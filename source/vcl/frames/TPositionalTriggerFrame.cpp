@@ -1,11 +1,11 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TPositionalTriggerFrame.h"
-#include "abMove.h"
+#include "apt/abMove.h"
 #include "apt/abAPTMotor.h"
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include "mtkVCLUtils.h"
-#include "abTriggerFunction.h"
+#include "process/abTriggerFunction.h"
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)

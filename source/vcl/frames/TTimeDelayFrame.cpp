@@ -2,11 +2,11 @@
 #pragma hdrstop
 #include "TTimeDelayFrame.h"
 #include "mtkVCLUtils.h"
-#include "abProcess.h"
-#include "abMove.h"
+#include "process/abProcess.h"
+#include "apt/abMove.h"
 #include "abTimeDelay.h"
 #include "mtkLogger.h"
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include "apt/abAPTMotor.h"
 #include "abTimeDelay.h"
 

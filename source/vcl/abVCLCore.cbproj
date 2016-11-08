@@ -35,12 +35,13 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <ProjectType>CppPackage</ProjectType>
         <ILINK_LibraryPath>..\database\;..\..\UI\frames\;components\;frames\;forms\;P:\ArrayBot\source\vcl\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\database\;..\..\UI\frames\;components\;frames\;forms\;P:\ArrayBot\source\vcl\;$(IncludePath)</IncludePath>
+        <IncludePath>..\database\;..\..\UI\frames\;components\;frames\;forms\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl\;$(IncludePath)</IncludePath>
         <_TCHARMapping>char</_TCHARMapping>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -282,13 +283,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\DuneComponentsDD.bpl">Components by DuneScientific</Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\abVCLCore.bpl">ArrayBot VCL Core package</Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </CPlusPlusBuilder.Personality>
             <Deployment/>
             <Platforms>

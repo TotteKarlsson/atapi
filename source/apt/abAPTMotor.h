@@ -2,7 +2,7 @@
 #define abAPTMotorH
 #include "abAPTDevice.h"
 #include "mtkTimer.h"
-#include "abDataStructures.h"
+#include "arraybot/abDataStructures.h"
 #include "abMotorMessageProcessor.h"
 #include "abMotorMessageContainer.h"
 #include "mtkRange.h"

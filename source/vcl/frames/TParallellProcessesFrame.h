@@ -7,7 +7,7 @@
 #include "TMotorMoveProcessFrame.h"
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 #include "TArrayBotBtn.h"

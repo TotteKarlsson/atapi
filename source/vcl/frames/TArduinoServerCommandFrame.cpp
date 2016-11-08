@@ -3,7 +3,7 @@
 #include "TArduinoServerCommandFrame.h"
 #include "arduino/abArduinoServerCommand.h"
 #include "mtkVCLUtils.h"
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include "TTextInputDialog.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

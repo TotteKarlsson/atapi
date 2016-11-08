@@ -1,7 +1,7 @@
 #ifndef abArduinoServerCommandH
 #define abArduinoServerCommandH
 #include "abExporter.h"
-#include "abProcess.h"
+#include "process/abProcess.h"
 //---------------------------------------------------------------------------
 
 class ArduinoClient;

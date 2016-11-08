@@ -8,7 +8,7 @@
 #include "TMotorMoveProcessFrame.h"
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include "TFloatLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 #include "TIntegerLabeledEdit.h"

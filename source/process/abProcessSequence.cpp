@@ -2,7 +2,7 @@
 #include "abProcessSequence.h"
 #include "abProcess.h"
 #include "mtkIniFile.h"
-#include "abMove.h"
+//#include "abMove.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 

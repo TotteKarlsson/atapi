@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -125,6 +125,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>abUtilities.h</DependentOn>
             <BuildOrder>27</BuildOrder>
         </CppCompile>
+        <CppCompile Include="apt\abAbsoluteMove.cpp">
+            <DependentOn>apt\abAbsoluteMove.h</DependentOn>
+            <BuildOrder>72</BuildOrder>
+        </CppCompile>
         <CppCompile Include="apt\abAPTDevice.cpp">
             <DependentOn>apt\abAPTDevice.h</DependentOn>
             <BuildOrder>60</BuildOrder>
@@ -161,6 +165,26 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>apt\abMotorMessageProcessor.h</DependentOn>
             <BuildOrder>68</BuildOrder>
         </CppCompile>
+        <CppCompile Include="apt\abMove.cpp">
+            <DependentOn>apt\abMove.h</DependentOn>
+            <BuildOrder>47</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\abPairedMove.cpp">
+            <DependentOn>apt\abPairedMove.h</DependentOn>
+            <BuildOrder>48</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\abPairedMoves.cpp">
+            <DependentOn>apt\abPairedMoves.h</DependentOn>
+            <BuildOrder>49</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\abPositionalTrigger.cpp">
+            <DependentOn>apt\abPositionalTrigger.h</DependentOn>
+            <BuildOrder>50</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\abRelativeMove.cpp">
+            <DependentOn>apt\abRelativeMove.h</DependentOn>
+            <BuildOrder>51</BuildOrder>
+        </CppCompile>
         <CppCompile Include="apt\abTCubeDCServo.cpp">
             <DependentOn>apt\abTCubeDCServo.h</DependentOn>
             <BuildOrder>69</BuildOrder>
@@ -172,6 +196,82 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\abThorlabStructs.cpp">
             <DependentOn>apt\abThorlabStructs.h</DependentOn>
             <BuildOrder>59</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoClient.cpp">
+            <DependentOn>arduino\abArduinoClient.h</DependentOn>
+            <BuildOrder>57</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoDevice.cpp">
+            <DependentOn>arduino\abArduinoDevice.h</DependentOn>
+            <BuildOrder>70</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoIPCServerReceiver.cpp">
+            <DependentOn>arduino\abArduinoIPCServerReceiver.h</DependentOn>
+            <BuildOrder>69</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoMessageProcessor.cpp">
+            <DependentOn>arduino\abArduinoMessageProcessor.h</DependentOn>
+            <BuildOrder>68</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoServer.cpp">
+            <DependentOn>arduino\abArduinoServer.h</DependentOn>
+            <BuildOrder>67</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoServerCommand.cpp">
+            <DependentOn>arduino\abArduinoServerCommand.h</DependentOn>
+            <BuildOrder>66</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abArduinoUtils.cpp">
+            <DependentOn>arduino\abArduinoUtils.h</DependentOn>
+            <BuildOrder>65</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abLeicaUC7Controller.cpp">
+            <DependentOn>arduino\abLeicaUC7Controller.h</DependentOn>
+            <BuildOrder>64</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abLightsArduino.cpp">
+            <DependentOn>arduino\abLightsArduino.h</DependentOn>
+            <BuildOrder>63</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abLightsArduinoClient.cpp">
+            <DependentOn>arduino\abLightsArduinoClient.h</DependentOn>
+            <BuildOrder>62</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abPufferArduino.cpp">
+            <DependentOn>arduino\abPufferArduino.h</DependentOn>
+            <BuildOrder>61</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abPufferArduinoClient.cpp">
+            <DependentOn>arduino\abPufferArduinoClient.h</DependentOn>
+            <BuildOrder>60</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abSensorsArduino.cpp">
+            <DependentOn>arduino\abSensorsArduino.h</DependentOn>
+            <BuildOrder>59</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\abSensorsArduinoClient.cpp">
+            <DependentOn>arduino\abSensorsArduinoClient.h</DependentOn>
+            <BuildOrder>58</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arraybot\abArrayBot.cpp">
+            <DependentOn>arraybot\abArrayBot.h</DependentOn>
+            <BuildOrder>52</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arraybot\abEnvironmentalSensorReader.cpp">
+            <DependentOn>arraybot\abEnvironmentalSensorReader.h</DependentOn>
+            <BuildOrder>56</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arraybot\abRibbonController.cpp">
+            <DependentOn>arraybot\abRibbonController.h</DependentOn>
+            <BuildOrder>55</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arraybot\abWhiskerUnit.cpp">
+            <DependentOn>arraybot\abWhiskerUnit.h</DependentOn>
+            <BuildOrder>54</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arraybot\abXYZUnit.cpp">
+            <DependentOn>arraybot\abXYZUnit.h</DependentOn>
+            <BuildOrder>53</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>56</BuildOrder>
@@ -235,6 +335,42 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="labelprinter\abTSCLIB.cpp">
             <BuildOrder>73</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abParallellProcess.cpp">
+            <DependentOn>process\abParallellProcess.h</DependentOn>
+            <BuildOrder>53</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abProcess.cpp">
+            <DependentOn>process\abProcess.h</DependentOn>
+            <BuildOrder>39</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abProcessSequence.cpp">
+            <DependentOn>process\abProcessSequence.h</DependentOn>
+            <BuildOrder>41</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abProcessSequenceProject.cpp">
+            <DependentOn>process\abProcessSequenceProject.h</DependentOn>
+            <BuildOrder>43</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abProcessSequencer.cpp">
+            <DependentOn>process\abProcessSequencer.h</DependentOn>
+            <BuildOrder>45</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abProcessSequences.cpp">
+            <DependentOn>process\abProcessSequences.h</DependentOn>
+            <BuildOrder>47</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abTimeDelay.cpp">
+            <DependentOn>process\abTimeDelay.h</DependentOn>
+            <BuildOrder>71</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abTrigger.cpp">
+            <DependentOn>process\abTrigger.h</DependentOn>
+            <BuildOrder>49</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\abTriggerFunction.cpp">
+            <DependentOn>process\abTriggerFunction.h</DependentOn>
+            <BuildOrder>51</BuildOrder>
         </CppCompile>
         <CppCompile Include="serial\abSerial.cpp">
             <DependentOn>serial\abSerial.h</DependentOn>

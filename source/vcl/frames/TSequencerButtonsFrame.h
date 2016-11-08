@@ -5,7 +5,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "abArrayBot.h"
+#include "arraybot/abArrayBot.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
