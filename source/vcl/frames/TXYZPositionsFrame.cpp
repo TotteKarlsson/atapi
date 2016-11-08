@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TXYZPositionsFrame.h"
-#include "abXYZUnit.h"
+#include "arraybot/abXYZUnit.h"
 #include "mtkVCLUtils.h"
 #include "apt/abAPTMotor.h"
 

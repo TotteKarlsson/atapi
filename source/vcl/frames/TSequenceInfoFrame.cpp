@@ -1,9 +1,9 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TSequenceInfoFrame.h"
-#include "abProcess.h"
-#include "abParallellProcess.h"
-#include "abProcessSequence.h"
+#include "process/abProcess.h"
+#include "process/abParallellProcess.h"
+#include "process/abProcessSequence.h"
 #include "mtkVCLUtils.h"
 #include "TStringInputDialog.h"
 #include "abTimeDelay.h"
