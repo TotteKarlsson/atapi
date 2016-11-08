@@ -90,8 +90,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <BCC_whid>false</BCC_whid>
-        <PreBuildEvent><![CDATA[copy $(AB_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
-copy $(AB_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
+        <PreBuildEvent><![CDATA[copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
+copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dslib\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
@@ -113,101 +113,17 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>abABObject.h</DependentOn>
             <BuildOrder>30</BuildOrder>
         </CppCompile>
-        <CppCompile Include="abAbsoluteMove.cpp">
-            <DependentOn>abAbsoluteMove.h</DependentOn>
-            <BuildOrder>31</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abArrayBot.cpp">
-            <DependentOn>abArrayBot.h</DependentOn>
-            <BuildOrder>32</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abContinousMove.cpp">
-            <DependentOn>abContinousMove.h</DependentOn>
-            <BuildOrder>33</BuildOrder>
-        </CppCompile>
         <CppCompile Include="abCore.cpp">
             <DependentOn>abCore.h</DependentOn>
             <BuildOrder>34</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abEnvironmentalSensorReader.cpp">
-            <DependentOn>abEnvironmentalSensorReader.h</DependentOn>
-            <BuildOrder>70</BuildOrder>
         </CppCompile>
         <CppCompile Include="abExceptions.cpp">
             <DependentOn>abExceptions.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
-        <CppCompile Include="abMove.cpp">
-            <DependentOn>abMove.h</DependentOn>
-            <BuildOrder>36</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abPairedMove.cpp">
-            <DependentOn>abPairedMove.h</DependentOn>
-            <BuildOrder>38</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abPairedMoves.cpp">
-            <DependentOn>abPairedMoves.h</DependentOn>
-            <BuildOrder>39</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abParallellProcess.cpp">
-            <DependentOn>abParallellProcess.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abPositionalTrigger.cpp">
-            <DependentOn>abPositionalTrigger.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abProcess.cpp">
-            <DependentOn>abProcess.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abProcessSequence.cpp">
-            <DependentOn>abProcessSequence.h</DependentOn>
-            <BuildOrder>17</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abProcessSequenceProject.cpp">
-            <DependentOn>abProcessSequenceProject.h</DependentOn>
-            <BuildOrder>18</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abProcessSequencer.cpp">
-            <DependentOn>abProcessSequencer.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abProcessSequences.cpp">
-            <DependentOn>abProcessSequences.h</DependentOn>
-            <BuildOrder>20</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abRelativeMove.cpp">
-            <DependentOn>abRelativeMove.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abRibbonController.cpp">
-            <DependentOn>abRibbonController.h</DependentOn>
-            <BuildOrder>22</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abTimeDelay.cpp">
-            <DependentOn>abTimeDelay.h</DependentOn>
-            <BuildOrder>24</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abTrigger.cpp">
-            <DependentOn>abTrigger.h</DependentOn>
-            <BuildOrder>25</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abTriggerFunction.cpp">
-            <DependentOn>abTriggerFunction.h</DependentOn>
-            <BuildOrder>26</BuildOrder>
-        </CppCompile>
         <CppCompile Include="abUtilities.cpp">
             <DependentOn>abUtilities.h</DependentOn>
             <BuildOrder>27</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abWhiskerUnit.cpp">
-            <DependentOn>abWhiskerUnit.h</DependentOn>
-            <BuildOrder>28</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="abXYZUnit.cpp">
-            <DependentOn>abXYZUnit.h</DependentOn>
-            <BuildOrder>29</BuildOrder>
         </CppCompile>
         <CppCompile Include="apt\abAPTDevice.cpp">
             <DependentOn>apt\abAPTDevice.h</DependentOn>
@@ -256,61 +172,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\abThorlabStructs.cpp">
             <DependentOn>apt\abThorlabStructs.h</DependentOn>
             <BuildOrder>59</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoClient.cpp">
-            <DependentOn>arduino\abArduinoClient.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoDevice.cpp">
-            <DependentOn>arduino\abArduinoDevice.h</DependentOn>
-            <BuildOrder>42</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoIPCServerReceiver.cpp">
-            <DependentOn>arduino\abArduinoIPCServerReceiver.h</DependentOn>
-            <BuildOrder>43</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoMessageProcessor.cpp">
-            <DependentOn>arduino\abArduinoMessageProcessor.h</DependentOn>
-            <BuildOrder>44</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoServer.cpp">
-            <DependentOn>arduino\abArduinoServer.h</DependentOn>
-            <BuildOrder>45</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoServerCommand.cpp">
-            <DependentOn>arduino\abArduinoServerCommand.h</DependentOn>
-            <BuildOrder>46</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abArduinoUtils.cpp">
-            <DependentOn>arduino\abArduinoUtils.h</DependentOn>
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abLeicaUC7Controller.cpp">
-            <DependentOn>arduino\abLeicaUC7Controller.h</DependentOn>
-            <BuildOrder>48</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abLightsArduino.cpp">
-            <BuildOrder>69</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abLightsArduinoClient.cpp">
-            <DependentOn>arduino\abLightsArduinoClient.h</DependentOn>
-            <BuildOrder>71</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abPufferArduino.cpp">
-            <DependentOn>arduino\abPufferArduino.h</DependentOn>
-            <BuildOrder>51</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abPufferArduinoClient.cpp">
-            <DependentOn>arduino\abPufferArduinoClient.h</DependentOn>
-            <BuildOrder>40</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abSensorsArduino.cpp">
-            <DependentOn>arduino\abSensorsArduino.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\abSensorsArduinoClient.cpp">
-            <DependentOn>arduino\abSensorsArduinoClient.h</DependentOn>
-            <BuildOrder>70</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>56</BuildOrder>
@@ -452,6 +313,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
@@ -471,7 +333,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>copy $(AB_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AB_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
+        <PreBuildEvent>copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>

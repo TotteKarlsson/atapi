@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2016/11/08 11:13:57.679,P:\libs\atapi\source\arduino\abArduinoClient.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.683,P:\libs\atapi\source\arduino\abArduinoDevice.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.686,P:\libs\atapi\source\arduino\abArduinoIPCServerReceiver.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.689,P:\libs\atapi\source\arduino\abArduinoMessageProcessor.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.691,P:\libs\atapi\source\arduino\abArduinoServer.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.694,P:\libs\atapi\source\arduino\abArduinoServerCommand.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.696,P:\libs\atapi\source\arduino\abArduinoUtils.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.697,P:\libs\atapi\source\arduino\abLeicaUC7Controller.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.698,P:\libs\atapi\source\arduino\abLightsArduino.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.700,P:\libs\atapi\source\arduino\abLightsArduinoClient.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.701,P:\libs\atapi\source\arduino\abPufferArduino.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.702,P:\libs\atapi\source\arduino\abPufferArduinoClient.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.704,P:\libs\atapi\source\arduino\abSensorsArduino.cpp=</Transaction>
+    <Transaction>2016/11/08 11:13:57.705,P:\libs\atapi\source\arduino\abSensorsArduinoClient.cpp=</Transaction>
+  </Transactions>
+</BorlandProject>
