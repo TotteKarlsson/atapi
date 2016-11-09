@@ -2,10 +2,10 @@
 #define abExporterH
 
 #if defined (_WIN32)
-    #if defined(AT_STATIC)
+    #if defined(AB_STATIC)
         #define AT_CORE
     #else
-        #if defined(AT_SHARED)
+        #if defined(AB_SHARED)
             #define AT_CORE __declspec(dllexport)
         #else
             #define AT_CORE __declspec(dllimport)
