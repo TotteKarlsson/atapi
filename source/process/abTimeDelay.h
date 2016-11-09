@@ -7,7 +7,7 @@
 using namespace std;
 
 
-class AB_CORE TimeDelay : public Process
+class AT_CORE TimeDelay : public Process
 {
     public:
         	   			            TimeDelay(const string& lbl, Poco::Timespan ts = Poco::Timespan(1000*Poco::Timespan::MILLISECONDS));

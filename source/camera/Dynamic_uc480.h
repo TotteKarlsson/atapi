@@ -21,7 +21,7 @@
 
 #include "abExporter.h"
 
-class AB_CORE Cuc480Dll
+class AT_CORE Cuc480Dll
 {
     public:
       										Cuc480Dll();

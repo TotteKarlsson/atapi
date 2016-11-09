@@ -6,7 +6,7 @@
 
 class ArduinoServer;
 
-class AB_CORE RibbonController : public ABObject
+class AT_CORE RibbonController : public ABObject
 {
     public:
 						                    RibbonController(ArduinoServer& s);

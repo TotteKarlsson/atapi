@@ -11,7 +11,7 @@ using mtk::IniFile;
 
 typedef list<JoyStickSetting> JSSettings;
 
-class AB_CORE JoyStickSettings : public ABObject
+class AT_CORE JoyStickSettings : public ABObject
 {
     public:
                             			JoyStickSettings(const string& iniSection, IniFile& iniFile);

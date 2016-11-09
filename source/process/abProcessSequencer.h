@@ -21,7 +21,7 @@ class ArrayBot;
 //!The sequencer do currently load all available sequences into a sequence container.
 //Todo: Break out the sequence container to simplify the complexity of the sequencer
 //---------------------------------------------------------------------------
-class AB_CORE ProcessSequencer : public ABObject
+class AT_CORE ProcessSequencer : public ABObject
 {
 	public:
 			      	                        ProcessSequencer(ArrayBot& ab, const string& fileFolder);

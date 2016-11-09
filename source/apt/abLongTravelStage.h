@@ -3,7 +3,7 @@
 #include "abAPTMotor.h"
 //---------------------------------------------------------------------------
 
-class AB_CORE LongTravelStage : public APTMotor
+class AT_CORE LongTravelStage : public APTMotor
 {
     public:
         						        LongTravelStage(int serial);

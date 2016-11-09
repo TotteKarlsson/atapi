@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 using std::string;
 
-class AB_CORE ABObject
+class AT_CORE ABObject
 {
 	public:
     							ABObject();

@@ -15,7 +15,7 @@ using std::vector;
 typedef double (__closure *triggerTestFunctionFPtr)();
 class TriggerFunction;
 
-class AB_CORE Trigger : public ABObject
+class AT_CORE Trigger : public ABObject
 {
     public:
                                             Trigger(ABObject* s, LogicOperator lt = loLargerThan);

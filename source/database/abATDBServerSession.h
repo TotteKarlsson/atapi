@@ -22,7 +22,7 @@ using namespace mtk;
 
 //!The ATDB server session class encapsulate a database session
 //!with the ATDB MySQL database
-class AB_CORE ATDBServerSession : public DBConnection
+class AT_CORE ATDBServerSession : public DBConnection
 {
     public:
 					        	        ATDBServerSession(const string& db, const string& host="127.0.0.1", const string& user="atdb_client", const string& password="atdb123");

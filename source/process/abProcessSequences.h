@@ -12,7 +12,7 @@ using namespace mtk;
 
 class ProcessSequencer;
 
-class AB_CORE ProcessSequences : public ABObject
+class AT_CORE ProcessSequences : public ABObject
 {
 	public:
 								                    ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayBot& ab);

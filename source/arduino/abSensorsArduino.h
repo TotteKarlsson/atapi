@@ -4,7 +4,7 @@
 #include "abArduinoDevice.h"
 //---------------------------------------------------------------------------
 
-class AB_CORE SensorsArduino : public ArduinoDevice
+class AT_CORE SensorsArduino : public ArduinoDevice
 {
     public:
                                 			SensorsArduino(int portNr, int baudRate = 9600);

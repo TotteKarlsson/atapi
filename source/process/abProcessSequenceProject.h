@@ -6,7 +6,7 @@
 #include "abProcess.h"
 
 //---------------------------------------------------------------------------
-AB_CORE extern const string gProcessSequenceProjectFileVersion;
+AT_CORE extern const string gProcessSequenceProjectFileVersion;
 
 namespace tinyxml2
 {
@@ -18,7 +18,7 @@ class AbsoluteMove;
 class ArduinoServerCommand;
 
 
-class AB_CORE ProcessSequenceProject : public mtk::Project
+class AT_CORE ProcessSequenceProject : public mtk::Project
 {
     public:
                                                 ProcessSequenceProject(ProcessSequence& ps, const string& fName = "Sequence 1.abp");

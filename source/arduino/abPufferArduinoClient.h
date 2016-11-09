@@ -4,7 +4,7 @@
 #include "abArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AB_CORE PufferArduinoClient : public ArduinoClient
+class AT_CORE PufferArduinoClient : public ArduinoClient
 {
     public:
 			   			        PufferArduinoClient();

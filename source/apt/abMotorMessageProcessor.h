@@ -16,7 +16,7 @@ using mtk::StringList;
 using mtk::gEmptyString;
 typedef void __fastcall (__closure *UICallback)(void);
 
-class AB_CORE MotorMessageProcessor : public ABObject, public mtk::Thread
+class AT_CORE MotorMessageProcessor : public ABObject, public mtk::Thread
 {
     public:
                                                     MotorMessageProcessor(MotorMessageContainer& list, const string& threadName=gEmptyString);

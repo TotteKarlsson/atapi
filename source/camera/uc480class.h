@@ -22,7 +22,7 @@ enum _disp_mode
   e_disp_mode_direct3D
 };
 
-class AB_CORE Cuc480 : public Cuc480Dll
+class AT_CORE Cuc480 : public Cuc480Dll
 {
 	public:
                                             Cuc480();

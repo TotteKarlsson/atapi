@@ -17,7 +17,7 @@ using mtk::IniFileProperties;
 using mtk::Property;
 using mtk::IniFile;
 
-class AB_CORE XYZUnit : public ABObject
+class AT_CORE XYZUnit : public ABObject
 {
 	public:
     					                XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder);

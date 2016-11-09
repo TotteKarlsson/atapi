@@ -8,16 +8,16 @@ namespace ab
 {
 enum dbSQLKeyword {dbAscending = 0, dbDescending};
 
-std::string AB_CORE toString(dbSQLKeyword kw);
+std::string AT_CORE toString(dbSQLKeyword kw);
 
 
 //!MySQL stuff
-void AB_CORE handleMySQLException();
+void AT_CORE handleMySQLException();
 
 
 
 //!SQLite stuff
-void AB_CORE handleSQLiteException();
+void AT_CORE handleSQLiteException();
 
 }
 #endif

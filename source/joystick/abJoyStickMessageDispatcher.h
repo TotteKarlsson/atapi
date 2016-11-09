@@ -25,7 +25,7 @@ uses the right side of a PS3 joystick for the right side of the ArrayBot, and
 the left side designated for the left side of the ArrayBot. The POV buttons are
 used for x-y motions for the left (whisker) side of the Arraybot.
 */
-class AB_CORE JoyStickMessageDispatcher : public ABObject
+class AT_CORE JoyStickMessageDispatcher : public ABObject
 {
 	public:
                                                 JoyStickMessageDispatcher(ArrayBotJoyStick& js, int nrOfButtons, int& ID);

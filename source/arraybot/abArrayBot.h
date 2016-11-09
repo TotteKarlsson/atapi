@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 
 class ArduinoClient;
-class AB_CORE ArrayBot : public ABObject
+class AT_CORE ArrayBot : public ABObject
 {
     public:
 									                    ArrayBot(IniFile& ini, const string& appFolder);

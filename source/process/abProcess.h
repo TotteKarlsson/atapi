@@ -22,7 +22,7 @@ class Trigger;
 class ArrayBot;
 class ProcessSequence;
 
-class AB_CORE Process : public ABObject
+class AT_CORE Process : public ABObject
 {
     public:
         							            Process(const string& name, ABObject* ao = NULL);

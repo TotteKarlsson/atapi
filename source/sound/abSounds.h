@@ -6,10 +6,10 @@
 
 using std::string;
 //exports
-AB_CORE enum ABSound {absMotorStop = 0, absMotorWarning, absCameraShot};
+AT_CORE enum ABSound {absMotorStop = 0, absMotorWarning, absCameraShot};
 
 
-AB_CORE void 			playABSound(ABSound, long flags = 0);
+AT_CORE void 			playABSound(ABSound, long flags = 0);
 
 
 //Non exports

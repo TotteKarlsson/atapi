@@ -15,7 +15,7 @@ using mtk::IPCServer;
 using mtk::IPCMessage;
 using std::vector;
 
-mtk::SocketWorker* AB_CORE createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
+mtk::SocketWorker* AT_CORE createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
 
 typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
@@ -28,7 +28,7 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //There are currently two Arduino boards, the 'Puffer' board, and a 'Sensor' board containing sensors and
 //light controlling logic.
 
-class AB_CORE ArduinoServer : public IPCServer
+class AT_CORE ArduinoServer : public IPCServer
 {
 	friend RibbonController;
     public:

@@ -7,7 +7,7 @@
 class ArduinoClient;
 
 //!The switch class allow a 'switched' process to be executed
-class AB_CORE ArduinoServerCommand : public Process
+class AT_CORE ArduinoServerCommand : public Process
 {
     public:
         	   			                    ArduinoServerCommand(const string& lbl);

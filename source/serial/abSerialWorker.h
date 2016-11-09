@@ -5,7 +5,7 @@
 #include "mtkThread.h"
 #include "abSerialPort.h"
 class Serial;
-class AB_CORE SerialWorker : public mtk::Thread
+class AT_CORE SerialWorker : public mtk::Thread
 {
 	public:
                                         SerialWorker(Serial& h, SerialPort& s) : mTheHost(h), mSP(s), mMessageBuilder('[', ']'){}

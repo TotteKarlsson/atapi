@@ -9,7 +9,7 @@ class APTMotor;
 ///what happens when a JS button is pressed.
 ///A joystick button have an associated motor to control, where
 ///a pressed button basically means 'go'. and a depressed button stops the motor.
-class AB_CORE JoyStickButton : public ABObject
+class AT_CORE JoyStickButton : public ABObject
 {
     public:
 							JoyStickButton();

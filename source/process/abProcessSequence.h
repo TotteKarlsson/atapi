@@ -19,7 +19,7 @@ using mtk::Property;
 class Process;
 class ArrayBot;
 
-class AB_CORE ProcessSequence : public ABObject
+class AT_CORE ProcessSequence : public ABObject
 {
     public:
 										    ProcessSequence(ArrayBot& ab, const string& name = "", const string& fileExt = "proc");

@@ -83,7 +83,7 @@
 //TK Changes: Renamed CSerial to SerialPort
 
 class SerialWorker;
-class AB_CORE SerialPort
+class AT_CORE SerialPort
 {
 // Class enumerations
 	friend SerialWorker;

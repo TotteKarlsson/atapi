@@ -11,7 +11,7 @@ namespace ab
 
 //!The move baseclass contain the general logic for a 'move' of an APTMotor
 //!this should be subclassed - > MoveMotor
-class AB_CORE Move : public Process
+class AT_CORE Move : public Process
 {
     public:
         	   			                    Move(const string& lbl, APTMotor* mtr, double maxVel = 0, double acc = 0);

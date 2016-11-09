@@ -6,7 +6,7 @@
 #include "process/abProcessSequence.h"
 #include "mtkVCLUtils.h"
 #include "TStringInputDialog.h"
-#include "abTimeDelay.h"
+#include "process/abTimeDelay.h"
 #include "frames/TMotorMoveProcessFrame.h"
 #include "frames/TParallellProcessesFrame.h"
 #include "frames/TTimeDelayFrame.h"

@@ -18,14 +18,14 @@ struct TLI_DeviceInfo;
 //!We are using an enum for process type in order to save/retrieve different processes from XML
 enum ProcessType {ptBaseType = 0, ptMaster, ptParallell, ptAbsoluteMove, ptArduinoServerCommand, ptTimeDelay, ptUnknown};
 
-AB_CORE string toString(ProcessType tp);
-AB_CORE ProcessType toProcessType(const string& str);
+AT_CORE string toString(ProcessType tp);
+AT_CORE ProcessType toProcessType(const string& str);
 
 //!Logic operators, used in triggers
 enum LogicOperator {loLargerThan = 0, loSmallerThan, loLargerThanOrEqual, loSmallerThanOrEqual, loEqualTo, loUndefined};
 
-AB_CORE string 			toString(LogicOperator o);
-AB_CORE LogicOperator 	toLogicOperator(const string& p);
+AT_CORE string 			toString(LogicOperator o);
+AT_CORE LogicOperator 	toLogicOperator(const string& p);
 
 ///Enum holding Thorlab Device Type IDS
 enum DeviceTypeID
@@ -36,17 +36,17 @@ enum DeviceTypeID
     didTCubeDCServo 		= 83
 };
 
-AB_CORE DeviceTypeID getDeviceTypeID(const string& level);
+AT_CORE DeviceTypeID getDeviceTypeID(const string& level);
 
 ///getDeviceSerials populate a Stringlist with serial numbers for
 ///devices of the type supplied
-AB_CORE StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
-AB_CORE	bool        buildDeviceList();
-AB_CORE	int         getNumberOfConnectedDevices();
+AT_CORE StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
+AT_CORE	bool        buildDeviceList();
+AT_CORE	int         getNumberOfConnectedDevices();
 
-AB_CORE string 		toString(DeviceTypeID val);
-AB_CORE string 		toString(const TLI_DeviceInfo& val);
-AB_CORE string 		tlError(int errCode);
+AT_CORE string 		toString(DeviceTypeID val);
+AT_CORE string 		toString(const TLI_DeviceInfo& val);
+AT_CORE string 		tlError(int errCode);
 
 template<> inline
 std::string Property< DeviceTypeID >::getValueAsString() const

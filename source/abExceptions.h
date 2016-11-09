@@ -9,7 +9,7 @@
 using std::string;
 using std::stringstream;
 
-class AB_CORE ABException : public std::exception, public ABObject
+class AT_CORE ABException : public std::exception, public ABObject
 {
     public:
                                             ABException(const string& desc);

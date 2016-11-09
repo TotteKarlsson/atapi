@@ -21,7 +21,7 @@ using mtk::StringList;
 
 typedef void (__closure *InitCallBack)();
 
-class AB_CORE ArduinoDevice : public ABObject
+class AT_CORE ArduinoDevice : public ABObject
 {
     public:
         							ArduinoDevice(int portNr, int baudRate = 9600);

@@ -8,7 +8,7 @@
 using std::deque;
 
 
-class AB_CORE Positions : public ABObject
+class AT_CORE Positions : public ABObject
 {
 	public:
 								        Positions();

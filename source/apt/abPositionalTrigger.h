@@ -16,7 +16,7 @@ class APTMotor;
 //!the base class (no array yet)
 //!Triggers are members of the Process classes and are enabled, disabled in a process's start/stop functions
 
-class AB_CORE PositionalTrigger : public Trigger
+class AT_CORE PositionalTrigger : public Trigger
 {
     public:
                                 			PositionalTrigger(APTMotor* m = NULL, double position = 0, LogicOperator lt = loLargerThan);

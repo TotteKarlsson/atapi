@@ -6,7 +6,7 @@
 #include <mmreg.h>
 #include <dsound.h>
 
-class AB_CORE DirectSound : public ABObject
+class AT_CORE DirectSound : public ABObject
 {
     public:
 							        DirectSound();

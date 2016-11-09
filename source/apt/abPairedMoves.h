@@ -15,7 +15,7 @@ typedef list<PairedMove> PMList;
 	Paired moves are saved in a INI file. Assign motors before 
     using.
 */
-class AB_CORE PairedMoves : public ABObject
+class AT_CORE PairedMoves : public ABObject
 {
     public:
                             			PairedMoves(const string& iniSection, IniFile& iniFile);

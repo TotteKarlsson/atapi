@@ -30,7 +30,7 @@ enum MotorCommandEnum
 
 string toString(MotorCommandEnum e);
 
-class AB_CORE MotorCommand : public ABObject
+class AT_CORE MotorCommand : public ABObject
 {
 	public:
 							MotorCommand(MotorCommandEnum mce, double var1 = 0, double var2 = 0);
@@ -41,7 +41,7 @@ class AB_CORE MotorCommand : public ABObject
         double				getFirstVariable() const;
         double				getSecondVariable() const;
 
-		AB_CORE
+		AT_CORE
  		friend ostream&         operator<<(ostream& stream, const MotorCommand& cmd);
 
     protected:

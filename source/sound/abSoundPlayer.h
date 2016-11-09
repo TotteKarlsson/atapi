@@ -8,7 +8,7 @@
 using mtk::Timer;
 //---------------------------------------------------------------------------
 
-class AB_CORE SoundPlayer : public ABObject
+class AT_CORE SoundPlayer : public ABObject
 {
     public:
 						        SoundPlayer(const string& snd, int nrOfTimes = 1, int delay=500);

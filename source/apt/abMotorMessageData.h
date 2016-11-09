@@ -12,7 +12,7 @@ using mtk::Range;
 //!Motor message data may be send as a windows message to communicate that something
 //!is happening regarding the motor. It is up to the listening UI to communicate this
 //!to the user, and/or deal with it.
-class AB_CORE MotorMessageData
+class AT_CORE MotorMessageData
 {
 	public:
     								MotorMessageData();

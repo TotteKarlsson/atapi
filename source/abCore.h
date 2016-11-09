@@ -4,8 +4,8 @@
 
 #define MOTOR_WARNING_MESSAGE "MOTOR_WARNING_MESSAGE"
 
-AB_CORE unsigned int 	getABCoreMessageID(const string& msg);
-AB_CORE void 			initABCoreLib();
+AT_CORE unsigned int 	getABCoreMessageID(const string& msg);
+AT_CORE void 			initABCoreLib();
 
 
 #endif

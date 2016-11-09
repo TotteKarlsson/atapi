@@ -20,7 +20,7 @@
 //on by using pure process objects instead, like the MoveAbsoluteProcess
 
 class APTMotor;
-class AB_CORE TriggerFunction : public ABObject
+class AT_CORE TriggerFunction : public ABObject
 {
     public:
                                             TriggerFunction(){}
@@ -34,7 +34,7 @@ class AB_CORE TriggerFunction : public ABObject
 };
 
 //!Move absolute is a subclass of TriggerFunction.
-class AB_CORE MoveAbsolute : public  TriggerFunction
+class AT_CORE MoveAbsolute : public  TriggerFunction
 {
 	public:
 								            MoveAbsolute(APTMotor* mtr, double pos = 0, double v = 1.0, double a = 1.0);

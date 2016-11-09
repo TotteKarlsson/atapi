@@ -18,7 +18,7 @@ typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
 //!The Arduino Message processor processes messages sent from a
 //!Arduino Server.
-class AB_CORE ArduinoMessageProcessor : public Thread
+class AT_CORE ArduinoMessageProcessor : public Thread
 {
 
     public:

@@ -4,7 +4,7 @@
 #include "abArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AB_CORE LightsArduinoClient : public ArduinoClient
+class AT_CORE LightsArduinoClient : public ArduinoClient
 {
     public:
 			   			        			LightsArduinoClient();

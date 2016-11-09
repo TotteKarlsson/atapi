@@ -15,7 +15,7 @@ using mtk::IniFileProperties;
 using mtk::Property;
 class APTMotor;
 
-class AB_CORE CoverSlipAngleController : public ABObject
+class AT_CORE CoverSlipAngleController : public ABObject
 {
 	public:
       							            CoverSlipAngleController(const string& name, IniFile& iniFile);

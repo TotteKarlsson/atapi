@@ -23,7 +23,7 @@ typedef int (__stdcall *f_WinFont)(		 int, int, int, int, int, int, char*, char*
 
 //!The TSCLIB class wraps functions that are present in the tsclib.dll module. These functions
 //allow printing custom labels on a TSC printer
-class AB_CORE TSCLIB
+class AT_CORE TSCLIB
 {
 	public:
 							        TSCLIB();

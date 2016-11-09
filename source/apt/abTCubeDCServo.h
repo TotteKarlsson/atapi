@@ -3,7 +3,7 @@
 #include "abAPTMotor.h"
 //---------------------------------------------------------------------------
 
-class AB_CORE TCubeDCServo : public APTMotor
+class AT_CORE TCubeDCServo : public APTMotor
 {
     public:
         						        TCubeDCServo(int serial);

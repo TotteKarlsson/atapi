@@ -17,7 +17,7 @@ using mtk::StringList;
 //Thorlabs device
 class APTDevice;
 
-class AB_CORE DeviceManager : public ABObject
+class AT_CORE DeviceManager : public ABObject
 {
     public:
                                                     DeviceManager();
@@ -41,7 +41,7 @@ class AB_CORE DeviceManager : public ABObject
         APTDevice*                                  getPrevious() const;
         APTDevice*                                  getCurrent() const;
 
-        AB_CORE
+        AT_CORE
         friend ostream&                             operator<<(ostream& os, DeviceManager& pm);
 
     private:

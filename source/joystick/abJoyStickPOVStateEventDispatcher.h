@@ -14,7 +14,7 @@ typedef pair<JoyStickEvent, JoyStickEvent> ButtonEvents;
 state of the POV into four "simulated" buttons. If the POV is set
 to a 'in between' state, all button states are assumed to be 'up'
 */
-class AB_CORE JoyStickPOVStateEventDispatcher  : public ABObject
+class AT_CORE JoyStickPOVStateEventDispatcher  : public ABObject
 {
 	public:
 				    			JoyStickPOVStateEventDispatcher();

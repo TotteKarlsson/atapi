@@ -12,7 +12,7 @@
 using std::list;
 using std::string;
 
-class AB_CORE MoveSequence : public ProcessSequence
+class AT_CORE MoveSequence : public ProcessSequence
 {
     public:
 								 	        MoveSequence();

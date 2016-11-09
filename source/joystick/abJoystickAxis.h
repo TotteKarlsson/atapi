@@ -11,7 +11,7 @@ class APTMotor;
 ///for movement of a motor, by a joystick.
 ///In short, a joystick axis have an associated motor to control, as well as a
 ///function that is called from the UI controlling the motor
-class AB_CORE JoyStickAxis : public ABObject
+class AT_CORE JoyStickAxis : public ABObject
 {
     public:
 							            JoyStickAxis();

@@ -5,8 +5,8 @@
 //---------------------------------------------------------------------------
 using std::string;
 
-int 	AB_CORE getArduinoIPCMessageID(const string& msg);
-string  AB_CORE getArduinoIPCMessageName(int cs);
+int 	AT_CORE getArduinoIPCMessageID(const string& msg);
+string  AT_CORE getArduinoIPCMessageName(int cs);
 
 enum AB_IPC_ID
 {
