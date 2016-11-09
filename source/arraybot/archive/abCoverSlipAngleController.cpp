@@ -1,7 +1,7 @@
 #pragma hdrstop
-#include "abAngleController.h"
+#include "atAngleController.h"
 #include "mtkLogger.h"
-#include "abAPTMotor.h"
+#include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
 

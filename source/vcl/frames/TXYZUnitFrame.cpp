@@ -1,11 +1,11 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TXYZUnitFrame.h"
-#include "arraybot/abXYZUnit.h"
+#include "arraybot/atXYZUnit.h"
 #include "mtkVCLUtils.h"
-#include "apt/abAPTMotor.h"
+#include "apt/atAPTMotor.h"
 #include "TMotorFrame.h"
-#include "arraybot/abWhiskerUnit.h"
+#include "arraybot/atWhiskerUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"

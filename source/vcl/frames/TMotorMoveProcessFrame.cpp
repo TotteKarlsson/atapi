@@ -2,13 +2,13 @@
 #pragma hdrstop
 #include "TMotorMoveProcessFrame.h"
 #include "TPositionalTriggerFrame.h"
-#include "apt/abMove.h"
-#include "apt/abAPTMotor.h"
+#include "apt/atMove.h"
+#include "apt/atAPTMotor.h"
 #include "mtkVCLUtils.h"
-#include "arraybot/abXYZUnit.h"
-#include "arraybot/abArrayBot.h"
-#include "apt/abAbsoluteMove.h"
-#include "process/abTriggerFunction.h"
+#include "arraybot/atXYZUnit.h"
+#include "arraybot/atArrayBot.h"
+#include "apt/atAbsoluteMove.h"
+#include "process/atTriggerFunction.h"
 #include "TTextInputDialog.h"
 
 //---------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
-#include "sound/abDirectSound.h"
+#include "sound/atDirectSound.h"
 
 //---------------------------------------------------------------------------
 class PACKAGE TArrayBotButton : public TBitBtn

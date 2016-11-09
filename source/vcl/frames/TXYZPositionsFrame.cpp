@@ -1,9 +1,9 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TXYZPositionsFrame.h"
-#include "arraybot/abXYZUnit.h"
+#include "arraybot/atXYZUnit.h"
 #include "mtkVCLUtils.h"
-#include "apt/abAPTMotor.h"
+#include "apt/atAPTMotor.h"
 
 using namespace mtk;
 //---------------------------------------------------------------------------

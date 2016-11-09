@@ -1,0 +1,20 @@
+#ifndef abArduinoIPCServerReceiverH
+#define abArduinoIPCServerReceiverH
+#include "mtkIPCReceiver.h"
+#include "mtkIPCServer.h"
+#include "atExporter.h"
+#include "atABObject.h"
+//---------------------------------------------------------------------------
+
+class AT_CORE ArduinoServerIPCReceiver : public mtk::IPCReceiver
+{
+    public:
+						        		ArduinoServerIPCReceiver(int portNr = -1, int socket_handle = -1, mtk::IPCServer* server = NULL);
+						        		~ArduinoServerIPCReceiver();
+		virtual void                    Worker();
+
+    protected:
+
+};
+
+#endif

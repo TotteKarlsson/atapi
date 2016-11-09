@@ -95,7 +95,7 @@ copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dslib\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
-        <BCC_PCHInject>abCorePCH.h</BCC_PCHInject>
+        <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
         <LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
         <Defines>POCO_STATIC;$(Defines)</Defines>
@@ -109,20 +109,20 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="abATDBClientDBSession.cpp">
-            <DependentOn>abATDBClientDBSession.h</DependentOn>
+        <CppCompile Include="atATDBClientDBSession.cpp">
+            <DependentOn>atATDBClientDBSession.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="abATDBServerSession.cpp">
-            <DependentOn>abATDBServerSession.h</DependentOn>
+        <CppCompile Include="atATDBServerSession.cpp">
+            <DependentOn>atATDBServerSession.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="abDBConnection.cpp">
-            <DependentOn>abDBConnection.h</DependentOn>
+        <CppCompile Include="atDBConnection.cpp">
+            <DependentOn>atDBConnection.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="abDBUtils.cpp">
-            <DependentOn>abDBUtils.h</DependentOn>
+        <CppCompile Include="atDBUtils.cpp">
+            <DependentOn>atDBUtils.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="atDatabase.cpp">

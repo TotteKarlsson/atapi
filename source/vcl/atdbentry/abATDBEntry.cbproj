@@ -3,7 +3,7 @@
         <ProjectGuid>{5150D774-A398-4ECE-879A-3E495D538995}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>abATDBEntry.cpp</MainSource>
+        <MainSource>atATDBEntry.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -92,7 +92,7 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="abATDBEntry.cpp">
+        <CppCompile Include="atATDBEntry.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
         <PCHCompile Include="atdbEntryPCH.h">
@@ -119,7 +119,7 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">abATDBEntry.cpp</Source>
+                    <Source Name="MainSource">atATDBEntry.cpp</Source>
                 </Source>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
