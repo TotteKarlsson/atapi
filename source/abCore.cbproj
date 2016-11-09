@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;P:\ArrayBot\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -449,9 +449,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">File P:\build\xe3_ide\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
