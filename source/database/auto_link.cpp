@@ -9,7 +9,7 @@
 	#pragma comment(lib, "mtkIPC.lib")
 #endif
 
-#pragma comment(lib, "abCore.lib")
+#pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "poco_data-static.lib")
 #pragma comment(lib, "poco_mysql_connector-static.lib")

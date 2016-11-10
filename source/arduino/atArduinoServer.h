@@ -10,7 +10,7 @@
 #include "atSensorsArduino.h"
 #include <vector>
 #include "mtkTimer.h"
-#include "atRibbonController.h"
+#include "arraybot/atRibbonController.h"
 using mtk::IPCServer;
 using mtk::IPCMessage;
 using std::vector;

@@ -299,7 +299,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(BDSCOMMONDIR)\dcp\atVCLCore.bpi  $(BDSCOMMONDIR)\dcp\atVCLCore.lib</PostBuildEvent>
+        <PostBuildEvent>copy $(BDSCOMMONDIR)\dcp\atVCLCore.bpi  $(BDSCOMMONDIR)\dcp\atVCLCore.lib</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

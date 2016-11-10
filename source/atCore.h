@@ -1,5 +1,5 @@
-#ifndef abCoreH
-#define abCoreH
+#ifndef atCoreH
+#define atCoreH
 #include "atExporter.h"
 
 #define MOTOR_WARNING_MESSAGE "MOTOR_WARNING_MESSAGE"

@@ -25,7 +25,7 @@ void playABSound(ABSound a, long flags)
 
 bool PlayResource(const string& resName, long flags)
 {
-    HINSTANCE modHandle = GetModuleHandle("abCore.dll");
+    HINSTANCE modHandle = GetModuleHandle("atCore.dll");
     HRSRC hResInfo= FindResourceA(modHandle, resName.c_str(), RT_RCDATA);
     if(hResInfo == NULL)
     {
