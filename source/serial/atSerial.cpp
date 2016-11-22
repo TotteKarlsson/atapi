@@ -72,6 +72,11 @@ string Serial::popMessage()
     }
 }
 
+void Serial::assignMessageReceivedCallBackC(SerialMessageReceivedCallBackC cb)
+{
+	mReceivedCB_C = cb;
+}
+
 void Serial::assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
 {
 	mReceivedCB = cb;
@@ -81,7 +86,7 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
 {
 	LONG    lLastError = ERROR_SUCCESS;
     string portNr("COM" + toString(pNr));
-    lLastError = mSP.Open(_T(portNr.c_str()),0,0,true);
+    lLastError = mSP.Open(_T(portNr.c_str()), 0, 0, true);
 	if (lLastError != ERROR_SUCCESS)
     {
         string errorMsg = getLastWin32Error();

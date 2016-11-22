@@ -16,6 +16,31 @@ TSCLIB::~TSCLIB()
 	unload();
 }
 
+bool TSCLIB::print(const string& content, int copies, double width, double height)
+{
+	if(!mDLLHandle)
+    {
+    	Log(lError) << "Printer DLL is not loaded. Can't print anything";
+        return false;
+    }
+
+    openport("USB");
+    stringstream tc;
+    tc 	  	<< "SIZE "<<width<<","<<height<<"\n"
+            << "DIRECTION 1\n"
+            << "CLS\n"
+            << "TEXT 120,112, \"3\", 0, 1, 1, 1, \""<<content<<"\"\n"
+            << "DMATRIX 275,85,400,400,x5,\""<<content<<"\"\n"
+            << "PRINT 1,"<<copies<<"\n";
+
+
+    int ret = sendcommand(tc.str().c_str());
+    Log(lDebug) << "Printer Command: "<< tc.str();
+    Log(lInfo) 	<< "Printer result: "<< ret;
+    closeport();
+    return (bool) ret;
+}
+
 bool TSCLIB::load(const string& dllPath)
 {
 	if(fileExists(dllPath))
@@ -30,7 +55,8 @@ bool TSCLIB::load(const string& dllPath)
         return false;
     }
 
-    return 	assignFunctions();
+    //Assinging function s is part of the load process..
+    return assignFunctions();
 }
 
 bool TSCLIB::assignFunctions()
@@ -42,7 +68,7 @@ bool TSCLIB::assignFunctions()
     	Log(lError) <<"Failed to import function \"about\"";
     }
 
-    mOpenPort       = (f_int_char)      GetProcAddress(mDLLHandle, "openport");
+    mOpenPort       = (f_int_cchar)      GetProcAddress(mDLLHandle, "openport");
     if(!mOpenPort)
     {
     	Log(lError) <<"Failed to import function \"OpenPort\"";
@@ -66,7 +92,7 @@ bool TSCLIB::assignFunctions()
     	Log(lError) <<"Failed to import function \"ClosePort\"";
     }
 
-    mDownLoadPCX    = (f_int_char_char) GetProcAddress(mDLLHandle, "downloadpcx");
+    mDownLoadPCX    = (f_int_cchar_cchar) GetProcAddress(mDLLHandle, "downloadpcx");
     if(!mDownLoadPCX)
     {
     	Log(lError) <<"Failed to import function \"DownloadPCX\"";
@@ -90,13 +116,13 @@ bool TSCLIB::assignFunctions()
     	Log(lError) <<"Failed to import function \"PrinterFont\"";
     }
 
-    mPrintLabel     = (f_int_char_char) GetProcAddress(mDLLHandle, "printlabel");
+    mPrintLabel     = (f_int_cchar_cchar) GetProcAddress(mDLLHandle, "printlabel");
     if(!mPrintLabel)
     {
     	Log(lError) <<"Failed to import function \"PrintLabel\"";
     }
 
-    mSendCommand    = (f_int_char)      GetProcAddress(mDLLHandle, "sendcommand");
+    mSendCommand    = (f_int_cchar)      GetProcAddress(mDLLHandle, "sendcommand");
     if(!mSendCommand)
     {
     	Log(lError) <<"Failed to import function \"SendCommand\"";
@@ -137,12 +163,12 @@ int TSCLIB::about()
     return mAboutFunc ? mAboutFunc() : -1;
 }
 
-int TSCLIB::openport(char* printername)
+int TSCLIB::openport(const char* printername)
 {
 	return mOpenPort ? mOpenPort(printername) : -1;
 }
 
-int TSCLIB::barcode(char *x, char *y, char *type, char *height, char *readable, char *rotation, char *narrow, char *wide, char *code)
+int TSCLIB::barcode(const char *x, const char *y, const char *type, const char *height, const char *readable, const char *rotation, const char *narrow, const char *wide, const char *code)
 {
     return mBarCode ? mBarCode(x, y, type, height,	readable, rotation, narrow,	wide, code) : -1;
 }
@@ -157,7 +183,7 @@ int TSCLIB::closeport()
     return mClosePort ? mClosePort() : -1;
 }
 
-int TSCLIB::downloadpcx(char *filename,char *image_name)
+int TSCLIB::downloadpcx(const char *filename,const char *image_name)
 {
     return mDownLoadPCX ? mDownLoadPCX(filename, image_name) : -1;
 }
@@ -172,27 +198,27 @@ int TSCLIB::nobackfeed()
     return mNoBackFeed ? mNoBackFeed() : -1;
 }
 
-int TSCLIB::printerfont(char *x, char *y, char *fonttype, char *rotation, char *xmul, char *ymul, char *text)
+int TSCLIB::printerfont(const char *x, const char *y, const char *fonttype, const char *rotation, const char *xmul, const char *ymul, const char *text)
 {
     return mPrinterFont ? mPrinterFont(x, y, fonttype, rotation, xmul, ymul, text) : -1;
 }
 
-int TSCLIB::printlabel(char *set, char *copy)
+int TSCLIB::printlabel(const char *set, const char *copy)
 {
     return mPrintLabel ? mPrintLabel(set, copy) : -1;
 }
 
-int TSCLIB::sendcommand(char *printercommand)
+int TSCLIB::sendcommand(const char *printercommand)
 {
     return mSendCommand ? mSendCommand(printercommand) : -1;
 }
 
-int TSCLIB::setup(char *width, char *height, char *speed, char *density, char *sensor, char *vertical, char *offset)
+int TSCLIB::setup(const char *width, const char *height, const char *speed, const char *density, const char *sensor, const char *vertical, const char *offset)
 {
     return mSetup ? mSetup(width, height, speed, density, sensor, vertical, offset) : -1;
 }
 
-int TSCLIB::windowsfont(int x, int y, int fontheight, int rotation, int fontstyle, int fontunderline, char *szFaceName, char *content)
+int TSCLIB::windowsfont(int x, int y, int fontheight, int rotation, int fontstyle, int fontunderline, const char *szFaceName, const char *content)
 {
     return mWindowsFont ? mWindowsFont(x, y, fontheight, rotation, fontstyle, fontunderline, szFaceName, content) : -1;
 }

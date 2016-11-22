@@ -8,81 +8,77 @@
 using std::string;
 //Function pointers
 typedef int (__stdcall *f_int_void)();
-typedef int (__stdcall *f_int_char)(char*);
-typedef int (__stdcall *f_int_char_char)(char*, char*);
-typedef int (__stdcall *f_BarCode)(		 char*, char*, char*, char*, char*,
-								   		 char*, char*, char*, char*);
+typedef int (__stdcall *f_int_cchar)(const char*);
+typedef int (__stdcall *f_int_cchar_cchar)(const char*, const char*);
+typedef int (__stdcall *f_BarCode)(		 const char*, const char*, const char*, const char*, const char*,
+								   		 const char*, const char*, const char*, const char*);
 
-typedef int (__stdcall *f_PrinterFont)(	 char*, char*, char*, char*, char*,
-										 char*, char*);
+typedef int (__stdcall *f_PrinterFont)(	 const char*, const char*, const char*, const char*, const char*,
+										 const char*, const char*);
 
-typedef int (__stdcall *f_Setup)(		 char*, char*, char*, char*, char*,
-										 char*, char*);
+typedef int (__stdcall *f_Setup)(		 const char*, const char*, const char*, const char*, const char*,
+										 const char*, const char*);
 
-typedef int (__stdcall *f_WinFont)(		 int, int, int, int, int, int, char*, char*);
+typedef int (__stdcall *f_WinFont)(		 int, int, int, int, int, int, const char*, const char*);
 
 //!The TSCLIB class wraps functions that are present in the tsclib.dll module. These functions
 //allow printing custom labels on a TSC printer
 class AT_CORE TSCLIB
 {
 	public:
-							        TSCLIB();
-							        ~TSCLIB();
-        bool                        load(const string& dllPath);
-        bool						isLoaded();
-		bool                        unload();
+							                TSCLIB();
+							                ~TSCLIB();
+        bool                                load(const string& dllPath);
 
-							        //Exposed functions
-        int					        about();
+        bool								print(const string& content, int copies = 1, double width = 1.5, double height = 0.75);
 
-    	int 				        openport(char* printername);
+        bool						        isLoaded();
+		bool                                unload();
 
-		int 				        barcode(char *x,		char *y,		char *type,
-    			    		        		char *height,	char *readable,	char *rotation,
-    			    		        		char *narrow,	char *wide,		char *code);
+							                //Exposed functions
+        int					                about();
 
-    	int 				        clearbuffer();
+    	int 				                openport(const char* printername);
 
-	  	int 				        closeport();
+		int 				                barcode(const char *x,		const char *y,		const char *type,
+    			    		                		const char *height,	const char *readable,	const char *rotation,
+    			    		                		const char *narrow,	const char *wide,		const char *code);
 
-    	int 				        downloadpcx(char *filename,char *image_name);
+    	int 				                clearbuffer();
+	  	int 				                closeport();
+    	int 				                downloadpcx(const char *filename,const char *image_name);
+	  	int 				                formfeed();
+    	int 				                nobackfeed();
+    	int 				                printerfont(const char *x, 	const char *y, 	const char *fonttype, const char *rotation, const char *xmul,	const char *ymul,	const char *text);
 
-	  	int 				        formfeed();
+    	int 				                printlabel(const char *set, const char *copy);
+    	int 				                sendcommand(const char* printercommand);
 
-    	int 				        nobackfeed();
+    	int 				                setup(const char *width,	const char *height,  const char *speed,	const char *density,
+    			                                  const char *sensor,	const char *vertical,const char *offset);
 
-    	int 				        printerfont(char *x, 	char *y, 	char *fonttype, char *rotation,
-        					        			char *xmul,	char *ymul,	char *text);
-
-    	int 				        printlabel(char *set, char *copy);
-
-    	int 				        sendcommand(char *printercommand);
-
-    	int 				        setup(char *width,	char *height,  char *speed,	char *density,
-    			                          char *sensor,	char *vertical,char *offset);
-
-    	int 				        windowsfont(int x, 				int y, 			int fontheight,
-    						        			int rotation,		int fontstyle,	int fontunderline,
-    						        			char *szFaceName,	char *content);
+    	int 				                windowsfont(int x, 				int y, 			int fontheight,
+    						                			int rotation,		int fontstyle,	int fontunderline,
+    						                			const char *szFaceName,	const char *content);
 
 
     private:
-        HINSTANCE			        mDLLHandle;
-        f_int_void	   		        mAboutFunc;
-        f_int_char			        mOpenPort;
-        f_BarCode			        mBarCode;
-        f_int_void			        mClearBuffer;
-        f_int_void			        mClosePort;
-        f_int_char_char		        mDownLoadPCX;
-        f_int_void			        mFormFeed;
-        f_int_void			        mNoBackFeed;
-		f_PrinterFont		        mPrinterFont;
-        f_int_char_char		        mPrintLabel;
-       	f_int_char			        mSendCommand;
-		f_Setup            	        mSetup;
-    	f_WinFont			        mWindowsFont;
+        HINSTANCE			                mDLLHandle;
+        f_int_void	   		                mAboutFunc;
+        f_int_cchar			                mOpenPort;
+        f_BarCode			                mBarCode;
+        f_int_void			                mClearBuffer;
+        f_int_void			                mClosePort;
+        f_int_cchar_cchar		            mDownLoadPCX;
+        f_int_void			                mFormFeed;
+        f_int_void			                mNoBackFeed;
+		f_PrinterFont		                mPrinterFont;
+        f_int_cchar_cchar		            mPrintLabel;
+       	f_int_cchar			                mSendCommand;
+		f_Setup            	                mSetup;
+    	f_WinFont			                mWindowsFont;
 
-        bool						assignFunctions();
+        bool						        assignFunctions();
 
 };
 

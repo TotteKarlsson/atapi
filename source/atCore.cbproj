@@ -109,22 +109,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atABObject.cpp">
-            <DependentOn>atABObject.h</DependentOn>
-            <BuildOrder>30</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atCore.cpp">
-            <DependentOn>atCore.h</DependentOn>
-            <BuildOrder>34</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atExceptions.cpp">
-            <DependentOn>atExceptions.h</DependentOn>
-            <BuildOrder>35</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atUtilities.cpp">
-            <DependentOn>atUtilities.h</DependentOn>
-            <BuildOrder>27</BuildOrder>
-        </CppCompile>
         <CppCompile Include="apt\atAbsoluteMove.cpp">
             <DependentOn>apt\atAbsoluteMove.h</DependentOn>
             <BuildOrder>72</BuildOrder>
@@ -272,6 +256,22 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="arraybot\atXYZUnit.cpp">
             <DependentOn>arraybot\atXYZUnit.h</DependentOn>
             <BuildOrder>53</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atABObject.cpp">
+            <DependentOn>atABObject.h</DependentOn>
+            <BuildOrder>30</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atCore.cpp">
+            <DependentOn>atCore.h</DependentOn>
+            <BuildOrder>34</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atExceptions.cpp">
+            <DependentOn>atExceptions.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atUtilities.cpp">
+            <DependentOn>atUtilities.h</DependentOn>
+            <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>56</BuildOrder>
@@ -452,9 +452,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
-&amp;&amp;copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
-</PreBuildEvent>
+        <PreBuildEvent>copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
