@@ -1076,7 +1076,7 @@ object atdbDM: TatdbDM
   end
   object documentsDSource: TDataSource
     DataSet = documentsCDS
-    Left = 336
-    Top = 584
+    Left = 344
+    Top = 568
   end
 end

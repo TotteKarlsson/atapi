@@ -37,6 +37,7 @@ bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const s
     SQLConnection1->Params->Values[_D("User_Name")] = vclstr(mDataBaseUser);
     SQLConnection1->Params->Values[_D("Password")] = vclstr(mDataBaseUserPassword);
     SQLConnection1->Connected= true;
+    SQLConnection1->AutoClone = false;
     return SQLConnection1->Connected;
 }
 

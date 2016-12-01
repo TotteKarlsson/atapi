@@ -5,12 +5,11 @@
 #include "mtkStringUtils.h"
 #include "mtkLogger.h"
 #include "Poco/Data/RecordSet.h"
-using namespace mtk;
-
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+#pragma package(smart_init,weak)
 
 using namespace mtk;
+using namespace Poco;
 
 int getCurrentUserID(TComboBox* mUserCB)
 {
@@ -38,8 +37,9 @@ void populateUsersCB(TComboBox* mUserCB, ATDBServerSession& ses)
         int cols = rs->columnCount();
         int rows = rs->rowCount();
 
+        using Poco::Data::RowIterator;
         // iterate over all rows and columns
-        for (RecordSet::Iterator it = rs->begin(); it != rs->end(); ++it)
+        for (RowIterator it = rs->begin(); it != rs->end(); ++it)
         {
             Poco::Data::Row& row = *it;
             string user(row[1].convert<std::string>());

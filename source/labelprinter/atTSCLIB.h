@@ -30,7 +30,8 @@ class AT_CORE TSCLIB
 							                ~TSCLIB();
         bool                                load(const string& dllPath);
 
-        bool								print(const string& content, int copies = 1, double width = 1.5, double height = 0.75);
+        bool								printCoverSlipLabel(const string& content, int copies = 1);
+        bool								printFreshBatchLabel(const string& content, int copies = 1);
 
         bool						        isLoaded();
 		bool                                unload();

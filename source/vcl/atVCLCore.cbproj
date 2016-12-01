@@ -94,7 +94,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <ILINK_LibraryPath>$(DEBUG_BUILD)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <ILINK_Description>ArrayBot VCL Core package</ILINK_Description>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -211,18 +210,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <FormResources Include="frames\TTimeDelayFrame.dfm"/>
         <FormResources Include="frames\TXYZPositionsFrame.dfm"/>
-        <FormResources Include="frames\TSequencerButtonsFrame.dfm"/>
+        <FormResources Include="frames\TXYZUnitFrame.dfm"/>
         <FormResources Include="frames\TPositionalTriggerFrame.dfm"/>
         <FormResources Include="frames\TSequenceInfoFrame.dfm"/>
-        <FormResources Include="frames\TXYZUnitFrame.dfm"/>
-        <FormResources Include="frames\TParallellProcessesFrame.dfm"/>
+        <FormResources Include="frames\TSequencerButtonsFrame.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="frames\TMotorFrame.dfm"/>
         <FormResources Include="frames\TMotorMoveProcessFrame.dfm"/>
-        <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
+        <FormResources Include="frames\TParallellProcessesFrame.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
         <FormResources Include="forms\TTextInputDialog.dfm"/>
+        <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -283,7 +282,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
+                </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment/>
             <Platforms>

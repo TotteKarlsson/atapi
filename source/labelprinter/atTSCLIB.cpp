@@ -16,7 +16,7 @@ TSCLIB::~TSCLIB()
 	unload();
 }
 
-bool TSCLIB::print(const string& content, int copies, double width, double height)
+bool TSCLIB::printFreshBatchLabel(const string& content, int copies)
 {
 	if(!mDLLHandle)
     {
@@ -25,12 +25,67 @@ bool TSCLIB::print(const string& content, int copies, double width, double heigh
     }
 
     openport("USB");
+
+    //Centered
+//DIRECTION 1,0
+//CLS
+//SIZE 0.965,0.2874
+//TEXT 25, 55, "3", 0, 1, 1,1, "16NOV2901"
+//DMATRIX 215, 35, 0, 0, x3,"16NOV2901"
+//PRINT 1,1
+//CLS
     stringstream tc;
-    tc 	  	<< "SIZE "<<width<<","<<height<<"\n"
-            << "DIRECTION 1\n"
+    tc 	  	<< "DIRECTION 1,0\n"
             << "CLS\n"
-            << "TEXT 120,112, \"3\", 0, 1, 1, 1, \""<<content<<"\"\n"
-            << "DMATRIX 275,85,400,400,x5,\""<<content<<"\"\n"
+            << "SIZE "<<0.965<<","<<0.2874<<"\n"
+            << "TEXT 25, 55, \"3\", 0, 1, 1,1, \""<<content<<"\"\n"
+            << "DMATRIX 215, 35, 0, 0, x2,\""<<content<<"\"\n"
+            << "PRINT 1,"<<copies<<"\n";
+
+
+    int ret = sendcommand(tc.str().c_str());
+    Log(lDebug) << "Printer Command: "<< tc.str();
+    Log(lInfo) 	<< "Printer Result: "<< ret;
+    closeport();
+    return (bool) ret;
+}
+
+bool TSCLIB::printCoverSlipLabel(const string& content, int copies)
+{
+	if(!mDLLHandle)
+    {
+    	Log(lError) << "Printer DLL is not loaded. Can't print anything";
+        return false;
+    }
+
+    openport("USB");
+
+    //Centered
+	//Do this
+//    DIRECTION 1,1
+//DIRECTION 1,0
+//CLS
+//SIZE 0.965,0.2874
+//TEXT 15, 55, "1", 0, 1, 1,1, "B54C30C15"
+//TEXT 200, 55, "3", 0, 1, 1,1, "1234"
+//DMATRIX 145,35, 15, 15, x2, 43,43,"B54C30C15-1234"
+//PRINT 1,1
+//CLS
+
+	StringList c(content,'-');
+    if(c.count() != 2)
+    {
+    	Log(lError) << "Can't print this label: "<<content;
+        return false;
+    }
+
+    stringstream tc;
+    tc      << "DIRECTION 1,0\n"
+    		<< "SIZE "<<0.965<<","<<0.2874<<"\n"
+            << "CLS\n"
+			<< "TEXT 15, 55, \"1\", 0, 1, 1,1, \""<<c[0]<<"\"\n"
+			<< "TEXT 200, 55, \"3\", 0, 1, 1,1, \""<<c[1]<<"\"\n"
+            << "DMATRIX 145,35, 15, 15, x2, 43,43, \""<<content<<"\"\n"
             << "PRINT 1,"<<copies<<"\n";
 
 
