@@ -522,43 +522,12 @@ object atdbDM: TatdbDM
     object specimenDSdeath_date: TDateField
       FieldName = 'death_date'
     end
-    object specimenDSpreprocess_treatment: TSmallintField
-      FieldName = 'preprocess_treatment'
-    end
-    object specimenDSfixative: TSmallintField
-      FieldName = 'fixative'
-    end
-    object specimenDSfixation_method: TSmallintField
-      DisplayWidth = 50
-      FieldName = 'fixation_method'
-    end
     object specimenDSbrain_region_dissection: TStringField
       FieldName = 'brain_region_dissection'
       Size = 255
     end
-    object specimenDSpostfix_protocol: TSmallintField
-      FieldName = 'postfix_protocol'
-    end
     object specimenDSdate_received: TDateField
       FieldName = 'date_received'
-    end
-    object specimenDSdate_embedded: TDateField
-      FieldName = 'date_embedded'
-    end
-    object specimenDScryoprotection_protocol: TSmallintField
-      FieldName = 'cryoprotection_protocol'
-    end
-    object specimenDSfreezing_protocol: TSmallintField
-      FieldName = 'freezing_protocol'
-    end
-    object specimenDSsubstitution_protocol: TSmallintField
-      FieldName = 'substitution_protocol'
-    end
-    object specimenDSinfiltration_protocol: TSmallintField
-      FieldName = 'infiltration_protocol'
-    end
-    object specimenDSembedding_protocol: TSmallintField
-      FieldName = 'embedding_protocol'
     end
   end
   object specimenProvider: TDataSetProvider
@@ -693,66 +662,14 @@ object atdbDM: TatdbDM
       DisplayLabel = 'DOD'
       FieldName = 'death_date'
     end
-    object specimenCDSpreprocess_treatment: TSmallintField
-      DisplayLabel = 'Preprocess Treatment'
-      FieldName = 'preprocess_treatment'
-    end
-    object specimenCDSfixative: TSmallintField
-      DisplayLabel = 'Fixative'
-      FieldName = 'fixative'
-    end
-    object specimenCDSfixation_method: TSmallintField
-      DisplayLabel = 'Fixation Method'
-      DisplayWidth = 50
-      FieldName = 'fixation_method'
-    end
     object specimenCDSbrain_region_dissection: TStringField
       DisplayLabel = 'From Brain Region'
       FieldName = 'brain_region_dissection'
       Size = 255
     end
-    object specimenCDSpostfix_protocol: TShortintField
-      DisplayLabel = 'Postfix Protocol'
-      FieldName = 'postfix_protocol'
-    end
     object specimenCDSdate_received: TDateField
       DisplayLabel = 'Date Received'
       FieldName = 'date_received'
-    end
-    object specimenCDSdate_embedded: TDateField
-      DisplayLabel = 'Date Embedded'
-      FieldName = 'date_embedded'
-    end
-    object specimenCDScryoprotection_protocol: TShortintField
-      DisplayLabel = 'Cryoprotection Protocol'
-      FieldName = 'cryoprotection_protocol'
-    end
-    object specimenCDSfreezing_protocol: TShortintField
-      DisplayLabel = 'Freezing Protocol'
-      FieldName = 'freezing_protocol'
-    end
-    object specimenCDSsubstitution_protocol: TShortintField
-      DisplayLabel = 'Substitution Protocol'
-      FieldName = 'substitution_protocol'
-    end
-    object specimenCDSinfiltration_protocol: TShortintField
-      DisplayLabel = 'Infiltration Protocol'
-      FieldName = 'infiltration_protocol'
-    end
-    object specimenCDSembedding_protocol: TShortintField
-      DisplayLabel = 'Embedding Protocol'
-      FieldName = 'embedding_protocol'
-    end
-    object specimenCDSLpreproctreat: TStringField
-      DisplayLabel = 'PreProcess Treatment'
-      FieldKind = fkLookup
-      FieldName = 'Lpreproctreat'
-      LookupDataSet = preprocesstreatmentDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'preprocess_treatment'
-      Size = 255
-      Lookup = True
     end
     object specimenCDSLspecie: TStringField
       DisplayLabel = 'Specie'
@@ -762,94 +679,6 @@ object atdbDM: TatdbDM
       LookupKeyFields = 'id'
       LookupResultField = 'name'
       KeyFields = 'specie'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLFixative: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LFixative'
-      LookupDataSet = fixativeTBL
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'fixative'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLfixationMethod: TStringField
-      DisplayLabel = 'Fixation Method'
-      DisplayWidth = 60
-      FieldKind = fkLookup
-      FieldName = 'LfixationMethod'
-      LookupDataSet = fixationMethodDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'fixation_method'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLpostfix: TStringField
-      DisplayLabel = 'PostFix'
-      FieldKind = fkLookup
-      FieldName = 'Lpostfix'
-      LookupDataSet = postfix
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'postfix_protocol'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLcryoprotection: TStringField
-      DisplayLabel = 'Cryo Protection'
-      FieldKind = fkLookup
-      FieldName = 'Lcryoprotection'
-      LookupDataSet = cryoprotectionDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'cryoprotection_protocol'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLfreezeProtocol: TStringField
-      DisplayLabel = 'Freeze Protocol'
-      FieldKind = fkLookup
-      FieldName = 'LfreezeProtocol'
-      LookupDataSet = freezeprotocolDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'freezing_protocol'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLsubstitutionProtocol: TStringField
-      DisplayLabel = 'Substitution Protocol'
-      FieldKind = fkLookup
-      FieldName = 'LsubstitutionProtocol'
-      LookupDataSet = substitutionProtocol
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'substitution_protocol'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLinfiltration: TStringField
-      DisplayLabel = 'Infilatration'
-      FieldKind = fkLookup
-      FieldName = 'Linfiltration'
-      LookupDataSet = infiltrationProtocolDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'infiltration_protocol'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSLembedding: TStringField
-      DisplayLabel = 'Embedding'
-      FieldKind = fkLookup
-      FieldName = 'Lembedding'
-      LookupDataSet = embeddingProtocolDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'embedding_protocol'
       Size = 255
       Lookup = True
     end
