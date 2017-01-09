@@ -28,7 +28,7 @@ object atdbDM: TatdbDM
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
       'HostName=localhost'
-      'Database=atdb_demo'
+      'Database=atdb'
       'User_Name=atdb_client'
       'Password=atdb123'
       'MaxBlobSize=-1'
@@ -130,8 +130,8 @@ object atdbDM: TatdbDM
   end
   object blocksDS: TSQLDataSet
     CommandText = 
-      'select * from block WHERE process_id = :process_id ORDER by id D' +
-      'ESC'
+      'select * from blocks WHERE process_id = :process_id ORDER by id ' +
+      'DESC'
     DataSource = specimenDSrc
     MaxBlobSize = 1
     Params = <
@@ -174,7 +174,7 @@ object atdbDM: TatdbDM
     end
   end
   object usersDS: TSQLDataSet
-    CommandText = 'select * from user'
+    CommandText = 'select * from users'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConnection1
@@ -260,7 +260,7 @@ object atdbDM: TatdbDM
     end
   end
   object noteDS: TSQLDataSet
-    CommandText = 'select * from note'
+    CommandText = 'select * from notes'
     DataSource = notesDSource
     MaxBlobSize = 1
     Params = <>
@@ -389,7 +389,7 @@ object atdbDM: TatdbDM
     Top = 472
   end
   object ribbonsDS: TSQLDataSet
-    CommandText = 'SELECT * from ribbon where block_id=:id'
+    CommandText = 'SELECT * from ribbons where block_id=:id'
     DataSource = blocksDataSource
     MaxBlobSize = -1
     Params = <
@@ -427,8 +427,8 @@ object atdbDM: TatdbDM
   end
   object blockNotesDS: TSQLDataSet
     CommandText = 
-      'SELECT * FROM note n '#13#10'INNER JOIN block_note bn '#13#10'ON (bn.note_id' +
-      ' = n.id) '#13#10'WHERE block_id = :id '#13#10'ORDER BY created_on ASC'
+      'SELECT * FROM notes n '#13#10'INNER JOIN block_note bn '#13#10'ON (bn.note_i' +
+      'd = n.id) '#13#10'WHERE block_id = :id '#13#10'ORDER BY created_on ASC'
     DataSource = blocksDataSource
     MaxBlobSize = 1
     Params = <
@@ -461,8 +461,8 @@ object atdbDM: TatdbDM
   end
   object ribbonNotesDS: TSQLDataSet
     CommandText = 
-      'SELECT * FROM note n '#13#10'INNER JOIN ribbon_note rn '#13#10'ON (rn.note_i' +
-      'd = n.id) '#13#10'WHERE ribbon_id = :id '#13#10'ORDER BY created_on ASC'
+      'SELECT * FROM notes n '#13#10'INNER JOIN ribbon_note rn '#13#10'ON (rn.note_' +
+      'id = n.id) '#13#10'WHERE ribbon_id = :id '#13#10'ORDER BY created_on ASC'
     DataSource = mRibbonDSource
     MaxBlobSize = 1
     Params = <
@@ -491,7 +491,7 @@ object atdbDM: TatdbDM
     end
   end
   object specimenDS: TSQLDataSet
-    CommandText = 'SELECT * from specimen order by process_id'
+    CommandText = 'SELECT * from specimens order by process_id'
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
@@ -571,53 +571,13 @@ object atdbDM: TatdbDM
         DataType = ftDate
       end
       item
-        Name = 'preprocess_treatment'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'fixative'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'fixation_method'
-        DataType = ftSmallint
-      end
-      item
         Name = 'brain_region_dissection'
         DataType = ftString
         Size = 255
       end
       item
-        Name = 'postfix_protocol'
-        DataType = ftSmallint
-      end
-      item
         Name = 'date_received'
         DataType = ftDate
-      end
-      item
-        Name = 'date_embedded'
-        DataType = ftDate
-      end
-      item
-        Name = 'cryoprotection_protocol'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'freezing_protocol'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'substitution_protocol'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'infiltration_protocol'
-        DataType = ftSmallint
-      end
-      item
-        Name = 'embedding_protocol'
-        DataType = ftSmallint
       end>
     IndexDefs = <>
     Params = <>
@@ -691,7 +651,7 @@ object atdbDM: TatdbDM
   object fixativeTBL: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT * from fixative'
+    DataSet.CommandText = 'SELECT * from fixativeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -702,7 +662,7 @@ object atdbDM: TatdbDM
   object speciesDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT * from specie'
+    DataSet.CommandText = 'SELECT * from species'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -712,7 +672,7 @@ object atdbDM: TatdbDM
   object preprocesstreatmentDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from  preprocesstreatment'
+    DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -722,7 +682,7 @@ object atdbDM: TatdbDM
   object fixationMethodDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from `fixmethod`'
+    DataSet.CommandText = 'select * from `fixationprotocols`'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -732,7 +692,7 @@ object atdbDM: TatdbDM
   object postfix: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from postfix'
+    DataSet.CommandText = 'select * from postfixprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -742,7 +702,7 @@ object atdbDM: TatdbDM
   object cryoprotectionDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from cryoprotection'
+    DataSet.CommandText = 'select * from cryoprotectionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -752,7 +712,7 @@ object atdbDM: TatdbDM
   object freezeprotocolDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from freezeprotocol'
+    DataSet.CommandText = 'select * from freezeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -762,7 +722,7 @@ object atdbDM: TatdbDM
   object substitutionProtocol: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from substitution'
+    DataSet.CommandText = 'select * from substitutionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     FieldDefs = <
@@ -809,7 +769,7 @@ object atdbDM: TatdbDM
   object infiltrationProtocolDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from infiltration'
+    DataSet.CommandText = 'select * from infiltrationprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -819,7 +779,7 @@ object atdbDM: TatdbDM
   object embeddingProtocolDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from embedding'
+    DataSet.CommandText = 'select * from embeddingprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -829,7 +789,7 @@ object atdbDM: TatdbDM
   object blockstatusDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT * from blockstatus'
+    DataSet.CommandText = 'SELECT * from blockstatuses'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -840,7 +800,7 @@ object atdbDM: TatdbDM
   object processIDDS: TSimpleDataSet
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT process_id  FROM specimen'
+    DataSet.CommandText = 'SELECT process_id  FROM specimens'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -848,7 +808,7 @@ object atdbDM: TatdbDM
     Top = 264
   end
   object documentsDS: TSQLDataSet
-    CommandText = 'SELECT * from document'
+    CommandText = 'SELECT * from documents'
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
@@ -881,7 +841,7 @@ object atdbDM: TatdbDM
     Aggregates = <>
     Params = <>
     ProviderName = 'documentsProvider'
-    Left = 224
+    Left = 256
     Top = 576
     object documentsCDSid: TIntegerField
       FieldName = 'id'

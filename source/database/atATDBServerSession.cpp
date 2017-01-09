@@ -56,7 +56,7 @@ RecordSet* ATDBServerSession::getBlocks(dbSQLKeyword kw)
     }
 
     Statement select(*mTheSession);
-    select << "SELECT * FROM block ORDER BY id " << ab::toString((dbSQLKeyword) kw);
+    select << "SELECT * FROM blocks ORDER BY id " << ab::toString((dbSQLKeyword) kw);
 
     int nrRows = select.execute();
     return new RecordSet(select);
@@ -76,7 +76,7 @@ RecordSet* ATDBServerSession::getNotesForBlock(int blockID)
     int id(blockID);
 
 	Statement s(ses);
-    s << "SELECT * FROM note WHERE id IN (SELECT note_id FROM block_note WHERE block_id = ?)", use(id), now;
+    s << "SELECT * FROM notes WHERE id IN (SELECT note_id FROM block_note WHERE block_id = ?)", use(id), now;
     return new RecordSet(s);
 }
 
@@ -96,11 +96,11 @@ bool ATDBServerSession::addNoteForBlock(int blockID, int userID, const string& _
     string note(_note);
 
 	Statement s(ses);
-    s << "INSERT INTO note (created_by, note) VALUES(?, ?)", use(uID), use(note), now;
+    s << "INSERT INTO notes (created_by, note) VALUES(?, ?)", use(uID), use(note), now;
     s.reset(ses);
 
     int noteID;
-    s << "SELECT MAX(id) FROM note", into(noteID), now;
+    s << "SELECT MAX(id) FROM notes", into(noteID), now;
     s.reset(ses);
 
     s << "INSERT INTO block_note (block_id, note_id) VALUES(?, ?)", use(bID), use(noteID), now;
@@ -123,11 +123,11 @@ bool ATDBServerSession::addNoteForRibbon(const string& ribbonID, int userID, con
     string note(_note);
 
 	Statement s(ses);
-    s << "INSERT INTO note (created_by, note) VALUES(?, ?)", use(uID), use(note), now;
+    s << "INSERT INTO notes (created_by, note) VALUES(?, ?)", use(uID), use(note), now;
     s.reset(ses);
 
     int noteID;
-    s << "SELECT MAX(id) FROM note", into(noteID), now;
+    s << "SELECT MAX(id) FROM notes", into(noteID), now;
     s.reset(ses);
 
     s << "INSERT INTO ribbon_note (ribbon_id, note_id) VALUES(?, ?)", use(rID), use(noteID), now;
@@ -148,7 +148,7 @@ bool ATDBServerSession::deleteNote(int noteID)
     int nID(noteID);
 
 	Statement s(ses);
-    s << "DELETE FROM note WHERE id = ?", use(nID), now;
+    s << "DELETE FROM notes WHERE id = ?", use(nID), now;
 	return true;
 }
 
@@ -167,7 +167,7 @@ bool ATDBServerSession::updateNote(int noteID, const string& note)
     string t(note);
 
 	Statement s(ses);
-    s << "UPDATE note SET note = ? WHERE id = ?", use(t), use(nID), now;
+    s << "UPDATE notes SET note = ? WHERE id = ?", use(t), use(nID), now;
 	return true;
 }
 
@@ -186,18 +186,18 @@ bool ATDBServerSession::insertBlock(int userID, const string& lbl, const string&
     string l(lbl), n(note);
 
 	Statement s(ses);
-    s << "INSERT INTO block (created_by, label) VALUES(?, ?)", use(id), use(l), now;
+    s << "INSERT INTO blocks (created_by, label) VALUES(?, ?)", use(id), use(l), now;
     s.reset(ses);
 
     int blockID;
-    s << "SELECT MAX(id) FROM block", into(blockID), now;
+    s << "SELECT MAX(id) FROM blocks", into(blockID), now;
     s.reset(ses);
 
-    s << "INSERT INTO note (created_by, note) VALUES(?, ?)", use(id), use(n), now;
+    s << "INSERT INTO notes (created_by, note) VALUES(?, ?)", use(id), use(n), now;
     s.reset(ses);
 
     int noteID;
-    s << "SELECT MAX(id) FROM note", into(noteID), now;
+    s << "SELECT MAX(id) FROM notes", into(noteID), now;
     s.reset(ses);
 
     s << "INSERT INTO block_note (block_id, note_id) VALUES(?, ?)", use(blockID), use(noteID), now;
@@ -219,7 +219,7 @@ bool ATDBServerSession::deleteBlock(int bId)
 
     s.reset(ses);
 
-    s << "DELETE FROM block WHERE id = ?", use(bId), now;
+    s << "DELETE FROM blocks WHERE id = ?", use(bId), now;
 	return true;
 }
 
@@ -233,7 +233,7 @@ bool ATDBServerSession::deleteNotesForBlock(int bId)
 	Statement s(ses);
 
     //Delete associated notes
-    s << "DELETE FROM note WHERE id IN (SELECT note_id FROM block_note WHERE block_id = ?)", use(bId), now;
+    s << "DELETE FROM notes WHERE id IN (SELECT note_id FROM block_note WHERE block_id = ?)", use(bId), now;
     s.reset(ses);
 	return true;
 }
@@ -251,11 +251,11 @@ bool ATDBServerSession::deleteRibbonsForBlock(int bId)
 
     //Delete associated notes
     //Delete associated notes
-    s << "DELETE FROM note WHERE id IN (SELECT note_id FROM ribbon_note where ribbon_id IN ( \
-    	SELECT ribbon_id FROM ribbon WHERE block_id = ?))", use(bID), now;
+    s << "DELETE FROM notes WHERE id IN (SELECT note_id FROM ribbon_note where ribbon_id IN ( \
+    	SELECT ribbon_id FROM ribbons WHERE block_id = ?))", use(bID), now;
 	s.reset(ses);
 
-    s << "DELETE FROM ribbon WHERE block_id = ?", use(bID), now;
+    s << "DELETE FROM ribbons WHERE block_id = ?", use(bID), now;
     s.reset(ses);
 	return true;
 }
@@ -270,7 +270,7 @@ bool ATDBServerSession::deleteNotesForRibbon(const string& rId)
 	Statement s(ses);
 
     //Delete associated notes
-    s << "DELETE FROM note WHERE id IN (SELECT note_id FROM ribbon_note WHERE ribbon_id = ?)", use(rID), now;
+    s << "DELETE FROM notes WHERE id IN (SELECT note_id FROM ribbon_note WHERE ribbon_id = ?)", use(rID), now;
     s.reset(ses);
 	return true;
 }
@@ -284,7 +284,7 @@ RecordSet* ATDBServerSession::getUsers(dbSQLKeyword kw)
     }
 
     Statement select(*mTheSession);
-    select << "SELECT * FROM user";
+    select << "SELECT * FROM users";
     int nrRows = select.execute();
     Log(lInfo) <<"Selected "<<nrRows<<" from user table";
     return new RecordSet(select);
