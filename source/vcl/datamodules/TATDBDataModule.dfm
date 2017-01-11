@@ -82,6 +82,7 @@ object atdbDM: TatdbDM
       Size = 255
     end
     object blocksCDSprocess_id: TIntegerField
+      Alignment = taLeftJustify
       DisplayLabel = 'Process ID'
       FieldName = 'process_id'
     end
@@ -111,6 +112,7 @@ object atdbDM: TatdbDM
       Lookup = True
     end
     object blocksCDSserial: TSmallintField
+      Alignment = taLeftJustify
       DisplayLabel = 'Serial'
       FieldName = 'serial'
       Required = True
@@ -120,6 +122,127 @@ object atdbDM: TatdbDM
       FieldName = 'Cblock_label'
       Size = 50
       Calculated = True
+    end
+    object blocksCDSdate_embedded: TDateField
+      FieldName = 'date_embedded'
+    end
+    object blocksCDSpreprocess_treatment_protocol: TSmallintField
+      FieldName = 'preprocess_treatment_protocol'
+    end
+    object blocksCDSfixative_protocol: TSmallintField
+      FieldName = 'fixative_protocol'
+    end
+    object blocksCDSfixation_protocol: TSmallintField
+      FieldName = 'fixation_protocol'
+    end
+    object blocksCDSpostfix_protocol: TSmallintField
+      FieldName = 'postfix_protocol'
+    end
+    object blocksCDScryoprotection_protocol: TSmallintField
+      FieldName = 'cryoprotection_protocol'
+    end
+    object blocksCDSfreezing_protocol: TSmallintField
+      FieldName = 'freezing_protocol'
+    end
+    object blocksCDSsubstitution_protocol: TSmallintField
+      FieldName = 'substitution_protocol'
+    end
+    object blocksCDSinfiltration_protocol: TSmallintField
+      FieldName = 'infiltration_protocol'
+    end
+    object blocksCDSembedding_protocol: TSmallintField
+      FieldName = 'embedding_protocol'
+    end
+    object blocksCDSLPreprocessTreatmentProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LPreprocessTreatmentProtocol'
+      LookupDataSet = preprocesstreatmentDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'preprocess_treatment_protocol'
+      Lookup = True
+    end
+    object blocksCDSLFixativeProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LFixativeProtocol'
+      LookupDataSet = fixativeTBL
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'fixative_protocol'
+      Lookup = True
+    end
+    object blocksCDSLFixationProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LFixationProtocol'
+      LookupDataSet = fixationMethodDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'fixation_protocol'
+      Lookup = True
+    end
+    object blocksCDSLPostFixProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LPostFixProtocol'
+      LookupDataSet = postfix
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'postfix_protocol'
+      Lookup = True
+    end
+    object blocksCDSLCryoProtectionProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LCryoProtectionProtocol'
+      LookupDataSet = cryoprotectionDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'cryoprotection_protocol'
+      Size = 0
+      Lookup = True
+    end
+    object blocksCDSLFreezingProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LFreezingProtocol'
+      LookupDataSet = freezeprotocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'freezing_protocol'
+      Lookup = True
+    end
+    object blocksCDSLSubstitutionProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LSubstitutionProtocol'
+      LookupDataSet = substitutionProtocol
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'substitution_protocol'
+      Lookup = True
+    end
+    object blocksCDSLInfiltrationProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LInfiltrationProtocol'
+      LookupDataSet = infiltrationProtocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'infiltration_protocol'
+      Lookup = True
+    end
+    object blocksCDSLEmbeddingProtocol: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LEmbeddingProtocol'
+      LookupDataSet = embeddingProtocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'embedding_protocol'
+      Lookup = True
+    end
+    object blocksCDSLUser: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LUser'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'created_by'
+      Lookup = True
     end
   end
   object blocksProvider: TDataSetProvider
@@ -171,6 +294,36 @@ object atdbDM: TatdbDM
     object blocksDSserial: TSmallintField
       FieldName = 'serial'
       Required = True
+    end
+    object blocksDSdate_embedded: TDateField
+      FieldName = 'date_embedded'
+    end
+    object blocksDSpreprocess_treatment_protocol: TSmallintField
+      FieldName = 'preprocess_treatment_protocol'
+    end
+    object blocksDSfixative_protocol: TSmallintField
+      FieldName = 'fixative_protocol'
+    end
+    object blocksDSfixation_protocol: TSmallintField
+      FieldName = 'fixation_protocol'
+    end
+    object blocksDSpostfix_protocol: TSmallintField
+      FieldName = 'postfix_protocol'
+    end
+    object blocksDScryoprotection_protocol: TSmallintField
+      FieldName = 'cryoprotection_protocol'
+    end
+    object blocksDSfreezing_protocol: TSmallintField
+      FieldName = 'freezing_protocol'
+    end
+    object blocksDSsubstitution_protocol: TSmallintField
+      FieldName = 'substitution_protocol'
+    end
+    object blocksDSinfiltration_protocol: TSmallintField
+      FieldName = 'infiltration_protocol'
+    end
+    object blocksDSembedding_protocol: TSmallintField
+      FieldName = 'embedding_protocol'
     end
   end
   object usersDS: TSQLDataSet
@@ -795,7 +948,7 @@ object atdbDM: TatdbDM
     Params = <>
     AfterPost = fixativeTBLAfterPost
     Left = 472
-    Top = 264
+    Top = 440
   end
   object processIDDS: TSimpleDataSet
     Aggregates = <>

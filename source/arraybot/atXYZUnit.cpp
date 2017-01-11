@@ -308,8 +308,8 @@ void XYZUnit::attachJoyStick(ArrayBotJoyStick* js)
             mJoyStick->getPOVButton(2).assignMotor(mZMotor);
             mJoyStick->getPOVButton(4).assignMotor(mZMotor);
 
-            mJoyStick->getPOVButton(2).setReverse();
-            mJoyStick->getPOVButton(4).setForward();
+            mJoyStick->getPOVButton(4).setReverse();
+            mJoyStick->getPOVButton(2).setForward();
 
             mJoyStick->getPOVButton(2).enable();
             mJoyStick->getPOVButton(4).enable();
@@ -365,8 +365,8 @@ void XYZUnit::attachJoyStick(ArrayBotJoyStick* js)
             mJoyStick->getButton(2).assignMotor(mZMotor);
             mJoyStick->getButton(4).assignMotor(mZMotor);
 
-            mJoyStick->getButton(2).setReverse();
-            mJoyStick->getButton(4).setForward();
+            mJoyStick->getButton(4).setReverse();
+            mJoyStick->getButton(2).setForward();
 
             mJoyStick->getButton(2).enable();
             mJoyStick->getButton(4).enable();

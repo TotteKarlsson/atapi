@@ -15,9 +15,9 @@ class AT_CORE WhiskerUnit  : public XYZUnit
 
 		vector<APTMotor*> 				getAllMotors();
 
-    protected:
-		Property<int>		            mZ2MotorSerialNr;
-        APTMotor*			            mZ2Motor;
+//    protected:
+//		Property<int>		            mZ2MotorSerialNr;
+//        APTMotor*			            mZ2Motor;
 
 };
 #endif

@@ -73,7 +73,8 @@ class AT_CORE ArrayBot : public ABObject
         JoyStickSettings			                    mJSSettings;
 
         XYZUnit						                    mCoverSlip;
-        WhiskerUnit		 			                    mWhisker;
+        XYZUnit											mWhisker;
+//        WhiskerUnit		 			                    mWhisker;
 
         							                    //!List of Lifts
         PairedMoves					                    mLifts;
