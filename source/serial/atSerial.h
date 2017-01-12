@@ -45,6 +45,13 @@ class AT_CORE Serial : public ABObject
         void								assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb);
 
     private:
+        									//!Messages are stored in a list of strings and consumed
+                                            //by clients
+        StringList				            mReceivedMessages;
+
+        						            //Messages from an arduino
+		Mutex					            mReceivedMessagesMutex;
+
         									//CSerial is doing the underlying serial port work
 		SerialPort							mSP;
 
@@ -54,12 +61,6 @@ class AT_CORE Serial : public ABObject
         SerialWorker						mSerialWorker;
         bool								setupAndOpenSerialPort(int pNr, int baudRate);
 
-        						            //Messages from an arduino
-		Mutex					            mReceivedMessagesMutex;
-
-        									//!Messages are stored in a list of strings and consumed
-                                            //by the Arduino server
-        StringList				            mReceivedMessages;
 
         SerialMessageReceivedCallBack	 	mReceivedCB;
         SerialMessageReceivedCallBackC	 	mReceivedCB_C;

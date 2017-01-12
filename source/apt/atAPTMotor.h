@@ -20,6 +20,7 @@ class AT_CORE APTMotor : public APTDevice
     public:
 						                    APTMotor(int serial);
 		virtual			                    ~APTMotor();
+        double								getMinPosition();
         double								getMaxPosition();
 		bool 	   							switchDirection(bool inThread = true);
 		bool	                    		setVelocityForward(double v);

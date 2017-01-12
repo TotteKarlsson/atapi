@@ -52,31 +52,31 @@ bool PairedMove::check()
         return false;
     }
 
-    //Find out which motor can move least
-    double dist1 =  mMotor1->getMaxPosition()  - mMotor1->getPosition();
-    double dist2  = mMotor2->getMaxPosition()  - mMotor2->getPosition();
-
+//    //Find out which motor can move least
+//    double dist1 =  mMotor1->getMinPosition()  - mMotor1->getPosition();
+//    double dist2  = mMotor2->getMinPosition()  - mMotor2->getPosition();
+//
     //Choose the shortest "longest" distance that we can move
-    mDistance = dist1 < dist2 ? dist1 : dist2;
-    mDistance = mDistance - 2.0;
+//    mDistance = dist1 < dist2 ? dist1 : dist2;
+//    mDistance = 30;//mDistance - 2.0;
 
     //get current positions and carry out some moveTo's
-	double newZ1Pos = mMotor1->getPosition() + mDistance;
-	double newZ2Pos = mMotor2->getPosition() + mDistance;
+	double newZ1Pos = mMotor1->getPosition() - mDistance;
+	double newZ2Pos = mMotor2->getPosition() - mDistance;
 
-    if(newZ1Pos >  mMotor1->getMaxPosition())
+    if(newZ1Pos < mMotor1->getMinPosition())
     {
     	stringstream s;
-        s << "New position ("<<newZ1Pos<<") too big for motor with label: \""<<mMotor1->getName()<<"\"\rMax position is "<<mMotor1->getMaxPosition()<<" mm";
+        s << "New position ("<<newZ1Pos<<") too small for motor with label: \""<<mMotor1->getName()<<"\"\rMax position is "<<mMotor1->getMinPosition()<<" mm";
     	Log(lError) << s.str();
         mCheckMessage = s.str();
         return false;
     }
 
-    if(newZ2Pos > mMotor2->getMaxPosition())
+    if(newZ2Pos < mMotor2->getMinPosition())
     {
     	stringstream s;
-        s << "New position ("<<newZ2Pos<<") too big for motor with label: \""<<mMotor2->getName()<<"\"\rMax position is "<<mMotor2->getMaxPosition()<<" mm";
+        s << "New position ("<<newZ2Pos<<") too small for motor with label: \""<<mMotor2->getName()<<"\"\rMax position is "<<mMotor2->getMinPosition()<<" mm";
     	Log(lError) << s.str();
         mCheckMessage = s.str();
         return false;
@@ -92,12 +92,11 @@ bool PairedMove::execute()
     }
 
     //get current positions and carry out some moveTo's
-	double newZ1Pos = mMotor1->getPosition() + mDistance;
-	double newZ2Pos = mMotor2->getPosition() + mDistance;
+	double newZ1Pos = mMotor1->getPosition() - mDistance;
+	double newZ2Pos = mMotor2->getPosition() - mDistance;
 
 	//Update motors with current parameters and start the move
     mMotor1->setVelocityParameters(mVelocity, mAcceleration);
-
     mMotor2->setVelocityParameters(mVelocity, mAcceleration);
 
     Log(lInfo) << "Moving Motor 1 to: "	<<newZ1Pos;

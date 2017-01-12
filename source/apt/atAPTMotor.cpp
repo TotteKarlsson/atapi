@@ -122,6 +122,11 @@ bool APTMotor::isAtDesiredPosition()
 	return isEqual(mDesiredPosition, getPosition(), 1.e-3);
 }
 
+double APTMotor::getMinPosition()
+{
+	return mPositionRange.getValue().getMin();
+}
+
 double APTMotor::getMaxPosition()
 {
 	return mPositionRange.getValue().getMax();

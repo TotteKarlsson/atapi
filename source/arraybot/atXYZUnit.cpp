@@ -135,6 +135,7 @@ bool XYZUnit::initialize()
     else
     {
 		Log(lError) << "Z motor is NOT connected";
+        Sleep(1000);
     }
 
     mAngleMotor = dynamic_cast<APTMotor*>(mDeviceManager.connectDevice(mAngleMotorSerialNr));
