@@ -22,7 +22,7 @@ class AT_CORE Serial : public ABObject
 	friend SerialWorker;
     public:
                                             //Initialize Serial communication with the given COM port
-                                            Serial(int portNr, int rate = 9600);
+                                            Serial(int portNr, int rate = 9600, char ld = '[', char rd = ']');
                                             ~Serial();
         bool					            connect(int portNr, int baudRate);
 

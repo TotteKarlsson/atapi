@@ -1,14 +1,15 @@
 #ifndef abSerialWorkerH
 #define abSerialWorkerH
-//---------------------------------------------------------------------------
 #include "mtkIPCMessageBuilder.h"
 #include "mtkThread.h"
 #include "atSerialPort.h"
+//---------------------------------------------------------------------------
+
 class Serial;
 class AT_CORE SerialWorker : public mtk::Thread
 {
 	public:
-                                        SerialWorker(Serial& h, SerialPort& s) : mTheHost(h), mSP(s), mMessageBuilder('[', ']'){}
+                                        SerialWorker(Serial& h, SerialPort& s, char ld = '[', char rd = ']') : mTheHost(h), mSP(s), mMessageBuilder(ld, rd){}
         void			                run();
         Serial&			                mTheHost;
         SerialPort&	 	                mSP;

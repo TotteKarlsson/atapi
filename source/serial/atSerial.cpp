@@ -5,10 +5,10 @@
 
 using namespace mtk;
 
-Serial::Serial(int portNr, int baudRate)
+Serial::Serial(int portNr, int baudRate, char ld, char rd)
 :
 mSP(),
-mSerialWorker(*this, mSP),
+mSerialWorker(*this, mSP, ld, rd),
 mReceivedCB(NULL)
 {
     if(portNr != -1)
@@ -149,12 +149,16 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
 
 bool Serial::disConnect()
 {
-    //Then the serial port itself
-	mSP.Close();
-
 	//First stop the worker
 	mSerialWorker.stop();
 
+	while(mSerialWorker.isAlive())
+    {
+    	Log(lInfo) << "closing..";
+    }
+
+    //Then the serial port itself
+	mSP.Close();
     return true;
 }
 

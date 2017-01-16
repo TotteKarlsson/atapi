@@ -132,6 +132,7 @@ void SerialWorker::run()
                             {
                                 // Finalize the data, so it is a valid message
                                 szBuffer[dwBytesRead] = '\0';
+                                Log(lDebug5) << "Read "<< dwBytesRead <<" bytes on serial port:"<<szBuffer;
                                 processReceiveBuffer(szBuffer, dwBytesRead);
                             }
                         }while (dwBytesRead > 0);
