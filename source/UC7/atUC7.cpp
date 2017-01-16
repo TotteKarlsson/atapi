@@ -10,7 +10,7 @@ UC7::UC7()
 :
 	mINIFileSection("UC7"),
     mCOMPort(-1),
-    mSerial(-1, 19200,'!', '\n')
+    mSerial(-1, 19200,'!', '\r')
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
 }
@@ -76,7 +76,7 @@ bool UC7::getCutterStatus()
 	return sendUC7Command(CUTTING_MOTOR_CONTROL, "FF");
 }
 
-bool UC7::sendUC7Command(UC7Command uc, const string& data1, const string& data2)
+bool UC7::sendUC7Command(const UC7CommandName& uc, const string& data1, const string& data2)
 {
 	stringstream cmd;
 
@@ -161,7 +161,16 @@ bool UC7::sendUC7Command(UC7Command uc, const string& data1, const string& data2
 bool UC7::decodeUC7Command(const string& data1)
 {
 
-	Log(lDebug5) << "Decoding UC7 message: "<<data1;
+	Log(lDebug4) << "Decoding UC7 message: "<<data1;
+    UC7Command cmd(data1);
+
+    Log(lDebug4) << "Receiver: "<<cmd.receiver();
+    Log(lDebug4) << "Sender: "<<cmd.sender();
+
+    Log(lDebug4) << "Command: "<<cmd.command();
+    Log(lDebug4) << "Data: "<<cmd.data();
+    Log(lDebug4) << "Checksum: "<<cmd.data();
+    Log(lDebug4) << "Checksum Check: "<<cmd.check() ? "OK" : "Failed";
 
     return true;
 }

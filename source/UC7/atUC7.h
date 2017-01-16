@@ -2,32 +2,10 @@
 #define atUC7H
 #include "atABObject.h"
 #include "serial/atSerial.h"
+#include "atUC7Command.h"
 //---------------------------------------------------------------------------
 
 using mtk::gEmptyString;
-//!Simple enum to hold commands
-enum UC7Command {SOFTWARE_RESET                             = 0,
-				 GET_PART_ID 	                            ,
-                 LOGIN			                            ,
-                 COMMAND_TRANSMISSION_ERROR                 ,
-                 GET_VERSION	                            ,
-
-                 FEEDRATE_MOTOR_CONTROL						,
-                 SEND_POSITION_AT_MOTION                    ,
-                 FEED                                       ,
-
-                 NORTH_SOUTH_MOTOR_MOVEMENT                 ,
-                 SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH      ,
-
-                 EAST_WEST_MOTOR_MOVEMENT                   ,
-				 SEND_POSITION_AT_MOVEMENT_EAST_WEST        ,
-
-                 CUTTING_MOTOR_CONTROL                      ,
-                 CUTTING_SPEED                              ,
-                 RETURN_SPEED                               ,
-                 HANDWHEEL_POSITION
-                };
-
 
 class AT_CORE UC7 : public ABObject
 {
@@ -51,7 +29,7 @@ class AT_CORE UC7 : public ABObject
         int								mCOMPort;
     	Serial							mSerial;
         void							onSerialMessage(const string& msg);
-        bool							sendUC7Command(UC7Command uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
+        bool							sendUC7Command(const UC7CommandName& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
 		bool    						decodeUC7Command(const string& msg);
 };
 
