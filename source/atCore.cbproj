@@ -385,7 +385,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>UC7\atUC7.h</DependentOn>
             <BuildOrder>69</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UC7\atUC7Command.cpp">
+        <CppCompile Include="UC7\atUC7Message.cpp">
             <BuildOrder>70</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

@@ -1,31 +1,29 @@
 #pragma hdrstop
-#include "atMotorMessageProcessor.h"
+#include "atUC7MessageConsumer.h"
 #include "mtkStringUtils.h"
-#include "atMotorMessageContainer.h"
 #include "Poco/Mutex.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
-#include "atAPTMotor.h"
+#include "atUC7.h"
 //---------------------------------------------------------------------------
 
 using Poco::Mutex;
 using namespace mtk;
 
 //----------------------------------------------------------------
-MotorMessageProcessor::MotorMessageProcessor(MotorMessageContainer& messageContainer,  const string& threadName)
+UC7MessageConsumer::UC7MessageConsumer(UC7& messageContainer,  const string& threadName)
 :
 mtk::Thread(threadName),
 mAllowProcessing(true),
-mMotorMessageContainer(messageContainer),
+mUC7(messageContainer),
 mProcessedCount(0),
 mNotifyUI(NULL),
-mMotor(NULL),
-mLastProcessedCommand(mcNone),
+//mLastProcessedCommand(mcNone),
 mProcessTimeDelay(150)
 {}
 
 //----------------------------------------------------------------
-MotorMessageProcessor::~MotorMessageProcessor()
+UC7MessageConsumer::~UC7MessageConsumer()
 {
 	if(mIsRunning)
     {
@@ -33,17 +31,13 @@ MotorMessageProcessor::~MotorMessageProcessor()
     }
 }
 
-void MotorMessageProcessor::assignMotor(APTMotor* motor)
-{
-	mMotor = motor;
-}
 
-MotorCommandEnum MotorMessageProcessor::getLastProcessedMessage()
-{
-	return mLastProcessedCommand;
-}
+//MotorCommandEnum UC7MessageConsumer::getLastProcessedMessage()
+//{
+//	return mLastProcessedCommand;
+//}
 
-bool MotorMessageProcessor::start(bool inThread)
+bool UC7MessageConsumer::start(bool inThread)
 {
 	if(isRunning())
 	{
@@ -61,121 +55,68 @@ bool MotorMessageProcessor::start(bool inThread)
 	}
 }
 
-void MotorMessageProcessor::pauseProcessing()
+void UC7MessageConsumer::pauseProcessing()
 {
 	mAllowProcessing = false;
 }
 
-void MotorMessageProcessor::resumeProcessing()
+void UC7MessageConsumer::resumeProcessing()
 {
 	mAllowProcessing = true;
 }
 
-void MotorMessageProcessor::stop()
+void UC7MessageConsumer::stop()
 {
 	//Sets time to die to true
 	mtk::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
-	mMotorMessageContainer.mNewCommandCondition.signal();
+	mUC7.mNewMessageCondition.signal();
 }
 
-void MotorMessageProcessor::run()
+void UC7MessageConsumer::run()
 {
 	worker();
 }
 
-void MotorMessageProcessor::worker()
+void UC7MessageConsumer::worker()
 {
 	Log(lDebug)<<"Entering Command Processor Worker Function.";
 	while(mIsTimeToDie == false)
 	{
 		{
-			Poco::ScopedLock<Poco::Mutex> lock(mMotorMessageContainer.mListMutex);
-			if(mMotorMessageContainer.count() == 0)
+			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mBufferMutex);
+			if(mUC7.mIncomingMessagesBuffer.size() == 0)
 			{
-				Log(lDebug3) << "Waiting for motor commands.";
-				mMotorMessageContainer.mNewCommandCondition.wait(mMotorMessageContainer.mListMutex);
+				Log(lDebug3) << "Waiting for UC7 message.";
+				mUC7.mNewMessageCondition.wait(mUC7.mBufferMutex);
 			}
 
-            while(mMotorMessageContainer.hasMessage() && mIsTimeToDie == false)
+            while(mUC7.hasMessage() && mIsTimeToDie == false)
             {
-	           	MotorCommand cmd = mMotorMessageContainer.pop();
+	           	UC7Command cmd = mUC7.mIncomingMessagesBuffer.front();
+                mUC7.mIncomingMessagesBuffer.pop_front();
 
-    	        Log(lDebug) << "Processing command: "<<cmd.asString();
-                if(mMotor == NULL)
+    	        Log(lDebug) << "Processing command: "<<cmd.command();
+
+                switch(toInt(cmd.sender()))
                 {
-                	break;
+//                    case mcNone:
+//		    	        Log(lWarning) << "Processing NONE command";
+//					break;
+
+                    default: Log(lError) << "UC7 Message: "<<cmd.command()<<" was not reckognized!";
+
                 }
 
-                switch(cmd.getCore())
-                {
-                    case mcNone:
-		    	        Log(lWarning) << "Processing NONE command";
-					break;
-
-                    case mcStopHard:
-                    	mMotor->stop(false);
-//                        //Wait until motor is stopped
-////                        while(mMotor->isActive())
-////                        {
-////                        ;
-////                        }
-					break;
-                    case mcStopProfiled:
-                    	mMotor->stopProfiled(false);
-                        while(mMotor->isActive())
-                        { ; }
-					break;
-
-                    case mcForward:
-                    	mMotor->forward(false);
-					break;
-
-                    case mcReverse:
-                    	mMotor->reverse(false);
-					break;
-
-                    case mcJogForward:
-                    	mMotor->jogForward(false);
-					break;
-
-                    case mcJogReverse:
-                    	mMotor->jogReverse(false);
-					break;
-
-                    case mcMoveToPosition:
-                    	mMotor->moveToPosition(cmd.getFirstVariable(), false);
-					break;
-
-                    case mcSetVelocityParameters:
-                    	mMotor->setVelocityParameters(cmd.getFirstVariable(), cmd.getSecondVariable(), false);
-					break;
-
-                    case mcSetVelocityForward:
-                    	mMotor->setJogVelocity(cmd.getFirstVariable());
-                    	mMotor->jogForward(false);
-					break;
-
-                    case mcSetVelocityReverse:
-                    	mMotor->setJogVelocity(cmd.getFirstVariable());
-                    	mMotor->jogReverse(false);
-					break;
-
-                    case mcSwitchDirection:
-                    	mMotor->switchDirection(false);
-					break;
-                    default: Log(lError) << "Motor Command: "<<toString(cmd.getCore())<<" was not reckognized!";
-
-                }
-                mLastProcessedCommand = cmd.getCore();
+                //mLastProcessedCommand = cmd.getCore();
                 sleep(mProcessTimeDelay);
             }
 
 		}//mutex
 	}
 
-    Log(lInfo) << "Motor Message Processor finished";
+    Log(lInfo) << "UC7 Message Processor finished";
 	mIsFinished = true;
 	mIsRunning = false;
 }

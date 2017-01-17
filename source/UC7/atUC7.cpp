@@ -48,10 +48,15 @@ bool UC7::getVersion()
 	return "";
 }
 
+bool UC7::hasMessage()
+{
+	return mIncomingMessagesBuffer.size() ? true : false;
+}
+
 void UC7::onSerialMessage(const string& msg)
 {
 	Log(lDebug4) << "Decoding UC7 message: "<<msg;
-    UC7Command cmd(msg, true);
+    UC7Message cmd(msg, true);
     if(cmd.check())
     {
         Log(lDebug4) << "Receiver: "	<<cmd.receiver();
@@ -85,20 +90,20 @@ bool UC7::sendRawMessage(const string& msg)
 
 bool UC7::startCutter()
 {
-	return sendUC7Command(CUTTING_MOTOR_CONTROL, "01");
+	return sendUC7Message(CUTTING_MOTOR_CONTROL, "01");
 }
 
 bool UC7::stopCutter()
 {
-	return sendUC7Command(CUTTING_MOTOR_CONTROL, "00");
+	return sendUC7Message(CUTTING_MOTOR_CONTROL, "00");
 }
 
 bool UC7::getCutterStatus()
 {
-	return sendUC7Command(CUTTING_MOTOR_CONTROL, "FF");
+	return sendUC7Message(CUTTING_MOTOR_CONTROL, "FF");
 }
 
-bool UC7::sendUC7Command(const UC7CommandName& uc, const string& data1, const string& data2)
+bool UC7::sendUC7Message(const UC7MessageName& uc, const string& data1, const string& data2)
 {
 	stringstream cmd;
 

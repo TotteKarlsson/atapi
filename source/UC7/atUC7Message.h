@@ -1,10 +1,10 @@
-#ifndef atUC7CommandH
-#define atUC7CommandH
+#ifndef atUC7MessageH
+#define atUC7MessageH
 #include "atABObject.h"
 //---------------------------------------------------------------------------
 
 //!Simple enum to hold commands
-enum UC7CommandName
+enum UC7MessageName
 				{SOFTWARE_RESET                             = 0,
 				 GET_PART_ID 	                            ,
                  LOGIN			                            ,
@@ -28,13 +28,13 @@ enum UC7CommandName
                  UNKNOWN
                 };
 
-UC7CommandName toCommandName(const string& cmd, int controllerAddress);
-string toString(UC7CommandName cmd);
+UC7MessageName toCommandName(const string& cmd, int controllerAddress);
+string toString(UC7MessageName cmd);
 
-class AT_CORE UC7Command : public ABObject
+class AT_CORE UC7Message : public ABObject
 {
 	public:
-					            UC7Command(const string& cmd = "", bool isResponse = false);
+					            UC7Message(const string& cmd = "", bool isResponse = false);
 
         string		            receiver();
         string		            sender();
@@ -51,7 +51,7 @@ class AT_CORE UC7Command : public ABObject
         string					mCheckSum;
         string 					mCommandString;
         bool					mIsResponse;
-        UC7CommandName			mCommandName;
+        UC7MessageName			mCommandName;
         bool					parse(const string& cmd, bool isResponse = false);
 };
 

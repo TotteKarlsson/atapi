@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atUC7Command.h"
+#include "atUC7Message.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
@@ -14,7 +14,7 @@ int hexToDec(const string& hex)
 }
 
 
-UC7Command::UC7Command(const string& cmd, bool isResponse)
+UC7Message::UC7Message(const string& cmd, bool isResponse)
 :
 mReceiver(""),
 mSender(""),
@@ -29,7 +29,7 @@ mIsResponse(isResponse)
     }
 }
 
-bool UC7Command::parse(const string& cmd, bool isResponse)
+bool UC7Message::parse(const string& cmd, bool isResponse)
 {
 	//A command has to be at least 6 chars long
     int minCmdSize = 6;
@@ -78,33 +78,33 @@ bool UC7Command::parse(const string& cmd, bool isResponse)
     return true;
 }
 
-string UC7Command::receiver()
+string UC7Message::receiver()
 {
 	return mReceiver;
 }
 
-string UC7Command::sender()
+string UC7Message::sender()
 {
 	return mSender;
 }
 
-string UC7Command::command()
+string UC7Message::command()
 {
 	return mCommandString;
 }
 
-string UC7Command::data()
+string UC7Message::data()
 {
 	return mData;
 }
 
-string UC7Command::checksum()
+string UC7Message::checksum()
 {
 	return mCheckSum;
 }
 
 
-string UC7Command::getMessage()
+string UC7Message::getMessage()
 {
 	return mReceiver + mSender + mCommandString + mData + mCheckSum;
 }
@@ -123,7 +123,7 @@ int addUpDataToInt(const string& mData)
     return sum;
 }
 
-bool UC7Command::check()
+bool UC7Message::check()
 {
 	//Check command against checksum for integrity
     string recSndrSum(mReceiver + mSender);
@@ -139,7 +139,7 @@ bool UC7Command::check()
     return (sum == cs) ? true : false;
 }
 
-UC7CommandName toCommandName(const string& cmd, int controllerAddress)
+UC7MessageName toCommandName(const string& cmd, int controllerAddress)
 {
 	switch(controllerAddress)
     {
@@ -209,7 +209,7 @@ UC7CommandName toCommandName(const string& cmd, int controllerAddress)
     }
 }
 
-string toString(UC7CommandName cmd)
+string toString(UC7MessageName cmd)
 {
     switch(cmd)
     {

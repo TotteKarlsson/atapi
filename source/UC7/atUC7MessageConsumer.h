@@ -14,11 +14,11 @@ using mtk::gEmptyString;
 
 typedef void __fastcall (__closure *UICallback)(void);
 
-class AT_CORE MotorMessageProcessor : public ABObject, public mtk::Thread
+class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
 {
     public:
-                                                    MotorMessageProcessor(MotorMessageContainer& list, const string& threadName=gEmptyString);
-                                                    ~MotorMessageProcessor();
+                                                    UC7MessageConsumer(UC7& list,  const string& threadName = gEmptyString);
+                                                    ~UC7MessageConsumer();
         bool                                        openDataBase(const string& db);
 
                                                     // overridden from Thread
@@ -26,20 +26,17 @@ class AT_CORE MotorMessageProcessor : public ABObject, public mtk::Thread
         virtual void                                worker();
         void                                        stop();
         bool                                        start(bool in_thread = true);
-        void										assignMotor(APTMotor* motor);
-
         void                                        pauseProcessing();
         void                                        resumeProcessing();
         UICallback                                  mNotifyUI;
-        MotorCommandEnum							getLastProcessedMessage();
+        //MotorCommandEnum							getLastProcessedMessage();
 
 	protected:
 		long                                        mProcessedCount;
 		bool                                        mAllowProcessing;
-		MotorCommandEnum							mLastProcessedCommand;
-        APTMotor*									mMotor;
+//		MotorCommandEnum							mLastProcessedCommand;
         double										mProcessTimeDelay;
-		MotorMessageContainer&                      mMotorMessageContainer;
+		UC7&                      					mUC7;
 };
 
 #endif
