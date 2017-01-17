@@ -24,30 +24,33 @@ enum UC7CommandName
                  CUTTING_MOTOR_CONTROL                      ,
                  CUTTING_SPEED                              ,
                  RETURN_SPEED                               ,
-                 HANDWHEEL_POSITION
+                 HANDWHEEL_POSITION							,
+                 UNKNOWN
                 };
 
-UC7CommandName toCommandName(const string& cmd, char controllerAddress);
+UC7CommandName toCommandName(const string& cmd, int controllerAddress);
 string toString(UC7CommandName cmd);
 
 class AT_CORE UC7Command : public ABObject
 {
 	public:
-					            UC7Command(const string& cmd = "");
+					            UC7Command(const string& cmd = "", bool isResponse = false);
 
         string		            receiver();
         string		            sender();
 		string		            command();
 		string					data();
 		string		            getMessage();
+        string					checksum();
         bool		            check();
 
 	private:
-    	char					mReceiver;
-        char					mSender;
+    	string 					mReceiver;
+        string 					mSender;
         string					mData;
         string					mCheckSum;
         string 					mCommandString;
+        bool					mIsResponse;
         UC7CommandName			mCommandName;
         bool					parse(const string& cmd, bool isResponse = false);
 };

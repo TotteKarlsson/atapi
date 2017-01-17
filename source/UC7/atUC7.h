@@ -3,9 +3,12 @@
 #include "atABObject.h"
 #include "serial/atSerial.h"
 #include "atUC7Command.h"
+#include <deque>
+#include "Poco/Mutex.h"
 //---------------------------------------------------------------------------
 
 using mtk::gEmptyString;
+using std::deque;
 
 class AT_CORE UC7 : public ABObject
 {
@@ -30,7 +33,12 @@ class AT_CORE UC7 : public ABObject
     	Serial							mSerial;
         void							onSerialMessage(const string& msg);
         bool							sendUC7Command(const UC7CommandName& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
-		bool    						decodeUC7Command(const string& msg);
+
+        Poco::Mutex						mBufferMutex;
+        Poco::Condition					mNewMessageCondition;
+        deque<UC7Command> 				mIncomingMessagesBuffer;
+
+
 };
 
 #endif

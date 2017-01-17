@@ -50,10 +50,32 @@ bool UC7::getVersion()
 
 void UC7::onSerialMessage(const string& msg)
 {
-	Log(lInfo) << "Got Message: "<<msg;
+	Log(lDebug4) << "Decoding UC7 message: "<<msg;
+    UC7Command cmd(msg, true);
+    if(cmd.check())
+    {
+        Log(lDebug4) << "Receiver: "	<<cmd.receiver();
+        Log(lDebug4) << "Sender: "		<<cmd.sender();
+        Log(lDebug4) << "Command: "		<<cmd.command();
+        Log(lDebug4) << "Data: "		<<cmd.data();
+        Log(lDebug4) << "Checksum: "	<<hex<<cmd.checksum();
+        Log(lDebug4) << "Checksum Check: "<<(cmd.check() ? "OK" : "Failed");
 
-    decodeUC7Command(msg);
+		//Get mutex using a scoped lock
+        {
+        	Poco::ScopedLock<Poco::Mutex> lock(mBufferMutex);
+	        mIncomingMessagesBuffer.push_back(cmd);
+        }
+
+        //Send a signal
+        mNewMessageCondition.signal();
+    }
+    else
+    {
+   		Log(lInfo) << "Bad CheckSum for message: "<<msg;
+    }
 }
+
 
 bool UC7::sendRawMessage(const string& msg)
 {
@@ -157,21 +179,4 @@ bool UC7::sendUC7Command(const UC7CommandName& uc, const string& data1, const st
     return true;
 }
 
-//Decode UC7 command
-bool UC7::decodeUC7Command(const string& data1)
-{
-
-	Log(lDebug4) << "Decoding UC7 message: "<<data1;
-    UC7Command cmd(data1);
-
-    Log(lDebug4) << "Receiver: "<<cmd.receiver();
-    Log(lDebug4) << "Sender: "<<cmd.sender();
-
-    Log(lDebug4) << "Command: "<<cmd.command();
-    Log(lDebug4) << "Data: "<<cmd.data();
-    Log(lDebug4) << "Checksum: "<<cmd.data();
-    Log(lDebug4) << "Checksum Check: "<<cmd.check() ? "OK" : "Failed";
-
-    return true;
-}
 
