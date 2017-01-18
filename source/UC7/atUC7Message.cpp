@@ -73,7 +73,7 @@ bool UC7Message::parse(const string& cmd, bool isResponse)
     return true;
 }
 
-string UC7Message::receiver()
+string UC7Message::receiver() const
 {
 	return mReceiver;
 }
@@ -83,23 +83,23 @@ string UC7Message::sender() const
 	return mSender;
 }
 
-string UC7Message::command()
+string UC7Message::command()  const
 {
 	return mCommandString;
 }
 
-string UC7Message::data()
+string UC7Message::data()  const
 {
 	return mData;
 }
 
-string UC7Message::checksum()
+string UC7Message::checksum() const
 {
 	return mCheckSum;
 }
 
 
-string UC7Message::getFullMessage()
+string UC7Message::getFullMessage() const
 {
 	return mReceiver + mSender + mCommandString + mData + mCheckSum;
 }
@@ -118,12 +118,12 @@ int addUpDataToInt(const string& mData)
     return sum;
 }
 
-string UC7Message::getMessageNameAsString()
+string UC7Message::getMessageNameAsString() const
 {
 	return toLongString(mCommandName);
 }
 
-bool UC7Message::check()
+bool UC7Message::check() const
 {
 	//Check command against checksum for integrity
     string recSndrSum(mReceiver + mSender);

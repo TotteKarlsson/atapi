@@ -37,14 +37,14 @@ class AT_CORE UC7Message : public ABObject
 	public:
 					            UC7Message(const string& cmd = "", bool isResponse = false);
 
-        string		            receiver();
+        string		            receiver() const;
         string		            sender() const;
-		string		            command();
-		string					data();
-		string		            getFullMessage();
-        string					checksum();
-        bool		            check();
-        string					getMessageNameAsString();
+		string		            command() const;
+		string					data() const;
+		string		            getFullMessage() const;
+        string					checksum() const;
+        bool		            check() const;
+        string					getMessageNameAsString() const;
 
 	private:
     	string 					mReceiver;
