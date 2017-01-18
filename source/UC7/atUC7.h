@@ -30,7 +30,6 @@ class AT_CORE UC7 : public ABObject
         int								calculateCheckSum(const string& cmd);
         bool							hasMessage();
 
-
     protected:
         string							mINIFileSection;
         int								mCOMPort;

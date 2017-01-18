@@ -4,15 +4,7 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-int hexToDec(const string& hex)
-{
-	stringstream convert(hex);
-
-    int val;
-    convert >> std::hex >> val;
-    return val;
-}
-
+int hexToDec(const string& hex);
 
 UC7Message::UC7Message(const string& cmd, bool isResponse)
 :
@@ -23,9 +15,12 @@ mCheckSum(""),
 mCommandString(""),
 mIsResponse(isResponse)
 {
-	if(!parse(cmd, mIsResponse))
+	if(cmd.size())
     {
-    	Log(lError) << "The UC7 command: " <<cmd<<" failed to parse";
+        if(!parse(cmd, mIsResponse))
+        {
+            Log(lError) << "The UC7 command: " <<cmd<<" failed to parse";
+        }
     }
 }
 
@@ -60,7 +55,7 @@ bool UC7Message::parse(const string& cmd, bool isResponse)
     //Next two chars are the command
     mCommandString.push_back(cmd[2]);
     mCommandString.push_back(cmd[3]);
-    mCommandName = toCommandName(mCommandString, toInt(mReceiver));
+    mCommandName = toCommandName(mCommandString, toInt(mSender));
 
     //The data is everything after the command and before the checksum
     if(cmd.size() == minCmdSize)
@@ -83,7 +78,7 @@ string UC7Message::receiver()
 	return mReceiver;
 }
 
-string UC7Message::sender()
+string UC7Message::sender() const
 {
 	return mSender;
 }
@@ -104,7 +99,7 @@ string UC7Message::checksum()
 }
 
 
-string UC7Message::getMessage()
+string UC7Message::getFullMessage()
 {
 	return mReceiver + mSender + mCommandString + mData + mCheckSum;
 }
@@ -113,7 +108,7 @@ int addUpDataToInt(const string& mData)
 {
 	int sum(0);
 
-    for(int i = 0; i < mData.size(); i+=2)
+    for(int i = 0; i < mData.size(); i += 2)
     {
         string val;
         val.push_back(mData[i]);
@@ -121,6 +116,11 @@ int addUpDataToInt(const string& mData)
         sum += hexToDec(val);
     }
     return sum;
+}
+
+string UC7Message::getMessageNameAsString()
+{
+	return toLongString(mCommandName);
 }
 
 bool UC7Message::check()
@@ -209,7 +209,7 @@ UC7MessageName toCommandName(const string& cmd, int controllerAddress)
     }
 }
 
-string toString(UC7MessageName cmd)
+string toShortString(UC7MessageName cmd)
 {
     switch(cmd)
     {
@@ -235,6 +235,45 @@ string toString(UC7MessageName cmd)
         case HANDWHEEL_POSITION:                            return "40";
 
         default:
-        	Log(lError) << "Bad command: "<<cmd;	   		return "";
+        	Log(lError) << "UNKNOWN UC7 message: "<<cmd;    return "UNKNOWN";
     }
 }
+
+string toLongString(UC7MessageName cmd)
+{
+    switch(cmd)
+    {
+        case SOFTWARE_RESET:		                        return "Software Reset";
+        case GET_PART_ID:			                        return "Get part ID (WKZ)";
+        case LOGIN:					                        return "Login";
+        case COMMAND_TRANSMISSION_ERROR:                    return "Command-/Transmission error";
+        case GET_VERSION:                                   return "Get version";
+
+        //Controller #4
+        case FEEDRATE_MOTOR_CONTROL:                        return "Feedrate motoro control";
+        case SEND_POSITION_AT_MOTION:                       return "Send position at motion";
+        case FEED:                                          return "Feed";
+        case NORTH_SOUTH_MOTOR_MOVEMENT:                    return "North/South Motor movement";
+        case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:         return "Send Position at movement (North/South)";
+        case EAST_WEST_MOTOR_MOVEMENT:                      return "East/West motor movement";
+        case SEND_POSITION_AT_MOVEMENT_EAST_WEST:           return "Send position at movement East/West";
+
+        //Controller #5
+        case CUTTING_MOTOR_CONTROL:                         return "Cutting motor control";
+        case CUTTING_SPEED:                                 return "Cutting Speed";
+        case RETURN_SPEED:                                  return "Return Speed";
+        case HANDWHEEL_POSITION:                            return "Handwheel position";
+
+        default:
+        	Log(lError) << "UNKNOWN UC7 message: "<<cmd;	return "UNKNOWN";
+    }
+}
+
+int hexToDec(const string& hex)
+{
+	stringstream convert(hex);
+    int val;
+    convert >> std::hex >> val;
+    return val;
+}
+

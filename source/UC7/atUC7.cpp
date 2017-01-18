@@ -81,7 +81,6 @@ void UC7::onSerialMessage(const string& msg)
     }
 }
 
-
 bool UC7::sendRawMessage(const string& msg)
 {
 	Log(lInfo) << "Sending raw message: "<<msg;
@@ -103,12 +102,12 @@ bool UC7::getCutterStatus()
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "FF");
 }
 
-bool UC7::sendUC7Message(const UC7MessageName& uc, const string& data1, const string& data2)
+bool UC7::sendUC7Message(const UC7MessageName& msgName, const string& data1, const string& data2)
 {
 	stringstream cmd;
 
 	//This function constructs a proper command to send to the UC7
-    switch(uc)
+    switch(msgName)
     {
         case SOFTWARE_RESET:
 

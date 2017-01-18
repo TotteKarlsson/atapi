@@ -5,21 +5,23 @@
 #include "mtkLogger.h"
 #include "mtkUtils.h"
 #include "atUC7.h"
+#include "atUC7ApplicationMessages.h"
+#include "atUC7DataStructures.h"
 //---------------------------------------------------------------------------
 
 using Poco::Mutex;
 using namespace mtk;
 
 //----------------------------------------------------------------
-UC7MessageConsumer::UC7MessageConsumer(UC7& messageContainer,  const string& threadName)
+UC7MessageConsumer::UC7MessageConsumer(UC7& messageContainer,  HWND__ *h, const string& threadName)
 :
 mtk::Thread(threadName),
 mAllowProcessing(true),
 mUC7(messageContainer),
 mProcessedCount(0),
 mNotifyUI(NULL),
-//mLastProcessedCommand(mcNone),
-mProcessTimeDelay(150)
+mProcessTimeDelay(1),
+mHandle(h)
 {}
 
 //----------------------------------------------------------------
@@ -30,12 +32,6 @@ UC7MessageConsumer::~UC7MessageConsumer()
 		stop();
     }
 }
-
-
-//MotorCommandEnum UC7MessageConsumer::getLastProcessedMessage()
-//{
-//	return mLastProcessedCommand;
-//}
 
 bool UC7MessageConsumer::start(bool inThread)
 {
@@ -94,26 +90,28 @@ void UC7MessageConsumer::worker()
 
             while(mUC7.hasMessage() && mIsTimeToDie == false)
             {
-	           	UC7Command cmd = mUC7.mIncomingMessagesBuffer.front();
+				UC7Message* msg = new UC7Message;
+	           	(*msg) = mUC7.mIncomingMessagesBuffer.front();
+
                 mUC7.mIncomingMessagesBuffer.pop_front();
-
-    	        Log(lDebug) << "Processing command: "<<cmd.command();
-
-                switch(toInt(cmd.sender()))
+                if(!msg->check())
                 {
-//                    case mcNone:
-//		    	        Log(lWarning) << "Processing NONE command";
-//					break;
-
-                    default: Log(lError) << "UC7 Message: "<<cmd.command()<<" was not reckognized!";
-
+                	Log(lError) << "Corrupted message";
+                }
+                else
+                {
+                    //Send windows message and let UI handle the message
+                    int ret = PostMessage(mHandle, UWM_MESSAGE, 1, (long) msg);
+                    if(!ret)
+                    {
+                        Log(lError) << "Post message failed..";
+                    }
                 }
 
-                //mLastProcessedCommand = cmd.getCore();
                 sleep(mProcessTimeDelay);
             }
 
-		}//mutex
+		}//scoped lock
 	}
 
     Log(lInfo) << "UC7 Message Processor finished";

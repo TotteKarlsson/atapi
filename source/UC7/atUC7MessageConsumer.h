@@ -17,7 +17,7 @@ typedef void __fastcall (__closure *UICallback)(void);
 class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
 {
     public:
-                                                    UC7MessageConsumer(UC7& list,  const string& threadName = gEmptyString);
+                                                    UC7MessageConsumer(UC7& list,  HWND__ *h, const string& threadName = gEmptyString);
                                                     ~UC7MessageConsumer();
         bool                                        openDataBase(const string& db);
 
@@ -29,14 +29,15 @@ class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
         void                                        pauseProcessing();
         void                                        resumeProcessing();
         UICallback                                  mNotifyUI;
-        //MotorCommandEnum							getLastProcessedMessage();
 
 	protected:
 		long                                        mProcessedCount;
 		bool                                        mAllowProcessing;
-//		MotorCommandEnum							mLastProcessedCommand;
         double										mProcessTimeDelay;
 		UC7&                      					mUC7;
+
+        											//The handle is needed for window messaging
+        HWND__*										mHandle;
 };
 
 #endif

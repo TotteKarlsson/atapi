@@ -29,7 +29,8 @@ enum UC7MessageName
                 };
 
 UC7MessageName toCommandName(const string& cmd, int controllerAddress);
-string toString(UC7MessageName cmd);
+string toShortString(UC7MessageName cmd);
+string toLongString(UC7MessageName cmd);
 
 class AT_CORE UC7Message : public ABObject
 {
@@ -37,12 +38,13 @@ class AT_CORE UC7Message : public ABObject
 					            UC7Message(const string& cmd = "", bool isResponse = false);
 
         string		            receiver();
-        string		            sender();
+        string		            sender() const;
 		string		            command();
 		string					data();
-		string		            getMessage();
+		string		            getFullMessage();
         string					checksum();
         bool		            check();
+        string					getMessageNameAsString();
 
 	private:
     	string 					mReceiver;
