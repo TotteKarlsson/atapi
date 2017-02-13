@@ -5,6 +5,7 @@
 using namespace mtk;
 
 int hexToDec(const string& hex);
+int addUpDataToInt(const string& mData);
 
 UC7Message::UC7Message(const string& cmd, bool isResponse)
 :
@@ -68,8 +69,15 @@ bool UC7Message::parse(const string& cmd, bool isResponse)
     	mData = cmd.substr(4, lengthOfData);
     }
 
-    mCheckSum.push_back(cmd[cmd.size() - 2]);
-    mCheckSum.push_back(cmd[cmd.size() - 1]);
+	if(isResponse)
+    {
+    	mCheckSum.push_back(cmd[cmd.size() - 2]);
+	    mCheckSum.push_back(cmd[cmd.size() - 1]);
+    }
+    else
+    {
+    	calculateCheckSum();
+    }
     return true;
 }
 
@@ -98,6 +106,21 @@ string UC7Message::checksum() const
 	return mCheckSum;
 }
 
+bool UC7Message::calculateCheckSum()
+{
+    //Calculate Checksum
+    string recSndrSum(mReceiver + mSender);
+    unsigned char sum = hexToDec(recSndrSum) + hexToDec(mCommandString);
+
+    int data = addUpDataToInt(mData);
+    sum += data;
+
+    //take two's complement, of a two byte variable
+    sum = ~sum + 1;
+    mCheckSum = toString(sum);
+
+    return true;
+}
 
 string UC7Message::getFullMessage() const
 {

@@ -45,6 +45,7 @@ class AT_CORE UC7Message : public ABObject
         string					checksum() const;
         bool		            check() const;
         string					getMessageNameAsString() const;
+        bool					calculateCheckSum();
 
 	private:
     	string 					mReceiver;
