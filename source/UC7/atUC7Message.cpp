@@ -7,28 +7,28 @@ using namespace mtk;
 int hexToDec(const string& hex);
 int addUpDataToInt(const string& mData);
 
-UC7Message::UC7Message(const string& cmd, bool isResponse)
+UC7Message::UC7Message(const string& cmd, bool hasCS)
 :
 mReceiver(""),
 mSender(""),
 mData(""),
 mCheckSum(""),
-mCommandString(""),
-mIsResponse(isResponse)
+mCommandString("")//,
+//mIsResponse(isResponse)
 {
 	if(cmd.size())
     {
-        if(!parse(cmd, mIsResponse))
+        if(!parse(cmd, hasCS))
         {
             Log(lError) << "The UC7 command: " <<cmd<<" failed to parse";
         }
     }
 }
 
-bool UC7Message::parse(const string& cmd, bool isResponse)
+bool UC7Message::parse(const string& cmd, bool hasCS)
 {
-	//A command has to be at least 6 chars long
-    int minCmdSize = 6;
+	//A command has to be at least 4 chars long
+    int minCmdSize = 4;
 
     if(cmd.size() < minCmdSize)
     {
@@ -36,24 +36,13 @@ bool UC7Message::parse(const string& cmd, bool isResponse)
         return false;
     }
 
-	if(isResponse)
-    {
-        //First letter is the receiver
-        mReceiver = cmd[0];
+    //First letter is the receiver
+    mReceiver = cmd[0];
 
-        //Second letter is the sender
-        mSender = cmd[1];
-    }
-    else
-    {
-        //First letter is the receiver
-        mReceiver = cmd[1];
+    //Second letter is the sender
+    mSender = cmd[1];
 
-        //Second letter is the sender
-        mSender = cmd[0];
-    }
-
-    //Next two chars are the command
+    //Next two chars is the command
     mCommandString.push_back(cmd[2]);
     mCommandString.push_back(cmd[3]);
     mCommandName = toCommandName(mCommandString, toInt(mSender));
@@ -65,11 +54,21 @@ bool UC7Message::parse(const string& cmd, bool isResponse)
     }
     else
     {
-    	int lengthOfData = cmd.size() - minCmdSize;
+        int lengthOfData;
+        if(hasCS)
+        {
+	    	lengthOfData = cmd.size() - (minCmdSize + 2); //check sum is two bytes
+        }
+        else
+        {
+	    	lengthOfData = cmd.size() - (minCmdSize);
+        }
+
     	mData = cmd.substr(4, lengthOfData);
     }
 
-	if(isResponse)
+
+    if(hasCS)
     {
     	mCheckSum.push_back(cmd[cmd.size() - 2]);
 	    mCheckSum.push_back(cmd[cmd.size() - 1]);
@@ -106,6 +105,23 @@ string UC7Message::checksum() const
 	return mCheckSum;
 }
 
+bool UC7Message::check() const
+{
+	//Check command against checksum for integrity
+    string recSndrSum(mReceiver + mSender);
+    unsigned char sum = hexToDec(recSndrSum) + hexToDec(mCommandString);
+
+	int data = addUpDataToInt(mData);
+    sum += data;
+
+    //take two's complement, of a two byte variable
+    sum = ~sum + 1;
+
+    unsigned int cs ( hexToDec(mCheckSum));
+    unsigned int test = sum;
+    return (test == cs ) ? true : false;
+}
+
 bool UC7Message::calculateCheckSum()
 {
     //Calculate Checksum
@@ -117,14 +133,14 @@ bool UC7Message::calculateCheckSum()
 
     //take two's complement, of a two byte variable
     sum = ~sum + 1;
-    mCheckSum = toString(sum);
 
+    mCheckSum = toString((int) sum, "", 16);
     return true;
 }
 
 string UC7Message::getFullMessage() const
 {
-	return mReceiver + mSender + mCommandString + mData + mCheckSum;
+	return '!' + mReceiver + mSender + mCommandString + mData + mCheckSum + 'D';
 }
 
 int addUpDataToInt(const string& mData)
@@ -144,22 +160,6 @@ int addUpDataToInt(const string& mData)
 string UC7Message::getMessageNameAsString() const
 {
 	return toLongString(mCommandName);
-}
-
-bool UC7Message::check() const
-{
-	//Check command against checksum for integrity
-    string recSndrSum(mReceiver + mSender);
-    unsigned char sum = hexToDec(recSndrSum) + hexToDec(mCommandString);
-
-	int data = addUpDataToInt(mData);
-    sum += data;
-
-    //take two's complement, of a two byte variable
-    sum = ~sum + 1;
-
-    int cs(hexToDec(mCheckSum));
-    return (sum == cs) ? true : false;
 }
 
 UC7MessageName toCommandName(const string& cmd, int controllerAddress)

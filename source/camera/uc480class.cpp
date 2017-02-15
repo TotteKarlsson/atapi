@@ -23,26 +23,21 @@ Cuc480::~Cuc480()
   Disconnect();
 }
 
-bool Cuc480::openCamera(HWND hwnd)
+bool Cuc480::openCamera(HWND hwnd, int cameraIndex)
 {
     m_hwnd = hwnd;
     exitCamera();
 
-    // init camera
-    int returnValue = InitCamera(0, m_hwnd);        // init cam
-
-    // continue when camera is sucessfully initialized
-    if( returnValue == IS_SUCCESS )
+    // continue only if camera is sucessfully initialized
+    if(InitCamera(cameraIndex, m_hwnd) == IS_SUCCESS )
     {
         // retrieve original image size
         GetSensorInfo(&mSensorInfo );
-
         GetMaxImageSize(&mSizeX, &mSizeY);
-        returnValue = InitDisplayMode();
 
         // enable the dialog based error report
         //returnValue = SetErrorReport(IS_DISABLE_ERR_REP);
-        if( returnValue != IS_SUCCESS )
+        if( InitDisplayMode() != IS_SUCCESS )
         {
             Log(lError) << "Failed to initialize Camera Display Mode";
             return false;
@@ -66,7 +61,7 @@ bool Cuc480::openCamera(HWND hwnd)
     }
     else
     {
-        Log(lError) << "No Camera could be opened";
+        Log(lError) << "Camera with index: "<<cameraIndex<<" could not be opened";
         return false;
     }
 }

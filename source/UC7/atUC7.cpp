@@ -10,7 +10,7 @@ UC7::UC7()
 :
 	mINIFileSection("UC7"),
     mCOMPort(-1),
-    mSerial(-1, 19200,'!', '\r')
+    mSerial(-1, 19200, '!', '\r')
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
 }

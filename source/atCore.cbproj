@@ -109,10 +109,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="P:\atUC7\source\atUC7MessageConsumer.cpp">
-            <DependentOn>P:\atUC7\source\atUC7MessageConsumer.h</DependentOn>
-            <BuildOrder>71</BuildOrder>
-        </CppCompile>
         <CppCompile Include="apt\atAbsoluteMove.cpp">
             <DependentOn>apt\atAbsoluteMove.h</DependentOn>
             <BuildOrder>72</BuildOrder>

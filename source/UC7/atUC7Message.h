@@ -35,7 +35,7 @@ string toLongString(UC7MessageName cmd);
 class AT_CORE UC7Message : public ABObject
 {
 	public:
-					            UC7Message(const string& cmd = "", bool isResponse = false);
+					            UC7Message(const string& cmd = "", bool hasCS = false);
 
         string		            receiver() const;
         string		            sender() const;
@@ -53,7 +53,7 @@ class AT_CORE UC7Message : public ABObject
         string					mData;
         string					mCheckSum;
         string 					mCommandString;
-        bool					mIsResponse;
+//        bool					mIsResponse;
         UC7MessageName			mCommandName;
         bool					parse(const string& cmd, bool isResponse = false);
 };

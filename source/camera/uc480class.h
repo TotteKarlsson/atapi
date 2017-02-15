@@ -27,7 +27,7 @@ class AT_CORE Cuc480 : public Cuc480Dll
 	public:
                                             Cuc480();
         virtual 							~Cuc480();
-        bool								openCamera(HWND hwnd);
+        bool								openCamera(HWND hwnd, int cameraIndex = 0);
         bool								exitCamera();
 
         HCAM                                GetCameraHandle(){ return m_hu; }

@@ -75,7 +75,8 @@ inline void SerialPort::CheckRequirements (LPOVERLAPPED lpOverlapped, DWORD dwTi
 
 	// Check if 0 or INFINITE time-out has been specified, because
 	// the communication I/O cannot be cancelled.
-	if ((dwTimeout != 0) && (dwTimeout != INFINITE))
+	if (!::WriteFile(m_hFile,pData,iLen,pdwWritten,lpOverlapped))
+	{	if ((dwTimeout != 0) && (dwTimeout != INFINITE))
 	{
 		// Quit application
 		::MessageBox(0,_T("Timeouts are not supported, when SERIAL_NO_CANCELIO is defined"),_T("Serial library"), MB_ICONERROR | MB_TASKMODAL);
