@@ -36,7 +36,7 @@ class AT_CORE UC7Message : public ABObject
 {
 	public:
 					            UC7Message(const string& cmd = "", bool hasCS = false);
-
+		bool					init(const string& cmd, bool hasCS = false);
         string		            receiver() const;
         string		            sender() const;
 		string		            command() const;

@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-int hexToDec(const string& hex);
+
 int addUpDataToInt(const string& mData);
 
 UC7Message::UC7Message(const string& cmd, bool hasCS)
@@ -13,16 +13,23 @@ mReceiver(""),
 mSender(""),
 mData(""),
 mCheckSum(""),
-mCommandString("")//,
-//mIsResponse(isResponse)
+mCommandString("")
+
 {
 	if(cmd.size())
     {
-        if(!parse(cmd, hasCS))
-        {
-            Log(lError) << "The UC7 command: " <<cmd<<" failed to parse";
-        }
+      	init(cmd, hasCS);
     }
+}
+
+bool UC7Message::init(const string& cmd, bool hasCS)
+{
+    if(!parse(cmd, hasCS))
+    {
+        Log(lError) << "The UC7 command: " <<cmd<<" failed to parse";
+        return false;
+    }
+	return true;
 }
 
 bool UC7Message::parse(const string& cmd, bool hasCS)
@@ -66,7 +73,6 @@ bool UC7Message::parse(const string& cmd, bool hasCS)
 
     	mData = cmd.substr(4, lengthOfData);
     }
-
 
     if(hasCS)
     {
@@ -292,11 +298,4 @@ string toLongString(UC7MessageName cmd)
     }
 }
 
-int hexToDec(const string& hex)
-{
-	stringstream convert(hex);
-    int val;
-    convert >> std::hex >> val;
-    return val;
-}
 

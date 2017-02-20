@@ -85,7 +85,16 @@ void Serial::assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
 bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
 {
 	LONG    lLastError = ERROR_SUCCESS;
-    string portNr("COM" + toString(pNr));
+    string portNr;//("COM" + toString(pNr));
+	if(pNr > 10)
+    {
+    	portNr = "\\\\.\\COM" + toString(pNr);
+    }
+    else
+    {
+	    portNr = "COM" + toString(pNr);
+    }
+
     lLastError = mSP.Open(_T(portNr.c_str()), 0, 0, true);
 	if (lLastError != ERROR_SUCCESS)
     {

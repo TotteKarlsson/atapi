@@ -1,11 +1,14 @@
-#ifndef atUC7H
-#define atUC7H
+#ifndef atUC7ComponentH
+#define atUC7ComponentH
 #include "atABObject.h"
 #include "serial/atSerial.h"
 #include "atUC7Message.h"
 #include <deque>
 #include "Poco/Mutex.h"
 //---------------------------------------------------------------------------
+
+//This class is named UC7, but unit is atUC7Component as not to conflict with
+//application name unit UC7
 
 using mtk::gEmptyString;
 using std::deque;

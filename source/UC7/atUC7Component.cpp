@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atUC7.h"
+#include "atUC7Component.h"
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
