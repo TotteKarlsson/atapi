@@ -4,17 +4,16 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
+int getDataPartSum(const string& mData);
 
-int addUpDataToInt(const string& mData);
-
-UC7Message::UC7Message(const string& cmd, bool hasCS)
+UC7Message::UC7Message(const string& cmd, bool hasCS, bool isResponse)
 :
 mReceiver(""),
 mSender(""),
 mData(""),
 mCheckSum(""),
-mCommandString("")
-
+mCommandString(""),
+mIsResponse(isResponse)
 {
 	if(cmd.size())
     {
@@ -50,9 +49,14 @@ bool UC7Message::parse(const string& cmd, bool hasCS)
     mSender = cmd[1];
 
     //Next two chars is the command
+    mCommandString.clear();
     mCommandString.push_back(cmd[2]);
     mCommandString.push_back(cmd[3]);
-    mCommandName = toCommandName(mCommandString, toInt(mSender));
+
+    //If this message is a response, then the sender indicate the
+    //controller address
+    int ctrlAddress =  (mIsResponse) ? toInt(mSender) : toInt(mReceiver);
+    mCommandNameEnum = toCommandName(mCommandString, ctrlAddress);
 
     //The data is everything after the command and before the checksum
     if(cmd.size() == minCmdSize)
@@ -86,29 +90,47 @@ bool UC7Message::parse(const string& cmd, bool hasCS)
     return true;
 }
 
-string UC7Message::receiver() const
+string UC7Message::getReceiver() const
 {
 	return mReceiver;
 }
 
-string UC7Message::sender() const
+string UC7Message::getSender() const
 {
 	return mSender;
 }
 
-string UC7Message::command()  const
+string UC7Message::getCommand()  const
 {
 	return mCommandString;
 }
 
-string UC7Message::data()  const
+string UC7Message::getData()  const
 {
 	return mData;
 }
 
-string UC7Message::checksum() const
+string UC7Message::getCheckSum() const
 {
 	return mCheckSum;
+}
+
+string UC7Message::getXX() const
+{
+	if(mData.size() >= 2)
+    {
+    	return mData.substr(0,2);
+    }
+    return "";
+}
+string UC7Message::getMessage() const
+{
+	return mReceiver + mSender + mCommandString + mData;
+}
+
+string UC7Message::getFullMessage() const
+{
+	return '!' + mReceiver + mSender + mCommandString + mData + mCheckSum + '\r';
 }
 
 bool UC7Message::check() const
@@ -117,7 +139,7 @@ bool UC7Message::check() const
     string recSndrSum(mReceiver + mSender);
     unsigned char sum = hexToDec(recSndrSum) + hexToDec(mCommandString);
 
-	int data = addUpDataToInt(mData);
+	int data = getDataPartSum(mData);
     sum += data;
 
     //take two's complement, of a two byte variable
@@ -134,7 +156,7 @@ bool UC7Message::calculateCheckSum()
     string recSndrSum(mReceiver + mSender);
     unsigned char sum = hexToDec(recSndrSum) + hexToDec(mCommandString);
 
-    int data = addUpDataToInt(mData);
+    int data = getDataPartSum(mData);
     sum += data;
 
     //take two's complement, of a two byte variable
@@ -144,12 +166,7 @@ bool UC7Message::calculateCheckSum()
     return true;
 }
 
-string UC7Message::getFullMessage() const
-{
-	return '!' + mReceiver + mSender + mCommandString + mData + mCheckSum + 'D';
-}
-
-int addUpDataToInt(const string& mData)
+int getDataPartSum(const string& mData)
 {
 	int sum(0);
 
@@ -165,17 +182,14 @@ int addUpDataToInt(const string& mData)
 
 string UC7Message::getMessageNameAsString() const
 {
-	return toLongString(mCommandName);
+	return toLongString(mCommandNameEnum);
 }
 
-UC7MessageName toCommandName(const string& cmd, int controllerAddress)
+UC7MessageEnum toCommandName(const string& cmd, int controllerAddress)
 {
 	switch(controllerAddress)
     {
-    	case 1: 		return UNKNOWN;
-        case 2:			return UNKNOWN;
-        case 3:			return UNKNOWN;
-        case 4:
+        case gStepperControllerAddress:
         {
         	if(cmd == "20")
             {
@@ -210,7 +224,8 @@ UC7MessageName toCommandName(const string& cmd, int controllerAddress)
             	return UNKNOWN;
             }
         }
-		case 5:
+
+		case gMotorControllerAddress:
         {
         	if(cmd == "20")
             {
@@ -234,11 +249,13 @@ UC7MessageName toCommandName(const string& cmd, int controllerAddress)
             }
         }
 
-        default: return UNKNOWN;
+        default:
+        	Log(lError) << "A unknown controller address was specified";
+        return UNKNOWN;
     }
 }
 
-string toShortString(UC7MessageName cmd)
+string toShortString(UC7MessageEnum cmd)
 {
     switch(cmd)
     {
@@ -268,7 +285,7 @@ string toShortString(UC7MessageName cmd)
     }
 }
 
-string toLongString(UC7MessageName cmd)
+string toLongString(UC7MessageEnum cmd)
 {
     switch(cmd)
     {

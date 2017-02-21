@@ -2,12 +2,15 @@
 #include "atSerial.h"
 #include "mtkUtils.h"
 #include "mtkWin32Utils.h"
+#include "mtkStringUtils.h"
+
 
 using namespace mtk;
 
-Serial::Serial(int portNr, int baudRate, char ld, char rd)
+Serial::Serial(int portNr, int baudRate, char ld, char rd, SerialPort::EHandshake handShake)
 :
 mSP(),
+mHandShake(handShake),
 mSerialWorker(*this, mSP, ld, rd),
 mReceivedCB(NULL)
 {
@@ -24,7 +27,7 @@ Serial::~Serial()
 
 bool Serial::connect(int pNr, int baudRate)
 {
-    if(setupAndOpenSerialPort(pNr, baudRate))
+    if(setupAndOpenSerialPort(pNr, baudRate, mHandShake))
     {
         Log(lInfo) <<"Connected to COM port: " <<pNr<<" using BaudRate: "<<baudRate;
 
@@ -40,49 +43,7 @@ bool Serial::connect(int pNr, int baudRate)
 	return true;
 }
 
-bool Serial::send(const string& msg)
-{
-	OVERLAPPED osWrite = {0};
-   	DWORD dwWritten;
-	Log(lDebug5) << "Sending serial message: "<<msg;
-
-   	// Create this write operation's OVERLAPPED structure's hEvent.
-   	osWrite.hEvent = CreateEventA(NULL, TRUE, FALSE, NULL);
-   	if (osWrite.hEvent == NULL)
-    {
-      	// error creating overlapped event handle
-    	Log(lError) << "Failed to create overlapped Event handle";
-      	return false;
-    }
-
-	int error = mSP.Write(msg.c_str(), msg.size(), &dwWritten, &osWrite);
-    if(error)
-    {
-    	Log(lError) << "Failed to send over Serial Port..";
-        return false;
-    }
-	return true;
-}
-
-string Serial::popMessage()
-{
-    {
-        Poco::ScopedLock<Poco::Mutex> lock(mReceivedMessagesMutex);
-		return mReceivedMessages.size() ? mReceivedMessages.popBack() : string("");
-    }
-}
-
-void Serial::assignMessageReceivedCallBackC(SerialMessageReceivedCallBackC cb)
-{
-	mReceivedCB_C = cb;
-}
-
-void Serial::assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
-{
-	mReceivedCB = cb;
-}
-
-bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
+bool Serial::setupAndOpenSerialPort(int pNr, int baudRate, SerialPort::EHandshake handShake)
 {
 	LONG    lLastError = ERROR_SUCCESS;
     string portNr;//("COM" + toString(pNr));
@@ -95,7 +56,7 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
 	    portNr = "COM" + toString(pNr);
     }
 
-    lLastError = mSP.Open(_T(portNr.c_str()), 0, 0, true);
+    lLastError = mSP.Open( _T(portNr.c_str() ), 0, 0, true);
 	if (lLastError != ERROR_SUCCESS)
     {
         string errorMsg = getLastWin32Error();
@@ -115,7 +76,8 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
     }
 
 	// Setup handshaking (default is no handshaking)
-    lLastError = mSP.SetupHandshaking(SerialPort::EHandshakeHardware);
+//    lLastError = mSP.SetupHandshaking(SerialPort::EHandshakeHardware);
+    lLastError = mSP.SetupHandshaking(SerialPort::EHandshake::EHandshakeOff);
 	if (lLastError != ERROR_SUCCESS)
     {
         string errorMsg = getLastWin32Error();
@@ -156,9 +118,100 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate)
     return true;
 }
 
+bool Serial::send(const unsigned char b)
+{
+	OVERLAPPED osWrite = {0};
+   	DWORD dwWritten;
+
+    stringstream log;
+    log << "Sending byte (hex): ";
+	log <<toHex(b);
+
+	Log(lDebug) << log.str();
+
+   	// Create this write operation's OVERLAPPED structure's hEvent.
+   	osWrite.hEvent = CreateEventA(NULL, TRUE, FALSE, NULL);
+   	if (osWrite.hEvent == NULL)
+    {
+      	// error creating overlapped event handle
+    	Log(lError) << "Failed to create overlapped Event handle";
+      	return false;
+    }
+
+    string m;
+    m.push_back(b);
+
+    LPCSTR buffer = m.c_str();
+
+	int error = mSP.Write(buffer, &dwWritten, &osWrite);
+    if(error)
+    {
+    	Log(lError) << "Failed to send over Serial Port..";
+        return false;
+    }
+	return true;
+}
+
+bool Serial::send(const string& msg)
+{
+	OVERLAPPED osWrite = {0};
+   	DWORD dwWritten;
+
+    stringstream log;
+    log << "Sending bytes (hex): ";
+    for(int byte = 0; byte < msg.size(); byte++)
+    {
+		log << ""<<toHex(msg[byte])<<"";
+        if(byte < msg.size() -1 )
+        {
+        	log <<" ";
+        }
+    }
+
+	Log(lDebug) << log.str();
+
+    const char* buffer = msg.c_str();
+
+   	// Create this write operation's OVERLAPPED structure's hEvent.
+   	osWrite.hEvent = CreateEventA(NULL, TRUE, FALSE, NULL);
+   	if (osWrite.hEvent == NULL)
+    {
+      	// error creating overlapped event handle
+    	Log(lError) << "Failed to create overlapped Event handle";
+      	return false;
+    }
+
+	int error = mSP.Write(buffer, msg.size(), &dwWritten, &osWrite);
+    if(error)
+    {
+    	Log(lError) << "Failed to send over Serial Port..";
+        return false;
+    }
+	return true;
+}
+
+string Serial::popMessage()
+{
+    {
+        Poco::ScopedLock<Poco::Mutex> lock(mReceivedMessagesMutex);
+		return mReceivedMessages.size() ? mReceivedMessages.popBack() : string("");
+    }
+}
+
+void Serial::assignMessageReceivedCallBackC(SerialMessageReceivedCallBackC cb)
+{
+	mReceivedCB_C = cb;
+}
+
+void Serial::assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
+{
+	mReceivedCB = cb;
+}
+
 bool Serial::disConnect()
 {
 	//First stop the worker
+	mSP.Close();
 	mSerialWorker.stop();
 
 	while(mSerialWorker.isAlive())
@@ -167,7 +220,7 @@ bool Serial::disConnect()
     }
 
     //Then the serial port itself
-	mSP.Close();
+	//mSP.Close();
     return true;
 }
 

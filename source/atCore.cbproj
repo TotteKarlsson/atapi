@@ -381,8 +381,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>sound\atSounds.h</DependentOn>
             <BuildOrder>56</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UC7\atUC7.cpp">
-            <DependentOn>UC7\atUC7.h</DependentOn>
+        <CppCompile Include="UC7\atUC7Component.cpp">
+            <DependentOn>UC7\atUC7Component.h</DependentOn>
             <BuildOrder>69</BuildOrder>
         </CppCompile>
         <CppCompile Include="UC7\atUC7Message.cpp">
@@ -441,7 +441,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>

@@ -8,9 +8,13 @@ using namespace mtk;
 void SerialWorker::run()
 {
 	Log(lInfo) << "Starting reading/writing serial port..";
+    mIsStarted = true;
+    mIsRunning = true;
+
  	if(!mTheHost.isConnected())
     {
 		Log(lInfo) << "Serial port is not connected.";
+        mIsTimeToDie = true;
     }
 
 	// Create a handle for the overlapped operations
@@ -21,7 +25,7 @@ void SerialWorker::run()
         string errorMsg = getLastWin32Error();
         Log(lError) <<"Unable to CreateEvent";
         Log(lError) <<"Error was: "<<errorMsg;
-        return;
+	    mIsTimeToDie = true;
     }
 
 	// Setup the overlapped structure
@@ -29,12 +33,13 @@ void SerialWorker::run()
 	ov.hEvent = hevtOverlapped;
 
 	// Open the "STOP" handle
-	HANDLE hevtStop = ::CreateEventA(0,TRUE,FALSE,_T("Overlapped_Stop_Event"));
+	HANDLE hevtStop = ::CreateEventA(0, TRUE, FALSE,_T("Overlapped_Stop_Event"));
 	if (hevtStop == 0)
     {
         string errorMsg = getLastWin32Error();
         Log(lError) <<"Unable to CreateEvent";
         Log(lError) <<"Error was: "<<errorMsg;
+   	    mIsTimeToDie = true;
     }
 
 	while(!mIsTimeToDie)
@@ -55,7 +60,7 @@ void SerialWorker::run()
         ahWait[1] = hevtStop;
 
         // Wait until something happens
-        switch (::WaitForMultipleObjects(sizeof(ahWait)/sizeof(*ahWait),ahWait,FALSE,INFINITE))
+        switch (::WaitForMultipleObjects( sizeof(ahWait)/sizeof(*ahWait), ahWait, FALSE, INFINITE))
         {
         	case WAIT_OBJECT_0:
             {		//To allow for local variables
@@ -154,7 +159,7 @@ void SerialWorker::run()
             break;
         }
     }
-
+	CloseHandle(hevtStop);
     mIsRunning  = false;
     mIsFinished = true;
 }

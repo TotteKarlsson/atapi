@@ -22,7 +22,7 @@ class AT_CORE Serial : public ABObject
 	friend SerialWorker;
     public:
                                             //Initialize Serial communication with the given COM port
-                                            Serial(int portNr, int rate = 9600, char ld = '[', char rd = ']');
+                                            Serial(int portNr, int rate = 9600, char ld = '[', char rd = ']', SerialPort::EHandshake handShake = SerialPort::EHandshake::EHandshakeOff);
                                             ~Serial();
         bool					            connect(int portNr, int baudRate);
 
@@ -40,6 +40,7 @@ class AT_CORE Serial : public ABObject
 
         									//!Post message to internal output queue
 		bool								send(const string& msg);
+		bool								send(const unsigned char b);
 
         void								assignMessageReceivedCallBackC(SerialMessageReceivedCallBackC cb);
         void								assignMessageReceivedCallBack(SerialMessageReceivedCallBack cb);
@@ -54,17 +55,18 @@ class AT_CORE Serial : public ABObject
 
         									//CSerial is doing the underlying serial port work
 		SerialPort							mSP;
-
+        SerialPort::EHandshake 				mHandShake;
         									//The serial worker reads data on the serial port
                                             //in a thread. Incoming messages are placed in the mMessages
                                             //list
         SerialWorker						mSerialWorker;
-        bool								setupAndOpenSerialPort(int pNr, int baudRate);
+        bool								setupAndOpenSerialPort(int pNr, int baudRate, SerialPort::EHandshake handShake);
 
 
         SerialMessageReceivedCallBack	 	mReceivedCB;
         SerialMessageReceivedCallBackC	 	mReceivedCB_C;
         Poco::Condition                     mGotMessage;
+
 };
 
 #endif

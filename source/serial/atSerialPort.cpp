@@ -191,7 +191,7 @@ LONG SerialPort::Open (LPCTSTR lpszDevice, DWORD dwInQueue, DWORD dwOutQueue, bo
 						   0,
 						   0,
 						   OPEN_EXISTING,
-						   fOverlapped?FILE_FLAG_OVERLAPPED:0,
+						   fOverlapped ? FILE_FLAG_OVERLAPPED : 0,
 						   0);
 	if (m_hFile == INVALID_HANDLE_VALUE)
 	{
@@ -351,8 +351,14 @@ LONG SerialPort::Setup (EBaudrate eBaudrate, EDataBits eDataBits, EParity eParit
 	dcb.Parity   = BYTE(eParity);
 	dcb.StopBits = BYTE(eStopBits);
 
+//	dcb.fRtsControl = 0;
+//	dcb.fDtrControl = 0;
+//    dcb.fOutxCtsFlow = 0;
+//    dcb.fOutxDsrFlow = 0;
+
 	// Determine if parity is used
 	dcb.fParity  = (eParity != EParNone);
+//    dcb.EofChar = '\r';
 
 	// Set the new DCB structure
 	if (!::SetCommState(m_hFile,&dcb))
@@ -574,7 +580,6 @@ LONG SerialPort::WaitEvent (LPOVERLAPPED lpOverlapped, DWORD dwTimeout)
 	// Return successfully
 	return m_lLastError;
 }
-
 
 LONG SerialPort::SetupHandshaking (EHandshake eHandshake)
 {
