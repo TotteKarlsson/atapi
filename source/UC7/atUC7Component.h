@@ -5,6 +5,7 @@
 #include "atUC7Message.h"
 #include <deque>
 #include "Poco/Mutex.h"
+#include "atCounter.h"
 //---------------------------------------------------------------------------
 
 //This class is named UC7, but unit is atUC7Component as not to conflict with
@@ -29,6 +30,7 @@ class AT_CORE UC7 : public ABObject
         bool							isConnected();
         bool							getVersion();
 
+        Counter&						getCounter(){return mCounter;}
         bool							sendRawMessage(const string& msg);
         bool							sendByte(const unsigned char b);
 
@@ -38,7 +40,7 @@ class AT_CORE UC7 : public ABObject
         								//Set Feedrate in nm
         bool							setFeedRate(int feedRate);
 
-										//staus requests
+										//status requests
                                         //Get all statuses
         bool							getStatus();
 
@@ -66,6 +68,7 @@ class AT_CORE UC7 : public ABObject
         Poco::Condition					mNewMessageCondition;
         UC7Message 						mUC7Message;
         deque<UC7Message> 				mIncomingMessagesBuffer;
+        Counter							mCounter;
 };
 
 #endif

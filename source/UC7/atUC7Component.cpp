@@ -56,6 +56,7 @@ bool UC7::getStatus()
     }
 
 	sleep(50);
+
 	//Query HW status
     if(!getCurrentFeedRate())
     {
@@ -83,7 +84,6 @@ UC7Message UC7::getLastSentMessage()
 {
 	return mUC7Message;
 }
-
 
 //This one is called from serial port listening thread
 void UC7::onSerialMessage(const string& msg)
