@@ -13,7 +13,9 @@ mSP(),
 mHandShake(handShake),
 mSerialWorker(*this, mSP, ld, rd),
 mReceivedCB(NULL),
-mOverLappedIO(true)
+mOverLappedIO(true),
+mReceiveBufferSize(1024),
+mSendBufferSize(1024)
 {
     if(portNr != -1)
     {
@@ -57,7 +59,7 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate, SerialPort::EHandshak
 	    portNr = "COM" + toString(pNr);
     }
 
-    lLastError = mSP.Open( _T(portNr.c_str() ), 512, 512, mOverLappedIO);
+    lLastError = mSP.Open( _T(portNr.c_str() ), mReceiveBufferSize, mSendBufferSize, mOverLappedIO);
 	if (lLastError != ERROR_SUCCESS)
     {
         string errorMsg = getLastWin32Error();
@@ -158,18 +160,18 @@ bool Serial::send(const string& msg)
 	OVERLAPPED osWrite = {0};
    	DWORD dwWritten;
 
-    stringstream log;
-    log << "Sending bytes (hex): ";
-    for(int byte = 0; byte < msg.size(); byte++)
-    {
-		log << ""<<toHex(msg[byte])<<"";
-        if(byte < msg.size() -1 )
-        {
-        	log <<" ";
-        }
-    }
-
-	Log(lDebug) << log.str();
+//    stringstream log;
+//    log << "Sending bytes (hex): ";
+//    for(int byte = 0; byte < msg.size(); byte++)
+//    {
+//		log << ""<<toHex(msg[byte])<<"";
+//        if(byte < msg.size() -1 )
+//        {
+//        	log <<" ";
+//        }
+//    }
+//
+//	Log(lDebug) << log.str();
 
     const char* buffer = msg.c_str();
 

@@ -53,7 +53,8 @@ class AT_CORE Serial : public ABObject
 		bool								mOverLappedIO;
         						            //Messages from an arduino
 		Mutex					            mReceivedMessagesMutex;
-
+		int									mReceiveBufferSize;
+		int									mSendBufferSize;
         									//CSerial is doing the underlying serial port work
 		SerialPort							mSP;
         SerialPort::EHandshake 				mHandShake;
@@ -62,7 +63,6 @@ class AT_CORE Serial : public ABObject
                                             //list
         SerialWorker						mSerialWorker;
         bool								setupAndOpenSerialPort(int pNr, int baudRate, SerialPort::EHandshake handShake);
-
 
         SerialMessageReceivedCallBack	 	mReceivedCB;
         SerialMessageReceivedCallBackC	 	mReceivedCB_C;

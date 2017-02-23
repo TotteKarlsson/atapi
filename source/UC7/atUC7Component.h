@@ -6,6 +6,7 @@
 #include <deque>
 #include "Poco/Mutex.h"
 #include "atCounter.h"
+#include "atUC7MessageSender.h"
 //---------------------------------------------------------------------------
 
 //This class is named UC7, but unit is atUC7Component as not to conflict with
@@ -20,9 +21,11 @@ using mtk::gEmptyString;
 using std::deque;
 class UC7MessageConsumer;
 
+
 class AT_CORE UC7 : public ABObject
 {
 	friend UC7MessageConsumer;
+	friend UC7MessageSender;
 	public:
 										UC7();
 										~UC7();
@@ -79,10 +82,18 @@ class AT_CORE UC7 : public ABObject
     	Serial							mSerial;
         void							onSerialMessage(const string& msg);
         bool							sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
-        Poco::Mutex						mBufferMutex;
-        Poco::Condition					mNewMessageCondition;
-        UC7Message 						mUC7Message;
+
         deque<UC7Message> 				mIncomingMessagesBuffer;
+        Poco::Mutex						mReceiveBufferMutex;
+        Poco::Condition					mNewReceivedMessageCondition;
+
+		deque<string>  					mOutgoingMessagesBuffer;
+        Poco::Mutex						mSendBufferMutex;
+        Poco::Condition					mNewMessageToSendCondition;
+
+        UC7Message 						mUC7Message;
+
+
 
         								//Hardware states
 
@@ -94,6 +105,7 @@ class AT_CORE UC7 : public ABObject
         bool							mPrepareToCutRibbon;
 
         Counter							mCounter;
+        UC7MessageSender				mMessageSender;
 };
 
 #endif

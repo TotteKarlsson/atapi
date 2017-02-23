@@ -3,6 +3,7 @@
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 #include "mtkStringUtils.h"
+
 //---------------------------------------------------------------------------
 
 using namespace mtk;
@@ -15,7 +16,8 @@ UC7::UC7()
     mFeedRate(-1),
     mPrepareForNewRibbon(false),
     mPrepareToCutRibbon(false),
-    mPresetFeedRate(30)
+    mPresetFeedRate(30),
+    mMessageSender(*this)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
 }
@@ -32,6 +34,8 @@ bool UC7::connect(int com)
     {
 		return false;
     }
+
+    mMessageSender.start();
 
     return true;
 }
@@ -102,12 +106,12 @@ void UC7::onSerialMessage(const string& msg)
 
 		//Get mutex using a scoped lock
         {
-        	Poco::ScopedLock<Poco::Mutex> lock(mBufferMutex);
+        	Poco::ScopedLock<Poco::Mutex> lock(mReceiveBufferMutex);
 	        mIncomingMessagesBuffer.push_back(cmd);
         }
 
         //Send a signal
-        mNewMessageCondition.signal();
+        mNewReceivedMessageCondition.signal();
     }
     else
     {
@@ -123,8 +127,15 @@ bool UC7::sendByte(const unsigned char b)
 
 bool UC7::sendRawMessage(const string& msg)
 {
-	bool r = mSerial.send(msg);
-    return r;
+	//Put the message on the putgoing queue
+    {
+        Poco::ScopedLock<Poco::Mutex> lock(mSendBufferMutex);
+    	mOutgoingMessagesBuffer.push_back(msg);
+    }
+
+    //Send a signal
+    mNewMessageToSendCondition.signal();
+	return true;
 }
 
 bool UC7::startCutter()
