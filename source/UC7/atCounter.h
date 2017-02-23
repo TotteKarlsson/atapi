@@ -2,8 +2,7 @@
 #define atCounterH
 #include "atABObject.h"
 //---------------------------------------------------------------------------
-typedef void (__closure *OnCountCallBack)(int count);
-
+typedef void (__closure *CounterCallBack)();
 
 class AT_CORE Counter : public ABObject
 {
@@ -15,13 +14,21 @@ class AT_CORE Counter : public ABObject
         int							getCount();
         int&		  				getCountReference();
         int&		  				getCountToReference();
-		void 						assignOnCountCallBack(OnCountCallBack cb);
+		void 						assignOnCountCallBack(CounterCallBack cb);
+		void 						assignOnCountedToCallBack(CounterCallBack cb);
+        void						enable();
+        void						disable();
+        bool						isEnabled(){return mEnabled;}
 
     private:
     	int							mCount;
         int							mCountTo;
-        OnCountCallBack				mOnCountedToCallBack;
-        OnCountCallBack				mOnCountCallBack;
+        bool						mEnabled;
+
+        							//!The onCountedCallback is called when the counter reaches
+                                    //!the mCountTo value
+        CounterCallBack				mOnCountedToCallBack;
+        CounterCallBack				mOnCountCallBack;
 };
 
 #endif

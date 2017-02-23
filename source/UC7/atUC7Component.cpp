@@ -3,8 +3,6 @@
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 #include "mtkStringUtils.h"
-
-
 //---------------------------------------------------------------------------
 
 using namespace mtk;
@@ -13,7 +11,11 @@ UC7::UC7()
 :
 	mINIFileSection("UC7"),
     mCOMPort(-1),
-    mSerial(-1, 19200, '!', '\r', SerialPort::EHandshake::EHandshakeOff)
+    mSerial(-1, 19200, '!', '\r', SerialPort::EHandshake::EHandshakeOff),
+    mFeedRate(-1),
+    mPrepareForNewRibbon(false),
+    mPrepareToCutRibbon(false),
+    mPresetFeedRate(30)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
 }
@@ -55,19 +57,18 @@ bool UC7::getStatus()
     	Log(lError) << "Failed query: Cutter Status";
     }
 
-	sleep(50);
-
 	//Query HW status
     if(!getCurrentFeedRate())
     {
     	Log(lError) << "Failed query: FeedRate";
     }
 
-	sleep(50);
+
 	if(!getKnifeStagePosition())
     {
     	Log(lError) << "Failed query: Feed, Absolute position";
     }
+    return true;
 }
 
 bool UC7::getVersion()
@@ -92,12 +93,12 @@ void UC7::onSerialMessage(const string& msg)
     UC7Message cmd(msg, true, true);
     if(cmd.check())
     {
-        Log(lDebug4) << "Receiver: "	<<cmd.getReceiver();
-        Log(lDebug4) << "Sender: "		<<cmd.getSender();
-        Log(lDebug4) << "Command: "		<<cmd.getCommand();
-        Log(lDebug4) << "Data: "		<<cmd.getData();
-        Log(lDebug4) << "Checksum: "	<<hex<<cmd.getCheckSum();
-        Log(lDebug4) << "Checksum Check: "<<(cmd.check() ? "OK" : "Failed");
+//        Log(lDebug4) << "Receiver: "	<<cmd.getReceiver();
+//        Log(lDebug4) << "Sender: "		<<cmd.getSender();
+//        Log(lDebug4) << "Command: "		<<cmd.getCommand();
+//        Log(lDebug4) << "Data: "		<<cmd.getData();
+//        Log(lDebug4) << "Checksum: "	<<hex<<cmd.getCheckSum();
+//        Log(lDebug4) << "Checksum Check: "<<(cmd.check() ? "OK" : "Failed");
 
 		//Get mutex using a scoped lock
         {
@@ -122,8 +123,8 @@ bool UC7::sendByte(const unsigned char b)
 
 bool UC7::sendRawMessage(const string& msg)
 {
-	Log(lInfo) << "Sending raw message: "<<msg;
-	return mSerial.send(msg);
+	bool r = mSerial.send(msg);
+    return r;
 }
 
 bool UC7::startCutter()
@@ -136,10 +137,69 @@ bool UC7::stopCutter()
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "00");
 }
 
-bool UC7::setFeedRate(int feedRate)
+bool UC7::startRibbon()
 {
-	string dataStr(zeroPadString(4, toHex(feedRate)));
-	return sendUC7Message(FEED, "01", dataStr);
+
+	//Move knife stage north using preset
+	moveKnifeStageNorth(mKnifeStageJogPreset);
+
+	//Set cut thickness to preset
+    setFeedRate(100);
+    return true;
+}
+
+bool UC7::getKnifeStagePosition()
+{
+	return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "FF");
+}
+
+bool UC7::moveKnifeStageSouth(int nm, bool isRequest)
+{
+	string dataStr(zeroPadString(4, toHex(nm)));
+	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "06", dataStr);
+    mKnifeStageJogPreset = (nm);
+    return true;
+}
+
+bool UC7::moveKnifeStageNorth(int nm, bool isRequest)
+{
+	string dataStr(zeroPadString(4, toHex(nm)));
+	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "07", dataStr);
+    return true;
+}
+
+void UC7::disableCounter()
+{
+	mCounter.disable();
+}
+
+void UC7::enableCounter()
+{
+	mCounter.enable();
+}
+
+bool UC7::setPresetFeedRate(int rate)
+{
+	if(rate != -1)
+    {
+		mPresetFeedRate = rate;
+    }
+
+    setFeedRate(mPresetFeedRate);
+    return true;
+}
+
+bool UC7::setFeedRate(int feedRate, bool isRequest)
+{
+	if(isRequest)
+    {
+		string dataStr(zeroPadString(4, toHex(feedRate)));
+		return sendUC7Message(FEED, "01", dataStr);
+    }
+
+    mFeedRate = feedRate;
+	(mFeedRate > 0) ?  mCounter.enable() : mCounter.disable();
+    return true;
 }
 
 bool UC7::getCutterMotorStatus()
@@ -147,14 +207,13 @@ bool UC7::getCutterMotorStatus()
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "FF");
 }
 
-bool UC7::getCurrentFeedRate()
+int UC7::getCurrentFeedRate(bool isRequest)
 {
-	return sendUC7Message(FEED, "FF");
-}
-
-bool UC7::getKnifeStagePosition()
-{
-	return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "FF");
+	if(isRequest)
+    {
+		return sendUC7Message(FEED, "FF");
+    }
+   	return mFeedRate;
 }
 
 bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, const string& data2)
@@ -237,7 +296,7 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 
     }
 
-    Log(lDebug4) << "Sending UC7 command: "<<mUC7Message.getFullMessage();
+    Log(lDebug4) << "Sending UC7 command: "<<mUC7Message.getMessageNameAsString() <<"("<<mUC7Message.getFullMessage()<<")";
 	sendRawMessage(mUC7Message.getFullMessage());
     return true;
 }

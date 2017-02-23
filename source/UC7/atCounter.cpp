@@ -7,32 +7,51 @@ Counter::Counter()
 :
 mCount(0),
 mCountTo(10),
-mOnCountCallBack(NULL)
+mOnCountCallBack(NULL),
+mOnCountedToCallBack(NULL),
+mEnabled(false)
 {}
 
 void Counter::increase(int count)
 {
+	if(!mEnabled)
+    {
+    	return;
+    }
+
 	mCount += count;
+
     //Check....
     if(mCount >= mCountTo)
     {
-    	if(mOnCountCallBack)
+        if(mOnCountedToCallBack)
         {
-        	mOnCountCallBack(mCount);
+            mOnCountedToCallBack();
         }
+
 		//reset count
         mCount = 0;
+    }
+
+    if(mOnCountCallBack)
+    {
+        mOnCountCallBack();
     }
 }
 
 void Counter::decrease()
 {
+	if(!mEnabled)
+    {
+    	return;
+    }
+
 	mCount--;
     if(mCount <= mCountTo)
     {
     	if(mOnCountCallBack)
         {
-        	mOnCountCallBack(mCount);
+        	mOnCountCallBack();
         }
     }
 }
@@ -58,7 +77,22 @@ int& Counter::getCountToReference()
 	return mCountTo;
 }
 
-void Counter::assignOnCountCallBack(OnCountCallBack cb)
+void Counter::assignOnCountCallBack(CounterCallBack cb)
 {
 	mOnCountCallBack = cb;
+}
+
+void Counter::assignOnCountedToCallBack(CounterCallBack cb)
+{
+	mOnCountedToCallBack = cb;
+}
+
+void Counter::enable()
+{
+	mEnabled = true;
+}
+
+void Counter::disable()
+{
+	mEnabled = false;
 }

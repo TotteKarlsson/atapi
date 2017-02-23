@@ -250,7 +250,8 @@ UC7MessageEnum toCommandName(const string& cmd, int controllerAddress)
         }
 
         default:
-        	Log(lError) << "A unknown controller address was specified";
+
+       	Log(lError) << "A unknown controller address was specified";
         return UNKNOWN;
     }
 }

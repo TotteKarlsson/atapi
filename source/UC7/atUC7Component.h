@@ -12,8 +12,10 @@
 //application name unit UC7
 
 //!Observe that most "get" functions don't return a result immediately. Instead, a request
-//!is sent to the UC7 hardware, and a response is be received at a laterstage. I.e. this
-//!code can be said to be event driven
+//!is sent to the UC7 hardware, and a response is be received at a laterstage.
+//If a client is querying the UC7 object itself, specify isRequest = false when calling
+//getfunctions
+
 using mtk::gEmptyString;
 using std::deque;
 class UC7MessageConsumer;
@@ -37,8 +39,12 @@ class AT_CORE UC7 : public ABObject
         bool							startCutter();
         bool							stopCutter();
 
+        bool							startRibbon();
+        bool							moveKnifeStageSouth(int nm, bool isRequest = true);
+        bool							moveKnifeStageNorth(int nm, bool isRequest= true);
+
         								//Set Feedrate in nm
-        bool							setFeedRate(int feedRate);
+        bool							setFeedRate(int feedRate, bool isRequest = true);
 
 										//status requests
                                         //Get all statuses
@@ -48,7 +54,7 @@ class AT_CORE UC7 : public ABObject
         bool							getCutterMotorStatus();
 
         								//Get current feedrate in nm
-		bool							getCurrentFeedRate();
+		int								getCurrentFeedRate(bool isRequest = true);
 
         								//Get absolute position of stage
         bool							getKnifeStagePosition();
@@ -56,18 +62,37 @@ class AT_CORE UC7 : public ABObject
         bool							hasMessage();
         UC7Message						getLastSentMessage();
 
+        void							disableCounter();
+        void							enableCounter();
+        bool							prepareForNewRibbon(){return mPrepareForNewRibbon;}
+        void							prepareForNewRibbon(bool what){mPrepareForNewRibbon = what;}
+
+        bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
+        void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
+        bool							setPresetFeedRate(int rate = -1);
 
     protected:
         string							mINIFileSection;
+
+										//Serial details
         int								mCOMPort;
     	Serial							mSerial;
         void							onSerialMessage(const string& msg);
         bool							sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
-
         Poco::Mutex						mBufferMutex;
         Poco::Condition					mNewMessageCondition;
         UC7Message 						mUC7Message;
         deque<UC7Message> 				mIncomingMessagesBuffer;
+
+        								//Hardware states
+
+                                        //!Feedrate in nm
+		int								mFeedRate;
+		int								mPresetFeedRate;
+		int								mKnifeStageJogPreset;
+        bool							mPrepareForNewRibbon;
+        bool							mPrepareToCutRibbon;
+
         Counter							mCounter;
 };
 

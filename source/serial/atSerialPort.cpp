@@ -951,10 +951,19 @@ SerialPort::EHandshake SerialPort::GetHandshaking (void)
 	return EHandshakeOff;
 }
 
+LONG SerialPort::Write (LPCSTR pString, DWORD* pdwWritten, LPOVERLAPPED lpOverlapped, DWORD dwTimeout)
+{
+	// Check if time-outs are supported
+	CheckRequirements(lpOverlapped, dwTimeout);
+
+	// Determine the length of the string
+	return Write(pString,strlen(pString), pdwWritten, lpOverlapped, dwTimeout);
+}
+
 LONG SerialPort::Write (const void* pData, size_t iLen, DWORD* pdwWritten, LPOVERLAPPED lpOverlapped, DWORD dwTimeout)
 {
 	// Check if time-outs are supported
-	CheckRequirements(lpOverlapped,dwTimeout);
+	CheckRequirements(lpOverlapped, dwTimeout);
 
 	// Overlapped operation should specify the pdwWritten variable
 	_ASSERTE(!lpOverlapped || pdwWritten);
@@ -1089,15 +1098,6 @@ LONG SerialPort::Write (const void* pData, size_t iLen, DWORD* pdwWritten, LPOVE
 
 	// Return successfully
 	return m_lLastError;
-}
-
-LONG SerialPort::Write (LPCSTR pString, DWORD* pdwWritten, LPOVERLAPPED lpOverlapped, DWORD dwTimeout)
-{
-	// Check if time-outs are supported
-	CheckRequirements(lpOverlapped,dwTimeout);
-
-	// Determine the length of the string
-	return Write(pString,strlen(pString),pdwWritten,lpOverlapped,dwTimeout);
 }
 
 LONG SerialPort::Read (void* pData, size_t iLen, DWORD* pdwRead, LPOVERLAPPED lpOverlapped, DWORD dwTimeout)

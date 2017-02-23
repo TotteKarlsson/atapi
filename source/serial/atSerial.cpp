@@ -12,7 +12,8 @@ Serial::Serial(int portNr, int baudRate, char ld, char rd, SerialPort::EHandshak
 mSP(),
 mHandShake(handShake),
 mSerialWorker(*this, mSP, ld, rd),
-mReceivedCB(NULL)
+mReceivedCB(NULL),
+mOverLappedIO(true)
 {
     if(portNr != -1)
     {
@@ -56,7 +57,7 @@ bool Serial::setupAndOpenSerialPort(int pNr, int baudRate, SerialPort::EHandshak
 	    portNr = "COM" + toString(pNr);
     }
 
-    lLastError = mSP.Open( _T(portNr.c_str() ), 0, 0, true);
+    lLastError = mSP.Open( _T(portNr.c_str() ), 512, 512, mOverLappedIO);
 	if (lLastError != ERROR_SUCCESS)
     {
         string errorMsg = getLastWin32Error();
@@ -181,7 +182,7 @@ bool Serial::send(const string& msg)
       	return false;
     }
 
-	int error = mSP.Write(buffer, msg.size(), &dwWritten, &osWrite);
+	int error = mSP.Write(buffer, msg.size(), &dwWritten, &osWrite, mOverLappedIO);
     if(error)
     {
     	Log(lError) << "Failed to send over Serial Port..";

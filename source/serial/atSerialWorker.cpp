@@ -18,7 +18,8 @@ void SerialWorker::run()
     }
 
 	// Create a handle for the overlapped operations
-	HANDLE hevtOverlapped = mSP.m_hevtOverlapped; //::CreateEventA(0,TRUE,FALSE,0);
+//	HANDLE hevtOverlapped = mSP.m_hevtOverlapped; //::CreateEventA(0,TRUE,FALSE,0);
+	HANDLE hevtOverlapped = ::CreateEventA(0,TRUE,FALSE,0);
 
 	if (hevtOverlapped == 0)
     {
@@ -70,19 +71,19 @@ void SerialWorker::run()
                     // Handle break event
                     if (eEvent & SerialPort::EEventBreak)
                     {
-                        printf("\n### BREAK received ###\n");
+                        Log(lError) << "### BREAK received";
                     }
 
                     // Handle CTS event
                     if (eEvent & SerialPort::EEventCTS)
                     {
-                        printf("\n### Clear to send %s ###\n", mSP.GetCTS()?"on":"off");
+                        Log(lError) << "### Clear to send "<<mSP.GetCTS();
                     }
 
                     // Handle DSR event
                     if (eEvent & SerialPort::EEventDSR)
                     {
-                        printf("\n### Data set ready %s ###\n", mSP.GetDSR()?"on":"off");
+                        Log(lError) << "### Data set ready: " << mSP.GetDSR();
                     }
 
                     // Handle error event
@@ -90,28 +91,28 @@ void SerialWorker::run()
                     {
                         switch (mSP.GetError())
                         {
-                            case SerialPort::EErrorBreak:		Log(lError) <<("Break condition");			break;
-                            case SerialPort::EErrorFrame:		Log(lError) <<("Framing error");			break;
-                            case SerialPort::EErrorIOE:			Log(lError) <<("IO device error");			break;
-                            case SerialPort::EErrorMode:		Log(lError) <<("Unsupported mode");			break;
-                            case SerialPort::EErrorOverrun:		Log(lError) <<("Buffer overrun");			break;
-                            case SerialPort::EErrorRxOver:		Log(lError) <<("Input buffer overflow");	break;
-                            case SerialPort::EErrorParity:		Log(lError) <<("Input parity error");		break;
-                            case SerialPort::EErrorTxFull:		Log(lError) <<("Output buffer full");		break;
-                            default:							Log(lError) <<("Unknown Error");					break;
+                            case SerialPort::EErrorBreak:		Log(lError) <<"Break condition";	   break;
+                            case SerialPort::EErrorFrame:		Log(lError) <<"Framing error";		   break;
+                            case SerialPort::EErrorIOE:			Log(lError) <<"IO device error";	   break;
+                            case SerialPort::EErrorMode:		Log(lError) <<"Unsupported mode";	   break;
+                            case SerialPort::EErrorOverrun:		Log(lError) <<"Buffer overrun";		   break;
+                            case SerialPort::EErrorRxOver:		Log(lError) <<"Input buffer overflow"; break;
+                            case SerialPort::EErrorParity:		Log(lError) <<"Input parity error";	   break;
+                            case SerialPort::EErrorTxFull:		Log(lError) <<"Output buffer full";	   break;
+                            default:							Log(lError) <<"Unknown Error";		   break;
                         }
                     }
 
                     // Handle ring event
                     if (eEvent & SerialPort::EEventRing)
                     {
-                        printf("\n### RING ###\n");
+                        Log(lError) << "### RING ###";
                     }
 
                     // Handle RLSD/CD event
                     if (eEvent & SerialPort::EEventRLSD)
                     {
-                        printf("\n### RLSD/CD %s ###\n", mSP.GetRLSD()?"on":"off");
+                        Log(lError) << "### RLSD/CD " << mSP.GetRLSD();
                     }
 
                     // Handle data receive event
@@ -183,7 +184,6 @@ int SerialWorker::processReceiveBuffer(char* buffer, int bufSize)
                 //Execute callback if present..
                 if(mTheHost.mReceivedCB)
                 {
-                	//We need to synchronize this with the main UI thread
                 	mTheHost.mReceivedCB(mMessageBuilder.getMessage());
                 }
             }

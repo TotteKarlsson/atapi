@@ -50,6 +50,7 @@ class AT_CORE Serial : public ABObject
                                             //by clients
         StringList				            mReceivedMessages;
 
+		bool								mOverLappedIO;
         						            //Messages from an arduino
 		Mutex					            mReceivedMessagesMutex;
 
