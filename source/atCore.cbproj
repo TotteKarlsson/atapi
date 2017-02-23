@@ -109,9 +109,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="P:\atUC7\source\atUC7MessageSender.cpp">
-            <BuildOrder>72</BuildOrder>
-        </CppCompile>
         <CppCompile Include="apt\atAbsoluteMove.cpp">
             <DependentOn>apt\atAbsoluteMove.h</DependentOn>
             <BuildOrder>72</BuildOrder>
@@ -393,6 +390,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="UC7\atUC7Message.cpp">
             <BuildOrder>70</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="UC7\atUC7MessageSender.cpp">
+            <BuildOrder>72</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
