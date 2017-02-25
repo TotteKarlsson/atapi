@@ -10,7 +10,7 @@ class AT_CORE Counter : public ABObject
     								Counter();
 		void						increase(int count = 1);
 		void						decrease();
-		void						reset(int count = 0, int countTo = 10);
+		void						reset(int count = 0);
         int							getCount();
         int&		  				getCountReference();
         int&		  				getCountToReference();

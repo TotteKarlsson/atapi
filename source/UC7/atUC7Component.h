@@ -7,6 +7,9 @@
 #include "Poco/Mutex.h"
 #include "atCounter.h"
 #include "atUC7MessageSender.h"
+#include "mtkTimer.h"
+
+
 //---------------------------------------------------------------------------
 
 //This class is named UC7, but unit is atUC7Component as not to conflict with
@@ -27,6 +30,10 @@ class AT_CORE UC7 : public ABObject
 	friend UC7MessageConsumer;
 	friend UC7MessageSender;
 	public:
+        enum EStrokeState 				{ssCutting, ssAfterCutting, ssRetracting, ssBeforeCutting, ssUndefined};
+
+	public:
+
 										UC7();
 										~UC7();
 
@@ -72,10 +79,29 @@ class AT_CORE UC7 : public ABObject
 
         bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
         void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
+
         bool							setPresetFeedRate(int rate = -1);
+        bool							prepareCommandToCutRibbon();
+		bool							prepareCommandForNewRibbon();
+        void							setTimeForStoppingCutter(int ms){mCustomTimer.setInterval(ms);}
+        bool							setStrokeState(EStrokeState state);
+        EStrokeState					getStrokeState(){return mStrokeState;}
+        bool							setStageMoveDelay(int ms);
+        bool							isActive(){return mIsActive;}
+		bool							isActive(bool isIt){mIsActive = isIt;}
+
+    									//Reerences
+		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}
+		int&        					getSetNumberOfZeroStrokes(){return mSetNumberOfZeroStrokes;}
 
     protected:
         string							mINIFileSection;
+        EStrokeState	  				mStrokeState;
+
+        								//!When active, zero stroke and knife stage movement will
+                                        //!take place when the counter reaches ribbonLength
+
+        bool							mIsActive;
 
 										//Serial details
         int								mCOMPort;
@@ -90,10 +116,7 @@ class AT_CORE UC7 : public ABObject
 		deque<string>  					mOutgoingMessagesBuffer;
         Poco::Mutex						mSendBufferMutex;
         Poco::Condition					mNewMessageToSendCondition;
-
         UC7Message 						mUC7Message;
-
-
 
         								//Hardware states
 
@@ -101,11 +124,21 @@ class AT_CORE UC7 : public ABObject
 		int								mFeedRate;
 		int								mPresetFeedRate;
 		int								mKnifeStageJogPreset;
+        int								mSetNumberOfZeroStrokes;
+        int								mNumberOfZeroStrokes;
+
+        								//!When this boolean is true, UC7 commands may be sent to the leica
+                                        //!when HW status is changing
         bool							mPrepareForNewRibbon;
         bool							mPrepareToCutRibbon;
 
+
         Counter							mCounter;
         UC7MessageSender				mMessageSender;
+		mtk::Timer	   			        mCustomTimer;
+        void 							onPrepareToCutRibbon();
+		void 							onPrepareForNewRibbon();
+
 };
 
 #endif

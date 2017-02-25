@@ -19,7 +19,7 @@ mtk::Thread(""),
 mAllowProcessing(true),
 mUC7(uc7),
 mProcessedCount(0),
-mProcessTimeDelay(50)
+mProcessTimeDelay(1)
 {}
 
 //----------------------------------------------------------------
@@ -100,6 +100,7 @@ void UC7MessageSender::worker()
                     }
 
                     sleep(mProcessTimeDelay);
+
                 }
                 catch(...)
                 {

@@ -3,7 +3,6 @@
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 #include "mtkStringUtils.h"
-
 //---------------------------------------------------------------------------
 
 using namespace mtk;
@@ -16,10 +15,14 @@ UC7::UC7()
     mFeedRate(-1),
     mPrepareForNewRibbon(false),
     mPrepareToCutRibbon(false),
-    mPresetFeedRate(30),
-    mMessageSender(*this)
+    mPresetFeedRate(70),
+    mMessageSender(*this),
+    mIsActive(false),
+    mSetNumberOfZeroStrokes(0),
+    mNumberOfZeroStrokes(0)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
+    mCustomTimer.setInterval(5);
 }
 
 UC7::~UC7()
@@ -50,11 +53,80 @@ bool UC7::isConnected()
 	return mSerial.isConnected();
 }
 
+bool UC7::setStrokeState(EStrokeState state)
+{
+	mStrokeState = state;
+    if(state == ssCutting && mFeedRate == 0)
+    {
+    	mNumberOfZeroStrokes++;
+    }
+
+    if(mFeedRate != 0)
+    {
+		mNumberOfZeroStrokes =0;
+    }
+
+    //When the state changes, certain events may take place
+    if(mPrepareToCutRibbon)
+    {
+        if(mStrokeState == ssAfterCutting)
+        {
+            Log(lInfo) << "Preparing new Ribbon: (1) Setting feedrate to 0 nm";
+            setFeedRate(0);
+        }
+        else if(mStrokeState == ssRetracting && mFeedRate == 0)
+        {
+        	if(mNumberOfZeroStrokes >= mSetNumberOfZeroStrokes)
+            {
+            	mCustomTimer.assignTimerFunction(onPrepareToCutRibbon);
+            	mCustomTimer.start();
+            	Log(lInfo) << "Started Custom Timer";
+            	prepareToCutRibbon(false);
+            }
+        }
+    }
+    else if(mPrepareForNewRibbon)
+    {
+        if(mPrepareForNewRibbon == true && mStrokeState == ssAfterCutting)
+        {
+            Log(lInfo) << "Preparing new Ribbon: (1) Setting feedrate to: "<<mPresetFeedRate<<" nm";
+            setFeedRate(mPresetFeedRate);
+        }
+        else if (mStrokeState == ssRetracting && mFeedRate == mPresetFeedRate)
+        {
+        	//This will move the stage
+            mCustomTimer.assignTimerFunction(onPrepareForNewRibbon);
+            mCustomTimer.start();
+            Log(lInfo) << "Started Custom Timer";
+            prepareForNewRibbon(false);
+        }
+    }
+    return true;
+}
+
+bool UC7::setStageMoveDelay(int ms)
+{
+	return mCustomTimer.setInterval(ms);
+}
+
+void UC7::onPrepareToCutRibbon()
+{
+    Log(lInfo) << "Custom Timer fired";
+    mCustomTimer.stop();
+	Log(lInfo) << "Moving Knife stage SOUTH";
+    moveKnifeStageSouth(mKnifeStageJogPreset);
+}
+
+void UC7::onPrepareForNewRibbon()
+{
+    Log(lInfo) << "Custom Timer fired";
+    mCustomTimer.stop();
+	Log(lInfo) << "Moving Knife stage NORTH";
+    moveKnifeStageNorth(mKnifeStageJogPreset);
+}
+
 bool UC7::getStatus()
 {
-	//Don't like the sleeps, but sending data
-    //too fast over serial port causes a problem :(
-
 	//Query HW status
     if(!getCutterMotorStatus())
     {
@@ -66,7 +138,6 @@ bool UC7::getStatus()
     {
     	Log(lError) << "Failed query: FeedRate";
     }
-
 
 	if(!getKnifeStagePosition())
     {
@@ -97,13 +168,6 @@ void UC7::onSerialMessage(const string& msg)
     UC7Message cmd(msg, true, true);
     if(cmd.check())
     {
-//        Log(lDebug4) << "Receiver: "	<<cmd.getReceiver();
-//        Log(lDebug4) << "Sender: "		<<cmd.getSender();
-//        Log(lDebug4) << "Command: "		<<cmd.getCommand();
-//        Log(lDebug4) << "Data: "		<<cmd.getData();
-//        Log(lDebug4) << "Checksum: "	<<hex<<cmd.getCheckSum();
-//        Log(lDebug4) << "Checksum Check: "<<(cmd.check() ? "OK" : "Failed");
-
 		//Get mutex using a scoped lock
         {
         	Poco::ScopedLock<Poco::Mutex> lock(mReceiveBufferMutex);
@@ -115,7 +179,7 @@ void UC7::onSerialMessage(const string& msg)
     }
     else
     {
-   		Log(lError) << "Bad CheckSum for message: "<<msg;
+   		Log(lError) << "Bad checksum for message: "<<msg<<" Message discarded";
     }
 }
 
@@ -127,7 +191,7 @@ bool UC7::sendByte(const unsigned char b)
 
 bool UC7::sendRawMessage(const string& msg)
 {
-	//Put the message on the putgoing queue
+	//Put the message on the utgoing queue
     {
         Poco::ScopedLock<Poco::Mutex> lock(mSendBufferMutex);
     	mOutgoingMessagesBuffer.push_back(msg);
@@ -212,6 +276,7 @@ bool UC7::setFeedRate(int feedRate, bool isRequest)
 	(mFeedRate > 0) ?  mCounter.enable() : mCounter.disable();
     return true;
 }
+
 
 bool UC7::getCutterMotorStatus()
 {
@@ -307,7 +372,7 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 
     }
 
-    Log(lDebug4) << "Sending UC7 command: "<<mUC7Message.getMessageNameAsString() <<"("<<mUC7Message.getFullMessage()<<")";
+    Log(lInfo) << "Sending UC7 command: "<<mUC7Message.getMessageNameAsString() <<"\t\t("<<mUC7Message.getFullMessage()<<")";
 	sendRawMessage(mUC7Message.getFullMessage());
     return true;
 }

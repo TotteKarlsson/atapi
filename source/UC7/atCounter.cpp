@@ -28,9 +28,6 @@ void Counter::increase(int count)
         {
             mOnCountedToCallBack();
         }
-
-		//reset count
-        mCount = 0;
     }
 
     if(mOnCountCallBack)
@@ -56,10 +53,9 @@ void Counter::decrease()
     }
 }
 
-void Counter::reset(int count, int countTo)
+void Counter::reset(int count)
 {
 	mCount = count;
-    mCountTo = countTo;
 }
 
 int	Counter::getCount()

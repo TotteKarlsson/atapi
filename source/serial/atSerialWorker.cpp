@@ -174,7 +174,14 @@ int SerialWorker::processReceiveBuffer(char* buffer, int bufSize)
 
 	for(int i = 0; i < bufSize; i++)
     {
-        mMessageBuilder.build(buffer[i]);
+        if(!mMessageBuilder.build(buffer[i]))
+        {
+        	Log(lError) << "Incoming message error";
+  			Log(lError) << "Current receive buffer length: "<< bufSize;
+			Log(lError) << "Current receive buffer is: "	<< buffer;
+            break;
+        }
+
         if(mMessageBuilder.isComplete())
         {
             {
