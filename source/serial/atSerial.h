@@ -67,7 +67,6 @@ class AT_CORE Serial : public ABObject
         SerialMessageReceivedCallBack	 	mReceivedCB;
         SerialMessageReceivedCallBackC	 	mReceivedCB_C;
         Poco::Condition                     mGotMessage;
-
 };
 
 #endif

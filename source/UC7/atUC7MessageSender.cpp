@@ -1,24 +1,16 @@
 #pragma hdrstop
 #include "atUC7MessageSender.h"
-#include "mtkStringUtils.h"
-#include "Poco/Mutex.h"
-#include "mtkLogger.h"
-#include "mtkUtils.h"
 #include "atUC7Component.h"
-#include "atUC7ApplicationMessages.h"
-#include "atUC7DataStructures.h"
 //---------------------------------------------------------------------------
 
-using Poco::Mutex;
 using namespace mtk;
+using Poco::Mutex;
 
 //----------------------------------------------------------------
 UC7MessageSender::UC7MessageSender(UC7& uc7)
 :
 mtk::Thread(""),
-mAllowProcessing(true),
 mUC7(uc7),
-mProcessedCount(0),
 mProcessTimeDelay(1)
 {}
 
@@ -31,58 +23,18 @@ UC7MessageSender::~UC7MessageSender()
     }
 }
 
-bool UC7MessageSender::start(bool inThread)
-{
-	if(isRunning())
-	{
-		Log(lWarning) << "Tried to start a runnning thread";
-		return true;
-	}
-	if(inThread)
-	{
-		return mtk::Thread::start();
-	}
-	else
-	{
-		worker();
-		return true;
-	}
-}
-
-void UC7MessageSender::pauseProcessing()
-{
-	mAllowProcessing = false;
-}
-
-void UC7MessageSender::resumeProcessing()
-{
-	mAllowProcessing = true;
-}
-
-void UC7MessageSender::stop()
-{
-	//Sets time to die to true
-	mtk::Thread::stop();
-
-	//If thread is waiting.. get it out of wait state
-	mUC7.mNewMessageToSendCondition.signal();
-}
-
+//----------------------------------------------------------------
 void UC7MessageSender::run()
 {
-	worker();
-}
-
-void UC7MessageSender::worker()
-{
-	Log(lDebug)<<"Entering UC7 message sender worker function";
+	mIsRunning = true;
+	Log(lDebug)<<"Entering UC7 message sender thread";
 	while(mIsTimeToDie == false)
 	{
 		{
 			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mSendBufferMutex);
 			if(mUC7.mOutgoingMessagesBuffer.size() == 0)
 			{
-				Log(lDebug3) << "Waiting for UC7 message.";
+				Log(lDebug3) << "Waiting for incoming UC7 messages.";
 				mUC7.mNewMessageToSendCondition.wait(mUC7.mSendBufferMutex);
 			}
 
@@ -96,22 +48,53 @@ void UC7MessageSender::worker()
                     //Send windows message and let UI handle the message
                     if(!mUC7.mSerial.send(msg))
                     {
-                        Log(lError) << "Sending UC7 message failed..";
+                        Log(lError) << "Sending a UC7 message failed..";
                     }
 
+                    //Use a delay in case the serial devices input buffer overflows
                     sleep(mProcessTimeDelay);
 
                 }
                 catch(...)
                 {
-                	Log(lError) << "Bad stuff in message consumer..";
+                	Log(lError) << "Exception thrown in message sender code..";
                 }
             }
 
 		}//scoped lock
 	}
 
-    Log(lInfo) << "UC7 Message Sender thread finished";
+    Log(lDebug) << "UC7 Message Sender thread finished";
 	mIsFinished = true;
 	mIsRunning = false;
 }
+
+//----------------------------------------------------------------
+bool UC7MessageSender::start(bool inThread)
+{
+	if(isRunning())
+	{
+		Log(lWarning) << "Tried to start a runnning thread";
+		return true;
+	}
+	if(inThread)
+	{
+		return mtk::Thread::start();
+	}
+	else
+	{
+		run();
+		return true;
+	}
+}
+
+//----------------------------------------------------------------
+void UC7MessageSender::stop()
+{
+	//Sets time to die to true
+	mtk::Thread::stop();
+
+	//If thread is waiting.. get it out of wait state
+	mUC7.mNewMessageToSendCondition.signal();
+}
+

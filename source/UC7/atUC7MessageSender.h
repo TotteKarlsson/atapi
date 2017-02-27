@@ -4,19 +4,17 @@
 #include <string>
 #include "mtkThread.h"
 #include "atABObject.h"
-#include "mtkConstants.h"
-#include "mtkStringList.h"
 #include "atUC7MessageConsumer.h"
 
 //---------------------------------------------------------------------------
 class UC7;
 using mtk::gEmptyString;
 
-//The message consumer monitors the referenced UC7 object for new
-//messages. When a new message is available, the message is popped
-//from the UC7 queue and propagated to the main UI, which is responsible
-//to handle it.
-
+//!The message sender manages the UC7's serial output queue in a thread.
+//!When a message is posted onto the queue, the thread is awakened and
+//!the message, or messages are sent one by one over the serial port.
+//!A delay, ProcessTimeDelay can be used in order to no overflow the serial
+//!devices input buffer
 class AT_CORE UC7MessageSender : public ABObject, public mtk::Thread
 {
     public:
@@ -25,20 +23,13 @@ class AT_CORE UC7MessageSender : public ABObject, public mtk::Thread
 
                                                     // overridden from Thread
         void                                        run();
-        virtual void                                worker();
-        void                                        stop();
+
         bool                                        start(bool in_thread = true);
-        void                                        pauseProcessing();
-        void                                        resumeProcessing();
+        void                                        stop();
 
 	protected:
-		long                                        mProcessedCount;
-		bool                                        mAllowProcessing;
         double										mProcessTimeDelay;
 		UC7&                      					mUC7;
-
-        											//The handle is needed for window messaging
-        HWND__*										mHandle;
 };
 
 #endif

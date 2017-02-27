@@ -7,7 +7,7 @@
 
 using namespace mtk;
 
-UC7::UC7()
+UC7::UC7(HWND__ *h)
 :
 	mINIFileSection("UC7"),
     mCOMPort(-1),
@@ -16,6 +16,7 @@ UC7::UC7()
     mPrepareForNewRibbon(false),
     mPrepareToCutRibbon(false),
     mPresetFeedRate(70),
+	mMessageConsumer(*this, h),
     mMessageSender(*this),
     mIsActive(false),
     mSetNumberOfZeroStrokes(0),
@@ -33,18 +34,22 @@ UC7::~UC7()
 bool UC7::connect(int com)
 {
 	Log(lInfo) << "Connecting UC7 client on COM"<<com;
+
+    mMessageConsumer.start();
+    mMessageSender.start();
+
     if(!mSerial.connect(com, 19200))
     {
 		return false;
     }
-
-    mMessageSender.start();
 
     return true;
 }
 
 bool UC7::disConnect()
 {
+    mMessageSender.stop();
+    mMessageConsumer.stop();
 	return mSerial.disConnect();
 }
 
@@ -214,7 +219,6 @@ bool UC7::stopCutter()
 
 bool UC7::startRibbon()
 {
-
 	//Move knife stage north using preset
 	moveKnifeStageNorth(mKnifeStageJogPreset);
 
@@ -277,7 +281,6 @@ bool UC7::setFeedRate(int feedRate, bool isRequest)
     return true;
 }
 
-
 bool UC7::getCutterMotorStatus()
 {
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "FF");
@@ -301,23 +304,23 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
     switch(msgName)
     {
         case SOFTWARE_RESET:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case GET_PART_ID:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case LOGIN:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case COMMAND_TRANSMISSION_ERROR:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case GET_VERSION:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case FEEDRATE_MOTOR_CONTROL:
@@ -326,7 +329,7 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
  		break;
 
         case SEND_POSITION_AT_MOTION:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case FEED:
@@ -340,15 +343,15 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
  		break;
 
         case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:
-
- 		break;
+  			Log(lInfo) << "Not implemented!";
+   		break;
 
         case EAST_WEST_MOTOR_MOVEMENT:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case SEND_POSITION_AT_MOVEMENT_EAST_WEST:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case CUTTING_MOTOR_CONTROL:
@@ -357,18 +360,20 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
  		break;
 
         case CUTTING_SPEED:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case RETURN_SPEED:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
         case HANDWHEEL_POSITION:
-
+  			Log(lInfo) << "Not implemented!";
  		break;
 
-        default: break;
+        default:
+        	Log(lInfo) << "Unhandled Message!";
+        break;
 
     }
 

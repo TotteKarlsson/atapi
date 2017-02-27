@@ -9,32 +9,29 @@
 #include "atUC7MessageSender.h"
 #include "mtkTimer.h"
 
-
 //---------------------------------------------------------------------------
-
-//This class is named UC7, but unit is atUC7Component as not to conflict with
+//!This class is named UC7, but unit is atUC7Component as not to conflict with
 //application name unit UC7
 
-//!Observe that most "get" functions don't return a result immediately. Instead, a request
+//!Observe that most "get" functions below don't return a result immediately. Instead, a request
 //!is sent to the UC7 hardware, and a response is be received at a laterstage.
-//If a client is querying the UC7 object itself, specify isRequest = false when calling
-//getfunctions
+//!If a client is querying the UC7 object itself, specify isRequest = false when calling
+//!getfunctions, the current (sw) state is returned.
 
 using mtk::gEmptyString;
 using std::deque;
 class UC7MessageConsumer;
 
-
 class AT_CORE UC7 : public ABObject
 {
 	friend UC7MessageConsumer;
 	friend UC7MessageSender;
+
 	public:
         enum EStrokeState 				{ssCutting, ssAfterCutting, ssRetracting, ssBeforeCutting, ssUndefined};
 
 	public:
-
-										UC7();
+										UC7(HWND__ *h);
 										~UC7();
 
 		bool							connect(int comPort);
@@ -43,27 +40,32 @@ class AT_CORE UC7 : public ABObject
         bool							getVersion();
 
         Counter&						getCounter(){return mCounter;}
+
         bool							sendRawMessage(const string& msg);
         bool							sendByte(const unsigned char b);
 
         bool							startCutter();
         bool							stopCutter();
 
+        								//!The start ribbon will cause the
+                                        //!knife stage to move north,
+                                        //!an also change cutrate to preset cutrate
         bool							startRibbon();
-        bool							moveKnifeStageSouth(int nm, bool isRequest = true);
-        bool							moveKnifeStageNorth(int nm, bool isRequest= true);
 
-        								//Set Feedrate in nm
+        bool							moveKnifeStageSouth(int nm, bool isRequest = true);
+        bool							moveKnifeStageNorth(int nm, bool isRequest = true);
+
+        								//!Set Feedrate in nm
         bool							setFeedRate(int feedRate, bool isRequest = true);
 
 										//status requests
-                                        //Get all statuses
+                                        //!Get all statuses
         bool							getStatus();
 
-        								//Get status of cutter motor, on or off
+        								//!Get status of cutter motor, on/off
         bool							getCutterMotorStatus();
 
-        								//Get current feedrate in nm
+        								//!Get current feedrate in nm
 		int								getCurrentFeedRate(bool isRequest = true);
 
         								//Get absolute position of stage
@@ -74,6 +76,7 @@ class AT_CORE UC7 : public ABObject
 
         void							disableCounter();
         void							enableCounter();
+
         bool							prepareForNewRibbon(){return mPrepareForNewRibbon;}
         void							prepareForNewRibbon(bool what){mPrepareForNewRibbon = what;}
 
@@ -81,32 +84,32 @@ class AT_CORE UC7 : public ABObject
         void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
 
         bool							setPresetFeedRate(int rate = -1);
-        bool							prepareCommandToCutRibbon();
-		bool							prepareCommandForNewRibbon();
-        void							setTimeForStoppingCutter(int ms){mCustomTimer.setInterval(ms);}
+
         bool							setStrokeState(EStrokeState state);
         EStrokeState					getStrokeState(){return mStrokeState;}
+
         bool							setStageMoveDelay(int ms);
+
         bool							isActive(){return mIsActive;}
 		bool							isActive(bool isIt){mIsActive = isIt;}
 
-    									//Reerences
+    									//Refrences
 		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}
-		int&        					getSetNumberOfZeroStrokes(){return mSetNumberOfZeroStrokes;}
+		int&        					getSetNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
+
+        bool							isMessageSenderRunnning(){return mMessageSender.isRunning();}
+//        bool							isMessagereceiverRunnning(){return mMessageSender.isRunning();}
 
     protected:
         string							mINIFileSection;
-        EStrokeState	  				mStrokeState;
 
         								//!When active, zero stroke and knife stage movement will
                                         //!take place when the counter reaches ribbonLength
-
         bool							mIsActive;
 
-										//Serial details
+										//Serial Components
         int								mCOMPort;
     	Serial							mSerial;
-        void							onSerialMessage(const string& msg);
         bool							sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
 
         deque<UC7Message> 				mIncomingMessagesBuffer;
@@ -116,11 +119,13 @@ class AT_CORE UC7 : public ABObject
 		deque<string>  					mOutgoingMessagesBuffer;
         Poco::Mutex						mSendBufferMutex;
         Poco::Condition					mNewMessageToSendCondition;
+
+        								//!This is the most previous sent message
         UC7Message 						mUC7Message;
 
         								//Hardware states
-
                                         //!Feedrate in nm
+        EStrokeState	  				mStrokeState;
 		int								mFeedRate;
 		int								mPresetFeedRate;
 		int								mKnifeStageJogPreset;
@@ -132,13 +137,18 @@ class AT_CORE UC7 : public ABObject
         bool							mPrepareForNewRibbon;
         bool							mPrepareToCutRibbon;
 
-
         Counter							mCounter;
         UC7MessageSender				mMessageSender;
+
+        								//!Consume UC7 messages
+        UC7MessageConsumer		  		mMessageConsumer;
+
 		mtk::Timer	   			        mCustomTimer;
+
+        								//!Events
+        void							onSerialMessage(const string& msg);
         void 							onPrepareToCutRibbon();
 		void 							onPrepareForNewRibbon();
-
 };
 
 #endif
