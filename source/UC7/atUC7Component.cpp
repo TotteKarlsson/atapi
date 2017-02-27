@@ -16,8 +16,8 @@ UC7::UC7(HWND__ *h)
     mPrepareForNewRibbon(false),
     mPrepareToCutRibbon(false),
     mPresetFeedRate(70),
-	mMessageConsumer(*this, h),
-    mMessageSender(*this),
+	mUC7MessageReceiver(*this, h),
+    mUC7MessageSender(*this),
     mIsActive(false),
     mSetNumberOfZeroStrokes(0),
     mNumberOfZeroStrokes(0)
@@ -35,8 +35,8 @@ bool UC7::connect(int com)
 {
 	Log(lInfo) << "Connecting UC7 client on COM"<<com;
 
-    mMessageConsumer.start();
-    mMessageSender.start();
+    mUC7MessageReceiver.start();
+    mUC7MessageSender.start();
 
     if(!mSerial.connect(com, 19200))
     {
@@ -48,8 +48,8 @@ bool UC7::connect(int com)
 
 bool UC7::disConnect()
 {
-    mMessageSender.stop();
-    mMessageConsumer.stop();
+    mUC7MessageSender.stop();
+    mUC7MessageReceiver.stop();
 	return mSerial.disConnect();
 }
 
@@ -153,7 +153,7 @@ bool UC7::getStatus()
 
 bool UC7::getVersion()
 {
-	return "";
+	return false;
 }
 
 bool UC7::hasMessage()
@@ -186,12 +186,6 @@ void UC7::onSerialMessage(const string& msg)
     {
    		Log(lError) << "Bad checksum for message: "<<msg<<" Message discarded";
     }
-}
-
-bool UC7::sendByte(const unsigned char b)
-{
-	Log(lDebug5) << "Sending byte: "<<b;
-	return mSerial.send(b);
 }
 
 bool UC7::sendRawMessage(const string& msg)
@@ -249,12 +243,12 @@ bool UC7::moveKnifeStageNorth(int nm, bool isRequest)
 
 void UC7::disableCounter()
 {
-	mCounter.disable();
+	mSectionCounter.disable();
 }
 
 void UC7::enableCounter()
 {
-	mCounter.enable();
+	mSectionCounter.enable();
 }
 
 bool UC7::setPresetFeedRate(int rate)
@@ -277,7 +271,7 @@ bool UC7::setFeedRate(int feedRate, bool isRequest)
     }
 
     mFeedRate = feedRate;
-	(mFeedRate > 0) ?  mCounter.enable() : mCounter.disable();
+	(mFeedRate > 0) ?  mSectionCounter.enable() : mSectionCounter.disable();
     return true;
 }
 

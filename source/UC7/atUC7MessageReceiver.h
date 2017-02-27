@@ -1,13 +1,11 @@
-#ifndef atUC7MessageConsumerH
-#define atUC7MessageConsumerH
+#ifndef atUC7MessageReceiverH
+#define atUC7MessageReceiverH
 #include "atExporter.h"
 #include <string>
 #include "mtkThread.h"
 #include "atABObject.h"
 #include "mtkConstants.h"
 #include "mtkStringList.h"
-#include "atUC7MessageConsumer.h"
-
 //---------------------------------------------------------------------------
 class UC7;
 using mtk::gEmptyString;
@@ -17,11 +15,11 @@ using mtk::gEmptyString;
 //from the UC7 queue and propagated to the main UI, which is responsible
 //to handle it.
 
-class AT_CORE UC7MessageConsumer : public ABObject, public mtk::Thread
+class AT_CORE UC7MessageReceiver : public ABObject, public mtk::Thread
 {
     public:
-                                                    UC7MessageConsumer(UC7& list,  HWND__ *h, const string& threadName = gEmptyString);
-                                                    ~UC7MessageConsumer();
+                                                    UC7MessageReceiver(UC7& list,  HWND__ *h, const string& threadName = gEmptyString);
+                                                    ~UC7MessageReceiver();
 
                                                     // overridden from Thread
         void                                        run();

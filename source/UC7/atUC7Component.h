@@ -39,10 +39,9 @@ class AT_CORE UC7 : public ABObject
         bool							isConnected();
         bool							getVersion();
 
-        Counter&						getCounter(){return mCounter;}
+        Counter&						getCounter(){return mSectionCounter;}
 
         bool							sendRawMessage(const string& msg);
-        bool							sendByte(const unsigned char b);
 
         bool							startCutter();
         bool							stopCutter();
@@ -97,8 +96,8 @@ class AT_CORE UC7 : public ABObject
 		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}
 		int&        					getSetNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
 
-        bool							isMessageSenderRunnning(){return mMessageSender.isRunning();}
-//        bool							isMessagereceiverRunnning(){return mMessageSender.isRunning();}
+        bool							isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
+        bool							isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
 
     protected:
         string							mINIFileSection;
@@ -137,11 +136,11 @@ class AT_CORE UC7 : public ABObject
         bool							mPrepareForNewRibbon;
         bool							mPrepareToCutRibbon;
 
-        Counter							mCounter;
-        UC7MessageSender				mMessageSender;
+        Counter							mSectionCounter;
+        UC7MessageSender				mUC7MessageSender;
 
         								//!Consume UC7 messages
-        UC7MessageConsumer		  		mMessageConsumer;
+        UC7MessageConsumer		  		mUC7MessageReceiver;
 
 		mtk::Timer	   			        mCustomTimer;
 

@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atUC7MessageConsumer.h"
+#include "atUC7MessageReceiver.h"
 #include "mtkStringUtils.h"
 #include "Poco/Mutex.h"
 #include "mtkLogger.h"
@@ -13,7 +13,7 @@ using Poco::Mutex;
 using namespace mtk;
 
 //----------------------------------------------------------------
-UC7MessageConsumer::UC7MessageConsumer(UC7& messageContainer,  HWND__ *h, const string& threadName)
+UC7MessageReceiver::UC7MessageReceiver(UC7& messageContainer,  HWND__ *h, const string& threadName)
 :
 mtk::Thread(threadName),
 mAllowProcessing(true),
@@ -24,7 +24,7 @@ mHandle(h)
 {}
 
 //----------------------------------------------------------------
-UC7MessageConsumer::~UC7MessageConsumer()
+UC7MessageReceiver::~UC7MessageReceiver()
 {
 	if(mIsRunning)
     {
@@ -32,7 +32,7 @@ UC7MessageConsumer::~UC7MessageConsumer()
     }
 }
 
-bool UC7MessageConsumer::start(bool inThread)
+bool UC7MessageReceiver::start(bool inThread)
 {
 	if(isRunning())
 	{
@@ -50,17 +50,17 @@ bool UC7MessageConsumer::start(bool inThread)
 	}
 }
 
-void UC7MessageConsumer::pauseProcessing()
+void UC7MessageReceiver::pauseProcessing()
 {
 	mAllowProcessing = false;
 }
 
-void UC7MessageConsumer::resumeProcessing()
+void UC7MessageReceiver::resumeProcessing()
 {
 	mAllowProcessing = true;
 }
 
-void UC7MessageConsumer::stop()
+void UC7MessageReceiver::stop()
 {
 	//Sets time to die to true
 	mtk::Thread::stop();
@@ -69,12 +69,12 @@ void UC7MessageConsumer::stop()
 	mUC7.mNewReceivedMessageCondition.signal();
 }
 
-void UC7MessageConsumer::run()
+void UC7MessageReceiver::run()
 {
 	worker();
 }
 
-void UC7MessageConsumer::worker()
+void UC7MessageReceiver::worker()
 {
 	Log(lDebug)<<"Entering Command Processor Worker Function.";
 	while(mIsTimeToDie == false)
