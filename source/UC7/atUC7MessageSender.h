@@ -4,7 +4,6 @@
 #include <string>
 #include "mtkThread.h"
 #include "atABObject.h"
-#include "atUC7MessageConsumer.h"
 
 //---------------------------------------------------------------------------
 class UC7;

@@ -7,6 +7,7 @@
 #include "Poco/Mutex.h"
 #include "atCounter.h"
 #include "atUC7MessageSender.h"
+#include "atUC7MessageReceiver.h"
 #include "mtkTimer.h"
 
 //---------------------------------------------------------------------------
@@ -20,11 +21,11 @@
 
 using mtk::gEmptyString;
 using std::deque;
-class UC7MessageConsumer;
+class UC7MessageReceiver;
 
 class AT_CORE UC7 : public ABObject
 {
-	friend UC7MessageConsumer;
+	friend UC7MessageReceiver;
 	friend UC7MessageSender;
 
 	public:
@@ -137,10 +138,12 @@ class AT_CORE UC7 : public ABObject
         bool							mPrepareToCutRibbon;
 
         Counter							mSectionCounter;
+
+        								//!Send UC7 messages
         UC7MessageSender				mUC7MessageSender;
 
-        								//!Consume UC7 messages
-        UC7MessageConsumer		  		mUC7MessageReceiver;
+        								//!Receive UC7 messages
+        UC7MessageReceiver		  		mUC7MessageReceiver;
 
 		mtk::Timer	   			        mCustomTimer;
 

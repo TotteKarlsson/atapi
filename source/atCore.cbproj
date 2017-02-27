@@ -391,7 +391,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="UC7\atUC7Message.cpp">
             <BuildOrder>70</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UC7\atUC7MessageConsumer.cpp">
+        <CppCompile Include="UC7\atUC7MessageReceiver.cpp">
             <BuildOrder>73</BuildOrder>
         </CppCompile>
         <CppCompile Include="UC7\atUC7MessageSender.cpp">
