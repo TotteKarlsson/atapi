@@ -1,3 +1,45 @@
+Release 0.5.1 (Feb 27)
+=======================
+* Added more info regarding serial connection state in UC7 component
+* Renamed UC7MessageConsumer to UC7MessageReceiver
+* Cleaned up UC7 message sender and reader
+* Fixed bugs in the counter
+* Added timed events in UC7 to deal with movement of knife stage
+* Added more logic to deal with starting and ending a ribbon
+* Added serial message consumer unit
+* Added serial message sender
+* Added settings for COM port send and receive buffer sizes
+* Added outgoing container for messages - use a consumer thread to send them
+* Removed printf's in Serial worker
+* Changed generation of createEvent handle in serial worker run function
+* Added a default of a 512 buffer in atSerial
+* Added many functions for orchestrating ribbon separation
+* Added functions for section counter
+* implementing a counter for the UC7 object
+* Renamed atUC7 Unit file to atUC7Component.
+* Added fixes to SerialWorker class
+* Added ability to set handshake mode for serial communication
+* many upgrades to UC7Message class
+* Upgrading UC7 software
+* Added camera service thread
+* Getting UC7 messaging to UI working
+* Setting up UC7 message consumption
+* Added class that consumes UC7 messages
+* Added UC7 Command class
+* Added support to choose serial message delimiters
+* Implementing a UC7 class
+* Added UC7 class to control the Leica UC7 microtome
+* Updating to new configuration
+* Updated ATDB datamodule to use plural table names, and protocols are moved to blocks
+* Added a Query builder
+* Added custom print functions to labelprinter API
+* Changed TSQLConnection->AutoClone to false
+* Adding thirdparty binaries to repository
+* Refactored all ab* files into at* files
+* Creating database dll
+* Refactoring AB => AT
+* Added resource DLL
+
 Release 0.5.0 (Nov 8)
 =======================
 * Initial commit, most code was transferred from the ArrayBot repository
