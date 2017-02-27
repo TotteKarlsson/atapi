@@ -55,7 +55,7 @@ bool UC7::disConnect()
 
 bool UC7::isConnected()
 {
-	return mSerial.isConnected();
+	return mSerial.isConnected() || mUC7MessageSender.isRunning() || mUC7MessageReceiver.isRunning();
 }
 
 bool UC7::setStrokeState(EStrokeState state)
