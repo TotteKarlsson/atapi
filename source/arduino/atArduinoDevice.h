@@ -6,9 +6,11 @@
 #include "Poco/Mutex.h"
 #include "Poco/Condition.h"
 #include "serial/atSerial.h"
+#include <deque>
+
 using Poco::Mutex;
 using Poco::Condition;
-
+using std::deque;
 using mtk::StringList;
 
 /*
@@ -63,6 +65,14 @@ class AT_CORE ArduinoDevice : public ABObject
     								//!Serial communication can be quite complex. It is wrapped by the Serial class
                                     //and confined further with low level functions in the SerialPort class
         Serial						mSerial;
+
+        deque<string> 				mIncomingMessagesBuffer;
+        Poco::Mutex		  			mReceiveBufferMutex;
+        Poco::Condition	  			mNewReceivedMessageCondition;
+
+		deque<string>  	  			mOutgoingMessagesBuffer;
+        Poco::Mutex		  			mSendBufferMutex;
+        Poco::Condition	  			mNewMessageToSendCondition;
 
 									//!Threat the serial port as a resource that can only be accesed from
                                     //the outside by one client at a time

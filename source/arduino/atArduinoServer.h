@@ -5,12 +5,10 @@
 #include "atABObject.h"
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
-#include "atPufferArduino.h"
 #include "atLightsArduino.h"
 #include "atSensorsArduino.h"
 #include <vector>
 #include "mtkTimer.h"
-#include "arraybot/atRibbonController.h"
 using mtk::IPCServer;
 using mtk::IPCMessage;
 using std::vector;
@@ -27,10 +25,8 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
 //There are currently two Arduino boards, the 'Puffer' board, and a 'Sensor' board containing sensors and
 //light controlling logic.
-
 class AT_CORE ArduinoServer : public IPCServer
 {
-	friend RibbonController;
     public:
                                             ArduinoServer(int portNumber = 50000);
 	                                        ~ArduinoServer();
@@ -40,7 +36,6 @@ class AT_CORE ArduinoServer : public IPCServer
                                             //!These messages are sent to the server from a client.
     	bool 					            processMessage(IPCMessage& msg);
 
-    	PufferArduino& 			            getPufferArduino(){return mPufferArduino;}
     	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
     	SensorsArduino& 		            getSensorsArduino(){return mSensorsArduino;}
         bool            		            shutDown();
@@ -62,11 +57,8 @@ class AT_CORE ArduinoServer : public IPCServer
 
         									//We should create a mutex for each of these
                                             //devices...
-    	PufferArduino 			            mPufferArduino;
     	LightsArduino 			            mLightsArduino;
     	SensorsArduino 			            mSensorsArduino;
-
-		RibbonController					mRibbonController;
 
         OnMessageUpdateCB					onMessageUpdateCB;
 

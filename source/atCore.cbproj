@@ -245,10 +245,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>arraybot\atEnvironmentalSensorReader.h</DependentOn>
             <BuildOrder>56</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arraybot\atRibbonController.cpp">
-            <DependentOn>arraybot\atRibbonController.h</DependentOn>
-            <BuildOrder>55</BuildOrder>
-        </CppCompile>
         <CppCompile Include="arraybot\atWhiskerUnit.cpp">
             <DependentOn>arraybot\atWhiskerUnit.h</DependentOn>
             <BuildOrder>54</BuildOrder>
