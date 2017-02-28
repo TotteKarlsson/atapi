@@ -197,6 +197,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>arduino\atArduinoMessageProcessor.h</DependentOn>
             <BuildOrder>68</BuildOrder>
         </CppCompile>
+        <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
+            <BuildOrder>72</BuildOrder>
+        </CppCompile>
         <CppCompile Include="arduino\atArduinoServer.cpp">
             <DependentOn>arduino\atArduinoServer.h</DependentOn>
             <BuildOrder>67</BuildOrder>
@@ -391,7 +394,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <BuildOrder>73</BuildOrder>
         </CppCompile>
         <CppCompile Include="UC7\atUC7MessageSender.cpp">
-            <BuildOrder>72</BuildOrder>
+            <DependentOn>UC7\atUC7MessageSender.h</DependentOn>
+            <BuildOrder>73</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

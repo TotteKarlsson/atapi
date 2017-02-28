@@ -112,10 +112,14 @@ class AT_CORE UC7 : public ABObject
     	Serial							mSerial;
         bool							sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
 
+        								//!Receive UC7 messages
+        UC7MessageReceiver		  		mUC7MessageReceiver;
         deque<UC7Message> 				mIncomingMessagesBuffer;
         Poco::Mutex						mReceiveBufferMutex;
         Poco::Condition					mNewReceivedMessageCondition;
 
+        								//!Send UC7 messages
+        UC7MessageSender				mUC7MessageSender;
 		deque<string>  					mOutgoingMessagesBuffer;
         Poco::Mutex						mSendBufferMutex;
         Poco::Condition					mNewMessageToSendCondition;
@@ -138,12 +142,6 @@ class AT_CORE UC7 : public ABObject
         bool							mPrepareToCutRibbon;
 
         Counter							mSectionCounter;
-
-        								//!Send UC7 messages
-        UC7MessageSender				mUC7MessageSender;
-
-        								//!Receive UC7 messages
-        UC7MessageReceiver		  		mUC7MessageReceiver;
 
 		mtk::Timer	   			        mCustomTimer;
 

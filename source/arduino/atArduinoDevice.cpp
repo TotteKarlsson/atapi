@@ -7,7 +7,8 @@ using namespace mtk;
 
 ArduinoDevice::ArduinoDevice(int pNr, int baudRate)
 :
-mSerial(pNr, baudRate)
+mSerial(pNr, baudRate),
+mMessageSender(*this)
 {}
 
 ArduinoDevice::~ArduinoDevice()
@@ -18,8 +19,19 @@ ArduinoDevice::~ArduinoDevice()
 
 bool ArduinoDevice::connect(int portNr, int baudRate)
 {
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
+    mMessageSender.start();
 	return mSerial.connect(portNr, baudRate);
+}
+
+bool ArduinoDevice::isConnected()
+{
+	return mSerial.isConnected() || mMessageSender.isAlive();
+}
+
+bool ArduinoDevice::disConnect()
+{
+	mMessageSender.stop();
+	return mSerial.disConnect();
 }
 
 bool ArduinoDevice::readDigitalPin(int pin)
@@ -34,41 +46,49 @@ bool ArduinoDevice::writeDigitalPin(int pin)
 
 bool ArduinoDevice::send(int val)
 {
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
 	return send(toString(val));
 }
 
 bool ArduinoDevice::send(const string& msg)
 {
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
-	return mSerial.send(msg);
+	//Put the message on the utgoing queue
+    {
+        Poco::ScopedLock<Poco::Mutex> lock(mSendBufferMutex);
+    	mOutgoingMessagesBuffer.push_back(msg);
+    }
+
+    //Send a signal
+    mNewMessageToSendCondition.signal();
+	return true;
+
+//	return mSerial.send(msg);
 }
+
+//bool UC7::sendRawMessage(const string& msg)
+//{
+//	//Put the message on the utgoing queue
+//    {
+//        Poco::ScopedLock<Poco::Mutex> lock(mSendBufferMutex);
+//    	mOutgoingMessagesBuffer.push_back(msg);
+//    }
+//
+//    //Send a signal
+//    mNewMessageToSendCondition.signal();
+//	return true;
+//}
+
 
 void ArduinoDevice::assignSerialMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
 {
 	mSerial.assignMessageReceivedCallBack(cb);
 }
 
-bool ArduinoDevice::isConnected()
-{
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
-	return mSerial.isConnected();
-}
-
-bool ArduinoDevice::disConnect()
-{
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
-	return mSerial.disConnect();
-}
-
 bool ArduinoDevice::hasMessage()
 {
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
 	return mSerial.hasMessage();
 }
 
 string ArduinoDevice::getMessage()
 {
-	Poco::ScopedLock<Poco::Mutex> lock(mSerialPortMutex);
 	return mSerial.popMessage();
 }

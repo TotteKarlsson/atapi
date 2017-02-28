@@ -7,6 +7,7 @@
 #include "Poco/Condition.h"
 #include "serial/atSerial.h"
 #include <deque>
+#include "atArduinoSerialMessageSender.h"
 
 using Poco::Mutex;
 using Poco::Condition;
@@ -25,6 +26,7 @@ typedef void (__closure *InitCallBack)();
 
 class AT_CORE ArduinoDevice : public ABObject
 {
+	friend ArduinoSerialMessageSender;
     public:
         							ArduinoDevice(int portNr, int baudRate = 9600);
     	virtual		    			~ArduinoDevice();
@@ -66,17 +68,15 @@ class AT_CORE ArduinoDevice : public ABObject
                                     //and confined further with low level functions in the SerialPort class
         Serial						mSerial;
 
+
         deque<string> 				mIncomingMessagesBuffer;
         Poco::Mutex		  			mReceiveBufferMutex;
         Poco::Condition	  			mNewReceivedMessageCondition;
 
+        ArduinoSerialMessageSender 	mMessageSender;
 		deque<string>  	  			mOutgoingMessagesBuffer;
         Poco::Mutex		  			mSendBufferMutex;
         Poco::Condition	  			mNewMessageToSendCondition;
-
-									//!Threat the serial port as a resource that can only be accesed from
-                                    //the outside by one client at a time
-		Mutex						mSerialPortMutex;
 
         							//A stream makes it easy to compose messages
         std::stringstream		  	mSS;
