@@ -21,7 +21,7 @@ ostream& operator<<(ostream& stream, const MotorCommand& cmd)
     return stream;
 }
 
-MotorCommandEnum MotorCommand::getCore()
+MotorCommandEnum MotorCommand::getCore() const
 {
 	return mCommand;
 }

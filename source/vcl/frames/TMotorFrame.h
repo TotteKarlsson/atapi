@@ -54,7 +54,6 @@ class PACKAGE TMotorFrame : public TFrame
 	TFloatLabeledEdit *mMinPositionLimitE;
 	TFloatLabeledEdit *mMaxPositionLimitE;
 	TFloatLabeledEdit *mPotentiometerSettingE;
-	TGroupBox *MiscGB;
 	TButton *EnableDisableBtn;
 	TPropertyCheckBox *mEnableDisableLimits;
         void __fastcall mMotorStatusTimerTimer(TObject *Sender);

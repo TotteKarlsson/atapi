@@ -51,6 +51,11 @@ APTMotor::~APTMotor()
 	Log(lDebug) <<"Exiting destructor for motor with serial: "<<mSerial;
 }
 
+int	APTMotor::getNumberOfQueuedCommands()
+{
+	return mMotorMessageContainer.count();
+}
+
 bool APTMotor::isInDangerZone()
 {
     if(mPositionLimitsEnabled)
@@ -67,7 +72,7 @@ bool APTMotor::isInDangerZone()
 
 void APTMotor::onStatusTimer()
 {
-	if(!isActive() || isHoming())
+	if(mStatusTimer.isTimeToDie() || !isActive() || isHoming())
     {
     	return;
     }
@@ -94,7 +99,6 @@ void APTMotor::onStatusTimer()
         if(pos <= mPositionLimits.getValue().getMin())
         {
             Log(lWarning) << "Motor \""<<getName()<<"\" has crossed the minimum position limit";
-
         }
     }
 }
@@ -215,6 +219,7 @@ bool APTMotor::setVelocityReverse(double vel)
 
 bool APTMotor::disconnect()
 {
+	mStatusTimer.stop();
 	mMotorMessageProcessor.stop();
     return true;
 }

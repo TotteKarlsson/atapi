@@ -14,10 +14,9 @@ mJoyStickID(-1),
 mJoyStick(mJoyStickID.getReference()),
 mArduinoClient(NULL),
 mJSSettings("JOYSTICK SETTINGS",	mIniFile),
-mCoverSlip("COVERSLIP UNIT", 		mIniFile, appFolder),
-mWhisker("WHISKER UNIT", 		mIniFile, appFolder),
-//mWhisker(mIniFile, appFolder),
-mLifts("PAIRED_MOVES", 				mIniFile),
+mCoverSlip(	"COVERSLIP UNIT", 		mIniFile, appFolder),
+mWhisker(	"WHISKER UNIT", 		mIniFile, appFolder),
+mLifts(		"PAIRED_MOVES", 		mIniFile),
 mProcessSequencer(*this, appFolder),
 mIsShuttingDown(false)
 {

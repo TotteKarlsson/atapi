@@ -7,24 +7,24 @@
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE MotorMessageCreator : public mtk::Thread, public ABObject
-{
-	public:
-													MotorMessageCreator(const string& threadName = mtk::gEmptyString);
-													~MotorMessageCreator();
-
-													// overridden from Thread
-		void                                        run();
-		virtual void                                worker();
-		void                                        stop();
-		void										setRepeatRate(int rate);
-
-		bool                                        start(bool in_thread = true);
-
-	protected:
-
-		int											mRepeatRate;
-
-};
+//class AT_CORE MotorMessageCreator : public mtk::Thread, public ABObject
+//{
+//	public:
+//													MotorMessageCreator(const string& threadName = mtk::gEmptyString);
+//													~MotorMessageCreator();
+//
+//													// overridden from Thread
+//		void                                        run();
+//		virtual void                                worker();
+//		void                                        stop();
+//		void										setRepeatRate(int rate);
+//
+//		bool                                        start(bool in_thread = true);
+//
+//	protected:
+//
+//		int											mRepeatRate;
+//
+//};
 
 #endif

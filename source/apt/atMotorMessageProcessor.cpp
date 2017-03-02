@@ -98,9 +98,10 @@ void MotorMessageProcessor::worker()
 				mMotorMessageContainer.mNewCommandCondition.wait(mMotorMessageContainer.mListMutex);
 			}
 
-            while(mMotorMessageContainer.hasMessage() && mIsTimeToDie == false)
+           	MotorCommand cmd = mMotorMessageContainer.pop();
+            //while(mMotorMessageContainer.hasMessage() && mIsTimeToDie == false)
             {
-	           	MotorCommand cmd = mMotorMessageContainer.pop();
+
 
     	        Log(lDebug) << "Processing command: "<<cmd.asString();
                 if(mMotor == NULL)
@@ -116,12 +117,8 @@ void MotorMessageProcessor::worker()
 
                     case mcStopHard:
                     	mMotor->stop(false);
-//                        //Wait until motor is stopped
-////                        while(mMotor->isActive())
-////                        {
-////                        ;
-////                        }
 					break;
+
                     case mcStopProfiled:
                     	mMotor->stopProfiled(false);
                         while(mMotor->isActive())
@@ -169,10 +166,10 @@ void MotorMessageProcessor::worker()
 
                 }
                 mLastProcessedCommand = cmd.getCore();
-                sleep(mProcessTimeDelay);
             }
 
 		}//mutex
+        sleep(mProcessTimeDelay);
 	}
 
     Log(lInfo) << "Motor Message Processor finished";

@@ -18,6 +18,10 @@ void MotorMessageContainer::post(const MotorCommand& msg)
     //The list of motorCMDs are accessed by child threads
     {
         Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
+        if(msg.getCore() == mcStopProfiled || msg.getCore() == mcStopHard)
+        {
+			mCommands.clear();
+        }
         mCommands.push_back(msg);
         mNewCommandCondition.signal();
         Log(lDebug) << "Command posted to message list: "<<msg.asString();

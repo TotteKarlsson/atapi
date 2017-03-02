@@ -16,7 +16,7 @@ mJoyStick(js),
 mEnabled(false),
 mNrOfButtons(nrOfButtons)
 {
-    mUpdateStateTimer.setInterval(30);
+    mUpdateStateTimer.setInterval(50);
 	mUpdateStateTimer.OnTimerC = refresh;
 
    	mEnabled = readCapabilities();

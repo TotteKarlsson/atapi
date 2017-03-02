@@ -74,7 +74,6 @@ class AT_CORE ArrayBot : public ABObject
 
         XYZUnit						                    mCoverSlip;
         XYZUnit											mWhisker;
-//        WhiskerUnit		 			                    mWhisker;
 
         							                    //!List of Lifts
         PairedMoves					                    mLifts;

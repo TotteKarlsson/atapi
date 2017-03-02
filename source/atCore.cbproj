@@ -137,10 +137,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>apt\atMotorMessageContainer.h</DependentOn>
             <BuildOrder>65</BuildOrder>
         </CppCompile>
-        <CppCompile Include="apt\atMotorMessageCreator.cpp">
-            <DependentOn>apt\atMotorMessageCreator.h</DependentOn>
-            <BuildOrder>66</BuildOrder>
-        </CppCompile>
         <CppCompile Include="apt\atMotorMessageData.cpp">
             <DependentOn>apt\atMotorMessageData.h</DependentOn>
             <BuildOrder>67</BuildOrder>

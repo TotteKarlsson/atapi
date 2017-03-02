@@ -37,12 +37,12 @@ class AT_CORE MotorCommand : public ABObject
                         	~MotorCommand();
 
 		string				asString() const;
-        MotorCommandEnum	getCore();
+        MotorCommandEnum	getCore() const;
         double				getFirstVariable() const;
         double				getSecondVariable() const;
 
 		AT_CORE
- 		friend ostream&         operator<<(ostream& stream, const MotorCommand& cmd);
+ 		friend ostream&     operator<<(ostream& stream, const MotorCommand& cmd);
 
     protected:
 		MotorCommandEnum	mCommand;

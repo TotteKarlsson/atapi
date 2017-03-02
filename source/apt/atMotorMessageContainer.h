@@ -17,6 +17,7 @@ class AT_CORE MotorMessageContainer : public ABObject
 	public:
 												MotorMessageContainer();
 												~MotorMessageContainer();
+
 		void                                    post(const MotorCommand& cmd);
 
 		bool                                    hasMessage();

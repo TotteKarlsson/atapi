@@ -2,7 +2,7 @@ object MotorFrame: TMotorFrame
   Left = 0
   Top = 0
   Width = 297
-  Height = 417
+  Height = 393
   AutoSize = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object MotorFrame: TMotorFrame
     Left = 0
     Top = 0
     Width = 297
-    Height = 417
+    Height = 393
     Caption = 'Motor'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -27,12 +27,13 @@ object MotorFrame: TMotorFrame
     TabOrder = 0
     object StatusGB: TGroupBox
       Left = 2
-      Top = 330
+      Top = 306
       Width = 293
       Height = 85
       Align = alBottom
       Caption = 'Status'
       TabOrder = 2
+      ExplicitTop = 330
       object Label1: TLabel
         Left = 10
         Top = 23
@@ -209,12 +210,13 @@ object MotorFrame: TMotorFrame
     end
     object JoggingGB: TGroupBox
       Left = 2
-      Top = 256
+      Top = 232
       Width = 293
       Height = 74
       Align = alBottom
       Caption = 'Jogging'
       TabOrder = 3
+      ExplicitTop = 256
       object mFwdBtn: TButton
         Left = 162
         Top = 19
@@ -262,12 +264,13 @@ object MotorFrame: TMotorFrame
     end
     object GroupBox1: TGroupBox
       Left = 2
-      Top = 192
+      Top = 136
       Width = 293
-      Height = 64
+      Height = 96
       Align = alBottom
       Caption = 'Range && Limits (mm)'
       TabOrder = 4
+      ExplicitTop = 137
       object mPositionRangeMaxE: TFloatLabeledEdit
         Left = 10
         Top = 34
@@ -304,43 +307,15 @@ object MotorFrame: TMotorFrame
         Text = '-1.00'
         Value = -1.000000000000000000
       end
-    end
-    object MiscGB: TGroupBox
-      Left = 2
-      Top = 120
-      Width = 293
-      Height = 72
-      Align = alBottom
-      Caption = 'Misc.'
-      TabOrder = 5
-      object mPotentiometerSettingE: TFloatLabeledEdit
-        Left = 10
-        Top = 34
-        Width = 61
-        Height = 21
-        EditLabel.Width = 60
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Pot. Velocity'
-        TabOrder = 0
-        Text = '0.00'
-        OnKeyDown = DevEdit
-      end
-      object Button4: TButton
-        Left = 86
-        Top = 20
-        Width = 60
-        Height = 40
-        Action = home
-        TabOrder = 1
-      end
-      object StopBtn: TButton
-        Left = 152
-        Top = 20
-        Width = 136
-        Height = 40
-        Caption = 'Stop'
-        TabOrder = 2
-        OnClick = StopBtnClick
+      object mEnableDisableLimits: TPropertyCheckBox
+        Left = 11
+        Top = 56
+        Width = 110
+        Height = 41
+        Caption = 'Use Position Limits'
+        TabOrder = 3
+        WordWrap = True
+        OnClick = mEnableDisableLimitsClick
       end
     end
     object EnableDisableBtn: TButton
@@ -349,18 +324,37 @@ object MotorFrame: TMotorFrame
       Width = 60
       Height = 40
       Caption = 'EnableBtn'
-      TabOrder = 6
+      TabOrder = 5
       OnClick = EnableDisableBtnClick
     end
-    object mEnableDisableLimits: TPropertyCheckBox
-      Left = 154
-      Top = 79
-      Width = 110
-      Height = 41
-      Caption = 'Enable or Disable Position Limits'
+    object Button4: TButton
+      Left = 79
+      Top = 18
+      Width = 60
+      Height = 40
+      Action = home
+      TabOrder = 6
+    end
+    object StopBtn: TButton
+      Left = 79
+      Top = 74
+      Width = 58
+      Height = 40
+      Caption = 'Stop'
       TabOrder = 7
-      WordWrap = True
-      OnClick = mEnableDisableLimitsClick
+      OnClick = StopBtnClick
+    end
+    object mPotentiometerSettingE: TFloatLabeledEdit
+      Left = 154
+      Top = 110
+      Width = 125
+      Height = 21
+      EditLabel.Width = 127
+      EditLabel.Height = 13
+      EditLabel.Caption = 'Set Potentiometer Velocity'
+      TabOrder = 8
+      Text = '0.00'
+      OnKeyDown = DevEdit
     end
   end
   object mMotorStatusTimer: TTimer
@@ -371,8 +365,8 @@ object MotorFrame: TMotorFrame
     Top = 328
   end
   object ActionList1: TActionList
-    Left = 120
-    Top = 288
+    Left = 272
+    Top = 40
     object identify: TAction
       Caption = 'Identify'
       OnExecute = identifyExecute
