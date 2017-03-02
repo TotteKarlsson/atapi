@@ -48,6 +48,7 @@ void ArduinoMessageProcessor::run()
 
 void ArduinoMessageProcessor::worker()
 {
+	mIsRunning = true;
     Log(lDebug)<<"Entering ArduinoMessageProcessor Worker Function.";
     mID =  GetCurrentThreadId();
 

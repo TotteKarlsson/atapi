@@ -29,7 +29,7 @@ const string ArduinoServerCommand::getTypeName() const
 void ArduinoServerCommand::init(ArrayBot& ab)
 {
 	Process::init(ab);
-//	mArduinoClient = ab.getArduinoClient();
+	mArduinoClient = ab.getArduinoClient();
 }
 
 bool ArduinoServerCommand::isBeingProcessed()
