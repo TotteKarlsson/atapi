@@ -135,7 +135,10 @@ void JoyStickAxis::Move(int newPosition)
     {
         if(mMotor->isActive() &&  lastCommand != mcStopHard)
         {
-            mMotor->stopProfiled();
+        	if(lastCommand != mcStopProfiled)
+            {
+            	mMotor->stopProfiled();
+            }
         }
         return;
     }
