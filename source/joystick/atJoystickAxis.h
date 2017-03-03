@@ -20,6 +20,7 @@ class AT_CORE JoyStickAxis : public ABObject
 		void				            enable();
    		void				            disable();
 		bool				            isEnabled();
+        void							setDeadZones(double leftDZ, double rightDZ);
 
         void				            assignMotor(APTMotor* motor);
 		void				            setNumberOfGears(int g);
@@ -38,6 +39,10 @@ class AT_CORE JoyStickAxis : public ABObject
     protected:
         bool				            mIsEnabled;
         bool				            mZeroInMiddle;
+
+        double							mLeftDeadZone;
+        double							mRightDeadZone;
+
         int					            mSenseOfDirection;
 		APTMotor*			            mMotor;
 		int					            mMaxPosition;

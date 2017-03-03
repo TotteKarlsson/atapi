@@ -236,10 +236,18 @@ void LongTravelStage::stop(bool inThread)
 
 void LongTravelStage::stopProfiled(bool inThread)
 {
-    int e = ISC_StopProfiled(mSerial.c_str());
-    if(e != 0)
+	if(inThread)
     {
-        Log(lError) <<tlError(e);
+		MotorCommand cmd(mcStopProfiled);
+		post(cmd);
+    }
+    else
+    {
+        int e = ISC_StopProfiled(mSerial.c_str());
+        if(e != 0)
+        {
+            Log(lError) <<tlError(e);
+        }
     }
 }
 

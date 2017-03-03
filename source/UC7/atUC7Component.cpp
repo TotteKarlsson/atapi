@@ -94,7 +94,7 @@ bool UC7::setStrokeState(EStrokeState state)
     {
         if(mPrepareForNewRibbon == true && mStrokeState == ssAfterCutting)
         {
-            Log(lInfo) << "Preparing new Ribbon: (1) Setting feedrate to: "<<mPresetFeedRate<<" nm";
+            Log(lInfo) << "Preparing NEW Ribbon: (1) Setting feedrate to: "<<mPresetFeedRate<<" nm";
             setFeedRate(mPresetFeedRate);
         }
         else if (mStrokeState == ssRetracting && mFeedRate == mPresetFeedRate)
@@ -102,7 +102,7 @@ bool UC7::setStrokeState(EStrokeState state)
         	//This will move the stage
             mCustomTimer.assignTimerFunction(onPrepareForNewRibbon);
             mCustomTimer.start();
-            Log(lInfo) << "Started Custom Timer";
+            Log(lInfo) << "Started Custom Timer in order to move KNIFE STAGE";
             prepareForNewRibbon(false);
         }
     }
@@ -116,17 +116,15 @@ bool UC7::setStageMoveDelay(int ms)
 
 void UC7::onPrepareToCutRibbon()
 {
-    Log(lInfo) << "Custom Timer fired";
     mCustomTimer.stop();
-	Log(lInfo) << "Moving Knife stage SOUTH";
+	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
     moveKnifeStageSouth(mKnifeStageJogPreset);
 }
 
 void UC7::onPrepareForNewRibbon()
 {
-    Log(lInfo) << "Custom Timer fired";
     mCustomTimer.stop();
-	Log(lInfo) << "Moving Knife stage NORTH";
+	Log(lInfo) << "Moving Knife stage ============ NORTH "<<mKnifeStageJogPreset<<" (nm) ==================";
     moveKnifeStageNorth(mKnifeStageJogPreset);
 }
 
@@ -217,7 +215,7 @@ bool UC7::startRibbon()
 	moveKnifeStageNorth(mKnifeStageJogPreset);
 
 	//Set cut thickness to preset
-    setFeedRate(100);
+    setFeedRate(mPresetFeedRate);
     return true;
 }
 
@@ -251,7 +249,7 @@ void UC7::enableCounter()
 	mSectionCounter.enable();
 }
 
-bool UC7::setPresetFeedRate(int rate)
+bool UC7::setFeedRatePreset(int rate)
 {
 	if(rate != -1)
     {
@@ -259,6 +257,16 @@ bool UC7::setPresetFeedRate(int rate)
     }
 
     setFeedRate(mPresetFeedRate);
+    return true;
+}
+
+bool UC7::setKnifeStageJogStepPreset(int rate)
+{
+	if(rate != -1)
+    {
+		mKnifeStageJogPreset = rate;
+    }
+
     return true;
 }
 

@@ -83,7 +83,9 @@ class AT_CORE UC7 : public ABObject
         bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
         void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
 
-        bool							setPresetFeedRate(int rate = -1);
+        bool							setFeedRatePreset(int rate = -1);
+
+        bool							setKnifeStageJogStepPreset(int rate = -1);
 
         bool							setStrokeState(EStrokeState state);
         EStrokeState					getStrokeState(){return mStrokeState;}
@@ -93,7 +95,7 @@ class AT_CORE UC7 : public ABObject
         bool							isActive(){return mIsActive;}
 		bool							isActive(bool isIt){mIsActive = isIt;}
 
-    									//Refrences
+    									//References
 		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}
 		int&        					getSetNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
 

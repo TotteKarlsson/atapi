@@ -21,7 +21,7 @@ mProcessedCount(0),
 mNotifyUI(NULL),
 mMotor(NULL),
 mLastProcessedCommand(mcNone),
-mProcessTimeDelay(150)
+mProcessTimeDelay(50)
 {}
 
 //----------------------------------------------------------------

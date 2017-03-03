@@ -36,9 +36,12 @@ class AT_CORE ArrayBotJoyStick : public ABObject
         bool						                disableWhiskerZButtons();
 
         bool				                        isEnabled();
+
+
     	JoyStickAxis&		                        getX1Axis();
-    	JoyStickAxis&		                        getX2Axis();
     	JoyStickAxis&		                        getY1Axis();
+
+    	JoyStickAxis&		                        getX2Axis();
     	JoyStickAxis&		                        getY2Axis();
         bool						                setAxesMaxVelocity(double maxV);
 

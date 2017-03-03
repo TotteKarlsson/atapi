@@ -17,7 +17,9 @@ JoyStickAxis::JoyStickAxis()
 	mMotorVelocity(0),
 	mAlpha(1),
     mSenseOfDirection(1),
-    mMotor(NULL)
+    mMotor(NULL),
+    mLeftDeadZone(0),
+    mRightDeadZone(0)
 {}
 
 JoyStickAxis::~JoyStickAxis()
@@ -28,6 +30,12 @@ void JoyStickAxis::setup(APTMotor* motor, double vel, double acc)
     assignMotor(motor);
     setMaxVelocity(vel);
     setAcceleration(acc);
+}
+
+void JoyStickAxis::setDeadZones(double leftDZ, double rightDZ)
+{
+	mLeftDeadZone = leftDZ;
+    mRightDeadZone = rightDZ;
 }
 
 void JoyStickAxis::setSenseOfDirection(int sign)
@@ -97,12 +105,40 @@ void JoyStickAxis::Move(int newPosition)
 {
 	if(!mMotor || !isEnabled())
     {
+		//    	Log(lError) << "Tried to move a NULL or disabled motor";
     	return;
     }
 
     //Scale the incoming position to be in the motors velocity range,
     double scaledPosition 	= ((newPosition)  - mMaxPosition/2.0 ); //-32767.5 -> +32767.5
     scaledPosition 			= (scaledPosition/mMaxPosition) * 2.0; //-1 -> +1
+
+    //Accomodate for deadzonez
+    MotorCommandEnum lastCommand = mMotor->getLastCommand();
+    bool stopMotor(false);
+    if(scaledPosition < 0) //Negative
+    {
+        if(scaledPosition > mLeftDeadZone)
+        {
+        	stopMotor = true;
+        }
+    }
+    else
+    {
+        if(scaledPosition < mRightDeadZone)
+        {
+        	stopMotor = true;
+        }
+    }
+
+    if(stopMotor)
+    {
+        if(mMotor->isActive() &&  lastCommand != mcStopHard)
+        {
+            mMotor->stopProfiled();
+        }
+        return;
+    }
 
     int    nrOfSteps = getNumberOfGears();
 	double stepSize  = mMaxVelocity  / nrOfSteps;

@@ -16,7 +16,7 @@ mJoyStick(js),
 mEnabled(false),
 mNrOfButtons(nrOfButtons)
 {
-    mUpdateStateTimer.setInterval(50);
+    mUpdateStateTimer.setInterval(100);
 	mUpdateStateTimer.OnTimerC = refresh;
 
    	mEnabled = readCapabilities();
@@ -178,6 +178,8 @@ void JoyStickMessageDispatcher::refresh()
     }
     mY1Axis.mPosition = mJoyInfo.dwYpos;
 
+
+    //Whisker X
     if(mJoyStick.mWhiskerAxesEnabled && mX2Axis.mEvent)
     {
         mX2Axis.mEvent(mJoyInfo.dwZpos);

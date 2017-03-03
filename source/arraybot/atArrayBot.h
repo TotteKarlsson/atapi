@@ -70,6 +70,16 @@ class AT_CORE ArrayBot : public ABObject
         Property<int>									mJoyStickID;
         ArrayBotJoyStick			                    mJoyStick;
 
+		Property<double>								mRightJoyStickXLeftDeadZone;
+        Property<double>                                mRightJoyStickXRightDeadZone;
+        Property<double>                                mRightJoyStickYLeftDeadZone;
+        Property<double>                                mRightJoyStickYRightDeadZone;
+
+        Property<double>                                mLeftJoyStickXLeftDeadZone;
+        Property<double>                                mLeftJoyStickXRightDeadZone;
+        Property<double>                                mLeftJoyStickYLeftDeadZone;
+        Property<double>                                mLeftJoyStickYRightDeadZone;
+
         JoyStickSettings			                    mJSSettings;
 
         XYZUnit						                    mCoverSlip;

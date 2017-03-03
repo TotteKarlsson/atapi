@@ -137,20 +137,11 @@ bool ArrayBotJoyStick::disableWhiskerZButtons()
 bool ArrayBotJoyStick::enable()
 {
     mEnabled = mJSMessageDispatcher.enable(mJoyStickID);
-    if(mEnabled)
-    {
-		mCoverSlipAxesEnabled = true;
-		mWhiskerAxesEnabled = true;
-        mCoverSlipZButtonsEnabled = true;
-        mWhiskerZButtonsEnabled = true;
-    }
-    else
-    {
-		mCoverSlipAxesEnabled = false;
-		mWhiskerAxesEnabled = false;
-        mCoverSlipZButtonsEnabled = false;
-        mWhiskerZButtonsEnabled = false;
-    }
+
+    mCoverSlipAxesEnabled = mEnabled;
+    mWhiskerAxesEnabled = mEnabled;
+    mCoverSlipZButtonsEnabled = mEnabled;
+    mWhiskerZButtonsEnabled = mEnabled;
 
     return mEnabled;
 }

@@ -11,6 +11,17 @@ ArrayBot::ArrayBot(IniFile& ini, const string& appFolder)
 mAppDataFolder(appFolder),
 mIniFile(ini),
 mJoyStickID(-1),
+
+mRightJoyStickXLeftDeadZone(0),
+mRightJoyStickXRightDeadZone(0),
+mRightJoyStickYLeftDeadZone(0),
+mRightJoyStickYRightDeadZone(0),
+
+mLeftJoyStickXLeftDeadZone(0),
+mLeftJoyStickXRightDeadZone(0),
+mLeftJoyStickYLeftDeadZone(0),
+mLeftJoyStickYRightDeadZone(0),
+
 mJoyStick(mJoyStickID.getReference()),
 mArduinoClient(NULL),
 mJSSettings("JOYSTICK SETTINGS",	mIniFile),
@@ -25,7 +36,26 @@ mIsShuttingDown(false)
 	mProperties.setIniFile(&mIniFile);
 	mProperties.add((BaseProperty*)  &mJoyStickID.setup( 	                "JOYSTICK_ID",    	                1));
 
+	//Read JS deadzones
+	mProperties.add((BaseProperty*)  &mRightJoyStickXLeftDeadZone.setup( 	"JS_RIGHT_X_AXIS_LEFT_DEADZONE",         0));
+	mProperties.add((BaseProperty*)  &mRightJoyStickXRightDeadZone.setup(   "JS_RIGHT_X_AXIS_RIGHT_DEADZONE",        0));
+	mProperties.add((BaseProperty*)  &mRightJoyStickYLeftDeadZone.setup( 	"JS_RIGHT_Y_AXIS_TOP_DEADZONE",          0));
+	mProperties.add((BaseProperty*)  &mRightJoyStickYRightDeadZone.setup(   "JS_RIGHT_Y_AXIS_BOTTOM_DEADZONE",       0));
+
+	mProperties.add((BaseProperty*)  &mLeftJoyStickXLeftDeadZone.setup( 	"JS_LEFT_X_AXIS_LEFt_DEADZONE",         0));
+	mProperties.add((BaseProperty*)  &mLeftJoyStickXRightDeadZone.setup(    "JS_LEFT_X_AXIS_RIGHT_DEADZONE",        0));
+	mProperties.add((BaseProperty*)  &mLeftJoyStickYLeftDeadZone.setup( 	"JS_LEFT_Y_AXIS_TOP_DEADZONE",          0));
+	mProperties.add((BaseProperty*)  &mLeftJoyStickYRightDeadZone.setup(    "JS_LEFT_Y_AXIS_BOTTOM_DEADZONE",       0));
+
     mProperties.read();
+
+	mJoyStick.getX1Axis().setDeadZones(mRightJoyStickXLeftDeadZone, mLeftJoyStickXRightDeadZone);
+	mJoyStick.getY1Axis().setDeadZones(mRightJoyStickXLeftDeadZone, mLeftJoyStickXRightDeadZone);
+
+	mJoyStick.getX2Axis().setDeadZones(mRightJoyStickXLeftDeadZone, mRightJoyStickXRightDeadZone);
+	mJoyStick.getY2Axis().setDeadZones(mRightJoyStickXLeftDeadZone, mRightJoyStickXRightDeadZone);
+
+
     if(!mJoyStick.enableJoyStickWithID(mJoyStickID))
     {
     	Log(lWarning) << "Joystick with ID: " << mJoyStickID << " was not enabled.";
