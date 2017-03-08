@@ -3,11 +3,13 @@
 #include <Buttons.hpp>
 #include "TSequencerButtonsFrame.h"
 #include "mtkVCLUtils.h"
-
+#include "TYesNoForm.h"
+#include <sstream>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
+using std::stringstream;
 TSequencerButtonsFrame *SequencerButtonsFrame;
 //---------------------------------------------------------------------------
 __fastcall TSequencerButtonsFrame::TSequencerButtonsFrame(ArrayBot& bot, TComponent* Owner)
@@ -76,12 +78,22 @@ void __fastcall TSequencerButtonsFrame::runSequenceBtnClick(TObject *Sender)
 	TSpeedButton* b = dynamic_cast<TSpeedButton*>(Sender);
     if(b)
     {
-        ProcessSequencer& psr = mAB.getProcessSequencer();
-        if(psr.selectSequence(stdstr(b->Caption)))
+	    TYesNoForm* f = new TYesNoForm(this);
+        f->Caption = "";
+        stringstream msg;
+        msg <<"Execute sequence: "<< stdstr(b->Caption);
+
+        f->mInfoLabel->Caption = msg.str().c_str();
+        int res = f->ShowModal();
+        if(res == mrYes)
         {
-      		mSequenceStatusTimer->Enabled = true;
-            mAB.disableJoyStickAxes();
-        	psr.start();
+            ProcessSequencer& psr = mAB.getProcessSequencer();
+            if(psr.selectSequence(stdstr(b->Caption)))
+            {
+                mSequenceStatusTimer->Enabled = true;
+                mAB.disableJoyStickAxes();
+                psr.start();
+            }
         }
     }
 }

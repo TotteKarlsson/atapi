@@ -2,18 +2,19 @@
 #pragma hdrstop
 USEFORM("frames\TTimeDelayFrame.cpp", TimeDelayFrame); /* TFrame: File Type */
 USEFORM("frames\TXYZPositionsFrame.cpp", XYZPositionsFrame); /* TFrame: File Type */
-USEFORM("frames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
+USEFORM("frames\TSequencerButtonsFrame.cpp", SequencerButtonsFrame); /* TFrame: File Type */
 USEFORM("frames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
 USEFORM("frames\TSequenceInfoFrame.cpp", SequenceInfoFrame); /* TFrame: File Type */
-USEFORM("frames\TSequencerButtonsFrame.cpp", SequencerButtonsFrame); /* TFrame: File Type */
+USEFORM("frames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
+USEFORM("frames\TParallellProcessesFrame.cpp", ParallellProcessesFrame);
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
 USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("frames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
 USEFORM("frames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
-USEFORM("frames\TParallellProcessesFrame.cpp", ParallellProcessesFrame);
+USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
 USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
 USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
-USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
+USEFORM("forms\TYesNoForm.cpp", YesNoForm);
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
