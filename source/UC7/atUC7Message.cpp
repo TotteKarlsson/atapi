@@ -163,6 +163,9 @@ bool UC7Message::calculateCheckSum()
     sum = ~sum + 1;
 
     mCheckSum = toString((int) sum, "", 16);
+
+    //A UC7 message have a two byte checksum. Zeropad any one byte hex numbers.
+    mCheckSum = zeroPadString(1, mCheckSum);
     return true;
 }
 
@@ -249,9 +252,32 @@ UC7MessageEnum toCommandName(const string& cmd, int controllerAddress)
             }
         }
 
+        case gSystemCommands:
+        {
+        	if(cmd == "F0")
+            {
+				return SOFTWARE_RESET;
+            }
+            else if(cmd == "F1")
+            {
+				return GET_PART_ID;
+            }
+            else if(cmd == "F2")
+            {
+            	return LOGIN;
+            }
+            else if(cmd == "F3")
+            {
+            	return COMMAND_TRANSMISSION_ERROR;
+            }
+            else if(cmd == "F5")
+            {
+            	return GET_VERSION;
+            }
+        }
         default:
 
-       	Log(lError) << "A unknown controller address was specified";
+       	Log(lError) << "A unknown controller address was specified: "<<controllerAddress;
         return UNKNOWN;
     }
 }
@@ -297,7 +323,7 @@ string toLongString(UC7MessageEnum cmd)
         case GET_VERSION:                                   return "Get version";
 
         //Controller #4
-        case FEEDRATE_MOTOR_CONTROL:                        return "Feedrate motoro control";
+        case FEEDRATE_MOTOR_CONTROL:                        return "Feedrate motor control";
         case SEND_POSITION_AT_MOTION:                       return "Send position at motion";
         case FEED:                                          return "Feed";
         case NORTH_SOUTH_MOTOR_MOVEMENT:                    return "North/South Motor movement";

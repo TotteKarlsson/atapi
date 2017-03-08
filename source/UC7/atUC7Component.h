@@ -55,8 +55,13 @@ class AT_CORE UC7 : public ABObject
         bool							moveKnifeStageSouth(int nm, bool isRequest = true);
         bool							moveKnifeStageNorth(int nm, bool isRequest = true);
 
+        								//!Prevent user from bumping in knife into specimen
+		bool 							setNorthLimitPosition(int limit);
+
         								//!Set Feedrate in nm
         bool							setFeedRate(int feedRate, bool isRequest = true);
+
+		bool							setNorthSouthStageAbsolutePosition(int pos, bool isRequest = true);
 
 										//status requests
                                         //!Get all statuses
@@ -85,6 +90,7 @@ class AT_CORE UC7 : public ABObject
 
         bool							setFeedRatePreset(int rate = -1);
 
+
         bool							setKnifeStageJogStepPreset(int rate = -1);
 
         bool							setStrokeState(EStrokeState state);
@@ -97,7 +103,7 @@ class AT_CORE UC7 : public ABObject
 
     									//References
 		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}
-		int&        					getSetNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
+		int&        					getNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
 
         bool							isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
         bool							isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
@@ -137,10 +143,14 @@ class AT_CORE UC7 : public ABObject
 		int								mKnifeStageJogPreset;
         int								mSetNumberOfZeroStrokes;
         int								mNumberOfZeroStrokes;
+        int								mNorthSouthStagePosition;
+        int								mNorthLimitPosition;
 
         								//!When this boolean is true, UC7 commands may be sent to the leica
                                         //!when HW status is changing
         bool							mPrepareForNewRibbon;
+
+                                        //!This boolean controls the Cut ribbon process
         bool							mPrepareToCutRibbon;
 
         Counter							mSectionCounter;

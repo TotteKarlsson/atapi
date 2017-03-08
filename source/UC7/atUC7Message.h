@@ -5,10 +5,10 @@
 
 const int gStepperControllerAddress = 4;
 const int gMotorControllerAddress   = 5;
+const int gSystemCommands  			= 8;
 
 
 //!Simple enum to hold commands
-
 enum UC7MessageEnum
 {
     SOFTWARE_RESET                             = 0,

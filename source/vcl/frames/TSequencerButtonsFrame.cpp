@@ -34,6 +34,11 @@ void TSequencerButtonsFrame::update()
 
     int nrOfButtons = pss.count();
 
+    int pWidth = this->Width;
+    int pHeight = this->Height;
+
+
+    int btnNr(0);
     while(ps)
     {
         TSpeedButton* btn = new TSpeedButton(this);
@@ -41,11 +46,25 @@ void TSequencerButtonsFrame::update()
 
         btn->Parent = this;
         btn->Caption = vclstr(ps->getName());
-        btn->Align = alLeft;
+//        btn->Align = alLeft;
         btn->OnClick = runSequenceBtnClick;
-        btn->Font->Size = 14;
+
+        btn->Font->Size = 12;
         ps = pss.getNext();
-        btn->Width = this->Width / nrOfButtons;
+        btn->Width = 150;
+        btn->Height = 150;
+
+        if(btnNr == 0)
+        {
+	        btn->Left = 3;
+        }
+        else
+        {
+			btn->Left = 3 + btnNr * (btn->Width + btn->Width / 4);
+        }
+
+        btn->Top = 0;
+        btnNr +=1 ;
     }
 
     //Restore back to the sequence wich was selected

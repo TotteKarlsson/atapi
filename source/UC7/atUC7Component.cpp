@@ -20,7 +20,8 @@ UC7::UC7(HWND__ *h)
     mUC7MessageSender(*this),
     mIsActive(false),
     mSetNumberOfZeroStrokes(0),
-    mNumberOfZeroStrokes(0)
+    mNumberOfZeroStrokes(0),
+    mNorthLimitPosition(0)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
     mCustomTimer.setInterval(5);
@@ -68,7 +69,7 @@ bool UC7::setStrokeState(EStrokeState state)
 
     if(mFeedRate != 0)
     {
-		mNumberOfZeroStrokes =0;
+		mNumberOfZeroStrokes = 0;
     }
 
     //When the state changes, certain events may take place
@@ -76,8 +77,15 @@ bool UC7::setStrokeState(EStrokeState state)
     {
         if(mStrokeState == ssAfterCutting)
         {
-            Log(lInfo) << "Preparing new Ribbon: (1) Setting feedrate to 0 nm";
-            setFeedRate(0);
+            if(mFeedRate != 0)
+            {
+	            Log(lInfo) << "Setting feedrate to 0 nm";
+            	setFeedRate(0);
+            }
+            else
+            {
+	            Log(lInfo) << "Executing ZERO stroke";
+            }
         }
         else if(mStrokeState == ssRetracting && mFeedRate == 0)
         {
@@ -112,6 +120,11 @@ bool UC7::setStrokeState(EStrokeState state)
 bool UC7::setStageMoveDelay(int ms)
 {
 	return mCustomTimer.setInterval(ms);
+}
+
+bool UC7::setNorthLimitPosition(int limit)
+{
+	mNorthLimitPosition = limit;
 }
 
 void UC7::onPrepareToCutRibbon()
@@ -232,9 +245,15 @@ bool UC7::moveKnifeStageSouth(int nm, bool isRequest)
     return true;
 }
 
-bool UC7::moveKnifeStageNorth(int nm, bool isRequest)
+bool UC7::moveKnifeStageNorth(int nm_step, bool isRequest)
 {
-	string dataStr(zeroPadString(4, toHex(nm)));
+	if((nm_step + mNorthSouthStagePosition) > mNorthLimitPosition)
+    {
+    	Log(lError) << "Can't move stage past NORTH limit!";
+        return false;
+    }
+
+	string dataStr(zeroPadString(4, toHex(nm_step)));
 	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "07", dataStr);
     return true;
 }
@@ -280,6 +299,19 @@ bool UC7::setFeedRate(int feedRate, bool isRequest)
 
     mFeedRate = feedRate;
 	(mFeedRate > 0) ?  mSectionCounter.enable() : mSectionCounter.disable();
+    return true;
+}
+
+bool UC7::setNorthSouthStageAbsolutePosition(int pos, bool isRequest)
+{
+	if(isRequest)
+    {
+    	Log(lWarning) << "Not implemented";
+
+		return false;
+    }
+
+    mNorthSouthStagePosition = pos;
     return true;
 }
 
