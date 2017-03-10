@@ -6,8 +6,6 @@
 #include <deque>
 #include "atDBConnection.h"
 #include "mtkStringList.h"
-
-
 //---------------------------------------------------------------------------
 
 namespace Poco
