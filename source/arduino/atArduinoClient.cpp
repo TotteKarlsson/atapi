@@ -36,11 +36,6 @@ bool ArduinoClient::init(int serverPort, const string& hostname, bool connectOnI
         }
     }
 
-    if(!mMessageProcessor.isRunning())
-    {
-        mMessageProcessor.start(true);
-    }
-
     return true;
 }
 
@@ -78,6 +73,12 @@ bool ArduinoClient::connect(int serverPort, const string& host)
 {
 	//This should be done in a thread..
     bool res = init(serverPort, host, true);
+
+    //Do only run the message processor if we are connected
+    if(res == true && !mMessageProcessor.isRunning())
+    {
+        mMessageProcessor.start(true);
+    }
 
     return res;
 }

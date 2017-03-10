@@ -15,7 +15,10 @@ mDelay(delay)
 }
 
 SoundPlayer::~SoundPlayer()
-{}
+{
+	mPlayingTimer.OnTimerC = NULL;
+    mPlayingTimer.stop();
+}
 
 bool SoundPlayer::create(HWND hWnd)
 {

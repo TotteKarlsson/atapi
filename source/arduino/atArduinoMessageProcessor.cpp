@@ -14,11 +14,11 @@ ArduinoMessageProcessor::ArduinoMessageProcessor(ArduinoClient& client)
 :
 Thread("MessageProcessor"),
 mAllowProcessing(true),
-mClient(client),
-mMessageContainer(client.mIncomingMessages)
+mMessageContainer(client.mIncomingMessages),
+mClient(client)
 {
-	//Run will start the worker thread
-	Thread::run();
+//	//Run will start the worker thread
+//	Thread::run();
 }
 
 //----------------------------------------------------------------
