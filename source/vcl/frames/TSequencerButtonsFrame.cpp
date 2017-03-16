@@ -7,6 +7,7 @@
 #include <sstream>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 using std::stringstream;
@@ -43,13 +44,13 @@ void TSequencerButtonsFrame::update()
     int btnNr(0);
     while(ps)
     {
-        TSpeedButton* btn = new TSpeedButton(this);
+        TArrayBotButton* btn = new TArrayBotButton(this->Parent);
         mButtons.push_back(btn);
 
         btn->Parent = this;
         btn->Caption = vclstr(ps->getName());
-//        btn->Align = alLeft;
-        btn->OnClick = runSequenceBtnClick;
+        btn->OnClick = click;
+        btn->SoundID = "button_click_5";
 
         btn->Font->Size = 12;
         ps = pss.getNext();
@@ -72,10 +73,20 @@ void TSequencerButtonsFrame::update()
     //Restore back to the sequence wich was selected
     pss.select(current);
 }
-
-void __fastcall TSequencerButtonsFrame::runSequenceBtnClick(TObject *Sender)
+void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sender)
 {
-	TSpeedButton* b = dynamic_cast<TSpeedButton*>(Sender);
+    ProcessSequencer& psr = mAB.getProcessSequencer();
+	if(!psr.isRunning())
+    {
+		mSequenceStatusTimer->Enabled = false;
+        mAB.enableJoyStickAxes();
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TSequencerButtonsFrame::click(TObject *Sender)
+{
+	TArrayBotButton* b = dynamic_cast<TArrayBotButton*>(Sender);
     if(b)
     {
 	    TYesNoForm* f = new TYesNoForm(this);
@@ -98,18 +109,4 @@ void __fastcall TSequencerButtonsFrame::runSequenceBtnClick(TObject *Sender)
     }
 }
 
-void __fastcall TSequencerButtonsFrame::FrameEnter(TObject *Sender)
-{
-	update();
-}
-
-void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sender)
-{
-    ProcessSequencer& psr = mAB.getProcessSequencer();
-	if(!psr.isRunning())
-    {
-		mSequenceStatusTimer->Enabled = false;
-        mAB.enableJoyStickAxes();
-    }
-}
 

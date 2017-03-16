@@ -4,7 +4,6 @@ object SequencerButtonsFrame: TSequencerButtonsFrame
   Width = 669
   Height = 123
   TabOrder = 0
-  OnEnter = FrameEnter
   object mSequenceStatusTimer: TTimer
     Enabled = False
     Interval = 100

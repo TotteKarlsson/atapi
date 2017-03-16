@@ -5,8 +5,6 @@
 #include "sound/atDirectSound.h"
 #include "atCore.h"
 #include "mtkVCLUtils.h"
-
-
 #pragma package(smart_init)
 
 using namespace mtk;
@@ -36,21 +34,6 @@ void __fastcall	TArrayBotButton::CreateWnd()
 void __fastcall	TArrayBotButton::DestroyWnd()
 {
 }
-
-//void __fastcall TArrayBotButton::setSoundID(const String& snd)
-//{
-//	FSoundID = snd;
-////	HWND hWnd = this->Handle;
-////    if(!mSound.Create(FSoundID.c_str(), hWnd))
-////    {
-////    	MessageDlg("Failed creating that sound..", mtWarning, TMsgDlgButtons() << mbOK, 0);
-////    }
-//}
-//
-//String __fastcall TArrayBotButton::getSoundID()
-//{
-//	return FSoundID;
-//}
 
 bool TArrayBotButton::init(HWND wnd)
 {

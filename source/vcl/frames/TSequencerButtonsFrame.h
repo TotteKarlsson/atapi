@@ -8,19 +8,20 @@
 #include "arraybot/atArrayBot.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
+#include "TArrayBotBtn.h"
 //---------------------------------------------------------------------------
+
 
 class PACKAGE TSequencerButtonsFrame : public TFrame
 {
     __published:	// IDE-managed Components
 	TTimer *mSequenceStatusTimer;
-	void __fastcall runSequenceBtnClick(TObject *Sender);
-	void __fastcall FrameEnter(TObject *Sender);
 	void __fastcall mSequenceStatusTimerTimer(TObject *Sender);
+	void __fastcall click(TObject *Sender);
 
     private:	// User declarations
 		ArrayBot&				mAB;
-        vector<TSpeedButton *> 	mButtons;
+        vector<TArrayBotButton*> 	mButtons;
 
 	public:
 					__fastcall 	TSequencerButtonsFrame(ArrayBot& bot, TComponent* Owner);

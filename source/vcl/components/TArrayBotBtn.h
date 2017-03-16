@@ -1,14 +1,13 @@
 #ifndef TArrayBotBtnH
 #define TArrayBotBtnH
-//---------------------------------------------------------------------------
 #include <SysUtils.hpp>
 #include <Classes.hpp>
 #include <Vcl.Buttons.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include "sound/atDirectSound.h"
-
 //---------------------------------------------------------------------------
+
 class PACKAGE TArrayBotButton : public TBitBtn
 {
     private:
@@ -21,10 +20,6 @@ class PACKAGE TArrayBotButton : public TBitBtn
         DirectSound						mSound;
         String                          FSoundID;
 
-  //      void                __fastcall  setSoundID(const String& snd);
-//        String              __fastcall  getSoundID();
-
-
     public:
         					__fastcall 	TArrayBotButton(TComponent* Owner);
 		bool	   						init(HWND wnd);
@@ -32,5 +27,5 @@ class PACKAGE TArrayBotButton : public TBitBtn
         __property String     SoundID   = {read=FSoundID, write=FSoundID, default=true};
 
 };
-//---------------------------------------------------------------------------
+
 #endif
