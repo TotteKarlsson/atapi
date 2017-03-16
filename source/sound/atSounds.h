@@ -4,6 +4,7 @@
 #include "mtkThread.h"
 #include <string>
 #include <deque>
+#include <mmsystem.h>
 //---------------------------------------------------------------------------
 
 using std::string;
@@ -14,16 +15,22 @@ using mtk::Thread;
 AT_CORE enum ABSound
 {
 	absMotorStop = 0,
+    absAlert1,
     absMotorWarning,
     absCameraShot,
     absSlowSpeed,
     absMediumSpeed,
     absFastSpeed,
-    absBeforeBackOff
+    absBeforeBackOff,
+    absButtonClick4,
+    absDefaultClick
 };
 
 
-AT_CORE void 			playABSound(ABSound, long flags = 0);
+//!Flags are
+//!SND_ASYNC SND_SYNC
+//!See: https://msdn.microsoft.com/en-us/library/windows/desktop/dd743680(v=vs.85).aspx
+AT_CORE void 			playABSound(ABSound, long flags = SND_ASYNC);
 
 //Non exports
 string 	                getSoundResourceName(ABSound a);

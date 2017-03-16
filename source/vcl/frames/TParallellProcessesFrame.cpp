@@ -15,6 +15,7 @@
 #include "TStringInputDialog.h"
 #include "arduino/atArduinoServerCommand.h"
 #include "TArduinoServerCommandFrame.h"
+#include "TYesNoForm.h"
 
 #pragma package(smart_init)
 #pragma link "TMotorMoveProcessFrame"
@@ -218,13 +219,20 @@ void __fastcall TParallellProcessesFrame::mUpdateFinalPositionsAExecute(TObject 
                 "Update final motor position for motor: "<<am->getMotorName() <<
                 "\n("<<am->getPosition()<<" -> "<< mtr->getPosition()<<")";
 
-                if(MessageDlg(vclstr(msg.str()), mtConfirmation, TMsgDlgButtons() << mbYes<<mbNo, 0) == mrYes)
+                TYesNoForm* f = new TYesNoForm(this);
+                f->Caption = "";
+                f->mInfoLabel->Caption = msg.str().c_str();
+                f->Width = Application->MainForm->Width * 0.8;
+                int res = f->ShowModal();
+
+                if(res == mrYes)
                 {
                 	am->setPosition(mtr->getPosition());
 
                     //Save updated sequence
                     mAB->getProcessSequencer().saveCurrent();
                 }
+                delete f;
             }
 
             //Check if this move has a trigger

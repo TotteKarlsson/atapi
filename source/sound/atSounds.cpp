@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atSounds.h"
-#include <windows.h>
 #include "mtkWin32Utils.h"
-#include <mmsystem.h>
+#include <windows.h>
+
 //---------------------------------------------------------------------------
 
 using namespace mtk;
@@ -14,11 +14,16 @@ string getSoundResourceName(ABSound a)
     	case absMotorStop: 		return "MOTOR_STOP_SOUND";
     	case absMotorWarning: 	return "MOTOR_WARNING_SOUND";
 
-        case absSlowSpeed:		return "ALERT_1";
+        case absSlowSpeed:
+        case absAlert1:			return "ALERT_1";
+
 	    case absMediumSpeed:    return "BOING_1";
     	case absFastSpeed:		return "BUTTON_CLICK_5";
 
 		case absBeforeBackOff:	return "SHORT_BEEP_1";
+
+		case absButtonClick4:
+        case absDefaultClick:	return "BUTTON_CLICK_4";
 
         default: 	  			return "MOTOR_WARNING_SOUND";
     }

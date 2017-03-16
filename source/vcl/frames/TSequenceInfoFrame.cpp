@@ -12,15 +12,14 @@
 #include "frames/TTimeDelayFrame.h"
 #include "atVCLUtils.h"
 #include "mtkLogger.h"
-
-using namespace mtk;
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 TSequenceInfoFrame *SequenceInfoFrame;
+
+using namespace mtk;
 //---------------------------------------------------------------------------
 __fastcall TSequenceInfoFrame::TSequenceInfoFrame(TComponent* Owner)
 	: TFrame(Owner),
