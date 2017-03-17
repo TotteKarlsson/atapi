@@ -9,8 +9,8 @@ using Poco::Mutex;
 ArduinoSerialMessageSender::ArduinoSerialMessageSender(ArduinoDevice& d)
 :
 mtk::Thread(""),
-mTheArduino(d),
-mProcessTimeDelay(1)
+mProcessTimeDelay(1),
+mTheArduino(d)
 {}
 
 //----------------------------------------------------------------
@@ -26,14 +26,14 @@ ArduinoSerialMessageSender::~ArduinoSerialMessageSender()
 void ArduinoSerialMessageSender::run()
 {
 	mIsRunning = true;
-	Log(lDebug)<<"Entering UC7 message sender thread";
+	Log(lDebug)<<"Entering Arduino message sender thread for device: "<<mTheArduino.getName();
 	while(mIsTimeToDie == false)
 	{
 		{
 			Poco::ScopedLock<Poco::Mutex> lock(mTheArduino.mSendBufferMutex);
 			if(mTheArduino.mOutgoingMessagesBuffer.size() == 0)
 			{
-				Log(lDebug3) << "Waiting for incoming UC7 messages.";
+				Log(lDebug3) << "Waiting for messages to send to Arduino device: "<<mTheArduino.getName();
 				mTheArduino.mNewMessageToSendCondition.wait(mTheArduino.mSendBufferMutex);
 			}
 
@@ -47,7 +47,11 @@ void ArduinoSerialMessageSender::run()
                     //Send windows message and let UI handle the message
                     if(!mTheArduino.mSerial.send(msg))
                     {
-                        Log(lError) << "Sending a UC7 message failed..";
+                        Log(lError) << "Sending message to Arduino \""<<mTheArduino.getName()<<"\" failed..";
+                    }
+                    else
+                    {
+                        Log(lDebug3) << "Sent message '"<<msg<<"' to device "<<mTheArduino.getName();
                     }
 
                     //Use a delay in case the serial devices input buffer overflows
@@ -56,14 +60,14 @@ void ArduinoSerialMessageSender::run()
                 }
                 catch(...)
                 {
-                	Log(lError) << "Exception thrown in message sender code..";
+                	Log(lError) << "Exception thrown in message sender code for device: "<<mTheArduino.getName();
                 }
             }
 
 		}//scoped lock
 	}
 
-    Log(lDebug) << "UC7 Message Sender thread finished";
+    Log(lDebug) << "Arduino message sender thread finished for device: "<<mTheArduino.getName();
 	mIsFinished = true;
 	mIsRunning = false;
 }
@@ -73,7 +77,7 @@ bool ArduinoSerialMessageSender::start(bool inThread)
 {
 	if(isRunning())
 	{
-		Log(lWarning) << "Tried to start a runnning thread";
+		Log(lWarning) << "Tried to start a runnning thread for device: "<<mTheArduino.getName();
 		return true;
 	}
 	if(inThread)

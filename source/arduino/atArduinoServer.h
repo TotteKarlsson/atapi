@@ -6,7 +6,7 @@
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
 #include "atLightsArduino.h"
-#include "atSensorsArduino.h"
+
 #include <vector>
 #include "mtkTimer.h"
 using mtk::IPCServer;

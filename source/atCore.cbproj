@@ -208,10 +208,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>arduino\atArduinoUtils.h</DependentOn>
             <BuildOrder>65</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arduino\atLeicaUC7Controller.cpp">
-            <DependentOn>arduino\atLeicaUC7Controller.h</DependentOn>
-            <BuildOrder>64</BuildOrder>
-        </CppCompile>
         <CppCompile Include="arduino\atLightsArduino.cpp">
             <DependentOn>arduino\atLightsArduino.h</DependentOn>
             <BuildOrder>63</BuildOrder>
@@ -219,22 +215,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="arduino\atLightsArduinoClient.cpp">
             <DependentOn>arduino\atLightsArduinoClient.h</DependentOn>
             <BuildOrder>62</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atPufferArduino.cpp">
-            <DependentOn>arduino\atPufferArduino.h</DependentOn>
-            <BuildOrder>61</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atPufferArduinoClient.cpp">
-            <DependentOn>arduino\atPufferArduinoClient.h</DependentOn>
-            <BuildOrder>60</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduino.cpp">
-            <DependentOn>arduino\atSensorsArduino.h</DependentOn>
-            <BuildOrder>59</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduinoClient.cpp">
-            <DependentOn>arduino\atSensorsArduinoClient.h</DependentOn>
-            <BuildOrder>58</BuildOrder>
         </CppCompile>
         <CppCompile Include="arraybot\atArrayBot.cpp">
             <DependentOn>arraybot\atArrayBot.h</DependentOn>

@@ -13,16 +13,12 @@ class AT_CORE LightsArduino : public ArduinoDevice
 		bool								toggleLED();
         bool								turnLEDLightsOn();
         bool								turnLEDLightsOff();
-		bool								toggleCoax();
-        bool								turnCoaxLightOn();
-        bool								turnCoaxLightOff();
         bool								getStatus();
 
     protected:
         									//!ArduinoLines
 		int 								mLEDLightONLine;
 		int									mLEDLightOFFLine;
-		int 								mCoaxLightONLine;
-		int									mCoaxLightOFFLine;
+
 };
 #endif

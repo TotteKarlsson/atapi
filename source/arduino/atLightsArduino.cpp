@@ -9,9 +9,7 @@ LightsArduino::LightsArduino(int portNr, int baudRate)
 :
 ArduinoDevice(portNr, baudRate),
 mLEDLightONLine(3),
-mLEDLightOFFLine(4),
-mCoaxLightONLine(1),
-mCoaxLightOFFLine(2)
+mLEDLightOFFLine(4)
 {}
 
 bool LightsArduino::turnLEDLightsOn()
@@ -26,30 +24,11 @@ bool LightsArduino::turnLEDLightsOff()
 	return send(mLEDLightOFFLine);
 }
 
-bool LightsArduino::turnCoaxLightOn()
-{
-	Log(lInfo) << "Turning on Coax light";
-	return send(mCoaxLightONLine);
-}
-
-bool LightsArduino::turnCoaxLightOff()
-{
-	Log(lInfo) << "Turning off Coax light";
-	return send(mCoaxLightOFFLine);
-}
-
 bool LightsArduino::toggleLED()
 {
 	static bool switcher(false);
     switcher = !switcher;
     return (switcher) ? send(mLEDLightONLine) :	send(mLEDLightOFFLine);
-}
-
-bool LightsArduino::toggleCoax()
-{
-	static bool switcher(false);
-    switcher = !switcher;
-    return (switcher) ? send(mCoaxLightONLine) : send(mCoaxLightOFFLine);
 }
 
 bool LightsArduino::getStatus()
