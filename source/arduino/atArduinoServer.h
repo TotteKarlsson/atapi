@@ -18,13 +18,14 @@ mtk::SocketWorker* AT_CORE createArduinoIPCReceiver(int portNr, int socketHandle
 typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
 //!The Arduino server is a component that serve clients with Arduino connections over a
-//tcp/ip socket. The Arraybot Arduino server is designed to handle messages and data related to the
+//tcp/ip socket. The Arduino server is designed to handle messages and data related to the
 //arraybot project. The Arduino server is a descendant of the IPC server class that is implementing all
 //network functionality.
 //The Arduino server forwards any messages sent from the arduino board to any connected tcp/ip clients.
 
-//There are currently two Arduino boards, the 'Puffer' board, and a 'Sensor' board containing sensors and
+//There are currently one Arduino board, the 'Lights' board containing sensors and
 //light controlling logic.
+
 class AT_CORE ArduinoServer : public IPCServer
 {
     public:
@@ -37,15 +38,7 @@ class AT_CORE ArduinoServer : public IPCServer
     	bool 					            processMessage(IPCMessage& msg);
 
     	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
-    	SensorsArduino& 		            getSensorsArduino(){return mSensorsArduino;}
         bool            		            shutDown();
-
-		void        						enableAutoPuff();
-		void        						disableAutoPuff();
-
-		void        						enableAutoZeroCut();
-		void        						disableAutoZeroCut();
-        bool								setZeroCut();
 
         void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
 		void								onUpdateClientsTimer();
@@ -58,13 +51,13 @@ class AT_CORE ArduinoServer : public IPCServer
         									//We should create a mutex for each of these
                                             //devices...
     	LightsArduino 			            mLightsArduino;
-    	SensorsArduino 			            mSensorsArduino;
+
 
         OnMessageUpdateCB					onMessageUpdateCB;
 
-		void					            pufferArduinoMessageReceived(const string& msg);
+
 		void					            lightsArduinoMessageReceived(const string& msg);
-		void					            sensorsArduinoMessageReceived(const string& msg);
+
         void								notifyClients(const string& msg);
 };
 
