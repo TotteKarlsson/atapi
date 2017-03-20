@@ -12,17 +12,23 @@ using namespace mtk;
 ArduinoServer::ArduinoServer(int portNumber)
 :
 IPCServer(portNumber, "ARDUINO_SERVER", createArduinoIPCReceiver),
-mLightsArduino(-1)
+//mLightsArduino(-1),
+mSensorsArduino(-1)
 {
-	mArduinos.push_back(&mLightsArduino);
+//	mArduinos.push_back(&mLightsArduino);
+	mArduinos.push_back(&mSensorsArduino);
 
     //Assign receive callbacks
-    mLightsArduino.assignSerialMessageReceivedCallBack(lightsArduinoMessageReceived);
+//    mLightsArduino.assignSerialMessageReceivedCallBack(lightsArduinoMessageReceived);
+
+    //Assign receive callbacks
+    mSensorsArduino.assignSerialMessageReceivedCallBack(sensorsArduinoMessageReceived);
 }
 
 ArduinoServer::~ArduinoServer()
 {
-    mLightsArduino.assignSerialMessageReceivedCallBack(NULL);
+//    mLightsArduino.assignSerialMessageReceivedCallBack(NULL);
+    mSensorsArduino.assignSerialMessageReceivedCallBack(NULL);
 }
 
 void ArduinoServer::assignOnUpdateCallBack(OnMessageUpdateCB cb)
@@ -47,28 +53,33 @@ void ArduinoServer::notifyClients(const string& msg)
     	return;
     }
 
-	//TODO: There might be a threading problem with this.
-    //This call will update the UI
     if(onMessageUpdateCB)
     {
+    	//This one is synchronized
         onMessageUpdateCB(msg);
     }
 
-    broadcast(msg);
+//    broadcast(msg);
 }
 
 void ArduinoServer::broadcastStatus()
 {
-	//These are all status messages possible
-    //A client may call this one in order to sync their UI
     stringstream msg;
    	notifyClients(msg.str());
 }
 
+////This is called from the arduino devices class upon receiving
+////a message from the arduino thread over the serial port
+////Socket clients are updated using the notifyClients funtion
+//void ArduinoServer::lightsArduinoMessageReceived(const string& msg)
+//{
+//	notifyClients(msg);
+//}
+
 //This is called from the arduino devices class upon receiving
 //a message from the arduino thread over the serial port
 //Socket clients are updated using the notifyClients funtion
-void ArduinoServer::lightsArduinoMessageReceived(const string& msg)
+void ArduinoServer::sensorsArduinoMessageReceived(const string& msg)
 {
 	notifyClients(msg);
 }
@@ -77,7 +88,7 @@ void ArduinoServer::lightsArduinoMessageReceived(const string& msg)
 //These messages are handled in a thread
 //Depending on the message, a response may be sent using the
 //notifyClients function
-bool ArduinoServer::processMessage(IPCMessage& msg)
+bool ArduinoServer::processRequest(IPCMessage& msg)
 {
     stringstream clientMessage;
     if(msg.isPacked())
@@ -89,19 +100,19 @@ bool ArduinoServer::processMessage(IPCMessage& msg)
     if(startsWith("TURN_ON_LED_LIGHTS", msg))
     {
     	Log(lInfo) << "Turn on LED lights";
-        mLightsArduino.turnLEDLightsOn();
+        //mLightsArduino.turnLEDLightsOn();
     }
 
     else if(startsWith("TURN_OFF_LED_LIGHTS", msg))
     {
     	Log(lInfo) << "Turn off LED lights";
-        mLightsArduino.turnLEDLightsOff();
+        //mLightsArduino.turnLEDLightsOff();
     }
 
     else if(startsWith("TOGGLE_LED_LIGHT", msg))
     {
     	Log(lInfo) << "Toggling LED on/off";
-        mLightsArduino.toggleLED();
+        //mLightsArduino.toggleLED();
     }
 
     else if(startsWith("SET_FRONT_LED", msg))
@@ -112,7 +123,7 @@ bool ArduinoServer::processMessage(IPCMessage& msg)
             stringstream s;
             s << 'f' <<sl[1];
 			Log(lInfo) << "Set Front LED Intensity ("<<sl[1]<<")";
-        	mLightsArduino.send(s.str());
+        	//mLightsArduino.send(s.str());
         }
     }
 
@@ -124,14 +135,14 @@ bool ArduinoServer::processMessage(IPCMessage& msg)
             stringstream s;
             s << 'b' <<sl[1];
 			Log(lInfo) << "Set Back LED Intensity ("<<sl[1]<<")";
-        	mLightsArduino.send(s.str());
+        	//mLightsArduino.send(s.str());
         }
     }
 
     else if(startsWith("GET_LIGHTS_ARDUINO_STATUS", msg))
     {
 		Log(lInfo) << "Requesting lights arduino status";
-        mLightsArduino.getStatus();
+        //mLightsArduino.getStatus();
     }
 
     else if(startsWith("LIGHTS_CUSTOM_MESSAGE", msg))
@@ -140,7 +151,7 @@ bool ArduinoServer::processMessage(IPCMessage& msg)
         if(l.size() == 2)
         {
 	    	Log(lInfo) << "Sending custom message to Lights Arduino: "<<l[1];
-	        mLightsArduino.send(l[1]);
+	        //mLightsArduino.send(l[1]);
         }
     }
 

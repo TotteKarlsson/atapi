@@ -55,9 +55,11 @@ class AT_CORE Serial : public ABObject
 		Mutex					            mReceivedMessagesMutex;
 		int									mReceiveBufferSize;
 		int									mSendBufferSize;
+
         									//CSerial is doing the underlying serial port work
 		SerialPort							mSP;
         SerialPort::EHandshake 				mHandShake;
+
         									//The serial worker reads data on the serial port
                                             //in a thread. Incoming messages are placed in the mMessages
                                             //list

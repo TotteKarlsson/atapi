@@ -5,7 +5,8 @@
 #include "atABObject.h"
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
-#include "atLightsArduino.h"
+//#include "atLightsArduino.h"
+#include "atSensorsArduino.h"
 
 #include <vector>
 #include "mtkTimer.h"
@@ -23,8 +24,8 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //network functionality.
 //The Arduino server forwards any messages sent from the arduino board to any connected tcp/ip clients.
 
-//There are currently one Arduino board, the 'Lights' board containing sensors and
-//light controlling logic.
+//There are currently two Arduino boards, the 'Lights' board, and a 'Sensor' board containing sensors and
+//light controlling logic respectively.
 
 class AT_CORE ArduinoServer : public IPCServer
 {
@@ -32,12 +33,13 @@ class AT_CORE ArduinoServer : public IPCServer
                                             ArduinoServer(int portNumber = 50000);
 	                                        ~ArduinoServer();
 
-                                            //!The process message is an overide from the IPCServer base class.
-                                            //!Process message implements the arduino server specific processing.
-                                            //!These messages are sent to the server from a client.
-    	bool 					            processMessage(IPCMessage& msg);
+                                            //!The process request is an overide from the IPCServer base class.
+                                            //!ProcessRequest implements the arduino server specific processing.
+                                            //!Requests are sent to the server from a client.
+    	bool 					            processRequest(IPCMessage& msg);
 
-    	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
+//    	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
+    	SensorsArduino& 	   	            getSensorsArduino(){return mSensorsArduino;}
         bool            		            shutDown();
 
         void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
@@ -48,15 +50,18 @@ class AT_CORE ArduinoServer : public IPCServer
     							            //!Container for Arduino devices
 		vector<ArduinoDevice*> 	            mArduinos;
 
+
+//    	LightsArduino 			            mLightsArduino;
+
         									//We should create a mutex for each of these
                                             //devices...
-    	LightsArduino 			            mLightsArduino;
-
+    	SensorsArduino 			            mSensorsArduino;
 
         OnMessageUpdateCB					onMessageUpdateCB;
 
 
-		void					            lightsArduinoMessageReceived(const string& msg);
+//		void					            lightsArduinoMessageReceived(const string& msg);
+		void					            sensorsArduinoMessageReceived(const string& msg);
 
         void								notifyClients(const string& msg);
 };

@@ -53,7 +53,7 @@ void ArduinoServerIPCReceiver::Worker()
                     IPCMessage msg     = IPCMessage(msgID, aMessage.getMessage(), this->getSocketHandle());
                     if(mServer)
                     {
-                        mServer->postIPCMessage(msg);
+                        mServer->postRequest(msg);
                     }
 
                     aMessage.reset();
