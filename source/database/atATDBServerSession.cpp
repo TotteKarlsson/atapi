@@ -9,7 +9,7 @@
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
-using namespace ab;
+using namespace at;
 
 using namespace Poco::Data;
 using namespace Poco::Data::Keywords;
@@ -56,7 +56,7 @@ RecordSet* ATDBServerSession::getBlocks(dbSQLKeyword kw)
     }
 
     Statement select(*mTheSession);
-    select << "SELECT * FROM blocks ORDER BY id " << ab::toString((dbSQLKeyword) kw);
+    select << "SELECT * FROM blocks ORDER BY id " << at::toString((dbSQLKeyword) kw);
 
     int nrRows = select.execute();
     return new RecordSet(select);
@@ -290,5 +290,25 @@ RecordSet* ATDBServerSession::getUsers(dbSQLKeyword kw)
     return new RecordSet(select);
 }
 
+bool ATDBServerSession::insertSensorData(int sensorID, double val1, double val2)
+{
+    if(!mTheSession)
+    {
+        Log(lError) << "No DB Session...";
+        return NULL;
+    }
+
+    Session& ses = *mTheSession;
+
+    //We need local variables for the statements..
+    int sensor_id(sensorID);
+	double v1(val1), v2(val2);
+
+	Statement s(ses);
+    s << "INSERT INTO sensordata (sensor_id, data1, data2) VALUES(?, ?, ?)", use(sensor_id), use(v1), use(v2), now;
+    s.reset(ses);
+
+	return true;
+}
 
 

@@ -4,7 +4,7 @@
 #include <string>
 //---------------------------------------------------------------------------
 
-namespace ab
+namespace at
 {
 enum dbSQLKeyword {dbAscending = 0, dbDescending};
 

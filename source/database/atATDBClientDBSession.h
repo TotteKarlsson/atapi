@@ -31,13 +31,13 @@ class AT_CORE ATDBClientDBSession : public DBConnection
 		bool							insertImageNote(int imageID, int userID, const string& note="");
 
         bool							insertSensorData(int id, double t, double h);
-		RecordSet* 	    				getBlocks(ab::dbSQLKeyword kw =ab::dbDescending);
+		RecordSet* 	    				getBlocks(at::dbSQLKeyword kw =at::dbDescending);
 
         bool							insertBlock(int userID, const string& lbl, const string& note);
         bool							deleteBlock(int bId);
 
         								//Users
-		RecordSet* 	   					getUsers(ab::dbSQLKeyword kw = ab::dbAscending);
+		RecordSet* 	   					getUsers(at::dbSQLKeyword kw = at::dbAscending);
 
         								//!Maintain user id from server
         bool							insertOrUpdateUser(int uid, const string& u);

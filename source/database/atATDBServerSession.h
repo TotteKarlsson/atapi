@@ -29,7 +29,7 @@ class AT_CORE ATDBServerSession : public DBConnection
 		StringList						getTableNames();
 
 										//!Statements
-		Poco::Data::RecordSet* 	    	getBlocks(ab::dbSQLKeyword kw = ab::dbDescending);
+		Poco::Data::RecordSet* 	    	getBlocks(at::dbSQLKeyword kw = at::dbDescending);
         bool							insertBlock(int userID, const string& lbl, const string& note);
         bool							deleteBlock(int bId);
         bool							deleteNotesForBlock(int bId);
@@ -44,7 +44,10 @@ class AT_CORE ATDBServerSession : public DBConnection
 		bool							deleteNote(int noteID);
 		bool							updateNote(int noteID, const string& note);
 
-		Poco::Data::RecordSet* 	  		getUsers(ab::dbSQLKeyword kw = ab::dbAscending);
+		Poco::Data::RecordSet* 	  		getUsers(at::dbSQLKeyword kw = at::dbAscending);
+
+										//Sensor data
+        bool							insertSensorData(int sensorID, double val1, double val2);
 
 
     protected:
