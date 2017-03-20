@@ -25,9 +25,9 @@ using mtk::SocketReceiver;
 class AT_CORE ArduinoClient : public SocketClient
 {
 	friend ArduinoMessageProcessor;
-     public:
+	public:
                                             ArduinoClient();
-        virtual                             ~ArduinoClient();
+    	virtual                             ~ArduinoClient();
         virtual bool                        shutDown();
 
         virtual bool                        init(int pNumber = 50010, const string& hostname = mtk::gEmptyString, bool connectOnInit = true);

@@ -18,25 +18,23 @@ ArduinoClient::~ArduinoClient()
 
 bool ArduinoClient::init(int serverPort, const string& hostname, bool connectOnInit)
 {
-    Log(lDebug3)<<"Setting up client";
+    Log(lDebug3)<<"Setting up an Arduino client";
 	this->assignParent(this);
 
     if(connectOnInit)
     {
-    	bool res = SocketClient::connect(serverPort, hostname);
-
-        if(isConnected())
+        if(!SocketClient::connect(serverPort, hostname))
         {
-        	if(mReceiver.isRunning())
-            {
-            	mReceiver.stop();
-            }
+        	return false;
+        }
 
+       	if(!mReceiver.isRunning())
+        {
             mReceiver.start(true);
         }
+     	return true;
     }
-
-    return true;
+    return false;
 }
 
 void ArduinoClient::getServerStatus()

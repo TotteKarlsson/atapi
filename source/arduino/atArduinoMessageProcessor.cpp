@@ -16,10 +16,7 @@ Thread("MessageProcessor"),
 mAllowProcessing(true),
 mMessageContainer(client.mIncomingMessages),
 mClient(client)
-{
-//	//Run will start the worker thread
-//	Thread::run();
-}
+{}
 
 //----------------------------------------------------------------
 ArduinoMessageProcessor::~ArduinoMessageProcessor()
