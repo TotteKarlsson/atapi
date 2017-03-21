@@ -7,7 +7,7 @@
 class ArduinoClient;
 
 //!The switch class allow a 'switched' process to be executed
-//!Arraybot can execute a Arduino command, lile Activate Vacuum using an
+//!Arraybot can execute a Arduino command, like Activate Vacuum using an
 //!Arduino server command and
 class AT_CORE ArduinoServerCommand : public Process
 {

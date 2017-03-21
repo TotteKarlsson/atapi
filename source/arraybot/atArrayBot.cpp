@@ -23,7 +23,7 @@ mLeftJoyStickYLeftDeadZone(0),
 mLeftJoyStickYRightDeadZone(0),
 
 mJoyStick(mJoyStickID.getReference()),
-mArduinoClient(NULL),
+//mArduinoClient(NULL),
 mJSSettings("JOYSTICK SETTINGS",	mIniFile),
 mCoverSlip(	"COVERSLIP UNIT", 		mIniFile, appFolder),
 mWhisker(	"WHISKER UNIT", 		mIniFile, appFolder),

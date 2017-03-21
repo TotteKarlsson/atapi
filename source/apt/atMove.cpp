@@ -11,7 +11,6 @@ namespace ab
 
 //using namespace std::tr1;
 using namespace mtk;
-using namespace ab;
 
 //---------------------------------------------------------------------------
 Move::Move(const string& lbl, APTMotor* mtr, double maxVel, double acc)
