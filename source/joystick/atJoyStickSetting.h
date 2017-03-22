@@ -11,7 +11,7 @@ using std::vector;
 //! The JoystickSetting class holds motor settings for all motors.
 /*!The settings are saved/retrieved from a INI file.
 */
-class AT_CORE JoyStickSetting : public ABObject
+class AT_CORE JoyStickSetting : public ATObject
 {
     public:
  				       	            JoyStickSetting(const string& lbl, 	double XYVel = 0, double xyAcc = 0,

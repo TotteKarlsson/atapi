@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 typedef void (__closure *CounterCallBack)();
 
-class AT_CORE Counter : public ABObject
+class AT_CORE Counter : public ATObject
 {
 	public:
     								Counter();

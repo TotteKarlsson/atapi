@@ -7,7 +7,7 @@
 using namespace mtk;
 using Poco::Timespan;
 
-Trigger::Trigger(ABObject* s, LogicOperator lt)
+Trigger::Trigger(ATObject* s, LogicOperator lt)
 :
 mSubject(s),
 mIsTriggered(false),

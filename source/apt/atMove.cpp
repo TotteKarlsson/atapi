@@ -59,11 +59,11 @@ string Move::getMotorName()
 	return "<none>";
 }
 
-void Move::assignUnit(ABObject* o)
+void Move::assignUnit(ATObject* o)
 {
 	mSubject = NULL;
 
-	//Check out what ABObject is
+	//Check out what ATObject is
     if(dynamic_cast<ArrayBot*>(o))
     {
 		ArrayBot* ab = dynamic_cast<ArrayBot*>(o);

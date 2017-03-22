@@ -328,7 +328,7 @@ void __fastcall TXYZProcessSequencerFrame::MotorsCBChange(TObject *Sender)
     }
 
 	//Check if a motor is selected
-    ABObject* obj = (ABObject*) MotorsCB->Items->Objects[MotorsCB->ItemIndex];
+    ATObject* obj = (ATObject*) MotorsCB->Items->Objects[MotorsCB->ItemIndex];
 
     APTMotor* 			motor = dynamic_cast<APTMotor*>(obj);
     if(motor)

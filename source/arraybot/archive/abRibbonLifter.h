@@ -22,7 +22,7 @@ using mtk::IniFileProperties;
 
 //typedef void (__closure *RibbonLifterOnTimer)();
 
-class AT_CORE RibbonLifter : public ABObject
+class AT_CORE RibbonLifter : public ATObject
 {
     public:
 							            RibbonLifter(ArrayBot& ab, IniFile& ini);

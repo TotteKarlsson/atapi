@@ -8,7 +8,7 @@
 //UI. This is done internally in the 'Leica Arduino' by automating the mouse on the UC7.
 
 class PufferArduino;
-class AT_CORE LeicaUC7Controller : public ABObject
+class AT_CORE LeicaUC7Controller : public ATObject
 {
     public:
                                 LeicaUC7Controller(PufferArduino& p);

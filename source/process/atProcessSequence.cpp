@@ -19,7 +19,7 @@ mProject(*this, fileExt)
 ProcessSequence::~ProcessSequence()
 {}
 
-bool ProcessSequence::assignSubject(ABObject* o)
+bool ProcessSequence::assignSubject(ATObject* o)
 {
     Process* p = getFirst();
     while(p)

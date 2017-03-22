@@ -22,10 +22,10 @@ class Trigger;
 class ArrayBot;
 class ProcessSequence;
 
-class AT_CORE Process : public ABObject
+class AT_CORE Process : public ATObject
 {
     public:
-        							            Process(const string& name, ABObject* ao = NULL);
+        							            Process(const string& name, ATObject* ao = NULL);
 							                    ~Process(){}
 		virtual void		   		            init(ArrayBot& ab);
 
@@ -42,12 +42,12 @@ class AT_CORE Process : public ABObject
         void									setInfoText(const string& txt){mInfoText = txt;}
 
 		string 						            getProcessType();
-		virtual void	                        assignSubject(ABObject* o){mSubject = o;}
+		virtual void	                        assignSubject(ATObject* o){mSubject = o;}
 		virtual void	                        assignProcessSequence(ProcessSequence* ps){mProcessSequence = ps;}
 		ProcessSequence*						getProcessSequence(){return mProcessSequence;}
 
         void									setSubjectName(const string& n){mSubjectName = n;}
-		ABObject*					            getUnit(){return mSubject;}
+		ATObject*					            getUnit(){return mSubject;}
         string						            getProcessName(){return mProcessName;}
         void						            setProcessName(const string& l) {mProcessName = l;}
         bool						            isTimedOut();
@@ -73,7 +73,7 @@ class AT_CORE Process : public ABObject
 
         					                    //!The subject object can be casted in derived classes
                                                 //!The subject is typically a motor or relay for example
-    	ABObject* 		                        mSubject;
+    	ATObject* 		                        mSubject;
 
         										//!When reconstructing a process from XML we use strings
                                                 //!to identify objects

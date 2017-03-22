@@ -14,7 +14,7 @@ physical JoyStick events are mediated by the JoyStickMessageDispatcher classes.
 */
 typedef void (__closure *JoyStickEvent)();
 
-class AT_CORE ArrayBotJoyStick : public ABObject
+class AT_CORE ArrayBotJoyStick : public ATObject
 {
 	friend JoyStickMessageDispatcher;
     public:

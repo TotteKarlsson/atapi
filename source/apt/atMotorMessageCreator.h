@@ -7,7 +7,7 @@
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------
 
-//class AT_CORE MotorMessageCreator : public mtk::Thread, public ABObject
+//class AT_CORE MotorMessageCreator : public mtk::Thread, public ATObject
 //{
 //	public:
 //													MotorMessageCreator(const string& threadName = mtk::gEmptyString);

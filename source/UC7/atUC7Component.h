@@ -23,7 +23,7 @@ using mtk::gEmptyString;
 using std::deque;
 class UC7MessageReceiver;
 
-class AT_CORE UC7 : public ABObject
+class AT_CORE UC7 : public ATObject
 {
 	friend UC7MessageReceiver;
 	friend UC7MessageSender;

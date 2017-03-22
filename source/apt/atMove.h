@@ -21,7 +21,7 @@ class AT_CORE Move : public Process
 		virtual void		   		        init(ArrayBot& ab);
 
 		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot) = 0;
-		virtual void	                    assignUnit(ABObject* o);
+		virtual void	                    assignUnit(ATObject* o);
 
         virtual bool	                    stop();
         virtual bool	                    isBeingProcessed();

@@ -21,7 +21,7 @@ class AT_CORE Move : public Process
         void						setMotorName(const string& n){mMotorName = n;}
 
 		virtual mtk::XMLElement*    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
-		virtual void	            assignUnit(ABObject* o);
+		virtual void	            assignUnit(ATObject* o);
 
         virtual bool	            start();
         virtual bool	            stop();

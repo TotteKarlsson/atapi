@@ -14,7 +14,7 @@ using mtk::gEmptyString;
 //!the message, or messages are sent one by one over the serial port.
 //!A delay, ProcessTimeDelay can be used in order to no overflow the serial
 //!devices input buffer
-class AT_CORE ArduinoSerialMessageSender : public ABObject, public mtk::Thread
+class AT_CORE ArduinoSerialMessageSender : public ATObject, public mtk::Thread
 {
     public:
                                                     ArduinoSerialMessageSender(ArduinoDevice& d);

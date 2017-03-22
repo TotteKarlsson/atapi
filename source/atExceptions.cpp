@@ -1,26 +1,26 @@
 #pragma hdrstop
 #include "atExceptions.h"
 //---------------------------------------------------------------------------
-ABException::ABException(const string& desc)
+ATException::ATException(const string& desc)
 :
 mMessage(desc)
 {}
 
-ABException::ABException(const stringstream& msg)
+ATException::ATException(const stringstream& msg)
 :
 mMessage(msg.str())
 {}
 
-ABException::~ABException() throw()
+ATException::~ATException() throw()
 {}
 
 
-const char* ABException::what() const throw()
+const char* ATException::what() const throw()
 {
     return mMessage.c_str();
 }
 
-string ABException::Message() const
+string ATException::Message() const
 {
     return mMessage;
 }

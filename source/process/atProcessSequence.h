@@ -19,7 +19,7 @@ using mtk::Property;
 class Process;
 class ArrayBot;
 
-class AT_CORE ProcessSequence : public ABObject
+class AT_CORE ProcessSequence : public ATObject
 {
     public:
 										    ProcessSequence(ArrayBot& ab, const string& name = "", const string& fileExt = "proc");
@@ -37,7 +37,7 @@ class AT_CORE ProcessSequence : public ABObject
         virtual bool	 		            read(const string& fName);
         virtual bool			            write(const string& folder = mtk::gEmptyString);
 
-		virtual bool	   		            assignSubject(ABObject* o);
+		virtual bool	   		            assignSubject(ATObject* o);
 
 		virtual bool 			            add(Process* p);
 

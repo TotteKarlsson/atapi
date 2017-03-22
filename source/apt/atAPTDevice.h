@@ -12,7 +12,7 @@ struct HardwareInformation;
 
 
 //---------------------------------------------------------------------------
-class AT_CORE APTDevice : public ABObject
+class AT_CORE APTDevice : public ATObject
 {
 	public:
     							                //Every APTDevice need to be created with a serial number

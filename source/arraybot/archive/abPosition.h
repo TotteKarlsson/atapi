@@ -16,7 +16,7 @@ The position can be named using the Label attribute
 namespace ab
 {
 
-class AT_CORE Position : public ABObject
+class AT_CORE Position : public ATObject
 {
 	public:
 								Position(const string& lbl, double x, double y, double z);

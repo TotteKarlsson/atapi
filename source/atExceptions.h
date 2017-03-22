@@ -9,17 +9,17 @@
 using std::string;
 using std::stringstream;
 
-class AT_CORE ABException : public std::exception, public ABObject
+class AT_CORE ATException : public std::exception, public ATObject
 {
     public:
-                                            ABException(const string& desc);
-                                            ABException(const stringstream& msg);
-        virtual                             ~ABException() throw();
+                                            ATException(const string& desc);
+                                            ATException(const stringstream& msg);
+        virtual                             ~ATException() throw();
         virtual const char*                 what() const throw();
         string                              Message() const;
 
     protected:
-                                            //ABException message
+                                            //ATException message
         string                              mMessage;
 };
 

@@ -11,7 +11,7 @@ typedef void (__closure *JoyStickEvent)();
 typedef pair<JoyStickEvent, JoyStickEvent> ButtonEvents;
 
 //Helper class
-class AT_CORE JoyStickButtonStateEventDispatcher  : public ABObject
+class AT_CORE JoyStickButtonStateEventDispatcher  : public ATObject
 {
 	public:
 				    			JoyStickButtonStateEventDispatcher();

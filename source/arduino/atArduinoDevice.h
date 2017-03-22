@@ -24,7 +24,7 @@ using mtk::StringList;
 
 typedef void (__closure *InitCallBack)();
 
-class AT_CORE ArduinoDevice : public ABObject
+class AT_CORE ArduinoDevice : public ATObject
 {
 	friend ArduinoSerialMessageSender;
     public:

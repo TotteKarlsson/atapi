@@ -30,7 +30,7 @@ enum MotorCommandEnum
 
 string toString(MotorCommandEnum e);
 
-class AT_CORE MotorCommand : public ABObject
+class AT_CORE MotorCommand : public ATObject
 {
 	public:
 							MotorCommand(MotorCommandEnum mce, double var1 = 0, double var2 = 0);

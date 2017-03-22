@@ -15,14 +15,14 @@ using std::vector;
 typedef double (__closure *triggerTestFunctionFPtr)();
 class TriggerFunction;
 
-class AT_CORE Trigger : public ABObject
+class AT_CORE Trigger : public ATObject
 {
     public:
-                                            Trigger(ABObject* s, LogicOperator lt = loLargerThan);
+                                            Trigger(ATObject* s, LogicOperator lt = loLargerThan);
 		virtual                             ~Trigger(){}
 
-        void								assignSubject(ABObject* s){mSubject = s;}
-        ABObject*							getSubject(){return mSubject;}
+        void								assignSubject(ATObject* s){mSubject = s;}
+        ATObject*							getSubject(){return mSubject;}
 
 		string					            getSubjectName();
 
@@ -61,7 +61,7 @@ class AT_CORE Trigger : public ABObject
         string					            mSubjectName;
 
         									//!The subject being 'observed' is typically APTDevices, motors etc
-        ABObject*							mSubject;
+        ATObject*							mSubject;
 
     										//!The mIsTriggered is set to true in case the trigger been fired
         bool					            mIsTriggered;

@@ -20,7 +20,7 @@ using Poco::Data::Session;
 
 //!The ATDB server session class encapsulate a database session
 //!with the ATDB MySQL database
-class AT_CORE DBConnection : public ABObject
+class AT_CORE DBConnection : public ATObject
 {
     public:
 					        	        DBConnection(const string& host="127.0.0.1", const string& user="atdb_client", const string& password="atdb123", const string& db = "atdb");

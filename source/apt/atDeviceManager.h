@@ -17,7 +17,7 @@ using mtk::StringList;
 //Thorlabs device
 class APTDevice;
 
-class AT_CORE DeviceManager : public ABObject
+class AT_CORE DeviceManager : public ATObject
 {
     public:
                                                     DeviceManager();

@@ -7,7 +7,7 @@
 using std::string;
 
 class APTMotor;
-class AT_CORE PairedMove : public ABObject
+class AT_CORE PairedMove : public ATObject
 {
     public:
                                         PairedMove(const string& name, double d = 0, double v = 0, double a = 0);

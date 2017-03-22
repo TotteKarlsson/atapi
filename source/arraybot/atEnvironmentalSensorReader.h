@@ -18,7 +18,7 @@ struct SensorReading
 };
 
 //!The EnvironmentaSensorReader class are populated by one sensor at a time
-class AT_CORE EnvironmentaSensorReader : public ABObject
+class AT_CORE EnvironmentaSensorReader : public ATObject
 {
     public:
 					                EnvironmentaSensorReader(int nrOfSensors = 3) : mNrOfSensors(3){}

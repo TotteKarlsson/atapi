@@ -5,7 +5,7 @@
 
 typedef void (__closure *JoyStickAxisEvent)(int pos);
 
-class JoyStickAxisStateEventDispatcher  : public ABObject
+class JoyStickAxisStateEventDispatcher  : public ATObject
 {
 	public:
 				    		JoyStickAxisStateEventDispatcher() : mPosition(0){};

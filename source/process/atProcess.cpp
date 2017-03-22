@@ -7,7 +7,7 @@
 using Poco::Timespan;
 using namespace mtk;
 
-Process::Process(const string& lbl, ABObject* ao)
+Process::Process(const string& lbl, ATObject* ao)
 :
 mSubject(ao),
 mProcessName(lbl),

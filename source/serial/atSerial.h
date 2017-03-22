@@ -17,7 +17,7 @@ using mtk::IPCMessageBuilder;
 typedef void (*SerialMessageReceivedCallBackC)(const string& msg);
 typedef void (__closure *SerialMessageReceivedCallBack)(const string& msg);
 
-class AT_CORE Serial : public ABObject
+class AT_CORE Serial : public ATObject
 {
 	friend SerialWorker;
     public:

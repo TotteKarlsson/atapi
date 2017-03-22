@@ -20,7 +20,7 @@
 //on by using pure process objects instead, like the MoveAbsoluteProcess
 
 class APTMotor;
-class AT_CORE TriggerFunction : public ABObject
+class AT_CORE TriggerFunction : public ATObject
 {
     public:
                                             TriggerFunction(){}
