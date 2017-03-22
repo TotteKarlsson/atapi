@@ -116,7 +116,7 @@
         <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
-        <Defines>SSIDLL_EXPORTS;$(Defines)</Defines>
+        <Defines>AT_SHARED;$(Defines)</Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

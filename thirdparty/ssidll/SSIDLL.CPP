@@ -233,15 +233,15 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 *                          If an error code was set, 
 *                             delete the CComPort object and set it's pointer to NULL
 *                   If there is a CComPort Object
-*						    Call the SetComPort function with the baud and port. 
-*						    If the function returned true, 
+*						    Call the SetComPort function with the baud and port.
+*						    If the function returned true,
 *                       Call the function to set the pointer for this com port in the global com port array.
 *                       Set the ret_val to TRUE and sleep for a little while for the threads to get going.
 *                     Else
 *                       delete the SSI object and set it's pointer to null.
-*                 If the ret_val is false, call the function to get the error code and return the code 
-*                 Else return zero for success.    
-*                  
+*                 If the ret_val is false, call the function to get the error code and return the code
+*                 Else return zero for success.
+*
 ******************************************************************************/
 SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 {
@@ -251,8 +251,8 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 	CComPort * SSI = GetSSIComHandler(Port);
 
 
-	if(SSI)		// already connected 
-		SSI->SetLastError(SSICOMM_ALREADYCONNECTED);	
+	if(SSI)		// already connected
+		SSI->SetLastError(SSICOMM_ALREADYCONNECTED);
 	else
 	{
 		if(hwnd) // we have valid input
@@ -272,10 +272,9 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 
 		if(SSI)	// we have a valid object
 		{
-         SSI->SetLastError(SSICOMM_NOERROR);	
-
-			if(SSI->SetComPort(Baud,Port))  
-			{	
+         	SSI->SetLastError(SSICOMM_NOERROR);
+			if(SSI->SetComPort(Baud,Port))
+			{
 				AddSSIComHandler(SSI,Port);
 				Sleep(50);
 				ret_val = TRUE;
@@ -298,20 +297,26 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 	}
 	else
 		return 0; // success
-	
+
 }
 
+
+int __stdcall IsConnected(int Port)
+{
+	CComPort * SSI = GetSSIComHandler(Port);
+    return SSI ? true : false;
+}
 
 /*****************************************************************************
 *	SYNOPSIS:		SSIDLL_API int __stdcall SSIDisconnect(HWND hwnd, int nComPort)
 *
-*	DESCRIPTION:	Sends the disconnect commands to the scanner and deletes the SSI object.			
+*	DESCRIPTION:	Sends the disconnect commands to the scanner and deletes the SSI object.
 *
 *	PARAMETERS:		hwnd:	handle to window that the object was created with.
 *                 nComPort: the com port number
 *
 *	RETURN VALUE:	Zero if connection was terminated successfully o/w the erro code
-*	INPUTS:			SSI 
+*	INPUTS:			SSI
 *	OUTPUTS:			SSI (global error code is set if unsuccessful)
 *
 *	NOTES:			If a fatal system error occurs (threads unable to be stopped), 
@@ -341,25 +346,24 @@ SSIDLL_API int __stdcall SSIDisconnect( HWND   hwnd, int nComPort)
 	{
 		if(SSI->g_hwnd && (SSI->g_hwnd == (HWND)hwnd) )  
 		{
-         SSI->SetLastError(SSICOMM_NOERROR);	
-	
-			SSI->g_hwnd = NULL;  
-
+        	SSI->SetLastError(SSICOMM_NOERROR);
+			SSI->g_hwnd = NULL;
 			SSI->ProtocolHandler->hWnd = NULL; // STOP ANY WINDOWS MESSAGES
-
-
-		   SSI->Disconnect(); 
-         delete SSI; 
+		   	SSI->Disconnect();
+         	delete SSI;
 			RemoveSSIComHandler(nComPort);
-			ret_val = TRUE;	
+			ret_val = TRUE;
 		}
-		else if(SSI->g_hwnd != (HWND)hwnd)  
-			SSI->SetLastError(ERR_SSI_MISMATCHHWND);  
-      else if(!SSI->g_hwnd)  
-         SSI->SetLastError(ERR_SSI_HWND);
-
+		else if(SSI->g_hwnd != (HWND)hwnd)
+        {
+        	SSI->SetLastError(ERR_SSI_MISMATCHHWND);
+        }
+    	else if(!SSI->g_hwnd)
+      	{
+        	SSI->SetLastError(ERR_SSI_HWND);
+      	}
 	}
-	
+
 	if(!ret_val)
 		return GetLastProtocolError(nComPort);
 	else
@@ -1259,8 +1263,8 @@ SSIDLL_API int __stdcall ScanDisable(int nComPort)
 	{
 		if(SSI->g_hwnd  && COMDEV(SSI->PortInfo)) 
 		{
-			SSI->SetLastError(SSICOMM_NOERROR);	
-				
+			SSI->SetLastError(SSICOMM_NOERROR);
+
 			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT,SCAN_DISABLE, NULL,0);
 			if(ret_val == 0)
 				SSI->SetLastError(SSICOMM_BUSY);
@@ -1268,6 +1272,7 @@ SSIDLL_API int __stdcall ScanDisable(int nComPort)
       else
         SSI->SetLastError(ERR_SSI_HWND);
 	}
+
 	if(!ret_val)
 		return GetLastProtocolError(nComPort);
 	else

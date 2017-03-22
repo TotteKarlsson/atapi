@@ -246,6 +246,8 @@
 /*	Extern Function Prototypes **********************************************/
 SSIDLL_API int __stdcall            SSIConnect(HWND hwnd, long Baud, int Port);
 SSIDLL_API int __stdcall            SSIDisconnect(HWND hwnd, int nComPort);
+SSIDLL_API int __stdcall            IsConnected(int nComPort);
+
 SSIDLL_API int __stdcall            SnapShot(int nComPort);
 SSIDLL_API int __stdcall            TransmitVersion(int nComPort);
 SSIDLL_API int __stdcall            AbortImageXfer(int nComPort);
