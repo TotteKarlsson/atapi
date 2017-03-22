@@ -49,12 +49,6 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
@@ -84,7 +78,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <BCC_PCHName_Clang>atZebraDLLPCH1.h</BCC_PCHName_Clang>
+        <BCC_PCHName_Clang>atSSIPCH1.h</BCC_PCHName_Clang>
         <PackageImports>VCLCommon;bindcompfmx;DBXSqliteDriver;RaizeComponentsTrialVcl;HsBarcode2DRun;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;TeeUI;vclie;HsBarcode1DRun;RaizeComponentsTrialVclDb;vcltouch;websnap;CustomIPTransport;dsnap;IndyIPServer;IndyCore;vcl;fmxase;IndyIPCommon;dsnapcon;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;dbexpress;adortl;IndyIPClient;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
@@ -125,16 +119,13 @@
     <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <BCC_PCHName_Clang>atZebraDLLPCH1.h</BCC_PCHName_Clang>
-    </PropertyGroup>
     <ItemGroup>
+        <PCHCompile Include="atSSIPCH1.h">
+            <BuildOrder>0</BuildOrder>
+        </PCHCompile>
         <CppCompile Include="atZebraDLL.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <PCHCompile Include="atZebraDLLPCH1.h">
-            <BuildOrder>0</BuildOrder>
-        </PCHCompile>
         <CppCompile Include="commthreads.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
