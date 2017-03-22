@@ -57,6 +57,11 @@ bool DS457::isConnected()
     return IsConnected(mCOMPort);
 }
 
+const unsigned char* DS457::getMemoryBuffer() const
+{
+	return mVideoData;
+}
+
 bool DS457::scanEnable()
 {
   	int status = ScanEnable(mCOMPort);
@@ -114,7 +119,7 @@ bool DS457::aimOff()
 
 bool DS457::LEDsOn()
 {
-	int status = LedOn(mCOMPort, '3');
+	int status = LedOn(mCOMPort, 1);
     if(status)
     {
     	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
@@ -125,7 +130,7 @@ bool DS457::LEDsOn()
 
 bool DS457::LEDsOff()
 {
-	int status = LedOff(mCOMPort, 3);
+	int status = LedOff(mCOMPort, 1);
     if(status)
     {
     	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
@@ -155,11 +160,3 @@ bool DS457::illuminationOff()
 
 	return status == 0 ? true : false;
 }
-
-//!This need to be called after each
-//decode event
-bool DS457::restoreDecodeBuffer()
-{
-
-}
-

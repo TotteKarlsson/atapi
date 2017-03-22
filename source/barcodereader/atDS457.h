@@ -53,10 +53,7 @@ class AT_BCR DS457 : public ATObject
 		bool					            LEDsOn();
 		bool					            LEDsOff();
 
-        						            //!This need to be called after each
-                                            //decode event
-		bool					            restoreDecodeBuffer();
-
+		const unsigned char*			   	getMemoryBuffer() const;
     private:
     	HWND					            mHandle;
         int						            mCOMPort;

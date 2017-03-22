@@ -61,7 +61,7 @@ const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] = {
 		PARAM_SEND, 
 		IMAGE_DATA, 
 		VIDEO_DATA, 
-      REPLY_REVISION, 
+      	REPLY_REVISION,
 		EVENT, 
 		BATCH_DATA, 
 		CAPABILITIES_REPLY }; 
