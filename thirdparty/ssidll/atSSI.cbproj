@@ -120,12 +120,12 @@
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="atSSI.cpp">
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
         <PCHCompile Include="atSSIPCH1.h">
             <BuildOrder>0</BuildOrder>
         </PCHCompile>
-        <CppCompile Include="atZebraDLL.cpp">
-            <BuildOrder>1</BuildOrder>
-        </CppCompile>
         <CppCompile Include="commthreads.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
