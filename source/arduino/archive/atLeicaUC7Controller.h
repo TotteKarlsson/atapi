@@ -1,7 +1,7 @@
 #ifndef abLeicaUC7ControllerH
 #define abLeicaUC7ControllerH
 #include "atExporter.h"
-#include "atABObject.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 //!The LeicaUC7 controller gives a client the possibility to execute actions on the UC7's

@@ -1,6 +1,6 @@
 #ifndef abDirectSoundH
 #define abDirectSoundH
-#include "atABObject.h"
+#include "atATObject.h"
 
 #include <windows.h>
 #include <mmreg.h>

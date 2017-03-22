@@ -2,7 +2,7 @@
 #define abPositionalTriggerH
 //---------------------------------------------------------------------------
 #include "atExporter.h"
-#include "atABObject.h"
+#include "atATObject.h"
 #include "process/atTrigger.h"
 //---------------------------------------------------------------------------
 

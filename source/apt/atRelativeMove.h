@@ -1,7 +1,7 @@
 #ifndef abRelativeMoveH
 #define abRelativeMoveH
 #include "atExporter.h"
-#include "atABObject.h"
+#include "atATObject.h"
 #include "atMove.h"
 //---------------------------------------------------------------------------
 class APTMotor;

@@ -2,7 +2,7 @@
 #define abMotorMessageCreatorH
 #include "atExporter.h"
 #include <string>
-#include "atABObject.h"
+#include "atATObject.h"
 #include "mtkThread.h"
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------

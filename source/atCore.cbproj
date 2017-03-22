@@ -235,9 +235,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>arraybot\atXYZUnit.h</DependentOn>
             <BuildOrder>53</BuildOrder>
         </CppCompile>
-        <CppCompile Include="atABObject.cpp">
-            <DependentOn>atABObject.h</DependentOn>
-            <BuildOrder>30</BuildOrder>
+        <CppCompile Include="atATObject.cpp">
+            <BuildOrder>68</BuildOrder>
         </CppCompile>
         <CppCompile Include="atCore.cpp">
             <DependentOn>atCore.h</DependentOn>

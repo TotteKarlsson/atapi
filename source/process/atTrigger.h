@@ -1,7 +1,7 @@
 #ifndef abTriggerH
 #define abTriggerH
 #include "atExporter.h"
-#include "atABObject.h"
+#include "atATObject.h"
 #include <string>
 #include "mtkTimer.h"
 #include <vector>

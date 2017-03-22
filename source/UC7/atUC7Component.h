@@ -1,6 +1,6 @@
 #ifndef atUC7ComponentH
 #define atUC7ComponentH
-#include "atABObject.h"
+#include "atATObject.h"
 #include "serial/atSerial.h"
 #include "atUC7Message.h"
 #include <deque>
