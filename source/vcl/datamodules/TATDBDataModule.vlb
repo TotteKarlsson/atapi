@@ -2,10 +2,10 @@
 Coordinates=427,143,83,123
 
 [blocksCDS]
-Coordinates=58,124,68,159
+Coordinates=58,124,148,609
 
 [blocksDS]
-Coordinates=145,179,61,159
+Coordinates=145,179,148,375
 
 [usersDS]
 Coordinates=269,125,57,105
@@ -27,4 +27,61 @@ Coordinates=312,477,91,123
 
 [ribbonNotesCDS]
 Coordinates=46,321,96,123
+
+[blockNotesDS]
+Coordinates=456,71,84,123
+
+[processIDDS]
+Coordinates=47,771,78,51
+
+[preprocesstreatmentDS]
+Coordinates=456,1,131,51
+
+[specimenDS]
+Coordinates=15,286,115,249
+
+[blockstatusDS]
+Coordinates=75,573,85,51
+
+[infiltrationProtocolDS]
+Coordinates=668,141,120,51
+
+[fixationMethodDS]
+Coordinates=120,934,101,51
+
+[ribbonsDS]
+Coordinates=437,934,73,177
+
+[speciesDS]
+Coordinates=625,71,66,51
+
+[postfix]
+Coordinates=221,771,48,51
+
+[documentsCDS]
+Coordinates=338,934,91,123
+
+[substitutionProtocol]
+Coordinates=456,526,115,123
+
+[cryoprotectionDS]
+Coordinates=11,934,100,51
+
+[embeddingProtocolDS]
+Coordinates=625,1,125,51
+
+[specimenCDS]
+Coordinates=0,0,115,267
+
+[freezeprotocolDS]
+Coordinates=229,934,99,51
+
+[documentsDS]
+Coordinates=456,213,83,123
+
+[ribbonNotesDS]
+Coordinates=456,355,89,123
+
+[fixativeTBL]
+Coordinates=625,211,69,51
 

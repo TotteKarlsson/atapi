@@ -51,7 +51,6 @@ void __fastcall TatdbDM::SQLConnection1BeforeConnect(TObject *Sender)
 void __fastcall TatdbDM::SQLConnection1AfterConnect(TObject *Sender)
 {
 	afterConnect();
-//    initCSDM();
 }
 
 void __fastcall TatdbDM::afterConnect()
@@ -63,10 +62,8 @@ void __fastcall TatdbDM::afterConnect()
 
 	Log(lInfo) << "Connection established to: "<<mDataBase;
 	usersCDS->Active 	    = true;
-
 	specimenCDS->Active  	= true;
     blocksCDS->Active 	    = true;
-
     mRibbonCDS->Active 	    = true;
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
@@ -80,7 +77,6 @@ void __fastcall TatdbDM::afterDisConnect()
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
   	usersCDS->Active 	    = false;
     blocksCDS->Active 	    = false;
-
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
@@ -311,4 +307,18 @@ void __fastcall TatdbDM::cdsBeforeRefresh(TDataSet *DataSet)
 void __fastcall TatdbDM::specimenCDSBeforeClose(TDataSet *DataSet)
 {
     //delete runtime indices
+    Log(lDebug) << "Closing dataset";
 }
+
+void __fastcall TatdbDM::specimenCDSAfterClose(TDataSet *DataSet)
+{
+    Log(lDebug) << "Closing dataset";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TatdbDM::specimenCDSAfterOpen(TDataSet *DataSet)
+{
+    Log(lDebug) << "After Open";
+}
+//---------------------------------------------------------------------------
+

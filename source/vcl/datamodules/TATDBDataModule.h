@@ -1,7 +1,7 @@
 #ifndef TATDBDataModuleH
 #define TATDBDataModuleH
 #include <System.Classes.hpp>
-#include "DbxDevartSQLite.hpp"
+//#include "DbxDevartSQLite.hpp"
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>
@@ -89,7 +89,7 @@ __published:	// IDE-managed Components
 	TSQLDataSet *specimenDS;
 	TDataSetProvider *specimenProvider;
 	TClientDataSet *specimenCDS;
-	TDataSource *specimenDSrc;
+	TDataSource *specimenDataSource;
 	TStringField *specimenCDSspeciment_id;
 	TStringField *specimenCDSLspecie;
 	TStringField *specimenCDSadditional_identifier;
@@ -181,6 +181,10 @@ __published:	// IDE-managed Components
 	TStringField *blocksCDSLInfiltrationProtocol;
 	TStringField *blocksCDSLEmbeddingProtocol;
 	TStringField *blocksCDSLUser;
+	TSQLTimeStampField *specimenDSdate_entered;
+	TIntegerField *specimenDSentered_by;
+	TSQLTimeStampField *specimenCDSdate_entered;
+	TIntegerField *specimenCDSentered_by;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -198,6 +202,8 @@ __published:	// IDE-managed Components
           bool DisplayText);
 	void __fastcall cdsBeforeRefresh(TDataSet *DataSet);
 	void __fastcall specimenCDSBeforeClose(TDataSet *DataSet);
+	void __fastcall specimenCDSAfterClose(TDataSet *DataSet);
+	void __fastcall specimenCDSAfterOpen(TDataSet *DataSet);
 
 	private:	// User declarations
     protected:

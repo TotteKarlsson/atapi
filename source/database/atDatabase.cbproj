@@ -129,6 +129,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atDBUtils.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atQueryBuilder.cpp">
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>56</BuildOrder>
         </CppCompile>

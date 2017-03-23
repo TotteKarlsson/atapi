@@ -39,6 +39,7 @@ object atdbDM: TatdbDM
       'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -247,7 +248,7 @@ object atdbDM: TatdbDM
   end
   object blocksProvider: TDataSetProvider
     DataSet = blocksDS
-    Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
     Left = 136
     Top = 240
   end
@@ -255,7 +256,7 @@ object atdbDM: TatdbDM
     CommandText = 
       'select * from blocks WHERE process_id = :process_id ORDER by id ' +
       'DESC'
-    DataSource = specimenDSrc
+    DataSource = specimenDataSource
     MaxBlobSize = 1
     Params = <
       item
@@ -644,7 +645,7 @@ object atdbDM: TatdbDM
     end
   end
   object specimenDS: TSQLDataSet
-    CommandText = 'SELECT * from specimens order by process_id'
+    CommandText = 'SELECT * from specimens order by process_id DESC'
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
@@ -682,9 +683,17 @@ object atdbDM: TatdbDM
     object specimenDSdate_received: TDateField
       FieldName = 'date_received'
     end
+    object specimenDSdate_entered: TSQLTimeStampField
+      FieldName = 'date_entered'
+    end
+    object specimenDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
+    end
   end
   object specimenProvider: TDataSetProvider
     DataSet = specimenDS
+    Options = [poAutoRefresh, poUseQuoteChar]
     Left = 136
     Top = 160
   end
@@ -731,12 +740,23 @@ object atdbDM: TatdbDM
       item
         Name = 'date_received'
         DataType = ftDate
+      end
+      item
+        Name = 'date_entered'
+        DataType = ftTimeStamp
+      end
+      item
+        Name = 'entered_by'
+        Attributes = [faRequired]
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
     ProviderName = 'specimenProvider'
     StoreDefs = True
+    AfterOpen = specimenCDSAfterOpen
     BeforeClose = specimenCDSBeforeClose
+    AfterClose = specimenCDSAfterClose
     AfterPost = cdsAfterPost
     AfterScroll = cdsAfterScroll
     BeforeRefresh = cdsBeforeRefresh
@@ -795,8 +815,15 @@ object atdbDM: TatdbDM
       Size = 255
       Lookup = True
     end
+    object specimenCDSdate_entered: TSQLTimeStampField
+      FieldName = 'date_entered'
+    end
+    object specimenCDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
+    end
   end
-  object specimenDSrc: TDataSource
+  object specimenDataSource: TDataSource
     DataSet = specimenCDS
     Left = 344
     Top = 160
