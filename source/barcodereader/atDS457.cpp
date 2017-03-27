@@ -67,7 +67,7 @@ bool DS457::scanEnable()
   	int status = ScanEnable(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "ScanEnable returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -78,7 +78,7 @@ bool DS457::scanDisable()
   	int status = ScanDisable(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "ScanDisable returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -89,7 +89,7 @@ bool DS457::beep(int b)
 	int status = SoundBeeper(mCOMPort, b);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "SoundBeeper returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -100,7 +100,7 @@ bool DS457::aimOn()
 	int status = AimOn(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "AimOn returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -111,7 +111,7 @@ bool DS457::aimOff()
 	int status = AimOff(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "AimOff returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -122,7 +122,7 @@ bool DS457::LEDsOn()
 	int status = LedOn(mCOMPort, 1);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "LEDOn returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -133,7 +133,7 @@ bool DS457::LEDsOff()
 	int status = LedOff(mCOMPort, 1);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "LedOff returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -144,7 +144,7 @@ bool DS457::illuminationOn()
 	int status = IlluminationOn(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "IlluminationOn returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
@@ -155,7 +155,7 @@ bool DS457::illuminationOff()
 	int status = IlluminationOff(mCOMPort);
     if(status)
     {
-    	Log(lError) << "The barcodereader returned with an Error. Error ID = " << status;
+    	Log(lError) << "IlluminationOff returned with an Error. Error ID = " << status;
     }
 
 	return status == 0 ? true : false;
