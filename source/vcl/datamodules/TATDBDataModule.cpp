@@ -156,7 +156,6 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
         }
         cdsAfterRefresh(mRibbonCDS);
     }
-
 }
 
 void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)

@@ -44,6 +44,10 @@ class AT_BCR DS457 : public ATObject
 
         bool					            scanEnable();
         bool					            scanDisable();
+
+        bool					            startDecodeSession();
+        bool					            stopDecodeSession();
+
 		bool								beep(int b);
 		bool					            aimOn();
 		bool					            aimOff();

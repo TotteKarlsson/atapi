@@ -2745,21 +2745,17 @@ int CComThreads::ProcessCapabilitiesPacket(void)
 int CComThreads::ProcessParamPacket( int first_intermediate_last)
 {
 	int ret_val = TRUE;
-	
-
-
 	nRetries = 0;
-	
-	
+
 	if((cur_param_len + Packet->Length - SSI_HEADER_LEN) < VIDEOIMAGESIZE)
 	{
 		// remove beep code
 		if((Packet->Length - SSI_HEADER_LEN - 1) > 0)
 			memcpy(&VideoBarcodeOrEvent[cur_param_len], &Packet->Data[1], Packet->Length - SSI_HEADER_LEN - 1);
-	
+
 
 		cur_param_len += Packet->Length - SSI_HEADER_LEN - 1;
-	
+
 	}
 	else
 	{
@@ -2804,7 +2800,6 @@ int CComThreads::ProcessParamPacket( int first_intermediate_last)
 	return ret_val;
 }
 
-
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::SendWindowsMessage(int msg, WPARAM wParam, LPARAM lParam)
 *
@@ -2816,12 +2811,8 @@ int CComThreads::ProcessParamPacket( int first_intermediate_last)
 
 void CComThreads::SendWindowsMessage( int msg, WPARAM wParam, LPARAM lParam)
 {
-
-
 	PostMessage(hWnd, msg, wParam, lParam);
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::PostWindowsMessage(int msg, WPARAM wParam, LPARAM lParam)
@@ -2832,9 +2823,6 @@ void CComThreads::SendWindowsMessage( int msg, WPARAM wParam, LPARAM lParam)
 ******************************************************************************/
 void CComThreads::PostWindowsMessage( int msg, WPARAM wParam, LPARAM lParam)
 {
-	
-
 	PostMessage(hWnd, msg, wParam, lParam);
-
 }
 

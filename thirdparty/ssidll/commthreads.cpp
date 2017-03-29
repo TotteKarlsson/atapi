@@ -93,20 +93,20 @@ CComThreads::~CComThreads()
 *							Close the status message event handle and set the error code
 *						Initialize the remainder of the protocol handling variables and 
 *						create the packet and response timers by calling the setup protocol function.
-*                 Return the status in ret_val  
+*                 Return the status in ret_val
 *
 ******************************************************************************/
 int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 {
 	int ret_val = SSICOMM_NOERROR;
 
-	
-	hWnd = hwnd;			// copy handle of window to get messages so we have it for WM_ messages 
- 
+
+	hWnd = hwnd;			// copy handle of window to get messages so we have it for WM_ messages
+
 	SetupStateMachine(); // no global allocation that needs to be cleaned up, no msgs sent to user
 
 	bFlagUserInterrupt = FALSE;
-   
+
    InitializeCriticalSection(&gcsWriterData);
    InitializeCriticalSection(&gcsStateMachine);
     //
@@ -131,7 +131,7 @@ int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 	SetupProtocolHandler(nPort);  // create timers and init the array of pointers for this port
 											// so timer callbacks will know which CComPort Object the timeout is for.
 
-   return (ret_val);
+	return (ret_val);
 }
 
 /*****************************************************************************
@@ -161,21 +161,22 @@ void CComThreads::GlobalCleanup(int nPort)
 	DeleteCriticalSection(&gcsStateMachine);
    	DeleteCriticalSection(&gcsWriterData);
 
-
 	if(ghThreadExitEvent)
+    {
 		CloseHandle(ghThreadExitEvent);
+    }
 	ghThreadExitEvent = NULL;
 
 	if(ghWriterEvent)
+    {
 		CloseHandle(ghWriterEvent);
+    }
 	ghWriterEvent = NULL;
 
 	CleanupStateMachine();	// deletes storage for image
 
 	hWnd = NULL;
-
-
-   return;
+	return;
 }
 
 

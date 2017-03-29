@@ -16,6 +16,24 @@ TSCLIB::~TSCLIB()
 	unload();
 }
 
+bool TSCLIB::load(const string& dllPath)
+{
+	if(fileExists(dllPath))
+    {
+    	Log(lInfo) << "Loading DLL: " << getFileNameNoPath(dllPath);
+	  	mDLLHandle = LoadLibraryA(dllPath.c_str());
+    }
+
+    if(!mDLLHandle)
+    {
+    	Log(lError) << "Failed to load DLL: "<< getFileNameNoPath(dllPath);
+        return false;
+    }
+
+    //Assinging function s is part of the load process..
+    return assignFunctions();
+}
+
 bool TSCLIB::printFreshBatchLabel(const string& content, int copies)
 {
 	if(!mDLLHandle)
@@ -50,7 +68,7 @@ bool TSCLIB::printFreshBatchLabel(const string& content, int copies)
     return (bool) ret;
 }
 
-bool TSCLIB::printCoverSlipLabel(const string& content, int copies)
+bool TSCLIB::printCoverSlipLabel(BarcodePrintParameters& p, const string& content, int copies)
 {
 	if(!mDLLHandle)
     {
@@ -58,60 +76,59 @@ bool TSCLIB::printCoverSlipLabel(const string& content, int copies)
         return false;
     }
 
-    openport("USB");
-
-    //Centered
-	//Do this
-//    DIRECTION 1,1
-//DIRECTION 1,0
-//CLS
-//SIZE 0.965,0.2874
-//TEXT 15, 55, "1", 0, 1, 1,1, "B54C30C15"
-//TEXT 200, 55, "3", 0, 1, 1,1, "1234"
-//DMATRIX 145,35, 15, 15, x2, 43,43,"B54C30C15-1234"
-//PRINT 1,1
-//CLS
-
-	StringList c(content,'-');
-    if(c.count() != 2)
+    try
     {
-    	Log(lError) << "Can't print this label: "<<content;
-        return false;
+    	openport("USB");
+
+        //Centered
+        //Do this
+    //    DIRECTION 1,1
+    //DIRECTION 1,0
+    //CLS
+    //SIZE 0.965,0.2874
+    //TEXT 15, 55, "1", 0, 1, 1,1, "B54C30C15"
+    //TEXT 200, 55, "3", 0, 1, 1,1, "1234"
+    //DMATRIX 145,35, 15, 15, x2, 43,43,"B54C30C15-1234"
+    //PRINT 1,1
+    //CLS
+
+//        StringList c(content,'-');
+//        if(c.count() != 2)
+//        {
+//            Log(lError) << "Can't print this label: "<<content;
+//            return false;
+//        }
+
+        stringstream tc;
+        tc      << "SIZE "<<0.965<<","<<0.2874<<"\n"<<
+		        "GAP 3 mm,0.5 mm \n"<<
+        		"DIRECTION 1,0\n"<<
+                "SHIFT -20\n"<<
+                "CLS\n"<<
+                "TEXT 200, 35, \"1\", 0, 1, 1, 1, \""<<content<<"\"\n" <<
+                "DMATRIX "<<
+                p.xStart<<","<<
+                p.yStart<<","<<
+                p.expectedWidth<<","<<
+                p.expectedHeight<<","<<
+                "x"<<p.moduleSize<<","<<
+//                p.rowSymbolSize<<","<<
+//				p.colSymbolSize<<","<<
+                "\""<<content<<"\"\n"<<
+                "PRINT 1,"<<copies<<"\n";
+
+
+        int ret = sendcommand(tc.str().c_str());
+        Log(lDebug) << "Printer Command: "<< tc.str();
+        Log(lInfo) 	<< "Printer result: "<< ret;
+    }
+    catch(...)
+    {
+    	Log(lError) << "Failed opening port to label printer";
     }
 
-    stringstream tc;
-    tc      << "DIRECTION 1,0\n"
-    		<< "SIZE "<<0.965<<","<<0.2874<<"\n"
-            << "CLS\n"
-			<< "TEXT 15, 55, \"1\", 0, 1, 1,1, \""<<c[0]<<"\"\n"
-			<< "TEXT 200, 55, \"3\", 0, 1, 1,1, \""<<c[1]<<"\"\n"
-            << "DMATRIX 145,35, 15, 15, x2, 43,43, \""<<content<<"\"\n"
-            << "PRINT 1,"<<copies<<"\n";
-
-
-    int ret = sendcommand(tc.str().c_str());
-    Log(lDebug) << "Printer Command: "<< tc.str();
-    Log(lInfo) 	<< "Printer result: "<< ret;
     closeport();
-    return (bool) ret;
-}
-
-bool TSCLIB::load(const string& dllPath)
-{
-	if(fileExists(dllPath))
-    {
-    	Log(lInfo) << "Loading DLL: " << getFileNameNoPath(dllPath);
-	  	mDLLHandle = LoadLibraryA(dllPath.c_str());
-    }
-
-    if(!mDLLHandle)
-    {
-    	Log(lError) << "Failed to load DLL: "<< getFileNameNoPath(dllPath);
-        return false;
-    }
-
-    //Assinging function s is part of the load process..
-    return assignFunctions();
+    return (bool) true;
 }
 
 bool TSCLIB::assignFunctions()

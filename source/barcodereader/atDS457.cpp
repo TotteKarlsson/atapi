@@ -84,6 +84,28 @@ bool DS457::scanDisable()
 	return status == 0 ? true : false;
 }
 
+bool DS457::startDecodeSession()
+{
+  	int status = PullTrigger(mCOMPort);
+    if(status)
+    {
+    	Log(lError) << "ScanDisable returned with an Error. Error ID = " << status;
+    }
+
+	return status == 0 ? true : false;
+}
+
+bool DS457::stopDecodeSession()
+{
+  	int status = ReleaseTrigger(mCOMPort);
+    if(status)
+    {
+    	Log(lError) << "ScanDisable returned with an Error. Error ID = " << status;
+    }
+
+	return status == 0 ? true : false;
+}
+
 bool DS457::beep(int b)
 {
 	int status = SoundBeeper(mCOMPort, b);

@@ -33,9 +33,6 @@
 #define SSI_SOURCE_DECODER 0x00
 static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length);
 
-
-
-
 /*****************************************************************************
 *	SYNOPSIS:		DWORD WINAPI ReaderProc(LPVOID lpV)
 *
@@ -239,7 +236,7 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 						pSSI->ProtocolHandler->PacketTimer->SetInterval(0);
 						pSSI->ProtocolHandler->ResponseTimer->SetInterval(0);
 						EscapeCommFunction(pCOMDEV(pPortInfo),CLRRTS);     // scanner needs to see deassertion after the nak cancel
-						pSSI->ProtocolHandler->PacketState = PacketStart; 
+						pSSI->ProtocolHandler->PacketState = PacketStart;
 						pSSI->ProtocolHandler->bFlagUserInterrupt = FALSE;
 
 						// bFlagUserInterrupt is set to TRUE then the state is set to UserCommandPending at which point
@@ -494,7 +491,7 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 
 	for (i = 0; i < Length; i++)  
 	{
-		
+
 		Received = stream[i];
 
 		switch (pSSI->ProtocolHandler->PacketState)
@@ -604,12 +601,12 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 				pSSI->ProtocolHandler->Packet->Checksum |= (Received);  
 
 
-				
+
 				if (pSSI->ProtocolHandler->Packet->Checksum == pSSI->ProtocolHandler->Packet->ComputedChecksum)
 				{
 					if(pSSI->ProtocolHandler->PacketTimer->Tag == PacketStart) // no data errors noted along the way
 					{
-					
+
 						if(event_type == NAK_RESEND_EVENT)
 							if(pSSI->ProtocolHandler->Packet->Data[0] != 1)
 								event_type = NAK_DENIED_OR_BADCONTEXT_EVENT;
@@ -624,11 +621,11 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 							int resend_index =  i+4;
 							if(!(stream[resend_index] & 0x01) )// this is a resend so ditch the current one and use the next one
 								pSSI->ProtocolHandler->RunStateMachine( event_type,0,NULL,0);
-						}	
+						}
 
 						pSSI->ProtocolHandler->PacketStats.OK++;
 					}
-					else  // indicate data error by setting tag to PacketCRC1 so that when times out in error state, 
+					else  // indicate data error by setting tag to PacketCRC1 so that when times out in error state,
 					{		// we will know that we got a command that we don't understand or that the source was not expected
 						pSSI->ProtocolHandler->PacketTimer->Tag = PacketCRC1;
 						pSSI->ProtocolHandler->PacketState = PacketError;
@@ -645,13 +642,11 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 
 				}
 			break;
-			case PacketError: // we stay here until packet timeout occurrs and is processed 
+			case PacketError: // we stay here until packet timeout occurrs and is processed
 				Length = 0;
 			break;
 
 		}
 	}
-
-
 }
 

@@ -36,17 +36,15 @@
 /*	Defines, typedefs, etc. *************************************************/
 
 // defines for the SSIMESSAGE source
-#define SSI_SOURCE_HOST 0x04
-#define SSI_SOURCE_DECODER 0x00
+#define SSI_SOURCE_HOST 	0x04
+#define SSI_SOURCE_DECODER 	0x00
 
 // defines for NAK message, Cause field
 #define NAK_RESEND	1
 #define NAK_CANCEL	10
 #define NAK_DENIED	6
 #define NAK_BADCONTEXT	2
-
 #define PERMANENT_CHANGE 0x08;
-
 
 /****************************************************************************/
 /*	Local (private) Variables *********************************************************/
@@ -54,31 +52,31 @@
 // Constant tables
 
 // Packets that come from the decoder
-const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] = { 
-		DECODE_DATA, 
-		CMD_ACK, 
-		CMD_NAK, 
-		PARAM_SEND, 
-		IMAGE_DATA, 
-		VIDEO_DATA, 
+const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] = {
+		DECODE_DATA,
+		CMD_ACK,
+		CMD_NAK,
+		PARAM_SEND,
+		IMAGE_DATA,
+		VIDEO_DATA,
       	REPLY_REVISION,
-		EVENT, 
-		BATCH_DATA, 
-		CAPABILITIES_REPLY }; 
+		EVENT,
+		BATCH_DATA,
+		CAPABILITIES_REPLY };
 
 
 // PacketTimer function processes these in the state machine - each packet type above will map to one of these events
 const BYTE CComThreads::Recv_Pkt_Events[MAX_DECODER_PKTTYPES] = {
-	LAST_BARCODE_PKT_EVENT,    // all last_ events may be changed to next_ events by subtracting status byte, bit 1 
-	ACK_EVENT, 
+	LAST_BARCODE_PKT_EVENT,    // all last_ events may be changed to next_ events by subtracting status byte, bit 1
+	ACK_EVENT,
 	NAK_RESEND_EVENT,				// may change to NAK_DENIED_OR_BADCONTEXT_EVENT if first data byte is 2 or 6 or 10
-	LAST_PARAMDATA_PKT_EVENT, 
-	LAST_IMG_PKT_EVENT, 
-	LAST_VIDEO_PKT_EVENT, 
-    REVDATA_PKT_EVENT, 
-	SCANNEREVENT_PKT_EVENT, 
-	LAST_BATCHDATA_PKT_EVENT, 
-	CAPABILITIESDATA_PKT_EVENT}; 
+	LAST_PARAMDATA_PKT_EVENT,
+	LAST_IMG_PKT_EVENT,
+	LAST_VIDEO_PKT_EVENT,
+    REVDATA_PKT_EVENT,
+	SCANNEREVENT_PKT_EVENT,
+	LAST_BATCHDATA_PKT_EVENT,
+	CAPABILITIESDATA_PKT_EVENT};
 
 
 // This data structure and static array are used only in the timeout callback functions: ResponseTimeout and PacketTimeout
@@ -99,8 +97,8 @@ static thread_array_struct ThreadArray[MAX_COM_PORTS] = {0};
 *	SYNOPSIS:		void CComThreads::SetupProtocolHandler(int nComPortIndex)
 *
 *	DESCRIPTION:	Initialization - called during global initialization
-*						of the CComThreads object.  Initializes the object's 
-*						variables and creates the timers needed for protocol 
+*						of the CComThreads object.  Initializes the object's
+*						variables and creates the timers needed for protocol
 *                 handling in the state machine.
 *
 *	PARAMETERS:		nComPortIndex - com port number ( not zero offset )
@@ -177,10 +175,8 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 		delete PacketTimer;
 		PacketTimer = NULL;
 	}
-
-
-
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -188,15 +184,12 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 //
 //                                        TRANSMITTING
 //
-//                
+//
 //
 //												   Messages To Scanner
 //
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::SendSimpleCommand(unsigned char CmdCode, 
@@ -230,11 +223,7 @@ int CComThreads::SendSimpleCommand(unsigned char CmdCode, unsigned char *Params,
 
 	ResponseTimer->Tag = CmdCode;  // use for timeout message code
    return WritePacket(CmdCode, Params, ParamBytes, retries);
-
 }
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::PacketACK ()
@@ -259,7 +248,6 @@ int CComThreads::PacketACK ()
 
 	return WritePacket (CMD_ACK, NULL, 0, nRetries);  
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::PacketNAK (void)
@@ -321,16 +309,11 @@ int CComThreads::PacketNakBADCONTEXT (void)
 	return WritePacket (CMD_NAK, &Reason, 1, nRetries);
 }
 
-
-
-
-
-
 /*****************************************************************************
-*	SYNOPSIS:		int CComThreads::WritePacket(unsigned char CmdCode, 
+*	SYNOPSIS:		int CComThreads::WritePacket(unsigned char CmdCode,
 *										unsigned char *Params, int ParamBytes, int retries)
 *
-*	DESCRIPTION:	Builds the SSI packet, computes the checksum and stores it in 
+*	DESCRIPTION:	Builds the SSI packet, computes the checksum and stores it in
 *						the packet then calls WriteBuffer with the packet and it's length
 *
 *	PARAMETERS:		CmdCode:	SSI opcode
@@ -366,43 +349,39 @@ int CComThreads::WritePacket(unsigned char CmdCode, unsigned char *Params, int P
 	Checksum = 0;
 	for (i = 0; i < SSIBuffer[ 0 ]; i++)
 		Checksum += SSIBuffer[i];
-	
+
 	i = SSI_HEADER_LEN + ParamBytes;
 	SSIBuffer[i++] = (unsigned char)(((-Checksum) >> 8) & 0xFF);
 	SSIBuffer[i++] = (unsigned char)((-Checksum) & 0xFF);
 
-
-
 	return WriteBuffer ( SSIBuffer, i);
-	
 }
 
-
 /*****************************************************************************
-*	SYNOPSIS:		void CALLBACK CComThreads::ResponseTimeout(HWND hwnd, UINT uMsg, 
+*	SYNOPSIS:		void CALLBACK CComThreads::ResponseTimeout(HWND hwnd, UINT uMsg,
 *											UINT idEvent, DWORD dwTime )
 *
 *	DESCRIPTION:	Timer callback function for signaling no response was received
-*						from the scanner.  The response timer is started during 
+*						from the scanner.  The response timer is started during
 *						the transmission process and is killed during input packet processing.
 *						It may be disabled during the running of the state machine by
-*						having it's interval set to zero.  
-*						
+*						having it's interval set to zero.
+*
 *
 *						This function also kills the Packet timer.  This stops the Packet
-*						timer in the case of a checksum error found during packet processing. 
+*						timer in the case of a checksum error found during packet processing.
 *						A zero value for the Packet timer's Interval is set during PacketTimeout.
-*						
+*
 *
 *	PARAMETERS:		unused - standard windows timer function prameters
 *
 *	RETURN VALUE:	none
 *
 *	NOTES:			We don't want to kill the response timer during it's CALLBACK function
-*						so setting it's interval to zero disables it and indicates another thread 
+*						so setting it's interval to zero disables it and indicates another thread
 *						may kill it.  The interval may be reset to zero during the state machine or set to
 *                 it's next timeout value.  Then during the writer thread, it will be killed
-*                 and possibly re-started.  
+*                 and possibly re-started.
 *
 ******************************************************************************/
 void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
@@ -410,7 +389,7 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 	CComThreads *pThread = NULL;
 	int i;
 
-	// find the instance that this response timer belongs to 
+	// find the instance that this response timer belongs to
 	for( i = 0; i < MAX_COM_PORTS; i++)
 	{
 		if(ThreadArray[i].pResponseTimerID)
@@ -434,17 +413,15 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 		if(!pThread->PacketTimer->GetInterval())	// packet timeout indicated that it's disabled during it's callback
 			pThread->PacketTimer->Enable(FALSE);	// so kill it here.
 
-		if(pThread->ResponseTimer->GetInterval())	// response timer has not been disabled so process the timeout.	
-			pThread->RunStateMachine(RESPONSE_TIMEOUT_EVENT, 0,NULL, 0);   
+		if(pThread->ResponseTimer->GetInterval())	// response timer has not been disabled so process the timeout.
+			pThread->RunStateMachine(RESPONSE_TIMEOUT_EVENT, 0,NULL, 0);
 		   // if state machine was busy here, the response timer will usually be reset again and
-			// this timeout can be ignored.  If this timeout 
-			// is ignored because the state machine is busy denying a 
+			// this timeout can be ignored.  If this timeout
+			// is ignored because the state machine is busy denying a
 			// user request, the timer will timeout again since no-one
 			// is stopping it or disabling it and the timeout will be handled then.
-	}                               
+	}
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //

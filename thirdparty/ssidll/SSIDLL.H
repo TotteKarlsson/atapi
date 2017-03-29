@@ -51,7 +51,7 @@
 *
 *  A call to SetParameters will send a request to the scanner to change one or more of it's parameter values.
 *  The parameters to change and the new values are sent to the scanner along with the request.  The format of the
-*  parameters and their values is either  <param_num><value>  if param num is in the range 0..EFh or the format 
+*  parameters and their values is either  <param_num><value>  if param num is in the range 0..EFh or the format
 *  is <extended parameter code><parm_num_offset><value> for parameters whose param_num is 256 or higher.
 *  The other param is the length of the param data in bytes  Note that if the param value is a word value rather than a
 *  byte value, a byte having the value 0xf4 must preceed <param_num>. 
@@ -251,8 +251,13 @@ SSIDLL_API int __stdcall            IsConnected(int nComPort);
 SSIDLL_API int __stdcall            SnapShot(int nComPort);
 SSIDLL_API int __stdcall            TransmitVersion(int nComPort);
 SSIDLL_API int __stdcall            AbortImageXfer(int nComPort);
+
 SSIDLL_API int __stdcall            PullTrigger(int nComPort);
 SSIDLL_API int __stdcall            ReleaseTrigger(int nComPort);
+
+//SSIDLL_API int __stdcall            StartSession(int nComPort);
+//SSIDLL_API int __stdcall            StopSession(int nComPort);
+
 SSIDLL_API int __stdcall            SetParameters(unsigned char *Params, int ParamBytes, int nComPort);
 SSIDLL_API int __stdcall            TransmitVideo(int nComPort);
 SSIDLL_API int __stdcall            RequestParameters(unsigned char *Params, int ParamBytes, int nComPort);

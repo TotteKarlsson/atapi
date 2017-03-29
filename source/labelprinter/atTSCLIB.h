@@ -21,6 +21,18 @@ typedef int (__stdcall *f_Setup)(		 const char*, const char*, const char*, const
 
 typedef int (__stdcall *f_WinFont)(		 int, int, int, int, int, int, const char*, const char*);
 
+struct BarcodePrintParameters
+{
+	int 		xStart;
+    int 		yStart;
+    double 		expectedWidth;
+    double 		expectedHeight;
+    int 		moduleSize;
+    int			rowSymbolSize;
+    int			colSymbolSize;
+};
+
+
 //!The TSCLIB class wraps functions that are present in the tsclib.dll module. These functions
 //allow printing custom labels on a TSC printer
 class AT_CORE TSCLIB
@@ -30,7 +42,7 @@ class AT_CORE TSCLIB
 							                ~TSCLIB();
         bool                                load(const string& dllPath);
 
-        bool								printCoverSlipLabel(const string& content, int copies = 1);
+        bool								printCoverSlipLabel(BarcodePrintParameters& p, const string& content, int copies = 1);
         bool								printFreshBatchLabel(const string& content, int copies = 1);
 
         bool						        isLoaded();
