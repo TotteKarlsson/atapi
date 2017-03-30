@@ -32,26 +32,25 @@
 
 class TTimer
 {
-public:
-	TTimer(int hwnd);
-	~TTimer(void);
-	void Enable(bool);
-	void SetInterval(int);
-	int GetInterval(void);
-	BOOL RunningOn(void);
-	void (CALLBACK *OnTimer)(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
-	int Tag;
-	UINT ID;
-private:
-	int Hwnd;
-	bool Enabled;
-	int Interval;
-	CRITICAL_SECTION csTimer;
-
+    public:
+                                    TTimer(int hwnd);
+                                    ~TTimer(void);
+        void                     	Enable(bool);
+        void                        SetInterval(int);
+        int                         GetInterval(void);
+        BOOL                        RunningOn(void);
+        void (CALLBACK *OnTimer)	(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
+        int 						Tag;
+        UINT 						ID;
+    private:
+        int 						Hwnd;
+        bool                       	Enabled;
+        int                         Interval;
+        CRITICAL_SECTION 			csTimer;
 };
 
 
-#define ABORTTIMEOUT						2000	// when  user asks to abort transfer of image data, set timer to this value
+#define ABORTTIMEOUT					2000	// when  user asks to abort transfer of image data, set timer to this value
 #define COMMANDTIMEOUT					2000	// after user command, we allow this much time to pass
 #define RESPONSETIMEOUT					3000	// after user PARAM request AND PARAM SEND , we allow this much time to pass
 #define PINGERTIMEOUT					3000	
@@ -61,4 +60,4 @@ private:
 // #define PACKETSTARTTIMEOUT				500	// time from when get first char to when give up waiting to get entire packet
 
 
-#endif  //  __MSGTIMERS_H__
+#endif

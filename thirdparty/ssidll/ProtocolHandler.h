@@ -2,20 +2,20 @@
 *	FILENAME:		ProtocolHandler.h
 *	COPYRIGHT(c) 2002 Symbol Technologies Inc.  All rights reserved
 *
-*	DESCRIPTION:	Defines and typedefs for SSI packets - lengths, opcodes, data fields.	
+*	DESCRIPTION:	Defines and typedefs for SSI packets - lengths, opcodes, data fields.
 *
 *	NOTES:
-*	
+*
 *	AUTHOR:			A.Schuessler
 *	CREATION DATE: 10/28/02
 *	DERIVED FROM:  New File
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/ProtocolHandler.h-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:50   fitzsimj
  * Initial revision.
- * 
+ *
  *    Rev 1.0   Oct 28 2002 14:38:48   schuesla
  * Initial revision.
 *
@@ -30,7 +30,6 @@
 #define SSI_MAX_PACKET_LENGTH 258
 #define SSI_HEADER_LEN        4
 #define SSI_CHECKSUM_LEN      2
-
 
 /* Defines all the SSI commands -=- these are the SSIMESSAGE opcodes - KEEP IN ASCENDING NUMERIC ORDER */
 #define		FLUSH_MACRO_PDF	      0x10
@@ -64,32 +63,24 @@
 #define		DECODE_DATA			  0xF3
 #define		EVENT				  0xF6
 #define		IMAGER_MODE			  0xF7
-#define		LAST_OPCODE			  IMAGER_MOdE
-
-
+#define		LAST_OPCODE			  IMAGER_MODE
 
 #define MAX_DECODER_PKTTYPES 10
-
 
 // Defines for data field of IMAGER_MODE command
 #define VIDEO_OPERATION 2
 #define SNAPSHOT_OPERATION 1
 #define BARCODE_READER_OPERATION 0
 
-
-
-
 // param for PARAM_REQUEST -=- this the the SSIMESSAGE data for a param request for all parameters
 #define SSI_PARAM_ALL 0xFE  // for the parm send from the decoder, it will be 0XFF
 
 #define SSI_256_PREFIX 0xF0  // TBD - NOT USED BUT MIGHT BE USEFUL LATER
 
-
-
 // Defines for packet queuing - we are not queuing since this protocol uses strict handshaking, but use for
 // creating data structures anyway.
 
-#define MAX_BUFFERS		2 
+#define MAX_BUFFERS		2
 
 #define VIDEOIMAGESIZE	4000
 #define VIDEOIMAGEQSIZE	4  // in case user can't process as fast as we can
@@ -97,7 +88,7 @@
 #define OUTPUTPACKETQSIZE	2
 #define PACKET_Q_SIZE   3
 
-#define MAX_SSI_PACKET   (SSI_MAX_PACKET_LENGTH - SSI_HEADER_LEN)  
+#define MAX_SSI_PACKET   (SSI_MAX_PACKET_LENGTH - SSI_HEADER_LEN)
 
 typedef struct
 {
@@ -122,14 +113,10 @@ typedef struct
   long OK;
 } PacketStatsStruct;
 
-
-
 // values for ScannerStatus CComThreads member var
 #define SCANNER_ALIVE   0
 #define SCANNER_DEAD    1
 #define SCANNER_QUERY   2
-
-
 
 // values for PacketState
 #define PacketStart	0
@@ -140,10 +127,5 @@ typedef struct
 #define PacketCRC1	5
 #define PacketCRC2	6
 #define PacketError	7
-
-
-
-                     
-
 
 #endif   // __PROTOCOLHANDLER_H__

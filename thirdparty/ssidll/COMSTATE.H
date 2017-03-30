@@ -28,13 +28,7 @@
 
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
-
-
-
-
-
 // Define the events we monitor
-
 
 // event affecting the state machine from the response timer and from the packet timer
 #define PKT_TIMEOUT_EVENT		0	// pkt was started, but bad or incomplete within pkt timeout period
@@ -57,30 +51,28 @@
 #define NEXT_VIDEO_PKT_EVENT	10	// received a video data packet from the decoder and it was not the last packet
 #define LAST_VIDEO_PKT_EVENT	11	// received a video data packet from the decoder and it was the last packet
 // may be multipacketed
-#define NEXT_BARCODE_PKT_EVENT 12	// received a barcode data packet from the decoder and it was not the last packet 
-#define LAST_BARCODE_PKT_EVENT 13	// received a barcode data packet from the decoder and it was the last packet 
+#define NEXT_BARCODE_PKT_EVENT 12	// received a barcode data packet from the decoder and it was not the last packet
+#define LAST_BARCODE_PKT_EVENT 13	// received a barcode data packet from the decoder and it was the last packet
 // never multipacketed
-#define SCANNEREVENT_PKT_EVENT	14	// received an event data packet from the decoder - always last packet 
+#define SCANNEREVENT_PKT_EVENT	14	// received an event data packet from the decoder - always last packet
 
 
 // events affecting the state machine from solicited scanner input that cannot be ack'ed or nak'ed
 // these may all be considered ack's
 // multipacketed
-#define NXT_BATCHDATA_PKT_EVENT	15
+#define NXT_BATCHDATA_PKT_EVENT		15
 #define LAST_BATCHDATA_PKT_EVENT	16
 // may be multipacketed
-#define NXT_PARAMDATA_PKT_EVENT	17
+#define NXT_PARAMDATA_PKT_EVENT		17
 #define LAST_PARAMDATA_PKT_EVENT	18
 // never multipacketed
-#define REVDATA_PKT_EVENT	19
-#define CAPABILITIESDATA_PKT_EVENT 20
-#define ACK_EVENT 21
-#define NAK_RESEND_EVENT 22
+#define REVDATA_PKT_EVENT			19
+#define CAPABILITIESDATA_PKT_EVENT 	20
+#define ACK_EVENT 					21
+#define NAK_RESEND_EVENT 			22
 #define NAK_DENIED_OR_BADCONTEXT_EVENT 23
 
 
 #define MAX_MONITORED_EVENTS 24
 
-
-
-#endif // !defined _COM_STATE_H_
+#endif

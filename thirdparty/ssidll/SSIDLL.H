@@ -177,7 +177,6 @@
 								    	// user should re-try request
 #define SSICOMM_BADDATA			    -22	// param data is in incorrect format
 
-
 // these generate WM_ERROR messages to the app - all are either fatal/nonfatal errors occurring during program execution,
 // ... or are the return value of an api function indicating a fatal error
 
@@ -254,9 +253,6 @@ SSIDLL_API int __stdcall            AbortImageXfer(int nComPort);
 
 SSIDLL_API int __stdcall            PullTrigger(int nComPort);
 SSIDLL_API int __stdcall            ReleaseTrigger(int nComPort);
-
-//SSIDLL_API int __stdcall            StartSession(int nComPort);
-//SSIDLL_API int __stdcall            StopSession(int nComPort);
 
 SSIDLL_API int __stdcall            SetParameters(unsigned char *Params, int ParamBytes, int nComPort);
 SSIDLL_API int __stdcall            TransmitVideo(int nComPort);

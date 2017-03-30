@@ -49,7 +49,7 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length);
 *                 Call the function to get the OSVersion information
 *						initialzie fThreadNotDone, fWaitingOnRead and fWaitingOnStat to FALSE
 *						Set pPortInfo to the PortInfo struct for the CComPort object
-*						Create the reader and status events 
+*						Create the reader and status events
 *						Store those events and the thread exit event in hArray
 *						While fThreadNotDone
 *							If not fWaitingOnRead
@@ -84,12 +84,12 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length);
 *									Else 
 *										if there were chars read, call the function to process the input
 *									SetfWaitingRead to FALSE
-*								Else if the function returns status event was signaled	
+*								Else if the function returns status event was signaled
 *									Call GetOverlappedResult function
-*									If it was unsuccessful, 
-*										get the error code						
+*									If it was unsuccessful,
+*										get the error code
 *										if error code wasn't operation aborted,
-*											send user fatal WM_ERROR message 
+*											send user fatal WM_ERROR message
 *									Else
 *										if the status was transmit buffer empty, clear RTS
 *									SetfWaitingOnStat to FALSE
@@ -99,11 +99,10 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length);
 *									call the function to clear the comm errors
 *								Else ignore the return value - this should never happen
 *
-*						Close the reader and status events	
+*						Close the reader and status events
 *						Return TRUE
 *
 ******************************************************************************/
-
 DWORD WINAPI ReaderProc(LPVOID lpV)
 {
     OVERLAPPED osReader = {0};  // overlapped structure for read operations
@@ -120,26 +119,22 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
     char   	   lpBuf[AMOUNT_TO_READ];
 	unsigned long LastError;
 	int WaitCommFlag;
-	CComPort *pSSI = (CComPort *)lpV;	
+	CComPort *pSSI = (CComPort *)lpV;
 	TTYInfo *pPortInfo;
 
 	OSVERSIONINFO OSVersionInfo;
-	
+
 	OSVersionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	GetVersionEx(&OSVersionInfo);	
-	
+	GetVersionEx(&OSVersionInfo);
 	pPortInfo = &(pSSI->PortInfo);
 
-    //
     // create two overlapped structures, one for read events
     // and another for status events
-    //
-
     osReader.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
     if (osReader.hEvent == NULL)
     {
         pSSI->ProtocolHandler->OnError(SSIRTHREAD_CREATEREVENT);
-        ExitThread(0);  
+        ExitThread(0);
     }
     osStatus.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
     if (osStatus.hEvent == NULL)
@@ -149,29 +144,23 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
         ExitThread(0);
     }
 
-	  //
-
-    //
     // We want to detect the following events:
     //   Read events (from ReadFile)
     //   Status events (from WaitCommEvent)
     //   Thread exit events (from our shutdown functions)
     //
 	hArray[0] = osReader.hEvent;
-	hArray[1] = osStatus.hEvent;	
+	hArray[1] = osStatus.hEvent;
 	hArray[2] = pSSI->ProtocolHandler->ghThreadExitEvent;
 
-
-
-   while ( !fThreadDone ) 
+   while ( !fThreadDone )
    {
-
       //
       // if no read is outstanding, then issue another one
       //
-      if (!fWaitingOnRead) 
+      if (!fWaitingOnRead)
       {
-         if (!ReadFile(pCOMDEV(pPortInfo), lpBuf, AMOUNT_TO_READ, &dwRead, &osReader)) 
+         if (!ReadFile(pCOMDEV(pPortInfo), lpBuf, AMOUNT_TO_READ, &dwRead, &osReader))
          {
             if (GetLastError() != ERROR_IO_PENDING)	  // read not delayed?
             {
@@ -181,13 +170,11 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 
             fWaitingOnRead = TRUE;
          }
-         else 
-         {    
+         else
+         {
             // read completed immediately
             if (dwRead)
                InterpretPacket(pSSI,(BYTE*)lpBuf, dwRead);
-
-            
          }
       }
 
@@ -196,14 +183,13 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
         // This will cause a pending WaitCommEvent to complete
         // and the resultant event flag will be NULL.
         //
-      if (dwStoredFlags != pEVENTFLAGS(pPortInfo)) 
+      if (dwStoredFlags != pEVENTFLAGS(pPortInfo))
       {
          dwStoredFlags = pEVENTFLAGS(pPortInfo);
-    
+
 			if (!SetCommMask(pCOMDEV(pPortInfo), EV_TXEMPTY))
             pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_SETMASK);
       }
-
 
         //
         // if no status check is outstanding, then issue another one
@@ -218,12 +204,12 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 	         WaitCommFlag = !(LastError == ERROR_IO_PENDING);
          }
          if (!WaitCommFlag)
-         {     
+         {
             if (GetLastError() != ERROR_IO_PENDING)	  // Wait not delayed?
                pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_WAITCEVENT);
             else
                fWaitingOnStat = TRUE;
-         }     
+         }
          // else WaitCommEvent returned immediately
 			if(!fWaitingOnStat)
 			{
@@ -231,7 +217,7 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 				{
 					if(pSSI->ProtocolHandler->bFlagUserInterrupt) // last time thru, state machine sent nak cancel instead of
 						                                           // a user command because the scanner might have been waiting
-																				 // for an ack or nak and would not have recognized the command 
+																				 // for an ack or nak and would not have recognized the command
 					{
 						pSSI->ProtocolHandler->PacketTimer->SetInterval(0);
 						pSSI->ProtocolHandler->ResponseTimer->SetInterval(0);
@@ -243,57 +229,52 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 						// if a PKT_TIMEOUT_EVENT is seen, the command will be re-sent.  The event could have been set to
 						// any of the events that would have caused a re-send of the last command whose value has been stored.
 						pSSI->ProtocolHandler->RunStateMachine( PKT_TIMEOUT_EVENT, 0,0,0);
-  
 					}
 					else
 					{
 						EscapeCommFunction(pCOMDEV(pPortInfo),CLRRTS);
 						pSSI->ProtocolHandler->PacketState = PacketStart;
 					}
-
 				}
 			}
 		}
-   
 
         //
         // wait for pending operations to complete
         //
-      if ( fWaitingOnStat && fWaitingOnRead ) 
+      if ( fWaitingOnStat && fWaitingOnRead )
       {
          dwRes = WaitForMultipleObjects(NUM_READSTAT_HANDLES, hArray, FALSE, STATUS_CHECK_TIMEOUT);
          switch(dwRes)
          {
-                //
-                // read completed
-                //
+            // read completed
             case WAIT_OBJECT_0:
-               if (!GetOverlappedResult(pCOMDEV(pPortInfo), &osReader, &dwRead, FALSE)) 
+               if (!GetOverlappedResult(pCOMDEV(pPortInfo), &osReader, &dwRead, FALSE))
                {
                   if (GetLastError() != ERROR_OPERATION_ABORTED)
                   {
-                      pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_ORESULT); 
+                      pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_ORESULT);
                       ExitThread(0);
                   }
                }
-               else 
+               else
                {      // read completed successfully
                   if (dwRead)
                      InterpretPacket(pSSI, (BYTE*)lpBuf, dwRead);
                }
-               
+
                fWaitingOnRead = FALSE;
                break;
 
                 //
                 // status completed
                 //
-            case WAIT_OBJECT_0 + 1: 
-               if (!GetOverlappedResult(pCOMDEV(pPortInfo), &osStatus, &dwOvRes, FALSE)) 
+            case WAIT_OBJECT_0 + 1:
+               if (!GetOverlappedResult(pCOMDEV(pPortInfo), &osStatus, &dwOvRes, FALSE))
                {
                   if (GetLastError() != ERROR_OPERATION_ABORTED)
                   {
-                     pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_ORESULT); // needs error 
+                     pSSI->ProtocolHandler->OnFatalError(SSIRTHREAD_ORESULT); // needs error
                      ExitThread(0);
                   }
 						else
@@ -317,8 +298,6 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 										EscapeCommFunction(pCOMDEV(pPortInfo),CLRRTS);
 										pSSI->ProtocolHandler->PacketState = PacketStart;
 									}
-									
-
 								}
 							}
 					}
@@ -332,52 +311,45 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 								pSSI->ProtocolHandler->PacketTimer->SetInterval(0);
 								pSSI->ProtocolHandler->ResponseTimer->SetInterval(0);
 								EscapeCommFunction(pCOMDEV(pPortInfo),CLRRTS);
-								pSSI->ProtocolHandler->PacketState = PacketStart;  
+								pSSI->ProtocolHandler->PacketState = PacketStart;
 								pSSI->ProtocolHandler->bFlagUserInterrupt = FALSE;
-		
+
 								pSSI->ProtocolHandler->RunStateMachine( PKT_TIMEOUT_EVENT, 0,0,0);
-							}	
+							}
 							else
 							{
 								EscapeCommFunction(pCOMDEV(pPortInfo),CLRRTS);
 								pSSI->ProtocolHandler->PacketState = PacketStart;
 							}
-
 						}
-
 					}
-
 
                fWaitingOnStat = FALSE;
                break;
 
- 
 				case WAIT_OBJECT_0 + 2:
                fThreadDone = TRUE;
                break;
 
             case WAIT_TIMEOUT:
                {
-                  COMSTAT ComStatNew; 
+                  COMSTAT ComStatNew;
                   DWORD dwErrors;
 
                   ClearCommError(pCOMDEV(pPortInfo), &dwErrors, &ComStatNew);
                }
-               break;                       
+               break;
 
             default:
-                    
+
                break;
          }
       }
    }
 
-    //
     // close event handles
-    //
    CloseHandle(osReader.hEvent);
    CloseHandle(osStatus.hEvent);
-
    return 1;
 }
 
@@ -392,7 +364,7 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 *	RETURN VALUE:	none
 *	INPUTS:			CComPort PacketState			
 *						CComPort PacketArray			
-*						CComPort CurrentPacketNumber	
+*						CComPort CurrentPacketNumber
 *
 *	OUTPUTS:			CComPort ResponseTimer
 *						CComPort PacketTimer
@@ -476,8 +448,6 @@ DWORD WINAPI ReaderProc(LPVOID lpV)
 ******************************************************************************/
 static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 {
-
-
 	unsigned long i;
 	int index;
 	static BYTE event_type;
@@ -598,7 +568,7 @@ static void InterpretPacket (LPVOID lpV, BYTE *stream, unsigned long Length)
 			break;
 
 			case PacketCRC2:
-				pSSI->ProtocolHandler->Packet->Checksum |= (Received);  
+				pSSI->ProtocolHandler->Packet->Checksum |= (Received);
 
 
 

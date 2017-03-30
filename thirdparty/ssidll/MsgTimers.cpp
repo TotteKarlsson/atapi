@@ -74,7 +74,9 @@ TTimer::TTimer(int hwnd)
 TTimer::~TTimer(void)
 {
 	if(OnTimer && Enabled)
+    {
 		KillTimer((HWND)Hwnd, ID);
+    }
 	Enabled = FALSE;
 	OnTimer = 0;
 	Interval = 0;
@@ -131,14 +133,15 @@ void TTimer::Enable(bool flag)
 	}
 	LeaveCriticalSection(&csTimer);
 
-	
 };
+
 void TTimer::SetInterval(int i)
 {
 	EnterCriticalSection(&csTimer);
 	Interval = i;
 	LeaveCriticalSection(&csTimer);
 }
+
 int TTimer::GetInterval(void)
 {
 	int i;

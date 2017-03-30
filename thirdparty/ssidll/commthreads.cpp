@@ -22,8 +22,6 @@
  * Initial revision.
 *
 *****************************************************************************/
-
-/****************************************************************************/
 /*	Include Files ***********************************************************/
 #include <windows.h>
 #include <commctrl.h>
@@ -66,20 +64,20 @@ CComThreads::~CComThreads()
 *	SYNOPSIS:		int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 *
 *	DESCRIPTION:	Sets up the state machine for the protcol and initializes
-*						critical sections and events.	
+*						critical sections and events.
 *
-*	PARAMETERS:		hwnd:	handle to the window that is to receive any windows 
+*	PARAMETERS:		hwnd:	handle to the window that is to receive any windows
 *								messages.
-*                 nPort: the com port number 
+*                 nPort: the com port number
 *
 *	RETURN VALUE:	Error code if any error during initialization.
 *	INPUTS:
 *	OUTPUTS:			CComThreads object with intialized member variables.
-*						
+*
 *
 *	NOTES:			Critical section is initialized here even if event can't be
 *						created.  GlobalCleanup() will delete them.  These two functions
-*						are called only once - immediately after CComThreads construction and 
+*						are called only once - immediately after CComThreads construction and
 *						immediately before CComThreads destruction, in the CComPort constructor
 *						and destructor.
 *
@@ -91,7 +89,7 @@ CComThreads::~CComThreads()
 *						Create the thread exit event and writer event
 *						if unsuccessful,
 *							Close the status message event handle and set the error code
-*						Initialize the remainder of the protocol handling variables and 
+*						Initialize the remainder of the protocol handling variables and
 *						create the packet and response timers by calling the setup protocol function.
 *                 Return the status in ret_val
 *
@@ -100,15 +98,14 @@ int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 {
 	int ret_val = SSICOMM_NOERROR;
 
-
 	hWnd = hwnd;			// copy handle of window to get messages so we have it for WM_ messages
 
 	SetupStateMachine(); // no global allocation that needs to be cleaned up, no msgs sent to user
 
 	bFlagUserInterrupt = FALSE;
 
-   InitializeCriticalSection(&gcsWriterData);
-   InitializeCriticalSection(&gcsStateMachine);
+   	InitializeCriticalSection(&gcsWriterData);
+   	InitializeCriticalSection(&gcsStateMachine);
     //
     // thread exit event
     //
@@ -123,10 +120,7 @@ int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 
 
 	pPortInfo = NULL;
-
-		//
 		//   for ProtocolHandling Initialization
-		//
 
 	SetupProtocolHandler(nPort);  // create timers and init the array of pointers for this port
 											// so timer callbacks will know which CComPort Object the timeout is for.
@@ -214,10 +208,9 @@ void CComThreads::GlobalCleanup(int nPort)
 int CComThreads::StartThreads(LPVOID lpV)
 {
 	DWORD dwReadStatId;
-   DWORD dwWriterId;
+   	DWORD dwWriterId;
 	int return_val = SSICOMM_NOERROR;
 	CComPort *pSSI = (CComPort *)lpV;
-
 	pPortInfo = &(pSSI->PortInfo);
 
 	// 257 is max byes per packet - we assume no interchar delay and expect to see all the chars within this timeout
@@ -262,8 +255,6 @@ int CComThreads::StartThreads(LPVOID lpV)
 	}
    return return_val;
 }
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		DWORD CComThreads::WaitForThreadsToExit( DWORD dwTimeout)  
@@ -318,18 +309,15 @@ DWORD CComThreads::WaitForThreadsToExit( DWORD dwTimeout)
 		PacketTimer->Enable(FALSE);
 		PacketTimer->SetInterval(0);
 	}
-	
 
-	
 	Sleep(100);
-
 	SetEvent(ghThreadExitEvent);
 
-   if(hThreads[0] == NULL) 
+   if(hThreads[0] == NULL)
 	{
       dwRes = WaitForSingleObject(pWRITERTHREAD(pPortInfo),dwTimeout);
 	}
-   else if (hThreads[1] == NULL) 
+   else if (hThreads[1] == NULL)
 	{
       dwRes = WaitForSingleObject(pREADSTATTHREAD(pPortInfo), dwTimeout);
 	}
@@ -341,23 +329,22 @@ DWORD CComThreads::WaitForThreadsToExit( DWORD dwTimeout)
    switch(dwRes)
    {
 		case WAIT_OBJECT_0:  // fall thru
-		case WAIT_OBJECT_0 + 1: 
+		case WAIT_OBJECT_0 + 1:
 			dwRes = WAIT_OBJECT_0;
 			break;
 
-        
 		default: // wait timeout
 			if(pREADSTATTHREAD(pPortInfo))
 			{
 				if (WaitForSingleObject(pREADSTATTHREAD(pPortInfo), 0) == WAIT_TIMEOUT)
 				{
 					// Fatal Error occurred try to terminat the thread
-					TerminateThread(pREADSTATTHREAD(pPortInfo),0); 
-			                                              
-					// This function is dangerous if thread owns a critical section, it won't be released, 
+					TerminateThread(pREADSTATTHREAD(pPortInfo),0);
+
+					// This function is dangerous if thread owns a critical section, it won't be released,
 					// if thread is executing kernel32 calls when we call release, the kernel32
-					// state of the thread's process may be inconsistent, 
-					// if thread is manipulating the global state of a shared dll, 
+					// state of the thread's process may be inconsistent,
+					// if thread is manipulating the global state of a shared dll,
 					// ...state of the dll could be destroyed, affecting other users of the dll
 				}
 			}
@@ -370,12 +357,9 @@ DWORD CComThreads::WaitForThreadsToExit( DWORD dwTimeout)
 				}
 			}
          break;
-
     }
 
-   ResetEvent(ghThreadExitEvent);
-
-
+	ResetEvent(ghThreadExitEvent);
     return dwRes;  // error message is handled in calling function on receipt of this value
 }
 

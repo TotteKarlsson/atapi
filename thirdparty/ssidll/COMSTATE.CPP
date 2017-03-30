@@ -57,17 +57,17 @@
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
 
-#define IdleState								0 //  No pending host request, no decoder input expected
+#define IdleState						0 //  No pending host request, no decoder input expected
 
-// these may have been folded into one state but extra logic would have made processing less clear  
-// ... No pending host request, expecting next barcode, image or video data packet from decoder 
+// these may have been folded into one state but extra logic would have made processing less clear
+// ... No pending host request, expecting next barcode, image or video data packet from decoder
 #define Unsolicited_Barcode_Pending		1 //  No pending host request, expecting next barcode data packet from decoder
 #define Unsolicited_Image_Pending		2 //  No pending host request, expecting next image data packet from decoder
 #define Unsolicited_Video_Pending		3 //  No pending host request, expecting next video data packet from decoder
 
 #define HOST_ABORTXFER_Pending			4 //  Host has requested image transfer abort, waiting for line to go quiet
 
-#define HOST_CMD_Pending					5 //  Host Command has been issued, expecting ACK packet from decoder
+#define HOST_CMD_Pending				5 //  Host Command has been issued, expecting ACK packet from decoder
 
 // these could have been folded into 2 states, but extra logic for handling which type of data would make code less clear
 //... Host Request for data packet response has been issued, expecting next requested data packet
@@ -79,10 +79,10 @@
 
 
 // for  packet data that may or may not be multipacketed
-#define FIRST_AND_LAST			3	// one packet and it's marked as the last packet
-#define FIRST_IN_SERIES			2	// first packet of multipacket series
-#define INTERMEDIATE_PACKET		1	// multipacket series - not first and not last packet
-#define LAST_IN_SERIES			0	// mutlipacket series and it's the last packet
+#define FIRST_AND_LAST			        3	// one packet and it's marked as the last packet
+#define FIRST_IN_SERIES			        2	// first packet of multipacket series
+#define INTERMEDIATE_PACKET		        1	// multipacket series - not first and not last packet
+#define LAST_IN_SERIES			        0	// mutlipacket series and it's the last packet
 
 
 // image type defines
@@ -181,13 +181,10 @@ void CComThreads::CleanupStateMachine(void)
 *
 *	NOTES:			Trigger is released automatically if barcode has been decoded and now in barcode data transfer state
 *						Trigger is released automatically if it began an image transfer
-*						Therefore, Trigger only needs to be released while in idle and the barcode hasn't been decoded 
+*						Therefore, Trigger only needs to be released while in idle and the barcode hasn't been decoded
 *						yet or during a video transfer.
 *						A TRUE return value does not mean trigger was released, only that commands to release trigger were
 *						attempted to be sent to the scanner.
-*
-*
-*
 ******************************************************************************/
 int CComThreads::ServiceTriggerRelease(void)
 {
@@ -195,9 +192,7 @@ int CComThreads::ServiceTriggerRelease(void)
 
 	return_val = RunStateMachine(USER_CMD_EVENT,STOP_SESSION, NULL, 0);
 	return(return_val);
-		
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ServiceTriggerPull(void)
@@ -210,32 +205,22 @@ int CComThreads::ServiceTriggerRelease(void)
 *
 *	RETURN VALUE:	TRUE if trigger pull commands were sent.
 *
-*	NOTES:			Generally speaking, it doesn't make sense to pull the trigger while waiting for another command 
+*	NOTES:			Generally speaking, it doesn't make sense to pull the trigger while waiting for another command
 *						to complete.  Last command must be ack/nak'd before the scanner can take a new one. Exception is
 *                 If snapshot mode command was sent to scanner that has video viewfinder parameter set.  This results
 *                 in the start of video mode continuing until the trigger is pulled.  Therefore, we allow trigger pull
 *                 during video mode.
-*					
-*
 ******************************************************************************/
-
-
 int CComThreads::ServiceTriggerPull(void)
 {
 	int return_val = FALSE;
 
-
 	return_val = RunStateMachine( USER_CMD_EVENT,START_SESSION, NULL, 0);
-		
-
 	return(return_val);
-	
 }
 
-
-
 /*****************************************************************************
-*	SYNOPSIS:		int CComThreads::ServiceUserCommand(int nEvent, unsigned char CmdCode, 
+*	SYNOPSIS:		int CComThreads::ServiceUserCommand(int nEvent, unsigned char CmdCode,
 *								unsigned char *pParams, int ParamBytes)
 *
 *	DESCRIPTION:	User has a command other than abort xfer, pull trigger or release trigger, or a request for data
@@ -252,58 +237,50 @@ int CComThreads::ServiceTriggerPull(void)
 *
 *
 ******************************************************************************/
-
 int CComThreads::ServiceUserCommand(int nEvent, unsigned char CmdCode, unsigned char *pParams, int ParamBytes)
 {
 	int ret_val;
-
 	ret_val = RunStateMachine( nEvent, CmdCode, pParams, ParamBytes);
-	
-
 	return ret_val;
-	
 }
 
 /*****************************************************************************
-*	SYNOPSIS:		int CComThreads::SendAbortCommands() 
+*	SYNOPSIS:		int CComThreads::SendAbortCommands()
 *
 *	DESCRIPTION:	For aborting an image transfer only. Just calls state
 *						machine with a cancel event command.
 *
 *	PARAMETERS:		none
 *
-*	RETURN VALUE:	returns true if command is handled, FALSE if request is 
+*	RETURN VALUE:	returns true if command is handled, FALSE if request is
 *						denied (eg not in state that handes image transfer
 *
 *	NOTES:			This is a user entry point into the state machine.
 *
 ******************************************************************************/
-int CComThreads::SendAbortCommands() 
+int CComThreads::SendAbortCommands()
 {
-
 	return RunStateMachine(USR_NAK_CANCEL_EVENT,0, NULL, 0);
 }
 
-
-
 /*****************************************************************************
-*	SYNOPSIS:		int CComThreads::RunStateMachine(int nEvent, unsigned char CmdCode, 
+*	SYNOPSIS:		int CComThreads::RunStateMachine(int nEvent, unsigned char CmdCode,
 *							unsigned char *Params, int ParamBytes)
 *
-*	DESCRIPTION:	For the input event, perform the function of the current state.	
+*	DESCRIPTION:	For the input event, perform the function of the current state.
 *
 *	PARAMETERS:		nEvent:		the event to be serviced depending on the current state
 *						CmdCode:		the SSI command  code if the state machine is entered by user cmd or request or
 *                             indicator of bad checksum if the state machine is entered by Packet timeout, o/w it's
-*                             value is don't care.										
+*                             value is don't care.
 *						Params:		the user data to be sent with the command, if any, if entry is by user cmd or request
 *										otherwise value is don't care
 *						ParamBytes:	the length of Params buffer if entry is by user command or request
-*										otherwise value is don't care		
+*										otherwise value is don't care
 *
 *	RETURN VALUE:	If the state machine is busy FALSE is returned.  If not busy:
-*                 If entered by user command or request for data, a value of TRUE is returned if the 
-*						command or request was accepted and readied for sending to the scanner.  Later, when the scanner 
+*                 If entered by user command or request for data, a value of TRUE is returned if the
+*						command or request was accepted and readied for sending to the scanner.  Later, when the scanner
 *						actually services a user request for data, a Windows message will be sent to the user
 *						application.  A value of FALSE means the request or command could not be serviced at this time
 *						If entered by a packet timer timeout, if the state machine is not busy, a TRUE is always returned.
@@ -315,27 +292,24 @@ int CComThreads::SendAbortCommands()
 *                 the reader thread data will just be dropped as if it were lost and the response timer will timeout and
 *                 ask for a resend or the scanner will retry.
 *
-*	INPUTS:			
+*	INPUTS:
 *
-*	OUTPUTS:			
+*	OUTPUTS:
 *
-*	NOTES:			
+*	NOTES:
 *
 *	PSEUDOCODE:		see inline comments
 *
 ******************************************************************************/
-
 int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned char *Params, int ParamBytes)
 {
 	int ret_val = FALSE;
 	BOOL bad_checksum = FALSE;
-	
+
 	if((ResponseTimer == NULL) || (PacketTimer == NULL))
 		return FALSE;
 
 	EnterCriticalSection(&(gcsStateMachine));
-
-
 	if(StateMachineInUse)
 	{
 		LeaveCriticalSection(&(gcsStateMachine));
@@ -351,17 +325,15 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 	switch(CurrentState)
 	{
 		//***************************************************************************************************************
-
 		case IdleState:		//  No pending host request, no decoder input expected
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
 				{
-					// events from timer CALLBACK routines 
+					// events from timer CALLBACK routines
 					case PKT_TIMEOUT_EVENT:		// pkt was started, but bad or incomplete within pkt timeout period
 						{
-							// Reset response timer interval  then send nak resend or nak cancel, no message to user 
+							// Reset response timer interval  then send nak resend or nak cancel, no message to user
 							if(bad_checksum) // input is set to 1 if checksum failure
 								AssumeNakableUnsolicitedMsg( FALSE); // false because we don't want the response timer interval set
 							else
@@ -371,12 +343,12 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 								PacketNakBADCONTEXT();
 							}
 							ret_val = TRUE; // tells packet timeout that timeout was handled and timer can be disabled
-							                // since we are either in idle or response timer has been re-started 
+							                // since we are either in idle or response timer has been re-started
 
-							break;         
+							break;
 						}
-					case RESPONSE_TIMEOUT_EVENT: 
-						{	
+					case RESPONSE_TIMEOUT_EVENT:
+						{
 							ret_val = TRUE; // just stay in idle - no message t user
 
 							ResponseTimer->SetInterval(0);  // indicate response timer should be killed - we are still in
@@ -388,8 +360,8 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 
 					// user command
 					case USER_CMD_EVENT:			// idle state - user wants to send a simple cmd to the decoder
-						{								// we always accept commands - even if a transmission is in process 
-														// from the scanner. Response timer is not running in idle 
+						{								// we always accept commands - even if a transmission is in process
+														// from the scanner. Response timer is not running in idle
 
 							int save_interval = PacketTimer->GetInterval();
 							PacketTimer->SetInterval(0); // packetstate is reset to start when tx buffer is empty
@@ -502,21 +474,18 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 					// may be multipacketed
 					case NEXT_BARCODE_PKT_EVENT:	// received a barcode data packet from the decoder and it was not the last packet 
 						{
-						
 							if(ret_val = ProcessBarcodePacket(FIRST_IN_SERIES))
 								CurrentState = Unsolicited_Barcode_Pending;
 							break;
 						}
-					case LAST_BARCODE_PKT_EVENT:	// received a barcode data packet from the decoder and it was the last packet 
+					case LAST_BARCODE_PKT_EVENT:	// received a barcode data packet from the decoder and it was the last packet
 						{
-					
 							ret_val = ProcessBarcodePacket(FIRST_AND_LAST);
 							break;
 						}
 					// never multipacketed
-					case SCANNEREVENT_PKT_EVENT:	// received an event data packet from the decoder - always last packet 
+					case SCANNEREVENT_PKT_EVENT:	// received an event data packet from the decoder - always last packet
 						{
-							
 							ret_val = ProcessEventPacket(); 
 							break;
 						}
@@ -548,9 +517,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 				break;
 			}
 		//***************************************************************************************************************
-
 		case Unsolicited_Barcode_Pending:	//  No pending host request, expecting next barcode packet from decoder
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -690,20 +657,20 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 
 					// events from packet timer -=- solicited scanner input that cannot be ack'ed or nak'ed
 					// these may all be considered ack's -=- all are unexpected here.  Ignore any more of these
-					// packets when back in idle.					
+					// packets when back in idle.
 
 					// multipacketed
 					case NXT_BATCHDATA_PKT_EVENT: // fall thru
 					case LAST_BATCHDATA_PKT_EVENT:
 					// may be multipacketed
 					case NXT_PARAMDATA_PKT_EVENT:
-					case LAST_PARAMDATA_PKT_EVENT:	
+					case LAST_PARAMDATA_PKT_EVENT:
 					// never multipacketed
-					case REVDATA_PKT_EVENT:	
+					case REVDATA_PKT_EVENT:
 					case CAPABILITIESDATA_PKT_EVENT:
-					case ACK_EVENT: 
+					case ACK_EVENT:
 					case NAK_RESEND_EVENT: // our last message was an ack - can't respond to ack or nak with ack or nak
-					case NAK_DENIED_OR_BADCONTEXT_EVENT: 
+					case NAK_DENIED_OR_BADCONTEXT_EVENT:
 						{
 							// the response timer is already dead from packet processor so just reset retires and WM_ to user
 							ret_val = UserErrorMessage(ERR_UNEXPECTEDDATA);  // ALWAYS RETURNS FALSE
@@ -711,14 +678,11 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 							break;
 						}
 				}
-
 				break;
 			}
 			
 		//***************************************************************************************************************
-
 		case Unsolicited_Image_Pending: //  No pending host request, expecting next image data packet from decoder
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -826,16 +790,16 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 					case LAST_BATCHDATA_PKT_EVENT:
 					// may be multipacketed
 					case NXT_PARAMDATA_PKT_EVENT:
-					case LAST_PARAMDATA_PKT_EVENT:	
+					case LAST_PARAMDATA_PKT_EVENT:
 					// never multipacketed
-					case REVDATA_PKT_EVENT:	
+					case REVDATA_PKT_EVENT:
 					case CAPABILITIESDATA_PKT_EVENT:
-					case ACK_EVENT: 
+					case ACK_EVENT:
 					case NAK_RESEND_EVENT: // can't re-send our ack or nak because cant ack or nak another ack or nak
-					case NAK_DENIED_OR_BADCONTEXT_EVENT: 
+					case NAK_DENIED_OR_BADCONTEXT_EVENT:
 						{
 							//  reset retires and WM_ to user AND return false
-							ret_val = UserErrorMessage(ERR_UNEXPECTEDDATA); 
+							ret_val = UserErrorMessage(ERR_UNEXPECTEDDATA);
 							CurrentState = IdleState;
 							break;
 						}
@@ -844,9 +808,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 				break;
 			}
 		//***************************************************************************************************************
-
 		case Unsolicited_Video_Pending:	//  No pending host request, expecting next  video data packet from decoder
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -854,12 +816,12 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 					// events from timers
 					case PKT_TIMEOUT_EVENT:		// pkt was started, but bad or incomplete within pkt timeout period
 						{
-	
+
 
 							// send nak cancel, response timer reset and set retries to 0 and return true always
 								ret_val = CancelScanDataNsndErrMsg(0, FALSE); // no error message sent, reset response timer
-								CurrentState = IdleState; 
-						
+								CurrentState = IdleState;
+
 							break;
 						}
 					case RESPONSE_TIMEOUT_EVENT: // one of the below events was expected but no pkt was received from the decoder
@@ -876,7 +838,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 						}
 
 					// events from the user
-					case USER_CMD_EVENT:			// user wants to send a simple cmd to the decoder - only cmds allowed 
+					case USER_CMD_EVENT:			// user wants to send a simple cmd to the decoder - only cmds allowed
 														// are pull and release trigger
 						{								// After command is handled, we will go to back to idle state,  so we set
 														// up the command here then send it in wait for cmd handled state
@@ -887,9 +849,9 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 								SSIcmd_code = CmdCode;
 								memcpy(ParamData, Params, ParamBytes);
 								nParamLen = ParamBytes;
-								nRetries = -1; // since we can't send command here, we'll set retries so when incremented it's ok 
+								nRetries = -1; // since we can't send command here, we'll set retries so when incremented it's ok
 
-															
+
 								CurrentState = HOST_CMD_Pending;
 								bFlagUserInterrupt = TRUE;
 								ret_val = TRUE;
@@ -899,9 +861,9 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 							break;
 						}
 					case USER_BATCHDATAREQ_EVENT:		// fall thru
-					case USER_PARAMDATAREQ_EVENT:		// user wants batch data, param data, revision data, 
+					case USER_PARAMDATAREQ_EVENT:		// user wants batch data, param data, revision data,
 					case USER_REVDATAREQ_EVENT:		// ...or capabilities data from decoder
-					case USER_CAPDATAREQ_EVENT:		
+					case USER_CAPDATAREQ_EVENT:
 					case USR_NAK_CANCEL_EVENT:			// for abort xfer during image transfer or response data transfer states
 						{
 							ret_val = FALSE;  // DenyUserRequest  unallowed command during video
@@ -910,7 +872,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 
 					// Events from packet timer -=- unsolicited scanner input that must be ack'ed or nak'ed
 
-					// multipacketed					
+					// multipacketed
 					case NEXT_IMG_PKT_EVENT:		// fall thru
 					case LAST_IMG_PKT_EVENT:		// received an image packet from the decoder - in video viewfinder this can happen
 						{
@@ -927,7 +889,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 					case LAST_VIDEO_PKT_EVENT:	// received a video data packet from the decoder and it was the last packet
 						{
 							ret_val = ProcessVideoPacket(LAST_IN_SERIES);
-							CurrentState = IdleState; 
+							CurrentState = IdleState;
 							break;
 						}
 					// may be multipacketed
@@ -939,9 +901,9 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 							CurrentState = IdleState;				// handle the retry in idle
 							break;
 						}
-					
+
 					// never multipacketed
-					case SCANNEREVENT_PKT_EVENT:	// received an event data packet from the decoder - always last packet 
+					case SCANNEREVENT_PKT_EVENT:	// received an event data packet from the decoder - always last packet
 						{
 							// Reset response timer interval for next packet timeout, post a WM_ and send nak resend
 							ret_val = NakWithTimeoutMsg(VIDEO_DATA);  // resend handled in idle
@@ -958,13 +920,13 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 					case LAST_BATCHDATA_PKT_EVENT:
 					// may be multipacketed
 					case NXT_PARAMDATA_PKT_EVENT:
-					case LAST_PARAMDATA_PKT_EVENT:	
+					case LAST_PARAMDATA_PKT_EVENT:
 					// never multipacketed
-					case REVDATA_PKT_EVENT:	
+					case REVDATA_PKT_EVENT:
 					case CAPABILITIESDATA_PKT_EVENT:
-					case ACK_EVENT: 
-					case NAK_RESEND_EVENT: 
-					case NAK_DENIED_OR_BADCONTEXT_EVENT: 
+					case ACK_EVENT:
+					case NAK_RESEND_EVENT:
+					case NAK_DENIED_OR_BADCONTEXT_EVENT:
 					default: // just in case
 						{
 							//  reset retires and WM_ to user and return false
@@ -1066,11 +1028,8 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 			}
 
 
-
 		//***************************************************************************************************************
-
 		case HOST_CMD_Pending:			//  Host Command has been issued, expecting ACK packet from decoder
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -1159,7 +1118,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 							bFlagUserInterrupt = FALSE;
 							ret_val = TRUE;
 							CurrentState = IdleState;
-							SendWindowsMessage(WM_CMDCOMPLETEMSG, 0, 0);
+							PostWindowsMessage(WM_CMDCOMPLETEMSG, 0, 0);
 							nRetries = 0;
 
 							break;
@@ -1216,8 +1175,8 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 							cur_param_len = 0;
 							
 							ret_val = TRUE; // tells packet timeout that timeout was handled and timer can be disabled
-							                // since we are either in idle or response timer has been re-started 
-							
+							                // since we are either in idle or response timer has been re-started
+
 							break;
 						}
 					case RESPONSE_TIMEOUT_EVENT: // one of the below events was expected but no pkt was received from the decoder
@@ -1318,9 +1277,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 				break;
 			}
 		//**************************************************************************************************************
-
 		case HOST_REQforCapDATA_Pending:	//	 Host Request for data has been issued, expecting next requested data packet
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -1421,9 +1378,7 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 				break;
 			}
 		//***************************************************************************************************************
-
 		case HOST_REQforRevDATA_Pending:	//	 Host Request for data has been issued, expecting next requested data packet
-
 		//***************************************************************************************************************
 			{
 				switch(nEvent)
@@ -1521,19 +1476,11 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 
 	}
 
-
-
-
 	EnterCriticalSection(&(gcsStateMachine));
 	StateMachineInUse = FALSE;
 	LeaveCriticalSection(&(gcsStateMachine));
 	return ret_val;
-
 }
-
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::UserErrorMessage( int err_code)
@@ -1546,21 +1493,13 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 *	RETURN VALUE:	Always FALSE
 *
 ******************************************************************************/
-
 int CComThreads::UserErrorMessage(  int err_code)
 {
-	
-
-	// ResponseTimer was killed already during packet processing   
+	// ResponseTimer was killed already during packet processing
 	nRetries = 0;
-	SendWindowsMessage(WM_ERROR, (WPARAM)err_code, 0);
+	PostWindowsMessage(WM_ERROR, (WPARAM)err_code, 0);
 	return FALSE;
 }
-
-
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::CancelScanDataNsndErrMsg(int error_code, int set_timeout)
@@ -1578,8 +1517,6 @@ int CComThreads::UserErrorMessage(  int err_code)
 
 int CComThreads::CancelScanDataNsndErrMsg( int error_code, int set_timeout)
 {
-	
-
 	nRetries = 0;
 
 	if(set_timeout)
@@ -1591,22 +1528,21 @@ int CComThreads::CancelScanDataNsndErrMsg( int error_code, int set_timeout)
 	PacketNakCANCEL();
 
 	if(error_code)
-		PostWindowsMessage(WM_ERROR, (WPARAM)error_code, 0);  // unexpected message 
+		PostWindowsMessage(WM_ERROR, (WPARAM)error_code, 0);  // unexpected message
 	return TRUE;
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::AssumeNakableUnsolicitedMsg(int bSetResponseTimer)
 *
 *	DESCRIPTION:	Sets the response timer to timeout so we get an indication that no input
-*						was received from the scanner after we send a nak-resend, or set the 
-*						response timer to be turned off because we will try the nak-resend but 
+*						was received from the scanner after we send a nak-resend, or set the
+*						response timer to be turned off because we will try the nak-resend but
 *						we don't care if we get a response or not.
-*						
+*
 *
 *	PARAMETERS:		bSetResponseTimer:	if TRUE, set the ResponseTimer interval to NEXTPACKETTIMEOUT
-*													if FALSE set it to zero so the writer function will kill it	
+*													if FALSE set it to zero so the writer function will kill it
 *
 *	RETURN VALUE:	always returns TRUE
 *
@@ -1616,23 +1552,19 @@ int CComThreads::CancelScanDataNsndErrMsg( int error_code, int set_timeout)
 *						Call the function to send a nak resend to the scanner
 *
 ******************************************************************************/
-
 int CComThreads::AssumeNakableUnsolicitedMsg( int bSetResponseTimer)
 {
 	if(bSetResponseTimer)
 		ResponseTimer->SetInterval(NEXTPACKETTIMEOUT);
-	else 
+	else
 	{
 		nRetries = 0;
-		ResponseTimer->SetInterval(0);  // indicate to writer function to kill timer 
+		ResponseTimer->SetInterval(0);  // indicate to writer function to kill timer
 	}
 
 	PacketNAK();  // resend
 	return TRUE;
 }
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::NakWithTimeoutMsg( int timer_function_code )
@@ -1642,44 +1574,37 @@ int CComThreads::AssumeNakableUnsolicitedMsg( int bSetResponseTimer)
 *						timer_function_code, and calls the function to nak resend.
 *						Always returns TRUE
 *
-*	Note:				After calling this function, you must always return to idle since 
+*	Note:				After calling this function, you must always return to idle since
 *						response timer is reset.  The resent message will be handled in idle.
 *
 ******************************************************************************/
-
 int CComThreads::NakWithTimeoutMsg(  int timer_function_code )
 {
-	
-
 	ResponseTimer->SetInterval(0);
-	
+
 	PostWindowsMessage(WM_TIMEOUT, 0, (LPARAM) timer_function_code );
 	PacketNAK();
 	return TRUE;
-
 }
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::NakIfNotTimedOut( int timer_function_code )
 *
-*	DESCRIPTION: 
+*	DESCRIPTION:
 *
 *	PARAMETERS:		timer_function_code:	what kind of data we were waiting for
 *
-*	RETURN VALUE:	TRUE if timeout because all retries are used up, 
-*						FALSE if response timer was restarted and nak resend sent 
+*	RETURN VALUE:	TRUE if timeout because all retries are used up,
+*						FALSE if response timer was restarted and nak resend sent
 
 *	INPUTS:			nRetries
-*				
+*
 *	OUTPUTS:			nRetries
 *						ResponseTimer
 *
 *	NOTES:
 *
-*	PSEUDOCODE:		Set return val to FALSE	
+*	PSEUDOCODE:		Set return val to FALSE
 *						Increment nRetries
 *						If retries are up
 *							post a windows message for timeout sending timer_function code as a param
@@ -1690,74 +1615,59 @@ int CComThreads::NakWithTimeoutMsg(  int timer_function_code )
 *						return return val
 *
 ******************************************************************************/
-
 int CComThreads::NakIfNotTimedOut(  int timer_function_code )
 {
-
 	int return_val = FALSE;
-	
-
-
 	if(nRetries++ >= MAX_RETRIES)
 	{
 		nRetries = 0;
 		// lparam is set to image data or video data or decode data
-		PostWindowsMessage(WM_TIMEOUT, 0, (LPARAM) timer_function_code ); 
+		PostWindowsMessage(WM_TIMEOUT, 0, (LPARAM) timer_function_code );
 		return_val = TRUE;
-		
+
 		ResponseTimer->SetInterval(0);
 	}
-	else 
+	else
 	{
-		
+
 		ResponseTimer->SetInterval(NEXTPACKETTIMEOUT);
       PacketNAK();
 	}
 	return return_val;
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::CheckIfTimedOut( int timer_function_code )
 *
-*	DESCRIPTION:	Same as NakIfNotTimedOut function above except, no 
+*	DESCRIPTION:	Same as NakIfNotTimedOut function above except, no
 *						nak is sent when retries are up but response timer sets
 *						timeout value to next packet timeout if retries are left or zero if not.
 *
 *
 ******************************************************************************/
-
 int CComThreads::CheckIfTimedOut(  int timer_function_code )
 {
-
 	int return_val = FALSE;
-	
-
-
 	if(nRetries++ >= MAX_RETRIES)
 	{
 		nRetries = 0;
-		PostWindowsMessage(WM_TIMEOUT, 0, (LPARAM) timer_function_code ); 
+		PostWindowsMessage(WM_TIMEOUT, 0, (LPARAM) timer_function_code );
 		return_val = TRUE;
-		
+
 		ResponseTimer->SetInterval(0);
 	}
 	else
 		ResponseTimer->SetInterval(NEXTPACKETTIMEOUT);
-	
+
 	return return_val;
-
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::IncreaseTimeout( int error_code )
 *
 *	DESCRIPTION:	Sets response timer interval to next packet t/o if retries are not up
 *						o/w sets nRetries, cur_param_len, cur_batch_len and Response timer interval to zero
-*						and posts a WM_ERROR message to user app. 
+*						and posts a WM_ERROR message to user app.
 *
 *	PARAMETERS:		error_code:	the error code to be sent to user app if retries are up
 *
@@ -1776,40 +1686,29 @@ int CComThreads::CheckIfTimedOut(  int timer_function_code )
 *	PSEUDOCODE:		Set return_val to FALSE
 *						If nRetries are up
 *							Set nRetries, cur_param_len, cur_batch_len and ResponseTimer interval to zero
-*							Post a windows message with the input error code 
+*							Post a windows message with the input error code
 *
 ******************************************************************************/
-
 int CComThreads::IncreaseTimeout(  int error_code )
 {
-
 	int return_val = FALSE;
-	
-
-
 	if(nRetries++ >= MAX_RETRIES)
 	{
-		nRetries = 0;	
+		nRetries = 0;
 		cur_param_len = 0;
 
 		PostWindowsMessage(WM_ERROR, (WPARAM)error_code, 0);
-		
+
 		ResponseTimer->SetInterval(0);
 	}
-	else 
+	else
 	{
-		
+
 		ResponseTimer->SetInterval(NEXTPACKETTIMEOUT);
 		return_val = TRUE;
 	}
 	return return_val;
-
-
 }
-
-
-
-
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::SendParamReqCommand(void)
 *
@@ -1839,18 +1738,13 @@ int CComThreads::IncreaseTimeout(  int error_code )
 ******************************************************************************/
 int CComThreads::SendParamReqCommand(void)
 {
-	
-
 	nRetries = 0;
 	cur_param_len = 0;
-
 	int return_val = SendSimpleCommand(SSIcmd_code,
 		                        ParamData,
 										nParamLen,
-										nRetries); 
-
+										nRetries);
 	return return_val;
-
 }
 
 /*****************************************************************************
@@ -1865,32 +1759,28 @@ int CComThreads::SendParamReqCommand(void)
 *	INPUTS:			SSIcmd_code
 *						ParamData
 *						nParamLen
-*						
+*
 *	OUTPUTS:			nRetries
 *
 *	NOTES:			SSI command info is stored in "global" var so that it can
 *						be re-sent if necessary.
-*					
+*
 *	PSEUDOCODE:		Set nRetries to zero
 *						Call the function to send the stored command to the scanner
-*						If the command was unable to be sent, 
+*						If the command was unable to be sent,
 *							Call the function to set the dll error code and return FALSE
 *						Else return TRUE
 *
 ******************************************************************************/
 int CComThreads::SendCpabilitiesReqCommand(void)
 {
-	
-
 	nRetries = 0;
 	int return_val = SendSimpleCommand(SSIcmd_code,
 		                        ParamData,
 										nParamLen,
-										nRetries); 
+										nRetries);
 	return return_val;
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::SendRevReqCommand(void)
@@ -1904,39 +1794,34 @@ int CComThreads::SendCpabilitiesReqCommand(void)
 *	INPUTS:			SSIcmd_code
 *						ParamData
 *						nParamLen
-*						
+*
 *	OUTPUTS:			nRetries
 *
 *	NOTES:			SSI command info is stored in "global" var so that it can
 *						be re-sent if necessary.
-*					
+*
 *	PSEUDOCODE:		Set nRetries to zero
 *						Call the function to send the stored command to the scanner
-*						If the command was unable to be sent, 
+*						If the command was unable to be sent,
 *							Call the function to set the dll error code and return FALSE
 *						Else return TRUE
 *
 ******************************************************************************/
-
 int CComThreads::SendRevReqCommand(void)
 {
-	
-
 	nRetries = 0;
 	int return_val = SendSimpleCommand(SSIcmd_code,
 		                        ParamData,
 										nParamLen,
-										nRetries); 
+										nRetries);
 	return return_val;
 }
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::SendUserCommand(  void)
 *
 *	DESCRIPTION:	Sends the user command that has been stored in
-*						SSIcmd_code, ParamData and nParamLen with the 
+*						SSIcmd_code, ParamData and nParamLen with the
 *						current value for nRetries.
 *
 *	PARAMETERS:		none
@@ -1946,37 +1831,31 @@ int CComThreads::SendRevReqCommand(void)
 *	INPUTS:			SSIcmd_code
 *						ParamData
 *						nParamLen
-*						
+*
 *	OUTPUTS:			nRetries
 *						SavedState
 *
 *	NOTES:			SSI command info is stored in "global" var so that it can
 *						be re-sent if necessary. Return value can be sent to user.
 *
-*	PSEUDOCODE:		Set nRetries to zero 
+*	PSEUDOCODE:		Set nRetries to zero
 *						Call the function to send the ssi command that was stored
 *						if the function returns FALSE
 *							call the function to set the error code for the dll and return FALSE
-*						else return TRUE 
+*						else return TRUE
 *
 ******************************************************************************/
 int CComThreads::SendUserCommand(void)
 {
 	int return_val = FALSE;
-	
-
-
 	nRetries = 0;
-	
 
 	// this gets the response timer going also -=- it returns FALSE if the output queue is not empty
 	return_val = SendSimpleCommand(SSIcmd_code,
 		                        ParamData,
 										nParamLen,
-										nRetries); 
-
+										nRetries);
 	return return_val;
-
 }
 
 /*****************************************************************************
@@ -1984,12 +1863,12 @@ int CComThreads::SendUserCommand(void)
 *
 *	DESCRIPTION:	If the retries are up, sends Windows message for timeout,
 *						resets timer interval and nRetries to zero and returns FALSE.
-*						Otherwise, resends last command to the decoder and returns TRUE, 
-*                 
+*						Otherwise, resends last command to the decoder and returns TRUE,
+*
 *
 *	PARAMETERS:		error_code: to send to the user applicaion if a WM_ERROR must be sent
 *
-*	RETURN VALUE:	TRUE if retries are up 
+*	RETURN VALUE:	TRUE if retries are up
 *	INPUTS:			nRetries
 *
 *	OUTPUTS:			ResponseTimer
@@ -2001,7 +1880,7 @@ int CComThreads::SendUserCommand(void)
 *
 *	NOTES:
 *
-*	PSEUDOCODE:		If nRetries are used up, 
+*	PSEUDOCODE:		If nRetries are used up,
 *							Set nRetries to zero
 *							Post a Windows message with the errror code
 *							Set the ResponseTimer Interval to zero
@@ -2014,13 +1893,10 @@ int CComThreads::SendUserCommand(void)
 int CComThreads::ReSendUserCommand(  int error_code )
 {
 	int return_val = FALSE;
-	
-
-
 	if(nRetries++ >= MAX_RETRIES)
 	{
-		nRetries = 0;	
-		PostWindowsMessage(WM_ERROR, error_code, 0); 
+		nRetries = 0;
+		PostWindowsMessage(WM_ERROR, error_code, 0);
 		ResponseTimer->SetInterval(0);
 	}
 	else // resend the last message - if we got nothing back from the decoder, that's all we can do
@@ -2029,26 +1905,25 @@ int CComThreads::ReSendUserCommand(  int error_code )
 	    // we can assume we got an ack and continue or we can resend
 		 // We'll assume we got a nak resend.  That way we'll force the decoder to resend it's previous packet
 		 // return val of this function will be ignored by  callback function  It will be FALSE
-		// if queue was full -- we'll let this go and timeout next time thru since this function will reset the 
+		// if queue was full -- we'll let this go and timeout next time thru since this function will reset the
 		// response timer
 		SendSimpleCommand(SSIcmd_code, ParamData, nParamLen, nRetries);
 
 		return_val = TRUE;
 	}
-	return return_val;				
+	return return_val;
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::MustResendHostCmd(int error_code)
 *
 *	DESCRIPTION:		If retries are up or last command couldn't be resent, return FALSE after setting cur_param_len,
-*							cur_batch_len, nRetries and the ResponseTimer interval to zero. 
+*							cur_batch_len, nRetries and the ResponseTimer interval to zero.
 *
-*	PARAMETERS:			error_code:	the code to be sent if a windows error message needs to be sent to the 
+*	PARAMETERS:			error_code:	the code to be sent if a windows error message needs to be sent to the
 *							user application.
 *
-*	RETURN VALUE:		TRUE if command was resent successfully, FALSE if user should return to 
+*	RETURN VALUE:		TRUE if command was resent successfully, FALSE if user should return to
 *							idle state (or saved state) since  command could not be reset because retries
 *							were up or error condition.
 *
@@ -2080,59 +1955,54 @@ int CComThreads::ReSendUserCommand(  int error_code )
 *									post a windows error message with the input error condition
 *
 ******************************************************************************/
-
-int CComThreads::MustResendHostCmd( int error_code) 
+int CComThreads::MustResendHostCmd( int error_code)
 {
 	int return_val = FALSE;
-	
-
 
 	// We were looking for an ACK from the decoder after we sent our command.
-	// Decoder sent NAK resend 
+	// Decoder sent NAK resend
 	// or any other "non-nakable" batch, capabilites etc. packet.  We'll send our last cmd again
 	// because this should cause the decoder to ack our command and then it may re-send this
 	// unexpected data but by then we'll be in idle mode and we'll take care of it there.
 
 	// We also may have been waiting for the host revision request and instead got a response timeout.
 
-	if(nRetries++ >= MAX_RETRIES) 
-	{ 
-		nRetries = 0;	
+	if(nRetries++ >= MAX_RETRIES)
+	{
+		nRetries = 0;
 		cur_param_len = 0;
 		ResponseTimer->SetInterval(0);
-		PostWindowsMessage(WM_ERROR, error_code, 0);  
+		PostWindowsMessage(WM_ERROR, error_code, 0);
 	}
-	else // resend the last message 
+	else // resend the last message
 	{
-     
+
 		return_val = SendSimpleCommand(SSIcmd_code, ParamData, nParamLen, nRetries);
-	
+
 		if(!return_val) // queue was full so couldn't send message - we must be in an error condition
-		{ 
+		{
 			nRetries = 0;
     		cur_param_len = 0;
 			ResponseTimer->SetInterval(0); // the call to send the command above set the response timer - we need to reset it
 			PostWindowsMessage(WM_ERROR, error_code, 0);
 		}
-
 	}
 	return return_val;
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessImagePacket(int first_intermediate_last)
 *
 *	DESCRIPTION:	Processes the current packet as an ssi image data packet by storing
 *						data from intermediate packets, appending them into a buffer until the
-*						last packet is reached. While appending intermediate packets, it sends 
-*						the current total number of bytes stored and the total number expected 
+*						last packet is reached. While appending intermediate packets, it sends
+*						the current total number of bytes stored and the total number expected
 *						to the user app using windows messages. when the last packet is processed,
-*						it sends the data to the user app using another window's message.  
+*						it sends the data to the user app using another window's message.
 *
 *	PARAMETERS:		first_intermediate_last:	set to FIRST_IN_SERIES during idle state then
-*															set to INTERMEDIATE_PACKET or LAST_IN_SERIES 
-*															in image processing state	
+*															set to INTERMEDIATE_PACKET or LAST_IN_SERIES
+*															in image processing state
 *
 *	RETURN VALUE:	FALSE if done with image, successfully or unsuccessfully,  and user should return to idle state.
 *	INPUTS:			pImageData
@@ -2180,18 +2050,13 @@ int CComThreads::MustResendHostCmd( int error_code)
 *							Call the function to send a nak cancel to the scanner to abort the transfer
 *							Set the cur_image_len to zero
 *						Return the ret_val
-*							
+*
 ******************************************************************************/
-
 int CComThreads::ProcessImagePacket( int first_intermediate_last)
 {
 	int ret_val = TRUE;
 	long new_image_len;
-	
-
-
 	nRetries = 0;
-	
 
 	if(first_intermediate_last == FIRST_IN_SERIES)
 	{
@@ -2201,7 +2066,7 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 		new_image_len |= Packet->Data[1] << 16;
 		new_image_len |= Packet->Data[2] << 8;
 		new_image_len |= Packet->Data[3];
-		
+
 		new_image_len += PREAMBLE_BYTES; // add in the bytes for the header
 
 		if(pImageData != NULL)
@@ -2224,7 +2089,6 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 			else
 				curMAXIMAGESIZE = 0;
 		}
-
 	}
 	if((cur_image_len + Packet->Length - SSI_HEADER_LEN) <= curMAXIMAGESIZE)
 	{
@@ -2235,7 +2099,6 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 	{
 		ret_val = FALSE;
 	}
-
 
 	if(ret_val)
 	{
@@ -2259,11 +2122,10 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
             PostWindowsMessage(WM_IMAGE, NOBUFFER_ERROR, cur_image_len - PREAMBLE_BYTES);
       }
       else
-		{	// tell user how many bytes so far out of how many to expect for total image 
-			PostWindowsMessage( WM_XFERSTATUS, (WPARAM) (cur_image_len - PREAMBLE_BYTES), 
+		{	// tell user how many bytes so far out of how many to expect for total image
+			PostWindowsMessage( WM_XFERSTATUS, (WPARAM) (cur_image_len - PREAMBLE_BYTES),
 				                                          (LPARAM) (curMAXIMAGESIZE - PREAMBLE_BYTES));
 		}
-
 	}
 	else
 	{
@@ -2273,29 +2135,25 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 	}
 
 	return ret_val;
-
-
 }
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessVideoPacket(int first_intermediate_last)
 *
-*	DESCRIPTION:	Processes the 
+*	DESCRIPTION:	Processes the
 *
 *	PARAMETERS:		first_intermediate_last:	indicates order of packet in video stream
 *															first, intermediate, last, etc.
 *
-*	RETURN VALUE:	FALSE if next state should be idle state - done with this frame 
+*	RETURN VALUE:	FALSE if next state should be idle state - done with this frame
 *						either successfully or unsuccessfully.  Return TRUE to stay in current mode.
 *
 *	INPUTS:			cur_frame_len
-*						VideoBarcodeOrEvent	
-*						VideoImageQ		
+*						VideoBarcodeOrEvent
+*						VideoImageQ
 *
 *	OUTPUTS:			nRetries
-*						cur_frame_len	
+*						cur_frame_len
 *						VideoBarcodeOrEvent
 *						VideoImageQ
 *						VideoImageQIndex
@@ -2305,7 +2163,7 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 *	PSEUDOCODE:		set ret_val to TRUE and nRetries to zero
 *						if this is the first packet in a series
 *							set cur_frame_len to zero
-*						else if first packet is marked first and last 
+*						else if first packet is marked first and last
 *							this is an error so set cur_frame_len to VIDEOIMAGESIZE  so it won't get processed
 *						determine the size needed - what we have plus what we just got plus a jpeg file header
 *						if the size needed is less than VIDEOIMAGESIZE
@@ -2322,19 +2180,15 @@ int CComThreads::ProcessImagePacket( int first_intermediate_last)
 *							Set the cur_frame_len to zero
 *						Set the response timeout inteval for the next packet
 *						Send an ACK always and return ret_val
-*								
+*
 *
 ******************************************************************************/
-
 int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 {
 	int ret_val = TRUE;
 	long new_image_len;
-	int Length;	
-
-
+	int Length;
 	nRetries = 0;
-	
 
 	if(first_intermediate_last == FIRST_IN_SERIES)
 	{
@@ -2351,7 +2205,7 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 	else if (first_intermediate_last == FIRST_AND_LAST)
 		cur_frame_len =  VIDEOIMAGESIZE;  // this is an error - always more than one packet for video
 
-	if(Packet->Status & 0x01) // re-transmitting an intermediate packet - we'll throw out the frame 
+	if(Packet->Status & 0x01) // re-transmitting an intermediate packet - we'll throw out the frame
 		cur_frame_len =  VIDEOIMAGESIZE; // ... by acking the rest of the packets and waiting for the beginning of the next
 	else if((cur_frame_len + Packet->Length - SSI_HEADER_LEN) <= VIDEOIMAGESIZE)
 	{
@@ -2370,11 +2224,11 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 		new_image_len |= VideoBarcodeOrEvent[3];
 
 		if((cur_frame_len - 10) == new_image_len)
-		{	
+		{
 			if((cur_frame_len > 11) && (cur_frame_len < VIDEOIMAGESIZE))
 			{
 				Length = BuildHeader(VideoBarcodeOrEvent+10, (unsigned char *)VideoImageQ[VideoImageQIndex], cur_frame_len -10);
-				
+
 				if(GlobalVideoDataLen >= Length)
 				{
 					memcpy(pGlobalVideoData, VideoImageQ[VideoImageQIndex], Length);
@@ -2384,8 +2238,8 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
                PostWindowsMessage(WM_VIDEOIMAGE, BUFFERSIZE_ERROR, Length);
             else
                PostWindowsMessage(WM_VIDEOIMAGE, NOBUFFER_ERROR, Length);
-				
-				
+
+
 				pGlobalVideoData = NULL; // can't use buffer anymore
 				GlobalVideoDataLen = 0;
 				VideoImageQIndex = (VideoImageQIndex +1) % VIDEOIMAGEQSIZE;
@@ -2402,14 +2256,8 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 
 
 	PacketACK();
-
 	return ret_val;
-
-
 }
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessBarcodePacket(int first_intermediate_last)
@@ -2420,10 +2268,10 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 *
 *	PARAMETERS:		first_intermediate_last:	set to FIRST_IN_SERIES or FIRST_AND_LAST
 *															if this is the first of a multipacketed transmissison
-*															
 *
-*	RETURN VALUE:	TRUE if done with barcode data processing and user should return to idle 
-*						
+*
+*	RETURN VALUE:	TRUE if done with barcode data processing and user should return to idle
+*
 *
 *	INPUTS:			Packet
 *						cur_barcode_len
@@ -2434,14 +2282,14 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 *						VideoBarocodeOrEvent
 *						cur_barcode_len
 *
-*	NOTES:			Sends the barcode type preceeding the data 
+*	NOTES:			Sends the barcode type preceeding the data
 *
-*			 
+*
 *
 *	PSEUDOCODE:		Set return val to TRUE and nRetries to zero
 *						if this is the first barcode of a series or first and last because there's only one
 *							set cur_barcode_len to zero and allocate a temp buffer for the data if needed
-**						if the data fits in our data buffer, 
+**						if the data fits in our data buffer,
 *							copy the data (including the codetype indicator in the first byte of first packet)
 *						else try to resize the buffer an copy if successful o/w
 *							set ret_val to FALSE so we will return to idle at end of processing
@@ -2462,13 +2310,11 @@ int CComThreads::ProcessVideoPacket( int first_intermediate_last)
 int CComThreads::ProcessBarcodePacket( int first_intermediate_last)
 {
 	int ret_val = TRUE;
-	
+ 	nRetries = 0;
 
-	nRetries = 0;
-
-	if((first_intermediate_last == FIRST_IN_SERIES) || (first_intermediate_last == FIRST_AND_LAST))	
+	if((first_intermediate_last == FIRST_IN_SERIES) || (first_intermediate_last == FIRST_AND_LAST))
 		cur_barcode_len = 0;
-	
+
 
 	if(cur_barcode_len == 0)
 	{
@@ -2511,18 +2357,13 @@ int CComThreads::ProcessBarcodePacket( int first_intermediate_last)
 			memcpy(ptemp,pImageData,cur_barcode_len);
 			delete [] pImageData;
 			pImageData = ptemp;
-			curMAXIMAGESIZE += VIDEOIMAGESIZE;	
+			curMAXIMAGESIZE += VIDEOIMAGESIZE;
 			memcpy(&pImageData[cur_barcode_len], Packet->Data, Packet->Length - SSI_HEADER_LEN);
 			cur_barcode_len += Packet->Length - SSI_HEADER_LEN;
 		}
 		else
 			ret_val = FALSE;
-
-	}
-
-	
-
-
+ 	}
 
 	if(ret_val)
 	{
@@ -2544,26 +2385,19 @@ int CComThreads::ProcessBarcodePacket( int first_intermediate_last)
             PostWindowsMessage(WM_DECODE, BUFFERSIZE_ERROR, cur_barcode_len);
          else
             PostWindowsMessage(WM_DECODE, NOBUFFER_ERROR, cur_barcode_len);
- 
-
-			cur_barcode_len = 0;
+ 			cur_barcode_len = 0;
 		}
-
-	}
+ 	}
 	else
 	{
 		ResponseTimer->SetInterval(0);
 		PacketNakCANCEL();
-		SendWindowsMessage(WM_ERROR, (WPARAM)SSI_DATAFORMAT_ERR, 0);
+		PostWindowsMessage(WM_ERROR, (WPARAM)SSI_DATAFORMAT_ERR, 0);
 		cur_barcode_len = 0;
-	}	
+	}
 
 	return ret_val;
 }
-
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessEventPacket(void)
@@ -2583,30 +2417,17 @@ int CComThreads::ProcessBarcodePacket( int first_intermediate_last)
 ******************************************************************************/
 int CComThreads::ProcessEventPacket(void)
 {
-
-
 	int ret_val = TRUE;
 	int len = Packet->Length - SSI_HEADER_LEN; // this is a single byte of data
 	WORD nEvent;
-	
-	
 	nRetries = 0;
 	ResponseTimer->SetInterval(0);
-
 	nEvent = Packet->Data[0];
-	
-	
 	PacketACK();
 
-
-
-	SendWindowsMessage( WM_EVENT, nEvent & 0x00ff, 1);  // data goes out with the message
-	
+	PostWindowsMessage( WM_EVENT, nEvent & 0x00ff, 1);  // data goes out with the message
 	return ret_val;
-
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessRevisionPacket()
@@ -2618,14 +2439,14 @@ int CComThreads::ProcessEventPacket(void)
 *
 *	PARAMETERS:		none
 *:
-*	RETURN VALUE:	Always TRUE 
-*		
-*	INPUTS:			Packet			
+*	RETURN VALUE:	Always TRUE
+*
+*	INPUTS:			Packet
 *
 *	OUTPUTS:			nRetries
 *						VideoBarcodeOrEvent
 *
-*	NOTES:			This is always a single packet.  
+*	NOTES:			This is always a single packet.
 *
 *	PSEUDOCODE:		Set ret val to TRUE and nRetries to FALSE and len to length of packet data
 *						copy the revision string as is into VideoBarocodeOrEvent
@@ -2633,7 +2454,6 @@ int CComThreads::ProcessEventPacket(void)
 *						return the ret val which is always TRUE - meaning go to idle
 *
 ******************************************************************************/
-
 int CComThreads::ProcessRevisionPacket(void)
 {
 	int ret_val = TRUE;
@@ -2647,7 +2467,7 @@ int CComThreads::ProcessRevisionPacket(void)
 
 	VideoBarcodeOrEvent[len] = '\0';  // for safety
 
-   
+
    if(GlobalVersionDataLen >= len)
    {
 		memcpy(pGlobalVersionData, VideoBarcodeOrEvent, len);
@@ -2658,18 +2478,14 @@ int CComThreads::ProcessRevisionPacket(void)
    else
       PostWindowsMessage(WM_SWVERSION, NOBUFFER_ERROR, len);
 
-
-
-
 	return ret_val;
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::ProcessCapabilitiesPacket(void)
 *
 *	DESCRIPTION:	For getting the scanner capablilities.  This is like an ACK
-*						to us from the scanner. 
+*						to us from the scanner.
 *
 *	PARAMETERS:		none
 *
@@ -2678,8 +2494,8 @@ int CComThreads::ProcessRevisionPacket(void)
 *	OUTPUTS:			nRetries
 *						VideoBarcodeOrEvent
 *
-*	NOTES:			
-*						 
+*	NOTES:
+*
 *
 *
 *	PSEUDOCODE:   Just copy the data and send the Windows message that data is available.
@@ -2687,7 +2503,6 @@ int CComThreads::ProcessRevisionPacket(void)
 ******************************************************************************/
 int CComThreads::ProcessCapabilitiesPacket(void)
 {
-
 	int ret_val = TRUE;
 	int len = Packet->Length - SSI_HEADER_LEN;
 	int i;
@@ -2696,7 +2511,7 @@ int CComThreads::ProcessCapabilitiesPacket(void)
 	for( i = 0; i < len; i++)
 		VideoBarcodeOrEvent[i] = Packet->Data[i];
 	VideoBarcodeOrEvent[len] = '\0';  // for safety
-	
+
    if(GlobalCapabilitiesDataLen >= len)
    {
 		memcpy(pGlobalCapabilitiesData, VideoBarcodeOrEvent, len);
@@ -2706,7 +2521,6 @@ int CComThreads::ProcessCapabilitiesPacket(void)
       PostWindowsMessage(WM_CAPABILITIES, BUFFERSIZE_ERROR, len);
    else
       PostWindowsMessage(WM_CAPABILITIES, NOBUFFER_ERROR, len);
-
 
 	return ret_val;
 }
@@ -2719,7 +2533,7 @@ int CComThreads::ProcessCapabilitiesPacket(void)
 *						is like an ack from the scanner to us in response to our request
 *						for data.  We never ack or nak this packet
 *
-*	PARAMETERS:		first_intermediate_last:	 set to intermediate packet or last in series	
+*	PARAMETERS:		first_intermediate_last:	 set to intermediate packet or last in series
 *
 *	RETURN VALUE:	TRUE if done and caller should return to idle state
 *
@@ -2753,23 +2567,20 @@ int CComThreads::ProcessParamPacket( int first_intermediate_last)
 		if((Packet->Length - SSI_HEADER_LEN - 1) > 0)
 			memcpy(&VideoBarcodeOrEvent[cur_param_len], &Packet->Data[1], Packet->Length - SSI_HEADER_LEN - 1);
 
-
 		cur_param_len += Packet->Length - SSI_HEADER_LEN - 1;
-
 	}
 	else
 	{
 		ret_val = FALSE;
 	}
 
-
 	if(ret_val)
 	{
-	
+
 		if(first_intermediate_last == LAST_IN_SERIES)
 		{
 			VideoBarcodeOrEvent[cur_param_len] = 0;
-			
+
          if(GlobalParamDataLen >= cur_param_len)
          {
 		      memcpy(pGlobalParamData, VideoBarcodeOrEvent, cur_param_len);
@@ -2779,8 +2590,8 @@ int CComThreads::ProcessParamPacket( int first_intermediate_last)
             PostWindowsMessage(WM_PARAMS, BUFFERSIZE_ERROR, cur_param_len);
          else
             PostWindowsMessage(WM_PARAMS, NOBUFFER_ERROR, cur_param_len);
-		
-					
+
+
 			cur_param_len = 0;
 			nRetries = 0;
 		}
@@ -2789,29 +2600,13 @@ int CComThreads::ProcessParamPacket( int first_intermediate_last)
 			ResponseTimer->SetInterval(NEXTPACKETTIMEOUT);
 			ResponseTimer->Enable(TRUE);
 		}
-
 	}
 	else
 	{
-
 		cur_param_len = 0;
 	}
-	
+
 	return ret_val;
-}
-
-/*****************************************************************************
-*	SYNOPSIS:		void CComThreads::SendWindowsMessage(int msg, WPARAM wParam, LPARAM lParam)
-*
-*	DESCRIPTION:	Call function to Post a windows message msg, using wParam and lParam
-*						when doing so.
-*
-*
-******************************************************************************/
-
-void CComThreads::SendWindowsMessage( int msg, WPARAM wParam, LPARAM lParam)
-{
-	PostMessage(hWnd, msg, wParam, lParam);
 }
 
 /*****************************************************************************

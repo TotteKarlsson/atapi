@@ -24,16 +24,12 @@
  * Initial revision.
 *
 *****************************************************************************/
-
 #ifndef __CommThreads_H
 #define __CommThreads_H
 
-
 /****************************************************************************/
 /*	Nested Include Files ****************************************************/
-
 #include <windows.h>
-
 #include "PortInfoStruct.h"
 #include "ProtocolHandler.h"
 #include "MsgTimers.h"
@@ -50,10 +46,10 @@
 
 typedef struct WRITEREQUEST
 {
-  DWORD 				dwSize;			   							// size of buffer
-  unsigned char       lpBuf[SSI_MAX_PACKET_LENGTH + 10];            // buffer to send
-  DWORD 			  dwSize2;										// in case we need to send a second buffer right after
-  unsigned char       lpBuf2[SSI_MAX_PACKET_LENGTH + 10];      		// second buffer to send
+  DWORD 			 	dwSize;			   							// size of buffer
+  unsigned char       	lpBuf[SSI_MAX_PACKET_LENGTH + 10];            // buffer to send
+  DWORD 			  	dwSize2;										// in case we need to send a second buffer right after
+  unsigned char       	lpBuf2[SSI_MAX_PACKET_LENGTH + 10];      		// second buffer to send
 
 } WRITEREQUEST, *PWRITEREQUEST;
 
@@ -115,7 +111,6 @@ class CComThreads
         int                         ServiceUserCommand(int nEvent, unsigned char CmdCode, unsigned char *pParams, int ParamBytes);
 
    		// these are the "Action" functions performed by the states for a particular event
-
         int                         UserErrorMessage( int err_code); // sends WM_ERROR and returns false
         int                         CancelScanDataNsndErrMsg(int error_code, int set_timeout); // enables response timer and sends nak cancel, may send WM_ERROR and always returns true
         int                         AssumeNakableUnsolicitedMsg(int bSetResponseTimer); // may enable response timer, sends nak resend and returns true
@@ -138,9 +133,7 @@ class CComThreads
         int                         ProcessCapabilitiesPacket(void);
         int                         ProcessParamPacket(int first_intermediate_last);
 
-
         void                        PostWindowsMessage(int msg, WPARAM wParam, LPARAM lParam);
-        void                        SendWindowsMessage(int msg, WPARAM wParam, LPARAM lParam);
 
         unsigned char*				pGlobalVideoData;
         long						GlobalVideoDataLen;
@@ -173,7 +166,6 @@ class CComThreads
         // keeps track of how many times we have timed out waiting for a correct response from the scanner
         int 						nRetries;
 
-
         // fine for video and events, also for params but barcode will need dynamic allocation if macropdf
         BYTE 						VideoBarcodeOrEvent[VIDEOIMAGESIZE + 1];  // a single macro pdf symbol may hold as many as 2700 digits and
                                                // even with a max sized macro control block, there will be fewer than
@@ -201,7 +193,8 @@ class CComThreads
 
 DWORD WINAPI 	ReaderProc(LPVOID lpV);
 DWORD WINAPI 	WriterProc(LPVOID lpV);
-void CALLBACK 	PacketTimeout (HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
-void CALLBACK 	ResponseTimeout (HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
+void CALLBACK 	PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
+void CALLBACK 	ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime);
 
 #endif
+

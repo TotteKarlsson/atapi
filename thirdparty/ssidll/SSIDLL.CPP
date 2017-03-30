@@ -240,8 +240,7 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 	int ret_val = FALSE;
 	int error_code;
 
-	CComPort * SSI = GetSSIComHandler(Port);
-
+	CComPort* SSI = GetSSIComHandler(Port);
 
 	if(SSI)		// already connected
 		SSI->SetLastError(SSICOMM_ALREADYCONNECTED);
@@ -802,78 +801,6 @@ SSIDLL_API int __stdcall PullTrigger(int nComPort)
 *
 ******************************************************************************/
 SSIDLL_API int __stdcall ReleaseTrigger(int nComPort)
-{
-	int ret_val = FALSE;
-	CComPort * SSI = GetSSIComHandler(nComPort);
-
-   	if(SSI)
-   	{
-    	if(SSI->g_hwnd  && COMDEV(SSI->PortInfo))
-      	{
-        	SSI->SetLastError(SSICOMM_NOERROR);
-
-			ret_val = SSI->ProtocolHandler->ServiceTriggerRelease();
-			if(!ret_val)
-            {
-				SSI->SetLastError(SSI_INPUTQ_FULL);
-            }
-        }
-        else
-        {
-            SSI->SetLastError(ERR_SSI_HWND);
-        }
-	}
-   	return (!ret_val) ? GetLastProtocolError(nComPort) : 0;
-}
-
-/*****************************************************************************
-*	SYNOPSIS:		SSIDLL_API int __stdcall StartSession(int nComPort)
-*
-*	DESCRIPTION:	Sends command to scanner to start a scan session.
-*
-*	PARAMETERS:		nComPort: the com port number
-*
-*	RETURN VALUE:	Zero if command was sent to scanner successfully o/w the error code
-*	INPUTS:			SSI
-*	OUTPUTS:		The global error code will be set if unsuccessful send
-*
-*
-******************************************************************************/
-SSIDLL_API int __stdcall StartSession(int nComPort)
-{
-	int ret_val = FALSE;
-   CComPort * SSI = GetSSIComHandler(nComPort);
-
-
-	if(SSI)
-	{
-		if(SSI->g_hwnd  && COMDEV(SSI->PortInfo))
-      {
-			SSI->SetLastError(SSICOMM_NOERROR);
-
-			ret_val = SSI->ProtocolHandler->ServiceTriggerPull();
-			if(!ret_val)
-				SSI->SetLastError(SSI_INPUTQ_FULL);
-      }
-      else
-        SSI->SetLastError(ERR_SSI_HWND);
-
-	}
-	return (!ret_val) ? GetLastProtocolError(nComPort) : 0;
-}
-
-/*****************************************************************************
-*	SYNOPSIS:		SSIDLL_API int __stdcall StopSession(int nComPort)
-*
-*	DESCRIPTION:	Sends command to scanner to stop a session.
-*
-*	PARAMETERS:		nComPort: the com port number
-*
-*	RETURN VALUE:	Zero if command was sent to scanner successfully o/w the error code
-*	INPUTS:			SSI
-*	OUTPUTS:			The global error code will be set if unsuccessful send
-******************************************************************************/
-SSIDLL_API int __stdcall StopSession(int nComPort)
 {
 	int ret_val = FALSE;
 	CComPort * SSI = GetSSIComHandler(nComPort);

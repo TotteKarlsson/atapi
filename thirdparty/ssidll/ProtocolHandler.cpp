@@ -6,17 +6,17 @@
 *						input data as SSI packets during the reader thread.
 *
 *	NOTES:
-*	
+*
 *	AUTHOR:	A.Schuessler
 *	CREATION DATE: 10/28/02
 *	DERIVED FROM: New File
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/ProtocolHandler.cpp-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:50   fitzsimj
  * Initial revision.
- * 
+ *
  *    Rev 1.0   Oct 28 2002 14:38:48   schuesla
  * Initial revision.
 *
@@ -24,14 +24,9 @@
 
 /****************************************************************************/
 /*	Include Files ************************************************************/
-//#include "stdafx.h"
-
-
 #include "ssidll.h"
 #include "CommThreads.h"
 #include "ProtocolHandler.h"
-
-
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
 
@@ -52,7 +47,8 @@
 // Constant tables
 
 // Packets that come from the decoder
-const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] = {
+const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] =
+{
 		DECODE_DATA,
 		CMD_ACK,
 		CMD_NAK,
@@ -62,11 +58,12 @@ const int CComThreads::Recv_Pkt_Types[MAX_DECODER_PKTTYPES] = {
       	REPLY_REVISION,
 		EVENT,
 		BATCH_DATA,
-		CAPABILITIES_REPLY };
-
+		CAPABILITIES_REPLY
+};
 
 // PacketTimer function processes these in the state machine - each packet type above will map to one of these events
-const BYTE CComThreads::Recv_Pkt_Events[MAX_DECODER_PKTTYPES] = {
+const BYTE CComThreads::Recv_Pkt_Events[MAX_DECODER_PKTTYPES] =
+{
 	LAST_BARCODE_PKT_EVENT,    // all last_ events may be changed to next_ events by subtracting status byte, bit 1
 	ACK_EVENT,
 	NAK_RESEND_EVENT,				// may change to NAK_DENIED_OR_BADCONTEXT_EVENT if first data byte is 2 or 6 or 10
@@ -76,22 +73,21 @@ const BYTE CComThreads::Recv_Pkt_Events[MAX_DECODER_PKTTYPES] = {
     REVDATA_PKT_EVENT,
 	SCANNEREVENT_PKT_EVENT,
 	LAST_BATCHDATA_PKT_EVENT,
-	CAPABILITIESDATA_PKT_EVENT};
-
+	CAPABILITIESDATA_PKT_EVENT
+};
 
 // This data structure and static array are used only in the timeout callback functions: ResponseTimeout and PacketTimeout
 // They are necessary in order to map the timer id, which we get as a param to the callback function, to it's thread and
 // ...hWnd.
-
-typedef	struct thread_array_tag{
+typedef	struct thread_array_tag
+{
 		CComThreads *pThread;
 		UINT *pResponseTimerID;
 		UINT *pPacketTimerID;
 		int hWnd;
-	}thread_array_struct;
+} thread_array_struct;
 
 static thread_array_struct ThreadArray[MAX_COM_PORTS] = {0};
-
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::SetupProtocolHandler(int nComPortIndex)
@@ -106,21 +102,21 @@ static thread_array_struct ThreadArray[MAX_COM_PORTS] = {0};
 *	RETURN VALUE:	none
 *
 ******************************************************************************/
-void CComThreads::SetupProtocolHandler(int nComPortIndex) 
+void CComThreads::SetupProtocolHandler(int nComPortIndex)
 {
 	nComPortIndex -= 1;
 
 	PacketState = PacketStart;			// init to looking for first byte of a packet from scanner
 	CurrentPacketNumber = 0;			// index into PacketArray
 	Packet = &PacketArray[0];			// for filling from scanner input and processing in state mach.
-	
-	// time to wait for response from scanner to our command 
-	ResponseTimer = new TTimer((int)hWnd);
-	ResponseTimer->OnTimer = ResponseTimeout;
+
+	// time to wait for response from scanner to our command
+	ResponseTimer 			= new TTimer((int)hWnd);
+	ResponseTimer->OnTimer 	= ResponseTimeout;
 
 	// time to wait from receipt of first byte of packet for the rest of the packet
 	PacketTimer = new TTimer((int)hWnd);
-	PacketTimer->OnTimer = PacketTimeout; 
+	PacketTimer->OnTimer = PacketTimeout;
 	PacketTimer->SetInterval(0);  // init interval to zero
 
 	ThreadArray[nComPortIndex].pResponseTimerID = &(ResponseTimer->ID);
@@ -135,21 +131,19 @@ void CComThreads::SetupProtocolHandler(int nComPortIndex)
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 *
-*	DESCRIPTION:	Called during destruction of the CComThreads object.  Sets pointer 
+*	DESCRIPTION:	Called during destruction of the CComThreads object.  Sets pointer
 *                 variables to NULL and deletes the Response and Packet Timer objects for
 *                 the given com port number.
-*                 
+*
 *
 *	PARAMETERS:		nComPortIndex - com port number ( not zero offset )
 *
 *	RETURN VALUE:	none
 *
 ******************************************************************************/
-void CComThreads::TearDownProtocolHandler(int nComPortIndex) 
+void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 {
 	PacketQInsertIndex	= 1;
-
-
 	nComPortIndex -= 1;
 
 	if((nComPortIndex >= 0)&&(nComPortIndex <16))
@@ -159,7 +153,7 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 		ThreadArray[nComPortIndex].hWnd = NULL;
 		ThreadArray[nComPortIndex].pThread = NULL;
 	}
-	
+
 	if(ResponseTimer)
 	{
 		ResponseTimer->Enable(FALSE);
@@ -170,7 +164,7 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 	PacketState = PacketStart;
 
 	if(PacketTimer)
-	{	
+	{
 		PacketTimer->Enable(FALSE);
 		delete PacketTimer;
 		PacketTimer = NULL;
@@ -179,27 +173,18 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//
-//
-//
 //                                        TRANSMITTING
-//
-//
-//
 //												   Messages To Scanner
-//
-//
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /*****************************************************************************
-*	SYNOPSIS:		int CComThreads::SendSimpleCommand(unsigned char CmdCode, 
+*	SYNOPSIS:		int CComThreads::SendSimpleCommand(unsigned char CmdCode,
 *									unsigned char *Params, int ParamBytes, int retries)
 *
-*	DESCRIPTION:	Sets up ResponseTimer with the input command code to time 
+*	DESCRIPTION:	Sets up ResponseTimer with the input command code to time
 *						out after COMMANDTIMEOUT if no response is recieved from
 *						the scanner, then calls the funciton to Write the Packet
 *						which sets up the write request and signals a write request
-*						event.  
+*						event.
 *
 *	PARAMETERS:		CmdCode:		SSI Command opcode
 *						Params:		The data to be sent to the scanner
@@ -209,7 +194,7 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 *
 *	RETURN VALUE:	returns TRUE if command could be serviced o/w returns FALSE.
 *
-*	NOTES:			This function can only be called by the state machine when 
+*	NOTES:			This function can only be called by the state machine when
 *						the state machine allows a write request to be issued.
 *
 ******************************************************************************/
@@ -222,7 +207,7 @@ int CComThreads::SendSimpleCommand(unsigned char CmdCode, unsigned char *Params,
 		ResponseTimer->SetInterval(COMMANDTIMEOUT);       // Allow for response to command
 
 	ResponseTimer->Tag = CmdCode;  // use for timeout message code
-   return WritePacket(CmdCode, Params, ParamBytes, retries);
+	return WritePacket(CmdCode, Params, ParamBytes, retries);
 }
 
 /*****************************************************************************
@@ -245,8 +230,7 @@ int CComThreads::SendSimpleCommand(unsigned char CmdCode, unsigned char *Params,
 int CComThreads::PacketACK ()
 {
 	SSIAckNakCode = CMD_ACK;
-
-	return WritePacket (CMD_ACK, NULL, 0, nRetries);  
+	return WritePacket (CMD_ACK, NULL, 0, nRetries);
 }
 
 /*****************************************************************************
@@ -296,16 +280,12 @@ int CComThreads::PacketNAK (void)
 int CComThreads::PacketNakCANCEL (void)
 {
 	BYTE Reason = NAK_CANCEL;   // TELL DECODER WE DON'T WANT THE MESSAGE IN PROGRESS - DON'T RESEND IT
-
-	
 	return WritePacket (CMD_NAK, &Reason, 1, nRetries);
 }
 
 int CComThreads::PacketNakBADCONTEXT (void)
 {
 	BYTE Reason = NAK_BADCONTEXT;   // TELL DECODER WE DON'T UNDERSTAND THE MESSAGE IN PROGRESS - DON'T RESEND IT
-
-	
 	return WritePacket (CMD_NAK, &Reason, 1, nRetries);
 }
 
@@ -367,7 +347,6 @@ int CComThreads::WritePacket(unsigned char CmdCode, unsigned char *Params, int P
 *						It may be disabled during the running of the state machine by
 *						having it's interval set to zero.
 *
-*
 *						This function also kills the Packet timer.  This stops the Packet
 *						timer in the case of a checksum error found during packet processing.
 *						A zero value for the Packet timer's Interval is set during PacketTimeout.
@@ -404,9 +383,9 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 			}
 		}
 	}
+
 	if(pThread)
 	{
-
 		if((pThread->PacketTimer == NULL) || (pThread->ResponseTimer == NULL))
 			return;
 
@@ -424,20 +403,8 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//
-//
 //                                        RECEIVING
-//
-//
-//
-//
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 /*****************************************************************************
 *	SYNOPSIS:		void CALLBACK CComThreads::PacketTimeout(HWND hwnd, UINT uMsg, 
 *						UINT idEvent, DWORD dwTime )
@@ -449,7 +416,7 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 *						calling the state machine to handle the fact that there was a
 *						checksum error.  
 *						We don't want to kill the timer during this CALLBACK function so
-*						we set the Interval value to 0 to indicate that the timer should be 
+*						we set the Interval value to 0 to indicate that the timer should be
 *						ignored when it times out again.
 *						We also take this opportunity to kill the response timer if it's on.
 *
@@ -470,8 +437,6 @@ void CALLBACK ResponseTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 ******************************************************************************/
 void CALLBACK PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 {
-
-
 	CComThreads *pThread = NULL;
 	int i;
 
@@ -480,7 +445,7 @@ void CALLBACK PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 		if(ThreadArray[i].pPacketTimerID)
 		{
 			if(*(ThreadArray[i].pPacketTimerID) == idEvent)
-			{	
+			{
 				if((int)hwnd == ThreadArray[i].hWnd)
 					pThread = ThreadArray[i].pThread;
 				if(pThread)
@@ -498,8 +463,8 @@ void CALLBACK PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 	{												// we need to wait for a response timeout to kill this packet timer since
 													// we don't want to do it here in its CALLBACK function.
 
-			
-		// we can have a timeout if we got less than a full packet's worth of chars, OR if we got a full 
+
+		// we can have a timeout if we got less than a full packet's worth of chars, OR if we got a full
 		// packet but an error occurred
 
 		// we know we had fewer than a full packet's worth of chars if the timer tag is not CRC1 or CRC2
@@ -508,42 +473,28 @@ void CALLBACK PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 		// if the tag is anything other than either of these, we didn't get a full packet's worth of data
 		// ...so that will be reported here as a checksum error.
 
-
-			
 		// The state machine returns FALSE on a PKT_TIMEOUT_EVENT only if the state machine was busy.
 		// If it returned true but the ResponseTimeout was reset, then it was not able to be handled and we are back in idle
-		if(pThread->RunStateMachine(PKT_TIMEOUT_EVENT, (pThread->PacketTimer->Tag != PacketCRC1) ? 1: 0, NULL,0) ) 
+		if(pThread->RunStateMachine(PKT_TIMEOUT_EVENT, (pThread->PacketTimer->Tag != PacketCRC1) ? 1: 0, NULL,0) )
 		{
 			pThread->PacketTimer->SetInterval(0);		// indicate packet timer is disabled - when checked elsewhere, it may be disabled
 			if(pThread->ResponseTimer->GetInterval())	            // eg during a subsequent response timeout.
 				pThread->PacketState = PacketStart;
 
 		}
-
-
-
-      
-		// Packet State is reset to Start in the reader function the next time 
+		// Packet State is reset to Start in the reader function the next time
 		// the transmit buffer is empty and we deassert CTS.  But if we give up here meaning we didn't send
-		// any message to the scanner to resend because retries are up, then we are back in idle.  
+		// any message to the scanner to resend because retries are up, then we are back in idle.
 		// If a user request is next, a message will be written to the scanner and when done, PacketStart will be set
 		// in reader function.
-		// However, if an unsolicited packet comes from the scanner while we in idle now, the PACKET state will be in the state 
+		// However, if an unsolicited packet comes from the scanner while we in idle now, the PACKET state will be in the state
 		// was in now when this  packet timeout occurred - the error state or an intermediate state if an incomplete packet was
 		// ...obtained.  If it was an intermediate state, the unsolicited packet will cause it to go to the error state
 		// ...but no packet timeout will occur since it only gets set in PacketStart state. So we must look at the return
 		// ...value from RunStateMachine and if it's true, then we see if we are in idle ( response timer will be off )
 		// ...and then we reset the packet state to start.
-
-
-
-		
 	}
 }
-
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::OnError(int error_code)
@@ -558,10 +509,8 @@ void CALLBACK PacketTimeout(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime )
 ******************************************************************************/
 void CComThreads::OnError(int error_code)
 {
-
-	SendWindowsMessage( WM_ERROR, (WPARAM) error_code, 0);
+	PostWindowsMessage( WM_ERROR, (WPARAM) error_code, 0);
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::OnFatalError(int error_code)
@@ -576,10 +525,5 @@ void CComThreads::OnError(int error_code)
 ******************************************************************************/
 void CComThreads::OnFatalError(int error_code)
 {
-
-	SendWindowsMessage(WM_ERROR, (WPARAM) error_code, 1);
-	
+	PostWindowsMessage(WM_ERROR, (WPARAM) error_code, 1);
 }
-
-
-

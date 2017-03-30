@@ -67,8 +67,7 @@ static BOOL HandleWriteRequests(LPVOID lpV);
 
 BOOL CComThreads::WriteBuffer(BYTE *buffer, DWORD ByteCount)
 {
-
-   PWRITEREQUEST pWrite = &gWriteRequest;
+   	PWRITEREQUEST pWrite = &gWriteRequest;
 
 	EnterCriticalSection(&gcsWriterData);
 	if(PacketQInsertIndex) // not done sending last message - THIS SHOULD NEVER HAPPEN UNLESS WE GOT DISCONNECTED PHYSICALLY
@@ -78,7 +77,7 @@ BOOL CComThreads::WriteBuffer(BYTE *buffer, DWORD ByteCount)
 	}
 
 	pWrite->dwSize = ByteCount;
-   memcpy(pWrite->lpBuf,buffer, ByteCount);
+   	memcpy(pWrite->lpBuf,buffer, ByteCount);
 
 
 	PacketQInsertIndex++;
