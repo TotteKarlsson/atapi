@@ -1,8 +1,9 @@
 object ParallellProcessesFrame: TParallellProcessesFrame
   Left = 0
   Top = 0
-  Width = 663
-  Height = 489
+  Width = 233
+  Height = 487
+  AutoSize = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -19
@@ -13,59 +14,75 @@ object ParallellProcessesFrame: TParallellProcessesFrame
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 145
-    Height = 489
+    Width = 233
+    Height = 487
     Align = alLeft
     Caption = 'Actions'
     TabOrder = 0
-    object Button1: TButton
-      Left = 13
-      Top = 182
-      Width = 118
-      Height = 60
-      Action = addMoveA
-      Caption = 'New'
-      TabOrder = 1
-    end
-    object Button2: TButton
-      Left = 13
-      Top = 324
-      Width = 118
-      Height = 60
-      Action = removeMoveA
-      TabOrder = 2
-    end
     object mSubProcessesLB: TListBox
-      Left = 13
-      Top = 37
-      Width = 118
-      Height = 139
+      Left = 2
+      Top = 25
+      Width = 229
+      Height = 167
+      Align = alClient
       ItemHeight = 23
       TabOrder = 0
       OnClick = mSubProcessesLBClick
     end
-    object mRenameBtn: TArrayBotButton
-      Left = 13
-      Top = 396
-      Width = 118
-      Height = 60
-      Caption = 'Rename'
-      TabOrder = 3
-      OnClick = mRenameBtnClick
-      SoundID = 'BUTTON_CLICK_4'
-    end
-    object Button3: TButton
-      Left = 13
-      Top = 248
-      Width = 118
-      Height = 60
-      Action = addArduinoCommandA
-      TabOrder = 4
+    object Panel1: TPanel
+      Left = 2
+      Top = 192
+      Width = 229
+      Height = 293
+      Align = alBottom
+      TabOrder = 1
+      DesignSize = (
+        229
+        293)
+      object Button1: TButton
+        Left = 13
+        Top = 14
+        Width = 200
+        Height = 60
+        Action = addMoveA
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'New'
+        TabOrder = 0
+      end
+      object Button2: TButton
+        Left = 13
+        Top = 150
+        Width = 200
+        Height = 60
+        Action = removeMoveA
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 1
+      end
+      object Button3: TButton
+        Left = 13
+        Top = 82
+        Width = 200
+        Height = 60
+        Action = addArduinoCommandA
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 2
+      end
+      object mRenameBtn: TArrayBotButton
+        Left = 13
+        Top = 219
+        Width = 200
+        Height = 60
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Rename'
+        TabOrder = 3
+        OnClick = mRenameBtnClick
+        SoundID = 'BUTTON_CLICK_4'
+      end
     end
   end
   object ActionList1: TActionList
-    Left = 240
-    Top = 40
+    Left = 72
+    Top = 64
     object addMoveA: TAction
       Caption = 'Add'
       OnExecute = addMoveAExecute

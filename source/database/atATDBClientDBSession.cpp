@@ -24,7 +24,7 @@ RecordSet* ATDBClientDBSession::getBlocks(dbSQLKeyword kw)
 {
     if(!mTheSession)
     {
-        Log(lError) << "No Session...";
+        Log(lError) << "No ATDBClient DB Session...";
         return NULL;
     }
 

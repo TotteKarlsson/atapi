@@ -33,6 +33,7 @@ __published:	// IDE-managed Components
 	TArrayBotButton *mAddTriggerBtn;
 	TGroupBox *GroupBox1;
 	TListBox *mTriggersLB;
+	TPanel *Panel1;
 	void __fastcall MotorsCBChange(TObject *Sender);
 	void __fastcall mMovePosEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall TriggersLBClick(TObject *Sender);

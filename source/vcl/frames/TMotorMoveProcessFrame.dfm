@@ -1,8 +1,8 @@
 object MotorMoveProcessFrame: TMotorMoveProcessFrame
   Left = 0
   Top = 0
-  Width = 795
-  Height = 621
+  Width = 803
+  Height = 766
   Align = alClient
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,42 +16,22 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
   object mMainGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 795
-    Height = 369
+    Width = 803
+    Height = 465
     Align = alTop
     Caption = 'Action Properties'
     Padding.Left = 15
     Padding.Right = 15
     TabOrder = 1
-    ExplicitWidth = 451
-    object mActionInfo: TLabel
-      Left = 17
-      Top = 25
-      Width = 761
-      Height = 151
-      Align = alClient
-      AutoSize = False
-      Caption = 
-        'This move will move the Z motor to a good position for cover sli' +
-        'p extraction. As Z gets above 200 mm, the x motor is triggered t' +
-        'o move to a convenient position.'
-      Layout = tlCenter
-      WordWrap = True
-      OnClick = mActionInfoClick
-      ExplicitLeft = 1
-      ExplicitTop = 24
-      ExplicitWidth = 426
-      ExplicitHeight = 182
-    end
     object Panel2: TPanel
       Left = 17
-      Top = 176
-      Width = 761
-      Height = 191
+      Top = 296
+      Width = 769
+      Height = 167
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 417
+      ExplicitTop = 200
       object Label1: TLabel
         Left = 16
         Top = 15
@@ -104,29 +84,59 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
         TabOrder = 0
         OnChange = MotorsCBChange
       end
+    end
+    object Panel1: TPanel
+      Left = 17
+      Top = 25
+      Width = 769
+      Height = 271
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      ExplicitHeight = 151
+      object mActionInfo: TLabel
+        Left = 0
+        Top = 0
+        Width = 233
+        Height = 271
+        Align = alLeft
+        AutoSize = False
+        Caption = 
+          'This move will move the Z motor to a good position for cover sli' +
+          'p extraction. As Z gets above 200 mm, the x motor is triggered t' +
+          'o move to a convenient position.'
+        Layout = tlCenter
+        WordWrap = True
+        OnClick = mActionInfoClick
+        ExplicitHeight = 151
+      end
       object mAddTriggerBtn: TArrayBotButton
-        Left = 375
-        Top = 44
-        Width = 169
-        Height = 108
+        Left = 233
+        Top = 0
+        Width = 536
+        Height = 271
+        Align = alClient
         Caption = 'Add Child Action'
         Enabled = False
         ParentDoubleBuffered = True
-        TabOrder = 4
+        TabOrder = 0
         OnClick = AddTriggerBClick
         SoundID = 'BUTTON_CLICK_4'
+        ExplicitLeft = 240
+        ExplicitWidth = 177
+        ExplicitHeight = 151
       end
     end
   end
   object mTriggerPanel: TPanel
     Left = 0
-    Top = 369
-    Width = 795
-    Height = 252
+    Top = 465
+    Width = 803
+    Height = 301
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 451
-    ExplicitHeight = 268
+    ExplicitTop = 440
+    ExplicitHeight = 326
     object GroupBox1: TGroupBox
       Left = 377
       Top = 32
@@ -144,6 +154,7 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
         ItemHeight = 23
         TabOrder = 0
         OnClick = TriggersLBClick
+        ExplicitLeft = -6
       end
     end
   end

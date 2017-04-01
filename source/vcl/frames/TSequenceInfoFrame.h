@@ -31,6 +31,9 @@ class PACKAGE TSequenceInfoFrame : public TFrame
 	TArrayBotButton *mMoveSequenceDownBtn;
 	TArrayBotButton *mMoveSequenceUpBtn;
 	TArrayBotButton *mUpdatePositionsBtn;
+	TPanel *Panel1;
+	TPanel *Panel2;
+	TPanel *Panel3;
     void __fastcall mMoveSequenceUpBtnClick(TObject *Sender);
     void __fastcall RemoveProcessAExecute(TObject *Sender);
 	void __fastcall mMoveSequenceDownBtnClick(TObject *Sender);

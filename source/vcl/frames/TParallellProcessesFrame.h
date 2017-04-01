@@ -34,6 +34,7 @@ __published:	// IDE-managed Components
 	TArrayBotButton *mRenameBtn;
 	TButton *Button3;
 	TAction *addArduinoCommandA;
+	TPanel *Panel1;
 	void __fastcall addMoveAExecute(TObject *Sender);
 	void __fastcall mSubProcessesLBClick(TObject *Sender);
 	void __fastcall removeMoveAExecute(TObject *Sender);

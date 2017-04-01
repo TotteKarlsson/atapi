@@ -6,25 +6,21 @@
 *                 and Disconnection of Com Port.
 *
 *	NOTES:
-*	
+*
 *	AUTHOR:
 *	CREATION DATE: 10/28/02
 *	DERIVED FROM: mtty.c code sample and CommThread.cpp by M.O'Haire
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/COMPORT.CPP-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:44   fitzsimj
  * Initial revision.
- * 
+ *
  *    Rev 1.0   Oct 28 2002 14:38:46   schuesla
  * Initial revision.
 *
 *****************************************************************************/
-
-
-/****************************************************************************/
-/*	Include Files ***********************************************************/
 #include "windows.h"
 #include "ssidll.h"
 #include "comport.h"
@@ -33,7 +29,7 @@ using namespace std;
 /****************************************************************************/
 /*	Defines, typedefs, etc. **************************************************/
 
-#define DEFAULT_READINTERVAL_T_O	1 // max time to elapse between arrival of 
+#define DEFAULT_READINTERVAL_T_O	1 // max time to elapse between arrival of
 #define WIN32_READINTERVAL_T_O		5 // 2 chars beginning with 1st bit of 1st char
 
 #define EVENTFLAGS_DEFAULT      	(EV_BREAK | EV_CTS | EV_DSR | EV_ERR | EV_RING | EV_RLSD)
@@ -51,19 +47,19 @@ using namespace std;
 *	INPUTS:			none
 *	OUTPUTS:			Initialized CComPort Object
 *
-*	NOTES:         Initializes but does not connect the comm port 
+*	NOTES:         Initializes but does not connect the comm port
 *                 Connect() must be called to do the connection.
 *
 *	PSEUDOCODE:		Initialize the g_hwnd member with the input hwnd value
 *						Initialize the g_commErrorCode to no errors
 *						Call the function to check if this version can support the
 *							dll
-*						if not, 
-*							set the error code to version error 
-*							call the Init function for the com data structure so it 
+*						if not,
+*							set the error code to version error
+*							call the Init function for the com data structure so it
 *							will be set to not connected and return
 *						if the version can support the dll, Init the data structure
-*							for the com port then create the protocol handler 
+*							for the com port then create the protocol handler
 *
 ******************************************************************************/
 CComPort::CComPort(HWND hwnd)
@@ -96,22 +92,18 @@ CComPort::CComPort(HWND hwnd)
 *						ProtocolHandler
 *	OUTPUTS:			ProtocolHandler
 *
-*	NOTES:			If the OS version is not supported by the dll, then 
+*	NOTES:			If the OS version is not supported by the dll, then
 *						there is nothing to clean up.
 *
 ******************************************************************************/
 CComPort::~CComPort()
 {
-
-   if(m_OSVersion.dwPlatformId != VER_PLATFORM_WIN32s) 
+   if(m_OSVersion.dwPlatformId != VER_PLATFORM_WIN32s)
 	{
-	   ProtocolHandler->GlobalCleanup(PORT( PortInfo ) ); 
-		delete (ProtocolHandler); 
-	
+    	ProtocolHandler->GlobalCleanup(PORT( PortInfo ) );
+		delete (ProtocolHandler);
 	}
 }
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		BOOL CComPort::VersionCheck(void)
@@ -128,7 +120,6 @@ CComPort::~CComPort()
 *
 ******************************************************************************/
 /* verifies that the correct version of Windows is running */
-
 BOOL CComPort::VersionCheck(void)
 {
 	m_OSVersion.dwOSVersionInfoSize = sizeof(m_OSVersion);
@@ -158,7 +149,6 @@ BOOL CComPort::VersionCheck(void)
 void CComPort::InitTTYInfo(void)
 {
     COMMTIMEOUTS TimeoutsDefault;
-
     TimeoutsDefault.ReadIntervalTimeout = DEFAULT_READINTERVAL_T_O;
     TimeoutsDefault.ReadTotalTimeoutMultiplier = 0;
     TimeoutsDefault.ReadTotalTimeoutConstant = 0;
@@ -292,9 +282,7 @@ BOOL CComPort::SetComPort(long baud, int port )
 ******************************************************************************/
 BOOL CComPort::Connect()
 {
-
     int pNr = PORT( PortInfo );
-
     char portNr[25];//("COM" + toString(pNr));
     string pNrStr;
 	itoa(pNr, portNr, 10);
@@ -505,9 +493,6 @@ BOOL CComPort::Disconnect()
 	return(true);
 }
 
-
-
-
 /*****************************************************************************
 *	SYNOPSIS:      BOOL CComPort::BreakDownCommPort()
 *
@@ -558,7 +543,7 @@ BOOL CComPort::BreakDownCommPort()
       if(g_commErrorCode == SSICOMM_NOERROR)  // don't overwrite a previous error
 		   g_commErrorCode = SSICOMM_UNABLE_PURGE;
       // we won't return false here because it's a non fatal error 
-	};
+	}
 
    if (ProtocolHandler->WaitForThreadsToExit( 20000) != WAIT_OBJECT_0)
    {

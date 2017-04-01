@@ -55,10 +55,10 @@ static g_nVersion = (unsigned)((VER_MAJOR <<8) + VER_MINOR);
 ******************************************************************************/
 static CComPort *GetSSIComHandler(int nComPort)
 {
-	if(nComPort < 1)
+	if(nComPort < 1 || nComPort > MAX_COM_PORTS)
+    {
 		return NULL;
-	if(nComPort > MAX_COM_PORTS)
-		return NULL;
+    }
 
 	return SSI_Ports[nComPort-1];
 }
@@ -82,13 +82,11 @@ static CComPort *GetSSIComHandler(int nComPort)
 ******************************************************************************/
 static BOOL AddSSIComHandler(CComPort *pSSI, int nComPort)
 {
-	if(nComPort < 1)
+	if (nComPort < 1 || nComPort > MAX_COM_PORTS || SSI_Ports[nComPort-1] != NULL)
+    {
 		return FALSE;
-	if(nComPort > MAX_COM_PORTS)
-		return FALSE;
+    }
 
-	if(SSI_Ports[nComPort-1] != NULL)
-		return FALSE;
 	EnterCriticalSection(&csPort);
 	SSI_Ports[nComPort-1] = pSSI;
 	LeaveCriticalSection(&csPort);
@@ -114,13 +112,11 @@ static BOOL AddSSIComHandler(CComPort *pSSI, int nComPort)
 ******************************************************************************/
 static BOOL RemoveSSIComHandler( int nComPort)
 {
-	if(nComPort < 1)
+	if(nComPort < 1 || nComPort > MAX_COM_PORTS || SSI_Ports[nComPort-1] == NULL)
+    {
 		return FALSE;
-	if(nComPort > MAX_COM_PORTS)
-		return FALSE;
+    }
 
-	if(SSI_Ports[nComPort-1] == NULL)
-		return FALSE;
 	EnterCriticalSection(&csPort);
 	SSI_Ports[nComPort-1] = NULL;
 	LeaveCriticalSection(&csPort);
@@ -753,22 +749,24 @@ SSIDLL_API int __stdcall AbortImageXfer(int nComPort)
 SSIDLL_API int __stdcall PullTrigger(int nComPort)
 {
 	int ret_val = FALSE;
-   CComPort * SSI = GetSSIComHandler(nComPort);
-
+   	CComPort * SSI = GetSSIComHandler(nComPort);
 
 	if(SSI)
 	{
 		if(SSI->g_hwnd  && COMDEV(SSI->PortInfo))
-      {
-			SSI->SetLastError(SSICOMM_NOERROR);
+      	{
+        	SSI->SetLastError(SSICOMM_NOERROR);
 
 			ret_val = SSI->ProtocolHandler->ServiceTriggerPull();
 			if(!ret_val)
+            {
 				SSI->SetLastError(SSI_INPUTQ_FULL);
-      }
-      else
-        SSI->SetLastError(ERR_SSI_HWND);
-
+            }
+      	}
+      	else
+        {
+        	SSI->SetLastError(ERR_SSI_HWND);
+        }
 	}
 	return (!ret_val) ? GetLastProtocolError(nComPort) : 0;
 }

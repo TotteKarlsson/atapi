@@ -146,7 +146,7 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 	PacketQInsertIndex	= 1;
 	nComPortIndex -= 1;
 
-	if((nComPortIndex >= 0)&&(nComPortIndex <16))
+	if((nComPortIndex >= 0)&&(nComPortIndex < MAX_COM_PORTS))
 	{
 		ThreadArray[nComPortIndex].pResponseTimerID = NULL;
 		ThreadArray[nComPortIndex].pPacketTimerID = NULL;
@@ -159,7 +159,7 @@ void CComThreads::TearDownProtocolHandler(int nComPortIndex)
 		ResponseTimer->Enable(FALSE);
 		delete ResponseTimer;
 		ResponseTimer = NULL;
-	};
+	}
 
 	PacketState = PacketStart;
 

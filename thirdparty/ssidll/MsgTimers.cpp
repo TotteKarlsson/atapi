@@ -113,8 +113,6 @@ TTimer::~TTimer(void)
 void TTimer::Enable(bool flag)
 {
 	UINT Set;
-	
-
 	EnterCriticalSection(&csTimer);
 	if(Enabled && (flag == FALSE))  // don't reset interval here - let it keep it's former value
 	{
@@ -132,8 +130,7 @@ void TTimer::Enable(bool flag)
 			ID = 0;
 	}
 	LeaveCriticalSection(&csTimer);
-
-};
+}
 
 void TTimer::SetInterval(int i)
 {
