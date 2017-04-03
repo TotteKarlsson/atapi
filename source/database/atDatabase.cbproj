@@ -93,7 +93,7 @@
         <PreBuildEvent><![CDATA[REM copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
 REM copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
 $(PreBuildEvent)]]></PreBuildEvent>
-        <Debugger_DebugSourcePath>P:\libs\dslib\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>P:\libs\dsl\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
         <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>

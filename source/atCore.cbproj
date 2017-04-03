@@ -93,11 +93,10 @@
 copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
 $(PostBuildEvent)]]></PostBuildEvent>
         <BCC_whid>false</BCC_whid>
-        <PreBuildEvent><![CDATA[rmdir $(DEBUG_BUILD)\include\uc480
-mkdir $(DEBUG_BUILD)\include\uc480
+        <PreBuildEvent><![CDATA[if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480
 xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y
 $(PreBuildEvent)]]></PreBuildEvent>
-        <Debugger_DebugSourcePath>P:\libs\dslib\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>P:\libs\dsl\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
         <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
@@ -176,10 +175,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\atTCubeStepperMotor.cpp">
             <DependentOn>apt\atTCubeStepperMotor.h</DependentOn>
             <BuildOrder>70</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atThorlabStructs.cpp">
-            <DependentOn>apt\atThorlabStructs.h</DependentOn>
-            <BuildOrder>59</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoClient.cpp">
             <DependentOn>arduino\atArduinoClient.h</DependentOn>
@@ -453,7 +448,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>rmdir $(DEBUG_BUILD)\include\uc480&amp;&amp;mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
