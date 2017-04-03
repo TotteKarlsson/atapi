@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "atCameraServiceThread.h"
 #include "mtkWin32Utils.h"
-#include "camera/uc480class.h"
+#include "uc480/uc480class.h"
 #include "mtkLogger.h"
 
 using namespace mtk;

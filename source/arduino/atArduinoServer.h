@@ -27,7 +27,7 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //There are currently two Arduino boards, the 'Lights' board, and a 'Sensor' board containing sensors and
 //light controlling logic respectively.
 
-class AT_CORE ArduinoServer : public IPCServer
+class AT_CORE ArduinoServer : public IPCServer, public ATObject
 {
     public:
                                             ArduinoServer(int portNumber = 50000);

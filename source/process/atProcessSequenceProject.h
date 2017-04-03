@@ -4,6 +4,7 @@
 #include "mtkProject.h"
 #include "mtkConstants.h"
 #include "atProcess.h"
+#include "atATObject.h"
 
 //---------------------------------------------------------------------------
 AT_CORE extern const string gProcessSequenceProjectFileVersion;
@@ -18,7 +19,7 @@ class AbsoluteMove;
 class ArduinoServerCommand;
 
 
-class AT_CORE ProcessSequenceProject : public mtk::Project
+class AT_CORE ProcessSequenceProject : public mtk::Project, public ATObject
 {
     public:
                                                 ProcessSequenceProject(ProcessSequence& ps, const string& fName = "Sequence 1.abp");

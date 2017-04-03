@@ -103,7 +103,7 @@ void UC7MessageReceiver::worker()
                     else
                     {
                         //Send windows message and let UI handle the message
-                        if(!PostMessage(mHandle, UWM_MESSAGE, 1, (long) msg))
+                        if(!PostMessage(mHandle, UWM_UC7_MESSAGE, 1, (long) msg))
                         {
                             Log(lError) << "Post message failed..";
                         }

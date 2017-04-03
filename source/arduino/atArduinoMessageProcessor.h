@@ -3,6 +3,7 @@
 #include <string>
 #include "mtkThread.h"
 #include "atExporter.h"
+#include "atATObject.h"
 //----------------------------------------------------------------
 
 using mtk::Thread;
@@ -18,7 +19,7 @@ typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
 //!The Arduino Message processor processes messages sent from a
 //!Arduino Server.
-class AT_CORE ArduinoMessageProcessor : public Thread
+class AT_CORE ArduinoMessageProcessor : public Thread, public ATObject
 {
 
     public:

@@ -6,7 +6,7 @@
 #include "atATObject.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE ArduinoServerIPCReceiver : public mtk::IPCReceiver
+class AT_CORE ArduinoServerIPCReceiver : public mtk::IPCReceiver, public ATObject
 {
     public:
 						        		ArduinoServerIPCReceiver(int portNr = -1, int socket_handle = -1, mtk::IPCServer* server = NULL);

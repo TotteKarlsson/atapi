@@ -8,15 +8,16 @@
 using std::string;
 
 
-struct PACKAGE ATWindowStructMessage
+class PACKAGE ATWindowStructMessage
 {
-	Cardinal            Msg;
-    					//
-	int                 wparam;
+	public:
+        Cardinal            Msg;
+                            //
+        int                 wparam;
 
-    					//This is our data
-    void*				lparam;
-	LRESULT             Result;
+                            //This is our data
+        void*				lparam;
+        LRESULT             Result;
 };
 
 //List boxes

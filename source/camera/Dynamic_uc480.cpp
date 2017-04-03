@@ -73,7 +73,7 @@ bool Cuc480Dll::_SetPointers(bool Load)
                        }
 #define DECLARE(pars)
 
-    #include "uc480_macro.h"
+    #include "uc480/uc480_macro.h"
 
 #undef DECLARE
 #undef USB2CAMERA_MACRO_DO

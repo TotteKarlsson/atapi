@@ -11,11 +11,11 @@
 #ifndef _DYNAMIC_API_H_
 #define _DYNAMIC_API_H_
 
-#include "uc480.h"
+#include "uc480/uc480.h"
 
 #define USB2CAMERA_MACRO_DO(name) typedef INT (__cdecl* IS__##name)
 #define DECLARE(pars) pars;
-  #include "uc480_macro.h"
+  #include "uc480/uc480_macro.h"
 #undef DECLARE
 #undef USB2CAMERA_MACRO_DO
 
@@ -32,7 +32,7 @@ class AT_CORE Cuc480Dll
       // Declare functions
       #define USB2CAMERA_MACRO_DO(name) IS__##name is_##name ;
       #define DECLARE(pars)
-      #include "uc480_macro.h"
+      #include "uc480/uc480_macro.h"
       #undef DECLARE
       #undef USB2CAMERA_MACRO_DO
 

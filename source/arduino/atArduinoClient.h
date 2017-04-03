@@ -22,7 +22,7 @@ using mtk::SocketReceiver;
 //!The Arduino (socket) client class connects to a server over a socket.
 //!Messages are received, over the socket, by a socket receiver and placed in a message container.
 //!Received messages are processed by the ArduinoMessageProcessor.
-class AT_CORE ArduinoClient : public SocketClient
+class AT_CORE ArduinoClient : public SocketClient, public ATObject
 {
 	friend ArduinoMessageProcessor;
 	public:

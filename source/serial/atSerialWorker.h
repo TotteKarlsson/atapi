@@ -3,10 +3,11 @@
 #include "mtkIPCMessageBuilder.h"
 #include "mtkThread.h"
 #include "atSerialPort.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 class Serial;
-class AT_CORE SerialWorker : public mtk::Thread
+class AT_CORE SerialWorker : public mtk::Thread, public ATObject
 {
 	public:
                                         SerialWorker(Serial& h, SerialPort& s, char ld = '[', char rd = ']') : mTheHost(h), mSP(s), mMessageBuilder(ld, rd){}

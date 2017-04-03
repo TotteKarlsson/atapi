@@ -47,7 +47,7 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
+        <IncludePath>$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
@@ -89,9 +89,13 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <BCC_whid>false</BCC_whid>
-        <PreBuildEvent><![CDATA[copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
+        <PostBuildEvent><![CDATA[copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
 copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
+$(PostBuildEvent)]]></PostBuildEvent>
+        <BCC_whid>false</BCC_whid>
+        <PreBuildEvent><![CDATA[rmdir $(DEBUG_BUILD)\include\uc480
+mkdir $(DEBUG_BUILD)\include\uc480
+xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dslib\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
@@ -428,6 +432,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\atVCLCore.bpl">ArrayBot VCL Core package</Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
@@ -447,11 +453,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
+        <PreBuildEvent>rmdir $(DEBUG_BUILD)\include\uc480&amp;&amp;mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent/>
+        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

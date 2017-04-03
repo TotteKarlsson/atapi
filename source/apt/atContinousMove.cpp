@@ -8,7 +8,7 @@ using namespace mtk;
 
 ContinousMove::ContinousMove(const string& lbl, double v, double acc)
 :
-ab::Move(lbl, NULL, v, acc)
+at::Move(lbl, NULL, v, acc)
 {}
 
 bool ContinousMove::isDone()

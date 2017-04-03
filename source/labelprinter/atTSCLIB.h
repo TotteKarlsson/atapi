@@ -3,6 +3,7 @@
 #include <string>
 #include <windows.h>
 #include "atExporter.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 using std::string;
@@ -35,7 +36,7 @@ struct BarcodePrintParameters
 
 //!The TSCLIB class wraps functions that are present in the tsclib.dll module. These functions
 //!allow printing custom labels on a TSC printer
-class AT_CORE TSCLIB
+class AT_CORE TSCLIB : public ATObject
 {
 	public:
 							                TSCLIB();

@@ -2,10 +2,11 @@
 #define atReticleH
 #include <VCL.Graphics.hpp>
 #include <utility>
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 using std::pair;
-class PACKAGE TReticle
+class PACKAGE TReticle : public ATObject
 {
 	public:
     	enum ReticleType	{rtCrossHair, rtCircle, rtBoth};
@@ -22,7 +23,5 @@ class PACKAGE TReticle
         TColor				mLineColor;
         int					mCircleRadius;
         pair<int,int>		mReticleCenter;
-
-
 };
 #endif

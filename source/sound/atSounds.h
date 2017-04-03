@@ -5,6 +5,7 @@
 #include <string>
 #include <deque>
 #include <mmsystem.h>
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 using std::string;
@@ -39,7 +40,7 @@ bool 			        PlayResource(const string& resName, long flags = 0);
 
 class SoundPlayer;
 
-class SoundWorker : public mtk::Thread
+class SoundWorker : public mtk::Thread, public ATObject
 {
 	public:
     						SoundWorker(deque<ABSound>& soundDeck , Poco::Mutex bufferMutex);
@@ -48,7 +49,7 @@ class SoundWorker : public mtk::Thread
     	SoundPlayer&		mSoundPlayer;
 };
 
-class AT_CORE SoundPlayer
+class AT_CORE SoundPlayer : public ATObject
 {
 	public:
 								SoundPlayer();

@@ -1,6 +1,7 @@
 #ifndef atCameraServiceThreadH
 #define atCameraServiceThreadH
 #include "mtkThread.h"
+#include "atATObject.h"
 
 class Cuc480;
 using mtk::Thread;
@@ -16,7 +17,7 @@ typedef void __fastcall (__closure *ThreadCallBack)(System::TObject*);
 enum DoFunction {dfOpen, dfClose};
 
 //---------------------------------------------------------------------------
-class CameraServiceThread : public Thread
+class CameraServiceThread : public Thread, public ATObject
 {
 	public:
 								CameraServiceThread(Cuc480& camera, int id, HWND handle);
