@@ -34,7 +34,7 @@ struct BarcodePrintParameters
 
 
 //!The TSCLIB class wraps functions that are present in the tsclib.dll module. These functions
-//allow printing custom labels on a TSC printer
+//!allow printing custom labels on a TSC printer
 class AT_CORE TSCLIB
 {
 	public:

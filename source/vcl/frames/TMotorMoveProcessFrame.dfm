@@ -1,8 +1,8 @@
 object MotorMoveProcessFrame: TMotorMoveProcessFrame
   Left = 0
   Top = 0
-  Width = 803
-  Height = 766
+  Width = 451
+  Height = 304
   Align = alClient
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +11,10 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
   Font.Style = []
   ParentFont = False
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object mMainGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 803
+    Width = 451
     Height = 465
     Align = alTop
     Caption = 'Action Properties'
@@ -26,12 +24,11 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
     object Panel2: TPanel
       Left = 17
       Top = 296
-      Width = 769
+      Width = 417
       Height = 167
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitTop = 200
       object Label1: TLabel
         Left = 16
         Top = 15
@@ -88,12 +85,11 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
     object Panel1: TPanel
       Left = 17
       Top = 25
-      Width = 769
+      Width = 417
       Height = 271
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitHeight = 151
       object mActionInfo: TLabel
         Left = 0
         Top = 0
@@ -113,7 +109,7 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
       object mAddTriggerBtn: TArrayBotButton
         Left = 233
         Top = 0
-        Width = 536
+        Width = 184
         Height = 271
         Align = alClient
         Caption = 'Add Child Action'
@@ -122,21 +118,16 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
         TabOrder = 0
         OnClick = AddTriggerBClick
         SoundID = 'BUTTON_CLICK_4'
-        ExplicitLeft = 240
-        ExplicitWidth = 177
-        ExplicitHeight = 151
       end
     end
   end
   object mTriggerPanel: TPanel
     Left = 0
     Top = 465
-    Width = 803
+    Width = 451
     Height = 301
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 440
-    ExplicitHeight = 326
     object GroupBox1: TGroupBox
       Left = 377
       Top = 32
@@ -154,7 +145,6 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
         ItemHeight = 23
         TabOrder = 0
         OnClick = TriggersLBClick
-        ExplicitLeft = -6
       end
     end
   end

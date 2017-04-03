@@ -1,12 +1,10 @@
 #pragma hdrstop
 #include "atMove.h"
-//#include "atXYZUnit.h"
 #include "mtkLogger.h"
 #include "atArrayBot.h"
 #include "atAPTMotor.h"
-//#include "atPosition.h"
 #include "atTriggerFunction.h"
-namespace ab
+namespace at
 {
 
 //using namespace std::tr1;
