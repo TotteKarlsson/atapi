@@ -2,15 +2,14 @@
 #define abMoveH
 #include "atExporter.h"
 #include "process/atProcess.h"
-//#include "atPosition.h"
 #include "atPositionalTrigger.h"
 //---------------------------------------------------------------------------
 
-namespace ab
+namespace at
 {
 
-//!The move baseclass contain the general logic for a 'move' of an APTMotor
-//!this should be subclassed - > MoveMotor
+//!The move baseclass contain the general logic for a 'move' of an APTMotor.
+//!This should be subclassed - > MoveMotor
 class AT_CORE Move : public Process
 {
     public:

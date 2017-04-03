@@ -1,13 +1,12 @@
 #pragma hdrstop
 #include "atAbsoluteMove.h"
 #include "atAPTMotor.h"
-//#include "atPosition.h"
 #include "atTriggerFunction.h"
 //---------------------------------------------------------------------------
 
 AbsoluteMove::AbsoluteMove(const string& lbl, APTMotor* mtr, double pos, double maxVel, double acc)
 :
-ab::Move(lbl, mtr, maxVel, acc),
+at::Move(lbl, mtr, maxVel, acc),
 mPosition(pos),
 mPositionResolution(1.0e-3)
 {}

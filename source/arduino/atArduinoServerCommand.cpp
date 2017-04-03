@@ -4,13 +4,11 @@
 #include "mtkLogger.h"
 #include "atArrayBot.h"
 #include "atAPTMotor.h"
-//#include "atPosition.h"
 #include "atTriggerFunction.h"
 #include "atArduinoClient.h"
 
-
 using namespace mtk;
-using namespace ab;
+//using namespace at;
 
 //---------------------------------------------------------------------------
 ArduinoServerCommand::ArduinoServerCommand(const string& lbl)

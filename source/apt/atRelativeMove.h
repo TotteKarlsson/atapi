@@ -6,7 +6,7 @@
 //---------------------------------------------------------------------------
 class APTMotor;
 
-class AT_CORE RelativeMove : public ab::Move
+class AT_CORE RelativeMove : public at::Move
 {
     public:
     								RelativeMove( const string& lbl, APTMotor* mtr = NULL, double pos = 0, double maxVel = 1, double acc = 1);
