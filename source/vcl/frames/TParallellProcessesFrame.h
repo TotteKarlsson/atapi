@@ -52,7 +52,6 @@ __published:	// IDE-managed Components
 
 	public:		// User declarations
 							__fastcall  TParallellProcessesFrame(TComponent* Owner);
-
     	void							populate(ArrayBot& ab, Process* p);
     	void							rePopulate(Process* p);
 };
