@@ -14,6 +14,7 @@
 
 class ProcessSequence;
 class TParallellProcessesFrame;
+class TTimeDelayFrame;
 class Process;
 class ArrayBot;
 
@@ -42,22 +43,23 @@ class PACKAGE TSequenceInfoFrame : public TFrame
 	void __fastcall mUpdatePositionsBtnClick(TObject *Sender);
 	void __fastcall mRenameBtnClick(TObject *Sender);
 
-    private:	// User declarations
+    private:
 		ProcessSequence*		        mSequence;
         string					        mSequencesFolder;
         ArrayBot*				        mAB;
-        TScrollBox*					        mProcessPanel;
+        TScrollBox*					    mProcessPanel;
         TParallellProcessesFrame*		mParallellProcessesFrame;
+        TTimeDelayFrame*				mTimeDelayFrame;
 
-		void		__fastcall  empty();
-        void					disableEnableButtons(bool enabled);
-		void       				updateSequenceArrows();
-        Process*				getCurrentlySelectedProcess();
+		void		__fastcall          empty();
+        void							disableEnableButtons(bool enabled);
+		void       				        updateSequenceArrows();
+        Process*				        getCurrentlySelectedProcess();
 
-    public:		// User declarations
-        			__fastcall 	TSequenceInfoFrame(TComponent* Owner);
-		void					assignArrayBot(ArrayBot* ab);
-		bool					populate(ProcessSequence* seq, TScrollBox* processPanel = NULL);
+    public:
+        			__fastcall 	        TSequenceInfoFrame(TComponent* Owner);
+		void					        assignArrayBot(ArrayBot* ab);
+		bool					        populate(ProcessSequence* seq, TScrollBox* processPanel = NULL);
 };
 
 extern PACKAGE TSequenceInfoFrame *SequenceInfoFrame;

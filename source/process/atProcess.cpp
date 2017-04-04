@@ -29,10 +29,10 @@ string Process::getProcessType()
 bool Process::start()
 {
 	Poco::Timestamp now;
-	mStartTime = now;
-	mIsStarted = true;
-	mIsBeingProcessed = true;
-    mIsProcessed = false;
+	mStartTime 			= now;
+	mIsStarted 			= true;
+	mIsBeingProcessed 	= true;
+    mIsProcessed 		= false;
     return true;
 }
 

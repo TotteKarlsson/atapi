@@ -4,11 +4,11 @@
 #include "mtkLogger.h"
 #include "atProcessSequence.h"
 #include "atParallellProcess.h"
-//#include "atPosition.h"
 #include "atArrayBot.h"
 #include "atAbsoluteMove.h"
 #include "atMove.h"
 #include "atTimedelay.h"
+#include "atStopAndResumeProcess.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atArduinoServerCommand.h"
@@ -78,13 +78,23 @@ bool ProcessSequenceProject::save(const string& fName)
 			clm->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
         }
 
-        if(dynamic_cast<TimeDelay*>(p))
+        else if(dynamic_cast<TimeDelay*>(p))
 	    {
         	TimeDelay* td = dynamic_cast<TimeDelay*>(p);
 
         	//Write subprocesses
 			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
         }
+
+        else if(dynamic_cast<StopAndResumeProcess*>(p))
+	    {
+        	StopAndResumeProcess* td = dynamic_cast<StopAndResumeProcess*>(p);
+
+        	//Write subprocesses
+			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+        }
+
+
         p = mProcessSequence.getNext();
     }
 
@@ -172,6 +182,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
     {
     	case ptParallell: 				return createParallellProcess(element);
         case ptTimeDelay:       		return createTimeDelayProcess(element);
+        case ptStopAndResumeProcess:	return createStopAndResumeProcess(element);
     }
 
     return NULL;
@@ -354,6 +365,15 @@ Process* ProcessSequenceProject::createTimeDelayProcess(XMLElement* element)
     {
     	p->setTimeDelay(-1);
     }
+
+    return p;
+}
+
+Process* ProcessSequenceProject::createStopAndResumeProcess(XMLElement* element)
+{
+    StopAndResumeProcess* p = new StopAndResumeProcess("");
+
+   	p->setProcessName(element->Attribute("name"));
 
     return p;
 }

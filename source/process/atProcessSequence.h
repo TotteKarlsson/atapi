@@ -64,7 +64,6 @@ class AT_CORE ProcessSequence : public ATObject
         bool								moveForward(Process* ps);
         bool								moveBack(Process* ps);
 
-
     protected:
     	ArrayBot&							mAB;
 	    ProcessSequenceProject	 			mProject;

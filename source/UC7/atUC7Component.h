@@ -99,7 +99,7 @@ class AT_CORE UC7 : public ATObject
         bool							setStageMoveDelay(int ms);
 
         bool							isActive(){return mIsActive;}
-		bool							isActive(bool isIt){mIsActive = isIt;}
+		void							isActive(bool isIt){mIsActive = isIt;}
 
     									//References
 		bool&        					getRibbonCreatorActiveReference(){return mIsActive;}

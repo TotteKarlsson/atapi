@@ -321,9 +321,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>process\atProcessSequences.h</DependentOn>
             <BuildOrder>47</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atTimeDelay.cpp">
-            <DependentOn>process\atTimeDelay.h</DependentOn>
+        <CppCompile Include="process\atStopAndResumeProcess.cpp">
+            <DependentOn>process\atStopAndResumeProcess.h</DependentOn>
             <BuildOrder>71</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\atTimeDelay.cpp">
+            <BuildOrder>68</BuildOrder>
         </CppCompile>
         <CppCompile Include="process\atTrigger.cpp">
             <DependentOn>process\atTrigger.h</DependentOn>
@@ -448,11 +451,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
+        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

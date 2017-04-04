@@ -20,8 +20,8 @@
 #undef USB2CAMERA_MACRO_DO
 
 #include "atExporter.h"
-
-class AT_CORE Cuc480Dll
+#include "atATObject.h"
+class AT_CORE Cuc480Dll : public ATObject
 {
     public:
       										Cuc480Dll();

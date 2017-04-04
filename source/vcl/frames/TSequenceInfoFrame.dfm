@@ -121,6 +121,7 @@ object SequenceInfoFrame: TSequenceInfoFrame
         Align = alClient
         ParentDoubleBuffered = True
         TabOrder = 1
+        Visible = False
         OnClick = mUpdatePositionsBtnClick
         SoundID = 'BUTTON_CLICK_4'
       end

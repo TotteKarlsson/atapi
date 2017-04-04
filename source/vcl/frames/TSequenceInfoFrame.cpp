@@ -7,11 +7,13 @@
 #include "mtkVCLUtils.h"
 #include "TStringInputDialog.h"
 #include "process/atTimeDelay.h"
+#include "process/atStopAndResumeProcess.h"
 #include "frames/TMotorMoveProcessFrame.h"
 #include "frames/TParallellProcessesFrame.h"
 #include "frames/TTimeDelayFrame.h"
 #include "atVCLUtils.h"
 #include "mtkLogger.h"
+#include "TSelectProcessTypeDialog.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
@@ -26,9 +28,12 @@ __fastcall TSequenceInfoFrame::TSequenceInfoFrame(TComponent* Owner)
     mSequence(NULL),
     mAB(NULL)
 {
+    //Create frames
 	mParallellProcessesFrame = new TParallellProcessesFrame(Owner);
     mParallellProcessesFrame->Visible = false;
 
+    mTimeDelayFrame = new TTimeDelayFrame(Owner);
+    mTimeDelayFrame->Visible = false;
 	mUpdatePositionsBtn->Action = mParallellProcessesFrame->mUpdateFinalPositionsA;
 }
 
@@ -50,6 +55,7 @@ bool TSequenceInfoFrame::populate(ProcessSequence* seq, TScrollBox* processPanel
     {
     	mProcessPanel = processPanel;
 		mParallellProcessesFrame->Parent = mProcessPanel;
+        mTimeDelayFrame->Parent = mProcessPanel;
     }
 
     mProcessesLB->Clear();
@@ -160,29 +166,42 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
 
 	updateSequenceArrows();
 
+	mParallellProcessesFrame->Visible 	= false;
+	mUpdatePositionsBtn->Visible 		= false;
+    mTimeDelayFrame->Visible 			= false;
+
     //Check what kind of process we have, Pause, or CombinedMove
     Process* p = getCurrentlySelectedProcess();
-    if(p)
+    if(dynamic_cast<ParallellProcess*>(p) != NULL)
     {
-    	ParallellProcess* cm = dynamic_cast<ParallellProcess*>(p);
-
-        if(cm)
+    	ParallellProcess* pp = dynamic_cast<ParallellProcess*>(p);
+        if(mAB)
         {
-            if(mAB)
-    		{
-            	mParallellProcessesFrame->populate(*mAB, cm);
-                mParallellProcessesFrame->mSubProcessesLB->ItemIndex = 0;
-                mParallellProcessesFrame->mSubProcessesLB->OnClick(NULL);
-            }
-			mParallellProcessesFrame->Visible 	= true;
-			mUpdatePositionsBtn->Enabled 		= true;
-            mParallellProcessesFrame->Align = alClient;
+            mParallellProcessesFrame->populate(*mAB, pp);
+            mParallellProcessesFrame->mSubProcessesLB->ItemIndex = 0;
+            mParallellProcessesFrame->mSubProcessesLB->OnClick(NULL);
+        }
+
+        mParallellProcessesFrame->Visible 	= true;
+		mUpdatePositionsBtn->Visible 		= true;
+        mUpdatePositionsBtn->Enabled 		= true;
+        mParallellProcessesFrame->Align = alClient;
+    }
+    else if(dynamic_cast<TimeDelay*>(p) != NULL)
+    {
+		TimeDelay* tdp = dynamic_cast<TimeDelay*>(p);
+        if(mAB)
+        {
+			mTimeDelayFrame->populate(*mAB, tdp);
+            mTimeDelayFrame->Visible = true;
+	        mTimeDelayFrame->Align = alClient;
         }
     }
     else
     {
-		mParallellProcessesFrame->Visible = false;
-		mUpdatePositionsBtn->Enabled = false;
+		mParallellProcessesFrame->Visible 	= false;
+		mUpdatePositionsBtn->Enabled 		= false;
+		mUpdatePositionsBtn->Visible 		= false;
     }
 }
 
@@ -208,16 +227,44 @@ void __fastcall TSequenceInfoFrame::AddCombinedMoveAExecute(TObject *Sender)
     	return;
     }
 
-    int nr  = mSequence->getNumberOfProcesses() + 1;
+    //Ask the user for type of process/event to create
+   	TSelectProcessTypeDialog* pTypeForm = new TSelectProcessTypeDialog(this);
 
-	//Create and add a process to the sequence
-	Process *p = new ParallellProcess("Process " + mtk::toString(nr));
-   	mSequence->add(p);
-    mSequence->write();
+   	int mr = pTypeForm->ShowModal();
 
-    //Update LB
-    mProcessesLB->Items->AddObject(p->getProcessName().c_str(), (TObject*) p);
-	selectAndClickListBoxItem(mProcessesLB, (TObject*) p);
+   	if(mr == mrOk)
+	{
+	    Process *p = NULL;
+     	int nr  = mSequence->getNumberOfProcesses() + 1;
+
+    	//get process type
+        int pType = pTypeForm->mProcTypeRG->ItemIndex;
+        if(pType == 0) //Parallell process
+        {
+			//Create and add a process to the sequence
+	        p = new ParallellProcess("Process " + mtk::toString(nr));
+        }
+        else if(pType == 1) //Time delay
+        {
+        	p = new TimeDelay("Process " + mtk::toString(nr));
+        }
+        else if(pType == 2) //Stop/Start Dialog
+        {
+        	p = new StopAndResumeProcess("Process " + mtk::toString(nr));
+        }
+        else
+        {
+        	Log(lError) << "Process Type Selection is not Suported!";
+            return;
+        }
+
+        mSequence->add(p);
+        mSequence->write();
+
+        //Update LB
+        mProcessesLB->Items->AddObject(p->getProcessName().c_str(), (TObject*) p);
+        selectAndClickListBoxItem(mProcessesLB, (TObject*) p);
+   }
 }
 
 void TSequenceInfoFrame::updateSequenceArrows()

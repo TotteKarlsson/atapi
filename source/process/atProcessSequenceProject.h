@@ -37,6 +37,7 @@ class AT_CORE ProcessSequenceProject : public mtk::Project, public ATObject
         Process*				                createProcess(tinyxml2::XMLElement* element);
 		Process*								createParallellProcess(tinyxml2::XMLElement* element);
 		Process*								createTimeDelayProcess(tinyxml2::XMLElement* element);
+		Process*								createStopAndResumeProcess(tinyxml2::XMLElement* element);
 
 		AbsoluteMove* 				  			createAbsoluteMoveFromXML(const string& name,  tinyxml2::XMLElement* proc);
 		ArduinoServerCommand* 					createArduinoServerCommandFromXML(const string& name,  tinyxml2::XMLElement* proc);

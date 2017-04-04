@@ -23,8 +23,7 @@ TTimeDelayFrame *TimeDelayFrame;
 
 __fastcall TTimeDelayFrame::TTimeDelayFrame(TComponent* Owner)
 	: TFrame(Owner)
-{
-}
+{}
 
 void TTimeDelayFrame::populate(ArrayBot& ab, Process* p)
 {

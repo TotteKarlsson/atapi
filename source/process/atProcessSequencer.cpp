@@ -3,7 +3,7 @@
 #include "mtkLogger.h"
 #include "atProcess.h"
 #include "mtkUtils.h"
-
+#include "atStopAndResumeProcess.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
 
@@ -20,6 +20,34 @@ ProcessSequencer::~ProcessSequencer()
 {
 	mSequenceTimer.assignTimerFunction(NULL);
 	mSequenceTimer.stop();
+}
+
+void ProcessSequencer::pause()
+{
+	mSequenceTimer.pause();
+}
+
+bool ProcessSequencer::resume()
+{
+	//Get current process, and 'resume' it
+
+ 	ProcessSequence* s = mSequences.getCurrent();
+    if(!s)
+    {
+    	return false;
+    }
+
+	Process* p = s->getCurrent();
+    if(!p)
+    {
+    	Log(lInfo) << "Reached the end of process pipeline";
+        return false;
+    }
+
+    p->resume();
+
+	mSequenceTimer.resume();
+  	Log(lInfo) << "Sequence was resumed";
 }
 
 void ProcessSequencer::start(bool autoExecute)
@@ -275,6 +303,12 @@ void ProcessSequencer::onTimerFunc()
         	Log(lError) << "Process \""<<p->getProcessName()<<"\" timed out";
         	stop();
         }
+       	else if(p->isStarted() && dynamic_cast<StopAndResumeProcess*>(p) != NULL)
+        {
+        	//Tell the UI to show dialog to resume processing...
+            pause();
+            Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
+        }
         else if(p->isProcessed() == true && mExecuteAutomatic == false)
         {
             //We have finished one process in the sequence
@@ -305,5 +339,10 @@ string ProcessSequencer::getCurrentProcessName()
 bool ProcessSequencer::isRunning()
 {
 	return mSequenceTimer.isRunning();
+}
+
+bool ProcessSequencer::isPaused()
+{
+	return mSequenceTimer.isPaused();
 }
 

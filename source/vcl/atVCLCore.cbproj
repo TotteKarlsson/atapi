@@ -123,6 +123,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>forms\TamFileEditor.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="forms\TSelectProcessTypeDialog.cpp">
+            <Form>SelectProcessTypeDialog</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>forms\TSelectProcessTypeDialog.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
         <CppCompile Include="forms\TShowFileContentForm.cpp">
             <Form>ShowFileContentForm</Form>
             <DependentOn>forms\TShowFileContentForm.h</DependentOn>
@@ -224,14 +230,15 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TPositionalTriggerFrame.dfm"/>
         <FormResources Include="frames\TSequenceInfoFrame.dfm"/>
         <FormResources Include="frames\TXYZUnitFrame.dfm"/>
+        <FormResources Include="frames\TMotorMoveProcessFrame.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
-        <FormResources Include="forms\TShowFileContentForm.dfm"/>
+        <FormResources Include="forms\TYesNoForm.dfm"/>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="frames\TMotorFrame.dfm"/>
-        <FormResources Include="frames\TMotorMoveProcessFrame.dfm"/>
+        <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
         <FormResources Include="forms\TTextInputDialog.dfm"/>
-        <FormResources Include="forms\TYesNoForm.dfm"/>
+        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

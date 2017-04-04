@@ -9,7 +9,7 @@
 #include "atProcessSequences.h"
 
 using mtk::Timer;
-namespace ab
+namespace at
 {
 	class Move;
 }
@@ -37,6 +37,9 @@ class AT_CORE ProcessSequencer : public ATObject
 
 		void				                clear();
 		void		                        start(bool continous = true);
+		void		                        pause();
+		bool 		                        resume();
+
 		bool		                        reset();
 		bool								continueExecution();
 
@@ -46,10 +49,11 @@ class AT_CORE ProcessSequencer : public ATObject
 //        bool		                        reverse();
         void		                        stop();
         bool				                isRunning();
+        bool				                isPaused();
         bool				                isCurrentProcessActive();
 
 
-        									//!when all processes are executed, the processsequence is done
+        									//!After all processes are executed, the processsequence is done
         bool								isDone();
 
         ProcessSequence*   	                getCurrentSequence();

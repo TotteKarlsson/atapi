@@ -52,6 +52,7 @@ string toString(ProcessType pt)
     	case ptArduinoServerCommand: 	return "arduinoServerCommand";
     	case ptParallell: 		        return "parallell";
     	case ptTimeDelay: 		        return "timeDelay";
+    	case ptStopAndResumeProcess:    return "stopAndResumeProcess";
         default: 				        return "unknownProcessType";
     }
 }
@@ -78,6 +79,11 @@ ProcessType toProcessType(const string& str)
 	if(str == "timeDelay")
     {
     	return ptTimeDelay;
+    }
+
+	if(str == "stopAndResumeProcess")
+    {
+    	return ptStopAndResumeProcess;
     }
 
 	return ptUnknown;

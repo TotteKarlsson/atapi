@@ -52,6 +52,16 @@ bool TimeDelay::isBeingProcessed()
     return mIsBeingProcessed;
 }
 
+bool TimeDelay::start()
+{
+	return Process::start();
+}
+
+bool TimeDelay::stop()
+{
+	return Process::stop();
+}
+
 bool TimeDelay::isProcessed()
 {
     if(mIsProcessed == true)
@@ -68,16 +78,6 @@ bool TimeDelay::isProcessed()
     }
 
 	return false;
-}
-
-bool TimeDelay::start()
-{
-	return Process::start();
-}
-
-bool TimeDelay::stop()
-{
-	return Process::stop();
 }
 
 bool TimeDelay::isDone()

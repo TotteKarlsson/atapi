@@ -34,11 +34,13 @@ object TimeDelayFrame: TTimeDelayFrame
     object mNameEdit: TSTDStringLabeledEdit
       Left = 21
       Top = 64
-      Width = 121
+      Width = 260
       Height = 31
       EditLabel.Width = 49
       EditLabel.Height = 23
       EditLabel.Caption = 'Name'
+      Enabled = False
+      ReadOnly = True
       TabOrder = 1
       OnKeyDown = mEditKeyDown
     end

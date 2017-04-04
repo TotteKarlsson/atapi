@@ -2,7 +2,6 @@
 #include "atProcessSequence.h"
 #include "atProcess.h"
 #include "mtkIniFile.h"
-//#include "atMove.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 

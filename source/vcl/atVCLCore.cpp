@@ -7,14 +7,15 @@ USEFORM("frames\TParallellProcessesFrame.cpp", ParallellProcessesFrame);
 USEFORM("frames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
 USEFORM("frames\TSequenceInfoFrame.cpp", SequenceInfoFrame); /* TFrame: File Type */
 USEFORM("frames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
+USEFORM("frames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
-USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
+USEFORM("forms\TYesNoForm.cpp", YesNoForm);
 USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
 USEFORM("frames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
-USEFORM("frames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
+USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
 USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
-USEFORM("forms\TYesNoForm.cpp", YesNoForm);
+USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
