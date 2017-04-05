@@ -55,13 +55,13 @@ void __fastcall TProcessSequenceControlForm::mStatusTimerTimer(TObject *Sender)
 		mStatus = psNotStarted;
     }
 
+    mSequenceNameLbl->Caption 		= vclstr(mPS.getCurrentSequenceName());
+    mProcessNameLbl->Caption 		= vclstr(mPS.getCurrentProcessName());
+    mNextProcessNameLbl->Caption 	= vclstr(mPS.getNextProcessName());
+
     if(lastStatus != mStatus)
     {
         lastStatus = mStatus;
-        mSequenceNameLbl->Caption 		= vclstr(mPS.getCurrentSequenceName());
-        mProcessNameLbl->Caption 		= vclstr(mPS.getCurrentProcessName());
-        mNextProcessNameLbl->Caption 	= vclstr(mPS.getNextProcessName());
-
         switch(mStatus)
         {
 			case psNotStarted:

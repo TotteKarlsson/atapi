@@ -105,6 +105,7 @@ void __fastcall TSequencerButtonsFrame::click(TObject *Sender)
         TProcessSequenceControlForm* f = new TProcessSequenceControlForm(mAB.getProcessSequencer(), this);
         f->ShowModal();
         delete f;
+        mAB.enableJoyStickAxes();
     }
 }
 
