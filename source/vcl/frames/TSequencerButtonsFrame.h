@@ -1,6 +1,5 @@
 #ifndef TSequencerButtonsFrameH
 #define TSequencerButtonsFrameH
-//---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -15,12 +14,12 @@
 class PACKAGE TSequencerButtonsFrame : public TFrame
 {
     __published:	// IDE-managed Components
-	TTimer *mSequenceStatusTimer;
-	void __fastcall mSequenceStatusTimerTimer(TObject *Sender);
-	void __fastcall click(TObject *Sender);
+        TTimer *mSequenceStatusTimer;
+        void __fastcall mSequenceStatusTimerTimer(TObject *Sender);
+        void __fastcall click(TObject *Sender);
 
     private:	// User declarations
-		ArrayBot&				mAB;
+		ArrayBot&					mAB;
         vector<TArrayBotButton*> 	mButtons;
 
 	public:
@@ -28,7 +27,6 @@ class PACKAGE TSequencerButtonsFrame : public TFrame
     	void					update();
 };
 
-//---------------------------------------------------------------------------
+
 extern PACKAGE TSequencerButtonsFrame *SequencerButtonsFrame;
-//---------------------------------------------------------------------------
 #endif

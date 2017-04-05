@@ -5,11 +5,14 @@
 #include "mtkVCLUtils.h"
 #include "TYesNoForm.h"
 #include <sstream>
+#include "mtkLogger.h"
+#include "forms/TProcessSequenceControlForm.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
+using namespace mtk;
 using std::stringstream;
 TSequencerButtonsFrame *SequencerButtonsFrame;
 //---------------------------------------------------------------------------
@@ -21,7 +24,6 @@ __fastcall TSequencerButtonsFrame::TSequencerButtonsFrame(ArrayBot& bot, TCompon
 //--------------------------------------------------------------------------
 void TSequencerButtonsFrame::update()
 {
-
     for(int i = 0; i < mButtons.size(); i++)
     {
     	delete mButtons[i];
@@ -73,6 +75,8 @@ void TSequencerButtonsFrame::update()
     //Restore back to the sequence wich was selected
     pss.select(current);
 }
+
+//---------------------------------------------------------------------------
 void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sender)
 {
     ProcessSequencer& psr = mAB.getProcessSequencer();
@@ -87,25 +91,20 @@ void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sende
 void __fastcall TSequencerButtonsFrame::click(TObject *Sender)
 {
 	TArrayBotButton* b = dynamic_cast<TArrayBotButton*>(Sender);
-    if(b)
+    if(!b)
     {
-	    TYesNoForm* f = new TYesNoForm(this);
-        f->Caption = "";
-        stringstream msg;
-        msg <<"Execute sequence: "<< stdstr(b->Caption);
+    	Log(lError) << "Bad button on the frame";
+    	return;
+    }
 
-        f->mInfoLabel->Caption = msg.str().c_str();
-        int res = f->ShowModal();
-        if(res == mrYes)
-        {
-            ProcessSequencer& psr = mAB.getProcessSequencer();
-            if(psr.selectSequence(stdstr(b->Caption)))
-            {
-                mSequenceStatusTimer->Enabled = true;
-                mAB.disableJoyStickAxes();
-                psr.start();
-            }
-        }
+    ProcessSequencer& psr = mAB.getProcessSequencer();
+    if(psr.selectSequence(stdstr(b->Caption)))
+    {
+        mSequenceStatusTimer->Enabled = true;
+        mAB.disableJoyStickAxes();
+        TProcessSequenceControlForm* f = new TProcessSequenceControlForm(mAB.getProcessSequencer(), this);
+        f->ShowModal();
+        delete f;
     }
 }
 

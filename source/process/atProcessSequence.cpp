@@ -44,6 +44,9 @@ void ProcessSequence::init()
     	process->init(mAB);
         process = getNext();
     }
+
+    //Initialize process iterator to first process..
+    getFirst();
 }
 
 bool ProcessSequence::moveForward(Process* ps)
@@ -108,46 +111,6 @@ string ProcessSequence::getFileFolder()
 string ProcessSequence::getFileName()
 {
 	return mProject.getFileName();
-}
-
-bool ProcessSequence::read(const string& fName)
-{
-	if(mProject.loadFromFile(fName))
-    {
-    	bool res = mProject.open();
-    	return res;
-    }
-    return false;
-}
-
-bool ProcessSequence::write(const string& folder)
-{
-	if(folder.size())
-    {
-		//Create XML document
-	    mProject.setFileFolder(folder);
-    }
-
-    if(mProject.getFileName() == "")
-    {
-        mProject.setFileName(mProject.getProjectName() + ".abp");
-    }
-
-	bool saveRes(false);
-    if(mProcessIter != mProcesses.begin())
-    {
-        //We need to preserve the current process iterator in the sequence
-        list<Process*>::iterator savedIter = mProcessIter;
-
-        saveRes = mProject.save();
-        selectProcess(*(savedIter));
-	    return saveRes;
-    }
-    else
-    {
-        saveRes = mProject.save();
-    }
-    return saveRes;
 }
 
 bool ProcessSequence::selectProcess(Process* p)
@@ -244,4 +207,43 @@ Process* ProcessSequence::getPrevious() const
     return NULL;
 }
 
+bool ProcessSequence::read(const string& fName)
+{
+	if(mProject.loadFromFile(fName))
+    {
+    	bool res = mProject.open();
+    	return res;
+    }
+    return false;
+}
+
+bool ProcessSequence::write(const string& folder)
+{
+	if(folder.size())
+    {
+		//Create XML document
+	    mProject.setFileFolder(folder);
+    }
+
+    if(mProject.getFileName() == "")
+    {
+        mProject.setFileName(mProject.getProjectName() + ".abp");
+    }
+
+	bool saveRes(false);
+    if(mProcessIter != mProcesses.begin())
+    {
+        //We need to preserve the current process iterator in the sequence
+        list<Process*>::iterator savedIter = mProcessIter;
+
+        saveRes = mProject.save();
+        selectProcess(*(savedIter));
+	    return saveRes;
+    }
+    else
+    {
+        saveRes = mProject.save();
+    }
+    return saveRes;
+}
 

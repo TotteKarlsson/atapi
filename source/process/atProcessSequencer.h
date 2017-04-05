@@ -31,27 +31,29 @@ class AT_CORE ProcessSequencer : public ATObject
 
 		bool				                load(const string& sName);
 		bool				                loadAll(const string& fileFolder);
+        bool								initCurrentSequence();
+
         bool						        deleteSequence(const string& seq);
-
 		bool				                saveCurrent();
-
 		void				                clear();
+
+											//!Five main controlling actions..
 		void		                        start(bool continous = true);
+        void		                        stop();
 		void		                        pause();
 		bool 		                        resume();
+		bool		                        forward();
+//        bool		                        reverse();
 
 		bool		                        reset();
 		bool								continueExecution();
 
-		bool		                        forward();
         bool								canContinue();
 		string								getNextProcessName();
-//        bool		                        reverse();
-        void		                        stop();
+
         bool				                isRunning();
         bool				                isPaused();
         bool				                isCurrentProcessActive();
-
 
         									//!After all processes are executed, the processsequence is done
         bool								isDone();
@@ -73,6 +75,9 @@ class AT_CORE ProcessSequencer : public ATObject
                                             //!in sequence. If set false, each sequence need to be
                                             //!manually executed using the forward() function
         bool				                mExecuteAutomatic;
+
+        									//!The sequence time checks the state of the sequence
+                                            //!and individual processes every 50 ms
         Timer				                mSequenceTimer;
 		void			                    onTimerFunc();
 };

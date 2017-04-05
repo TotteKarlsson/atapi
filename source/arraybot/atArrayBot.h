@@ -57,16 +57,11 @@ class AT_CORE ArrayBot : public ATObject
         APTMotor*										getMotorWithSerial(const string& serial);
         ProcessSequencer&								getProcessSequencer();
 
-//        void											setArduinoClient(ArduinoClient* c){mArduinoClient = c;}
-//        ArduinoClient*									getArduinoClient(){return mArduinoClient;}
-
     private:
         bool						                    mIsShuttingDown;
         string						                    mAppDataFolder;
         IniFile&					                    mIniFile;
         IniFileProperties  			    				mProperties;
-
-//        ArduinoClient*									mArduinoClient;
         Property<int>									mJoyStickID;
         ArrayBotJoyStick			                    mJoyStick;
 

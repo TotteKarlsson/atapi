@@ -18,6 +18,7 @@ class AT_CORE StopAndResumeProcess : public Process
 
         virtual mtk::XMLElement*    addToXMLDocumentAsChildProcess(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 
+		virtual void		   		init(ArrayBot& ab);
         virtual bool	            start();
         virtual bool	            stop();
         virtual bool	            isBeingProcessed();

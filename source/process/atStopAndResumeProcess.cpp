@@ -47,6 +47,12 @@ bool StopAndResumeProcess::isBeingProcessed()
     return mIsBeingProcessed;
 }
 
+void StopAndResumeProcess::init(ArrayBot& ab)
+{
+	mResume = false;
+    Process::init(ab);
+}
+
 bool StopAndResumeProcess::start()
 {
 	return Process::start();

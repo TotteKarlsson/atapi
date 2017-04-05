@@ -27,10 +27,10 @@ void ProcessSequencer::pause()
 	mSequenceTimer.pause();
 }
 
+
 bool ProcessSequencer::resume()
 {
 	//Get current process, and 'resume' it
-
  	ProcessSequence* s = mSequences.getCurrent();
     if(!s)
     {
@@ -40,14 +40,27 @@ bool ProcessSequencer::resume()
 	Process* p = s->getCurrent();
     if(!p)
     {
-    	Log(lInfo) << "Reached the end of process pipeline";
+    	Log(lInfo) << "The end of process pipeline was reached";
         return false;
     }
 
     p->resume();
-
 	mSequenceTimer.resume();
-  	Log(lInfo) << "Sequence was resumed";
+  	Log(lInfo) << "The process sequence was resumed";
+    return true;
+}
+
+bool ProcessSequencer::initCurrentSequence()
+{
+ 	ProcessSequence* s = mSequences.getCurrent();
+    if(!s)
+    {
+    	return false;
+    }
+
+    //ReInit sequence so it can be executed over and over
+    s->init();
+	return true;
 }
 
 void ProcessSequencer::start(bool autoExecute)
@@ -60,17 +73,17 @@ void ProcessSequencer::start(bool autoExecute)
 
     //ReInit sequence so it can be executed over and over
     s->init();
-
 	mExecuteAutomatic = autoExecute;
+
 	Process* p = s->getFirst();
     if(p)
     {
-    	Log(lInfo) << "Executing sequence";
+    	Log(lInfo) << "Starting Process Sequence";
         mSequenceTimer.start();
     }
     else
     {
-    	Log(lError) << "There are no processes to sequence!";
+    	Log(lError) << "There are no processes to execute in the process sequence!";
     }
 }
 
@@ -126,7 +139,7 @@ string ProcessSequencer::getNextProcessName()
     {
     	return s->peekNext()->getProcessName();
     }
-    return gNoneString;
+    return gEmptyString;
 }
 
 bool ProcessSequencer::isDone()
@@ -166,8 +179,6 @@ bool ProcessSequencer::forward()
     }
 
   	Log(lInfo) << "Sequence was forwarded";
-
-
     if(mExecuteAutomatic)
     {
 	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
@@ -185,7 +196,6 @@ bool ProcessSequencer::forward()
 void ProcessSequencer::stop()
 {
 	mSequenceTimer.stop();
-
  	ProcessSequence* s = mSequences.getCurrent();
     if(!s)
     {
@@ -284,12 +294,12 @@ void ProcessSequencer::onTimerFunc()
     	//Check if we are to move forward in the sequence
         if(p->isProcessed() == true && mExecuteAutomatic)
         {
-	        Log(lInfo) << "Process \"" << p->getProcessName() <<"\" finished";
+	        Log(lInfo) << "The process \"" << p->getProcessName() <<"\" finished";
         	forward();
         }
         else if (s->isFirst(p) && p->isStarted() == false)
         {
-	        Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
+	        Log(lInfo) << "Executing the first process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
             if(!p->start())
             {
                 Log(lError) << "Failed executing process: "<<p->getProcessName();
@@ -300,15 +310,28 @@ void ProcessSequencer::onTimerFunc()
         }
         else if(p->isTimedOut())
         {
-        	Log(lError) << "Process \""<<p->getProcessName()<<"\" timed out";
+        	Log(lError) << "The process \""<<p->getProcessName()<<"\" timed out";
         	stop();
         }
        	else if(p->isStarted() && dynamic_cast<StopAndResumeProcess*>(p) != NULL)
         {
-        	//Tell the UI to show dialog to resume processing...
-            pause();
-            Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
-        }
+			StopAndResumeProcess* srp = dynamic_cast<StopAndResumeProcess*>(p);
+        	if(srp->isDone() && mExecuteAutomatic == false)
+            {
+                //We have finished one process in the sequence
+                mSequenceTimer.stop();
+                Log(lInfo) << "Finished processing process: "<<srp->getProcessName()<<" in the sequence: " << s->getName();
+                return;
+            }
+            else
+            {
+                //Tell the UI to show dialog to resume processing...
+                pause();
+                Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
+            }
+				////This will mark this process as done..
+				//srp->resume();
+	    }
         else if(p->isProcessed() == true && mExecuteAutomatic == false)
         {
             //We have finished one process in the sequence
