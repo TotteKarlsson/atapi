@@ -220,6 +220,10 @@ bool XYZUnit::disableJSAxes()
         }
 	    return true;
     }
+    else
+    {
+    	Log(lError) << "Failed disabling JS axes: No Joystick present";
+    }
     return false;
 }
 

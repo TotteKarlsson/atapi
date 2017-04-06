@@ -3,6 +3,7 @@ object ATDBConnectionFrame: TATDBConnectionFrame
   Top = 0
   Width = 286
   Height = 233
+  AutoSize = True
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0

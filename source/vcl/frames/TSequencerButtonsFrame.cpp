@@ -83,7 +83,6 @@ void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sende
 	if(!psr.isRunning())
     {
 		mSequenceStatusTimer->Enabled = false;
-        mAB.enableJoyStickAxes();
     }
 }
 

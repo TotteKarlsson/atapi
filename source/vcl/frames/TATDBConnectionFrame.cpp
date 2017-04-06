@@ -1,7 +1,12 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TATDBConnectionFrame.h"
-#include "atDBUtils.h"
+#include "database/atDBUtils.h"
+#include "mtkVCLUtils.h"
+#include "mtkLogger.h"
+using namespace mtk;
+
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
@@ -13,57 +18,73 @@ using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TATDBConnectionFrame::TATDBConnectionFrame(TComponent* Owner)
 	: TFrame(Owner),
-    mATDB(NULL)
-
+    mIniFile(NULL)
 {
+	mATDBServerBtnConnect->Caption = "Connect";
 }
 
-void TATDBConnectionFrame::assignDBSession(ATDBServerSession& db)
+bool TATDBConnectionFrame::init(IniFile* inifile)
 {
-	mATDB = &db;
+	mIniFile = inifile;
+	if(!mIniFile)
+    {
+    	return false;
+    }
+    mProperties.setIniFile(mIniFile);
+
+    mProperties.setSection("DB_CONNECTION");
+	mProperties.add((BaseProperty*)  &mServerIPE->getProperty()->setup( 	    "MYSQL_SERVER_IP",              	"127.0.0.1"));
+	mProperties.add((BaseProperty*)  &mDBUserE->getProperty()->setup( 	    	"ATDB_USER_NAME",                   "none"));
+	mProperties.add((BaseProperty*)  &mPasswordE->getProperty()->setup( 	    "ATDB_USER_PASSWORD",               "none"));
+	mProperties.add((BaseProperty*)  &mDatabaseE->getProperty()->setup( 	    "ATDB_DB_NAME",    			        "none"));
+
+	//Read from file. Create if file do not exist
+	mProperties.read();
+
+	//Update
+    mDBUserE->update();
+    mPasswordE->update();
+    mDatabaseE->update();
+	mServerIPE->update();
+}
+
+bool TATDBConnectionFrame::purge()
+{
+	mProperties.write();
 }
 
 void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender)
 {
-	if(!mATDB)
+	if(atdbDM->SQLConnection1->Connected)
     {
-    	Log(lError) << "No session object in ATDBServer Frame";
-    }
-
-    if(mATDBServerBtnConnect->Caption != "Disconnect")
-    {
-        try
+    	//Remove runtime indices
+    	TClientDataSet* cds = atdbDM->specimenCDS;
+	    cds->IndexDefs->Update();
+        for(int i = 0; i <cds->IndexDefs->Count; i++)
         {
-            if(!mATDB->isConnected())
+            String idxName = cds->IndexDefs->operator [](i)->Name;
+            Log(lDebug) <<"Removing index: "<< stdstr(idxName);
+            if(idxName != "DEFAULT_ORDER" && idxName != "CHANGEINDEX")
             {
-                //const string& ip, const string& user, const string& pwd, const string& db)
-                mATDB->connect(mServerIPE->getValue(), mDBUserE->getValue(), mPasswordE->getValue(),mDatabaseE->getValue());
-            }
-
-            if(mATDB->isConnected())
-            {
-                Log(lInfo) << "Connected to database: "<<mDatabaseE->getValue()<<" on host with IP: "<<mServerIPE->getValue();
-    //            populateUsersCB(mUsersCB, mClientDBSession);
-                mATDBServerBtnConnect->Caption = "Disconnect";
-            }
-            else
-            {
-                Log(lError) << "Failed to connect to database server...";
-                mATDBServerBtnConnect->Caption = "Connect";
+                cds->DeleteIndex(idxName);
             }
         }
-        catch(...)
-        {
-            handleMySQLException();
-        }
+
+	    atdbDM->SQLConnection1->Connected = false;
+	    atdbDM->SQLConnection1->Close();
     }
     else
     {
-	    if(mATDB->disConnect())
-        {
-                //const string& ip, const string& user, const string& pwd, const string& db)
-        	mATDBServerBtnConnect->Caption = "Connect";
-        }
+	    atdbDM->connect(mServerIPE->getValue(), mDBUserE->getValue(), mPasswordE->getValue(), mDatabaseE->getValue());
     }
 }
 
+void TATDBConnectionFrame::afterConnect()
+{
+	mATDBServerBtnConnect->Caption = "Disconnect";
+}
+
+void TATDBConnectionFrame::afterDisconnect()
+{
+	mATDBServerBtnConnect->Caption = "Connect";
+}

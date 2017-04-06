@@ -89,24 +89,28 @@ void ArrayBotJoyStick::setAxisEvent(int axis, JoyStickAxisEvent move)
 bool ArrayBotJoyStick::disableCoverSlipAxes()
 {
 	mCoverSlipAxesEnabled = false;
+    Log(lInfo) << "CS JS Axes Disabled";
     return true;
 }
 
 bool ArrayBotJoyStick::enableCoverSlipAxes()
 {
 	mCoverSlipAxesEnabled = true;
+    Log(lInfo) << "CS JS Axes Enabled";
     return true;
 }
 
 bool ArrayBotJoyStick::disableWhiskerAxes()
 {
 	mWhiskerAxesEnabled = false;
+    Log(lInfo) << "Whisker JS Axes Disabled";
     return true;
 }
 
 bool ArrayBotJoyStick::enableWhiskerAxes()
 {
 	mWhiskerAxesEnabled = true;
+    Log(lInfo) << "Whisker JS Axes Enabled";
     return true;
 }
 
