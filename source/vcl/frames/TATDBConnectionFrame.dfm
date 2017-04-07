@@ -2,14 +2,14 @@ object ATDBConnectionFrame: TATDBConnectionFrame
   Left = 0
   Top = 0
   Width = 286
-  Height = 233
+  Height = 201
   AutoSize = True
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
     Width = 286
-    Height = 233
+    Height = 201
     Caption = 'ATDB Connection'
     TabOrder = 0
     object mServerIPE: TSTDStringLabeledEdit
@@ -37,8 +37,8 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       Value = 'atdb-client'
     end
     object mPasswordE: TSTDStringLabeledEdit
-      Left = 16
-      Top = 137
+      Left = 146
+      Top = 89
       Width = 121
       Height = 21
       EditLabel.Width = 46
@@ -49,8 +49,8 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       Value = 'atdb123'
     end
     object mATDBServerBtnConnect: TArrayBotButton
-      Left = 143
-      Top = 89
+      Left = 87
+      Top = 126
       Width = 124
       Height = 64
       Caption = 'Connect/Disconnect'
@@ -59,8 +59,8 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       SoundID = 'BUTTON_CLICK_4'
     end
     object mDatabaseE: TSTDStringLabeledEdit
-      Left = 16
-      Top = 185
+      Left = 146
+      Top = 40
       Width = 121
       Height = 21
       EditLabel.Width = 46

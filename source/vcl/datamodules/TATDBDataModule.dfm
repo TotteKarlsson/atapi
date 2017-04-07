@@ -39,6 +39,7 @@ object atdbDM: TatdbDM
       'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -983,8 +984,12 @@ object atdbDM: TatdbDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 552
-    Top = 264
+    Left = 488
+    Top = 240
+    object processIDDSprocess_id: TIntegerField
+      FieldName = 'process_id'
+      Required = True
+    end
   end
   object documentsDS: TSQLDataSet
     CommandText = 'SELECT * from documents'

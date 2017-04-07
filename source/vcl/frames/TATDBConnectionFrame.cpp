@@ -4,17 +4,16 @@
 #include "database/atDBUtils.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
-using namespace mtk;
-
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
 #pragma link "TSTDStringLabeledEdit"
 #pragma resource "*.dfm"
-TATDBConnectionFrame *ATDBConnectionFrame;
 
+TATDBConnectionFrame *ATDBConnectionFrame;
+using namespace mtk;
 using namespace at;
+
 //---------------------------------------------------------------------------
 __fastcall TATDBConnectionFrame::TATDBConnectionFrame(TComponent* Owner)
 	: TFrame(Owner),

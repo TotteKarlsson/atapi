@@ -185,6 +185,7 @@ __published:	// IDE-managed Components
 	TIntegerField *specimenDSentered_by;
 	TSQLTimeStampField *specimenCDSdate_entered;
 	TIntegerField *specimenCDSentered_by;
+	TIntegerField *processIDDSprocess_id;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
