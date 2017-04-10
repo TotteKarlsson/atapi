@@ -35,10 +35,10 @@
 class AT_BCR DS457 : public ATObject
 {
 	public:
-								            DS457(HWND handle = NULL);
+								            DS457();
                                             ~DS457();
 
-		bool					            connect(int port, int baudRate);
+		bool					            connect(int port, int baudRate, HWND handle = NULL);
 		bool					            disconnect();
         bool								isConnected();
 

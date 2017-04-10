@@ -4,22 +4,20 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-
-
-DS457::DS457(HWND handle)
+DS457::DS457()
 :
-mHandle(handle),
+mHandle(NULL),
 mCOMPort(-1),
 mBaudRate(0)
-{
-}
+{}
 
 DS457::~DS457(){}
 
-bool DS457::connect(int port, int baudRate)
+bool DS457::connect(int port, int baudRate, HWND handle)
 {
-	mCOMPort = port;
-    mBaudRate = baudRate;
+	mCOMPort 	= port;
+    mBaudRate 	= baudRate;
+	mHandle 	= handle;
 
     int status = SSIConnect(mHandle, mBaudRate, mCOMPort);
 
