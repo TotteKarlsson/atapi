@@ -25,6 +25,7 @@ UC7::UC7(HWND__ *h)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
     mCustomTimer.setInterval(5);
+    mRibbonOrderCounter.enable();
 }
 
 UC7::~UC7()
@@ -132,6 +133,7 @@ void UC7::onPrepareToCutRibbon()
     mCustomTimer.stop();
 	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
     moveKnifeStageSouth(mKnifeStageJogPreset);
+    mRibbonOrderCounter.increase();
 }
 
 void UC7::onPrepareForNewRibbon()
@@ -261,11 +263,13 @@ bool UC7::moveKnifeStageNorth(int nm_step, bool isRequest)
 void UC7::disableCounter()
 {
 	mSectionCounter.disable();
+//	mRibbonOrderCounter.disable();
 }
 
 void UC7::enableCounter()
 {
 	mSectionCounter.enable();
+//	mRibbonOrderCounter.enable();
 }
 
 bool UC7::setFeedRatePreset(int rate)

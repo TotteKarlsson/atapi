@@ -40,8 +40,8 @@ class AT_CORE UC7 : public ATObject
         bool							isConnected();
         bool							getVersion();
 
-        Counter&						getCounter(){return mSectionCounter;}
-
+        Counter&						getSectionCounter(){return mSectionCounter;}
+        Counter&						getRibbonOrderCounter(){return mRibbonOrderCounter;}
         bool							sendRawMessage(const string& msg);
 
         bool							startCutter();
@@ -154,6 +154,7 @@ class AT_CORE UC7 : public ATObject
         bool							mPrepareToCutRibbon;
 
         Counter							mSectionCounter;
+        Counter							mRibbonOrderCounter;
 
 		mtk::Timer	   			        mCustomTimer;
 

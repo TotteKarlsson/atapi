@@ -500,6 +500,10 @@ object atdbDM: TatdbDM
     object mRibbonCDSmodified: TSQLTimeStampField
       FieldName = 'modified'
     end
+    object mRibbonCDScreated_by: TIntegerField
+      FieldName = 'created_by'
+      Required = True
+    end
   end
   object mRibbonDSource: TDataSource
     DataSet = mRibbonCDS
@@ -577,6 +581,10 @@ object atdbDM: TatdbDM
     end
     object ribbonsDSmodified: TSQLTimeStampField
       FieldName = 'modified'
+    end
+    object ribbonsDScreated_by: TIntegerField
+      FieldName = 'created_by'
+      Required = True
     end
   end
   object blockNotesDS: TSQLDataSet

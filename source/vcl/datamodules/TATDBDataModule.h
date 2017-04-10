@@ -186,6 +186,8 @@ __published:	// IDE-managed Components
 	TSQLTimeStampField *specimenCDSdate_entered;
 	TIntegerField *specimenCDSentered_by;
 	TIntegerField *processIDDSprocess_id;
+	TIntegerField *ribbonsDScreated_by;
+	TIntegerField *mRibbonCDScreated_by;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
