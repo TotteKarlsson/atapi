@@ -55,7 +55,13 @@ void Counter::decrease()
 
 void Counter::reset(int count)
 {
+	mLastCount = mCount;
 	mCount = count;
+}
+
+int	Counter::getLastCount()
+{
+	return mLastCount;
 }
 
 int	Counter::getCount()

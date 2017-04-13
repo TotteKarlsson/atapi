@@ -188,6 +188,8 @@ __published:	// IDE-managed Components
 	TIntegerField *processIDDSprocess_id;
 	TIntegerField *ribbonsDScreated_by;
 	TIntegerField *mRibbonCDScreated_by;
+	TIntegerField *ribbonsDScoverslip_id;
+	TIntegerField *mRibbonCDScoverslip_id;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -208,19 +210,19 @@ __published:	// IDE-managed Components
 	void __fastcall specimenCDSAfterClose(TDataSet *DataSet);
 	void __fastcall specimenCDSAfterOpen(TDataSet *DataSet);
 
-	private:	// User declarations
+	private:
+
     protected:
-    	string		mDataBaseUser;
-    	string		mDataBaseUserPassword;
-       	string		mDataBase;
-        string 		mDBIP;
+    	string		                    mDataBaseUser;
+    	string		                    mDataBaseUserPassword;
+       	string		                    mDataBase;
+        string 		                    mDBIP;
 
 	public:
-				__fastcall TatdbDM(TComponent* Owner);
-
-		bool 	__fastcall connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
-        void    __fastcall afterConnect();
-        void    __fastcall afterDisConnect();
+				__fastcall           	TatdbDM(TComponent* Owner);
+		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
+        void    __fastcall           	afterConnect();
+        void    __fastcall           	afterDisConnect();
 };
 
 extern PACKAGE TatdbDM *atdbDM;

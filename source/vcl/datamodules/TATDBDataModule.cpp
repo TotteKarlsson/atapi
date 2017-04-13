@@ -23,6 +23,7 @@ __fastcall TatdbDM::TatdbDM(TComponent* Owner)
   	SQLConnection1->Connected = false;
 }
 
+//---------------------------------------------------------------------------
 bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db)
 {
     mDataBase = db;
@@ -72,6 +73,7 @@ void __fastcall TatdbDM::afterConnect()
     documentsCDS->Active  	= true;
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TatdbDM::afterDisConnect()
 {
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
@@ -194,6 +196,7 @@ void __fastcall TatdbDM::cdsBeforePost(TDataSet *DataSet)
     }
 }
 
+//---------------------------------------------------------------------------
 string zeroPadLeft(int nr, int width)
 {
 	stringstream s;
@@ -201,6 +204,7 @@ string zeroPadLeft(int nr, int width)
     return s.str();
 }
 
+//---------------------------------------------------------------------------
 string zeroPadRight(int nr, int width)
 {
 	stringstream s;
@@ -208,6 +212,7 @@ string zeroPadRight(int nr, int width)
     return s.str();
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
@@ -236,6 +241,7 @@ void __fastcall TatdbDM::fixativeTBLAfterPost(TDataSet *DataSet)
     specimenCDS->Refresh();
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TatdbDM::blocksCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
@@ -262,8 +268,7 @@ void __fastcall TatdbDM::blocksCDSCalcFields(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::blocksCDSblockLabelGetText(TField *Sender, UnicodeString &Text,
-          bool DisplayText)
+void __fastcall TatdbDM::blocksCDSblockLabelGetText(TField *Sender, UnicodeString &Text, bool DisplayText)
 {
 	Text = "Test";
 }
@@ -301,7 +306,6 @@ void __fastcall TatdbDM::cdsBeforeRefresh(TDataSet *DataSet)
 //    }
 }
 
-
 //---------------------------------------------------------------------------
 void __fastcall TatdbDM::specimenCDSBeforeClose(TDataSet *DataSet)
 {
@@ -309,15 +313,16 @@ void __fastcall TatdbDM::specimenCDSBeforeClose(TDataSet *DataSet)
     Log(lDebug) << "Closing dataset";
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TatdbDM::specimenCDSAfterClose(TDataSet *DataSet)
 {
     Log(lDebug) << "Closing dataset";
 }
-//---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 void __fastcall TatdbDM::specimenCDSAfterOpen(TDataSet *DataSet)
 {
     Log(lDebug) << "After Open";
 }
-//---------------------------------------------------------------------------
+
 

@@ -12,6 +12,7 @@ class AT_CORE Counter : public ATObject
 		void						decrease();
 		void						reset(int count = 0);
         int							getCount();
+        int							getLastCount();
         int&		  				getCountReference();
         int&		  				getCountToReference();
 		void 						assignOnCountCallBack(CounterCallBack cb);
@@ -22,6 +23,7 @@ class AT_CORE Counter : public ATObject
 
     private:
     	int							mCount;
+        int							mLastCount;
         int							mCountTo;
         bool						mEnabled;
 

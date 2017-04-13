@@ -504,6 +504,10 @@ object atdbDM: TatdbDM
       FieldName = 'created_by'
       Required = True
     end
+    object mRibbonCDScoverslip_id: TIntegerField
+      FieldName = 'coverslip_id'
+      Required = True
+    end
   end
   object mRibbonDSource: TDataSource
     DataSet = mRibbonCDS
@@ -584,6 +588,10 @@ object atdbDM: TatdbDM
     end
     object ribbonsDScreated_by: TIntegerField
       FieldName = 'created_by'
+      Required = True
+    end
+    object ribbonsDScoverslip_id: TIntegerField
+      FieldName = 'coverslip_id'
       Required = True
     end
   end

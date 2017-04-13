@@ -107,9 +107,11 @@ class AT_CORE UC7 : public ATObject
 
         bool							isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
         bool							isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
+        int								getLastNumberOfSections(){return mSectionCounter.getLastCount();}
 
     protected:
         string							mINIFileSection;
+        int								mLastNrOfSections;
 
         								//!When active, zero stroke and knife stage movement will
                                         //!take place when the counter reaches ribbonLength
