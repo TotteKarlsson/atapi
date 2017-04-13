@@ -190,6 +190,10 @@ __published:	// IDE-managed Components
 	TIntegerField *mRibbonCDScreated_by;
 	TIntegerField *ribbonsDScoverslip_id;
 	TIntegerField *mRibbonCDScoverslip_id;
+	TDataSource *ROnCoverSlipsSource;
+	TClientDataSet *ROnCS_CDS;
+	TDataSetProvider *RibbonsOnCoverslipsProvider;
+	TSQLDataSet *ribbonsOnCoverSlipsDS;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);

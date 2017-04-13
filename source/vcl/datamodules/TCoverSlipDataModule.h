@@ -53,7 +53,6 @@ class TcsDM : public TDataModule
 	TIntegerField *csFreshBatchesCDSid;
 	TSQLTimeStampField *csFreshBatchesCDSdate_created;
 	TIntegerField *csFreshBatchesCDScount;
-	TStringField *csFreshBatchesCDSbatchcode;
 	TIntegerField *csFreshBatchesCDStype;
 	TStringField *csFreshBatchesCDSlot_number;
 	TIntegerField *csDSfreshCSBatch;
@@ -64,6 +63,7 @@ class TcsDM : public TDataModule
 	TIntegerField *csCDScleanCSBatch;
 	TIntegerField *csCDScarboncoatbatch;
 	TStringField *csCDSfrom_lot;
+	TIntegerField *csFreshBatchesCDSbox_number;
         void __fastcall csDSBeforeOpen(TDataSet *DataSet);
         void __fastcall CDSAfterPost(TDataSet *DataSet);
         void __fastcall CDSAfterScroll(TDataSet *DataSet);

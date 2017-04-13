@@ -71,6 +71,11 @@ void __fastcall TcsDM::CDSAfterScroll(TDataSet *DataSet)
         {
         	csDustAssayCDS->Refresh();
         }
+
+        if(atdbDM->ROnCS_CDS->Active)
+        {
+			atdbDM->ROnCS_CDS->Refresh();
+        }
     }
 }
 
@@ -83,4 +88,4 @@ void __fastcall TcsDM::csDustAsssayDSourceDataChange(TObject *Sender, TField *Fi
     }
 }
 
-
+//---------------------------------------------------------------------------

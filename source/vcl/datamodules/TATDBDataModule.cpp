@@ -71,6 +71,7 @@ void __fastcall TatdbDM::afterConnect()
     ribbonNotesCDS->Active  = true;
 	specimenCDS->Active  	= true;
     documentsCDS->Active  	= true;
+    ROnCS_CDS->Active  		= true;
 }
 
 //---------------------------------------------------------------------------

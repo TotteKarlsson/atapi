@@ -1,6 +1,6 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 765
+  Height = 890
   Width = 887
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
@@ -601,6 +601,7 @@ object atdbDM: TatdbDM
       'd = n.id) '#13#10'WHERE block_id = :id '#13#10'ORDER BY created_on ASC'
     DataSource = blocksDataSource
     MaxBlobSize = 1
+    ParamCheck = False
     Params = <
       item
         DataType = ftInteger
@@ -1067,5 +1068,37 @@ object atdbDM: TatdbDM
     DataSet = documentsCDS
     Left = 344
     Top = 568
+  end
+  object ROnCoverSlipsSource: TDataSource
+    DataSet = ROnCS_CDS
+    Left = 320
+    Top = 760
+  end
+  object ROnCS_CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'RibbonsOnCoverslipsProvider'
+    Left = 200
+    Top = 752
+  end
+  object RibbonsOnCoverslipsProvider: TDataSetProvider
+    DataSet = ribbonsOnCoverSlipsDS
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
+    Left = 200
+    Top = 680
+  end
+  object ribbonsOnCoverSlipsDS: TSQLDataSet
+    CommandText = 'SELECT * from ribbons where coverslip_id = :id'
+    DataSource = csDM.csDSource
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end>
+    SQLConnection = SQLConnection1
+    Left = 40
+    Top = 680
   end
 end

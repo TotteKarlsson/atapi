@@ -234,8 +234,8 @@ object csDM: TcsDM
   end
   object csDustAssayP: TDataSetProvider
     DataSet = csDustAssayDS
-    Left = 192
-    Top = 312
+    Left = 184
+    Top = 488
   end
   object csDustAssayCDS: TClientDataSet
     Aggregates = <>
@@ -243,26 +243,26 @@ object csDM: TcsDM
     ProviderName = 'csDustAssayP'
     AfterPost = CDSAfterPost
     AfterDelete = CDSAfterDelete
-    Left = 312
-    Top = 312
+    Left = 304
+    Top = 488
   end
   object csDustAsssayDSource: TDataSource
     DataSet = csDustAssayCDS
     OnDataChange = csDustAsssayDSourceDataChange
-    Left = 432
-    Top = 312
+    Left = 424
+    Top = 488
   end
   object csFreshBatchesDSource: TDataSource
     DataSet = csFreshBatchesCDS
     OnDataChange = csDustAsssayDSourceDataChange
-    Left = 424
-    Top = 408
+    Left = 432
+    Top = 312
   end
   object csFreshBatchP: TDataSetProvider
     DataSet = csFreshBatchesDS
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 184
-    Top = 408
+    Left = 192
+    Top = 312
   end
   object csFreshBatchesDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
@@ -271,8 +271,8 @@ object csDM: TcsDM
     MaxBlobSize = 1
     Params = <>
     SQLConnection = atdbDM.SQLConnection1
-    Left = 56
-    Top = 408
+    Left = 64
+    Top = 312
   end
   object csFreshBatchesCDS: TClientDataSet
     Aggregates = <>
@@ -280,8 +280,8 @@ object csDM: TcsDM
     ProviderName = 'csFreshBatchP'
     AfterPost = CDSAfterPost
     AfterDelete = CDSAfterDelete
-    Left = 288
-    Top = 408
+    Left = 296
+    Top = 312
     object csFreshBatchesCDSid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -294,11 +294,6 @@ object csDM: TcsDM
     object csFreshBatchesCDScount: TIntegerField
       FieldName = 'count'
     end
-    object csFreshBatchesCDSbatchcode: TStringField
-      FieldName = 'batchcode'
-      Required = True
-      Size = 9
-    end
     object csFreshBatchesCDStype: TIntegerField
       FieldName = 'type'
       Required = True
@@ -306,6 +301,10 @@ object csDM: TcsDM
     object csFreshBatchesCDSlot_number: TStringField
       FieldName = 'lot_number'
       Size = 128
+    end
+    object csFreshBatchesCDSbox_number: TIntegerField
+      FieldName = 'box_number'
+      Required = True
     end
   end
 end
