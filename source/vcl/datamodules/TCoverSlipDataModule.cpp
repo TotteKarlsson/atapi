@@ -1,6 +1,5 @@
 #pragma hdrstop
 #include "TCoverSlipDataModule.h"
-#include "TATDBDataModule.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -14,6 +13,10 @@ __fastcall TcsDM::TcsDM(TComponent* Owner)
 	: TDataModule(Owner),
     csDustAssayCDSOnDataChanged(NULL)
 {
+   csDS->SQLConnection = atdbDM->SQLConnection1;
+   csStatusDS->SQLConnection = atdbDM->SQLConnection1;
+   csTypeDS->SQLConnection = atdbDM->SQLConnection1;
+   csDustAssayDS->SQLConnection = atdbDM->SQLConnection1;
 }
 
 void __fastcall TcsDM::afterConnect()

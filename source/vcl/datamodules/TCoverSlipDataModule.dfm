@@ -1,13 +1,12 @@
 object csDM: TcsDM
   OldCreateOrder = False
-  Height = 614
+  Height = 638
   Width = 602
   object csDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
     CommandText = 'SELECT * FROM `coverslips`'
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = atdbDM.SQLConnection1
     Left = 64
     Top = 56
     object csDSid: TIntegerField
@@ -116,7 +115,6 @@ object csDM: TcsDM
     CommandText = 'SELECT * FROM `coverslipstatuses` ORDER by id'
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = atdbDM.SQLConnection1
     Left = 64
     Top = 136
     object csStatusDSid: TIntegerField
@@ -169,7 +167,6 @@ object csDM: TcsDM
     CommandText = 'SELECT * FROM `coversliptypes` ORDER by id'
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = atdbDM.SQLConnection1
     Left = 64
     Top = 208
     object csTypeDSid: TIntegerField
@@ -228,9 +225,8 @@ object csDM: TcsDM
         Name = 'id'
         ParamType = ptInput
       end>
-    SQLConnection = atdbDM.SQLConnection1
-    Left = 64
-    Top = 312
+    Left = 48
+    Top = 488
   end
   object csDustAssayP: TDataSetProvider
     DataSet = csDustAssayDS
@@ -270,8 +266,7 @@ object csDM: TcsDM
     DataSource = csDSource
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = atdbDM.SQLConnection1
-    Left = 64
+    Left = 56
     Top = 312
   end
   object csFreshBatchesCDS: TClientDataSet

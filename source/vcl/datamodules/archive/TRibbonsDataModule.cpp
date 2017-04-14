@@ -1,7 +1,6 @@
 #pragma hdrstop
 #include "TRibbonsDataModule.h"
-#include "TATDBDataModule.h"
-#include "TCoverSlipDataModule.h"
+
 #include "mtkLogger.h"
 
 //---------------------------------------------------------------------------
@@ -22,8 +21,5 @@ void __fastcall TRibbonsDataModule::afterConnect()
 {
 	Log(lInfo) << "Initializing Ribbons datamodule";
 }
-
-void __fastcall TcsDM::afterDisConnect()
-{}
 
 

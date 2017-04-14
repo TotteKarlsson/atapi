@@ -1,7 +1,6 @@
 #ifndef TATDBDataModuleH
 #define TATDBDataModuleH
 #include <System.Classes.hpp>
-//#include "DbxDevartSQLite.hpp"
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>
@@ -12,9 +11,10 @@
 #include <string>
 
 using std::string;
+
 //!The TatDM class encapsulate data exchange with the ATDB database
 //---------------------------------------------------------------------------
-class TatdbDM : public TDataModule
+class PACKAGE TatdbDM : public TDataModule
 {
 __published:	// IDE-managed Components
 	TSQLConnection *SQLConnection1;

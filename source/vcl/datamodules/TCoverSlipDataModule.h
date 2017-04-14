@@ -6,9 +6,10 @@
 #include <Data.SqlExpr.hpp>
 #include <Datasnap.DBClient.hpp>
 #include <Datasnap.Provider.hpp>
+#include "TATDBDataModule.h"
 
 //---------------------------------------------------------------------------
-class TcsDM : public TDataModule
+class PACKAGE TcsDM : public TDataModule
 {
     __published:	// IDE-managed Components
         TSQLDataSet *csDS;
