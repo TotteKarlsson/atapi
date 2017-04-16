@@ -1088,7 +1088,6 @@ object atdbDM: TatdbDM
   end
   object ribbonsOnCoverSlipsDS: TSQLDataSet
     CommandText = 'SELECT * from ribbons where coverslip_id = :id'
-    DataSource = csDM.csDSource
     MaxBlobSize = -1
     Params = <
       item

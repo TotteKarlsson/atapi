@@ -6,13 +6,13 @@
 #include <Data.SqlExpr.hpp>
 #include <Datasnap.DBClient.hpp>
 #include <Datasnap.Provider.hpp>
-#include "TATDBDataModule.h"
 
 //---------------------------------------------------------------------------
 class PACKAGE TcsDM : public TDataModule
 {
     __published:	// IDE-managed Components
         TSQLDataSet *csDS;
+        TSQLDataSet * csFreshBatchesDS;
         TDataSetProvider *csP;
         TClientDataSet *csCDS;
         TDataSource *csDSource;
