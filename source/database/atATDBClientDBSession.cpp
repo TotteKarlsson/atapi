@@ -69,9 +69,7 @@ bool ATDBClientDBSession::insertImageFile(const string& fName, int userID, const
     Session& ses = *mTheSession;
 
     //We need local variables for the statements..
-
     string f(fName), n(note);
-
 	Statement s(ses);
     s << "INSERT INTO umimage (file_name) VALUES(?)", use(f), now;
     s.reset(ses);

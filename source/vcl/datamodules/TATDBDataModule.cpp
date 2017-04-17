@@ -326,4 +326,14 @@ void __fastcall TatdbDM::specimenCDSAfterOpen(TDataSet *DataSet)
     Log(lDebug) << "After Open";
 }
 
-
+int	__fastcall TatdbDM::getCurrentBlockID()
+{
+	if(blocksCDS->Active)
+    {
+    	return blocksCDS->FieldByName("id")->Text.ToInt();
+    }
+    else
+    {
+    	return -1;
+    }
+}

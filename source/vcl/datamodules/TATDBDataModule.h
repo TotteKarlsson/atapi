@@ -227,6 +227,7 @@ __published:	// IDE-managed Components
 		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
         void    __fastcall           	afterConnect();
         void    __fastcall           	afterDisConnect();
+        int		__fastcall				getCurrentBlockID();
 };
 
 extern PACKAGE TatdbDM *atdbDM;
