@@ -92,5 +92,3 @@ void __fastcall TcsDM::csDustAsssayDSourceDataChange(TObject *Sender, TField *Fi
     	csDustAssayCDSOnDataChanged(Sender);
     }
 }
-
-//---------------------------------------------------------------------------
