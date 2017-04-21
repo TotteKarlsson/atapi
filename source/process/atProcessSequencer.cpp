@@ -4,12 +4,14 @@
 #include "atProcess.h"
 #include "mtkUtils.h"
 #include "atStopAndResumeProcess.h"
+
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-ProcessSequencer::ProcessSequencer(ArrayBot& ab, const string& fileFolder)
+ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc, const string& fileFolder)
 :
 mAB(ab),
+mArrayCamClient(acc),
 mSequences(fileFolder, "abp", mAB),
 mSequenceTimer(50)
 {
@@ -26,7 +28,6 @@ void ProcessSequencer::pause()
 {
 	mSequenceTimer.pause();
 }
-
 
 bool ProcessSequencer::resume()
 {
@@ -174,7 +175,7 @@ bool ProcessSequencer::forward()
 	Process* p = s->getNext();
     if(!p)
     {
-    	Log(lInfo) << "Reached the end of process pipeline";
+    	Log(lInfo) << "The process sequencer reached the end of the process pipeline";
         return false;
     }
 
@@ -184,7 +185,7 @@ bool ProcessSequencer::forward()
 	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
         if(!p->start())
         {
-            Log(lError) << "Failed executing a move: " << p->getProcessName();
+            Log(lError) << "Failed executing the process: " << p->getProcessName();
             Log(lError) << "Aborting execution of process sequence: "<<s->getName();
             mSequenceTimer.stop();
             return false;
@@ -285,6 +286,7 @@ void ProcessSequencer::onTimerFunc()
  	ProcessSequence* s = mSequences.getCurrent();
     if(!s)
     {
+    	Log(lError) << "No Process Sequence in: "<<__FUNC__;
     	return;
     }
 
@@ -292,10 +294,18 @@ void ProcessSequencer::onTimerFunc()
 	if(p)
     {
     	//Check if we are to move forward in the sequence
-        if(p->isProcessed() == true && mExecuteAutomatic)
+        if(p->isProcessed() == true)
         {
 	        Log(lInfo) << "The process \"" << p->getProcessName() <<"\" finished";
-        	forward();
+
+			if(mExecuteAutomatic)
+            {
+        		forward();
+            }
+            else
+            {
+	            mSequenceTimer.stop();
+            }
         }
         else if (s->isFirst(p) && p->isStarted() == false)
         {
@@ -308,35 +318,29 @@ void ProcessSequencer::onTimerFunc()
                 return;
             }
         }
-        else if(p->isTimedOut())
-        {
-        	Log(lError) << "The process \""<<p->getProcessName()<<"\" timed out";
-        	stop();
-        }
        	else if(p->isStarted() && dynamic_cast<StopAndResumeProcess*>(p) != NULL)
         {
 			StopAndResumeProcess* srp = dynamic_cast<StopAndResumeProcess*>(p);
         	if(srp->isDone() && mExecuteAutomatic == false)
             {
-                //We have finished one process in the sequence
+                //The stop and resume process finished
                 mSequenceTimer.stop();
                 Log(lInfo) << "Finished processing process: "<<srp->getProcessName()<<" in the sequence: " << s->getName();
                 return;
             }
             else
             {
-                //Tell the UI to show dialog to resume processing...
+                //Tell the UI to show a dialog to resume processing...
                 pause();
                 Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
             }
-				////This will mark this process as done..
-				//srp->resume();
+		   ///This will mark this process as done..
+		   //srp->resume();
 	    }
-        else if(p->isProcessed() == true && mExecuteAutomatic == false)
+        else if(p->isTimedOut())
         {
-            //We have finished one process in the sequence
-            mSequenceTimer.stop();
-            Log(lInfo) << "Finished processing process: "<<p->getProcessName()<<" in the sequence: " << s->getName();
+        	Log(lError) << "The process \""<<p->getProcessName()<<"\" timed out";
+        	stop();
         }
     }
     else

@@ -19,6 +19,10 @@ using mtk::Property;
 class Process;
 class ArrayBot;
 
+//!A ProcessSequence maintains a list of processes
+//!The processsequencer takes a ProcessSequences as input and executes inidividual processes
+//!from the sequence
+
 class AT_CORE ProcessSequence : public ATObject
 {
     public:

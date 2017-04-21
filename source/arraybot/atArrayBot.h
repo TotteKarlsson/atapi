@@ -18,6 +18,9 @@ class AT_CORE ArrayBot : public ATObject
 									                    ~ArrayBot();
 
 		void 						                    initialize();
+        bool						                    applyJoyStickSetting(const string& settingName);
+        bool						                    readINIParameters();
+        bool						                    writeINIParameters();
 
 		bool											enableCoverSlipUnit();
 		bool											disableCoverSlipUnit();
@@ -34,12 +37,11 @@ class AT_CORE ArrayBot : public ATObject
 		bool						                    enableJoyStick();
 		void						                    disableJoyStick();
 
+        												//!Allow buttons to work, while the axes don't
         void											enableJoyStickAxes();
+
         void											disableJoyStickAxes();
-
         void						                    stopAll();
-
-        void						                    initWorkingPosition();
 
         bool						                    isActive();
         bool						                    isShuttingDown();
@@ -48,14 +50,10 @@ class AT_CORE ArrayBot : public ATObject
 		APTMotor*					                    getCameraAngleController();
 
     	PairedMoves&	 			                    getLiftMoves(){return mLifts;}
-
-        bool						                    applyJoyStickSetting(const string& settingName);
-        bool						                    readINIParameters();
-        bool						                    writeINIParameters();
         vector<APTMotor*>			                    getAllMotors();
-        APTMotor*										getMotorWithName(const string& mn);
+        APTMotor*										getMotorWithName(const string& name);
         APTMotor*										getMotorWithSerial(const string& serial);
-        ProcessSequencer&								getProcessSequencer();
+//        ProcessSequencer&								getProcessSequencer();
 
     private:
         bool						                    mIsShuttingDown;
@@ -63,18 +61,16 @@ class AT_CORE ArrayBot : public ATObject
         IniFile&					                    mIniFile;
         IniFileProperties  			    				mProperties;
         Property<int>									mJoyStickID;
-        ArrayBotJoyStick			                    mJoyStick;
-
 		Property<double>								mRightJoyStickXLeftDeadZone;
         Property<double>                                mRightJoyStickXRightDeadZone;
         Property<double>                                mRightJoyStickYLeftDeadZone;
         Property<double>                                mRightJoyStickYRightDeadZone;
-
         Property<double>                                mLeftJoyStickXLeftDeadZone;
         Property<double>                                mLeftJoyStickXRightDeadZone;
         Property<double>                                mLeftJoyStickYLeftDeadZone;
         Property<double>                                mLeftJoyStickYRightDeadZone;
 
+        ArrayBotJoyStick			                    mJoyStick;
         JoyStickSettings			                    mJSSettings;
 
         XYZUnit						                    mCoverSlip;
@@ -82,7 +78,10 @@ class AT_CORE ArrayBot : public ATObject
 
         							                    //!List of Lifts
         PairedMoves					                    mLifts;
-   	    ProcessSequencer  								mProcessSequencer;
+
+//        												//!The Process sequencer allow individual
+//                                                        //!processes to be executed in sequence
+//   	    ProcessSequencer  								mProcessSequencer;
 };
 
 #endif

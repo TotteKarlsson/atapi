@@ -15,7 +15,7 @@ class AT_CORE ArrayCamRequest : public Process
     	virtual			            ~ArrayCamRequest(){}
         bool						setArrayCamRequest(const string& request){mArrayCamRequest = request; return true;}
 		const string 				getTypeName() const;
-
+		bool						assignArrayCamClient(ArrayCamClient* acc);
 	    void						clear();
 
         virtual mtk::XMLElement*    addToXMLDocumentAsChildProcess(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
@@ -32,7 +32,7 @@ class AT_CORE ArrayCamRequest : public Process
 
     protected:                      //!The ArrayCamRequest is a simple text command
 		string						mArrayCamRequest;
-        ArrayCamClient&				mAClient;
+        ArrayCamClient*				mArrayCamClient;
 };
 
 #endif

@@ -38,8 +38,8 @@ bool StopAndResumeProcess::isBeingProcessed()
 {
 	if(isDone())
     {
-		mIsBeingProcessed = false;
-        mIsProcessed = true;
+		mIsBeingProcessed 	= false;
+        mIsProcessed 		= true;
        	Timestamp now;
         mEndTime = now;
     }

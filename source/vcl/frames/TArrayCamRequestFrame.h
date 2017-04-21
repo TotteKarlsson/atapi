@@ -16,20 +16,19 @@ class ArrayCamRequest;
 //---------------------------------------------------------------------------
 class PACKAGE TArrayCamRequestFrame : public TFrame
 {
-	__published:	// IDE-managed Components
+	__published:
         TGroupBox *GroupBox1;
         TSTDStringLabeledEdit *mNameEdit;
 		TComboBox *mArrayCamRequestCB;
         void __fastcall mEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
-    private:	// User declarations
-		ArrayBot*						mAB;
+    private:
 		ArrayCamRequest*				mArrayCamRequest;
 
-	public:		// User declarations
+	public:
 							__fastcall  TArrayCamRequestFrame(TComponent* Owner);
 
-    	void							populate(ArrayBot& ab, Process* p);
+    	void							populate(Process* p);
     	void							rePopulate(Process* p);
 };
 

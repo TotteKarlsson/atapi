@@ -18,7 +18,7 @@ class TTimeDelayFrame;
 class TArrayCamRequestFrame;
 class Process;
 class ArrayBot;
-
+class ProcessSequencer;
 class PACKAGE TSequenceInfoFrame : public TFrame
 {
     __published:	// IDE-managed Components
@@ -45,9 +45,10 @@ class PACKAGE TSequenceInfoFrame : public TFrame
 	void __fastcall mRenameBtnClick(TObject *Sender);
 
     private:
+   		ProcessSequencer&		        mProcessSequencer;
+        ArrayBot&						mArrayBot;
 		ProcessSequence*		        mSequence;
         string					        mSequencesFolder;
-        ArrayBot*				        mAB;
         TScrollBox*					    mProcessPanel;
         TParallellProcessesFrame*		mParallellProcessesFrame;
         TTimeDelayFrame*				mTimeDelayFrame;
@@ -59,8 +60,8 @@ class PACKAGE TSequenceInfoFrame : public TFrame
         Process*				        getCurrentlySelectedProcess();
 
     public:
-        			__fastcall 	        TSequenceInfoFrame(TComponent* Owner);
-		void					        assignArrayBot(ArrayBot* ab);
+        			__fastcall 	        TSequenceInfoFrame(ProcessSequencer& ps, TComponent* Owner);
+//		void					        assignProcessSequencer(ProcessSequencer& ps);
 		bool					        populate(ProcessSequence* seq, TScrollBox* processPanel = NULL);
 };
 

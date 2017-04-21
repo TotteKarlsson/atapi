@@ -19,9 +19,8 @@ __fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(TComponent* Owner)
 	: TFrame(Owner)
 {}
 
-void TArrayCamRequestFrame::populate(ArrayBot& ab, Process* p)
+void TArrayCamRequestFrame::populate(Process* p)
 {
-	mAB = &ab;
 	rePopulate(p);
 }
 

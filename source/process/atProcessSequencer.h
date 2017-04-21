@@ -15,41 +15,43 @@ namespace at
 }
 
 class ArrayBot;
+class ArrayCamClient;
 //!The Process sequencer executes and maintain a process sequence.
 //!A sequence individual processes can be executed step by step, or executed
 //!continously.
+
 //!The sequencer do currently load all available sequences into a sequence container.
 //Todo: Break out the sequence container to simplify the complexity of the sequencer
+//Todo: Derive from this an ArrayBot sequences
+//!The sequencer will hand resources, such as the ArrayCamClient, and/or ArrayBot, to
+//!executing sequences
+
 //---------------------------------------------------------------------------
 class AT_CORE ProcessSequencer : public ATObject
 {
 	public:
-			      	                        ProcessSequencer(ArrayBot& ab, const string& fileFolder);
+			      	                        ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc, const string& fileFolder);
                   	                        ~ProcessSequencer();
-
-		bool						        selectSequence(const string& sName);
-
 		bool				                load(const string& sName);
 		bool				                loadAll(const string& fileFolder);
+		bool						        selectSequence(const string& sName);
+
         bool								initCurrentSequence();
 
         bool						        deleteSequence(const string& seq);
 		bool				                saveCurrent();
 		void				                clear();
 
-											//!Five main controlling actions..
+											//!There are Five main controlling actions, start, stop, pause, resume and forward
 		void		                        start(bool continous = true);
         void		                        stop();
 		void		                        pause();
 		bool 		                        resume();
 		bool		                        forward();
-//        bool		                        reverse();
 
 		bool		                        reset();
 		bool								continueExecution();
-
         bool								canContinue();
-		string								getNextProcessName();
 
         bool				                isRunning();
         bool				                isPaused();
@@ -61,14 +63,19 @@ class AT_CORE ProcessSequencer : public ATObject
         ProcessSequence*   	                getCurrentSequence();
         string				                getCurrentSequenceName();
         string				                getCurrentProcessName();
+		string								getNextProcessName();
 
         bool						        addSequence(ProcessSequence* seq);
         ProcessSequences&			        getSequences();
+        ArrayBot&							getArrayBot(){return mAB;}
+        ArrayCamClient&						getArrayCamClient(){return mArrayCamClient;}
 
 	private:
-    								        //!The sequencer is executing each sequence using
-                                            //an arrayBot object
+    								        //!The sequencer is executing each sequence handing
+                                            //various resources to the sequnce
     	ArrayBot&					        mAB;
+    	ArrayCamClient&				        mArrayCamClient;
+
     	ProcessSequences	                mSequences;
 
         							        //!ExecuteAutomatic executes individual processes

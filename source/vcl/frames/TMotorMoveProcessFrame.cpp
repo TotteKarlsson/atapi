@@ -31,9 +31,9 @@ __fastcall TMotorMoveProcessFrame::TMotorMoveProcessFrame(TComponent* Owner)
     mPosTriggerFrame->Visible = false;
 }
 
-void TMotorMoveProcessFrame::populate(ArrayBot* ab, AbsoluteMove* m)
+void TMotorMoveProcessFrame::populate(ArrayBot& ab, AbsoluteMove* m)
 {
-	mAB = ab;
+	mAB = &ab;
     MotorsCB->Clear();
 	populateMotorCB();
     rePopulate(m);
@@ -182,7 +182,7 @@ void __fastcall TMotorMoveProcessFrame::mDeleteTriggerBClick(TObject *Sender)
     	mMove->deleteTrigger();
 	    mTriggersLB->Clear();
 	    mPosTriggerFrame->Visible = false;
-		populate(mAB, mMove);
+		populate(*(mAB), mMove);
     }
 }
 
@@ -198,7 +198,7 @@ void __fastcall TMotorMoveProcessFrame::AddTriggerBClick(TObject *Sender)
         //Also add a trigger function
         MoveAbsolute *tf = new MoveAbsolute(NULL);
         t->assignTriggerFunction(tf);
-        populate(mAB, mMove);
+        populate(*mAB, mMove);
     }
     else
     {
@@ -209,7 +209,7 @@ void __fastcall TMotorMoveProcessFrame::AddTriggerBClick(TObject *Sender)
             mMove->deleteTrigger();
 //            mTriggersLB->Clear();
             mPosTriggerFrame->Visible = false;
-            populate(mAB, mMove);
+            populate(*mAB, mMove);
         }
     }
 }

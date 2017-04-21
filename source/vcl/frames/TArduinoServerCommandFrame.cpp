@@ -19,9 +19,9 @@ __fastcall TArduinoServerCommandFrame::TArduinoServerCommandFrame(TComponent* Ow
     mAB(NULL)
 {}
 
-void TArduinoServerCommandFrame::populate(ArrayBot* ab, ArduinoServerCommand* m)
+void TArduinoServerCommandFrame::populate(ArrayBot& ab, ArduinoServerCommand* m)
 {
-	mAB = ab;
+	mAB = &ab;
     rePopulate(m);
 }
 

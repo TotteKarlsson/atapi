@@ -11,7 +11,8 @@ using namespace tinyxml2;
 ArrayCamRequest::ArrayCamRequest(const string& lbl, const string& request)
 :
 Process(lbl, NULL),
-mArrayCamRequest(request)
+mArrayCamRequest(request),
+mArrayCamClient(NULL)
 {
 	mProcessType = ptArrayCamRequest;
 }
@@ -22,6 +23,11 @@ void ArrayCamRequest::clear()
 const string ArrayCamRequest::getTypeName() const
 {
 	return "arrayCamRequest";
+}
+
+bool ArrayCamRequest::assignArrayCamClient(ArrayCamClient* acc)
+{
+	mArrayCamClient = acc;
 }
 
 XMLElement* ArrayCamRequest::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
@@ -48,7 +54,7 @@ bool ArrayCamRequest::isBeingProcessed()
 
 bool ArrayCamRequest::start()
 {
-	mArrayCamClient
+//	mArrayCamClient
 	return Process::start();
 }
 

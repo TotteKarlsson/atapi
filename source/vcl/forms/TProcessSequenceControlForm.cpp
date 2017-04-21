@@ -3,7 +3,6 @@
 #include "TProcessSequenceControlForm.h"
 #include "process/atProcessSequencer.h"
 #include "mtkVCLUtils.h"
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"

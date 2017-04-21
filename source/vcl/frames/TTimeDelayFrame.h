@@ -31,7 +31,7 @@ class PACKAGE TTimeDelayFrame : public TFrame
 	public:		// User declarations
 							__fastcall  TTimeDelayFrame(TComponent* Owner);
 
-    	void							populate(ArrayBot& ab, Process* p);
+    	void							populate(Process* p);
     	void							rePopulate(Process* p);
 };
 

@@ -49,7 +49,7 @@ __published:	// IDE-managed Components
 
     public:		// User declarations
                         __fastcall TMotorMoveProcessFrame(TComponent* Owner);
-        void            		   populate(ArrayBot* ab, AbsoluteMove* m);
+        void            		   populate(ArrayBot& ab, AbsoluteMove* m);
         void            		   rePopulate(AbsoluteMove* m);
 };
 

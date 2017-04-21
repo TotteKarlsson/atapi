@@ -18,7 +18,6 @@ class ProcessSequence;
 class AbsoluteMove;
 class ArduinoServerCommand;
 
-
 class AT_CORE ProcessSequenceProject : public mtk::Project, public ATObject
 {
     public:
