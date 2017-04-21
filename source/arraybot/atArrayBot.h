@@ -53,7 +53,7 @@ class AT_CORE ArrayBot : public ATObject
         vector<APTMotor*>			                    getAllMotors();
         APTMotor*										getMotorWithName(const string& name);
         APTMotor*										getMotorWithSerial(const string& serial);
-//        ProcessSequencer&								getProcessSequencer();
+        ProcessSequencer&								getProcessSequencer();
 
     private:
         bool						                    mIsShuttingDown;
@@ -78,10 +78,7 @@ class AT_CORE ArrayBot : public ATObject
 
         							                    //!List of Lifts
         PairedMoves					                    mLifts;
-
-//        												//!The Process sequencer allow individual
-//                                                        //!processes to be executed in sequence
-//   	    ProcessSequencer  								mProcessSequencer;
+   	    ProcessSequencer  								mProcessSequencer;
 };
 
 #endif

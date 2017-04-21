@@ -42,7 +42,7 @@ __published:	// IDE-managed Components
 	void __fastcall addArduinoCommandAExecute(TObject *Sender);
 
     private:	// User declarations
-   	    ProcessSequencer&  	  			mProcessSequencer;
+		ArrayBot*						mAB;
 		ParallellProcess*				mParallell;
 		void					    	selectItem(Process* mv);
 		Process*						getCurrentlySelectedSubProcess();
@@ -50,8 +50,8 @@ __published:	// IDE-managed Components
         TArduinoServerCommandFrame*		mTArduinoServerCommandFrame;
 
 	public:		// User declarations
-							__fastcall  TParallellProcessesFrame(ProcessSequencer& ps, TComponent* Owner);
-    	void							populate(Process* p);
+							__fastcall  TParallellProcessesFrame(TComponent* Owner);
+    	void							populate(ArrayBot& ab, Process* p);
     	void							rePopulate(Process* p);
 };
 

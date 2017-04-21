@@ -30,7 +30,7 @@ class ArrayCamClient;
 class AT_CORE ProcessSequencer : public ATObject
 {
 	public:
-			      	                        ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc, const string& fileFolder);
+			      	                        ProcessSequencer(ArrayBot& ab, const string& fileFolder);
                   	                        ~ProcessSequencer();
 		bool				                load(const string& sName);
 		bool				                loadAll(const string& fileFolder);
@@ -68,13 +68,13 @@ class AT_CORE ProcessSequencer : public ATObject
         bool						        addSequence(ProcessSequence* seq);
         ProcessSequences&			        getSequences();
         ArrayBot&							getArrayBot(){return mAB;}
-        ArrayCamClient&						getArrayCamClient(){return mArrayCamClient;}
+ //       ArrayCamClient&						getArrayCamClient(){return mArrayCamClient;}
 
 	private:
     								        //!The sequencer is executing each sequence handing
                                             //various resources to the sequnce
     	ArrayBot&					        mAB;
-    	ArrayCamClient&				        mArrayCamClient;
+//    	ArrayCamClient&				        mArrayCamClient;
 
     	ProcessSequences	                mSequences;
 

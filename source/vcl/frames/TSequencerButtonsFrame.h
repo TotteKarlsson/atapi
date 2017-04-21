@@ -20,11 +20,10 @@ class PACKAGE TSequencerButtonsFrame : public TFrame
 
     private:	// User declarations
 		ArrayBot&					mAB;
-   	    ProcessSequencer&  	  		mProcessSequencer;
         vector<TArrayBotButton*> 	mButtons;
 
 	public:
-					__fastcall 	TSequencerButtonsFrame(ProcessSequencer& ps, TComponent* Owner);
+					__fastcall 	TSequencerButtonsFrame(ArrayBot& bot, TComponent* Owner);
     	void					update();
 };
 

@@ -27,7 +27,7 @@ mJSSettings("JOYSTICK SETTINGS",	mIniFile),
 mCoverSlip(	"COVERSLIP UNIT", 		mIniFile, appFolder),
 mWhisker(	"WHISKER UNIT", 		mIniFile, appFolder),
 mLifts(		"PAIRED_MOVES", 		mIniFile),
-//mProcessSequencer(*this, appFolder),
+mProcessSequencer(*this, appFolder),
 mIsShuttingDown(false)
 {
 	//Setup UI properties
@@ -92,10 +92,10 @@ bool ArrayBot::disableWhiskerUnit()
     return true;
 }
 
-//ProcessSequencer& ArrayBot::getProcessSequencer()
-//{
-//	return mProcessSequencer;
-//}
+ProcessSequencer& ArrayBot::getProcessSequencer()
+{
+	return mProcessSequencer;
+}
 
 vector<APTMotor*> ArrayBot::getAllMotors()
 {
@@ -196,8 +196,8 @@ bool ArrayBot::shutDown()
 void ArrayBot::stopAll()
 {
 	//In case the JoyStick is running amok, disable it (has never happened actually..)
-//	mProcessSequencer.stop();
     mJoyStick.disable();
+	mProcessSequencer.stop();
     mCoverSlip.stopAll();
     mWhisker.stopAll();
 }

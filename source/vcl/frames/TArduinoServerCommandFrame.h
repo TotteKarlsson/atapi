@@ -32,7 +32,7 @@ __published:	// IDE-managed Components
 
     public:		// User declarations
                         __fastcall TArduinoServerCommandFrame(TComponent* Owner);
-        void            		   populate(ArrayBot& ab, ArduinoServerCommand* m);
+        void            		   populate(ArrayBot* ab, ArduinoServerCommand* m);
         void            		   rePopulate(ArduinoServerCommand* m);
 };
 
