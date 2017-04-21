@@ -1,5 +1,5 @@
-#ifndef TTimeDelayFrameH
-#define TTimeDelayFrameH
+#ifndef TArrayCamRequestFrameH
+#define TArrayCamRequestFrameH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
@@ -8,32 +8,30 @@
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
 #include "arraybot/atArrayBot.h"
-#include "TFloatLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
-#include "TIntegerLabeledEdit.h"
 #include "TSTDStringLabeledEdit.h"
 
 class Process;
-class TimeDelay;
+class ArrayCamRequest;
 //---------------------------------------------------------------------------
-class PACKAGE TTimeDelayFrame : public TFrame
+class PACKAGE TArrayCamRequestFrame : public TFrame
 {
 	__published:	// IDE-managed Components
         TGroupBox *GroupBox1;
-        TIntegerLabeledEdit *mTimeDelayE;
         TSTDStringLabeledEdit *mNameEdit;
+		TComboBox *mArrayCamRequestCB;
         void __fastcall mEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
     private:	// User declarations
 		ArrayBot*						mAB;
-		TimeDelay*						mTimeDelay;
+		ArrayCamRequest*				mArrayCamRequest;
 
 	public:		// User declarations
-							__fastcall  TTimeDelayFrame(TComponent* Owner);
+							__fastcall  TArrayCamRequestFrame(TComponent* Owner);
 
     	void							populate(ArrayBot& ab, Process* p);
     	void							rePopulate(Process* p);
 };
 
-extern PACKAGE TTimeDelayFrame *TimeDelayFrame;
+extern PACKAGE TArrayCamRequestFrame *ArrayCamRequestFrame;
 #endif

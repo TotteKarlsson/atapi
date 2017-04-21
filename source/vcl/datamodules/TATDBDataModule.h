@@ -194,6 +194,13 @@ __published:	// IDE-managed Components
 	TClientDataSet *ROnCS_CDS;
 	TDataSetProvider *RibbonsOnCoverslipsProvider;
 	TSQLDataSet *ribbonsOnCoverSlipsDS;
+	TSQLDataSet *settingsDS;
+	TDataSetProvider *settingsProvider;
+	TClientDataSet *settingsCDS;
+	TIntegerField *settingsCDSid;
+	TMemoField *settingsCDSlabel_printer_command;
+	TIntegerField *settingsDSid;
+	TMemoField *settingsDSlabel_printer_command;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -213,6 +220,7 @@ __published:	// IDE-managed Components
 	void __fastcall specimenCDSBeforeClose(TDataSet *DataSet);
 	void __fastcall specimenCDSAfterClose(TDataSet *DataSet);
 	void __fastcall specimenCDSAfterOpen(TDataSet *DataSet);
+
 
 	private:
 

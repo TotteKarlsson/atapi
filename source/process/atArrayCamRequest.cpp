@@ -1,43 +1,39 @@
 #pragma hdrstop
-#include "atTimeDelay.h"
+#include "atArrayCamRequest.h"
 #include "atXYZUnit.h"
-#include "atAPTMotor.h"
 #include "mtkLogger.h"
-#include "atMove.h"
 #include "mtkXMLUtils.h"
 
 using namespace mtk;
-using namespace at;
 using namespace tinyxml2;
 
 //---------------------------------------------------------------------------
-TimeDelay::TimeDelay(const string& lbl, Poco::Timespan ts)
+ArrayCamRequest::ArrayCamRequest(const string& lbl, const string& request)
 :
 Process(lbl, NULL),
-mTimeDelay(ts)
+mArrayCamRequest(request)
 {
-	mProcessType = ptTimeDelay;
+	mProcessType = ptArrayCamRequest;
 }
 
-void TimeDelay::clear()
+void ArrayCamRequest::clear()
 {}
 
-const string TimeDelay::getTypeName() const
+const string ArrayCamRequest::getTypeName() const
 {
-	return "timeDelay";
+	return "arrayCamRequest";
 }
 
-XMLElement* TimeDelay::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+XMLElement* ArrayCamRequest::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
-	XMLElement* delay = doc.NewElement("delay");
-	delay->SetText(mtk::toString( (long) mTimeDelay.totalMicroseconds()).c_str() );
-
+	XMLElement* delay = doc.NewElement("arrayCamRequest");
+	delay->SetText(mtk::toString(mArrayCamRequest).c_str() );
     docRoot->InsertEndChild(delay);
     return delay;
 }
 
-bool TimeDelay::isBeingProcessed()
+bool ArrayCamRequest::isBeingProcessed()
 {
 	if(isDone())
     {
@@ -50,17 +46,18 @@ bool TimeDelay::isBeingProcessed()
     return mIsBeingProcessed;
 }
 
-bool TimeDelay::start()
+bool ArrayCamRequest::start()
 {
+	mArrayCamClient
 	return Process::start();
 }
 
-bool TimeDelay::stop()
+bool ArrayCamRequest::stop()
 {
 	return Process::stop();
 }
 
-bool TimeDelay::isProcessed()
+bool ArrayCamRequest::isProcessed()
 {
     if(mIsProcessed == true)
     {
@@ -78,14 +75,12 @@ bool TimeDelay::isProcessed()
 	return false;
 }
 
-bool TimeDelay::isDone()
+bool ArrayCamRequest::isDone()
 {
 	if(!mIsStarted)
     {
     	return false;
     }
 
-	Poco::Timestamp now;
-    Poco::Timespan timeElapsed(now - mStartTime);
-    return timeElapsed > mTimeDelay ? true : false;
+    return true;
 }

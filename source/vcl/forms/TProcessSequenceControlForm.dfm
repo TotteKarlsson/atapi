@@ -74,6 +74,12 @@ object ProcessSequenceControlForm: TProcessSequenceControlForm
       Height = 120
       Anchors = [akTop]
       Caption = 'Start'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       OnClick = mStartResumeButtonClick
       SoundID = 'BUTTON_CLICK_4'
@@ -85,6 +91,12 @@ object ProcessSequenceControlForm: TProcessSequenceControlForm
       Height = 120
       Anchors = [akTop]
       Caption = 'Pause'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       SoundID = 'BUTTON_CLICK_4'
     end
@@ -95,6 +107,12 @@ object ProcessSequenceControlForm: TProcessSequenceControlForm
       Height = 120
       Anchors = [akTop]
       Caption = 'Exit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       OnClick = mStopBtnClick
       SoundID = 'BUTTON_CLICK_4'

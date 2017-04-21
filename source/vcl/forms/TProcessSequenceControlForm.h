@@ -15,18 +15,18 @@ class PACKAGE TProcessSequenceControlForm : public TForm
 
     __published:	// IDE-managed Components
         TTimer *mStatusTimer;
-	TArrayBotButton *mStartResumeButton;
+		TArrayBotButton *mStartResumeButton;
         TPanel *mControlPanel;
         TArrayBotButton *mPauseBtn;
         TArrayBotButton *mStopBtn;
         TLabel *mSequenceNameLbl;
         TLabel *mProcessNameLbl;
-	TLabel *mNextProcessNameLbl;
-	void __fastcall FormShow(TObject *Sender);
-	void __fastcall mStatusTimerTimer(TObject *Sender);
-	void __fastcall mStartResumeButtonClick(TObject *Sender);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
-	void __fastcall mStopBtnClick(TObject *Sender);
+        TLabel *mNextProcessNameLbl;
+        void __fastcall FormShow(TObject *Sender);
+        void __fastcall mStatusTimerTimer(TObject *Sender);
+        void __fastcall mStartResumeButtonClick(TObject *Sender);
+        void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+        void __fastcall mStopBtnClick(TObject *Sender);
 
     private:
 		enum ProcessStatus {psNotStarted, psRunning, psPaused, psFinished, psUnknown};

@@ -4,9 +4,12 @@
 #include <windows.h>
 #include "atExporter.h"
 #include "atATObject.h"
-//---------------------------------------------------------------------------
+#include "mtkStringList.h"
 
+
+//---------------------------------------------------------------------------
 using std::string;
+using mtk::StringList;
 //Function pointers
 typedef int (__stdcall *f_int_void)();
 typedef int (__stdcall *f_int_cchar)(const char*);
@@ -24,13 +27,7 @@ typedef int (__stdcall *f_WinFont)(		 int, int, int, int, int, int, const char*,
 
 struct BarcodePrintParameters
 {
-	int 		xStart;
-    int 		yStart;
-    double 		expectedWidth;
-    double 		expectedHeight;
-    int 		moduleSize;
-    int			rowSymbolSize;
-    int			colSymbolSize;
+	StringList command;
 };
 
 

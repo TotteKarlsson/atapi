@@ -53,6 +53,7 @@ string toString(ProcessType pt)
     	case ptParallell: 		        return "parallell";
     	case ptTimeDelay: 		        return "timeDelay";
     	case ptStopAndResumeProcess:    return "stopAndResumeProcess";
+    	case ptArrayCamRequest:    		return "arrayCamRequest";
         default: 				        return "unknownProcessType";
     }
 }
@@ -84,6 +85,11 @@ ProcessType toProcessType(const string& str)
 	if(str == "stopAndResumeProcess")
     {
     	return ptStopAndResumeProcess;
+    }
+
+	if(str == "arrayCamRequest")
+    {
+    	return ptArrayCamRequest;
     }
 
 	return ptUnknown;

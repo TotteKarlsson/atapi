@@ -8,7 +8,6 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "TATDBDataModule.h"
 #include "mtkIniFile.h"
 #include "mtkIniFileProperties.h"
 //---------------------------------------------------------------------------

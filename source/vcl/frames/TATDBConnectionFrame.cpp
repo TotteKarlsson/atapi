@@ -4,6 +4,7 @@
 #include "database/atDBUtils.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
+#include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
@@ -45,11 +46,12 @@ bool TATDBConnectionFrame::init(IniFile* inifile)
     mPasswordE->update();
     mDatabaseE->update();
 	mServerIPE->update();
+    return true;
 }
 
 bool TATDBConnectionFrame::purge()
 {
-	mProperties.write();
+	return mProperties.write();
 }
 
 void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender)

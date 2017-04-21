@@ -72,6 +72,7 @@ void __fastcall TatdbDM::afterConnect()
 	specimenCDS->Active  	= true;
     documentsCDS->Active  	= true;
     ROnCS_CDS->Active  		= true;
+    settingsCDS->Active  	= true;
 }
 
 //---------------------------------------------------------------------------
@@ -337,3 +338,5 @@ int	__fastcall TatdbDM::getCurrentBlockID()
     	return -1;
     }
 }
+
+

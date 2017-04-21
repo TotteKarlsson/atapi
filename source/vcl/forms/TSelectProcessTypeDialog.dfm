@@ -62,7 +62,8 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
     Items.Strings = (
       'Parallell Process'
       'Time Delay'
-      'Stop/Start Dialog')
+      'Stop/Start Dialog'
+      'ArrayCam Request')
     TabOrder = 1
   end
 end

@@ -35,13 +35,14 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ProjectType>CppPackage</ProjectType>
         <ILINK_LibraryPath>..\database\;..\..\UI\frames\;components\;frames\;forms\;P:\ArrayBot\source\vcl\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\database\;..\..\UI\frames\;components\;frames\;forms\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl\;$(IncludePath)</IncludePath>
+        <IncludePath>..\database\;components\;frames\;forms\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl\;datamodules;$(IncludePath)</IncludePath>
         <_TCHARMapping>char</_TCHARMapping>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -160,6 +161,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
             <BuildOrder>9</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TArrayCamRequestFrame.cpp">
+            <Form>ArrayCamRequestFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TArrayCamRequestFrame.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TMotorFrame.cpp">
             <Form>MotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -199,7 +206,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <Form>TimeDelayFrame</Form>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>frames\TTimeDelayFrame.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
+            <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="frames\TXYZPositionsFrame.cpp">
             <Form>XYZPositionsFrame</Form>
@@ -230,7 +237,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <FormResources Include="frames\TSequenceInfoFrame.dfm"/>
         <FormResources Include="frames\TSequencerButtonsFrame.dfm"/>
-        <FormResources Include="frames\TTimeDelayFrame.dfm"/>
+        <FormResources Include="frames\TArrayCamRequestFrame.dfm"/>
         <FormResources Include="frames\TMotorMoveProcessFrame.dfm"/>
         <FormResources Include="frames\TParallellProcessesFrame.dfm"/>
         <FormResources Include="frames\TPositionalTriggerFrame.dfm"/>
@@ -245,6 +252,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="frames\TTimeDelayFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

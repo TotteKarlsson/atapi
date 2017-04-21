@@ -3,14 +3,11 @@
 #include "TTimeDelayFrame.h"
 #include "mtkVCLUtils.h"
 #include "process/atProcess.h"
-#include "apt/atMove.h"
 #include "process/atTimeDelay.h"
 #include "mtkLogger.h"
 #include "arraybot/atArrayBot.h"
-#include "apt/atAPTMotor.h"
 
 #pragma package(smart_init)
-#pragma link "TMotorMoveProcessFrame"
 #pragma link "TFloatLabeledEdit"
 #pragma link "TIntegerLabeledEdit"
 #pragma link "TSTDStringLabeledEdit"

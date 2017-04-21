@@ -7,10 +7,12 @@
 #include "mtkVCLUtils.h"
 #include "TStringInputDialog.h"
 #include "process/atTimeDelay.h"
+#include "process/atArrayCamRequest.h"
 #include "process/atStopAndResumeProcess.h"
 #include "frames/TMotorMoveProcessFrame.h"
 #include "frames/TParallellProcessesFrame.h"
 #include "frames/TTimeDelayFrame.h"
+#include "frames/TArrayCamRequestFrame.h"
 #include "atVCLUtils.h"
 #include "mtkLogger.h"
 #include "TSelectProcessTypeDialog.h"
@@ -34,6 +36,11 @@ __fastcall TSequenceInfoFrame::TSequenceInfoFrame(TComponent* Owner)
 
     mTimeDelayFrame = new TTimeDelayFrame(Owner);
     mTimeDelayFrame->Visible = false;
+
+    mArrayCamRequestFrame = new TArrayCamRequestFrame(Owner);
+    mArrayCamRequestFrame->Visible = false;
+
+
 	mUpdatePositionsBtn->Action = mParallellProcessesFrame->mUpdateFinalPositionsA;
 }
 
@@ -53,9 +60,10 @@ bool TSequenceInfoFrame::populate(ProcessSequence* seq, TScrollBox* processPanel
 
     if(processPanel)
     {
-    	mProcessPanel = processPanel;
-		mParallellProcessesFrame->Parent = mProcessPanel;
-        mTimeDelayFrame->Parent = mProcessPanel;
+    	mProcessPanel 						= processPanel;
+		mParallellProcessesFrame->Parent 	= mProcessPanel;
+        mTimeDelayFrame->Parent 			= mProcessPanel;
+        mArrayCamRequestFrame->Parent 		= mProcessPanel;
     }
 
     mProcessesLB->Clear();
@@ -169,6 +177,7 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
 	mParallellProcessesFrame->Visible 	= false;
 	mUpdatePositionsBtn->Visible 		= false;
     mTimeDelayFrame->Visible 			= false;
+    mArrayCamRequestFrame->Visible     	= false;
 
     //Check what kind of process we have, Pause, or CombinedMove
     Process* p = getCurrentlySelectedProcess();
@@ -195,6 +204,16 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
 			mTimeDelayFrame->populate(*mAB, tdp);
             mTimeDelayFrame->Visible = true;
 	        mTimeDelayFrame->Align = alClient;
+        }
+    }
+    else if(dynamic_cast<ArrayCamRequest*>(p) != NULL)
+    {
+		ArrayCamRequest* tdp = dynamic_cast<ArrayCamRequest*>(p);
+        if(mAB)
+        {
+			mArrayCamRequestFrame->populate(*mAB, tdp);
+            mArrayCamRequestFrame->Visible = true;
+	        mArrayCamRequestFrame->Align = alClient;
         }
     }
     else
@@ -252,6 +271,11 @@ void __fastcall TSequenceInfoFrame::AddCombinedMoveAExecute(TObject *Sender)
         {
         	p = new StopAndResumeProcess("Process " + mtk::toString(nr));
         }
+        else if(pType == 3) //Stop/Start Dialog
+        {
+        	p = new ArrayCamRequest("Process " + mtk::toString(nr));
+        }
+
         else
         {
         	Log(lError) << "Process Type Selection is not Suported!";

@@ -9,6 +9,7 @@
 #include "atMove.h"
 #include "atTimedelay.h"
 #include "atStopAndResumeProcess.h"
+#include "atArrayCamRequest.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atArduinoServerCommand.h"
@@ -94,6 +95,13 @@ bool ProcessSequenceProject::save(const string& fName)
 			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
         }
 
+        else if(dynamic_cast<ArrayCamRequest*>(p))
+	    {
+        	ArrayCamRequest* td = dynamic_cast<ArrayCamRequest*>(p);
+
+        	//Write subprocesses
+			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+        }
 
         p = mProcessSequence.getNext();
     }
@@ -183,6 +191,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
     	case ptParallell: 				return createParallellProcess(element);
         case ptTimeDelay:       		return createTimeDelayProcess(element);
         case ptStopAndResumeProcess:	return createStopAndResumeProcess(element);
+        case ptArrayCamRequest:			return createArrayCamRequestProcess(element);
     }
 
     return NULL;
@@ -225,11 +234,9 @@ Process* ProcessSequenceProject::createParallellProcess(XMLElement* element)
                     p->addProcess(c);
                 }
             }
-
             proc = proc->NextSiblingElement();
         }
     }
-
     return p;
 }
 
@@ -372,9 +379,14 @@ Process* ProcessSequenceProject::createTimeDelayProcess(XMLElement* element)
 Process* ProcessSequenceProject::createStopAndResumeProcess(XMLElement* element)
 {
     StopAndResumeProcess* p = new StopAndResumeProcess("");
-
    	p->setProcessName(element->Attribute("name"));
+    return p;
+}
 
+Process* ProcessSequenceProject::createArrayCamRequestProcess(XMLElement* element)
+{
+    ArrayCamRequest* p = new ArrayCamRequest("");
+   	p->setProcessName(element->Attribute("name"));
     return p;
 }
 

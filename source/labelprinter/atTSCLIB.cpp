@@ -79,43 +79,22 @@ bool TSCLIB::printCoverSlipLabel(BarcodePrintParameters& p, const string& conten
     try
     {
     	openport("USB");
-
-        //Centered
-        //Do this
-    //    DIRECTION 1,1
-    //DIRECTION 1,0
-    //CLS
-    //SIZE 0.965,0.2874
-    //TEXT 15, 55, "1", 0, 1, 1,1, "B54C30C15"
-    //TEXT 200, 55, "3", 0, 1, 1,1, "1234"
-    //DMATRIX 145,35, 15, 15, x2, 43,43,"B54C30C15-1234"
-    //PRINT 1,1
-    //CLS
-
-//        StringList c(content,'-');
-//        if(c.count() != 2)
-//        {
-//            Log(lError) << "Can't print this label: "<<content;
-//            return false;
-//        }
-
         stringstream tc;
-        tc      << "SIZE "<<0.965<<","<<0.2874<<"\n"<<
-		        "GAP 3 mm,0.5 mm \n"<<
-        		"DIRECTION 1,0\n"<<
-                "SHIFT -20\n"<<
-                "CLS\n"<<
-                "TEXT 200, 35, \"1\", 0, 1, 1, 1, \""<<content<<"\"\n" <<
-                "DMATRIX "<<
-                p.xStart<<","<<
-                p.yStart<<","<<
-                p.expectedWidth<<","<<
-                p.expectedHeight<<","<<
-                "x"<<p.moduleSize<<","<<
-//                p.rowSymbolSize<<","<<
-//				p.colSymbolSize<<","<<
-                "\""<<content<<"\"\n"<<
-                "PRINT 1,"<<copies<<"\n";
+		//Parse the lines in p
+        for(int i = 0; i < p.command.size(); i++)
+        {
+        	string line = p.command[i];
+            if(contains("content", line))
+            {
+            	line = substitute(line, "content", content);
+            }
+            else if(contains("copies", line))
+            {
+            	line = substitute(line, "copies", copies);
+            }
+
+            tc << line << "\n";
+        }
 
 
         int ret = sendcommand(tc.str().c_str());

@@ -1,6 +1,6 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 890
+  Height = 922
   Width = 887
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
@@ -1098,5 +1098,42 @@ object atdbDM: TatdbDM
     SQLConnection = SQLConnection1
     Left = 40
     Top = 680
+  end
+  object settingsDS: TSQLDataSet
+    CommandText = 'select * from settings order by id ASC'
+    MaxBlobSize = 1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 32
+    Top = 832
+    object settingsDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object settingsDSlabel_printer_command: TMemoField
+      FieldName = 'label_printer_command'
+      BlobType = ftMemo
+      Size = 1
+    end
+  end
+  object settingsProvider: TDataSetProvider
+    DataSet = settingsDS
+    Left = 128
+    Top = 832
+  end
+  object settingsCDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'settingsProvider'
+    AfterPost = cdsAfterPost
+    Left = 256
+    Top = 832
+    object settingsCDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object settingsCDSlabel_printer_command: TMemoField
+      FieldName = 'label_printer_command'
+      BlobType = ftMemo
+      Size = 1
+    end
   end
 end
