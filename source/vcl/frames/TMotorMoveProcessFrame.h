@@ -14,6 +14,7 @@
 
 class AbsoluteMove;
 class TPositionalTriggerFrame;
+class ProcessSequencer;
 
 class ArrayBot;
 class XYZUnit;
@@ -43,13 +44,14 @@ __published:	// IDE-managed Components
 
     private:	// User declarations
         AbsoluteMove* 	   			mMove;
-        ArrayBot*					mAB;
+        ProcessSequencer&			mProcessSequencer;
+        ArrayBot&					mAB;
 		void 						populateMotorCB();
         TPositionalTriggerFrame*	mPosTriggerFrame;
 
     public:		// User declarations
-                        __fastcall TMotorMoveProcessFrame(TComponent* Owner);
-        void            		   populate(ArrayBot* ab, AbsoluteMove* m);
+                        __fastcall TMotorMoveProcessFrame(ProcessSequencer& ps, TComponent* Owner);
+        void            		   populate(AbsoluteMove* m);
         void            		   rePopulate(AbsoluteMove* m);
 };
 

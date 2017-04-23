@@ -18,6 +18,7 @@ class TTimeDelayFrame;
 class TArrayCamRequestFrame;
 class Process;
 class ArrayBot;
+class ProcessSequencer;
 
 class PACKAGE TSequenceInfoFrame : public TFrame
 {
@@ -47,7 +48,7 @@ class PACKAGE TSequenceInfoFrame : public TFrame
     private:
 		ProcessSequence*		        mSequence;
         string					        mSequencesFolder;
-        ArrayBot*				        mAB;
+        ProcessSequencer&  		        mProcessSequencer;
         TScrollBox*					    mProcessPanel;
         TParallellProcessesFrame*		mParallellProcessesFrame;
         TTimeDelayFrame*				mTimeDelayFrame;
@@ -59,8 +60,7 @@ class PACKAGE TSequenceInfoFrame : public TFrame
         Process*				        getCurrentlySelectedProcess();
 
     public:
-        			__fastcall 	        TSequenceInfoFrame(TComponent* Owner);
-		void					        assignArrayBot(ArrayBot* ab);
+        			__fastcall 	        TSequenceInfoFrame(ProcessSequencer& ps, TComponent* Owner);
 		bool					        populate(ProcessSequence* seq, TScrollBox* processPanel = NULL);
 };
 

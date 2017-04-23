@@ -20,9 +20,10 @@
 TMotorMoveProcessFrame *MotorMoveProcessFrame;
 
 //---------------------------------------------------------------------------
-__fastcall TMotorMoveProcessFrame::TMotorMoveProcessFrame(TComponent* Owner)
+__fastcall TMotorMoveProcessFrame::TMotorMoveProcessFrame(ProcessSequencer& ps, TComponent* Owner)
 	: TFrame(Owner),
-    mAB(NULL),
+    mProcessSequencer(ps),
+    mAB(ps.getArrayBot()),
     mPosTriggerFrame(NULL)
 {
 	mPosTriggerFrame = new TPositionalTriggerFrame(this);
@@ -31,9 +32,8 @@ __fastcall TMotorMoveProcessFrame::TMotorMoveProcessFrame(TComponent* Owner)
     mPosTriggerFrame->Visible = false;
 }
 
-void TMotorMoveProcessFrame::populate(ArrayBot* ab, AbsoluteMove* m)
+void TMotorMoveProcessFrame::populate(AbsoluteMove* m)
 {
-	mAB = ab;
     MotorsCB->Clear();
 	populateMotorCB();
     rePopulate(m);
@@ -95,9 +95,11 @@ void TMotorMoveProcessFrame::rePopulate(AbsoluteMove* m)
     }
 }
 
+
+//Motor objects are stored in the checkbox list property
 void TMotorMoveProcessFrame::populateMotorCB()
 {
-	vector<APTMotor*> motors = mAB->getAllMotors();
+	vector<APTMotor*> motors = mAB.getAllMotors();
     for(int i = 0; i < motors.size(); i++)
     {
     	if(motors[i])
@@ -164,7 +166,7 @@ void __fastcall TMotorMoveProcessFrame::TriggersLBClick(TObject *Sender)
     if(t)
     {
 		//Check what kind of trigger
-       	mPosTriggerFrame->populate(*mAB, t);
+       	mPosTriggerFrame->populate(mAB, t);
 	    mPosTriggerFrame->Visible = true;
     }
     else
@@ -182,7 +184,7 @@ void __fastcall TMotorMoveProcessFrame::mDeleteTriggerBClick(TObject *Sender)
     	mMove->deleteTrigger();
 	    mTriggersLB->Clear();
 	    mPosTriggerFrame->Visible = false;
-		populate(mAB, mMove);
+		populate(mMove);
     }
 }
 
@@ -198,7 +200,7 @@ void __fastcall TMotorMoveProcessFrame::AddTriggerBClick(TObject *Sender)
         //Also add a trigger function
         MoveAbsolute *tf = new MoveAbsolute(NULL);
         t->assignTriggerFunction(tf);
-        populate(mAB, mMove);
+        populate(mMove);
     }
     else
     {
@@ -209,7 +211,7 @@ void __fastcall TMotorMoveProcessFrame::AddTriggerBClick(TObject *Sender)
             mMove->deleteTrigger();
 //            mTriggersLB->Clear();
             mPosTriggerFrame->Visible = false;
-            populate(mAB, mMove);
+            populate(mMove);
         }
     }
 }

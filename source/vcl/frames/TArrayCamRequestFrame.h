@@ -21,15 +21,15 @@ class PACKAGE TArrayCamRequestFrame : public TFrame
         TSTDStringLabeledEdit *mNameEdit;
 		TComboBox *mArrayCamRequestCB;
         void __fastcall mEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall mArrayCamRequestCBCloseUp(TObject *Sender);
 
     private:
 		ArrayCamRequest*				mArrayCamRequest;
 
 	public:
 							__fastcall  TArrayCamRequestFrame(TComponent* Owner);
-
     	void							populate(Process* p);
-    	void							rePopulate(Process* p);
+
 };
 
 extern PACKAGE TArrayCamRequestFrame *ArrayCamRequestFrame;

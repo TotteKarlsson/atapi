@@ -11,7 +11,7 @@ using namespace tinyxml2;
 ArrayCamRequest::ArrayCamRequest(const string& lbl, const string& request)
 :
 Process(lbl, NULL),
-mArrayCamRequest(request),
+mRequest(arrayCamRequestFromString(request)),
 mArrayCamClient(NULL)
 {
 	mProcessType = ptArrayCamRequest;
@@ -25,18 +25,31 @@ const string ArrayCamRequest::getTypeName() const
 	return "arrayCamRequest";
 }
 
+bool ArrayCamRequest::setRequest(const string& request)
+{
+	mRequest = arrayCamRequestFromString(request);
+    return true;
+}
+
+bool ArrayCamRequest::setRequest(ACRequest r)
+{
+	mRequest = r;
+    return true;
+}
+
 bool ArrayCamRequest::assignArrayCamClient(ArrayCamClient* acc)
 {
 	mArrayCamClient = acc;
+    return true;
 }
 
 XMLElement* ArrayCamRequest::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
-	XMLElement* delay = doc.NewElement("arrayCamRequest");
-	delay->SetText(mtk::toString(mArrayCamRequest).c_str() );
-    docRoot->InsertEndChild(delay);
-    return delay;
+	XMLElement* e = doc.NewElement("arrayCamRequest");
+	e->SetText(requestToString((ACRequest) mRequest).c_str() );
+    docRoot->InsertEndChild(e);
+    return e;
 }
 
 bool ArrayCamRequest::isBeingProcessed()
@@ -89,4 +102,30 @@ bool ArrayCamRequest::isDone()
     }
 
     return true;
+}
+
+string requestToString(ACRequest r)
+{
+	switch(r)
+    {
+    	case acrStartVideo: return "Start Video";
+    	case acrStopVideo: return "Stop Video";
+        default: 			return "Unknown";
+    }
+}
+
+ACRequest arrayCamRequestFromString(const string& t)
+{
+    if(compareNoCase(t, "Start Video"))
+    {
+    	return acrStartVideo;
+    }
+    if(compareNoCase(t, "Stop Video"))
+    {
+    	return acrStopVideo;
+    }
+    else
+    {
+    	return acrUnknown;
+    }
 }

@@ -28,11 +28,11 @@ __published:	// IDE-managed Components
 
     private:	// User declarations
         ArduinoServerCommand* 		mProcess;
-        ArrayBot*					mAB;
+        ArrayBot&					mAB;
 
     public:		// User declarations
-                        __fastcall TArduinoServerCommandFrame(TComponent* Owner);
-        void            		   populate(ArrayBot* ab, ArduinoServerCommand* m);
+                        __fastcall TArduinoServerCommandFrame(ArrayBot& ab, TComponent* Owner);
+        void            		   populate(ArduinoServerCommand* m);
         void            		   rePopulate(ArduinoServerCommand* m);
 };
 

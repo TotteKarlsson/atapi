@@ -387,6 +387,19 @@ Process* ProcessSequenceProject::createArrayCamRequestProcess(XMLElement* elemen
 {
     ArrayCamRequest* p = new ArrayCamRequest("");
    	p->setProcessName(element->Attribute("name"));
+    XMLElement* type = element->FirstChildElement("arrayCamRequest");
+    if(type)
+    {
+    	p->setRequest(type->GetText());
+    }
+   	else
+    {
+    	p->setRequest(acrUnknown);
+    }
+
+
+
+
     return p;
 }
 

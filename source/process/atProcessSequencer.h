@@ -16,21 +16,21 @@ namespace at
 
 class ArrayBot;
 class ArrayCamClient;
-//!The Process sequencer executes and maintain a process sequence.
-//!A sequence individual processes can be executed step by step, or executed
+//!The Process Sequencer executes and maintain a process sequence.
+//!A sequence consists of individual processes that can be executed step by step, or executed
 //!continously.
 
 //!The sequencer do currently load all available sequences into a sequence container.
 //Todo: Break out the sequence container to simplify the complexity of the sequencer
 //Todo: Derive from this an ArrayBot sequences
 //!The sequencer will hand resources, such as the ArrayCamClient, and/or ArrayBot, to
-//!executing sequences
+//!executing processes in a sequence
 
 //---------------------------------------------------------------------------
 class AT_CORE ProcessSequencer : public ATObject
 {
 	public:
-			      	                        ProcessSequencer(ArrayBot& ab, const string& fileFolder);
+			      	                        ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc, const string& fileFolder);
                   	                        ~ProcessSequencer();
 		bool				                load(const string& sName);
 		bool				                loadAll(const string& fileFolder);
@@ -68,14 +68,13 @@ class AT_CORE ProcessSequencer : public ATObject
         bool						        addSequence(ProcessSequence* seq);
         ProcessSequences&			        getSequences();
         ArrayBot&							getArrayBot(){return mAB;}
- //       ArrayCamClient&						getArrayCamClient(){return mArrayCamClient;}
+       	ArrayCamClient&						getArrayCamClient(){return mArrayCamClient;}
 
 	private:
     								        //!The sequencer is executing each sequence handing
                                             //various resources to the sequnce
     	ArrayBot&					        mAB;
-//    	ArrayCamClient&				        mArrayCamClient;
-
+    	ArrayCamClient&				        mArrayCamClient;
     	ProcessSequences	                mSequences;
 
         							        //!ExecuteAutomatic executes individual processes

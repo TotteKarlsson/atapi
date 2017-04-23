@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-ProcessSequencer::ProcessSequencer(ArrayBot& ab,  const string& fileFolder)
+ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc,  const string& fileFolder)
 :
 mAB(ab),
-//mArrayCamClient(acc),
+mArrayCamClient(acc),
 mSequences(fileFolder, "abp", mAB),
 mSequenceTimer(50)
 {

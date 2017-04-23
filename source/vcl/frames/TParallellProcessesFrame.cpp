@@ -27,27 +27,28 @@ using namespace mtk;
 
 TParallellProcessesFrame *ParallellProcessesFrame;
 //---------------------------------------------------------------------------
-__fastcall TParallellProcessesFrame::TParallellProcessesFrame(TComponent* Owner)
-	: TFrame(Owner)
+__fastcall TParallellProcessesFrame::TParallellProcessesFrame(ProcessSequencer& ps, TComponent* Owner)
+	: TFrame(Owner),
+    mProcessSequencer(ps)
 {
-	mTMotorMoveProcessFrame 	= new TMotorMoveProcessFrame(Owner);
+	mTMotorMoveProcessFrame 	= new TMotorMoveProcessFrame(mProcessSequencer, Owner);
     mTMotorMoveProcessFrame->Parent = this;
     mTMotorMoveProcessFrame->Visible = false;
     mTMotorMoveProcessFrame->Align 	 = alClient;
 
-    mTArduinoServerCommandFrame = new TArduinoServerCommandFrame(Owner);
+    mTArduinoServerCommandFrame = new TArduinoServerCommandFrame(mProcessSequencer.getArrayBot(), Owner);
     mTArduinoServerCommandFrame->Parent = this;
     mTArduinoServerCommandFrame->Visible = false;
     mTArduinoServerCommandFrame->Align = alClient;
 }
 
-void TParallellProcessesFrame::populate(ArrayBot& ab, Process* p)
+__fastcall TParallellProcessesFrame::~TParallellProcessesFrame()
 {
-	mAB = &ab;
-	rePopulate(p);
+	delete mTArduinoServerCommandFrame;
+    delete mTMotorMoveProcessFrame;
 }
 
-void TParallellProcessesFrame::rePopulate(Process* pp)
+void TParallellProcessesFrame::populate(Process* pp)
 {
 	mSubProcessesLB->Clear();
     if(!pp)
@@ -148,7 +149,7 @@ void __fastcall TParallellProcessesFrame::removeMoveAExecute(TObject *Sender)
     	string moveName = stdstr(mSubProcessesLB->Items->Strings[index]);
         mParallell->removeProcess(moveName);
         mParallell->write();
-		rePopulate(mParallell);
+		populate(mParallell);
     }
 }
 
@@ -156,7 +157,7 @@ void TParallellProcessesFrame::selectItem(Process* p)
 {
 	if(dynamic_cast<AbsoluteMove*>(p))
     {
-        mTMotorMoveProcessFrame->populate(mAB, dynamic_cast<AbsoluteMove*>(p));
+        mTMotorMoveProcessFrame->populate(dynamic_cast<AbsoluteMove*>(p));
         mTMotorMoveProcessFrame->Visible = true;
        	mTArduinoServerCommandFrame->Visible = false;
         EnableDisableFrame(mTMotorMoveProcessFrame, true);
@@ -164,7 +165,7 @@ void TParallellProcessesFrame::selectItem(Process* p)
     else if(dynamic_cast<ArduinoServerCommand*>(p))
     {
         mTMotorMoveProcessFrame->Visible = false;
-        mTArduinoServerCommandFrame->populate(mAB, dynamic_cast<ArduinoServerCommand*>(p));
+        mTArduinoServerCommandFrame->populate(dynamic_cast<ArduinoServerCommand*>(p));
         mTArduinoServerCommandFrame->Visible = true;
         EnableDisableFrame(mTArduinoServerCommandFrame, true);
     }
@@ -211,7 +212,7 @@ void __fastcall TParallellProcessesFrame::mUpdateFinalPositionsAExecute(TObject 
         AbsoluteMove* am = dynamic_cast<AbsoluteMove*>(p);
         if(am)
         {
-            APTMotor* mtr = mAB->getMotorWithName(am->getMotorName());
+            APTMotor* mtr = mProcessSequencer.getArrayBot().getMotorWithName(am->getMotorName());
             if(mtr && isEqual(am->getPosition(), mtr->getPosition(), 1.e-4) == false)
             {
                 stringstream msg;
@@ -230,7 +231,7 @@ void __fastcall TParallellProcessesFrame::mUpdateFinalPositionsAExecute(TObject 
                 	am->setPosition(mtr->getPosition());
 
                     //Save updated sequence
-                    mAB->getProcessSequencer().saveCurrent();
+                    mProcessSequencer.saveCurrent();
                 }
                 delete f;
             }
@@ -256,7 +257,7 @@ void __fastcall TParallellProcessesFrame::mUpdateFinalPositionsAExecute(TObject 
                             fn->setPosition(mtr->getPosition());
 
                             //Save updated sequence
-                            mAB->getProcessSequencer().saveCurrent();
+                            mProcessSequencer.saveCurrent();
                         }
                     }
                 }

@@ -25,13 +25,13 @@ TSequenceInfoFrame *SequenceInfoFrame;
 
 using namespace mtk;
 //---------------------------------------------------------------------------
-__fastcall TSequenceInfoFrame::TSequenceInfoFrame(TComponent* Owner)
+__fastcall TSequenceInfoFrame::TSequenceInfoFrame(ProcessSequencer& ps, TComponent* Owner)
 	: TFrame(Owner),
     mSequence(NULL),
-    mAB(NULL)
+    mProcessSequencer(ps)
 {
     //Create frames
-	mParallellProcessesFrame = new TParallellProcessesFrame(Owner);
+	mParallellProcessesFrame = new TParallellProcessesFrame(ps, Owner);
     mParallellProcessesFrame->Visible = false;
 
     mTimeDelayFrame = new TTimeDelayFrame(Owner);
@@ -42,11 +42,6 @@ __fastcall TSequenceInfoFrame::TSequenceInfoFrame(TComponent* Owner)
 
 
 	mUpdatePositionsBtn->Action = mParallellProcessesFrame->mUpdateFinalPositionsA;
-}
-
-void TSequenceInfoFrame::assignArrayBot(ArrayBot* ab)
-{
-	mAB = ab;
 }
 
 //---------------------------------------------------------------------------
@@ -184,12 +179,10 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
     if(dynamic_cast<ParallellProcess*>(p) != NULL)
     {
     	ParallellProcess* pp = dynamic_cast<ParallellProcess*>(p);
-        if(mAB)
-        {
-            mParallellProcessesFrame->populate(*mAB, pp);
-            mParallellProcessesFrame->mSubProcessesLB->ItemIndex = 0;
-            mParallellProcessesFrame->mSubProcessesLB->OnClick(NULL);
-        }
+        mParallellProcessesFrame->populate(pp);
+        mParallellProcessesFrame->mSubProcessesLB->ItemIndex = 0;
+        mParallellProcessesFrame->mSubProcessesLB->OnClick(NULL);
+
 
         mParallellProcessesFrame->Visible 	= true;
 		mUpdatePositionsBtn->Visible 		= true;
@@ -199,22 +192,16 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
     else if(dynamic_cast<TimeDelay*>(p) != NULL)
     {
 		TimeDelay* tdp = dynamic_cast<TimeDelay*>(p);
-        if(mAB)
-        {
-			mTimeDelayFrame->populate(tdp);
-            mTimeDelayFrame->Visible = true;
-	        mTimeDelayFrame->Align = alClient;
-        }
+        mTimeDelayFrame->populate(tdp);
+        mTimeDelayFrame->Visible = true;
+        mTimeDelayFrame->Align = alClient;
     }
     else if(dynamic_cast<ArrayCamRequest*>(p) != NULL)
     {
 		ArrayCamRequest* tdp = dynamic_cast<ArrayCamRequest*>(p);
-        if(mAB)
-        {
-			mArrayCamRequestFrame->populate(tdp);
-            mArrayCamRequestFrame->Visible = true;
-	        mArrayCamRequestFrame->Align = alClient;
-        }
+        mArrayCamRequestFrame->populate(tdp);
+        mArrayCamRequestFrame->Visible = true;
+        mArrayCamRequestFrame->Align = alClient;
     }
     else
     {
@@ -233,8 +220,7 @@ void TSequenceInfoFrame::disableEnableButtons(bool enabled)
 //---------------------------------------------------------------------------
 void __fastcall TSequenceInfoFrame::empty()
 {
-	//mMainGB->Caption = "<none>";
-	mProcessesLB->Clear();
+ 	mProcessesLB->Clear();
     EnableDisableFrame(this, false);
 }
 
@@ -360,6 +346,7 @@ void __fastcall TSequenceInfoFrame::mRenameBtnClick(TObject *Sender)
         if(selectAndClickListBoxItem(mProcessesLB, newName) == false)
         {
         	//bad..
+            Log(lError) << "Failed to select item: "<<newName;
         }
 
     }

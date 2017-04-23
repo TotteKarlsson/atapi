@@ -8,6 +8,7 @@ using namespace mtk;
 
 ArrayBot::ArrayBot(IniFile& ini, const string& appFolder)
 :
+mIsShuttingDown(false),
 mAppDataFolder(appFolder),
 mIniFile(ini),
 mJoyStickID(-1),
@@ -26,9 +27,7 @@ mLeftJoyStickYRightDeadZone(0),
 mJSSettings("JOYSTICK SETTINGS",	mIniFile),
 mCoverSlip(	"COVERSLIP UNIT", 		mIniFile, appFolder),
 mWhisker(	"WHISKER UNIT", 		mIniFile, appFolder),
-mLifts(		"PAIRED_MOVES", 		mIniFile),
-mProcessSequencer(*this, appFolder),
-mIsShuttingDown(false)
+mLifts(		"PAIRED_MOVES", 		mIniFile)
 {
 	//Setup UI properties
     mProperties.setSection("ARRAYBOT_GENERAL");
@@ -90,11 +89,6 @@ bool ArrayBot::disableWhiskerUnit()
 {
 	mWhisker.disableJSAxes();
     return true;
-}
-
-ProcessSequencer& ArrayBot::getProcessSequencer()
-{
-	return mProcessSequencer;
 }
 
 vector<APTMotor*> ArrayBot::getAllMotors()
@@ -197,7 +191,6 @@ void ArrayBot::stopAll()
 {
 	//In case the JoyStick is running amok, disable it (has never happened actually..)
     mJoyStick.disable();
-	mProcessSequencer.stop();
     mCoverSlip.stopAll();
     mWhisker.stopAll();
 }

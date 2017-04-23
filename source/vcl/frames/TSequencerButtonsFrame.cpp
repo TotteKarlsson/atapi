@@ -16,11 +16,12 @@ using namespace mtk;
 using std::stringstream;
 TSequencerButtonsFrame *SequencerButtonsFrame;
 //---------------------------------------------------------------------------
-__fastcall TSequencerButtonsFrame::TSequencerButtonsFrame(ArrayBot& bot, TComponent* Owner)
+__fastcall TSequencerButtonsFrame::TSequencerButtonsFrame(ProcessSequencer& ps, TComponent* Owner)
 	: TFrame(Owner),
-    mAB(bot)
-{
-}
+    mProcessSequencer(ps),
+    mAB(ps.getArrayBot())
+{}
+
 //--------------------------------------------------------------------------
 void TSequencerButtonsFrame::update()
 {
@@ -31,7 +32,7 @@ void TSequencerButtonsFrame::update()
 
 	mButtons.clear();
 
-    ProcessSequencer& psr = mAB.getProcessSequencer();
+    ProcessSequencer& psr = mProcessSequencer;
     ProcessSequences& pss = psr.getSequences();
 
 	ProcessSequence*  current = pss.getCurrent();
@@ -79,8 +80,7 @@ void TSequencerButtonsFrame::update()
 //---------------------------------------------------------------------------
 void __fastcall TSequencerButtonsFrame::mSequenceStatusTimerTimer(TObject *Sender)
 {
-    ProcessSequencer& psr = mAB.getProcessSequencer();
-	if(!psr.isRunning())
+	if(!mProcessSequencer.isRunning())
     {
 		mSequenceStatusTimer->Enabled = false;
     }
@@ -96,16 +96,14 @@ void __fastcall TSequencerButtonsFrame::click(TObject *Sender)
     	return;
     }
 
-    ProcessSequencer& psr = mAB.getProcessSequencer();
+    ProcessSequencer& psr = mProcessSequencer;
     if(psr.selectSequence(stdstr(b->Caption)))
     {
         mSequenceStatusTimer->Enabled = true;
         mAB.disableJoyStickAxes();
-        TProcessSequenceControlForm* f = new TProcessSequenceControlForm(mAB.getProcessSequencer(), this);
+        TProcessSequenceControlForm* f = new TProcessSequenceControlForm(mProcessSequencer, this);
         f->ShowModal();
         delete f;
         mAB.enableJoyStickAxes();
     }
 }
-
-

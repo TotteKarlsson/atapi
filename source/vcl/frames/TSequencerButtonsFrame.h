@@ -13,18 +13,19 @@
 
 class PACKAGE TSequencerButtonsFrame : public TFrame
 {
-    __published:	// IDE-managed Components
+    __published:
         TTimer *mSequenceStatusTimer;
         void __fastcall mSequenceStatusTimerTimer(TObject *Sender);
         void __fastcall click(TObject *Sender);
 
-    private:	// User declarations
+    private:
+		ProcessSequencer&	  		mProcessSequencer;
 		ArrayBot&					mAB;
         vector<TArrayBotButton*> 	mButtons;
 
 	public:
-					__fastcall 	TSequencerButtonsFrame(ArrayBot& bot, TComponent* Owner);
-    	void					update();
+					__fastcall 		TSequencerButtonsFrame(ProcessSequencer& ps, TComponent* Owner);
+    	void						update();
 };
 
 

@@ -7,13 +7,21 @@
 //---------------------------------------------------------------------------
 using namespace std;
 
+enum  ACRequest {acrStartVideo = 0, acrStopVideo,
+				 acrTakeSnapShot, acrEnableBarcodeScanner,
+                 acrDisableBarcodeScanner, acrValidateBarcode, acrUnknown};
+
+string 	requestToString(ACRequest r);
+ACRequest arrayCamRequestFromString(const string& t);
 
 class AT_CORE ArrayCamRequest : public Process
 {
     public:
         	   			            ArrayCamRequest(const string& lbl, const string& request = "");
     	virtual			            ~ArrayCamRequest(){}
-        bool						setArrayCamRequest(const string& request){mArrayCamRequest = request; return true;}
+
+        bool						setRequest(ACRequest r);
+        bool						setRequest(const string& request);
 		const string 				getTypeName() const;
 		bool						assignArrayCamClient(ArrayCamClient* acc);
 	    void						clear();
@@ -24,15 +32,17 @@ class AT_CORE ArrayCamRequest : public Process
         virtual bool	            stop();
         virtual bool	            isBeingProcessed();
         bool 						isProcessed();
-		string						getArrayCamRequest(){return mArrayCamRequest;}
+		ACRequest					getRequest(){return mRequest;}
+
 
 									//Check if we are at proper position(s)
         bool 						isDone();
        	bool	            		undo(){return true;}
 
     protected:                      //!The ArrayCamRequest is a simple text command
-		string						mArrayCamRequest;
+		ACRequest					mRequest;
         ArrayCamClient*				mArrayCamClient;
+
 };
 
 #endif

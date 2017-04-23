@@ -17,7 +17,7 @@ object ArrayCamRequestFrame: TArrayCamRequestFrame
     Width = 313
     Height = 207
     Align = alLeft
-    Caption = 'TimeDelay Process'
+    Caption = 'ArrayCam Request'
     TabOrder = 0
     object mNameEdit: TSTDStringLabeledEdit
       Left = 21
@@ -41,10 +41,14 @@ object ArrayCamRequestFrame: TArrayCamRequestFrame
       ItemIndex = 0
       TabOrder = 0
       Text = 'Start Video Recorder'
+      OnCloseUp = mArrayCamRequestCBCloseUp
       Items.Strings = (
         'Start Video Recorder'
         'Stop Video Recorder'
-        'Take SnapShoot')
+        'Take SnapShoot'
+        'Enable Barcode Scanner'
+        'Disable Barcode Scanner'
+        'Validate Barcode')
     end
   end
 end

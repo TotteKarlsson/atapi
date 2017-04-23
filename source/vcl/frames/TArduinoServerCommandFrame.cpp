@@ -14,14 +14,14 @@
 TArduinoServerCommandFrame *ArduinoServerCommandFrame;
 
 //---------------------------------------------------------------------------
-__fastcall TArduinoServerCommandFrame::TArduinoServerCommandFrame(TComponent* Owner)
-	: TFrame(Owner),
-    mAB(NULL)
+__fastcall TArduinoServerCommandFrame::TArduinoServerCommandFrame(ArrayBot& ab, TComponent* Owner)
+	:
+    TFrame(Owner),
+    mAB(ab)
 {}
 
-void TArduinoServerCommandFrame::populate(ArrayBot* ab, ArduinoServerCommand* m)
+void TArduinoServerCommandFrame::populate(ArduinoServerCommand* m)
 {
-	mAB = ab;
     rePopulate(m);
 }
 

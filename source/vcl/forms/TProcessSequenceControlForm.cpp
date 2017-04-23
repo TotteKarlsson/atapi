@@ -15,8 +15,7 @@ using namespace mtk;
 __fastcall TProcessSequenceControlForm::TProcessSequenceControlForm(ProcessSequencer& s, TComponent* Owner)
 	: TForm(Owner),
     mPS(s)
-{
-}
+{}
 
 //---------------------------------------------------------------------------
 void __fastcall TProcessSequenceControlForm::FormShow(TObject *Sender)
