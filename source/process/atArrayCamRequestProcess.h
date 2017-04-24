@@ -1,20 +1,17 @@
 #ifndef abArrayCamRequestH
 #define abArrayCamRequestH
 #include "atProcess.h"
-#include <vector>
 #include "mtkXMLUtils.h"
-#include "clients/ArrayCamClient.h"
 #include "arraycam/atArrayCamProtocol.h"
 //---------------------------------------------------------------------------
 using namespace std;
 
-
-class AT_CORE ArrayCamRequest : public Process
+class ArrayCamClient;
+class AT_CORE ArrayCamRequestProcess : public Process
 {
     public:
-        	   			            ArrayCamRequest(const string& lbl, const string& request = "");
-    	virtual			            ~ArrayCamRequest(){}
-
+        	   			            ArrayCamRequestProcess(const string& lbl, const string& request = "");
+    	virtual			            ~ArrayCamRequestProcess(){}
         bool						setRequest(ACRequest r);
         bool						setRequest(const string& request);
 		const string 				getTypeName() const;
@@ -34,8 +31,10 @@ class AT_CORE ArrayCamRequest : public Process
         bool 						isDone();
        	bool	            		undo(){return true;}
 
-    protected:                      //!The ArrayCamRequest is a simple text command
+    protected:                      //!The ArrayCamRequestProcess is a simple text command
 		ACRequest					mRequest;
+
+        							//!The client allows us to send a request to the server
         ArrayCamClient*				mArrayCamClient;
 
 };

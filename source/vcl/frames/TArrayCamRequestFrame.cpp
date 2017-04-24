@@ -3,7 +3,7 @@
 #include "TArrayCamRequestFrame.h"
 #include "mtkVCLUtils.h"
 #include "process/atProcess.h"
-#include "process/atArrayCamRequest.h"
+#include "process/atArrayCamRequestProcess.h"
 #include "mtkLogger.h"
 #include "arraybot/atArrayBot.h"
 #include "arraycam/atArrayCamProtocol.h"
@@ -16,8 +16,9 @@ TArrayCamRequestFrame *ArrayCamRequestFrame;
 //---------------------------------------------------------------------------
 
 extern ArrayCamProtocol gArrayCamProtocol;
-__fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(TComponent* Owner)
-	: TFrame(Owner)
+__fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(ProcessSequencer& ps, TComponent* Owner)
+	: TFrame(Owner),
+     mProcessSequencer(ps)
 {
 	mArrayCamRequestCB->Clear();
 
@@ -35,7 +36,7 @@ __fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(TComponent* Owner)
 void TArrayCamRequestFrame::populate(Process* p)
 {
 	//Populate, update frame with data from process
-    mArrayCamRequest = dynamic_cast<ArrayCamRequest*>(p);
+    mArrayCamRequest = dynamic_cast<ArrayCamRequestProcess*>(p);
     if(!p)
     {
     	EnableDisableFrame(this, false);
@@ -78,6 +79,7 @@ void __fastcall TArrayCamRequestFrame::mArrayCamRequestCBCloseUp(TObject *Sender
     {
 		ACRequest r = (ACRequest) mArrayCamRequestCB->Items->Objects[mArrayCamRequestCB->ItemIndex];
         mArrayCamRequest->setRequest(r);
+        mProcessSequencer.saveCurrent();
     }
 }
 

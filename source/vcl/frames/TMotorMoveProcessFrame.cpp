@@ -95,7 +95,6 @@ void TMotorMoveProcessFrame::rePopulate(AbsoluteMove* m)
     }
 }
 
-
 //Motor objects are stored in the checkbox list property
 void TMotorMoveProcessFrame::populateMotorCB()
 {
@@ -130,11 +129,11 @@ void __fastcall TMotorMoveProcessFrame::MotorsCBChange(TObject *Sender)
         mAddTriggerBtn->Enabled = false;
     }
 
-
     if(mMove && mMove->getTrigger())
     {
 		mPosTriggerFrame->rePopulate(mMove->getTrigger());
     }
+	mProcessSequencer.saveCurrent();
 }
 
 void __fastcall TMotorMoveProcessFrame::mMovePosEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
@@ -147,6 +146,8 @@ void __fastcall TMotorMoveProcessFrame::mMovePosEKeyDown(TObject *Sender, WORD &
     mMove->setPosition(mMovePosE->getValue());
     mMove->setMaxVelocity(mMaxVelE->getValue());
     mMove->setAcceleration(mAccE->getValue());
+
+	mProcessSequencer.saveCurrent();
 }
 
 //---------------------------------------------------------------------------

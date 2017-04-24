@@ -9,7 +9,7 @@
 #include "atMove.h"
 #include "atTimedelay.h"
 #include "atStopAndResumeProcess.h"
-#include "atArrayCamRequest.h"
+#include "atArrayCamRequestProcess.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atArduinoServerCommand.h"
@@ -95,9 +95,9 @@ bool ProcessSequenceProject::save(const string& fName)
 			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
         }
 
-        else if(dynamic_cast<ArrayCamRequest*>(p))
+        else if(dynamic_cast<ArrayCamRequestProcess*>(p))
 	    {
-        	ArrayCamRequest* td = dynamic_cast<ArrayCamRequest*>(p);
+        	ArrayCamRequestProcess* td = dynamic_cast<ArrayCamRequestProcess*>(p);
 
         	//Write subprocesses
 			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
@@ -188,10 +188,10 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
 	ProcessType pt = toProcessType(element->Attribute("type"));
     switch(pt)
     {
-    	case ptParallell: 				return createParallellProcess(element);
-        case ptTimeDelay:       		return createTimeDelayProcess(element);
-        case ptStopAndResumeProcess:	return createStopAndResumeProcess(element);
-        case ptArrayCamRequest:			return createArrayCamRequestProcess(element);
+    	case ptParallell: 				        return createParallellProcess(element);
+        case ptTimeDelay:       		        return createTimeDelayProcess(element);
+        case ptStopAndResumeProcess:	        return createStopAndResumeProcess(element);
+        case ptArrayCamRequestProcess:			return createArrayCamRequestProcess(element);
     }
 
     return NULL;
@@ -385,9 +385,9 @@ Process* ProcessSequenceProject::createStopAndResumeProcess(XMLElement* element)
 
 Process* ProcessSequenceProject::createArrayCamRequestProcess(XMLElement* element)
 {
-    ArrayCamRequest* p = new ArrayCamRequest("");
+    ArrayCamRequestProcess* p = new ArrayCamRequestProcess("");
    	p->setProcessName(element->Attribute("name"));
-    XMLElement* type = element->FirstChildElement("arrayCamRequest");
+    XMLElement* type = element->FirstChildElement("request");
     if(type)
     {
     	p->setRequest(type->GetText());

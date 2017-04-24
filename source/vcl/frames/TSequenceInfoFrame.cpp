@@ -7,7 +7,7 @@
 #include "mtkVCLUtils.h"
 #include "TStringInputDialog.h"
 #include "process/atTimeDelay.h"
-#include "process/atArrayCamRequest.h"
+#include "process/atArrayCamRequestProcess.h"
 #include "process/atStopAndResumeProcess.h"
 #include "frames/TMotorMoveProcessFrame.h"
 #include "frames/TParallellProcessesFrame.h"
@@ -37,7 +37,7 @@ __fastcall TSequenceInfoFrame::TSequenceInfoFrame(ProcessSequencer& ps, TCompone
     mTimeDelayFrame = new TTimeDelayFrame(Owner);
     mTimeDelayFrame->Visible = false;
 
-    mArrayCamRequestFrame = new TArrayCamRequestFrame(Owner);
+    mArrayCamRequestFrame = new TArrayCamRequestFrame(ps, Owner);
     mArrayCamRequestFrame->Visible = false;
 
 
@@ -196,9 +196,9 @@ void __fastcall TSequenceInfoFrame::mProcessesLBClick(TObject *Sender)
         mTimeDelayFrame->Visible = true;
         mTimeDelayFrame->Align = alClient;
     }
-    else if(dynamic_cast<ArrayCamRequest*>(p) != NULL)
+    else if(dynamic_cast<ArrayCamRequestProcess*>(p) != NULL)
     {
-		ArrayCamRequest* tdp = dynamic_cast<ArrayCamRequest*>(p);
+		ArrayCamRequestProcess* tdp = dynamic_cast<ArrayCamRequestProcess*>(p);
         mArrayCamRequestFrame->populate(tdp);
         mArrayCamRequestFrame->Visible = true;
         mArrayCamRequestFrame->Align = alClient;
@@ -259,7 +259,7 @@ void __fastcall TSequenceInfoFrame::AddCombinedMoveAExecute(TObject *Sender)
         }
         else if(pType == 3) //Stop/Start Dialog
         {
-        	p = new ArrayCamRequest("Process " + mtk::toString(nr));
+        	p = new ArrayCamRequestProcess("Process " + mtk::toString(nr));
         }
 
         else

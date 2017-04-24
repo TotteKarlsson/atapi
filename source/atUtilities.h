@@ -16,7 +16,18 @@ using mtk::IniFile;
 struct TLI_DeviceInfo;
 
 //!We are using an enum for process type in order to save/retrieve different processes from XML
-enum ProcessType {ptBaseType = 0, ptMaster, ptParallell, ptAbsoluteMove, ptArduinoServerCommand, ptTimeDelay, ptStopAndResumeProcess, ptArrayCamRequest, ptUnknown};
+enum ProcessType
+{
+	ptBaseType = 0,
+    ptMaster,
+    ptParallell,
+    ptAbsoluteMove,
+    ptArduinoServerCommand,
+    ptTimeDelay,
+    ptStopAndResumeProcess,
+    ptArrayCamRequestProcess,
+    ptUnknown
+};
 
 AT_CORE string toString(ProcessType tp);
 AT_CORE ProcessType toProcessType(const string& str);

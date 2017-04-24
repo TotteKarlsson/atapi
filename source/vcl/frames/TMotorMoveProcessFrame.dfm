@@ -1,8 +1,8 @@
 object MotorMoveProcessFrame: TMotorMoveProcessFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 1093
+  Height = 712
   Align = alClient
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,24 +11,28 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
   Font.Style = []
   ParentFont = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object mMainGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 451
+    Width = 1093
     Height = 465
     Align = alTop
     Caption = 'Action Properties'
     Padding.Left = 15
     Padding.Right = 15
     TabOrder = 1
+    ExplicitWidth = 451
     object Panel2: TPanel
       Left = 17
       Top = 296
-      Width = 417
+      Width = 1059
       Height = 167
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 417
       object Label1: TLabel
         Left = 16
         Top = 15
@@ -85,11 +89,12 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
     object Panel1: TPanel
       Left = 17
       Top = 25
-      Width = 417
+      Width = 1059
       Height = 271
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 417
       object mActionInfo: TLabel
         Left = 0
         Top = 0
@@ -109,7 +114,7 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
       object mAddTriggerBtn: TArrayBotButton
         Left = 233
         Top = 0
-        Width = 184
+        Width = 826
         Height = 271
         Align = alClient
         Caption = 'Add Child Action'
@@ -118,16 +123,19 @@ object MotorMoveProcessFrame: TMotorMoveProcessFrame
         TabOrder = 0
         OnClick = AddTriggerBClick
         SoundID = 'BUTTON_CLICK_4'
+        ExplicitWidth = 184
       end
     end
   end
   object mTriggerPanel: TPanel
     Left = 0
     Top = 465
-    Width = 451
-    Height = 301
+    Width = 1093
+    Height = 247
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 451
+    ExplicitHeight = 301
     object GroupBox1: TGroupBox
       Left = 377
       Top = 32

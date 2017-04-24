@@ -3,56 +3,59 @@
 #include "atXYZUnit.h"
 #include "mtkLogger.h"
 #include "mtkXMLUtils.h"
-
+#include "clients/atArrayCamClient.h"
 using namespace mtk;
 using namespace tinyxml2;
 
+ArrayCamProtocol ap;
 //---------------------------------------------------------------------------
-ArrayCamRequest::ArrayCamRequest(const string& lbl, const string& request)
+ArrayCamRequestProcess::ArrayCamRequestProcess(const string& lbl, const string& request)
 :
 Process(lbl, NULL),
-mRequest(arrayCamRequestFromString(request)),
+mRequest(ap.request(request)),
 mArrayCamClient(NULL)
 {
-	mProcessType = ptArrayCamRequest;
+	mProcessType = ptArrayCamRequestProcess;
 }
 
-void ArrayCamRequest::clear()
+void ArrayCamRequestProcess::clear()
 {}
 
-const string ArrayCamRequest::getTypeName() const
+const string ArrayCamRequestProcess::getTypeName() const
 {
-	return "arrayCamRequest";
+	return "arrayCamRequestProcess";
 }
 
-bool ArrayCamRequest::setRequest(const string& request)
+bool ArrayCamRequestProcess::setRequest(const string& request)
 {
-	mRequest = arrayCamRequestFromString(request);
+	ArrayCamProtocol ap;
+	mRequest = ap.request(request);
     return true;
 }
 
-bool ArrayCamRequest::setRequest(ACRequest r)
+bool ArrayCamRequestProcess::setRequest(ACRequest r)
 {
 	mRequest = r;
     return true;
 }
 
-bool ArrayCamRequest::assignArrayCamClient(ArrayCamClient* acc)
+bool ArrayCamRequestProcess::assignArrayCamClient(ArrayCamClient* acc)
 {
 	mArrayCamClient = acc;
     return true;
 }
 
-XMLElement* ArrayCamRequest::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+XMLElement* ArrayCamRequestProcess::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
+	ArrayCamProtocol ap;
     //Create XML for saving to file
-	XMLElement* e = doc.NewElement("arrayCamRequest");
-	e->SetText(requestToString((ACRequest) mRequest).c_str() );
+	XMLElement* e = doc.NewElement("request");
+	e->SetText(ap[mRequest].c_str() );
     docRoot->InsertEndChild(e);
     return e;
 }
 
-bool ArrayCamRequest::isBeingProcessed()
+bool ArrayCamRequestProcess::isBeingProcessed()
 {
 	if(isDone())
     {
@@ -65,18 +68,18 @@ bool ArrayCamRequest::isBeingProcessed()
     return mIsBeingProcessed;
 }
 
-bool ArrayCamRequest::start()
+bool ArrayCamRequestProcess::start()
 {
 //	mArrayCamClient
 	return Process::start();
 }
 
-bool ArrayCamRequest::stop()
+bool ArrayCamRequestProcess::stop()
 {
 	return Process::stop();
 }
 
-bool ArrayCamRequest::isProcessed()
+bool ArrayCamRequestProcess::isProcessed()
 {
     if(mIsProcessed == true)
     {
@@ -94,7 +97,7 @@ bool ArrayCamRequest::isProcessed()
 	return false;
 }
 
-bool ArrayCamRequest::isDone()
+bool ArrayCamRequestProcess::isDone()
 {
 	if(!mIsStarted)
     {
@@ -104,48 +107,4 @@ bool ArrayCamRequest::isDone()
     return true;
 }
 
-string requestToString(ACRequest r)
-{
-	switch(r)
-    {
-    	case acrStartVideo: 				return "Start Video";
-    	case acrStopVideo: 					return "Stop Video";
-    	case acrTakeSnapShot: 				return "Take Snapshot";
-    	case acrEnableBarcodeScanner: 		return "Enable Barcode Scanner";
-    	case acrDisableBarcodeScanner: 		return "Disable Barcode Scanner";
-    	case acrValidateBarcode: 			return "Validate Barcode";
-        default: 							return "Unknown";
-    }
-}
 
-ACRequest arrayCamRequestFromString(const string& t)
-{
-    if(compareNoCase(t, "Start Video"))
-    {
-    	return acrStartVideo;
-    }
-    if(compareNoCase(t, "Stop Video"))
-    {
-    	return acrStopVideo;
-    }
-    if(compareNoCase(t, "Stop Video"))
-    {
-    	return acrStopVideo;
-    }
-    if(compareNoCase(t, "Stop Video"))
-    {
-    	return acrStopVideo;
-    }
-    if(compareNoCase(t, "Stop Video"))
-    {
-    	return acrStopVideo;
-    }
-    if(compareNoCase(t, "Stop Video"))
-    {
-    	return acrStopVideo;
-    }
-    else
-    {
-    	return acrUnknown;
-    }
-}

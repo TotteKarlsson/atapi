@@ -263,8 +263,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="camera\uc480class.cpp">
             <BuildOrder>53</BuildOrder>
         </CppCompile>
-        <CppCompile Include="clients\ArrayCamClient.cpp">
-            <DependentOn>clients\ArrayCamClient.h</DependentOn>
+        <CppCompile Include="clients\atArrayCamClient.cpp">
+            <DependentOn>clients\atArrayCamClient.h</DependentOn>
             <BuildOrder>57</BuildOrder>
         </CppCompile>
         <CppCompile Include="clients\atArrayCamMessageProcessor.cpp">
@@ -309,7 +309,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="labelprinter\atTSCLIB.cpp">
             <BuildOrder>73</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atArrayCamRequest.cpp">
+        <CppCompile Include="process\atArrayCamRequestProcess.cpp">
             <BuildOrder>68</BuildOrder>
         </CppCompile>
         <CppCompile Include="process\atParallellProcess.cpp">

@@ -2,7 +2,7 @@
 #include "atArrayCamProtocol.h"
 //---------------------------------------------------------------------------
 
-map<int, string> ArrayCamProtocol::mRequests;
+map<ACRequest, string> ArrayCamProtocol::mRequests;
 
 
 ArrayCamProtocol::ArrayCamProtocol()
@@ -16,14 +16,24 @@ ArrayCamProtocol::ArrayCamProtocol()
     mRequests[acrUnknown]				= "Unknown";
 }
 
-ACRequest ArrayCamProtocol::strToEnum(const string& msg)
+ACRequest ArrayCamProtocol::request(const string& r)
 {
+    map<ACRequest, string>::const_iterator it;
+    ACRequest key = acrUnknown;
 
+    for (it = mRequests.begin(); it != mRequests.end(); ++it)
+    {
+	    if (it->second == r)
+    	{
+		    key = it->first;
+			return key;
+	    }
+    }
+
+   	return acrUnknown;
 }
 
 string ArrayCamProtocol::operator[](ACRequest r)
 {
 	return mRequests[r];
 }
-
-

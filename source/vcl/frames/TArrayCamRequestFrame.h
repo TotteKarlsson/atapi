@@ -12,7 +12,7 @@
 #include "TSTDStringLabeledEdit.h"
 
 class Process;
-class ArrayCamRequest;
+class ArrayCamRequestProcess;
 //---------------------------------------------------------------------------
 class PACKAGE TArrayCamRequestFrame : public TFrame
 {
@@ -24,10 +24,11 @@ class PACKAGE TArrayCamRequestFrame : public TFrame
 	void __fastcall mArrayCamRequestCBCloseUp(TObject *Sender);
 
     private:
-		ArrayCamRequest*				mArrayCamRequest;
+        ProcessSequencer&				mProcessSequencer;
+		ArrayCamRequestProcess*			mArrayCamRequest;
 
 	public:
-							__fastcall  TArrayCamRequestFrame(TComponent* Owner);
+							__fastcall  TArrayCamRequestFrame(ProcessSequencer& ps, TComponent* Owner);
     	void							populate(Process* p);
 
 };
