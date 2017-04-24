@@ -6,7 +6,7 @@
 #include "process/atArrayCamRequest.h"
 #include "mtkLogger.h"
 #include "arraybot/atArrayBot.h"
-
+#include "arraycam/atArrayCamProtocol.h"
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
 #pragma resource "*.dfm"
@@ -15,11 +15,13 @@ using namespace mtk;
 TArrayCamRequestFrame *ArrayCamRequestFrame;
 //---------------------------------------------------------------------------
 
+extern ArrayCamProtocol gArrayCamProtocol;
 __fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(TComponent* Owner)
 	: TFrame(Owner)
 {
 	mArrayCamRequestCB->Clear();
 
+	gArrayCamProtocol[acrStartVideo];
     //The combox items holds Arraycam requests text and enum values
 	mArrayCamRequestCB->Items->AddObject("Start Video", 			reinterpret_cast<TObject*>(acrStartVideo));
 	mArrayCamRequestCB->Items->AddObject("Stop Video", 				reinterpret_cast<TObject*>(acrStopVideo));

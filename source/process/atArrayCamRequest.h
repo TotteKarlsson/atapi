@@ -4,15 +4,10 @@
 #include <vector>
 #include "mtkXMLUtils.h"
 #include "clients/ArrayCamClient.h"
+#include "arraycam/atArrayCamProtocol.h"
 //---------------------------------------------------------------------------
 using namespace std;
 
-enum  ACRequest {acrStartVideo = 0, acrStopVideo,
-				 acrTakeSnapShot, acrEnableBarcodeScanner,
-                 acrDisableBarcodeScanner, acrValidateBarcode, acrUnknown};
-
-string 	requestToString(ACRequest r);
-ACRequest arrayCamRequestFromString(const string& t);
 
 class AT_CORE ArrayCamRequest : public Process
 {

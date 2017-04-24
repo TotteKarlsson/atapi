@@ -108,9 +108,13 @@ string requestToString(ACRequest r)
 {
 	switch(r)
     {
-    	case acrStartVideo: return "Start Video";
-    	case acrStopVideo: return "Stop Video";
-        default: 			return "Unknown";
+    	case acrStartVideo: 				return "Start Video";
+    	case acrStopVideo: 					return "Stop Video";
+    	case acrTakeSnapShot: 				return "Take Snapshot";
+    	case acrEnableBarcodeScanner: 		return "Enable Barcode Scanner";
+    	case acrDisableBarcodeScanner: 		return "Disable Barcode Scanner";
+    	case acrValidateBarcode: 			return "Validate Barcode";
+        default: 							return "Unknown";
     }
 }
 
@@ -119,6 +123,22 @@ ACRequest arrayCamRequestFromString(const string& t)
     if(compareNoCase(t, "Start Video"))
     {
     	return acrStartVideo;
+    }
+    if(compareNoCase(t, "Stop Video"))
+    {
+    	return acrStopVideo;
+    }
+    if(compareNoCase(t, "Stop Video"))
+    {
+    	return acrStopVideo;
+    }
+    if(compareNoCase(t, "Stop Video"))
+    {
+    	return acrStopVideo;
+    }
+    if(compareNoCase(t, "Stop Video"))
+    {
+    	return acrStopVideo;
     }
     if(compareNoCase(t, "Stop Video"))
     {

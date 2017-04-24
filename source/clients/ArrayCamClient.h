@@ -7,6 +7,7 @@
 #include "atArrayCamMessageProcessor.h"
 #include "mtkSocketClient.h"
 
+
 namespace mtk
 {
 	class SocketClient;
@@ -22,7 +23,7 @@ using mtk::SocketReceiver;
 //!The Arduino (socket) client class connects to a server over a socket.
 //!Messages are received, over the socket, by a socket receiver and placed in a message container.
 //!Received messages are processed by the ArduinoMessageProcessor.
-class ArrayCamClient : public SocketClient, public ATObject
+class AT_CORE ArrayCamClient : public SocketClient, public ATObject
 {
 	friend ArrayCamMessageProcessor;
 	public:
