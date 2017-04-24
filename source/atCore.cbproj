@@ -148,6 +148,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>apt\atMotorMessageProcessor.h</DependentOn>
             <BuildOrder>68</BuildOrder>
         </CppCompile>
+        <CppCompile Include="apt\atMotorWiggler.cpp">
+            <DependentOn>apt\atMotorWiggler.h</DependentOn>
+            <BuildOrder>73</BuildOrder>
+        </CppCompile>
         <CppCompile Include="apt\atMove.cpp">
             <DependentOn>apt\atMove.h</DependentOn>
             <BuildOrder>47</BuildOrder>

@@ -1,5 +1,5 @@
-#ifndef ArrayCamClientH
-#define ArrayCamClientH
+#ifndef atArrayCamClientH
+#define atArrayCamClientH
 #include "atExporter.h"
 #include "atATObject.h"
 #include "mtkProperty.h"

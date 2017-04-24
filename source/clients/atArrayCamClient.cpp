@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "mtkStringUtils.h"
-#include "ArrayCamClient.h"
+#include "atArrayCamClient.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 using namespace mtk;

@@ -21,14 +21,15 @@ __fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(TComponent* Owner)
 {
 	mArrayCamRequestCB->Clear();
 
-	gArrayCamProtocol[acrStartVideo];
+	ArrayCamProtocol ap;
+    string test = ap[acrStartVideo];
     //The combox items holds Arraycam requests text and enum values
-	mArrayCamRequestCB->Items->AddObject("Start Video", 			reinterpret_cast<TObject*>(acrStartVideo));
-	mArrayCamRequestCB->Items->AddObject("Stop Video", 				reinterpret_cast<TObject*>(acrStopVideo));
-	mArrayCamRequestCB->Items->AddObject("Take SnapShot", 			reinterpret_cast<TObject*>(acrTakeSnapShot));
-	mArrayCamRequestCB->Items->AddObject("Enable Barcode Scanner", 	reinterpret_cast<TObject*>(acrEnableBarcodeScanner));
-	mArrayCamRequestCB->Items->AddObject("Disable Barcode Scanner", reinterpret_cast<TObject*>(acrDisableBarcodeScanner));
-	mArrayCamRequestCB->Items->AddObject("Validate Barcode", 		reinterpret_cast<TObject*>(acrValidateBarcode));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStartVideo]),				reinterpret_cast<TObject*>(acrStartVideo));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStopVideo]), 				reinterpret_cast<TObject*>(acrStopVideo));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrTakeSnapShot]), 			reinterpret_cast<TObject*>(acrTakeSnapShot));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrEnableBarcodeScanner]), 	reinterpret_cast<TObject*>(acrEnableBarcodeScanner));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrDisableBarcodeScanner]), 	reinterpret_cast<TObject*>(acrDisableBarcodeScanner));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrValidateBarcode]), 		reinterpret_cast<TObject*>(acrValidateBarcode));
 }
 
 void TArrayCamRequestFrame::populate(Process* p)

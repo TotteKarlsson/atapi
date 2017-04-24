@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atArrayCamRequest.h"
+#include "atArrayCamRequestProcess.h"
 #include "atXYZUnit.h"
 #include "mtkLogger.h"
 #include "mtkXMLUtils.h"

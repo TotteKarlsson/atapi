@@ -28,11 +28,11 @@ class AT_CORE ArrayCamProtocol
 
 		ACRequest			        strToEnum(const string& msg);
 		string 	   			        operator[](ACRequest r);
-    	map<int, string> 			mRequests;
+    	static map<int, string>   	mRequests;
 
 	private:
 };
 
-AT_CORE ArrayCamProtocol gArrayCamProtocol;
+//AT_CORE ArrayCamProtocol gArrayCamProtocol;
 
 #endif

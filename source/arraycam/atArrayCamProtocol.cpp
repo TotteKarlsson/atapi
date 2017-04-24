@@ -2,8 +2,8 @@
 #include "atArrayCamProtocol.h"
 //---------------------------------------------------------------------------
 
+map<int, string> ArrayCamProtocol::mRequests;
 
-extern ArrayCamProtocol gArrayCamProtocol;
 
 ArrayCamProtocol::ArrayCamProtocol()
 {
