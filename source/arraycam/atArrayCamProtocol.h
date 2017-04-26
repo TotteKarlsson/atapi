@@ -7,30 +7,34 @@ using std::map;
 
 
 //Put this in a header to be shared between server/client
-//!Valid message request enum
-AT_CORE enum  ACRequest
+//!Valid messages/requests enum
+AT_CORE enum  ACMessageID
 {
-	acrStartVideo = 0,
-	acrStopVideo,
+	acrStartVideoRecorder = 0,
+    acrVideoRecorderStarted,
+	acrStopVideoRecorder,
+    acrVideoRecorderStopped,
 	acrTakeSnapShot,
+	acrSnapShotTaken,
     acrEnableBarcodeScanner,
+    acrBarcodeScanSucceded,
+    acrBarcodeScanFailed,
     acrDisableBarcodeScanner,
-    acrValidateBarcode,
+    acrBarcodeScannerDisabled,
     acrUnknown
 };
-
 
 class AT_CORE ArrayCamProtocol
 {
 	public:
-							        	ArrayCamProtocol();
+							        		ArrayCamProtocol();
 
-		ACRequest			        	request(const string& msg);
-		string 	   			        	operator[](ACRequest r);
-    	static map<ACRequest, string>   mRequests;
+		ACMessageID			        		idFromString(const string& msg);
+		string 	   			        		operator[](ACMessageID r);
+    	static map<ACMessageID, string>   	mIPCMessage;
 
 	private:
-	    map<ACRequest, string>::iterator	mIt;
+	    map<ACMessageID, string>::iterator	mIt;
 };
 
 #endif

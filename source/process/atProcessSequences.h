@@ -15,7 +15,7 @@ class ProcessSequencer;
 class AT_CORE ProcessSequences : public ATObject
 {
 	public:
-								                    ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayBot& ab);
+								                    ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayCamClient& ac, ArrayBot& ab);
 								                    ~ProcessSequences();
 		bool										setFileFolder(const string& fileFolder);
         string										getFileFolder();
@@ -45,6 +45,7 @@ class AT_CORE ProcessSequences : public ATObject
 	protected:
     												//!ArrayBot provide "unit"s that are used by the processes
     	ArrayBot&									mAB;
+    	ArrayCamClient&	  							mAC;
     	mutable deque<ProcessSequence*> 			mProcessSequences;
     	mutable deque<ProcessSequence*>::iterator 	mProcessSequencesIter;
         string										mFileFolder;

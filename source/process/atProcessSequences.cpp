@@ -9,9 +9,10 @@
 using namespace mtk;
 using namespace std;
 
-ProcessSequences::ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayBot& ab)
+ProcessSequences::ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayCamClient& ac, ArrayBot& ab)
 :
 mAB(ab),
+mAC(ac),
 mProcessSequencesIter(mProcessSequences.begin()),
 mFileFolder(fileFolder),
 mFileExtension(fileExtension)
@@ -95,7 +96,7 @@ bool ProcessSequences::load(const string& fName)
 {
 	if(fileExists(joinPath(mFileFolder, fName + ".abp")))
     {
-    	ProcessSequence* s = new ProcessSequence(mAB);
+    	ProcessSequence* s = new ProcessSequence(mAB, mAC);
         if(s->read(joinPath(mFileFolder, fName + ".abp")))
         {
         	//Setup function objects here

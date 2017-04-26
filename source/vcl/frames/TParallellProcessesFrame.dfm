@@ -46,7 +46,7 @@ object ParallellProcessesFrame: TParallellProcessesFrame
         Height = 60
         Action = addMoveA
         Anchors = [akLeft, akTop, akRight]
-        Caption = 'New'
+        Caption = 'New Move'
         TabOrder = 0
       end
       object Button2: TButton
@@ -63,8 +63,9 @@ object ParallellProcessesFrame: TParallellProcessesFrame
         Top = 82
         Width = 200
         Height = 60
-        Action = addArduinoCommandA
+        Action = newArrayCamRequestA
         Anchors = [akLeft, akTop, akRight]
+        Caption = 'ArrayCam Request'
         TabOrder = 2
       end
       object mRenameBtn: TArrayBotButton
@@ -95,9 +96,9 @@ object ParallellProcessesFrame: TParallellProcessesFrame
       Caption = 'Update Final Positions'
       OnExecute = mUpdateFinalPositionsAExecute
     end
-    object addArduinoCommandA: TAction
+    object newArrayCamRequestA: TAction
       Caption = 'Command'
-      OnExecute = addArduinoCommandAExecute
+      OnExecute = newArrayCamRequestAExecute
     end
   end
 end

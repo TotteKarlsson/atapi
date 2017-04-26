@@ -7,10 +7,10 @@
 
 using namespace mtk;
 
-ProcessSequence::ProcessSequence(ArrayBot& ab, const string& name, const string& fileExt)
+ProcessSequence::ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& name, const string& fileExt)
 :
 mAB(ab),
-mProject(*this, fileExt)
+mProject(*this, ac, fileExt)
 {
 	mProcessIter = mProcesses.begin();
 }

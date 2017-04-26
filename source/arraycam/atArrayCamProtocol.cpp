@@ -2,26 +2,43 @@
 #include "atArrayCamProtocol.h"
 //---------------------------------------------------------------------------
 
-map<ACRequest, string> ArrayCamProtocol::mRequests;
+map<ACMessageID, string> ArrayCamProtocol::mIPCMessage;
 
+//	acrStartVideoRecording = 0,
+//  acrVideoRecorderStarted,
+//	acrStopVideoRecorder,
+//  acrVideoRecorderStopped,
+//	acrTakeSnapShot,
+//	acrSnapShotTaken,
+//  acrEnableBarcodeScanner,
+//  acrBarcodeScanSucceded,
+//  acrBarcodeScanFailed,
+//  acrDisableBarcodeScanner,
+//  acrBarcodeScannerDisabled,
+//  acrUnknown
 
 ArrayCamProtocol::ArrayCamProtocol()
 {
-    mRequests[acrStartVideo] 			= "Start Video";
-    mRequests[acrStopVideo] 			= "Stop Video";
-    mRequests[acrTakeSnapShot] 			= "Take Snapshot";
-    mRequests[acrEnableBarcodeScanner] 	= "Enable Barcode Scanner";
-    mRequests[acrDisableBarcodeScanner]	= "Disable Barcode Scanner";
-    mRequests[acrValidateBarcode]		= "Validate Barcode";
-    mRequests[acrUnknown]				= "Unknown";
+    mIPCMessage[acrStartVideoRecorder] 		= "Start Video Recorder";
+    mIPCMessage[acrVideoRecorderStarted] 	= "Video Recorder Started";
+    mIPCMessage[acrStopVideoRecorder] 		= "Stop Video Recorder";
+    mIPCMessage[acrTakeSnapShot] 			= "Take Snapshot";
+    mIPCMessage[acrSnapShotTaken] 			= "Snapshot Taken";
+    mIPCMessage[acrEnableBarcodeScanner] 	= "Enable Barcode Scanner";
+    mIPCMessage[acrBarcodeScanSucceded] 	= "Barcode Scan Succeded";
+    mIPCMessage[acrBarcodeScanFailed] 		= "Barcode Scan Failed";
+    mIPCMessage[acrDisableBarcodeScanner]	= "Disable Barcode Scanner";
+    mIPCMessage[acrBarcodeScannerDisabled]	= "Barcode Scanner Disabled";
+
+    mIPCMessage[acrUnknown]					= "Unknown";
 }
 
-ACRequest ArrayCamProtocol::request(const string& r)
+ACMessageID ArrayCamProtocol::idFromString(const string& r)
 {
-    map<ACRequest, string>::const_iterator it;
-    ACRequest key = acrUnknown;
+    map<ACMessageID, string>::const_iterator it;
+    ACMessageID key = acrUnknown;
 
-    for (it = mRequests.begin(); it != mRequests.end(); ++it)
+    for (it = mIPCMessage.begin(); it != mIPCMessage.end(); ++it)
     {
 	    if (it->second == r)
     	{
@@ -33,7 +50,7 @@ ACRequest ArrayCamProtocol::request(const string& r)
    	return acrUnknown;
 }
 
-string ArrayCamProtocol::operator[](ACRequest r)
+string ArrayCamProtocol::operator[](ACMessageID r)
 {
-	return mRequests[r];
+	return mIPCMessage[r];
 }

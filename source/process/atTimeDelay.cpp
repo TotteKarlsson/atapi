@@ -27,7 +27,7 @@ const string TimeDelay::getTypeName() const
 	return "timeDelay";
 }
 
-XMLElement* TimeDelay::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+XMLElement* TimeDelay::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
 	XMLElement* delay = doc.NewElement("delay");

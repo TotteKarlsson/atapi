@@ -15,22 +15,25 @@ using namespace mtk;
 TArrayCamRequestFrame *ArrayCamRequestFrame;
 //---------------------------------------------------------------------------
 
+int TArrayCamRequestFrame::mFrameNr = 0;
+
 extern ArrayCamProtocol gArrayCamProtocol;
 __fastcall TArrayCamRequestFrame::TArrayCamRequestFrame(ProcessSequencer& ps, TComponent* Owner)
 	: TFrame(Owner),
      mProcessSequencer(ps)
 {
+    TFrame::Name = vclstr("ArrayCamFrame_" + mtk::toString(++mFrameNr));
+
 	mArrayCamRequestCB->Clear();
 
 	ArrayCamProtocol ap;
-    string test = ap[acrStartVideo];
+    string test = ap[acrStartVideoRecorder];
     //The combox items holds Arraycam requests text and enum values
-	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStartVideo]),				reinterpret_cast<TObject*>(acrStartVideo));
-	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStopVideo]), 				reinterpret_cast<TObject*>(acrStopVideo));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStartVideoRecorder]),		reinterpret_cast<TObject*>(acrStartVideoRecorder));
+	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrStopVideoRecorder]), 		reinterpret_cast<TObject*>(acrStopVideoRecorder));
 	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrTakeSnapShot]), 			reinterpret_cast<TObject*>(acrTakeSnapShot));
 	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrEnableBarcodeScanner]), 	reinterpret_cast<TObject*>(acrEnableBarcodeScanner));
 	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrDisableBarcodeScanner]), 	reinterpret_cast<TObject*>(acrDisableBarcodeScanner));
-	mArrayCamRequestCB->Items->AddObject(vclstr(ap[acrValidateBarcode]), 		reinterpret_cast<TObject*>(acrValidateBarcode));
 }
 
 void TArrayCamRequestFrame::populate(Process* p)
@@ -48,7 +51,7 @@ void TArrayCamRequestFrame::populate(Process* p)
     //What kind of request do we have?
     for(int i = 0; i < mArrayCamRequestCB->Items->Count; i++)
     {
-    	ACRequest ar = (ACRequest) mArrayCamRequestCB->Items->Objects[i];
+    	ACMessageID ar = (ACMessageID) mArrayCamRequestCB->Items->Objects[i];
 
 		if(mArrayCamRequest->getRequest() == ar)
         {
@@ -77,7 +80,7 @@ void __fastcall TArrayCamRequestFrame::mArrayCamRequestCBCloseUp(TObject *Sender
 
     if(mArrayCamRequest)
     {
-		ACRequest r = (ACRequest) mArrayCamRequestCB->Items->Objects[mArrayCamRequestCB->ItemIndex];
+		ACMessageID r = (ACMessageID) mArrayCamRequestCB->Items->Objects[mArrayCamRequestCB->ItemIndex];
         mArrayCamRequest->setRequest(r);
         mProcessSequencer.saveCurrent();
     }

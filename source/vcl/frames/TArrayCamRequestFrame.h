@@ -26,7 +26,7 @@ class PACKAGE TArrayCamRequestFrame : public TFrame
     private:
         ProcessSequencer&				mProcessSequencer;
 		ArrayCamRequestProcess*			mArrayCamRequest;
-
+		static int						mFrameNr;
 	public:
 							__fastcall  TArrayCamRequestFrame(ProcessSequencer& ps, TComponent* Owner);
     	void							populate(Process* p);

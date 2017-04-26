@@ -27,7 +27,7 @@ const string StopAndResumeProcess::getTypeName() const
 	return "stopAndResumeProcess";
 }
 
-XMLElement* StopAndResumeProcess::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+XMLElement* StopAndResumeProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
 	XMLElement* delay = doc.NewElement(getTypeName().c_str());

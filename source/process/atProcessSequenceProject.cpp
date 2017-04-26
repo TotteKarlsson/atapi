@@ -13,6 +13,7 @@
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atArduinoServerCommand.h"
+
 using namespace mtk;
 using namespace tinyxml2;
 
@@ -23,10 +24,11 @@ using namespace tinyxml2;
 
 const string gProcessSequenceProjectFileVersion    = "0.6";
 
-ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, const string& fName)
+ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName)
 :
 Project(fName, "abp"),
-mProcessSequence(ps)
+mProcessSequence(ps),
+mArrayCamClient(ac)
 {
 	resetXML();
 }
@@ -76,7 +78,7 @@ bool ProcessSequenceProject::save(const string& fName)
         	ParallellProcess* clm = dynamic_cast<ParallellProcess*>(p);
 
         	//Write subprocesses
-			clm->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+			clm->addToXMLDocumentAsChild(mTheXML, xmlProc);
         }
 
         else if(dynamic_cast<TimeDelay*>(p))
@@ -84,7 +86,7 @@ bool ProcessSequenceProject::save(const string& fName)
         	TimeDelay* td = dynamic_cast<TimeDelay*>(p);
 
         	//Write subprocesses
-			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
         }
 
         else if(dynamic_cast<StopAndResumeProcess*>(p))
@@ -92,7 +94,7 @@ bool ProcessSequenceProject::save(const string& fName)
         	StopAndResumeProcess* td = dynamic_cast<StopAndResumeProcess*>(p);
 
         	//Write subprocesses
-			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
         }
 
         else if(dynamic_cast<ArrayCamRequestProcess*>(p))
@@ -100,7 +102,7 @@ bool ProcessSequenceProject::save(const string& fName)
         	ArrayCamRequestProcess* td = dynamic_cast<ArrayCamRequestProcess*>(p);
 
         	//Write subprocesses
-			td->addToXMLDocumentAsChildProcess(mTheXML, xmlProc);
+			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
         }
 
         p = mProcessSequence.getNext();
@@ -174,13 +176,9 @@ int ProcessSequenceProject::loadProcesses()
 
 Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
 {
-    if(!element)
+    if(!element && !compareStrings(element->Name(), "process", csCaseInsensitive))
     {
-        return NULL;
-    }
-
-    if(!compareStrings(element->Name(), "process", csCaseInsensitive))
-    {
+    	Log(lError) <<"Bad 'createProcess' xml!";
     	return NULL;
     }
 
@@ -197,7 +195,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
     return NULL;
 }
 
-Process* ProcessSequenceProject::createParallellProcess(XMLElement* element)
+ParallellProcess* ProcessSequenceProject::createParallellProcess(XMLElement* element)
 {
     ParallellProcess* p = new ParallellProcess(element->Attribute("name"));
     p->assignProcessSequence(&mProcessSequence);
@@ -214,11 +212,11 @@ Process* ProcessSequenceProject::createParallellProcess(XMLElement* element)
 
             if(name)
             {
-                Log(lDebug) << "Loading element: "<<name;
+                Log(lDebug) << "Loading process with name: "<<name<<" and type: "<<type;
 
-                if(compareNoCase(type, "absoluteMove"))
+                if(toProcessType(type) == ptAbsoluteMove)
                 {
-                	AbsoluteMove* absMove = createAbsoluteMoveFromXML(name, proc);
+                	AbsoluteMove* absMove = createAbsoluteMove(proc);
     				absMove->assignProcessSequence(&mProcessSequence);
 
                     //We need to associate the motor with 'name' with a
@@ -227,12 +225,20 @@ Process* ProcessSequenceProject::createParallellProcess(XMLElement* element)
                     p->addProcess(absMove);
                 }
 
-                if(compareNoCase(type, "arduinoServerCommand"))
+                else if(toProcessType(type) == ptArrayCamRequestProcess)
                 {
-                	ArduinoServerCommand* c = createArduinoServerCommandFromXML(name, proc);
+                	ArrayCamRequestProcess* c = createArrayCamRequestProcess(proc);
     				c->assignProcessSequence(&mProcessSequence);
                     p->addProcess(c);
                 }
+
+                else if(toProcessType(type) == ptArduinoServerCommand)
+                {
+                	ArduinoServerCommand* c = createArduinoServerCommand(proc);
+    				c->assignProcessSequence(&mProcessSequence);
+                    p->addProcess(c);
+                }
+
             }
             proc = proc->NextSiblingElement();
         }
@@ -240,53 +246,54 @@ Process* ProcessSequenceProject::createParallellProcess(XMLElement* element)
     return p;
 }
 
-AbsoluteMove* ProcessSequenceProject::createAbsoluteMoveFromXML(const string& name,  XMLElement* proc)
+AbsoluteMove* ProcessSequenceProject::createAbsoluteMove(XMLElement* element)
 {
+   	string name = element->Attribute("name");
 	AbsoluteMove* absMove = new AbsoluteMove(name);
-    XMLElement* data = proc->FirstChildElement("info");
+    XMLElement* data = element->FirstChildElement("info");
     if(data && data->GetText())
     {
         absMove->setInfoText(data->GetText());
     }
 
-    data = proc->FirstChildElement("motor_name");
+    data = element->FirstChildElement("motor_name");
     if(data && data->GetText())
     {
         absMove->setSubjectName(data->GetText());
     }
 
-    data = proc->FirstChildElement("final_position");
+    data = element->FirstChildElement("final_position");
     if(data && data->GetText())
     {
         absMove->setPosition(toDouble(data->GetText()));
     }
 
-    data = proc->FirstChildElement("max_velocity");
+    data = element->FirstChildElement("max_velocity");
     if(data && data->GetText())
     {
         absMove->setMaxVelocity(toDouble(data->GetText()));
     }
 
-    data = proc->FirstChildElement("acc");
+    data = element->FirstChildElement("acc");
     if(data && data->GetText())
     {
         absMove->setAcceleration(toDouble(data->GetText()));
     }
 
-    data = proc->FirstChildElement("pre_dwell_time");
+    data = element->FirstChildElement("pre_dwell_time");
     if(data && data->GetText())
     {
         absMove->setPreDwellTime(toDouble(data->GetText()));
     }
 
-    data = proc->FirstChildElement("post_dwell_time");
+    data = element->FirstChildElement("post_dwell_time");
     if(data && data->GetText())
     {
         absMove->setPostDwellTime(toDouble(data->GetText()));
     }
 
     //Load the trigger
-    data = proc->FirstChildElement("trigger");
+    data = element->FirstChildElement("trigger");
 
     if(data)
     {
@@ -346,19 +353,7 @@ AbsoluteMove* ProcessSequenceProject::createAbsoluteMoveFromXML(const string& na
     return absMove;
 }
 
-ArduinoServerCommand* ProcessSequenceProject::createArduinoServerCommandFromXML(const string& name,  XMLElement* proc)
-{
-	ArduinoServerCommand* c = new ArduinoServerCommand(name);
-
-    XMLElement* data = proc->FirstChildElement("command");
-    if(data && data->GetText())
-    {
-        c->setCommand(data->GetText());
-    }
-	return c;
-}
-
-Process* ProcessSequenceProject::createTimeDelayProcess(XMLElement* element)
+TimeDelay* ProcessSequenceProject::createTimeDelayProcess(XMLElement* element)
 {
     TimeDelay* p = new TimeDelay("");
 
@@ -376,30 +371,31 @@ Process* ProcessSequenceProject::createTimeDelayProcess(XMLElement* element)
     return p;
 }
 
-Process* ProcessSequenceProject::createStopAndResumeProcess(XMLElement* element)
+StopAndResumeProcess* ProcessSequenceProject::createStopAndResumeProcess(XMLElement* element)
 {
     StopAndResumeProcess* p = new StopAndResumeProcess("");
    	p->setProcessName(element->Attribute("name"));
     return p;
 }
 
-Process* ProcessSequenceProject::createArrayCamRequestProcess(XMLElement* element)
+ArrayCamRequestProcess* ProcessSequenceProject::createArrayCamRequestProcess(XMLElement* element)
 {
-    ArrayCamRequestProcess* p = new ArrayCamRequestProcess("");
-   	p->setProcessName(element->Attribute("name"));
-    XMLElement* type = element->FirstChildElement("request");
-    if(type)
-    {
-    	p->setRequest(type->GetText());
-    }
-   	else
-    {
-    	p->setRequest(acrUnknown);
-    }
-
-
-
-
+   	string name = element->Attribute("name");
+    XMLElement* request = element->FirstChildElement("request");
+    ArrayCamRequestProcess* p = new ArrayCamRequestProcess(mArrayCamClient, name, request->GetText());
     return p;
+}
+
+ArduinoServerCommand* ProcessSequenceProject::createArduinoServerCommand(XMLElement* element)
+{
+   	string name = element->Attribute("name");
+	ArduinoServerCommand* c = new ArduinoServerCommand(name);
+
+    XMLElement* data = element->FirstChildElement("command");
+    if(data && data->GetText())
+    {
+        c->setCommand(data->GetText());
+    }
+	return c;
 }
 

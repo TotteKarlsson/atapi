@@ -14,14 +14,19 @@ namespace tinyxml2
 	class XMLElement;
 }
 
+class ArrayCamClient;
 class ProcessSequence;
 class AbsoluteMove;
+class StopAndResumeProcess;
+class ArrayCamRequestProcess;
+class TimeDelay;
+class ParallellProcess;
 class ArduinoServerCommand;
 
 class AT_CORE ProcessSequenceProject : public mtk::Project, public ATObject
 {
     public:
-                                                ProcessSequenceProject(ProcessSequence& ps, const string& fName = "Sequence 1.abp");
+                                                ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName = "Sequence 1.abp");
                                                 ~ProcessSequenceProject();
 
         bool                                    save(const string& fName = mtk::gEmptyString);
@@ -30,17 +35,18 @@ class AT_CORE ProcessSequenceProject : public mtk::Project, public ATObject
 
     protected:
         ProcessSequence&                        mProcessSequence;
+        ArrayCamClient&							mArrayCamClient;
         bool                                    resetXML();
         int                                     loadProcesses();
 
         Process*				                createProcess(tinyxml2::XMLElement* element);
-		Process*								createParallellProcess(tinyxml2::XMLElement* element);
-		Process*								createTimeDelayProcess(tinyxml2::XMLElement* element);
-		Process*								createStopAndResumeProcess(tinyxml2::XMLElement* element);
-		Process*								createArrayCamRequestProcess(tinyxml2::XMLElement* element);
+		ParallellProcess*						createParallellProcess(tinyxml2::XMLElement* element);
+		AbsoluteMove* 				  			createAbsoluteMove(tinyxml2::XMLElement* proc);
+		TimeDelay*								createTimeDelayProcess(tinyxml2::XMLElement* element);
+		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);
+		ArrayCamRequestProcess* 				createArrayCamRequestProcess(tinyxml2::XMLElement* element);
 
-		AbsoluteMove* 				  			createAbsoluteMoveFromXML(const string& name,  tinyxml2::XMLElement* proc);
-		ArduinoServerCommand* 					createArduinoServerCommandFromXML(const string& name,  tinyxml2::XMLElement* proc);
+		ArduinoServerCommand* 					createArduinoServerCommand(tinyxml2::XMLElement* proc);
 };
 
 #endif

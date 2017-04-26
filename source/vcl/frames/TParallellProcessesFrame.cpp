@@ -16,6 +16,8 @@
 #include "arduino/atArduinoServerCommand.h"
 #include "TArduinoServerCommandFrame.h"
 #include "TYesNoForm.h"
+#include "frames/TArrayCamRequestFrame.h"
+#include "process/atArrayCamRequestProcess.h"
 
 #pragma package(smart_init)
 #pragma link "TMotorMoveProcessFrame"
@@ -40,6 +42,11 @@ __fastcall TParallellProcessesFrame::TParallellProcessesFrame(ProcessSequencer& 
     mTArduinoServerCommandFrame->Parent = this;
     mTArduinoServerCommandFrame->Visible = false;
     mTArduinoServerCommandFrame->Align = alClient;
+
+    mArrayCamRequestFrame = new TArrayCamRequestFrame(mProcessSequencer, Owner);
+    mArrayCamRequestFrame->Visible = false;
+    mArrayCamRequestFrame->Parent = this;
+    mArrayCamRequestFrame->Align = alClient;
 }
 
 __fastcall TParallellProcessesFrame::~TParallellProcessesFrame()
@@ -114,7 +121,7 @@ void __fastcall TParallellProcessesFrame::addMoveAExecute(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TParallellProcessesFrame::addArduinoCommandAExecute(TObject *Sender)
+void __fastcall TParallellProcessesFrame::newArrayCamRequestAExecute(TObject *Sender)
 {
 	//Add a move to current process
     if(!mParallell)
@@ -123,20 +130,20 @@ void __fastcall TParallellProcessesFrame::addArduinoCommandAExecute(TObject *Sen
         return;
     }
 
-    Process* c = new ArduinoServerCommand("");
+   	Process* p = new ArrayCamRequestProcess(mProcessSequencer.getArrayCamClient(), "ArrayCam Process");
 
     //Add the move to the container.. this will give the move a name
-    mParallell->addProcess(c);
+    mParallell->addProcess(p);
 
-    c->assignProcessSequence(mParallell->getProcessSequence());
+    p->assignProcessSequence(mParallell->getProcessSequence());
     mParallell->write();
 
     //Add move to Listbox
-    int indx = mSubProcessesLB->Items->AddObject(c->getProcessName().c_str(), (TObject*) c);
+    int indx = mSubProcessesLB->Items->AddObject(p->getProcessName().c_str(), (TObject*) p);
 	mSubProcessesLB->ItemIndex = indx;
 
 	//Select the new process
-    selectItem(c);
+    selectItem(p);
 }
 
 //---------------------------------------------------------------------------
@@ -155,19 +162,26 @@ void __fastcall TParallellProcessesFrame::removeMoveAExecute(TObject *Sender)
 
 void TParallellProcessesFrame::selectItem(Process* p)
 {
+    mTMotorMoveProcessFrame->Visible = false;
+   	mTArduinoServerCommandFrame->Visible = false;
+    mArrayCamRequestFrame->Visible = false;
+
 	if(dynamic_cast<AbsoluteMove*>(p))
     {
         mTMotorMoveProcessFrame->populate(dynamic_cast<AbsoluteMove*>(p));
         mTMotorMoveProcessFrame->Visible = true;
-       	mTArduinoServerCommandFrame->Visible = false;
-        EnableDisableFrame(mTMotorMoveProcessFrame, true);
+	    EnableDisableFrame(mTMotorMoveProcessFrame, true);
     }
     else if(dynamic_cast<ArduinoServerCommand*>(p))
     {
-        mTMotorMoveProcessFrame->Visible = false;
         mTArduinoServerCommandFrame->populate(dynamic_cast<ArduinoServerCommand*>(p));
         mTArduinoServerCommandFrame->Visible = true;
         EnableDisableFrame(mTArduinoServerCommandFrame, true);
+    }
+    else if(dynamic_cast<ArrayCamRequestProcess*>(p) != NULL)
+    {
+        mArrayCamRequestFrame->populate(dynamic_cast<ArrayCamRequestProcess*>(p));
+        mArrayCamRequestFrame->Visible = true;
     }
 }
 
@@ -179,8 +193,10 @@ void __fastcall TParallellProcessesFrame::mSubProcessesLBClick(TObject *Sender)
     }
 
 	//Get Current itemIndex, retrieve the move and populate the move frame
-	string moveName = stdstr(mSubProcessesLB->Items->Strings[mSubProcessesLB->ItemIndex]);
-    Process* p = mParallell->getProcess(moveName);
+//	string moveName = stdstr(mSubProcessesLB->Items->Strings[mSubProcessesLB->ItemIndex]);
+    Process* subProcess = (Process*) mSubProcessesLB->Items->Objects[mSubProcessesLB->ItemIndex];
+    //Process* p = mParallell->getProcess(moveName);
+    Process* p = mParallell->getProcess(subProcess);
     selectItem(p);
 }
 

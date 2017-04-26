@@ -17,7 +17,7 @@ class AT_CORE TimeDelay : public Process
 
 	    void						clear();
 
-        virtual mtk::XMLElement*    addToXMLDocumentAsChildProcess(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        virtual mtk::XMLElement*    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 
         virtual bool	            start();
         virtual bool	            stop();

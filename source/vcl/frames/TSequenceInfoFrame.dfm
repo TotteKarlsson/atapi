@@ -49,7 +49,7 @@ object SequenceInfoFrame: TSequenceInfoFrame
           Left = 1
           Top = 1
           Width = 103
-          Height = 45
+          Height = 60
           Action = RemoveProcessA
           Align = alTop
           Caption = 'X'
@@ -59,9 +59,9 @@ object SequenceInfoFrame: TSequenceInfoFrame
         end
         object mMoveSequenceDownBtn: TArrayBotButton
           Left = 1
-          Top = 91
+          Top = 121
           Width = 103
-          Height = 45
+          Height = 60
           Align = alTop
           Caption = #9660
           ParentDoubleBuffered = True
@@ -71,9 +71,9 @@ object SequenceInfoFrame: TSequenceInfoFrame
         end
         object mMoveSequenceUpBtn: TArrayBotButton
           Left = 1
-          Top = 46
+          Top = 61
           Width = 103
-          Height = 45
+          Height = 60
           Align = alTop
           Caption = #9650
           ParentDoubleBuffered = True
@@ -83,13 +83,25 @@ object SequenceInfoFrame: TSequenceInfoFrame
         end
         object mRenameBtn: TArrayBotButton
           Left = 1
-          Top = 136
+          Top = 181
           Width = 103
-          Height = 50
+          Height = 60
           Align = alTop
           Caption = 'Rename'
           TabOrder = 3
           OnClick = mRenameBtnClick
+          SoundID = 'BUTTON_CLICK_4'
+        end
+        object mAddMoveBtn: TArrayBotButton
+          Left = 1
+          Top = 241
+          Width = 103
+          Height = 60
+          Action = AddCombinedMoveA
+          Align = alTop
+          Caption = 'New'
+          ParentDoubleBuffered = True
+          TabOrder = 4
           SoundID = 'BUTTON_CLICK_4'
         end
       end
@@ -101,26 +113,14 @@ object SequenceInfoFrame: TSequenceInfoFrame
       Height = 129
       Align = alBottom
       TabOrder = 1
-      object mAddMoveBtn: TArrayBotButton
+      object mUpdatePositionsBtn: TArrayBotButton
         Left = 1
         Top = 1
         Width = 435
-        Height = 60
-        Action = AddCombinedMoveA
-        Align = alTop
-        Caption = 'New Process'
-        ParentDoubleBuffered = True
-        TabOrder = 0
-        SoundID = 'BUTTON_CLICK_4'
-      end
-      object mUpdatePositionsBtn: TArrayBotButton
-        Left = 1
-        Top = 61
-        Width = 435
-        Height = 67
+        Height = 127
         Align = alClient
         ParentDoubleBuffered = True
-        TabOrder = 1
+        TabOrder = 0
         Visible = False
         OnClick = mUpdatePositionsBtnClick
         SoundID = 'BUTTON_CLICK_4'

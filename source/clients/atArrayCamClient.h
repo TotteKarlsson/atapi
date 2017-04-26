@@ -6,7 +6,7 @@
 #include "mtkMessageContainer.h"
 #include "atArrayCamMessageProcessor.h"
 #include "mtkSocketClient.h"
-
+#include "atArrayCamProtocol.h"
 
 namespace mtk
 {
@@ -20,9 +20,9 @@ using mtk::Property;
 using mtk::MessageContainer;
 using mtk::SocketReceiver;
 
-//!The Arduino (socket) client class connects to a server over a socket.
+//!The client class connects to a server over a socket.
 //!Messages are received, over the socket, by a socket receiver and placed in a message container.
-//!Received messages are processed by the ArduinoMessageProcessor.
+//!Received messages are processed by the MessageProcessor.
 class AT_CORE ArrayCamClient : public SocketClient, public ATObject
 {
 	friend ArrayCamMessageProcessor;
@@ -38,13 +38,22 @@ class AT_CORE ArrayCamClient : public SocketClient, public ATObject
 
 		virtual void	 					getBoardStatus(){}
 		void								getServerStatus();
+        bool								startVideo();
+        bool								stopVideo();
 
-									        //!Post a custom message to the message list
-        virtual void                        postMessage(const string& msg);
+        bool								takeSnapShot();
+        bool								enableBarcodeScanner();
+        bool								disableBarcodeScanner();
+
+									        //!Post a request
+        bool 		                        postRequest(const string& msg);
         void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
 
     protected:
         ArrayCamMessageProcessor   			mMessageProcessor;
+        ArrayCamProtocol					mProtocol;
+
 };
 
 #endif

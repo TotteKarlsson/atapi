@@ -259,7 +259,7 @@ void __fastcall TSequenceInfoFrame::AddCombinedMoveAExecute(TObject *Sender)
         }
         else if(pType == 3) //Stop/Start Dialog
         {
-        	p = new ArrayCamRequestProcess("Process " + mtk::toString(nr));
+        	p = new ArrayCamRequestProcess(mProcessSequencer.getArrayCamClient(), "Process " + mtk::toString(nr));
         }
 
         else

@@ -14,36 +14,37 @@ using namespace std;
 class AT_CORE ParallellProcess : public Process
 {
     public:
-        	   			            ParallellProcess(const string& lbl);
-    	virtual			            ~ParallellProcess(){}
-		virtual void		   		init(ArrayBot& ab);
-		const string 				getTypeName() const;
-        void						clear();
+        	   			                            ParallellProcess(const string& lbl);
+    	virtual			                            ~ParallellProcess(){}
+		virtual void		   		                init(ArrayBot& ab);
+		const string 				                getTypeName() const;
+        void						                clear();
 
-        virtual mtk::XMLElement*    addToXMLDocumentAsChildProcess(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
-        int							getNumberOfProcesses(){return mProcesses.size();}
+        virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        int							                getNumberOfProcesses(){return mProcesses.size();}
 
-		virtual void	            addProcess(Process* lm);
-        Process*			  		getProcess(const string& lbl);
-        Process*					getProcess(int i);
+		virtual void	                            addProcess(Process* lm);
+        Process*			  		                getProcess(const Process* p);
+        Process*			  		                getProcess(const string& lbl);
+        Process*					                getProcess(int i);
 
-        bool 						removeProcess(Process* m);
-        bool 						removeProcess(const string& name);
+        bool 						                removeProcess(Process* m);
+        bool 						                removeProcess(const string& name);
 
-        							//!All moves starts at the same time
-        virtual bool	            start();
-        virtual bool	            stop();
-        virtual bool	            isBeingProcessed();
-        bool 						isProcessed();
-		bool						isCommandPending();
-        virtual	bool	            undo();
+        							                //!All moves starts at the same time
+        virtual bool	                            start();
+        virtual bool	                            stop();
+        virtual bool	                            isBeingProcessed();
+        bool 						                isProcessed();
+		bool						                isCommandPending();
+        virtual	bool	                            undo();
 
-									//Check if we are at proper position(s)
-        virtual bool 	  			isDone();
-        virtual bool	            areMotorsActive();
+									                //Check if we are at proper position(s)
+        virtual bool 	  			                isDone();
+        virtual bool	                            areMotorsActive();
 
-    protected:                      //!The Processes container contain all moves
-		vector<Process*>	  		mProcesses;
+    protected:                                      //!The Processes container contain all moves
+		vector<Process*>	  		                mProcesses;
 };
 
 #endif

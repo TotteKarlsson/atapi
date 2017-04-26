@@ -4,6 +4,7 @@
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
+
 ArrayCamClient::ArrayCamClient()
 :
 mMessageProcessor(*this)
@@ -88,9 +89,39 @@ bool ArrayCamClient::disConnect()
 	return SocketClient::close();
 }
 
-void ArrayCamClient::postMessage(const string& msg)
+bool ArrayCamClient::postRequest(const string& msg)
 {
-    string socketMessage = msg;
-    SocketClient::send(msg);
+    return SocketClient::request(msg);
 }
+
+bool ArrayCamClient::startVideo()
+{
+	postRequest(mProtocol[acrStartVideoRecorder]);
+    return true;
+}
+
+bool ArrayCamClient::stopVideo()
+{
+	postRequest(mProtocol[acrStopVideoRecorder]);
+    return true;
+}
+
+bool ArrayCamClient::takeSnapShot()
+{
+	postRequest(mProtocol[acrTakeSnapShot]);
+    return true;
+}
+
+bool ArrayCamClient::enableBarcodeScanner()
+{
+	postRequest(mProtocol[acrEnableBarcodeScanner]);
+    return true;
+}
+
+bool ArrayCamClient::disableBarcodeScanner()
+{
+	postRequest(mProtocol[acrDisableBarcodeScanner]);
+    return true;
+}
+
 

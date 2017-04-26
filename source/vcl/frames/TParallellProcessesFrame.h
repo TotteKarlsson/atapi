@@ -18,6 +18,7 @@ class Process;
 class ParallellProcess;
 class XYZUnit;
 class TArduinoServerCommandFrame;
+class TArrayCamRequestFrame;
 
 class PACKAGE TParallellProcessesFrame : public TFrame
 {
@@ -32,14 +33,14 @@ __published:	// IDE-managed Components
 	TAction *mUpdateFinalPositionsA;
 	TArrayBotButton *mRenameBtn;
 	TButton *Button3;
-	TAction *addArduinoCommandA;
+	TAction *newArrayCamRequestA;
 	TPanel *Panel1;
 	void __fastcall addMoveAExecute(TObject *Sender);
 	void __fastcall mSubProcessesLBClick(TObject *Sender);
 	void __fastcall removeMoveAExecute(TObject *Sender);
 	void __fastcall mUpdateFinalPositionsAExecute(TObject *Sender);
 	void __fastcall mRenameBtnClick(TObject *Sender);
-	void __fastcall addArduinoCommandAExecute(TObject *Sender);
+	void __fastcall newArrayCamRequestAExecute(TObject *Sender);
 
     private:
 		ProcessSequencer&				mProcessSequencer;
@@ -48,6 +49,7 @@ __published:	// IDE-managed Components
 		Process*						getCurrentlySelectedSubProcess();
 		TMotorMoveProcessFrame*			mTMotorMoveProcessFrame;
         TArduinoServerCommandFrame*		mTArduinoServerCommandFrame;
+        TArrayCamRequestFrame*	 		mArrayCamRequestFrame;
 
 	public:
 							__fastcall  TParallellProcessesFrame(ProcessSequencer& pss, TComponent* Owner);

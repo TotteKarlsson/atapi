@@ -17,7 +17,7 @@ Process(lbl, NULL)
 
 const string ParallellProcess::getTypeName() const
 {
-	return "combinedMove";
+	return toString(mProcessType);
 }
 
 void ParallellProcess::init(ArrayBot& ab)
@@ -80,7 +80,7 @@ Process* ParallellProcess::getProcess(int i)
     return NULL;
 }
 
-Process*	ParallellProcess::getProcess(const string& lbl)
+Process* ParallellProcess::getProcess(const string& lbl)
 {
 	// look for item
     for(int i = 0 ; i < mProcesses.size(); i++)
@@ -94,12 +94,27 @@ Process*	ParallellProcess::getProcess(const string& lbl)
     return NULL;
 }
 
-XMLElement* ParallellProcess::addToXMLDocumentAsChildProcess(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+Process* ParallellProcess::getProcess(const Process* p)
+{
+	// look for item
+    for(int i = 0 ; i < mProcesses.size(); i++)
+    {
+    	Process* aProc = mProcesses[i];
+        if(aProc == p)
+        {
+        	return aProc;
+        }
+    }
+    return NULL;
+}
+
+XMLElement* ParallellProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
     	Process* lm = mProcesses[i];
-        lm->addToXMLDocumentAsChild(doc, docRoot);
+        mtk::XMLElement* e = lm->addToXMLDocument(doc, docRoot);
+        lm->addToXMLDocumentAsChild(doc, e);
     }
 
     return dynamic_cast<XMLElement*>(docRoot);

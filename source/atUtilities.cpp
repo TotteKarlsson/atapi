@@ -49,11 +49,11 @@ string toString(ProcessType pt)
 	switch(pt)
     {
     	case ptAbsoluteMove: 			return "absoluteMove";
-    	case ptArduinoServerCommand: 	return "arduinoServerCommand";
-    	case ptParallell: 		        return "parallell";
+    	case ptParallell: 		        return "parallellProcess";
     	case ptTimeDelay: 		        return "timeDelay";
     	case ptStopAndResumeProcess:    return "stopAndResumeProcess";
     	case ptArrayCamRequestProcess:	return "arrayCamRequestProcess";
+    	case ptArduinoServerCommand: 	return "arduinoServerCommand";
         default: 				        return "unknownProcessType";
     }
 }
@@ -62,7 +62,7 @@ string toString(ProcessType pt)
 
 ProcessType toProcessType(const string& str)
 {
-	if(str == "parallell")
+	if(str == "parallellProcess")
     {
     	return ptParallell;
     }

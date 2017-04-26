@@ -26,7 +26,7 @@ class ArrayBot;
 class AT_CORE ProcessSequence : public ATObject
 {
     public:
-										    ProcessSequence(ArrayBot& ab, const string& name = "", const string& fileExt = "proc");
+										    ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& name = "", const string& fileExt = "proc");
 				        		            ~ProcessSequence();
 					        		        ProcessSequence(const ProcessSequence& s);
 

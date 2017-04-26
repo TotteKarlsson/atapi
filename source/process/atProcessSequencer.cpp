@@ -4,7 +4,6 @@
 #include "atProcess.h"
 #include "mtkUtils.h"
 #include "atStopAndResumeProcess.h"
-
 //---------------------------------------------------------------------------
 using namespace mtk;
 
@@ -12,7 +11,7 @@ ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc,  const str
 :
 mAB(ab),
 mArrayCamClient(acc),
-mSequences(fileFolder, "abp", mAB),
+mSequences(fileFolder, "abp", acc, mAB),
 mSequenceTimer(50)
 {
 	mSequenceTimer.assignTimerFunction(onTimerFunc);
@@ -76,6 +75,7 @@ void ProcessSequencer::start(bool autoExecute)
     s->init();
 	mExecuteAutomatic = autoExecute;
 
+    //
 	Process* p = s->getFirst();
     if(p)
     {

@@ -7,7 +7,7 @@
 //----------------------------------------------------------------
 
 using mtk::Thread;
-
+using std::vector;
 namespace mtk
 {
 	class MessageContainer;
@@ -35,13 +35,17 @@ class AT_CORE ArrayCamMessageProcessor : public Thread, public ATObject
         virtual void                    processMessage(const string& msg);
         void                            suspendProcessing() {mAllowProcessing = false;}
         void                            resumeProcessing()  {mAllowProcessing = true;}
+
+        								//Might be nicer to setup a proper subject/observer mechanism
 		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
 
 	private:
         string                          mServerName;
         bool                            mAllowProcessing;
         MessageContainer&            	mMessageContainer;
-        OnMessageReceivedCB		  		onMessageReceivedCB;
+        vector<OnMessageReceivedCB>		onMessageReceivedCallbacks;
+
 		ArrayCamClient&					mClient;
 };
 

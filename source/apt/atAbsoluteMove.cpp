@@ -9,7 +9,9 @@ AbsoluteMove::AbsoluteMove(const string& lbl, APTMotor* mtr, double pos, double 
 at::Move(lbl, mtr, maxVel, acc),
 mPosition(pos),
 mPositionResolution(1.0e-3)
-{}
+{
+	mProcessType = ptAbsoluteMove;
+}
 
 const string AbsoluteMove::getTypeName() const
 {
@@ -97,50 +99,50 @@ void AbsoluteMove::addTrigger(Trigger* t)
 XMLElement* AbsoluteMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
-    XMLElement* pn	  			= doc.NewElement("process");
-    XMLNode*    rootNode 		= doc.InsertFirstChild(pn);
+//    XMLElement* pn	  			= doc.NewElement("process");
+//    XMLNode*    rootNode 		= doc.InsertFirstChild(pn);
 
-    //Attributes
-    pn->SetAttribute("type", getTypeName().c_str());
-    pn->SetAttribute("name", mProcessName.c_str());
+//    //Attributes
+//    pn->SetAttribute("type", getTypeName().c_str());
+//    pn->SetAttribute("name", mProcessName.c_str());
+//
+//	XMLElement* dataval1 = doc.NewElement("info");
+//    dataval1->SetText(mInfoText.c_str());
+//	pn->InsertEndChild(dataval1);
 
-	XMLElement* dataval1 = doc.NewElement("info");
-    dataval1->SetText(mInfoText.c_str());
-	pn->InsertEndChild(dataval1);
-
-	dataval1 = doc.NewElement("motor_name");
+	XMLElement* dataval1 = doc.NewElement("motor_name");
     dataval1->SetText(mSubjectName.c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
 	dataval1 = doc.NewElement("final_position");
     dataval1->SetText(toString(getPosition()).c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
  	dataval1 = doc.NewElement("max_velocity");
     dataval1->SetText(toString(getMaxVelocity()).c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
   	dataval1 = doc.NewElement("acc");
     dataval1->SetText(toString(getAcceleration()).c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
 	dataval1 = doc.NewElement("pre_dwell_time");
     dataval1->SetText(toString(getPreDwellTime()).c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
 	dataval1 = doc.NewElement("post_dwell_time");
     dataval1->SetText(toString(getPostDwellTime()).c_str());
-	pn->InsertEndChild(dataval1);
+	docRoot->InsertEndChild(dataval1);
 
 	//Add trigger
     if(mTrigger)
     {
-    	mTrigger->addToXMLDocumentAsChild(doc, pn);
+    	mTrigger->addToXMLDocumentAsChild(doc, docRoot);
     }
 
-    pn->InsertEndChild(rootNode);
-    docRoot->InsertEndChild(pn);
+//    dataval1->InsertEndChild(rootNode);
+    docRoot->InsertEndChild(dataval1);
 
-    return pn;
+    return dataval1;
 }
 

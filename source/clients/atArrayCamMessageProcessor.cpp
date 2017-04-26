@@ -6,7 +6,7 @@
 #include "atArrayCamMessageProcessor.h"
 #include "mtkMessageContainer.h"
 #include "Poco/Mutex.h"
-#include "ArrayCamClient.h"
+#include "atArrayCamClient.h"
 //----------------------------------------------------------------
 using namespace mtk;
 
@@ -24,7 +24,7 @@ ArrayCamMessageProcessor::~ArrayCamMessageProcessor()
 
 void ArrayCamMessageProcessor::assignOnMessageReceivedCallBack(OnMessageReceivedCB cb)
 {
-	onMessageReceivedCB = cb;
+	onMessageReceivedCallbacks.push_back(cb);
 }
 
 bool ArrayCamMessageProcessor::start(bool inThread)
@@ -79,10 +79,22 @@ void ArrayCamMessageProcessor::worker()
 
 void ArrayCamMessageProcessor::processMessage(const string& msg)
 {
-	if(onMessageReceivedCB)
+	for(int i = 0; i < onMessageReceivedCallbacks.size(); i++)
     {
-    	onMessageReceivedCB(msg);
-	    Log(lDebug) << "Processed message: "<<msg;
+		onMessageReceivedCallbacks[i](msg);
     }
+
+//	if(onMessageReceivedCB1)
+//    {
+//    	onMessageReceivedCB1(msg);
+//	    Log(lDebug) << "ArrayCamMessageProcessor fired CB1: "<<msg;
+//    }
+//
+//	if(onMessageReceivedCB2)
+//    {
+//    	onMessageReceivedCB2(msg);
+//	    Log(lDebug) << "ArrayCamMessageProcessor fired CB2: "<<msg;
+//    }
+
 }
 
