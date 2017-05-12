@@ -8,6 +8,8 @@
 #pragma link "ScBridge"
 #pragma link "ScSSHChannel"
 #pragma link "ScSSHClient"
+#pragma link "TIntegerLabeledEdit"
+#pragma link "TSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 TSSHFrame *SSHFrame;
 

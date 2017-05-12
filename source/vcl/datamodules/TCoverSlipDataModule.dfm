@@ -266,7 +266,7 @@ object csDM: TcsDM
   end
   object csFreshBatchesDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
-    CommandText = 'SELECT * FROM freshCSBatches'
+    CommandText = 'SELECT * FROM freshCSBatches ORDER by date_created DESC'
     DataSource = csDSource
     MaxBlobSize = 1
     Params = <>

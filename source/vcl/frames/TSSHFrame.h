@@ -7,24 +7,23 @@
 #include "ScBridge.hpp"
 #include "ScSSHChannel.hpp"
 #include "ScSSHClient.hpp"
+#include "TIntegerLabeledEdit.h"
+#include "TSTDStringLabeledEdit.h"
+#include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 class TSSHFrame : public TFrame
 {
 __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;
-	TLabel *Label1;
-	TLabel *Label2;
-	TLabel *Label3;
-	TLabel *Label4;
-	TEdit *edSSHHost;
-	TEdit *seSSHPort;
-	TEdit *edSSHUserName;
-	TEdit *edSSHPassword;
 	TButton *ConnectBtn;
 	TScFileStorage *ScFileStorage;
 	TScSSHShell *ScSSHShell1;
 	TScSSHChannel *ScSSHChannel;
 	TScSSHClient *ScSSHClient;
+	TSTDStringLabeledEdit *edSSHHost;
+	TIntegerLabeledEdit *seSSHPort;
+	TSTDStringLabeledEdit *edSSHUserName;
+	TSTDStringLabeledEdit *edSSHPassword;
 	void __fastcall ScSSHClientAfterConnect(TObject *Sender);
 	void __fastcall ScSSHClientServerKeyValidate(TObject *Sender, TScKey *NewServerKey,
           bool &Accept);
