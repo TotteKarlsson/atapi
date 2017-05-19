@@ -89,8 +89,6 @@ class AT_CORE UC7 : public ATObject
         void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
 
         bool							setFeedRatePreset(int rate = -1);
-
-
         bool							setKnifeStageJogStepPreset(int rate = -1);
 
         bool							setStrokeState(EStrokeState state);
