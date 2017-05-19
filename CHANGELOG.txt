@@ -1,3 +1,7 @@
+Release 0.5.3 (May 19)
+=======================
+* Added an SSH VCL Frame
+
 Release 0.5.2 (Apr 26)
 =======================
 * General changes to VCL frames that are dynamically created -> Pass references instead of pointers
@@ -36,7 +40,7 @@ Release 0.5.2 (Apr 26)
 * Added Thorlabs library files for Borland
 * Added Kinesis files
 * Added class for stop and resume operation
-* Adding stop and resume process
+* Adding stop and reshttps://github.com/TotteKarlsson/atapiume process
 * Fixing ab->at namespace
 * Reorganized thirdparty folder somewhat
 * Moved doxygen file to new folder
