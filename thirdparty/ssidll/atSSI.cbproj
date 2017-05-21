@@ -108,9 +108,9 @@
         <Manifest_File>None</Manifest_File>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
+        <BPILibOutputDir>$(DEBUG_BUILD32)\lib</BPILibOutputDir>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
+        <FinalOutputDir>$(DEBUG_BUILD32)\bin</FinalOutputDir>
         <Defines>SSIDLL_EXPORTS;$(Defines)</Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">

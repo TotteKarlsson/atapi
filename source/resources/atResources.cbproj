@@ -80,8 +80,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <Manifest_File>None</Manifest_File>
-        <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
-        <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
+        <BPILibOutputDir>$(DEBUG_BUILD32)\lib</BPILibOutputDir>
+        <FinalOutputDir>$(DEBUG_BUILD32)\bin</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
