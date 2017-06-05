@@ -363,6 +363,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>serial\atSerialWorker.h</DependentOn>
             <BuildOrder>52</BuildOrder>
         </CppCompile>
+        <CppCompile Include="sound\atApplicationSound.cpp">
+            <DependentOn>sound\atApplicationSound.h</DependentOn>
+            <BuildOrder>74</BuildOrder>
+        </CppCompile>
         <CppCompile Include="sound\atDirectSound.cpp">
             <DependentOn>sound\atDirectSound.h</DependentOn>
             <BuildOrder>57</BuildOrder>

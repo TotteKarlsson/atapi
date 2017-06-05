@@ -16,8 +16,8 @@ static unsigned int WM_MOTOR_WARNING_MESSAGE = 0;
 
 void initABCoreLib()
 {
-	HMODULE	handle = LoadLibraryA("atResources");
-    WM_MOTOR_WARNING_MESSAGE = RegisterWindowMessageA(MOTOR_WARNING_MESSAGE);
+	HMODULE	handle 				= LoadLibraryA("atResources");
+    WM_MOTOR_WARNING_MESSAGE 	= RegisterWindowMessageA(MOTOR_WARNING_MESSAGE);
 }
 
 unsigned int getABCoreMessageID(const string& msg)

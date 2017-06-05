@@ -4,6 +4,9 @@
 #include <windows.h>
 
 //---------------------------------------------------------------------------
+//Non exports
+string 	                getSoundResourceName(ABSound a);
+bool 			        PlayResource(const string& resName, long flags = 0);
 
 using namespace mtk;
 
@@ -16,7 +19,6 @@ string getSoundResourceName(ABSound a)
 
         case absSlowSpeed:
         case absAlert1:			return "ALERT_1";
-
 	    case absMediumSpeed:    return "BOING_1";
     	case absFastSpeed:		return "BUTTON_CLICK_5";
 

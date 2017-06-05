@@ -11,20 +11,24 @@ using namespace mtk;
 	#define DSBLOCK_ENTIREBUFFER        0x00000002
 #endif
 
-//LPDIRECTSOUND DirectSound::mDirectSoundStructure;
 DWORD DirectSound::mNrOfInstances;
 
 static void DSError(HRESULT hRes);
 
-DirectSound::DirectSound()
+DirectSound::DirectSound(const string& resName, HWND hWnd)
 :
 mDirectSoundBuffer(0),
 mTheSound(0),
 mTheSoundBytes(0),
-mEnabled(true)
+mResourceName(resName),
+mHandle(hWnd)
 {
 	mDirectSoundStructure = 0;
 	++mNrOfInstances;
+    if(mResourceName.size())
+    {
+    	create(mResourceName);
+    }
 }
 
 DirectSound::~DirectSound()
@@ -41,36 +45,24 @@ DirectSound::~DirectSound()
 	}
 }
 
-bool DirectSound::Create(UINT uResourceID)//, CWnd * pWnd = 0)
+bool DirectSound::create(const string& resName, HWND hWnd)
 {
-	return Create(MAKEINTRESOURCE(uResourceID));
-}
-
-DirectSound& DirectSound::EnableSound(bool bEnable)
-{
-	mEnabled = bEnable;
-
-	if(!bEnable)
+	if(isValid() && resName == mResourceName)
     {
-		Stop();
+    	return true;
     }
 
-	return *this;
-}
-
-bool DirectSound::Create(const string& pszResource, HWND hWnd)
-{
 	//////////////////////////////////////////////////////////////////
 	// load resource
-	HINSTANCE hResourceDLL = ::GetModuleHandle("atResources.dll");
+	HINSTANCE modHandle = ::GetModuleHandle("atResources.dll");
 
-	HRSRC hResInfo = ::FindResourceA(hResourceDLL, pszResource.c_str(), MAKEINTRESOURCE(10));
+	HRSRC hResInfo = ::FindResourceA(modHandle, resName.c_str(), MAKEINTRESOURCE(10));
 	if(hResInfo == 0)
     {
 		return false;
     }
 
-	HGLOBAL hRes = ::LoadResource(hResourceDLL, hResInfo);
+	HGLOBAL hRes = ::LoadResource(modHandle, hResInfo);
 	if(hRes == 0)
     {
 		return false;
@@ -82,7 +74,7 @@ bool DirectSound::Create(const string& pszResource, HWND hWnd)
 		return false;
     }
 
-    if(!Create(pTheSound, hWnd))
+    if(!create(pTheSound, hWnd))
     {
     	return false;
     }
@@ -90,15 +82,12 @@ bool DirectSound::Create(const string& pszResource, HWND hWnd)
 	return true;
 }
 
-bool DirectSound::Create(LPVOID pSoundData, HWND hWnd)
+bool DirectSound::create(LPVOID pSoundData, HWND hWnd)
 {
 	//////////////////////////////////////////////////////////////////
 	// create direct sound object
 	if(mDirectSoundStructure == 0)
     {
-		// Someone might use sounds for starting apps. This may cause
-		// DirectSoundCreate() to fail because the driver is used by
-		// anyone else. So wait a little before starting with the work ...
 		HRESULT hRes = DS_OK;
 		short nRes = 0;
 
@@ -128,21 +117,21 @@ bool DirectSound::Create(LPVOID pSoundData, HWND hWnd)
 	}
 
 	WAVEFORMATEX * pcmwf;
-	if(!GetWaveData(pSoundData, pcmwf, mTheSound, mTheSoundBytes))
+	if(!getWaveData(pSoundData, pcmwf, mTheSound, mTheSoundBytes))
 	{
     	string error = getLastWin32Error();
         Log(lError) << "Last win32 error: "<<error;
    		return false;
     }
 
-    if(!CreateSoundBuffer(pcmwf))
+    if(!createSoundBuffer(pcmwf))
     {
     	string error = getLastWin32Error();
         Log(lError) << "Last win32 error: "<<error;
 		return false;
     }
 
-    if(!SetSoundData(mTheSound, mTheSoundBytes) )
+    if(!setSoundData(mTheSound, mTheSoundBytes) )
 	{
     	string error = getLastWin32Error();
         Log(lError) << "Last win32 error: "<<error;
@@ -152,7 +141,7 @@ bool DirectSound::Create(LPVOID pSoundData, HWND hWnd)
 	return true;
 }
 
-bool DirectSound::GetWaveData(void* pRes, WAVEFORMATEX* &pWaveHeader, void* &pbWaveData, DWORD &cbWaveSize)
+bool DirectSound::getWaveData(void* pRes, WAVEFORMATEX* &pWaveHeader, void* &pbWaveData, DWORD &cbWaveSize)
 {
 	pWaveHeader = 0;
 	pbWaveData = 0;
@@ -215,7 +204,7 @@ bool DirectSound::GetWaveData(void* pRes, WAVEFORMATEX* &pWaveHeader, void* &pbW
 	return false;
 }
 
-bool DirectSound::CreateSoundBuffer(WAVEFORMATEX * pcmwf)
+bool DirectSound::createSoundBuffer(WAVEFORMATEX * pcmwf)
 {
 	DSBUFFERDESC dsbdesc;
 
@@ -235,11 +224,18 @@ bool DirectSound::CreateSoundBuffer(WAVEFORMATEX * pcmwf)
 		mDirectSoundBuffer = 0;
 		return false;
 	}
-
 	return true;
 }
 
-bool DirectSound::SetSoundData(void * pSoundData, DWORD dwSoundSize)
+void DirectSound::setVolume(int volume)
+{
+	if(mDirectSoundBuffer)
+    {
+    	mDirectSoundBuffer->SetVolume(volume);
+    }
+}
+
+bool DirectSound::setSoundData(void * pSoundData, DWORD dwSoundSize)
 {
 	LPVOID lpvPtr1;
 	DWORD dwBytes1;
@@ -269,9 +265,9 @@ bool DirectSound::SetSoundData(void * pSoundData, DWORD dwSoundSize)
 	return false;
 }
 
-bool DirectSound::Play(DWORD dwStartPosition, bool loop)
+bool DirectSound::play(DWORD dwStartPosition, bool loop)
 {
-	if(!IsValid() || ! IsEnabled())
+	if(!isValid())
     {
 		return false;		// no chance to play the sound ...
     }
@@ -288,7 +284,7 @@ bool DirectSound::Play(DWORD dwStartPosition, bool loop)
 		// another application had stolen our buffer
 		// Note that a "Restore()" is not enough, because
 		// the sound data is invalid after Restore().
-		SetSoundData(mTheSound, mTheSoundBytes);
+		setSoundData(mTheSound, mTheSoundBytes);
 
 		// Try playing again
 		mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0);
@@ -297,9 +293,9 @@ bool DirectSound::Play(DWORD dwStartPosition, bool loop)
     return true;
 }
 
-bool DirectSound::Stop()
+bool DirectSound::stop()
 {
-	if( IsValid() )
+	if( isValid() )
     {
 		mDirectSoundBuffer->Stop();
         return true;
@@ -307,23 +303,23 @@ bool DirectSound::Stop()
 	return false;
 }
 
-bool DirectSound::Pause()
+bool DirectSound::pause()
 {
-	return Stop();
+	return stop();
 }
 
-bool DirectSound::Continue()
+bool DirectSound::continuePlay()
 {
-	if(IsValid())
+	if(isValid())
     {
 		DWORD dwPlayCursor, dwWriteCursor;
 		mDirectSoundBuffer->GetCurrentPosition(&dwPlayCursor, &dwWriteCursor);
-		return Play(dwPlayCursor);
+		return play(dwPlayCursor);
 	}
     return false;
 }
 
-bool DirectSound::IsValid() const
+bool DirectSound::isValid() const
 {
 	return (mDirectSoundStructure && mDirectSoundBuffer && mTheSound && mTheSoundBytes) ? true : false;
 }
