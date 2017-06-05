@@ -12,7 +12,7 @@ UC7::UC7(HWND__ *h)
 	mINIFileSection("UC7"),
     mCOMPort(-1),
     mSerial(-1, 19200, '!', '\r', SerialPort::EHandshake::EHandshakeOff),
-    mFeedRate(-1),
+    mFeedRate(0),
     mPrepareForNewRibbon(false),
     mPrepareToCutRibbon(false),
     mPresetFeedRate(70),
@@ -21,7 +21,9 @@ UC7::UC7(HWND__ *h)
     mIsActive(false),
     mSetNumberOfZeroStrokes(0),
     mNumberOfZeroStrokes(0),
-    mNorthLimitPosition(0)
+    mNorthLimitPosition(0),
+	mKnifeStageJogPreset(0),
+    mKnifeStageResumeDelta(0)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
     mCustomTimer.setInterval(5);
@@ -101,12 +103,12 @@ bool UC7::setStrokeState(EStrokeState state)
     }
     else if(mPrepareForNewRibbon)
     {
-        if(mPrepareForNewRibbon == true && mStrokeState == ssAfterCutting)
-        {
-            Log(lInfo) << "Preparing NEW Ribbon: (1) Setting feedrate to: "<<mPresetFeedRate<<" nm";
-            setFeedRate(mPresetFeedRate);
-        }
-        else if (mStrokeState == ssRetracting && mFeedRate == mPresetFeedRate)
+//        if(mPrepareForNewRibbon == true && mStrokeState == ssAfterCutting)
+//        {
+//            //Log(lInfo) << "Preparing NEW Ribbon: (1) Setting feedrate to: "<<mPresetFeedRate<<" nm";
+//            //setFeedRate(mPresetFeedRate);
+//        }
+        if (mStrokeState == ssRetracting)// && mFeedRate == mPresetFeedRate)
         {
         	//This will move the stage
             mCustomTimer.assignTimerFunction(onPrepareForNewRibbon);
@@ -123,24 +125,26 @@ bool UC7::setStageMoveDelay(int ms)
 	return mCustomTimer.setInterval(ms);
 }
 
-bool UC7::setNorthLimitPosition(int limit)
+bool UC7::setNorthLimitPosition(uint limit)
 {
 	mNorthLimitPosition = limit;
+    return true;
 }
 
 void UC7::onPrepareToCutRibbon()
 {
     mCustomTimer.stop();
 	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
-    moveKnifeStageSouth(mKnifeStageJogPreset);
+    jogKnifeStageSouth(mKnifeStageJogPreset);
     mRibbonOrderCounter.increase();
 }
 
 void UC7::onPrepareForNewRibbon()
 {
     mCustomTimer.stop();
-	Log(lInfo) << "Moving Knife stage ============ NORTH "<<mKnifeStageJogPreset<<" (nm) ==================";
-    moveKnifeStageNorth(mKnifeStageJogPreset);
+    uint distance(mKnifeStageJogPreset - mKnifeStageResumeDelta);
+	Log(lInfo) << "Moving Knife stage ============ NORTH "<<distance<<" (nm) ==================";
+    jogKnifeStageNorth(distance);
 }
 
 bool UC7::getStatus()
@@ -224,76 +228,90 @@ bool UC7::stopCutter()
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "00");
 }
 
-bool UC7::startRibbon()
-{
-	//Move knife stage north using preset
-	moveKnifeStageNorth(mKnifeStageJogPreset);
-
-	//Set cut thickness to preset
-    setFeedRate(mPresetFeedRate);
-    return true;
-}
-
 bool UC7::getKnifeStagePosition()
 {
 	return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "FF");
 }
 
-bool UC7::moveKnifeStageSouth(int nm, bool isRequest)
+bool UC7::moveKnifeStageNSAbsolute(unsigned int pos, bool isRequest)
 {
-	string dataStr(zeroPadString(4, toHex(nm)));
-	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "06", dataStr);
-    mKnifeStageJogPreset = (nm);
+	string dataStr(zeroPadString(6, toHex(pos)));
+	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "01", dataStr);
     return true;
 }
 
-bool UC7::moveKnifeStageNorth(int nm_step, bool isRequest)
+bool UC7::jogKnifeStageSouth(uint step, bool useAbsolutePos, bool isRequest)
 {
-	if((nm_step + mNorthSouthStagePosition) > mNorthLimitPosition)
+	if(useAbsolutePos)
     {
-    	Log(lError) << "Can't move stage past NORTH limit!";
+		int pos = mNorthSouthStagePosition - step;
+
+		pos = pos < 0 ? 0 : pos;
+        return moveKnifeStageNSAbsolute(pos, isRequest);
+    }
+    else
+    {
+		string dataStr(zeroPadString(4, toHex(step)));
+		return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "06", dataStr);
+    }
+}
+
+bool UC7::jogKnifeStageNorth(uint step, bool useAbsolutePos, bool isRequest)
+{
+	if((step + mNorthSouthStagePosition) > mNorthLimitPosition)
+    {
+    	Log(lError) << "Can't move stage past NORTH limit: "<< mNorthLimitPosition;
         return false;
     }
 
-	string dataStr(zeroPadString(4, toHex(nm_step)));
-	sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "07", dataStr);
-    return true;
+    if(useAbsolutePos)
+    {
+		int pos = mNorthSouthStagePosition + step;
+        return moveKnifeStageNSAbsolute(pos, isRequest);
+    }
+    else
+    {
+		string dataStr(zeroPadString(4, toHex(step)));
+		return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "07", dataStr);
+    }
+}
+
+bool UC7::stopKnifeStageNSMotion()
+{
+	Log(lInfo) << "Stopping KnifeStage Motion";
+	return sendUC7Message(NORTH_SOUTH_MOTOR_MOVEMENT, "00");
 }
 
 void UC7::disableCounter()
 {
 	mSectionCounter.disable();
-//	mRibbonOrderCounter.disable();
 }
 
 void UC7::enableCounter()
 {
 	mSectionCounter.enable();
-//	mRibbonOrderCounter.enable();
 }
 
-bool UC7::setFeedRatePreset(int rate)
+bool UC7::setFeedRatePreset(uint rate)
 {
-	if(rate != -1)
-    {
-		mPresetFeedRate = rate;
-    }
-
+	mPresetFeedRate = rate;
     setFeedRate(mPresetFeedRate);
     return true;
 }
 
-bool UC7::setKnifeStageJogStepPreset(int rate)
+bool UC7::setKnifeStageJogStepPreset(uint preset)
 {
-	if(rate != -1)
-    {
-		mKnifeStageJogPreset = rate;
-    }
-
+	mKnifeStageJogPreset = preset;
     return true;
 }
 
-bool UC7::setFeedRate(int feedRate, bool isRequest)
+bool UC7::setKnifeStageResumeDelta(uint delta)
+{
+	mKnifeStageResumeDelta = delta;
+    return true;
+}
+
+bool UC7::setFeedRate(uint feedRate, bool isRequest)
 {
 	if(isRequest)
     {
@@ -306,7 +324,7 @@ bool UC7::setFeedRate(int feedRate, bool isRequest)
     return true;
 }
 
-bool UC7::setNorthSouthStageAbsolutePosition(int pos, bool isRequest)
+bool UC7::setNorthSouthStageAbsolutePosition(uint pos, bool isRequest)
 {
 	if(isRequest)
     {

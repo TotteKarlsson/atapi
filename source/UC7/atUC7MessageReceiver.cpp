@@ -11,7 +11,6 @@
 
 using Poco::Mutex;
 using namespace mtk;
-
 //----------------------------------------------------------------
 UC7MessageReceiver::UC7MessageReceiver(UC7& messageContainer,  HWND__ *h, const string& threadName)
 :
@@ -105,7 +104,7 @@ void UC7MessageReceiver::worker()
                         //Send windows message and let UI handle the message
                         if(!PostMessage(mHandle, UWM_UC7_MESSAGE, 1, (long) msg))
                         {
-                            Log(lError) << "Post message failed..";
+                            Log(lError) << "Post message failed in UC7 Message receiver.";
                         }
                     }
 

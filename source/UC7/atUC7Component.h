@@ -12,7 +12,7 @@
 
 //---------------------------------------------------------------------------
 //!This class is named UC7, but unit is atUC7Component as not to conflict with
-//application name unit UC7
+//application name unit atUC7
 
 //!Observe that most "get" functions below don't return a result immediately. Instead, a request
 //!is sent to the UC7 hardware, and a response is be received at a laterstage.
@@ -46,22 +46,19 @@ class AT_CORE UC7 : public ATObject
 
         bool							startCutter();
         bool							stopCutter();
+        bool							moveKnifeStageNSAbsolute(uint pos, bool isRequest = true);
 
-        								//!The start ribbon will cause the
-                                        //!knife stage to move north,
-                                        //!an also change cutrate to preset cutrate
-        bool							startRibbon();
-
-        bool							moveKnifeStageSouth(int nm, bool isRequest = true);
-        bool							moveKnifeStageNorth(int nm, bool isRequest = true);
+        bool							jogKnifeStageSouth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
+        bool							jogKnifeStageNorth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
+        bool							stopKnifeStageNSMotion();
 
         								//!Prevent user from bumping in knife into specimen
-		bool 							setNorthLimitPosition(int limit);
+		bool 							setNorthLimitPosition(uint limit);
 
         								//!Set Feedrate in nm
-        bool							setFeedRate(int feedRate, bool isRequest = true);
+        bool							setFeedRate(uint feedRate, bool isRequest = true);
 
-		bool							setNorthSouthStageAbsolutePosition(int pos, bool isRequest = true);
+		bool							setNorthSouthStageAbsolutePosition(uint pos, bool isRequest = true);
 
 										//status requests
                                         //!Get all statuses
@@ -88,8 +85,9 @@ class AT_CORE UC7 : public ATObject
         bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
         void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
 
-        bool							setFeedRatePreset(int rate = -1);
-        bool							setKnifeStageJogStepPreset(int rate = -1);
+        bool							setFeedRatePreset(uint rate);
+        bool							setKnifeStageJogStepPreset(uint preset);
+        bool							setKnifeStageResumeDelta(uint delta);
 
         bool							setStrokeState(EStrokeState state);
         EStrokeState					getStrokeState(){return mStrokeState;}
@@ -132,19 +130,20 @@ class AT_CORE UC7 : public ATObject
         Poco::Mutex						mSendBufferMutex;
         Poco::Condition					mNewMessageToSendCondition;
 
-        								//!This is the most previous sent message
+        								//!This is the previous sent message
         UC7Message 						mUC7Message;
 
         								//Hardware states
                                         //!Feedrate in nm
         EStrokeState	  				mStrokeState;
-		int								mFeedRate;
-		int								mPresetFeedRate;
-		int								mKnifeStageJogPreset;
-        int								mSetNumberOfZeroStrokes;
-        int								mNumberOfZeroStrokes;
-        int								mNorthSouthStagePosition;
-        int								mNorthLimitPosition;
+		uint	 						mFeedRate;
+		uint	 						mPresetFeedRate;
+		uint  							mKnifeStageJogPreset;
+        uint							mKnifeStageResumeDelta;
+        int  							mSetNumberOfZeroStrokes;
+        uint	 						mNumberOfZeroStrokes;
+        uint   							mNorthSouthStagePosition;
+        uint							mNorthLimitPosition;
 
         								//!When this boolean is true, UC7 commands may be sent to the leica
                                         //!when HW status is changing

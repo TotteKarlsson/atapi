@@ -210,7 +210,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>REM copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;REM copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
+        <PreBuildEvent>REM copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;REM copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>

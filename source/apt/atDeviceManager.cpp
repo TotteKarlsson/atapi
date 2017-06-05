@@ -133,7 +133,7 @@ int DeviceManager::connectAllDevices()
     if(serials.count())
     {
         Log(lDebug) <<"Connecting devices of type "<<toString(didTCubeDCServo);
-        for(u_int i = 0; i < serials.count(); i++)
+        for(uint i = 0; i < serials.count(); i++)
         {
             APTDevice* device = connectDevice(toInt(serials[i]));
         }
@@ -144,7 +144,7 @@ int DeviceManager::connectAllDevices()
     StringList lts_serials(getSerialsForDeviceType(didLongTravelStage));
     if(lts_serials.count())
     {
-        for(u_int i = 0; i < lts_serials.count(); i++)
+        for(uint i = 0; i < lts_serials.count(); i++)
         {
             APTDevice* device = connectDevice(toInt(lts_serials[i]));
         }
@@ -155,7 +155,7 @@ int DeviceManager::connectAllDevices()
     StringList tcsm_serials(getSerialsForDeviceType(didTCubeStepperMotor));
     if(tcsm_serials.count())
     {
-        for(u_int i = 0; i < tcsm_serials.count(); i++)
+        for(uint i = 0; i < tcsm_serials.count(); i++)
         {
             APTDevice* device = connectDevice(toInt(tcsm_serials[i]));
         }
