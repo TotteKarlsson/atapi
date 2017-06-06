@@ -9,8 +9,7 @@
 class AT_CORE DirectSound : public ATObject
 {
     public:
-							        DirectSound(const string& resName, HWND hWnd = NULL);        virtual 					~DirectSound();
-        bool						create(const string& resName, HWND hWnd = NULL);
+							        DirectSound(const string& resName, HWND hWnd = NULL);        virtual 					~DirectSound();        bool						create(const string& resName, HWND hWnd = NULL);
 
         bool			            isValid() const;
         bool			            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
@@ -19,6 +18,13 @@ class AT_CORE DirectSound : public ATObject
         bool			            pause();
         bool			            continuePlay();
         bool						purge();
+        void						setHandle(HWND h){create(mResourceName, h);}
+        HWND						getHandle() const {return mHandle;}
+
+		void						setName(const string& n){mResourceName = n;}
+        string						getName() const {return mResourceName;}
+        string						getResourceName() const {return mResourceName;}
+
 
     protected:
                                     // Alternativly you can specify the sound by yourself
@@ -27,11 +33,9 @@ class AT_CORE DirectSound : public ATObject
                                     // You can load an entire WAV file into memory and then call this
                                     // Create() method.
         bool						create(LPVOID pSoundData, HWND hWnd =  NULL);
-
         bool                        setSoundData(LPVOID pSoundData, DWORD dwSoundSize);
         bool                        createSoundBuffer(WAVEFORMATEX * pcmwf);
         bool                        getWaveData(void * pRes, WAVEFORMATEX * & pWaveHeader, void * & pbWaveData, DWORD & cbWaveSize);
-
 
     private:
     	HWND						mHandle;

@@ -6,13 +6,16 @@
 #include <deque>
 #include <mmsystem.h>
 #include "atATObject.h"
+#include "mtkStringList.h"
 //---------------------------------------------------------------------------
 
 using std::string;
 using std::deque;
 using mtk::Thread;
+using mtk::StringList;
 
 //These are names of sounds available
+//These will be replaced by usage of properties instead
 enum ABSound
 {
 	absMotorStop = 0,
@@ -27,35 +30,37 @@ enum ABSound
     absDefaultClick
 };
 
+//!Load our resource DLL and get a list of sound resources
+AT_CORE StringList		getSoundResources();
 
 //!Flags are
 //!SND_ASYNC SND_SYNC
 //!See: https://msdn.microsoft.com/en-us/library/windows/desktop/dd743680(v=vs.85).aspx
 AT_CORE void 			playABSound(ABSound, long flags = SND_ASYNC);
 
-class SoundPlayer;
-
-class SoundWorker : public mtk::Thread, public ATObject
-{
-	public:
-    						SoundWorker(deque<ABSound>& soundDeck , Poco::Mutex bufferMutex);
-
-	private:
-    	SoundPlayer&		mSoundPlayer;
-};
-
-class AT_CORE SoundPlayer : public ATObject
-{
-	public:
-								SoundPlayer();
-
-                                //!Add a sound to the soundplayer
-		bool					play(ABSound aSound, int repeat, int delay);
-
-    private:
-    	deque<ABSound> 			mSounds;
-        SoundWorker				mSoundWorker;
-        Poco::Mutex				mSoundMutex;
-};
+//class SoundPlayer;
+//
+//class SoundWorker : public mtk::Thread, public ATObject
+//{
+//	public:
+//    						SoundWorker(deque<ABSound>& soundDeck , Poco::Mutex bufferMutex);
+//
+//	private:
+//    	SoundPlayer&		mSoundPlayer;
+//};
+//
+//class AT_CORE SoundPlayer : public ATObject
+//{
+//	public:
+//								SoundPlayer();
+//
+//                                //!Add a sound to the soundplayer
+//		bool					play(ABSound aSound, int repeat, int delay);
+//
+//    private:
+//    	deque<ABSound> 			mSounds;
+//        SoundWorker				mSoundWorker;
+//        Poco::Mutex				mSoundMutex;
+//};
 
 #endif

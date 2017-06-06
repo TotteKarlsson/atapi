@@ -1,6 +1,5 @@
 #ifndef TSoundsFrameH
 #define TSoundsFrameH
-//---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -21,13 +20,14 @@ class TSoundsFrame : public TFrame
 	void __fastcall PlayBtnClick(TObject *Sender);
 	void __fastcall TrackBar1Change(TObject *Sender);
 	void __fastcall SoundsLBClick(TObject *Sender);
+
     private:
         DirectSound						mSound;
         string							mSelectedSound;
 
     public:
-			        __fastcall 	TSoundsFrame(TComponent* Owner);
-        void					populate();
+			        		__fastcall 	TSoundsFrame(TComponent* Owner);
+        void							populate();
 };
 
 extern PACKAGE TSoundsFrame *SoundsFrame;

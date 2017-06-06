@@ -47,6 +47,7 @@ DirectSound::~DirectSound()
 
 bool DirectSound::create(const string& resName, HWND hWnd)
 {
+	mHandle = hWnd;
 	if(isValid() && resName == mResourceName)
     {
     	return true;
@@ -55,8 +56,8 @@ bool DirectSound::create(const string& resName, HWND hWnd)
 	//////////////////////////////////////////////////////////////////
 	// load resource
 	HINSTANCE modHandle = ::GetModuleHandle("atResources.dll");
-
 	HRSRC hResInfo = ::FindResourceA(modHandle, resName.c_str(), MAKEINTRESOURCE(10));
+
 	if(hResInfo == 0)
     {
 		return false;

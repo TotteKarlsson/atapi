@@ -1,26 +1,26 @@
 object SoundsFrame: TSoundsFrame
   Left = 0
   Top = 0
-  Width = 540
-  Height = 313
-  AutoSize = True
+  Width = 656
+  Height = 414
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 540
-    Height = 313
+    Width = 561
+    Height = 345
     Caption = 'Available Sounds'
     TabOrder = 0
     object SoundsLB: TListBox
       Left = 2
       Top = 15
       Width = 239
-      Height = 296
+      Height = 328
       Align = alLeft
       ItemHeight = 13
       TabOrder = 0
       OnClick = SoundsLBClick
+      ExplicitHeight = 296
     end
     object PlayBtn: TButton
       Left = 264

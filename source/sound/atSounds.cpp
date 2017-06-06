@@ -31,6 +31,21 @@ string getSoundResourceName(ABSound a)
     }
 }
 
+AT_CORE StringList getSoundResources()
+{
+	StringList list;
+	HINSTANCE handle = GetModuleHandle("atResources.dll");
+    if(!handle)
+    {
+    	Log(lError) << "Failed to load resource DLL";
+        return list;
+    }
+
+
+
+    return list;
+}
+
 //Non working SHORT_BEEP_1, CLOSING_DOWN_1, SHORT_BEEP_2
 
 void playABSound(ABSound a, long flags)

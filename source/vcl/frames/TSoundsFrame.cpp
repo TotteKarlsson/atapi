@@ -5,7 +5,6 @@
 
 using namespace mtk;
 
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
