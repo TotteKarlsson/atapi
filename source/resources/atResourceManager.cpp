@@ -1,128 +1,85 @@
 #pragma hdrstop
 #include "atResourceManager.h"
+#include "mtkLogger.h"
 //---------------------------------------------------------------------------
+using namespace mtk;
 
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
-CRes::CRes()
+ResourceManager::ResourceManager()
 {
-	hExe = NULL;
-	hRes = NULL;
-	hResLoad = NULL;
-	lpResLock = NULL;
+	mModuleHandle = NULL;
+	loadResourceDLL();
 }
 
-CRes::~CRes()
+ResourceManager::~ResourceManager()
+{}
+
+bool ResourceManager::loadResourceDLL()
 {
-	FreeIt();
+	mModuleHandle = GetModuleHandle("atResources.dll");
+    if(!mModuleHandle)
+    {
+    	Log(lError) << "Failed to load resource DLL";
+		return false;
+    }
+	return true;
 }
 
-BOOL CRes::LoadExe()
+StringList ResourceManager::loadAllResources()
 {
-	FreeIt();
-	hExe = LoadLibrary(m_Path );
-
-	if (hExe == NULL)
-		return FALSE;
-	return TRUE;
+    mResources.clear();
+	if (mModuleHandle)
+ 	{
+		EnumResourceTypes((HMODULE) mModuleHandle, (ENUMRESTYPEPROC) EnumTypesFunc,(LONG) &mResources);
+  	}
+  	return mResources;
 }
 
-void CRes::FreeIt()
+bool ResourceManager::findResource(int res, const string& type)
 {
-	if ( hExe)
-		::FreeLibrary ((HMODULE)hExe);
-	hExe=NULL;
+	if (!mModuleHandle)
+    {
+    	return false;
+    }
+    HRSRC hRes = ::FindResourceA((HMODULE) mModuleHandle, MAKEINTRESOURCE(res), type.c_str());
+
+ 	return (hRes == NULL) ? false : true;
 }
 
-
-
-BOOL CRes::FindResource(int res,LPSTR type)
+bool ResourceManager::EnumTypesFunc(HANDLE hModule, LPSTR lpType, LONG lParam)
 {
-	if ( hExe)
-		hRes = ::FindResource((HMODULE)hExe, MAKEINTRESOURCE(res), type);
-	else
-		return FALSE;
- 	if (hRes == NULL)
-		return FALSE;
-	return TRUE;
+	EnumResourceNames((HINSTANCE) hModule, lpType, (ENUMRESNAMEPROC) EnumNames, lParam);
+    return true;
 }
 
-BOOL CRes::LoadResource()
+bool ResourceManager::EnumNames(HANDLE hModule, LPCTSTR lpType, LPTSTR lpName, LONG lParam)
 {
-	if ( hExe)
-		if ( hRes)
-			hResLoad =(HRSRC):: LoadResource((HMODULE)hExe,hRes);
-	else
-		return FALSE;
-
-	if (hResLoad == NULL)
-		return FALSE;
-	return TRUE;
-}
-
-BOOL CRes::EnumTypesFunc(HANDLE hModule, LPSTR lpType, LONG lParam)
-{
-      EnumResourceNames((HINSTANCE)hModule,
-        lpType,
-        (ENUMRESNAMEPROC)EnumNames,
-        lParam);
-
-    return TRUE;
-}
-
-BOOL CRes::EnumNames(HANDLE hModule, LPCTSTR lpType, LPTSTR lpName, LONG lParam)
-{
-	CArray<ResourceInfo,ResourceInfo&> *infos =(	CArray<ResourceInfo,ResourceInfo&> *)lParam;
+	StringList *r = (StringList*) lParam;
 	ResourceInfo info;
 
+    if((ULONG)lpName & 0xFFFF0000)
+    {
+		info.mName = lpName;
+    }
 
-    if ((ULONG)lpName & 0xFFFF0000)
-    {
-		info.m_Name = lpName;
-    }
-    else
-    {
-		info.m_Name .Format ("%u",(USHORT)lpName);
-    }
 	if ((ULONG)lpType & 0xFFFF0000)
     {
-       info.m_Type = lpType;
-	   info.Type_Type =1;
+       info.mType = lpType;
     }
-    else
+
+	if(r)
     {
-		info.Type_Type =0;
-		info.m_Type .Format ("%u",(USHORT)lpType);
-	}
+    	//Only append if resource size is larger than a few bytes
+	    HRSRC hRes = ::FindResourceA((HMODULE) hModule, lpName, lpType);
 
-	if (infos)
-		infos->Add (info);
+		DWORD sz = SizeofResource((HMODULE)hModule, hRes);
 
-    return TRUE;
+        if(sz > 256)
+        {
+			r->append(info.mName);
+        }
+    }
+
+    return true;
 }
 
-BOOL CRes::LoadAllResource()
-{
-  if ( hExe)
- {
-	return EnumResourceTypes((HMODULE)hExe,              // module handle
-    (ENUMRESTYPEPROC)EnumTypesFunc,  // callback function
-    (LONG)&m_Infos);                              // extra parameter
 
-  }
-  return FALSE;
-}
-
-HRSRC CRes::GetLoadedRes()
-{
-	return hResLoad;
-}
-
-LPSTR CRes::LockRes()
-{
-	lpResLock =(char*)::LockResource(hResLoad);
-	return lpResLock;
-}

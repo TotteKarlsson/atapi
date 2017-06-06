@@ -2,6 +2,7 @@
 #include "atSounds.h"
 #include "mtkWin32Utils.h"
 #include <windows.h>
+#include "resources/atResourceManager.h"
 
 //---------------------------------------------------------------------------
 //Non exports
@@ -41,7 +42,8 @@ AT_CORE StringList getSoundResources()
         return list;
     }
 
-
+	ResourceManager m;
+    list = m.loadAllResources();
 
     return list;
 }

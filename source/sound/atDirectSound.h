@@ -47,6 +47,6 @@ class AT_CORE DirectSound : public ATObject
         string						mResourceName;
 };
 
-//#pragma message("linking with Microsoft's DirectSound library ...")
+#pragma message("linking with Microsoft's DirectSound library ...")
 #pragma comment(lib, "dsound.lib")
 #endif

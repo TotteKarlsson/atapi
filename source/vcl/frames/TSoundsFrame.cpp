@@ -2,7 +2,7 @@
 #pragma hdrstop
 #include "TSoundsFrame.h"
 #include "mtkVCLUtils.h"
-
+#include "sound/atSounds.h"
 using namespace mtk;
 
 //---------------------------------------------------------------------------
@@ -18,8 +18,14 @@ __fastcall TSoundsFrame::TSoundsFrame(TComponent* Owner)
 
 void TSoundsFrame::populate()
 {
-	SoundsLB->AddItem("BUTTON_CLICK_2", NULL);
-	SoundsLB->AddItem("BUTTON_CLICK_3", NULL);
+	//Populate listbox with available sound resources
+	StringList snds = getSoundResources();
+
+	SoundsLB->Clear();
+    for(int i = 0; i < snds.count(); i++)
+    {
+    	SoundsLB->AddItem(vclstr(snds[i]), NULL);
+    }
 }
 
 //---------------------------------------------------------------------------

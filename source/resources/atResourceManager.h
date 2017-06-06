@@ -1,49 +1,55 @@
 #ifndef atResourceManagerH
 #define atResourceManagerH
+#include <string>
+#include "atExporter.h"
+#include "mtkStringList.h"
 //---------------------------------------------------------------------------
+
+using std::string;
+using mtk::StringList;
 
 struct ResourceInfo
 {
-	int Type_Type;//0 = NUMBER,other string
-	CString m_Name;
-	CString	m_Type;
-	CString m_ReadibleName;
-	ResourceInfo(const CString &name, const CString& type):m_Name(name),m_Type(type),Type_Type(0){};
-	ResourceInfo():m_Type(_T("")),Type_Type(0){};
-	ResourceInfo(const ResourceInfo &info){*this = info;};
-	ResourceInfo& operator= (const ResourceInfo& info)
+	string 		mName;
+	string		mType;
+                ResourceInfo(const string &name, const string& type)
+                :
+                mName(name),mType(type)
+                {}
+
+                ResourceInfo()
+                :
+                mType(_T(""))
+                {}
+
+                ResourceInfo(const ResourceInfo &info)
+                {
+                	*this = info;
+                }
+
+	ResourceInfo& operator=(const ResourceInfo& info)
 	{
-		m_Name = info.m_Name ;
-		m_Type = info.m_Type ;
-		m_ReadibleName = info.m_ReadibleName ;
-		Type_Type = info.Type_Type ;
+		mName = info.mName;
+		mType = info.mType;
 		return *this;
 	}
-
 };
-class CRes
+
+class AT_CORE ResourceManager
 {
-public:
-	CRes();
-	virtual ~CRes();
-public:
-	LPSTR LockRes();
-	HRSRC GetLoadedRes();
-	BOOL LoadAllResource();
-	static BOOL EnumNames( HANDLE hModule, LPCTSTR lpType, LPTSTR lpName, LONG lParam);
-	static BOOL EnumTypesFunc( HANDLE hModule, LPSTR lpType, LONG lParam);
-	BOOL LoadResource();
-	BOOL FindResource( int res,LPSTR type);
-	void FreeIt();
-	BOOL LoadExe();
-	CString m_Path;
-	CArray<ResourceInfo, ResourceInfo&> m_Infos;
-protected:
-	HRSRC hResLoad;     // handle to loaded resource
-	HANDLE hExe;        // handle to existing .EXE file
-	HRSRC hRes;         // handle/ptr. to res. info. in hExe
-	//HANDLE hUpdateRes;  // update resource handle
-	char *lpResLock;    // pointer to resource data
+    public:
+        						            ResourceManager();
+        virtual 				            ~ResourceManager();
+
+        StringList				            loadAllResources();
+        bool                                findResource(int res, const string& type);
+        bool                                loadResourceDLL();
+
+    protected:
+        HANDLE 					            mModuleHandle;
+        StringList							mResources;
+        static bool                         EnumNames(HANDLE hModule, LPCTSTR lpType, LPTSTR lpName, LONG lParam);
+        static bool                         EnumTypesFunc(HANDLE hModule, LPSTR lpType, LONG lParam);
 };
 
 

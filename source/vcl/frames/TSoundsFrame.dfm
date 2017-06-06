@@ -20,7 +20,6 @@ object SoundsFrame: TSoundsFrame
       ItemHeight = 13
       TabOrder = 0
       OnClick = SoundsLBClick
-      ExplicitHeight = 296
     end
     object PlayBtn: TButton
       Left = 264

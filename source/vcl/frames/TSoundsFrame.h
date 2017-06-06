@@ -12,14 +12,14 @@ class TSoundsFrame : public TFrame
 {
     __published:	// IDE-managed Components
         TGroupBox *GroupBox1;
-	TListBox *SoundsLB;
-	TButton *PlayBtn;
-	TTrackBar *TrackBar1;
-	TButton *StopBtn;
-	TCheckBox *RepeatSoundCB;
-	void __fastcall PlayBtnClick(TObject *Sender);
-	void __fastcall TrackBar1Change(TObject *Sender);
-	void __fastcall SoundsLBClick(TObject *Sender);
+		TListBox *SoundsLB;
+		TButton *PlayBtn;
+		TTrackBar *TrackBar1;
+		TButton *StopBtn;
+		TCheckBox *RepeatSoundCB;
+		void __fastcall PlayBtnClick(TObject *Sender);
+		void __fastcall TrackBar1Change(TObject *Sender);
+		void __fastcall SoundsLBClick(TObject *Sender);
 
     private:
         DirectSound						mSound;

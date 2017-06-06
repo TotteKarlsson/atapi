@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -350,6 +350,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="process\atTriggerFunction.cpp">
             <DependentOn>process\atTriggerFunction.h</DependentOn>
             <BuildOrder>51</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="resources\atResourceManager.cpp">
+            <BuildOrder>75</BuildOrder>
         </CppCompile>
         <CppCompile Include="serial\atSerial.cpp">
             <DependentOn>serial\atSerial.h</DependentOn>
