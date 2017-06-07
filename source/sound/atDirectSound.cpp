@@ -45,18 +45,83 @@ DirectSound::~DirectSound()
 	}
 }
 
+void DirectSound::setName(const string& n)
+{
+    if(n == mResourceName)
+    {
+    	return;
+    }
+
+	mResourceName = n;
+    if(mHandle)
+    {
+    	create(mResourceName, mHandle);
+    }
+}
+
+void DirectSound::setVolume(int volume)
+{
+	if(mDirectSoundBuffer)
+    {
+    	mDirectSoundBuffer->SetVolume(volume);
+    }
+}
+
+bool DirectSound::play(DWORD dwStartPosition, bool loop)
+{
+	if(!isValid())
+    {
+		return false;		// no chance to play the sound ...
+    }
+
+	if(dwStartPosition > mTheSoundBytes)
+    {
+    	dwStartPosition = mTheSoundBytes;
+    }
+
+	mDirectSoundBuffer->SetCurrentPosition(dwStartPosition);
+
+	if( DSERR_BUFFERLOST == mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0) )
+    {
+		// another application had stolen our buffer
+		// Note that a "Restore()" is not enough, because
+		// the sound data is invalid after Restore().
+		setSoundData(mTheSound, mTheSoundBytes);
+
+		// Try playing again
+		mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0);
+        return true;
+	}
+    return true;
+}
+
+bool DirectSound::stop()
+{
+	if( isValid() )
+    {
+		mDirectSoundBuffer->Stop();
+        return true;
+    }
+	return false;
+}
+
+bool DirectSound::pause()
+{
+	return stop();
+}
+
 bool DirectSound::create(const string& resName, HWND hWnd)
 {
 	mHandle = hWnd;
-	if(isValid() && resName == mResourceName)
-    {
-    	return true;
-    }
+//	if(isValid() && resName == mResourceName)
+//    {
+//    	return true;
+//    }
 
 	//////////////////////////////////////////////////////////////////
 	// load resource
 	HINSTANCE modHandle = ::GetModuleHandle("atResources.dll");
-	HRSRC hResInfo = ::FindResourceA(modHandle, resName.c_str(), MAKEINTRESOURCE(10));
+	HRSRC hResInfo 		= ::FindResourceA(modHandle, resName.c_str(), MAKEINTRESOURCE(10));
 
 	if(hResInfo == 0)
     {
@@ -228,15 +293,7 @@ bool DirectSound::createSoundBuffer(WAVEFORMATEX * pcmwf)
 	return true;
 }
 
-void DirectSound::setVolume(int volume)
-{
-	if(mDirectSoundBuffer)
-    {
-    	mDirectSoundBuffer->SetVolume(volume);
-    }
-}
-
-bool DirectSound::setSoundData(void * pSoundData, DWORD dwSoundSize)
+bool DirectSound::setSoundData(void* pSoundData, DWORD dwSoundSize)
 {
 	LPVOID lpvPtr1;
 	DWORD dwBytes1;
@@ -266,49 +323,6 @@ bool DirectSound::setSoundData(void * pSoundData, DWORD dwSoundSize)
 	return false;
 }
 
-bool DirectSound::play(DWORD dwStartPosition, bool loop)
-{
-	if(!isValid())
-    {
-		return false;		// no chance to play the sound ...
-    }
-
-	if(dwStartPosition > mTheSoundBytes)
-    {
-    	dwStartPosition = mTheSoundBytes;
-    }
-
-	mDirectSoundBuffer->SetCurrentPosition(dwStartPosition);
-
-	if( DSERR_BUFFERLOST == mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0) )
-    {
-		// another application had stolen our buffer
-		// Note that a "Restore()" is not enough, because
-		// the sound data is invalid after Restore().
-		setSoundData(mTheSound, mTheSoundBytes);
-
-		// Try playing again
-		mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0);
-        return true;
-	}
-    return true;
-}
-
-bool DirectSound::stop()
-{
-	if( isValid() )
-    {
-		mDirectSoundBuffer->Stop();
-        return true;
-    }
-	return false;
-}
-
-bool DirectSound::pause()
-{
-	return stop();
-}
-
 bool DirectSound::continuePlay()
 {
 	if(isValid())
@@ -329,23 +343,22 @@ static void DSError(HRESULT hRes)
 {
 	switch(hRes)
     {
-		case DS_OK: 					Log(lError) << ("NO ERROR\n"); 			        break;
-		case DSERR_ALLOCATED: 			Log(lError) << ("ALLOCATED\n"); 		        break;
-		case DSERR_INVALIDPARAM: 		Log(lError) << ("INVALIDPARAM\n"); 		        break;
-		case DSERR_OUTOFMEMORY: 		Log(lError) << ("OUTOFMEMORY\n"); 		        break;
-		case DSERR_UNSUPPORTED: 		Log(lError) << ("UNSUPPORTED\n"); 		        break;
-		case DSERR_NOAGGREGATION: 		Log(lError) << ("NOAGGREGATION\n"); 	        break;
-		case DSERR_UNINITIALIZED: 		Log(lError) << ("UNINITIALIZED\n"); 	        break;
-		case DSERR_BADFORMAT: 			Log(lError) << ("BADFORMAT\n"); 		        break;
-		case DSERR_ALREADYINITIALIZED: 	Log(lError) << ("ALREADYINITIALIZED\n");        break;
-		case DSERR_BUFFERLOST: 			Log(lError) << ("BUFFERLOST\n"); 		        break;
-		case DSERR_CONTROLUNAVAIL: 		Log(lError) << ("CONTROLUNAVAIL\n"); 	        break;
-		case DSERR_GENERIC: 			Log(lError) << ("GENERIC\n"); 			        break;
-		case DSERR_INVALIDCALL: 		Log(lError) << ("INVALIDCALL\n"); 		        break;
-		case DSERR_OTHERAPPHASPRIO: 	Log(lError) << ("OTHERAPPHASPRIO\n"); 	        break;
-		case DSERR_PRIOLEVELNEEDED: 	Log(lError) << ("PRIOLEVELNEEDED\n"); 	        break;
+		case DS_OK: 					Log(lError) << "NO ERROR"; 			       	    break;
+		case DSERR_ALLOCATED: 			Log(lError) << "ALLOCATED"; 		            break;
+		case DSERR_INVALIDPARAM: 		Log(lError) << "INVALIDPARAM"; 		            break;
+		case DSERR_OUTOFMEMORY: 		Log(lError) << "OUTOFMEMORY"; 		            break;
+		case DSERR_UNSUPPORTED: 		Log(lError) << "UNSUPPORTED"; 		            break;
+		case DSERR_NOAGGREGATION: 		Log(lError) << "NOAGGREGATION"; 	            break;
+		case DSERR_UNINITIALIZED: 		Log(lError) << "UNINITIALIZED"; 	            break;
+		case DSERR_BADFORMAT: 			Log(lError) << "BADFORMAT"; 		            break;
+		case DSERR_ALREADYINITIALIZED: 	Log(lError) << "ALREADYINITIALIZED";            break;
+		case DSERR_BUFFERLOST: 			Log(lError) << "BUFFERLOST"; 		            break;
+		case DSERR_CONTROLUNAVAIL: 		Log(lError) << "CONTROLUNAVAIL"; 	            break;
+		case DSERR_GENERIC: 			Log(lError) << "GENERIC"; 			            break;
+		case DSERR_INVALIDCALL: 		Log(lError) << "INVALIDCALL"; 		            break;
+		case DSERR_OTHERAPPHASPRIO: 	Log(lError) << "OTHERAPPHASPRIO"; 	            break;
+		case DSERR_PRIOLEVELNEEDED: 	Log(lError) << "PRIOLEVELNEEDED"; 	            break;
 		default: 						Log(lError) << "Direct Sound error: "<<hRes;    break;
 	}
 }
-
 

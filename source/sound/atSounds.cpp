@@ -44,11 +44,8 @@ AT_CORE StringList getSoundResources()
 
 	ResourceManager m;
     list = m.loadAllResources();
-
     return list;
 }
-
-//Non working SHORT_BEEP_1, CLOSING_DOWN_1, SHORT_BEEP_2
 
 void playABSound(ABSound a, long flags)
 {

@@ -12,6 +12,9 @@
 #include <Vcl.Bind.DBEngExt.hpp>
 #include <Vcl.Bind.Editors.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include "mtkProperty.h"
+#include "sound/atApplicationSound.h"
+
 //---------------------------------------------------------------------------
 
 namespace mtk
@@ -25,16 +28,20 @@ class PACKAGE TApplicationSounds : public TFrame
 {
     __published:	// IDE-managed Components
         TGroupBox *GroupBox1;
-        TListBox *ApplicationSoundsCB;
+	TListBox *ApplicationSoundsLB;
         TComboBox *SoundCB;
         TTrackBar *VolumeTB;
         TCheckBox *RepeatCB;
-        TIntLabel *VolumeLbl;
         TBindingsList *BindingsList1;
+	TButton *PlayBtn;
+	void __fastcall ApplicationSoundsLBClick(TObject *Sender);
+	void __fastcall SoundCBCloseUp(TObject *Sender);
+	void __fastcall PlayBtnClick(TObject *Sender);
+	void __fastcall VolumeTBChange(TObject *Sender);
 
     private:
 		IniFileProperties*				mSounds;
-
+		Property<ApplicationSound>* 	getCurrentSoundProperty();
     public:
         					__fastcall  TApplicationSounds(TComponent* Owner);
 		void							populate(IniFileProperties& props);

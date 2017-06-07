@@ -26,6 +26,12 @@ void TSoundsFrame::populate()
     {
     	SoundsLB->AddItem(vclstr(snds[i]), NULL);
     }
+
+    if(SoundsLB->Count)
+    {
+		SoundsLB->ItemIndex = 0;
+		SoundsLBClick(NULL);
+    }
 }
 
 //---------------------------------------------------------------------------
@@ -38,11 +44,10 @@ void __fastcall TSoundsFrame::PlayBtnClick(TObject *Sender)
     }
     else if (b == PlayBtn)
     {
-        if(!mSound.isValid())
+        if(mSound.isValid())
         {
-	    	mSound.create("BUTTON_CLICK_2", this->Handle);
-        }
-	    mSound.play(0, RepeatSoundCB->Checked ? 1 : 0);
+		    mSound.play(0, RepeatSoundCB->Checked ? 1 : 0);
+	    }
     }
 }
 

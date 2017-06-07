@@ -12,19 +12,20 @@ class AT_CORE DirectSound : public ATObject
 							        DirectSound(const string& resName, HWND hWnd = NULL);        virtual 					~DirectSound();        bool						create(const string& resName, HWND hWnd = NULL);
 
         bool			            isValid() const;
-        bool			            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
-		void						setVolume(int volume);
+		virtual void	 			setVolume(int volume);
+        virtual bool   	            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
+
         bool			            stop();
         bool			            pause();
         bool			            continuePlay();
-        bool						purge();
+//        bool						purge();
+
         void						setHandle(HWND h){create(mResourceName, h);}
         HWND						getHandle() const {return mHandle;}
 
-		void						setName(const string& n){mResourceName = n;}
+		void						setName(const string& n);
         string						getName() const {return mResourceName;}
         string						getResourceName() const {return mResourceName;}
-
 
     protected:
                                     // Alternativly you can specify the sound by yourself

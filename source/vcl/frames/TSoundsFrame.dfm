@@ -34,10 +34,12 @@ object SoundsFrame: TSoundsFrame
       Left = 264
       Top = 224
       Width = 150
-      Height = 45
+      Height = 25
       Max = 0
       Min = -10000
+      ShowSelRange = False
       TabOrder = 2
+      TickStyle = tsNone
       OnChange = TrackBar1Change
     end
     object StopBtn: TButton

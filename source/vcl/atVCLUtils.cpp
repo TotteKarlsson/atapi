@@ -144,6 +144,34 @@ int selectAndClickListBoxItem(TListBox* lb, const string& item)
     return -1;
 }
 
+string getSelectedItem(TComboBox* cb)
+{
+	if(!cb || cb->ItemIndex == -1)
+    {
+    	return gEmptyString;
+    }
+	return stdstr(cb->Items->Strings[cb->ItemIndex]);
+}
+
+int selectItem(TComboBox* cb, const string& name)
+{
+	if(!cb)
+    {
+    	return -1;
+    }
+
+	//find the item in the list box;
+	for(int i = 0; i < cb->Items->Count; i++)
+    {
+    	if(compareStrings(stdstr(cb->Items->Strings[i]) , name))
+        {
+        	cb->ItemIndex = i;
+            return i;
+        }
+    }
+    return -1;
+}
+
 int selectAndClickComboBoxItem(TComboBox* cb, const string& name)
 {
 	if(!cb)

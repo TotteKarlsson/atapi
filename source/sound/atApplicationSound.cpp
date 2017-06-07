@@ -19,9 +19,7 @@ ApplicationSound::ApplicationSound(const ApplicationSound& s)
 DirectSound(s.getName(), s.getHandle()),
 mVolume(s.getVolume()),
 mRepeats(s.repeats())
-{
-
-}
+{}
 
 ApplicationSound& ApplicationSound::operator=(const ApplicationSound& rhs)
 {
@@ -36,15 +34,25 @@ ApplicationSound& ApplicationSound::operator=(const ApplicationSound& rhs)
 
     return *this;
 }
-namespace mtk
-{
 
-string	toString(const ApplicationSound& sound)
+void ApplicationSound::setVolume(long v)
 {
-	stringstream s;
-
-    s << sound.getName()<<","<<sound.getVolume()<<","<<mtk::toString(sound.repeats());
-    return s.str();
+	mVolume = v;
+	DirectSound::setVolume(v);
 }
 
+bool ApplicationSound::play(DWORD sPos, bool loop)
+{
+	DirectSound::setVolume(mVolume);
+	return DirectSound::play(sPos, loop);
+}
+
+namespace mtk
+{
+    string	toString(const ApplicationSound& sound)
+    {
+        stringstream s;
+        s << sound.getName()<<","<<sound.getVolume()<<","<<mtk::toString(sound.repeats());
+        return s.str();
+    }
 }

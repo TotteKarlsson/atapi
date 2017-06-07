@@ -17,8 +17,8 @@ namespace mtk
 AT_CORE	string	toString(const ApplicationSound& sound);
 }
 
-//!An application sound is a sound that is associated to a part of an application. Its properties are typically stored in
-//!an ini file
+//!An application sound object is a sound that is associated to a part of an application. Its properties are typically stored in
+//!an ini file.
 class AT_CORE ApplicationSound : public DirectSound
 {
 	public:
@@ -26,8 +26,10 @@ class AT_CORE ApplicationSound : public DirectSound
 							            ApplicationSound(const ApplicationSound& s);
 		ApplicationSound&	            operator=(const ApplicationSound& rhs);
 
+        void				            setVolume(long v);
+        bool   	  			   	        play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
         long				            getVolume() const {return mVolume;}
-        void				            setVolume(long v){mVolume = v;}
+
 
         bool				            repeats() const {return mRepeats;}
         void				            setRepeats(bool val){mRepeats = val;}
