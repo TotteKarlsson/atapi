@@ -13,38 +13,31 @@ class AT_CORE DirectSound : public ATObject
 
         bool			            isValid() const;
 		virtual void	 			setVolume(int volume);
-        virtual bool   	            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
+        void						setHandle(HWND h);
+        HWND						getHandle() const;
 
+		void						setName(const string& n);
+        string						getName() const;
+        string						getResourceName() const;
+
+        virtual bool   	            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
         bool			            stop();
         bool			            pause();
         bool			            continuePlay();
-//        bool						purge();
-
-        void						setHandle(HWND h){create(mResourceName, h);}
-        HWND						getHandle() const {return mHandle;}
-
-		void						setName(const string& n);
-        string						getName() const {return mResourceName;}
-        string						getResourceName() const {return mResourceName;}
 
     protected:
-                                    // Alternativly you can specify the sound by yourself
-                                    // Note that the class does not copy the entire data ! Instead
-                                    // a pointer to the given data will be stored !
-                                    // You can load an entire WAV file into memory and then call this
-                                    // Create() method.
         bool						create(LPVOID pSoundData, HWND hWnd =  NULL);
         bool                        setSoundData(LPVOID pSoundData, DWORD dwSoundSize);
         bool                        createSoundBuffer(WAVEFORMATEX * pcmwf);
         bool                        getWaveData(void * pRes, WAVEFORMATEX * & pWaveHeader, void * & pbWaveData, DWORD & cbWaveSize);
 
     private:
+        static DWORD 				mNrOfInstances;
     	HWND						mHandle;
         LPVOID 						mTheSound;
         DWORD 						mTheSoundBytes;
         LPDIRECTSOUNDBUFFER 		mDirectSoundBuffer;
         LPDIRECTSOUND 				mDirectSoundStructure;
-        static DWORD 				mNrOfInstances;
         string						mResourceName;
 };
 

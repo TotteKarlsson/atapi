@@ -5,30 +5,24 @@
 
 using namespace mtk;
 
-// The following macro is defined since DirectX 5, but will work with
-// older versions too.
-#ifndef DSBLOCK_ENTIREBUFFER
-	#define DSBLOCK_ENTIREBUFFER        0x00000002
-#endif
-
 DWORD DirectSound::mNrOfInstances;
 
 static void DSError(HRESULT hRes);
 
 DirectSound::DirectSound(const string& resName, HWND hWnd)
 :
-mDirectSoundBuffer(0),
-mTheSound(0),
+mDirectSoundBuffer(NULL),
+mTheSound(NULL),
 mTheSoundBytes(0),
 mResourceName(resName),
-mHandle(hWnd)
+mHandle(hWnd),
+mDirectSoundStructure(NULL)
 {
-	mDirectSoundStructure = 0;
-	++mNrOfInstances;
     if(mResourceName.size())
     {
     	create(mResourceName);
     }
+	++mNrOfInstances;
 }
 
 DirectSound::~DirectSound()
@@ -41,7 +35,7 @@ DirectSound::~DirectSound()
 	if( !--mNrOfInstances && mDirectSoundStructure )
     {
 		mDirectSoundStructure->Release();
-		mDirectSoundStructure = 0;
+		mDirectSoundStructure = NULL;
 	}
 }
 
@@ -67,6 +61,27 @@ void DirectSound::setVolume(int volume)
     }
 }
 
+void DirectSound::setHandle(HWND h)
+{
+	create(mResourceName, h);
+}
+
+HWND DirectSound::getHandle() const
+{
+	return mHandle;
+}
+
+string DirectSound::getName() const
+{
+	return mResourceName;
+}
+
+string DirectSound::getResourceName() const
+{
+	return mResourceName;
+}
+
+
 bool DirectSound::play(DWORD dwStartPosition, bool loop)
 {
 	if(!isValid())
@@ -81,7 +96,7 @@ bool DirectSound::play(DWORD dwStartPosition, bool loop)
 
 	mDirectSoundBuffer->SetCurrentPosition(dwStartPosition);
 
-	if( DSERR_BUFFERLOST == mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0) )
+	if(DSERR_BUFFERLOST == mDirectSoundBuffer->Play(0, 0, loop ? DSBPLAY_LOOPING : 0) )
     {
 		// another application had stolen our buffer
 		// Note that a "Restore()" is not enough, because
@@ -154,22 +169,7 @@ bool DirectSound::create(LPVOID pSoundData, HWND hWnd)
 	// create direct sound object
 	if(mDirectSoundStructure == 0)
     {
-		HRESULT hRes = DS_OK;
-		short nRes = 0;
-
-		do
-        {
-        	if(nRes)
-            {
-				::Sleep(500);
-            }
-			hRes = ::DirectSoundCreate(0, &mDirectSoundStructure, 0);
-			++nRes;
-
-		}
-        while( nRes < 10 && (hRes == DSERR_ALLOCATED || hRes == DSERR_NODRIVER) );
-
-		if(hRes != DS_OK)
+		if(::DirectSoundCreate(0, &mDirectSoundStructure, 0) != DS_OK)
         {
 			return false;
         }
@@ -297,6 +297,7 @@ bool DirectSound::setSoundData(void* pSoundData, DWORD dwSoundSize)
 {
 	LPVOID lpvPtr1;
 	DWORD dwBytes1;
+
 	// Obtain write pointer.
 	HRESULT hr = mDirectSoundBuffer->Lock(0, 0, &lpvPtr1, &dwBytes1, 0, 0, DSBLOCK_ENTIREBUFFER);
 
@@ -319,7 +320,6 @@ bool DirectSound::setSoundData(void* pSoundData, DWORD dwSoundSize)
         }
 	}
 
-	// Lock, Unlock, or Restore failed.
 	return false;
 }
 
