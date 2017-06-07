@@ -59,6 +59,7 @@ void __fastcall TApplicationSounds::ApplicationSoundsLBClick(TObject *Sender)
 			ApplicationSound& s = p->getReference();
             VolumeTB->Position = s.getVolume();
             RepeatCB->Checked = s.repeats();
+            EnabledCB->Checked = s.enabled();
             selectItem(SoundCB, s.getName());
         }
     }
@@ -111,6 +112,22 @@ void __fastcall TApplicationSounds::VolumeTBChange(TObject *Sender)
         {
 			ApplicationSound& s = p->getReference();
             s.setVolume(VolumeTB->Position);
+        }
+    }
+}
+
+
+void __fastcall TApplicationSounds::EnabledCBClick(TObject *Sender)
+{
+    int itemIndex = ApplicationSoundsLB->ItemIndex;
+    if(itemIndex != -1 )
+    {
+    	Property<ApplicationSound>* p = getCurrentSoundProperty();
+        if(p)
+        {
+			ApplicationSound& s = p->getReference();
+            s.setVolume(VolumeTB->Position);
+            EnabledCB->Checked ? s.enable() : s.disable();
         }
     }
 }

@@ -11,11 +11,11 @@ static void DSError(HRESULT hRes);
 
 DirectSound::DirectSound(const string& resName, HWND hWnd)
 :
-mDirectSoundBuffer(NULL),
 mTheSound(NULL),
 mTheSoundBytes(0),
 mResourceName(resName),
 mHandle(hWnd),
+mDirectSoundBuffer(NULL),
 mDirectSoundStructure(NULL)
 {
     if(mResourceName.size())
@@ -27,7 +27,7 @@ mDirectSoundStructure(NULL)
 
 DirectSound::~DirectSound()
 {
-	if( mDirectSoundBuffer )
+	if(mDirectSoundBuffer)
     {
 		mDirectSoundBuffer->Release();
     }
@@ -128,18 +128,14 @@ bool DirectSound::pause()
 bool DirectSound::create(const string& resName, HWND hWnd)
 {
 	mHandle = hWnd;
-//	if(isValid() && resName == mResourceName)
-//    {
-//    	return true;
-//    }
 
-	//////////////////////////////////////////////////////////////////
 	// load resource
 	HINSTANCE modHandle = ::GetModuleHandle("atResources.dll");
-	HRSRC hResInfo 		= ::FindResourceA(modHandle, resName.c_str(), MAKEINTRESOURCE(10));
+	HRSRC hResInfo 		= ::FindResourceA(modHandle, resName.c_str(), RT_RCDATA);
 
 	if(hResInfo == 0)
     {
+    	Log(lError) << "Failed to find resource: "<<resName<<" in resource DLL";
 		return false;
     }
 

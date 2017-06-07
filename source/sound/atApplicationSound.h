@@ -14,7 +14,7 @@ using mtk::IniFile;
 class ApplicationSound;
 namespace mtk
 {
-AT_CORE	string	toString(const ApplicationSound& sound);
+	AT_CORE	string	toString(const ApplicationSound& sound);
 }
 
 //!An application sound object is a sound that is associated to a part of an application. Its properties are typically stored in
@@ -22,7 +22,7 @@ AT_CORE	string	toString(const ApplicationSound& sound);
 class AT_CORE ApplicationSound : public DirectSound
 {
 	public:
-							            ApplicationSound(const string& name = mtk::gEmptyString, long vol = 0, bool repeats = false, HWND handle = NULL);
+							            ApplicationSound(const string& name = mtk::gEmptyString, long vol = 0, bool repeats = false, bool enabled = false, HWND handle = NULL);
 							            ApplicationSound(const ApplicationSound& s);
 		ApplicationSound&	            operator=(const ApplicationSound& rhs);
 
@@ -30,13 +30,16 @@ class AT_CORE ApplicationSound : public DirectSound
         bool   	  			   	        play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
         long				            getVolume() const {return mVolume;}
 
-
+        bool				            enabled() const {return mEnabled;}
+        void				            enable()  {mEnabled = true;}
+        void				            disable() {mEnabled = false;}
         bool				            repeats() const {return mRepeats;}
         void				            setRepeats(bool val){mRepeats = val;}
 
     private:
         long			                mVolume;
         bool			                mRepeats;
+        bool							mEnabled;
 };
 
 template<>
@@ -76,9 +79,9 @@ bool Property< ApplicationSound >::read(IniFile* iniFile, const string& section)
 
     StringList val(iniFile->readString(mKey, section, ""),',');
     ApplicationSound tempVal;
-    if(val.size() == 3)
+    if(val.size() == 4)
     {
-    	tempVal = ApplicationSound(val[0], mtk::toInt(val[1]), toBool(val[2]));
+    	tempVal = ApplicationSound(val[0], mtk::toInt(val[1]), toBool(val[2]), toBool(val[3]));
     }
 
     mWasRead = iniFile->wasItFound();

@@ -34,10 +34,13 @@ class PACKAGE TApplicationSounds : public TFrame
         TCheckBox *RepeatCB;
         TBindingsList *BindingsList1;
 	TButton *PlayBtn;
+	TCheckBox *EnabledCB;
+	TGroupBox *GroupBox2;
 	void __fastcall ApplicationSoundsLBClick(TObject *Sender);
 	void __fastcall SoundCBCloseUp(TObject *Sender);
 	void __fastcall PlayBtnClick(TObject *Sender);
 	void __fastcall VolumeTBChange(TObject *Sender);
+	void __fastcall EnabledCBClick(TObject *Sender);
 
     private:
 		IniFileProperties*				mSounds;
