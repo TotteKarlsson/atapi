@@ -1,8 +1,9 @@
 object SoundsFrame: TSoundsFrame
   Left = 0
   Top = 0
-  Width = 656
-  Height = 414
+  Width = 561
+  Height = 345
+  AutoSize = True
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0

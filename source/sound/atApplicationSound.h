@@ -26,7 +26,7 @@ class AT_CORE ApplicationSound : public DirectSound
 							            ApplicationSound(const ApplicationSound& s);
 		ApplicationSound&	            operator=(const ApplicationSound& rhs);
 
-        void				            setVolume(long v);
+        void				            setVolume(int v);
         bool   	  			   	        play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
         long				            getVolume() const {return mVolume;}
 

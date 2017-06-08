@@ -3,20 +3,17 @@
 #include "atJoyStickButtonStateEventDispatcher.h"
 #include "atJoyStickAxisStateEventDispatcher.h"
 #include "atJoyStickPOVStateEventDispatcher.h"
-
 #include <windows.h>
 #include <mmsystem.h>
 #include "mtkTimer.h"
 #include <utility>
 #include <deque>
 
-
 using mtk::Timer;
 using std::deque;
 typedef deque<JoyStickButtonStateEventDispatcher> 	ButtonDeque;
 typedef JoyStickAxisStateEventDispatcher 			JSAxis;
 typedef JoyStickPOVStateEventDispatcher 			JSPOV; //!Point of view dispatcher
-
 
 class ArrayBotJoyStick;
 
@@ -59,7 +56,6 @@ class AT_CORE JoyStickMessageDispatcher : public ATObject
 
             const int			                mNrOfButtons;
             bool 				                readCapabilities();
-
 			bool								checkCapabilities(int ID);
 			ButtonDeque 		                mButtons;
 

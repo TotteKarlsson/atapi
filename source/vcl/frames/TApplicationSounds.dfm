@@ -2,7 +2,8 @@ object ApplicationSounds: TApplicationSounds
   Left = 0
   Top = 0
   Width = 509
-  Height = 321
+  Height = 241
+  AutoSize = True
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0
@@ -12,7 +13,6 @@ object ApplicationSounds: TApplicationSounds
     Align = alTop
     Caption = 'Application Sounds'
     TabOrder = 0
-    ExplicitWidth = 673
     object ApplicationSoundsLB: TListBox
       Left = 2
       Top = 15
@@ -31,15 +31,12 @@ object ApplicationSounds: TApplicationSounds
       Align = alClient
       Caption = 'Sound Properties'
       TabOrder = 1
-      ExplicitLeft = 168
-      ExplicitWidth = 502
       object EnabledCB: TCheckBox
         Left = 24
         Top = 143
         Width = 97
         Height = 17
         Caption = 'Enabled'
-        Enabled = False
         TabOrder = 0
         OnClick = EnabledCBClick
       end
@@ -57,7 +54,7 @@ object ApplicationSounds: TApplicationSounds
         Top = 120
         Width = 97
         Height = 17
-        Caption = 'RepeatCB'
+        Caption = 'Repeat'
         TabOrder = 2
         Visible = False
       end
@@ -87,7 +84,7 @@ object ApplicationSounds: TApplicationSounds
     Methods = <>
     OutputConverters = <>
     UseAppManager = True
-    Left = 324
-    Top = 181
+    Left = 148
+    Top = 165
   end
 end

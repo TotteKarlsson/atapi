@@ -5,7 +5,6 @@
 #include "atJoyStickAxis.h"
 #include "atJoyStickButton.h"
 #include "atJoyStickMessageDispatcher.h"
-
 //---------------------------------------------------------------------------
 
 /*!The joystick class is designed for the ArrayBot hardware. Joystick buttons and

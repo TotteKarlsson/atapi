@@ -38,7 +38,7 @@ ApplicationSound& ApplicationSound::operator=(const ApplicationSound& rhs)
     return *this;
 }
 
-void ApplicationSound::setVolume(long v)
+void ApplicationSound::setVolume(int v)
 {
 	mVolume = v;
 	DirectSound::setVolume(v);
