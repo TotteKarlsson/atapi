@@ -179,6 +179,22 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TMotorMoveProcessFrame.h</DependentOn>
             <BuildOrder>23</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TNavatarPresetsFrame.cpp">
+            <DependentOn>frames\TNavatarPresetsFrame.h</DependentOn>
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TNavitarMotorFrame.cpp">
+            <Form>NavitarMotorFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TNavitarMotorFrame.h</DependentOn>
+            <BuildOrder>29</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TNavitarPreset.cpp">
+            <Form>NavitarPreset</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TNavitarPreset.h</DependentOn>
+            <BuildOrder>30</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TParallellProcessesFrame.cpp">
             <Form>ParallellProcessesFrame</Form>
             <DependentOn>frames\TParallellProcessesFrame.h</DependentOn>
@@ -253,6 +269,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="frames\TNavitarPreset.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

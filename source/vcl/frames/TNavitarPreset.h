@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 
 class NavitarMotorController;
-class TNavitarPreset : public TFrame
+class PACKAGE TNavitarPreset : public TFrame
 {
     __published:	// IDE-managed Components
         TIntegerLabeledEdit *FocusPos;

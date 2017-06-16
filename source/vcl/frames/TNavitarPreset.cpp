@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TNavitarPreset.h"
-#include "atNavitarMotorController.h"
+#include "navitar/atNavitarMotorController.h"
 #pragma package(smart_init)
 #pragma link "TIntegerLabeledEdit"
 #pragma resource "*.dfm"

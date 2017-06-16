@@ -2,13 +2,13 @@
 #define atNavitarMotorControllerH
 #include "navitar/navusbAPI.h"
 #include <string>
-//#include "atATObject.h"
+#include "atATObject.h"
 #include "atNavitarMotor.h"
 //---------------------------------------------------------------------------
 
 using std::string;
 //!The NavitarMotorControl class is a Wrapper class for the Navitar USB motor controller API
-class NavitarMotorController //: public ATObject
+class AT_CORE NavitarMotorController : public ATObject
 {
    	friend NavitarMotor;
 	public:

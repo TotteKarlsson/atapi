@@ -25,3 +25,6 @@
 #pragma comment(lib, "Thorlabs.MotionControl.TCube.DCServoB.lib")
 #pragma comment(lib, "Thorlabs.MotionControl.TCube.BrushlessMotorB.lib")
 
+//Navitar
+#pragma comment(lib, "navusbAPI_B1.lib")
+

@@ -10,7 +10,7 @@
 //---------------------------------------------------------------------------
 
 class NavitarMotorController;
-class TPresetsFrame : public TFrame
+class PACKAGE TPresetsFrame : public TFrame
 {
     __published:
 	TGroupBox *GroupBox1;

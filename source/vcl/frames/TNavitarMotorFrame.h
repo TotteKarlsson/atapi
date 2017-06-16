@@ -13,7 +13,7 @@
 
 class NavitarMotor;
 
-class TNavitarMotorFrame : public TFrame
+class PACKAGE TNavitarMotorFrame : public TFrame
 {
     __published:
 		TGroupBox *MotorGB;

@@ -12,8 +12,6 @@ object NavitarMotorFrame: TNavitarMotorFrame
     Align = alClient
     Caption = 'UnitGB'
     TabOrder = 0
-    ExplicitWidth = 390
-    ExplicitHeight = 248
     object MaxPosLabel: TIntLabel
       Left = 273
       Top = 92

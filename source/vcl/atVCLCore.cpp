@@ -2,22 +2,24 @@
 #pragma hdrstop
 USEFORM("frames\TSequenceInfoFrame.cpp", SequenceInfoFrame); /* TFrame: File Type */
 USEFORM("frames\TSequencerButtonsFrame.cpp", SequencerButtonsFrame); /* TFrame: File Type */
-USEFORM("frames\TArrayCamRequestFrame.cpp", ArrayCamRequestFrame); /* TFrame: File Type */
+USEFORM("frames\TTimeDelayFrame.cpp", TimeDelayFrame); /* TFrame: File Type */
+USEFORM("frames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
+USEFORM("frames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
 USEFORM("frames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
 USEFORM("frames\TParallellProcessesFrame.cpp", ParallellProcessesFrame);
-USEFORM("frames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
 USEFORM("frames\TXYZPositionsFrame.cpp", XYZPositionsFrame); /* TFrame: File Type */
 USEFORM("frames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
-USEFORM("frames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
 USEFORM("forms\TProcessSequenceControlForm.cpp", ProcessSequenceControlForm);
-USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
 USEFORM("forms\TYesNoForm.cpp", YesNoForm);
 USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
+USEFORM("frames\TArrayCamRequestFrame.cpp", ArrayCamRequestFrame); /* TFrame: File Type */
+USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
 USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
 USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
-USEFORM("frames\TTimeDelayFrame.cpp", TimeDelayFrame); /* TFrame: File Type */
+USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
+USEFORM("frames\TNavitarPreset.cpp", NavitarPreset); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

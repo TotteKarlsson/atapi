@@ -12,10 +12,6 @@ object PresetsFrame: TPresetsFrame
     Align = alClient
     Caption = 'Presets'
     TabOrder = 0
-    ExplicitLeft = 48
-    ExplicitTop = 112
-    ExplicitWidth = 361
-    ExplicitHeight = 217
     inline TNavitarPreset1: TNavitarPreset
       Left = 2
       Top = 81
@@ -23,24 +19,12 @@ object PresetsFrame: TPresetsFrame
       Height = 66
       Align = alTop
       TabOrder = 0
-      ExplicitLeft = 79
-      ExplicitTop = 76
+      ExplicitLeft = 2
+      ExplicitTop = 81
+      ExplicitWidth = 569
       inherited GroupBox1: TGroupBox
         Width = 569
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 283
-        ExplicitHeight = 66
-        inherited ZoomPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 43
-        end
-        inherited FocusPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 45
-        end
+        ExplicitWidth = 569
       end
     end
     inline NavitarPreset1: TNavitarPreset
@@ -50,24 +34,12 @@ object PresetsFrame: TPresetsFrame
       Height = 66
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = 158
-      ExplicitTop = 169
+      ExplicitLeft = 2
+      ExplicitTop = 15
+      ExplicitWidth = 569
       inherited GroupBox1: TGroupBox
         Width = 569
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 283
-        ExplicitHeight = 66
-        inherited ZoomPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 43
-        end
-        inherited FocusPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 45
-        end
+        ExplicitWidth = 569
       end
     end
     inline NavitarPreset2: TNavitarPreset
@@ -77,24 +49,12 @@ object PresetsFrame: TPresetsFrame
       Height = 66
       Align = alTop
       TabOrder = 2
-      ExplicitLeft = 205
-      ExplicitTop = 292
+      ExplicitLeft = 2
+      ExplicitTop = 147
+      ExplicitWidth = 569
       inherited GroupBox1: TGroupBox
         Width = 569
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 283
-        ExplicitHeight = 66
-        inherited ZoomPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 43
-        end
-        inherited FocusPos: TIntegerLabeledEdit
-          EditLabel.ExplicitLeft = 0
-          EditLabel.ExplicitTop = -16
-          EditLabel.ExplicitWidth = 45
-        end
+        ExplicitWidth = 569
       end
     end
   end

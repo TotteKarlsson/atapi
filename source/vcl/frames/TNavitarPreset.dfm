@@ -12,10 +12,6 @@ object NavitarPreset: TNavitarPreset
     Align = alClient
     Caption = 'Preset Name'
     TabOrder = 0
-    ExplicitLeft = 56
-    ExplicitTop = 35
-    ExplicitWidth = 185
-    ExplicitHeight = 105
     object ZoomPos: TIntegerLabeledEdit
       Left = 24
       Top = 36

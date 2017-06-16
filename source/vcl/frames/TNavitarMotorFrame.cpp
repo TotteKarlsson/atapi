@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TNavitarMotorFrame.h"
-#include "atNavitarMotor.h"
+#include "navitar/atNavitarMotor.h"
 #include "mtkLogger.h"
 #include "mtkVCLUtils.h"
 #pragma package(smart_init)
