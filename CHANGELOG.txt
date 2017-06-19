@@ -1,3 +1,36 @@
+Release 0.5.3 (June 19)
+=======================
+* Updated readme
+* More restructure
+* Restructured source tree
+* Moved arraybot related into module arraybot
+* Restructuring code tree
+* Created a super build group
+* Added seperate build for APT classes
+* Cleaning up
+* Moved arraycam related classes to ArrayCam folder
+* Added redist dll
+* Added navitar DLL for redistribution
+* Added new units to atCore and atVCLCore
+* Added navitar vcl frames
+* Added navitar classes for controlling the zoom and focus on arraybot
+* Added navitar demos
+* Getting navitar under control
+* Added borland import library and obfuscated dll
+* Added Navitar developer files
+* Disabled sound enums
+* Use Application sounds instead
+* Cleaned up DirectSound class
+* Fixed bug -> an uninitialized directSoundStructure
+* Fixed some implementation details for application sounds
+* Got extraction of resources from resource DLL working
+* Added class for reading resources from a resource DLL
+* Added a frame for an Applications sounds
+* Added a frame to play system sounds
+* Added new class to handle specific application sounds
+* Changed some ints to unsigned ints
+* Cleaning up cutting logic
+
 Release 0.5.2 (Apr 26)
 =======================
 * General changes to VCL frames that are dynamically created -> Pass references instead of pointers
