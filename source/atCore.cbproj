@@ -112,42 +112,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="arduino\atArduinoClient.cpp">
-            <BuildOrder>69</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoDevice.cpp">
-            <DependentOn>arduino\atArduinoDevice.h</DependentOn>
-            <BuildOrder>70</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoIPCServerReceiver.cpp">
-            <DependentOn>arduino\atArduinoIPCServerReceiver.h</DependentOn>
-            <BuildOrder>69</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoMessageProcessor.cpp">
-            <DependentOn>arduino\atArduinoMessageProcessor.h</DependentOn>
-            <BuildOrder>68</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
-            <BuildOrder>72</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoServer.cpp">
-            <BuildOrder>68</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoUtils.cpp">
-            <DependentOn>arduino\atArduinoUtils.h</DependentOn>
-            <BuildOrder>65</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduino.cpp">
-            <DependentOn>arduino\atLightsArduino.h</DependentOn>
-            <BuildOrder>63</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduinoClient.cpp">
-            <DependentOn>arduino\atLightsArduinoClient.h</DependentOn>
-            <BuildOrder>62</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduino.cpp">
-            <BuildOrder>68</BuildOrder>
-        </CppCompile>
         <CppCompile Include="arraycam\atArrayCamClient.cpp">
             <DependentOn>arraycam\atArrayCamClient.h</DependentOn>
             <BuildOrder>77</BuildOrder>

@@ -1,6 +1,6 @@
 #ifndef abXYZUnitH
 #define abXYZUnitH
-#include "atABExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "atUtilities.h"
 #include "apt/atDeviceManager.h"
@@ -17,7 +17,7 @@ using mtk::IniFileProperties;
 using mtk::Property;
 using mtk::IniFile;
 
-class AT_CORE XYZUnit : public ATObject
+class AT_AB XYZUnit : public ATObject
 {
 	public:
     					                XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder);

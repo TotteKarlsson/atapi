@@ -1,18 +1,18 @@
-#ifndef atExporterH
-#define atExporterH
+#ifndef atABExporterH
+#define atABExporterH
 
 #if defined (_WIN32)
     #if defined(AT_STATIC)
-        #define AT_CORE
+        #define AT_AB
     #else
-        #if defined(AT_SHARED)
-            #define AT_CORE __declspec(dllexport)
+        #if defined(AT_AB_SHARED)
+            #define AT_AB __declspec(dllexport)
         #else
-            #define AT_CORE __declspec(dllimport)
+            #define AT_AB __declspec(dllimport)
         #endif
     #endif
 #else
-    #define AT_CORE
+    #define AT_AB
 #endif
 
 #endif

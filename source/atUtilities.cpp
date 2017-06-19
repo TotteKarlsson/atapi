@@ -2,7 +2,7 @@
 #include "atUtilities.h"
 #include <sstream>
 #include "mtkLogger.h"
-#include "Thorlabs.MotionControl.IntegratedStepperMotors.h"
+//#include "Thorlabs.MotionControl.IntegratedStepperMotors.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -30,18 +30,6 @@ LogicOperator toLogicOperator(const string& o)
    	if(o == "<=")	return loSmallerThanOrEqual;
 
     return loUndefined;
-}
-
-string toString(const TLI_DeviceInfo& val)
-{
-	stringstream str;
-    str
-    <<"Device Type ID: "<<val.typeID<<"\t"
-    <<"Description: "	<<val.description<<"\t"
-	<<"Serial: "		<<val.serialNo<<"\t"
-	<<"Is Known Type: " <<val.isKnownType<<"\t";
-
-    return str.str();
 }
 
 string toString(ProcessType pt)
@@ -93,68 +81,6 @@ ProcessType toProcessType(const string& str)
     }
 
 	return ptUnknown;
-}
-
-bool buildDeviceList()
-{
-    // Build list of connected device
-    return (TLI_BuildDeviceList() == 0) ? true : false;
-}
-
-int getNumberOfConnectedDevices()
-{
-	return TLI_GetDeviceListSize();
-}
-
-StringList getSerialsForDeviceType(DeviceTypeID deviceID)
-{
-	StringList serials;
-
-    // Build list of connected device
-//    if (TLI_BuildDeviceList() == 0)
-	{
-        // get device list size
-        short n = TLI_GetDeviceListSize();
-        if(n == 0)
-        {
-        	Log(lInfo) << "There are no open devices available";
-        }
-
-        // get serial numbers
-        char serialNos[250];
-        TLI_GetDeviceListByTypeExt(serialNos, 250, deviceID);
-
-         // output list of matching devices
-		serials = StringList(serialNos ,',');
-     }
-	return serials;
-}
-
-DeviceTypeID getDeviceTypeID(const string& id)
-{
-    string sid = toUpperCase(id);
-    if (sid == "UNKNOWN")  			return didUnknown;
-    if (sid == "LONGTRAVELSTAGE")   return didLongTravelStage;
-    if (sid == "TCUBESTEPPERMOTOR") return didTCubeStepperMotor;
-    if (sid == "TCUBEDCSERVO")            return didTCubeDCServo;
-    return didUnknown;
-}
-
-string toString(DeviceTypeID value)
-{
-	switch(value)
-    {
-    	case didTCubeDCServo:
-        	return "TCube DC Servo";
-
-		case didLongTravelStage:
-        	return "Long Travel Stage";
-
-		case didTCubeStepperMotor:
-        	return "TCube Stepper Motor";
-		default:
-        	return "Device type is not defined";
-    }
 }
 
 string tlError(int err)

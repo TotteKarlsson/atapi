@@ -6,6 +6,12 @@
         <Projects Include="source\atCore.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="source\arraybot\atArrayBotCore.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="thirdparty\ssidll\atSSI.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="source\barcodereader\atBarcodeReader.cbproj">
             <Dependencies/>
         </Projects>
@@ -13,9 +19,6 @@
             <Dependencies/>
         </Projects>
         <Projects Include="source\resources\atResources.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="thirdparty\ssidll\atSSI.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\vcl\atVCLCore.cbproj">
@@ -37,6 +40,24 @@
     </Target>
     <Target Name="atCore:Make">
         <MSBuild Projects="source\atCore.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atArrayBotCore">
+        <MSBuild Projects="source\arraybot\atArrayBotCore.cbproj"/>
+    </Target>
+    <Target Name="atArrayBotCore:Clean">
+        <MSBuild Projects="source\arraybot\atArrayBotCore.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atArrayBotCore:Make">
+        <MSBuild Projects="source\arraybot\atArrayBotCore.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atSSI">
+        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj"/>
+    </Target>
+    <Target Name="atSSI:Clean">
+        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atSSI:Make">
+        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atBarcodeReader">
         <MSBuild Projects="source\barcodereader\atBarcodeReader.cbproj"/>
@@ -65,15 +86,6 @@
     <Target Name="atResources:Make">
         <MSBuild Projects="source\resources\atResources.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atSSI">
-        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj"/>
-    </Target>
-    <Target Name="atSSI:Clean">
-        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atSSI:Make">
-        <MSBuild Projects="thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="atVCLCore">
         <MSBuild Projects="source\vcl\atVCLCore.cbproj"/>
     </Target>
@@ -84,13 +96,13 @@
         <MSBuild Projects="source\vcl\atVCLCore.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="atCore;atBarcodeReader;atDatabase;atResources;atSSI;atVCLCore"/>
+        <CallTarget Targets="atCore;atArrayBotCore;atSSI;atBarcodeReader;atDatabase;atResources;atVCLCore"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atCore:Clean;atBarcodeReader:Clean;atDatabase:Clean;atResources:Clean;atSSI:Clean;atVCLCore:Clean"/>
+        <CallTarget Targets="atCore:Clean;atArrayBotCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atDatabase:Clean;atResources:Clean;atVCLCore:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atCore:Make;atBarcodeReader:Make;atDatabase:Make;atResources:Make;atSSI:Make;atVCLCore:Make"/>
+        <CallTarget Targets="atCore:Make;atArrayBotCore:Make;atSSI:Make;atBarcodeReader:Make;atDatabase:Make;atResources:Make;atVCLCore:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

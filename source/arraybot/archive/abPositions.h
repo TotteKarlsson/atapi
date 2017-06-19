@@ -1,6 +1,6 @@
 #ifndef abPositionsH
 #define abPositionsH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include <deque>
 #include "atPosition.h"
@@ -8,7 +8,7 @@
 using std::deque;
 
 
-class AT_CORE Positions : public ATObject
+class AT_AB Positions : public ATObject
 {
 	public:
 								        Positions();

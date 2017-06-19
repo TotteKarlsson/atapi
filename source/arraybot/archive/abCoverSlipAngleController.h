@@ -1,6 +1,6 @@
 #ifndef abCoverSlipAngleControllerH
 #define abCoverSlipAngleControllerH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "mtkIniFile.h"
 #include "mtkProperties.h"
@@ -15,7 +15,7 @@ using mtk::IniFileProperties;
 using mtk::Property;
 class APTMotor;
 
-class AT_CORE CoverSlipAngleController : public ATObject
+class AT_AB CoverSlipAngleController : public ATObject
 {
 	public:
       							            CoverSlipAngleController(const string& name, IniFile& iniFile);

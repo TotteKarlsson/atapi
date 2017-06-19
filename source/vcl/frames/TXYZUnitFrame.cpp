@@ -3,7 +3,7 @@
 #include "TXYZUnitFrame.h"
 #include "arraybot/atXYZUnit.h"
 #include "mtkVCLUtils.h"
-#include "apt/atAPTMotor.h"
+#include "arraybot/apt/atAPTMotor.h"
 #include "TMotorFrame.h"
 #include "arraybot/atWhiskerUnit.h"
 //---------------------------------------------------------------------------

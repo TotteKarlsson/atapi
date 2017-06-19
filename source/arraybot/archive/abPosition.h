@@ -1,6 +1,6 @@
 #ifndef abPositionH
 #define abPositionH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "Math/mtkPoint.h"
 #include <string>
@@ -16,7 +16,7 @@ The position can be named using the Label attribute
 namespace ab
 {
 
-class AT_CORE Position : public ATObject
+class AT_AB Position : public ATObject
 {
 	public:
 								Position(const string& lbl, double x, double y, double z);

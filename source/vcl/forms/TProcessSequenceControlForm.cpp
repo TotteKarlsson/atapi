@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TProcessSequenceControlForm.h"
-#include "process/atProcessSequencer.h"
+#include "arraybot/process/atProcessSequencer.h"
 #include "mtkVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

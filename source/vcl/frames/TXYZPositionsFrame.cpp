@@ -3,7 +3,7 @@
 #include "TXYZPositionsFrame.h"
 #include "arraybot/atXYZUnit.h"
 #include "mtkVCLUtils.h"
-#include "apt/atAPTMotor.h"
+#include "arraybot/apt/atAPTMotor.h"
 
 using namespace mtk;
 //---------------------------------------------------------------------------
