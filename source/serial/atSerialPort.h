@@ -18,7 +18,7 @@
 
 #ifndef atSerialPortH
 #define atSerialPortH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 
 //////////////////////////////////////////////////////////////////////

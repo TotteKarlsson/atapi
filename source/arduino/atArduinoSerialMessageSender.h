@@ -1,6 +1,6 @@
 #ifndef atArduinoSerialMessageSenderH
 #define atArduinoSerialMessageSenderH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include <string>
 #include "mtkThread.h"
 #include "atATObject.h"

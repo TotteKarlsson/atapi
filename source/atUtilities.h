@@ -1,6 +1,6 @@
 #ifndef abUtilitiesH
 #define abUtilitiesH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include <vector>
 #include <string>
 #include "mtkStringList.h"
@@ -13,7 +13,6 @@ using std::vector;
 using mtk::StringList;
 using mtk::Property;
 using mtk::IniFile;
-struct TLI_DeviceInfo;
 
 //!We are using an enum for process type in order to save/retrieve different processes from XML
 enum ProcessType
@@ -37,75 +36,8 @@ enum LogicOperator {loLargerThan = 0, loSmallerThan, loLargerThanOrEqual, loSmal
 
 AT_CORE string 			toString(LogicOperator o);
 AT_CORE LogicOperator 	toLogicOperator(const string& p);
+AT_CORE string 			tlError(int errCode);
 
-///Enum holding Thorlab Device Type IDS
-enum DeviceTypeID
-{
-	didUnknown				= 0,
-    didLongTravelStage 		= 45,
-    didTCubeStepperMotor 	= 80,
-    didTCubeDCServo 		= 83
-};
-
-AT_CORE DeviceTypeID getDeviceTypeID(const string& level);
-
-///getDeviceSerials populate a Stringlist with serial numbers for
-///devices of the type supplied
-AT_CORE StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
-AT_CORE	bool        buildDeviceList();
-AT_CORE	int         getNumberOfConnectedDevices();
-
-AT_CORE string 		toString(DeviceTypeID val);
-AT_CORE string 		toString(const TLI_DeviceInfo& val);
-AT_CORE string 		tlError(int errCode);
-
-template<> inline
-std::string Property< DeviceTypeID >::getValueAsString() const
-{
-    return mtk::toString(getValue());
-}
-
-template<> inline
-bool Property<DeviceTypeID>::write(IniFile* iniFile, const string& section)
-{
-    if(iniFile == NULL)
-    {
-        return false;
-    }
-
-    string toWrite;
-    toWrite = mtk::toString(getValue());
-    iniFile->writeString(mKey, toWrite, "", section);
-    return true;
-}
-
-template<> inline
-bool Property<DeviceTypeID>::read(IniFile* iniFile, const string& section)
-{
-    if(iniFile == NULL)
-    {
-        return false;
-    }
-
-    string val(iniFile->readString(mKey, section, mtk::toString(mDefaultValue)));
-
-    DeviceTypeID tempVal = getDeviceTypeID(val);
-    mWasRead = iniFile->wasItFound();
-    setValue( mWasRead ? tempVal : mDefaultValue);
-    return mWasRead;
-}
-
-template<> inline
-bool Property<DeviceTypeID>::assignValueFromString(const string& v)
-{
-    return false;
-}
-
-template<> inline
-string Property<DeviceTypeID>::getTypeName() const
-{
-    return "DeviceTypeID";
-}
 
 
 

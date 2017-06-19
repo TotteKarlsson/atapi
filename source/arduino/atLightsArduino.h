@@ -1,6 +1,6 @@
 #ifndef abLightsArduinoH
 #define abLightsArduinoH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atArduinoDevice.h"
 //---------------------------------------------------------------------------
 

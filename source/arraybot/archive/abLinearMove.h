@@ -1,6 +1,6 @@
 #ifndef abMoveH
 #define abMoveH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atProcess.h"
 #include "atPosition.h"
 //---------------------------------------------------------------------------
@@ -11,7 +11,7 @@ string		toString(MoveType mt);
 
 //!The move baseclass contain the general logic for a 'move' of
 //any type of object
-class AT_CORE Move : public Process
+class AT_AB Move : public Process
 {
     public:
         	   			            Move(const string& lbl, MoveType type = mtAbsolute, const ab::Position& p = ab::Position("", 0,0,0), double maxVel = 0, double acc = 0, double dwellTime = 0);

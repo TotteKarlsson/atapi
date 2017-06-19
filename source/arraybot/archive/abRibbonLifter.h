@@ -1,6 +1,6 @@
 #ifndef abRibbonLifterH
 #define abRibbonLifterH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "mtkProperty.h"
 #include "mtkIniFile.h"
@@ -22,7 +22,7 @@ using mtk::IniFileProperties;
 
 //typedef void (__closure *RibbonLifterOnTimer)();
 
-class AT_CORE RibbonLifter : public ATObject
+class AT_AB RibbonLifter : public ATObject
 {
     public:
 							            RibbonLifter(ArrayBot& ab, IniFile& ini);

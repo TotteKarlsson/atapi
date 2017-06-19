@@ -1,6 +1,6 @@
 #ifndef abSensorsArduinoH
 #define abSensorsArduinoH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atArduinoDevice.h"
 //---------------------------------------------------------------------------
 

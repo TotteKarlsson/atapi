@@ -1,12 +1,12 @@
 #ifndef abRibbonControllerH
 #define abRibbonControllerH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 //---------------------------------------------------------------------------
 
 class ArduinoServer;
 
-class AT_CORE RibbonController : public ATObject
+class AT_AB RibbonController : public ATObject
 {
     public:
 						                    RibbonController(ArduinoServer& s);

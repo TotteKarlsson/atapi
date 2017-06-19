@@ -1,51 +1,44 @@
-#ifndef abDirectSoundH
-#define abDirectSoundH
+#ifndef atDirectSoundH
+#define atDirectSoundH
 #include "atATObject.h"
-
-#include <windows.h>
 #include <mmreg.h>
 #include <dsound.h>
 
 class AT_CORE DirectSound : public ATObject
 {
     public:
-							        DirectSound();
-        virtual 					~DirectSound();
+							                        DirectSound(const string& resName, HWND hWnd = NULL);        virtual 					                ~DirectSound();        bool						                create(const string& resName, HWND hWnd = NULL);
 
-    								// If the "pWnd" paramter is NULL, then AfxGetApp()->GetMainWnd() will be used.
-        bool						Create(const string& pszResource, HWND hWnd = NULL);
-        bool						Create(UINT uResourceID);
+        bool			                            isValid() const;
+		virtual void	 			                setVolume(int volume);
+        void						                setHandle(HWND h);
+        HWND						                getHandle() const;
 
-                                    // Alternativly you can specify the sound by yourself
-                                    // Note that the class does not copy the entire data ! Instead
-                                    // a pointer to the given data will be stored !
-                                    // You can load an entire WAV file into memory and then call this
-                                    // Create() method.
-        bool						Create(LPVOID pSoundData, HWND hWnd =  NULL);//, CWnd * pWnd = 0);
+		void						                setName(const string& n);
+        string						                getName() const;
+        string						                getResourceName() const;
 
-        bool			            IsValid() const;
-        bool			            Play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
-        bool			            Stop();
-        bool			            Pause();
-        bool			            Continue();
-        DirectSound &	            EnableSound(bool bEnable = true);
-        bool						IsEnabled() const {return mEnabled;}
+        virtual bool   	                            play(DWORD dwStartPosition = 0, bool bLoop = FALSE);
+        bool			                            stop();
+        bool			                            pause();
+        bool			                            continuePlay();
 
     protected:
-        bool                        SetSoundData(LPVOID pSoundData, DWORD dwSoundSize);
-        bool                        CreateSoundBuffer(WAVEFORMATEX * pcmwf);
-        bool                        GetWaveData(void * pRes, WAVEFORMATEX * & pWaveHeader, void * & pbWaveData, DWORD & cbWaveSize);
+        bool						                create(LPVOID pSoundData, HWND hWnd =  NULL);
+        bool                                        setSoundData(LPVOID pSoundData, DWORD dwSoundSize);
+        bool                                        createSoundBuffer(WAVEFORMATEX * pcmwf);
+        bool                                        getWaveData(void * pRes, WAVEFORMATEX * & pWaveHeader, void * & pbWaveData, DWORD & cbWaveSize);
 
     private:
-        LPVOID 						mTheSound;
-        DWORD 						mTheSoundBytes;
-        LPDIRECTSOUNDBUFFER 		mDirectSoundBuffer;
-        bool 						mEnabled;
-        LPDIRECTSOUND 				mDirectSoundStructure;
-        static DWORD 				mNrOfInstances;
+        static DWORD 				                mNrOfInstances;
+    	HWND						                mHandle;
+        LPVOID 						                mTheSound;
+        DWORD 						                mTheSoundBytes;
+        LPDIRECTSOUNDBUFFER 		                mDirectSoundBuffer;
+        LPDIRECTSOUND 				                mDirectSoundStructure;
+        string						                mResourceName;
 };
 
 #pragma message("linking with Microsoft's DirectSound library ...")
 #pragma comment(lib, "dsound.lib")
-
 #endif

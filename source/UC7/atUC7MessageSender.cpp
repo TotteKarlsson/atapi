@@ -11,7 +11,7 @@ UC7MessageSender::UC7MessageSender(UC7& uc7)
 :
 mtk::Thread(""),
 mUC7(uc7),
-mProcessTimeDelay(1)
+mProcessTimeDelay(50)
 {}
 
 //----------------------------------------------------------------

@@ -16,9 +16,8 @@ class PACKAGE TArrayBotButton : public TBitBtn
 
     protected:
     	virtual void __fastcall 		WndProc(TMessage& msg);
-
-        DirectSound						mSound;
         String                          FSoundID;
+        DirectSound						mSound;
 
     public:
         					__fastcall 	TArrayBotButton(TComponent* Owner);

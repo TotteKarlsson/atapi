@@ -1,7 +1,7 @@
 #ifndef abArduinoServerH
 #define abArduinoServerH
 //---------------------------------------------------------------------------
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"

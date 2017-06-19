@@ -2,9 +2,9 @@
 #include "atArduinoServerCommand.h"
 #include "atXYZUnit.h"
 #include "mtkLogger.h"
-#include "atArrayBot.h"
-#include "atAPTMotor.h"
-#include "atTriggerFunction.h"
+//#include "atArrayBot.h"
+//#include "atAPTMotor.h"
+//#include "atTriggerFunction.h"
 #include "atArduinoClient.h"
 
 using namespace mtk;
@@ -17,6 +17,9 @@ Process(lbl, NULL),
 mTrigger(NULL),
 mCommand("ENABLE_PUFFER"),
 mArduinoClient(NULL)
+{}
+
+ArduinoServerCommand::~ArduinoServerCommand()
 {}
 
 const string ArduinoServerCommand::getTypeName() const

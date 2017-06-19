@@ -1,6 +1,6 @@
 #ifndef abArrayBotH
 #define abArrayBotH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "atXYZUnit.h"
 #include "atWhiskerUnit.h"
@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 
 class ArduinoClient;
-class AT_CORE ArrayBot : public ATObject
+class AT_AB ArrayBot : public ATObject
 {
     public:
 									                    ArrayBot(IniFile& ini, const string& appFolder);

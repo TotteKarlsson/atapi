@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{E83BA68E-3135-44B3-A55F-7D9B225AE332}</ProjectGuid>
+        <ProjectGuid>{9FE377E9-A8A9-4E3C-B349-3AB3A1ED7CD8}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -101,7 +101,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
         <LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-        <Defines>POCO_STATIC;$(Defines)</Defines>
+        <Defines>POCO_STATIC;AT_CORE_SHARED;$(Defines)</Defines>
         <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BUILD)\lib;$(KINESIS_LIBS);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
@@ -112,132 +112,54 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="apt\atAbsoluteMove.cpp">
-            <DependentOn>apt\atAbsoluteMove.h</DependentOn>
-            <BuildOrder>72</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atAPTDevice.cpp">
-            <DependentOn>apt\atAPTDevice.h</DependentOn>
-            <BuildOrder>60</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atAPTMotor.cpp">
-            <DependentOn>apt\atAPTMotor.h</DependentOn>
-            <BuildOrder>61</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atDeviceManager.cpp">
-            <DependentOn>apt\atDeviceManager.h</DependentOn>
-            <BuildOrder>62</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atLongTravelStage.cpp">
-            <DependentOn>apt\atLongTravelStage.h</DependentOn>
-            <BuildOrder>63</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMotorCommand.cpp">
-            <DependentOn>apt\atMotorCommand.h</DependentOn>
-            <BuildOrder>64</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMotorMessageContainer.cpp">
-            <DependentOn>apt\atMotorMessageContainer.h</DependentOn>
-            <BuildOrder>65</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMotorMessageData.cpp">
-            <DependentOn>apt\atMotorMessageData.h</DependentOn>
-            <BuildOrder>67</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMotorMessageProcessor.cpp">
-            <DependentOn>apt\atMotorMessageProcessor.h</DependentOn>
-            <BuildOrder>68</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMotorWiggler.cpp">
-            <DependentOn>apt\atMotorWiggler.h</DependentOn>
-            <BuildOrder>73</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atMove.cpp">
-            <DependentOn>apt\atMove.h</DependentOn>
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atPairedMove.cpp">
-            <DependentOn>apt\atPairedMove.h</DependentOn>
-            <BuildOrder>48</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atPairedMoves.cpp">
-            <DependentOn>apt\atPairedMoves.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atPositionalTrigger.cpp">
-            <DependentOn>apt\atPositionalTrigger.h</DependentOn>
-            <BuildOrder>50</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atRelativeMove.cpp">
-            <DependentOn>apt\atRelativeMove.h</DependentOn>
-            <BuildOrder>51</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atTCubeDCServo.cpp">
-            <DependentOn>apt\atTCubeDCServo.h</DependentOn>
-            <BuildOrder>69</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="apt\atTCubeStepperMotor.cpp">
-            <DependentOn>apt\atTCubeStepperMotor.h</DependentOn>
-            <BuildOrder>70</BuildOrder>
-        </CppCompile>
         <CppCompile Include="arduino\atArduinoClient.cpp">
-            <BuildOrder>69</BuildOrder>
+            <BuildOrder>28</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoDevice.cpp">
-            <DependentOn>arduino\atArduinoDevice.h</DependentOn>
-            <BuildOrder>70</BuildOrder>
+            <BuildOrder>29</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoIPCServerReceiver.cpp">
-            <DependentOn>arduino\atArduinoIPCServerReceiver.h</DependentOn>
-            <BuildOrder>69</BuildOrder>
+            <BuildOrder>30</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoMessageProcessor.cpp">
-            <DependentOn>arduino\atArduinoMessageProcessor.h</DependentOn>
-            <BuildOrder>68</BuildOrder>
+            <BuildOrder>31</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
-            <BuildOrder>72</BuildOrder>
+            <DependentOn>arduino\atArduinoSerialMessageSender.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoServer.cpp">
-            <BuildOrder>68</BuildOrder>
+            <BuildOrder>33</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoServerCommand.cpp">
-            <DependentOn>arduino\atArduinoServerCommand.h</DependentOn>
-            <BuildOrder>66</BuildOrder>
+            <BuildOrder>34</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atArduinoUtils.cpp">
-            <DependentOn>arduino\atArduinoUtils.h</DependentOn>
-            <BuildOrder>65</BuildOrder>
+            <BuildOrder>35</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atLightsArduino.cpp">
-            <DependentOn>arduino\atLightsArduino.h</DependentOn>
-            <BuildOrder>63</BuildOrder>
+            <BuildOrder>36</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atLightsArduinoClient.cpp">
-            <DependentOn>arduino\atLightsArduinoClient.h</DependentOn>
-            <BuildOrder>62</BuildOrder>
+            <BuildOrder>37</BuildOrder>
         </CppCompile>
         <CppCompile Include="arduino\atSensorsArduino.cpp">
-            <BuildOrder>68</BuildOrder>
+            <BuildOrder>38</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arraybot\atArrayBot.cpp">
-            <DependentOn>arraybot\atArrayBot.h</DependentOn>
-            <BuildOrder>52</BuildOrder>
+        <CppCompile Include="arduino\atSensorsArduinoClient.cpp">
+            <BuildOrder>27</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arraybot\atEnvironmentalSensorReader.cpp">
-            <DependentOn>arraybot\atEnvironmentalSensorReader.h</DependentOn>
-            <BuildOrder>56</BuildOrder>
+        <CppCompile Include="arraycam\atArrayCamClient.cpp">
+            <DependentOn>arraycam\atArrayCamClient.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arraybot\atWhiskerUnit.cpp">
-            <DependentOn>arraybot\atWhiskerUnit.h</DependentOn>
-            <BuildOrder>54</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arraybot\atXYZUnit.cpp">
-            <DependentOn>arraybot\atXYZUnit.h</DependentOn>
-            <BuildOrder>53</BuildOrder>
+        <CppCompile Include="arraycam\atArrayCamMessageProcessor.cpp">
+            <DependentOn>arraycam\atArrayCamMessageProcessor.h</DependentOn>
+            <BuildOrder>76</BuildOrder>
         </CppCompile>
         <CppCompile Include="arraycam\atArrayCamProtocol.cpp">
-            <BuildOrder>71</BuildOrder>
+            <DependentOn>arraycam\atArrayCamProtocol.h</DependentOn>
+            <BuildOrder>76</BuildOrder>
         </CppCompile>
         <CppCompile Include="atATObject.cpp">
             <BuildOrder>68</BuildOrder>
@@ -246,16 +168,22 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atCore.h</DependentOn>
             <BuildOrder>34</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atEnvironmentalSensorReader.cpp">
+            <BuildOrder>26</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atExceptions.cpp">
             <DependentOn>atExceptions.h</DependentOn>
             <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atProcess.cpp">
+            <BuildOrder>39</BuildOrder>
         </CppCompile>
         <CppCompile Include="atUtilities.cpp">
             <DependentOn>atUtilities.h</DependentOn>
             <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
-            <BuildOrder>56</BuildOrder>
+            <BuildOrder>47</BuildOrder>
         </CppCompile>
         <CppCompile Include="camera\Dynamic_uc480.cpp">
             <BuildOrder>52</BuildOrder>
@@ -263,93 +191,19 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="camera\uc480class.cpp">
             <BuildOrder>53</BuildOrder>
         </CppCompile>
-        <CppCompile Include="clients\atArrayCamClient.cpp">
-            <DependentOn>clients\atArrayCamClient.h</DependentOn>
-            <BuildOrder>57</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="clients\atArrayCamMessageProcessor.cpp">
-            <BuildOrder>72</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atArrayBotJoystick.cpp">
-            <DependentOn>joystick\atArrayBotJoystick.h</DependentOn>
-            <BuildOrder>58</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoystickAxis.cpp">
-            <DependentOn>joystick\atJoystickAxis.h</DependentOn>
-            <BuildOrder>59</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickAxisStateEventDispatcher.cpp">
-            <DependentOn>joystick\atJoyStickAxisStateEventDispatcher.h</DependentOn>
-            <BuildOrder>60</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickButton.cpp">
-            <DependentOn>joystick\atJoyStickButton.h</DependentOn>
-            <BuildOrder>61</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickButtonStateEventDispatcher.cpp">
-            <DependentOn>joystick\atJoyStickButtonStateEventDispatcher.h</DependentOn>
-            <BuildOrder>62</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickMessageDispatcher.cpp">
-            <DependentOn>joystick\atJoyStickMessageDispatcher.h</DependentOn>
-            <BuildOrder>63</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickPOVStateEventDispatcher.cpp">
-            <DependentOn>joystick\atJoyStickPOVStateEventDispatcher.h</DependentOn>
-            <BuildOrder>64</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickSetting.cpp">
-            <DependentOn>joystick\atJoyStickSetting.h</DependentOn>
-            <BuildOrder>65</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="joystick\atJoyStickSettings.cpp">
-            <DependentOn>joystick\atJoyStickSettings.h</DependentOn>
-            <BuildOrder>66</BuildOrder>
-        </CppCompile>
         <CppCompile Include="labelprinter\atTSCLIB.cpp">
             <BuildOrder>73</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atArrayCamRequestProcess.cpp">
-            <BuildOrder>68</BuildOrder>
+        <CppCompile Include="navitar\atNavitarMotor.cpp">
+            <DependentOn>navitar\atNavitarMotor.h</DependentOn>
+            <BuildOrder>76</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atParallellProcess.cpp">
-            <DependentOn>process\atParallellProcess.h</DependentOn>
-            <BuildOrder>53</BuildOrder>
+        <CppCompile Include="navitar\atNavitarMotorController.cpp">
+            <DependentOn>navitar\atNavitarMotorController.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atProcess.cpp">
-            <DependentOn>process\atProcess.h</DependentOn>
-            <BuildOrder>39</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atProcessSequence.cpp">
-            <DependentOn>process\atProcessSequence.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atProcessSequenceProject.cpp">
-            <DependentOn>process\atProcessSequenceProject.h</DependentOn>
-            <BuildOrder>43</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atProcessSequencer.cpp">
-            <DependentOn>process\atProcessSequencer.h</DependentOn>
-            <BuildOrder>45</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atProcessSequences.cpp">
-            <DependentOn>process\atProcessSequences.h</DependentOn>
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atStopAndResumeProcess.cpp">
-            <DependentOn>process\atStopAndResumeProcess.h</DependentOn>
-            <BuildOrder>71</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atTimeDelay.cpp">
-            <BuildOrder>70</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atTrigger.cpp">
-            <DependentOn>process\atTrigger.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atTriggerFunction.cpp">
-            <DependentOn>process\atTriggerFunction.h</DependentOn>
-            <BuildOrder>51</BuildOrder>
+        <CppCompile Include="resources\atResourceManager.cpp">
+            <BuildOrder>75</BuildOrder>
         </CppCompile>
         <CppCompile Include="serial\atSerial.cpp">
             <DependentOn>serial\atSerial.h</DependentOn>
@@ -362,6 +216,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="serial\atSerialWorker.cpp">
             <DependentOn>serial\atSerialWorker.h</DependentOn>
             <BuildOrder>52</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="sound\atApplicationSound.cpp">
+            <DependentOn>sound\atApplicationSound.h</DependentOn>
+            <BuildOrder>74</BuildOrder>
         </CppCompile>
         <CppCompile Include="sound\atDirectSound.cpp">
             <DependentOn>sound\atDirectSound.h</DependentOn>
@@ -445,6 +303,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">File P:\build\xe3_ide\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>

@@ -12,7 +12,8 @@ using namespace mtk;
 //---------------------------------------------------------------------------
 __fastcall TArrayBotButton::TArrayBotButton(TComponent* Owner)
 	: TBitBtn(Owner),
-    FSoundID("BUTTON_CLICK_4")
+    FSoundID("BUTTON_CLICK_4"),
+    mSound("", NULL)
 {
 	initABCoreLib();
 }
@@ -25,7 +26,7 @@ void __fastcall	TArrayBotButton::CreateWnd()
     	Log(lError) << "The button does not have a handle";
     }
 
-    if(!mSound.Create(stdstr(FSoundID), this->Handle))
+    if(!mSound.create(stdstr(FSoundID), this->Handle))
     {
     	Log(lError) << "Failed creating sound for button";
     }
@@ -54,7 +55,7 @@ void __fastcall TArrayBotButton::WndProc(TMessage& msg)
         	Log(lDebug) << "Touch Up";
         break;
         case WM_LBUTTONUP:
-            mSound.Play(0, false);
+            mSound.play(0, false);
 		break;
 
         case WM_LBUTTONDOWN:

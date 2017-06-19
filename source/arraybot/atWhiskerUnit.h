@@ -1,10 +1,10 @@
 #ifndef abWhiskerUnitH
 #define abWhiskerUnitH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atXYZUnit.h"
 //---------------------------------------------------------------------------
 
-//class AT_CORE WhiskerUnit  : public XYZUnit
+//class AT_AB WhiskerUnit  : public XYZUnit
 //{
 //    public:
 //        						        WhiskerUnit(IniFile& iniFile, const string& appDataFolder);

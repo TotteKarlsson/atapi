@@ -1,11 +1,11 @@
 #ifndef atQueryBuilderH
 #define atQueryBuilderH
 #include <sstream>
-#include "atExporter.h"
+#include "atDBExporter.h"
 #include "atATObject.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE QueryBuilder : public std::stringstream, public ATObject
+class AT_DB QueryBuilder : public std::stringstream, public ATObject
 {
 	public:
 		std::string				asString();

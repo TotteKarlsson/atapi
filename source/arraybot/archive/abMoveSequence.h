@@ -1,6 +1,6 @@
 #ifndef abMoveSequenceH
 #define abMoveSequenceH
-#include "atExporter.h"
+#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include <list>
 #include <vector>
@@ -12,7 +12,7 @@
 using std::list;
 using std::string;
 
-class AT_CORE MoveSequence : public ProcessSequence
+class AT_AB MoveSequence : public ProcessSequence
 {
     public:
 								 	        MoveSequence();
