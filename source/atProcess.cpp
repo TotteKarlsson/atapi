@@ -1,7 +1,6 @@
 #pragma hdrstop
 #include "atProcess.h"
 #include "mtkXMLUtils.h"
-#include "atProcessSequence.h"
 //---------------------------------------------------------------------------
 
 using Poco::Timespan;
@@ -51,14 +50,14 @@ bool Process::stop()
     return true;
 }
 
-bool Process::write()
-{
-	if(mProcessSequence)
-    {
-    	return mProcessSequence->write();
-    }
-	return false;
-}
+//bool Process::write()
+//{
+//	if(mProcessSequence)
+//    {
+//    	return mProcessSequence->write();
+//    }
+//	return false;
+//}
 
 XMLElement* Process::addToXMLDocument(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {

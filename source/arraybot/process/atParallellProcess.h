@@ -1,5 +1,6 @@
 #ifndef abParallellProcessH
 #define abParallellProcessH
+#include "../atABExporter.h"
 #include "atProcess.h"
 #include <vector>
 #include "mtkXMLUtils.h"
@@ -19,8 +20,8 @@ class AT_AB ParallellProcess : public Process
 		virtual void		   		                init(ArrayBot& ab);
 		const string 				                getTypeName() const;
         void						                clear();
-
-        virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual bool 			  					write();
+	    virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
         int							                getNumberOfProcesses(){return mProcesses.size();}
 
 		virtual void	                            addProcess(Process* lm);

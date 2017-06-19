@@ -112,6 +112,43 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="arduino\atArduinoClient.cpp">
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoDevice.cpp">
+            <BuildOrder>29</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoIPCServerReceiver.cpp">
+            <BuildOrder>30</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoMessageProcessor.cpp">
+            <BuildOrder>31</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
+            <DependentOn>arduino\atArduinoSerialMessageSender.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoServer.cpp">
+            <BuildOrder>33</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoServerCommand.cpp">
+            <BuildOrder>34</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atArduinoUtils.cpp">
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atLightsArduino.cpp">
+            <BuildOrder>36</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atLightsArduinoClient.cpp">
+            <BuildOrder>37</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atSensorsArduino.cpp">
+            <BuildOrder>38</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="arduino\atSensorsArduinoClient.cpp">
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
         <CppCompile Include="arraycam\atArrayCamClient.cpp">
             <DependentOn>arraycam\atArrayCamClient.h</DependentOn>
             <BuildOrder>77</BuildOrder>
@@ -131,9 +168,15 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atCore.h</DependentOn>
             <BuildOrder>34</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atEnvironmentalSensorReader.cpp">
+            <BuildOrder>26</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atExceptions.cpp">
             <DependentOn>atExceptions.h</DependentOn>
             <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atProcess.cpp">
+            <BuildOrder>39</BuildOrder>
         </CppCompile>
         <CppCompile Include="atUtilities.cpp">
             <DependentOn>atUtilities.h</DependentOn>

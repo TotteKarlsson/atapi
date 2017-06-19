@@ -5,7 +5,7 @@
 #include "apt/atAPTMotor.h"
 #include "apt/atMove.h"
 #include "mtkXMLUtils.h"
-
+#include "atProcessSequence.h"
 using namespace mtk;
 using namespace at;
 using namespace tinyxml2;
@@ -25,6 +25,15 @@ void TimeDelay::clear()
 const string TimeDelay::getTypeName() const
 {
 	return "timeDelay";
+}
+
+bool TimeDelay::write()
+{
+	if(mProcessSequence)
+    {
+    	return mProcessSequence->write();
+    }
+	return false;
 }
 
 XMLElement* TimeDelay::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)

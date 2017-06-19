@@ -4,6 +4,7 @@
 #include "apt/atAPTMotor.h"
 #include "mtkLogger.h"
 #include "apt/atMove.h"
+#include "arraybot/process/atProcessSequence.h"
 using namespace mtk;
 using namespace at;
 
@@ -37,6 +38,15 @@ void ParallellProcess::init(ArrayBot& ab)
 void ParallellProcess::clear()
 {
 	mProcesses.clear();
+}
+
+bool ParallellProcess::write()
+{
+	if(mProcessSequence)
+    {
+    	return mProcessSequence->write();
+    }
+	return false;
 }
 
 void ParallellProcess::addProcess(Process* lm)

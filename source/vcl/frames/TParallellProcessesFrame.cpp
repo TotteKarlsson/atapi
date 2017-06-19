@@ -2,7 +2,7 @@
 #pragma hdrstop
 #include "TParallellProcessesFrame.h"
 #include "mtkVCLUtils.h"
-#include "arraybot/process/atProcess.h"
+#include "atProcess.h"
 #include "arraybot/apt/atMove.h"
 #include "arraybot/process/atParallellProcess.h"
 #include "mtkLogger.h"
@@ -13,7 +13,7 @@
 #include "mtkMathUtils.h"
 #include "arraybot/process/atTriggerFunction.h"
 #include "TStringInputDialog.h"
-#include "arraybot/arduino/atArduinoServerCommand.h"
+#include "arduino/atArduinoServerCommand.h"
 #include "TArduinoServerCommandFrame.h"
 #include "TYesNoForm.h"
 #include "frames/TArrayCamRequestFrame.h"

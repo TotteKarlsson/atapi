@@ -18,9 +18,6 @@
         <Projects Include="source\database\atDatabase.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="source\resources\atResources.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="source\vcl\atVCLCore.cbproj">
             <Dependencies/>
         </Projects>
@@ -77,15 +74,6 @@
     <Target Name="atDatabase:Make">
         <MSBuild Projects="source\database\atDatabase.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atResources">
-        <MSBuild Projects="source\resources\atResources.cbproj"/>
-    </Target>
-    <Target Name="atResources:Clean">
-        <MSBuild Projects="source\resources\atResources.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="atResources:Make">
-        <MSBuild Projects="source\resources\atResources.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="atVCLCore">
         <MSBuild Projects="source\vcl\atVCLCore.cbproj"/>
     </Target>
@@ -96,13 +84,13 @@
         <MSBuild Projects="source\vcl\atVCLCore.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="atCore;atArrayBotCore;atSSI;atBarcodeReader;atDatabase;atResources;atVCLCore"/>
+        <CallTarget Targets="atCore;atArrayBotCore;atSSI;atBarcodeReader;atDatabase;atVCLCore"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atCore:Clean;atArrayBotCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atDatabase:Clean;atResources:Clean;atVCLCore:Clean"/>
+        <CallTarget Targets="atCore:Clean;atArrayBotCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atDatabase:Clean;atVCLCore:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atCore:Make;atArrayBotCore:Make;atSSI:Make;atBarcodeReader:Make;atDatabase:Make;atResources:Make;atVCLCore:Make"/>
+        <CallTarget Targets="atCore:Make;atArrayBotCore:Make;atSSI:Make;atBarcodeReader:Make;atDatabase:Make;atVCLCore:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

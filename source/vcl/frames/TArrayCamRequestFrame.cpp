@@ -2,7 +2,7 @@
 #pragma hdrstop
 #include "TArrayCamRequestFrame.h"
 #include "mtkVCLUtils.h"
-#include "arraybot/process/atProcess.h"
+#include "atProcess.h"
 #include "arraybot/process/atArrayCamRequestProcess.h"
 #include "mtkLogger.h"
 #include "arraybot/atArrayBot.h"

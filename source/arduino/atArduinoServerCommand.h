@@ -1,22 +1,21 @@
 #ifndef abArduinoServerCommandH
 #define abArduinoServerCommandH
-#include "../atABExporter.h"
-#include "arraybot/process/atProcess.h"
+#include "atCoreExporter.h"
+#include "atProcess.h"
 //---------------------------------------------------------------------------
 
 class ArduinoClient;
 
-//!The switch class allow a 'switched' process to be executed
 //!Arraybot can execute a Arduino command, like Activate Vacuum using an
-//!Arduino server command and
-class AT_AB ArduinoServerCommand : public Process
+//!Arduino server command.
+class AT_CORE ArduinoServerCommand : public Process
 {
     public:
         	   			                    ArduinoServerCommand(const string& lbl);
     	virtual			                    ~ArduinoServerCommand();
 		const string 						getTypeName() const;
 		virtual void		   		        init(ArrayBot& ab);
-
+		virtual bool 			  	        write(){return false;}
 		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 
         virtual bool	                    isBeingProcessed();

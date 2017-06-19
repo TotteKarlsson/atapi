@@ -1,6 +1,6 @@
 #ifndef abEnvironmentalSensorReaderH
 #define abEnvironmentalSensorReaderH
-#include "arraybot/atABExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 #include <utility>
 #include <vector>
@@ -18,7 +18,7 @@ struct SensorReading
 };
 
 //!The EnvironmentaSensorReader class are populated by one sensor at a time
-class AT_AB EnvironmentaSensorReader : public ATObject
+class AT_CORE EnvironmentaSensorReader : public ATObject
 {
     public:
 					                EnvironmentaSensorReader(int nrOfSensors = 3) : mNrOfSensors(3){}

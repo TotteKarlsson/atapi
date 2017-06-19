@@ -4,6 +4,8 @@
 #include "mtkLogger.h"
 #include "mtkXMLUtils.h"
 #include "arraycam/atArrayCamClient.h"
+#include "atProcessSequence.h"
+
 using namespace mtk;
 using namespace tinyxml2;
 
@@ -21,6 +23,15 @@ mArrayCamClient(acc)
 
 void ArrayCamRequestProcess::clear()
 {}
+
+bool ArrayCamRequestProcess::write()
+{
+	if(mProcessSequence)
+    {
+    	return mProcessSequence->write();
+    }
+	return false;
+}
 
 const string ArrayCamRequestProcess::getTypeName() const
 {

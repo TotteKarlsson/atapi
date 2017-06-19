@@ -5,6 +5,7 @@
 #include "mtkLogger.h"
 #include "apt/atMove.h"
 #include "mtkXMLUtils.h"
+#include "atProcessSequence.h"
 
 using namespace mtk;
 using namespace at;
@@ -25,6 +26,15 @@ void StopAndResumeProcess::clear()
 const string StopAndResumeProcess::getTypeName() const
 {
 	return "stopAndResumeProcess";
+}
+
+bool StopAndResumeProcess::write()
+{
+	if(mProcessSequence)
+    {
+    	return mProcessSequence->write();
+    }
+	return false;
 }
 
 XMLElement* StopAndResumeProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)

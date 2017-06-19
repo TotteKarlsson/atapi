@@ -1,7 +1,6 @@
-#ifndef abProcessH
-#define abProcessH
+#ifndef atProcessH
+#define atProcessH
 #include <string>
-#include "arraybot/atABExporter.h"
 #include "atATObject.h"
 #include "Poco/TimeStamp.h"
 #include "Poco/Timespan.h"
@@ -22,7 +21,7 @@ class Trigger;
 class ArrayBot;
 class ProcessSequence;
 
-class AT_AB Process : public ATObject
+class AT_CORE Process : public ATObject
 {
     public:
         							            Process(const string& name, ATObject* ao = NULL);
@@ -37,7 +36,7 @@ class AT_AB Process : public ATObject
 
         										//If the process is part of a sequence, write will
                                                 //update the xml and save to file
-        bool									write();
+        virtual bool							write() = 0;
 
         string									getInfoText(){return mInfoText;}
         void									setInfoText(const string& txt){mInfoText = txt;}

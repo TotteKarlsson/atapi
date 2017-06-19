@@ -166,53 +166,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\atTCubeStepperMotor.cpp">
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="arduino\atArduinoClient.cpp">
-            <BuildOrder>45</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoDevice.cpp">
-            <BuildOrder>46</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoIPCServerReceiver.cpp">
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoMessageProcessor.cpp">
-            <BuildOrder>48</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
-            <DependentOn>arduino\atArduinoSerialMessageSender.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoServer.cpp">
-            <BuildOrder>50</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoServerCommand.cpp">
-            <BuildOrder>51</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoUtils.cpp">
-            <BuildOrder>52</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduino.cpp">
-            <BuildOrder>53</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduinoClient.cpp">
-            <BuildOrder>54</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduino.cpp">
-            <BuildOrder>55</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduinoClient.cpp">
-            <BuildOrder>44</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atArrayBot.cpp">
             <DependentOn>atArrayBot.h</DependentOn>
             <BuildOrder>52</BuildOrder>
         </CppCompile>
         <CppCompile Include="atArrayBotCore.cpp">
             <BuildOrder>55</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atEnvironmentalSensorReader.cpp">
-            <DependentOn>atEnvironmentalSensorReader.h</DependentOn>
-            <BuildOrder>56</BuildOrder>
         </CppCompile>
         <CppCompile Include="atWhiskerUnit.cpp">
             <DependentOn>atWhiskerUnit.h</DependentOn>
@@ -257,9 +216,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="process\atParallellProcess.cpp">
             <BuildOrder>6</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="process\atProcess.cpp">
-            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="process\atProcessSequence.cpp">
             <BuildOrder>8</BuildOrder>

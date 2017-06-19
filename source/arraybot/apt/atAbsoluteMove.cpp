@@ -2,6 +2,7 @@
 #include "atAbsoluteMove.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
+#include "atProcessSequence.h"
 //---------------------------------------------------------------------------
 
 AbsoluteMove::AbsoluteMove(const string& lbl, APTMotor* mtr, double pos, double maxVel, double acc)
@@ -16,6 +17,15 @@ mPositionResolution(1.0e-3)
 const string AbsoluteMove::getTypeName() const
 {
 	return "absoluteMove";
+}
+
+bool AbsoluteMove::write()
+{
+	if(mProcessSequence)
+    {
+    	return mProcessSequence->write();
+    }
+	return false;
 }
 
 bool AbsoluteMove::isDone()

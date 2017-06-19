@@ -1,7 +1,7 @@
 #ifndef abMoveH
 #define abMoveH
 #include "arraybot/atABExporter.h"
-#include "arraybot/process/atProcess.h"
+#include "atProcess.h"
 #include "atPositionalTrigger.h"
 //---------------------------------------------------------------------------
 
