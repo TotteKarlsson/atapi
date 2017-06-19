@@ -3,7 +3,7 @@
 #include "atXYZUnit.h"
 #include "mtkLogger.h"
 #include "mtkXMLUtils.h"
-#include "clients/atArrayCamClient.h"
+#include "arraycam/atArrayCamClient.h"
 using namespace mtk;
 using namespace tinyxml2;
 
