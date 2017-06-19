@@ -1,6 +1,6 @@
 #ifndef abArduinoServerCommandH
 #define abArduinoServerCommandH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "process/atProcess.h"
 //---------------------------------------------------------------------------
 

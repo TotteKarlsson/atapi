@@ -3,7 +3,7 @@
 #include "atMove.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE ContinousMove : public at::Move
+class AT_APT ContinousMove : public at::Move
 {
     public:
         							ContinousMove::ContinousMove(const string& lbl, double v, double acc);

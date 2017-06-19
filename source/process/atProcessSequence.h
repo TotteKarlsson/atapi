@@ -1,6 +1,6 @@
 #ifndef abProcessSequenceH
 #define abProcessSequenceH
-#include "atExporter.h"
+#include "apt/atAPTExporter.h"
 #include "atATObject.h"
 #include <list>
 #include <deque>

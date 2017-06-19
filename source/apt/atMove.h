@@ -1,6 +1,6 @@
 #ifndef abMoveH
 #define abMoveH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "process/atProcess.h"
 #include "atPositionalTrigger.h"
 //---------------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace at
 
 //!The move baseclass contain the general logic for a 'move' of an APTMotor.
 //!This should be subclassed - > MoveMotor
-class AT_CORE Move : public Process
+class AT_APT Move : public Process
 {
     public:
         	   			                    Move(const string& lbl, APTMotor* mtr, double maxVel = 0, double acc = 0);

@@ -1,4 +1,6 @@
 #pragma hdrstop
+#include <windows.h>
+#include "Thorlabs.MotionControl.TCube.StepperMotor.h"
 #include "atDeviceManager.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
@@ -6,8 +8,7 @@
 #include "atTCubeDCServo.h"
 #include "atTCubeStepperMotor.h"
 #include "atLongTravelStage.h"
-//#include "atThorlabStructs.h"
-#include "Thorlabs.MotionControl.TCube.StepperMotor.h"
+
 //---------------------------------------------------------------------------
 
 using namespace std;

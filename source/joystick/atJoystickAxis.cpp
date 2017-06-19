@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "atJoystickAxis.h"
 #include "mtkLogger.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 #include "mtkUtils.h"
 
 using namespace mtk;

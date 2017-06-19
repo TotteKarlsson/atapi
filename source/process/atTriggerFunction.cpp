@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atTriggerFunction.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
 
 MoveAbsolute::MoveAbsolute(APTMotor* mtr, double pos, double v, double a)

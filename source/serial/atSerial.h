@@ -1,6 +1,6 @@
 #ifndef abSerialH
 #define abSerialH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 #include "mtkStringList.h"
 #include "Poco/Mutex.h"

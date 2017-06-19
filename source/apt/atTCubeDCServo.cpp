@@ -1,6 +1,7 @@
 #pragma hdrstop
-#include "atTCubeDCServo.h"
+#include <windows.h>
 #include "Thorlabs.MotionControl.TCube.DCServo.h"
+#include "atTCubeDCServo.h"
 #include "mtkLogger.h"
 #include "atExceptions.h"
 #include <bitset>

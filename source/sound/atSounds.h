@@ -1,6 +1,6 @@
 #ifndef abSoundsH
 #define abSoundsH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "mtkThread.h"
 #include <string>
 #include <deque>

@@ -5,14 +5,14 @@
 #include "atProcessSequence.h"
 #include "atParallellProcess.h"
 #include "atArrayBot.h"
-#include "atAbsoluteMove.h"
-#include "atMove.h"
+#include "apt/atAbsoluteMove.h"
+#include "apt/atMove.h"
 #include "atTimedelay.h"
 #include "atStopAndResumeProcess.h"
 #include "atArrayCamRequestProcess.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 #include "atTriggerFunction.h"
-#include "atArduinoServerCommand.h"
+#include "arduino/atArduinoServerCommand.h"
 
 using namespace mtk;
 using namespace tinyxml2;

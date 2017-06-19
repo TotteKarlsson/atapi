@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atStopAndResumeProcess.h"
 #include "atXYZUnit.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 #include "mtkLogger.h"
-#include "atMove.h"
+#include "apt/atMove.h"
 #include "mtkXMLUtils.h"
 
 using namespace mtk;

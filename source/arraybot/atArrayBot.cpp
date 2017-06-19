@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "atArrayBot.h"
 #include "mtkLogger.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
 
 using namespace mtk;

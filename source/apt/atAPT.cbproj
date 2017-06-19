@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{E83BA68E-3135-44B3-A55F-7D9B225AE332}</ProjectGuid>
+        <ProjectGuid>{6761F744-DDF3-4B65-B13C-B8D770D80EB3}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -103,7 +103,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
         <LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-        <Defines>POCO_STATIC;$(Defines)</Defines>
+        <Defines>POCO_STATIC; WIN32_LEAN_AND_MEAN;$(Defines)</Defines>
         <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BUILD)\lib;$(KINESIS_LIBS);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
@@ -185,6 +185,40 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>56</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\process\atArrayCamRequestProcess.cpp">
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atParallellProcess.cpp">
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atProcess.cpp">
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atProcessSequence.cpp">
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atProcessSequenceProject.cpp">
+            <BuildOrder>22</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atProcessSequencer.cpp">
+            <BuildOrder>23</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atProcessSequences.cpp">
+            <BuildOrder>24</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atStopAndResumeProcess.cpp">
+            <DependentOn>..\process\atStopAndResumeProcess.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atTimeDelay.cpp">
+            <BuildOrder>26</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atTrigger.cpp">
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\process\atTriggerFunction.cpp">
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -238,7 +272,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\atVCLCore.bpl">ArrayBot VCL Core package</Excluded_Packages>
                     <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">File P:\build\xe3_ide\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>

@@ -1,6 +1,6 @@
 #ifndef atArrayCamClientH
 #define atArrayCamClientH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 #include "mtkProperty.h"
 #include "mtkMessageContainer.h"

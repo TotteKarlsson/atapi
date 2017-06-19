@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 
 //!An absolute move have the position and positionResolution attributes
-class AT_CORE AbsoluteMove : public at::Move
+class AT_APT AbsoluteMove : public at::Move
 {
     public:
 			        				AbsoluteMove( const string& lbl, APTMotor* mtr = NULL, double pos = 0, double maxVel = 1, double acc = 1);

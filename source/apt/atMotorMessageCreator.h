@@ -1,13 +1,13 @@
 #ifndef abMotorMessageCreatorH
 #define abMotorMessageCreatorH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include <string>
 #include "atATObject.h"
 #include "mtkThread.h"
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------
 
-//class AT_CORE MotorMessageCreator : public mtk::Thread, public ATObject
+//class AT_APT MotorMessageCreator : public mtk::Thread, public ATObject
 //{
 //	public:
 //													MotorMessageCreator(const string& threadName = mtk::gEmptyString);

@@ -2,7 +2,7 @@
 #define abArduinoMessageProcessorH
 #include <string>
 #include "mtkThread.h"
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "atATObject.h"
 //----------------------------------------------------------------
 

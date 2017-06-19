@@ -1,13 +1,13 @@
 #ifndef abPairedMoveH
 #define abPairedMoveH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "atATObject.h"
 #include <string>
 //---------------------------------------------------------------------------
 using std::string;
 
 class APTMotor;
-class AT_CORE PairedMove : public ATObject
+class AT_APT PairedMove : public ATObject
 {
     public:
                                         PairedMove(const string& name, double d = 0, double v = 0, double a = 0);

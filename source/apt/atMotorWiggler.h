@@ -11,7 +11,7 @@ class APTMotor;
 
 typedef void (__closure *OnTimer)();
 
-class AT_CORE MotorWiggler : public ATObject
+class AT_APT MotorWiggler : public ATObject
 {
 	public:
     							MotorWiggler(APTMotor* xmtr = NULL, APTMotor* ymtr = NULL);

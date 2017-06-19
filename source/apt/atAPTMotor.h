@@ -14,7 +14,7 @@ class TMotorFrame;
 //!An APT (Advanced Position Technology) Motor is an abstract class encaspulating properties/behaviour of a Thorlabs motor
 //The Thorlabs C API does unfortuntaly not allow a proper abstraction, meaning a lot of repetion of code in descendant
 //classes :(
-class AT_CORE APTMotor : public APTDevice
+class AT_APT APTMotor : public APTDevice
 {
 	friend class TMotorFrame;
     public:

@@ -2,7 +2,7 @@
 #include "atXYZUnit.h"
 #include "atArrayBotJoyStick.h"
 #include "mtkLogger.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 
 //---------------------------------------------------------------------------
 using namespace mtk;

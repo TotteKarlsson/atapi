@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atTrigger.h"
-#include "atAPTMotor.h"
+#include "apt/atAPTMotor.h"
 #include "atXYZUnit.h"
 //---------------------------------------------------------------------------
 

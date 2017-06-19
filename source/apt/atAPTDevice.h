@@ -1,6 +1,6 @@
 #ifndef abAPTDeviceH
 #define abAPTDeviceH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "atATObject.h"
 #include "mtkProperties.h"
 #include "atUtilities.h"
@@ -12,7 +12,7 @@ struct HardwareInformation;
 
 
 //---------------------------------------------------------------------------
-class AT_CORE APTDevice : public ATObject
+class AT_APT APTDevice : public ATObject
 {
 	public:
     							                //Every APTDevice need to be created with a serial number

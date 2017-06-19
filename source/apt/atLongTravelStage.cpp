@@ -1,6 +1,8 @@
 #pragma hdrstop
-#include "atLongTravelStage.h"
+#include <windows.h>
 #include "Thorlabs.MotionControl.IntegratedStepperMotors.h"
+#include "atLongTravelStage.h"
+
 #include "mtkLogger.h"
 #include "atExceptions.h"
 #include <bitset>

@@ -1,6 +1,6 @@
 #ifndef abMotorCommandH
 #define abMotorCommandH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "atATObject.h"
 #include <string>
 #include <ostream>
@@ -30,7 +30,7 @@ enum MotorCommandEnum
 
 string toString(MotorCommandEnum e);
 
-class AT_CORE MotorCommand : public ATObject
+class AT_APT MotorCommand : public ATObject
 {
 	public:
 							MotorCommand(MotorCommandEnum mce, double var1 = 0, double var2 = 0);
@@ -41,7 +41,7 @@ class AT_CORE MotorCommand : public ATObject
         double				getFirstVariable() const;
         double				getSecondVariable() const;
 
-		AT_CORE
+		AT_APT
  		friend ostream&     operator<<(ostream& stream, const MotorCommand& cmd);
 
     protected:

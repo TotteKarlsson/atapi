@@ -1,5 +1,5 @@
-#ifndef abExporterH
-#define abExporterH
+#ifndef atExporterH
+#define atExporterH
 
 #if defined (_WIN32)
     #if defined(AT_STATIC)

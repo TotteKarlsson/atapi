@@ -2,7 +2,7 @@
 #define abDeviceManagerH
 #include <string>
 #include <map>
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "atATObject.h"
 #include "mtkConstants.h"
 #include "mtkStringList.h"
@@ -17,7 +17,7 @@ using mtk::StringList;
 //Thorlabs device
 class APTDevice;
 
-class AT_CORE DeviceManager : public ATObject
+class AT_APT DeviceManager : public ATObject
 {
     public:
                                                     DeviceManager();
@@ -41,7 +41,7 @@ class AT_CORE DeviceManager : public ATObject
         APTDevice*                                  getPrevious() const;
         APTDevice*                                  getCurrent() const;
 
-        AT_CORE
+        AT_APT
         friend ostream&                             operator<<(ostream& os, DeviceManager& pm);
 
     private:

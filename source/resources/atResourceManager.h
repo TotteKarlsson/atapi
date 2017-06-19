@@ -1,7 +1,7 @@
 #ifndef atResourceManagerH
 #define atResourceManagerH
 #include <string>
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include "mtkStringList.h"
 //---------------------------------------------------------------------------
 

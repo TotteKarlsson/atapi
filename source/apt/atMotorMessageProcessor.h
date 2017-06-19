@@ -1,6 +1,6 @@
 #ifndef abMotorMessageProcessorH
 #define abMotorMessageProcessorH
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include <string>
 #include "mtkThread.h"
 #include "atATObject.h"
@@ -16,7 +16,7 @@ using mtk::StringList;
 using mtk::gEmptyString;
 typedef void __fastcall (__closure *UICallback)(void);
 
-class AT_CORE MotorMessageProcessor : public mtk::Thread, public ATObject
+class AT_APT MotorMessageProcessor : public mtk::Thread, public ATObject
 {
     public:
                                                     MotorMessageProcessor(MotorMessageContainer& list, const string& threadName=gEmptyString);

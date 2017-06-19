@@ -1,7 +1,7 @@
 #ifndef abMotorMessageContainerH
 #define abMotorMessageContainerH
 #include <deque>
-#include "atExporter.h"
+#include "atAPTExporter.h"
 #include "Poco/Condition.h"
 #include "atMotorMessageProcessor.h"
 #include "atMotorCommand.h"
@@ -11,7 +11,7 @@ using std::deque;
 //The motorCMD container is used after fetching new motorCMDs from amazon
 //An motorCMDs populator is popping motorCMDs from the container, pushing them into local database
 //The motorCMDs are simple strings
-class AT_CORE MotorMessageContainer : public ATObject
+class AT_APT MotorMessageContainer : public ATObject
 {
 	friend  MotorMessageProcessor;
 	public:

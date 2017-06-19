@@ -1,6 +1,6 @@
 #ifndef atUC7MessageReceiverH
 #define atUC7MessageReceiverH
-#include "atExporter.h"
+#include "atCoreExporter.h"
 #include <string>
 #include "mtkThread.h"
 #include "atATObject.h"
