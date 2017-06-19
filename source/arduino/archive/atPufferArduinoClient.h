@@ -1,5 +1,5 @@
-#ifndef abPufferArduinoClientH
-#define abPufferArduinoClientH
+#ifndef atPufferArduinoClientH
+#define atPufferArduinoClientH
 #include "atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------

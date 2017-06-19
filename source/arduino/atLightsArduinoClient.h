@@ -1,5 +1,5 @@
-#ifndef abLightsArduinoClientH
-#define abLightsArduinoClientH
+#ifndef atLightsArduinoClientH
+#define atLightsArduinoClientH
 #include "atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------

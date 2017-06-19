@@ -1,5 +1,5 @@
-#ifndef abArduinoServerH
-#define abArduinoServerH
+#ifndef atArduinoServerH
+#define atArduinoServerH
 //---------------------------------------------------------------------------
 #include "atCoreExporter.h"
 #include "atATObject.h"

@@ -1,5 +1,5 @@
-#ifndef abArduinoDeviceH
-#define abArduinoDeviceH
+#ifndef atArduinoDeviceH
+#define atArduinoDeviceH
 #include "atCoreExporter.h"
 #include <sstream>
 #include <iostream>

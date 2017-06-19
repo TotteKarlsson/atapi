@@ -1,5 +1,5 @@
-#ifndef abArduinoMessageProcessorH
-#define abArduinoMessageProcessorH
+#ifndef atArduinoMessageProcessorH
+#define atArduinoMessageProcessorH
 #include <string>
 #include "mtkThread.h"
 #include "atCoreExporter.h"

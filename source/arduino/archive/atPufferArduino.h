@@ -1,5 +1,5 @@
-#ifndef abPufferArduinoH
-#define abPufferArduinoH
+#ifndef atPufferArduinoH
+#define atPufferArduinoH
 #include "atArduinoDevice.h"
 #include "atLeicaUC7Controller.h"
 //---------------------------------------------------------------------------

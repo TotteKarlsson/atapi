@@ -1,5 +1,5 @@
-#ifndef abArduinoClientH
-#define abArduinoClientH
+#ifndef atArduinoClientH
+#define atArduinoClientH
 #include "atCoreExporter.h"
 #include "atATObject.h"
 #include "mtkProperty.h"

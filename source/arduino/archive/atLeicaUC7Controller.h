@@ -1,5 +1,5 @@
-#ifndef abLeicaUC7ControllerH
-#define abLeicaUC7ControllerH
+#ifndef atLeicaUC7ControllerH
+#define atLeicaUC7ControllerH
 #include "atCoreExporter.h"
 #include "atATObject.h"
 //---------------------------------------------------------------------------
