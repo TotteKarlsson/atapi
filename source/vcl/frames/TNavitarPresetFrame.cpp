@@ -2,31 +2,46 @@
 #pragma hdrstop
 #include "TNavitarPresetFrame.h"
 #include "navitar/atNavitarMotorController.h"
+#include "navitar/atNavitarPreset.h"
 #pragma package(smart_init)
 #pragma link "TIntegerLabeledEdit"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
 TNavitarPresetFrame *NavitarPresetFrame;
-
+static int frameNr = 0;
 //---------------------------------------------------------------------------
-__fastcall TNavitarPresetFrame::TNavitarPresetFrame(TComponent* Owner)
-	: TFrame(Owner)
+__fastcall TNavitarPresetFrame::TNavitarPresetFrame(NavitarPreset& preset, TComponent* Owner)
+	: TFrame(Owner),
+    mPreset(preset)
 {
+	this->Name = "NavitarPresetFrame_" + IntToStr(frameNr++);
+    MainGB->Caption = preset.getName().c_str();
+	FocusPos->setValue(mPreset.getFocusPreset());
+    ZoomPos->setValue(mPreset.getZoomPreset());
 }
-
-void TNavitarPresetFrame::populate(NavitarMotorController& c)
-{
-	mController = &c;
-}
-
 
 //---------------------------------------------------------------------------
 void __fastcall TNavitarPresetFrame::GoButtonClick(TObject *Sender)
 {
-	if(mController)
+	mPreset.set();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TNavitarPresetFrame::onKey(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+	if(Key == VK_RETURN)
     {
-		mController->setPreset(ZoomPos->getValue(), FocusPos->getValue());
+		TIntegerLabeledEdit* e = dynamic_cast<TIntegerLabeledEdit*>(Sender);
+        if(e == FocusPos)
+        {
+	        mPreset.setFocus(e->getValue());
+        }
+        else if(e == ZoomPos)
+        {
+        	mPreset.setZoom(e->getValue());
+        }
     }
 }
+
 

@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 #pragma hdrstop
 #include "atReticle.h"
 #include <vcl.controls.hpp>

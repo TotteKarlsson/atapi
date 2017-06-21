@@ -14,7 +14,6 @@
 #include <Vcl.ComCtrls.hpp>
 #include "mtkProperty.h"
 #include "sound/atApplicationSound.h"
-
 //---------------------------------------------------------------------------
 
 namespace mtk

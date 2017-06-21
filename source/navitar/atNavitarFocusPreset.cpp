@@ -17,12 +17,7 @@ NavitarFocusPreset::~NavitarFocusPreset()
 bool NavitarFocusPreset::set()
 {
 	Log(lInfo) << "Setting preset: " << mKey << " value = " << getValue();
-	return mController.getZoom().setPosition(getValue());
+	return mController.getFocus().setPosition(getValue());
 }
 
-bool NavitarFocusPreset::update(const int& value)
-{
-	setValue(value);
-    return true;
-}
 

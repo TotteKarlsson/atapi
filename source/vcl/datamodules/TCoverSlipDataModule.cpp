@@ -14,11 +14,14 @@ __fastcall TcsDM::TcsDM(TComponent* Owner)
 	: TDataModule(Owner),
     csDustAssayCDSOnDataChanged(NULL)
 {
-   csDS->SQLConnection = atdbDM->SQLConnection1;
-   csStatusDS->SQLConnection = atdbDM->SQLConnection1;
-   csTypeDS->SQLConnection = atdbDM->SQLConnection1;
-   csDustAssayDS->SQLConnection = atdbDM->SQLConnection1;
-   csFreshBatchesDS->SQLConnection = atdbDM->SQLConnection1;
+	if(atdbDM)
+    {
+        csDS->SQLConnection = atdbDM->SQLConnection1;
+        csStatusDS->SQLConnection = atdbDM->SQLConnection1;
+        csTypeDS->SQLConnection = atdbDM->SQLConnection1;
+        csDustAssayDS->SQLConnection = atdbDM->SQLConnection1;
+        csFreshBatchesDS->SQLConnection = atdbDM->SQLConnection1;
+    }
 }
 
 void __fastcall TcsDM::afterConnect()

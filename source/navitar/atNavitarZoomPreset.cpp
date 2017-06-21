@@ -19,10 +19,3 @@ bool NavitarZoomPreset::set()
 	Log(lInfo) << "Setting preset: " << mKey << " value = " << getValue();
 	return mController.getZoom().setPosition(getValue());
 }
-
-bool NavitarZoomPreset::update(const int& value)
-{
-	setValue(value);
-    return true;
-}
-

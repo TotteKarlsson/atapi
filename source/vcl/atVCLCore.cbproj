@@ -38,11 +38,11 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ProjectType>CppPackage</ProjectType>
-        <ILINK_LibraryPath>..\database\;..\..\UI\frames\;components\;frames\;forms\;P:\ArrayBot\source\vcl\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>datamodules\;..\database\;..\..\UI\frames\;components\;frames\;forms\;P:\ArrayBot\source\vcl\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\database\;components\;frames\;forms\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl\;datamodules;$(IncludePath)</IncludePath>
+        <IncludePath>datamodules\;..\database\;components\;frames\;forms\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl\;datamodules;$(IncludePath)</IncludePath>
         <_TCHARMapping>char</_TCHARMapping>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -112,10 +112,40 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>atVCLUtils.h</DependentOn>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
+        <PackageImport Include="bindcomp.bpi">
+            <BuildOrder>37</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="bindcompvcl.bpi">
+            <BuildOrder>39</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="bindengine.bpi">
+            <BuildOrder>36</BuildOrder>
+        </PackageImport>
         <CppCompile Include="components\TArrayBotBtn.cpp">
             <DependentOn>components\TArrayBotBtn.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
+        <PackageImport Include="dbexpress.bpi">
+            <BuildOrder>45</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dbrtl.bpi">
+            <BuildOrder>38</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dbxcds.bpi">
+            <BuildOrder>47</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DbxCommonDriver.bpi">
+            <BuildOrder>46</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DbxDevartSQLiteDriver170.bpi">
+            <BuildOrder>49</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DBXMySQLDriver.bpi">
+            <BuildOrder>48</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dsnap.bpi">
+            <BuildOrder>44</BuildOrder>
+        </PackageImport>
         <PackageImport Include="DuneComponents.bpi">
             <BuildOrder>17</BuildOrder>
         </PackageImport>
@@ -123,17 +153,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <Form>amFileEditor</Form>
             <DependentOn>forms\TamFileEditor.h</DependentOn>
             <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="forms\TProcessSequenceControlForm.cpp">
-            <Form>ProcessSequenceControlForm</Form>
-            <DependentOn>forms\TProcessSequenceControlForm.h</DependentOn>
-            <BuildOrder>26</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="forms\TSelectProcessTypeDialog.cpp">
-            <Form>SelectProcessTypeDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>forms\TSelectProcessTypeDialog.h</DependentOn>
-            <BuildOrder>25</BuildOrder>
         </CppCompile>
         <CppCompile Include="forms\TShowFileContentForm.cpp">
             <Form>ShowFileContentForm</Form>
@@ -155,89 +174,53 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>forms\TYesNoForm.h</DependentOn>
             <BuildOrder>23</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TApplicationSounds.cpp">
+            <Form>ApplicationSounds</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TApplicationSounds.h</DependentOn>
+            <BuildOrder>31</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TArduinoServerCommandFrame.cpp">
             <Form>ArduinoServerCommandFrame</Form>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TArrayCamRequestFrame.cpp">
-            <Form>ArrayCamRequestFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TArrayCamRequestFrame.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TMotorFrame.cpp">
-            <Form>MotorFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TMotorFrame.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TMotorMoveProcessFrame.cpp">
-            <Form>MotorMoveProcessFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TMotorMoveProcessFrame.h</DependentOn>
-            <BuildOrder>23</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TNavatarPresetsFrame.cpp">
-            <DependentOn>frames\TNavatarPresetsFrame.h</DependentOn>
-            <BuildOrder>28</BuildOrder>
+            <BuildOrder>31</BuildOrder>
         </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>frames\TNavitarMotorFrame.h</DependentOn>
-            <BuildOrder>29</BuildOrder>
+            <BuildOrder>32</BuildOrder>
         </CppCompile>
         <CppCompile Include="frames\TNavitarPresetFrame.cpp">
-            <Form>NavitarPreset</Form>
+            <Form>NavitarPresetFrame</Form>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>frames\TNavitarPresetFrame.h</DependentOn>
-            <BuildOrder>30</BuildOrder>
+            <BuildOrder>32</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TParallellProcessesFrame.cpp">
-            <Form>ParallellProcessesFrame</Form>
-            <DependentOn>frames\TParallellProcessesFrame.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TPositionalTriggerFrame.cpp">
-            <Form>PositionalTriggerFrame</Form>
+        <CppCompile Include="frames\TSoundsFrame.cpp">
+            <Form>SoundsFrame</Form>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TPositionalTriggerFrame.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
+            <DependentOn>frames\TSoundsFrame.h</DependentOn>
+            <BuildOrder>33</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TSequenceInfoFrame.cpp">
-            <Form>SequenceInfoFrame</Form>
+        <CppCompile Include="frames\TSSHFrame.cpp">
+            <Form>SSHFrame</Form>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TSequenceInfoFrame.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
+            <DependentOn>frames\TSSHFrame.h</DependentOn>
+            <BuildOrder>34</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TSequencerButtonsFrame.cpp">
-            <Form>SequencerButtonsFrame</Form>
+        <CppCompile Include="frames\TZebraScannerFrame.cpp">
+            <Form>ZebraScannerFrame</Form>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TSequencerButtonsFrame.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TTimeDelayFrame.cpp">
-            <Form>TimeDelayFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TTimeDelayFrame.h</DependentOn>
-            <BuildOrder>27</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TXYZPositionsFrame.cpp">
-            <Form>XYZPositionsFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TXYZPositionsFrame.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="frames\TXYZUnitFrame.cpp">
-            <Form>XYZUnitFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TXYZUnitFrame.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
+            <DependentOn>frames\TZebraScannerFrame.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
         </CppCompile>
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="sbridge170.bpi">
+            <BuildOrder>40</BuildOrder>
         </PackageImport>
         <PackageImport Include="vcl.bpi">
             <BuildOrder>16</BuildOrder>
@@ -251,26 +234,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PackageImport Include="vclx.bpi">
             <BuildOrder>19</BuildOrder>
         </PackageImport>
-        <FormResources Include="frames\TPositionalTriggerFrame.dfm"/>
-        <FormResources Include="frames\TSequenceInfoFrame.dfm"/>
-        <FormResources Include="frames\TSequencerButtonsFrame.dfm"/>
-        <FormResources Include="frames\TParallellProcessesFrame.dfm"/>
-        <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="frames\TSoundsFrame.dfm"/>
         <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
-        <FormResources Include="frames\TTimeDelayFrame.dfm"/>
-        <FormResources Include="frames\TXYZPositionsFrame.dfm"/>
-        <FormResources Include="frames\TXYZUnitFrame.dfm"/>
-        <FormResources Include="frames\TMotorMoveProcessFrame.dfm"/>
-        <FormResources Include="forms\TamFileEditor.dfm"/>
-        <FormResources Include="forms\TProcessSequenceControlForm.dfm"/>
-        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
-        <FormResources Include="frames\TArrayCamRequestFrame.dfm"/>
-        <FormResources Include="frames\TMotorFrame.dfm"/>
-        <FormResources Include="forms\TYesNoForm.dfm"/>
+        <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="frames\TSSHFrame.dfm"/>
+        <FormResources Include="frames\TZebraScannerFrame.dfm"/>
+        <FormResources Include="frames\TApplicationSounds.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="forms\TYesNoForm.dfm"/>
         <FormResources Include="forms\TTextInputDialog.dfm"/>
+        <FormResources Include="forms\TamFileEditor.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

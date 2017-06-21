@@ -7,22 +7,24 @@
 #include "TIntegerLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
+class NavitarPreset;
 
-class NavitarMotorController;
 class PACKAGE TNavitarPresetFrame : public TFrame
 {
-    __published:	// IDE-managed Components
+    __published:
         TIntegerLabeledEdit *FocusPos;
         TIntegerLabeledEdit *ZoomPos;
-        TGroupBox *GroupBox1;
+	TGroupBox *MainGB;
         TButton *GoButton;
-	void __fastcall GoButtonClick(TObject *Sender);
+		void __fastcall GoButtonClick(TObject *Sender);
+	void __fastcall onKey(TObject *Sender, WORD &Key, TShiftState Shift);
+
     private:
-		NavitarMotorController* 		mController;
+        NavitarPreset&					mPreset;
 
     public:
-        		__fastcall 	TNavitarPresetFrame(TComponent* Owner);
-        void		   		populate(NavitarMotorController& c);
+        		__fastcall 	TNavitarPresetFrame(NavitarPreset& p, TComponent* Owner);
+
 };
 
 extern PACKAGE TNavitarPresetFrame *NavitarPresetFrame;

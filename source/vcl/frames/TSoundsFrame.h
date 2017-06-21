@@ -8,7 +8,7 @@
 #include <Vcl.ComCtrls.hpp>
 
 //---------------------------------------------------------------------------
-class TSoundsFrame : public TFrame
+class PACKAGE TSoundsFrame : public TFrame
 {
     __published:	// IDE-managed Components
         TGroupBox *GroupBox1;

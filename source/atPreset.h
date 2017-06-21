@@ -22,20 +22,18 @@ class AT_CORE Preset : public Property<T>
 		virtual bool			                set() = 0;
 
         ///////////////////////////////////////////////////////////////////////////////////////////
-        string                                  getINIRecord(){return "";}
-        bool                                    assignValueFromString(const string& val){ return false;}
-        string                                  getLabel(){return "";}
-        string                                  getValueAsString() const{ return "";}
-        void*                                   getValueHandle(){return NULL;}
-        ObjectType                              getPropertyType(){ return mtk::otUndefined;}
-        bool                                    read(IniFile* iniFile, const string& section){ return false;}
-        bool                                    write(IniFile* iniFile, const string& section){ return false;}
+        string                                  getINIRecord()							        {return Property<T>::getINIRecord();}
+        bool                                    assignValueFromString(const string& val)        {return Property<T>::assignValueFromString(val);}
+        string                                  getLabel()								        {return Property<T>::getLabel();}
+        string                                  getValueAsString() const				        {return Property<T>::getValueAsString();}
+        void*                                   getValueHandle()						        {return Property<T>::getValueHandle();}
+        ObjectType                              getPropertyType()						        {return Property<T>::getPropertyType();}
+        bool                                    read(IniFile* iniFile, const string& section)	{return Property<T>::read(iniFile, section);}
+        bool                                    write(IniFile* iniFile, const string& section)	{return Property<T>::write(iniFile, section);}
 
                                                 //Copy temporary value to real value
-        void                                    applyModification(){;}
+        void                                    applyModification()								{Property<T>::applyModification();}
 		///////////////////////////////////////////////////////////////////////////////////////////
-
-        virtual bool			                update(const T& value) = 0;
 };
 
 template<class T>

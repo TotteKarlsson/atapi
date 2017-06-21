@@ -4,26 +4,36 @@
 #include "atNavitarZoomPreset.h"
 #include "atNavitarFocusPreset.h"
 #include "atNavitarMotorController.h"
+#include "mtkINIFileProperties.h"
 //---------------------------------------------------------------------------
 
 using mtk::ObjectType;
 using mtk::IniFile;
+using mtk::IniFileProperties;
 
-class AT_CORE NavitarPreset	: public ATObject
+class AT_CORE NavitarPreset	: public IniFileProperties
 {
     public:
 		                                        NavitarPreset(NavitarMotorController& mc, const string& name, const int& z = 0, const int& f = 0);
         				                        ~NavitarPreset();
+		string									getName();
+		bool									setName(const string& n);
+		bool									setup(const string& iniSection, IniFile& iniFile);
 
 		bool	 								set();
-        bool									update(const int& z, const int& f);
+        bool									setZoom(const int& z);
+        bool									setFocus(const int& f);
+        bool									setValue(const int& z, const int& f);
+
+        int										getFocusPreset();
+        int										getZoomPreset();
 
 
     protected:
+    	string									mName;
 		NavitarMotorController&					mController;
         NavitarZoomPreset						mZoom;
         NavitarFocusPreset						mFocus;
-
 
 };
 #endif

@@ -48,7 +48,7 @@ class AT_CORE NavitarMotor : public ATObject
         string								getLabel();
 
     protected:
-		NavitarMotorController& 	            mMotorController;
+		NavitarMotorController& 	        mMotorController;
 
         									//!When calling registers, the motor ID indicates which motor to
                                             //!communicate with
