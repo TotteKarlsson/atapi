@@ -1,4 +1,4 @@
-object NavitarPreset: TNavitarPreset
+object NavitarPresetFrame: TNavitarPresetFrame
   Left = 0
   Top = 0
   Width = 283

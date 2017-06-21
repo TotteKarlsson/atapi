@@ -1,5 +1,5 @@
-#ifndef TNavitarPresetH
-#define TNavitarPresetH
+#ifndef TNavitarPresetFrameH
+#define TNavitarPresetFrameH
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 
 class NavitarMotorController;
-class PACKAGE TNavitarPreset : public TFrame
+class PACKAGE TNavitarPresetFrame : public TFrame
 {
     __published:	// IDE-managed Components
         TIntegerLabeledEdit *FocusPos;
@@ -21,9 +21,9 @@ class PACKAGE TNavitarPreset : public TFrame
 		NavitarMotorController* 		mController;
 
     public:
-        		__fastcall 	TNavitarPreset(TComponent* Owner);
+        		__fastcall 	TNavitarPresetFrame(TComponent* Owner);
         void		   		populate(NavitarMotorController& c);
 };
 
-extern PACKAGE TNavitarPreset *NavitarPreset;
+extern PACKAGE TNavitarPresetFrame *NavitarPresetFrame;
 #endif

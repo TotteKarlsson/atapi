@@ -189,10 +189,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TNavitarMotorFrame.h</DependentOn>
             <BuildOrder>29</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TNavitarPreset.cpp">
+        <CppCompile Include="frames\TNavitarPresetFrame.cpp">
             <Form>NavitarPreset</Form>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TNavitarPreset.h</DependentOn>
+            <DependentOn>frames\TNavitarPresetFrame.h</DependentOn>
             <BuildOrder>30</BuildOrder>
         </CppCompile>
         <CppCompile Include="frames\TParallellProcessesFrame.cpp">
@@ -256,7 +256,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TSequencerButtonsFrame.dfm"/>
         <FormResources Include="frames\TParallellProcessesFrame.dfm"/>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
-        <FormResources Include="frames\TNavitarPreset.dfm"/>
+        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="frames\TTimeDelayFrame.dfm"/>
         <FormResources Include="frames\TXYZPositionsFrame.dfm"/>
         <FormResources Include="frames\TXYZUnitFrame.dfm"/>

@@ -175,6 +175,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atExceptions.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atPreset.cpp">
+            <DependentOn>atPreset.h</DependentOn>
+            <BuildOrder>41</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atProcess.cpp">
             <BuildOrder>39</BuildOrder>
         </CppCompile>
@@ -194,6 +198,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="labelprinter\atTSCLIB.cpp">
             <BuildOrder>73</BuildOrder>
         </CppCompile>
+        <CppCompile Include="navitar\atNavitarFocusPreset.cpp">
+            <DependentOn>navitar\atNavitarFocusPreset.h</DependentOn>
+            <BuildOrder>40</BuildOrder>
+        </CppCompile>
         <CppCompile Include="navitar\atNavitarMotor.cpp">
             <DependentOn>navitar\atNavitarMotor.h</DependentOn>
             <BuildOrder>76</BuildOrder>
@@ -201,6 +209,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="navitar\atNavitarMotorController.cpp">
             <DependentOn>navitar\atNavitarMotorController.h</DependentOn>
             <BuildOrder>77</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="navitar\atNavitarZoomPreset.cpp">
+            <BuildOrder>42</BuildOrder>
         </CppCompile>
         <CppCompile Include="resources\atResourceManager.cpp">
             <BuildOrder>75</BuildOrder>
