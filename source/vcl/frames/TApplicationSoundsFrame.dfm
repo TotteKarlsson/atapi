@@ -1,4 +1,4 @@
-object ApplicationSounds: TApplicationSounds
+object ApplicationSoundsFrame: TApplicationSoundsFrame
   Left = 0
   Top = 0
   Width = 509

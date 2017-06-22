@@ -1,16 +1,18 @@
 #include <System.hpp>
 #pragma hdrstop
-USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
-USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
-USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
-USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
-USEFORM("frames\TSSHFrame.cpp", SSHFrame); /* TFrame: File Type */
-USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
-USEFORM("frames\TApplicationSounds.cpp", ApplicationSounds); /* TFrame: File Type */
-USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
-USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
 USEFORM("forms\TYesNoForm.cpp", YesNoForm);
 USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
+USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
+USEFORM("frames\TApplicationSoundsFrame.cpp", ApplicationSounds); /* TFrame: File Type */
+USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
+USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
+USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
+USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
+USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
+USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
+USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
+USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
+USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -22,15 +24,10 @@ extern "C" int _libmain(unsigned long reason)
 {
 	return 1;
 }
-
-
 #pragma comment(lib, "mtkCommon.lib")
 #pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "atDataBase.lib")
 #pragma comment(lib, "atResources.lib")
-//#pragma comment(lib, "atArrayBotCore.lib")
-
-//#pragma comment(lib, "atSSI.lib")
 #pragma comment(lib, "atBarcodeReader.lib")
 
 #pragma comment(lib, "libmysqlB.lib")

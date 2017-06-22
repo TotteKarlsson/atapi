@@ -1,6 +1,6 @@
 #include <vcl.h>
 #pragma hdrstop
-#include "TApplicationSounds.h"
+#include "TApplicationSoundsFrame.h"
 #include "mtkIniFileProperties.h"
 #include "mtkVCLUtils.h"
 #include "sound/atSounds.h"
@@ -13,14 +13,14 @@ using namespace mtk;
 #pragma package(smart_init)
 #pragma link "TIntLabel"
 #pragma resource "*.dfm"
-TApplicationSounds *ApplicationSounds;
+TApplicationSoundsFrame *ApplicationSoundsFrame;
 
 //---------------------------------------------------------------------------
-__fastcall TApplicationSounds::TApplicationSounds(TComponent* Owner)
+__fastcall TApplicationSoundsFrame::TApplicationSoundsFrame(TComponent* Owner)
 	: TFrame(Owner)
 {}
 
-void TApplicationSounds::populate(IniFileProperties& props)
+void TApplicationSoundsFrame::populate(IniFileProperties& props)
 {
 	mSounds = &props;
     //Populate listbox with names
@@ -47,7 +47,7 @@ void TApplicationSounds::populate(IniFileProperties& props)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TApplicationSounds::ApplicationSoundsLBClick(TObject *Sender)
+void __fastcall TApplicationSoundsFrame::ApplicationSoundsLBClick(TObject *Sender)
 {
 	//Retrive the sound from the listbox
     int itemIndex = ApplicationSoundsLB->ItemIndex;
@@ -65,7 +65,7 @@ void __fastcall TApplicationSounds::ApplicationSoundsLBClick(TObject *Sender)
     }
 }
 
-void __fastcall TApplicationSounds::SoundCBCloseUp(TObject *Sender)
+void __fastcall TApplicationSoundsFrame::SoundCBCloseUp(TObject *Sender)
 {
 	//Get selected item and repopulate
     string item = getSelectedItem(SoundCB);
@@ -81,7 +81,7 @@ void __fastcall TApplicationSounds::SoundCBCloseUp(TObject *Sender)
     }
 }
 
-Property<ApplicationSound>* TApplicationSounds::getCurrentSoundProperty()
+Property<ApplicationSound>* TApplicationSoundsFrame::getCurrentSoundProperty()
 {
     int itemIndex = ApplicationSoundsLB->ItemIndex;
     if(itemIndex != -1)
@@ -92,7 +92,7 @@ Property<ApplicationSound>* TApplicationSounds::getCurrentSoundProperty()
     return NULL;
 }
 
-void __fastcall TApplicationSounds::PlayBtnClick(TObject *Sender)
+void __fastcall TApplicationSoundsFrame::PlayBtnClick(TObject *Sender)
 {
 	Property<ApplicationSound>* p = getCurrentSoundProperty();
     if(p)
@@ -102,7 +102,7 @@ void __fastcall TApplicationSounds::PlayBtnClick(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TApplicationSounds::VolumeTBChange(TObject *Sender)
+void __fastcall TApplicationSoundsFrame::VolumeTBChange(TObject *Sender)
 {
     int itemIndex = ApplicationSoundsLB->ItemIndex;
     if(itemIndex != -1 )
@@ -117,7 +117,7 @@ void __fastcall TApplicationSounds::VolumeTBChange(TObject *Sender)
 }
 
 
-void __fastcall TApplicationSounds::EnabledCBClick(TObject *Sender)
+void __fastcall TApplicationSoundsFrame::EnabledCBClick(TObject *Sender)
 {
     int itemIndex = ApplicationSoundsLB->ItemIndex;
     if(itemIndex != -1 )

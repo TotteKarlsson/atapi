@@ -1,5 +1,5 @@
-#ifndef TApplicationSoundsH
-#define TApplicationSoundsH
+#ifndef TApplicationSoundsFrameH
+#define TApplicationSoundsFrameH
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -23,7 +23,7 @@ namespace mtk
 
 using mtk::IniFileProperties;
 
-class PACKAGE TApplicationSounds : public TFrame
+class PACKAGE TApplicationSoundsFrame : public TFrame
 {
     __published:	// IDE-managed Components
         TGroupBox *GroupBox1;
@@ -45,9 +45,9 @@ class PACKAGE TApplicationSounds : public TFrame
 		IniFileProperties*				mSounds;
 		Property<ApplicationSound>* 	getCurrentSoundProperty();
     public:
-        					__fastcall  TApplicationSounds(TComponent* Owner);
+        					__fastcall  TApplicationSoundsFrame(TComponent* Owner);
 		void							populate(IniFileProperties& props);
 };
 
-extern PACKAGE TApplicationSounds *ApplicationSounds;
+extern PACKAGE TApplicationSoundsFrame *ApplicationSoundsFrame;
 #endif
