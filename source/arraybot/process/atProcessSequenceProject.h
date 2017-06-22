@@ -23,6 +23,7 @@ class TimeDelay;
 class ParallellProcess;
 class ArduinoServerCommand;
 
+//!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
 class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
 {
     public:
@@ -45,7 +46,6 @@ class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
 		TimeDelay*								createTimeDelayProcess(tinyxml2::XMLElement* element);
 		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);
 		ArrayCamRequestProcess* 				createArrayCamRequestProcess(tinyxml2::XMLElement* element);
-
 		ArduinoServerCommand* 					createArduinoServerCommand(tinyxml2::XMLElement* proc);
 };
 

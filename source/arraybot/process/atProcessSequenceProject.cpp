@@ -66,6 +66,7 @@ bool ProcessSequenceProject::save(const string& fName)
 
     //For now, do a brute force save of Moleculix Objects
     XMLElement* sequence = newElement("sequence");
+	sequence->SetAttribute("category", mProcessSequence.getCategory().c_str());
 
     //First save Processes
     Process* p = mProcessSequence.getFirst();
@@ -134,7 +135,7 @@ bool ProcessSequenceProject::open()
     }
     catch(...)
     {
-        throw(("Bad model file!"));
+        throw("Bad model file!");
     }
 }
 
@@ -147,6 +148,9 @@ int ProcessSequenceProject::loadProcesses()
     {
         return 0;
     }
+
+	string category = sequence->Attribute("category");
+    mProcessSequence.setCategory(category);
 
     int nrOfObjects = 0;
 

@@ -20,9 +20,8 @@ class Process;
 class ArrayBot;
 
 //!A ProcessSequence maintains a list of processes
-//!The processsequencer takes a ProcessSequences as input and executes inidividual processes
+//!The processsequencer takes a ProcessSequence as input and executes inidividual processes
 //!from the sequence
-
 class AT_AB ProcessSequence : public ATObject
 {
     public:
@@ -31,7 +30,7 @@ class AT_AB ProcessSequence : public ATObject
 					        		        ProcessSequence(const ProcessSequence& s);
 
                                             //!Init the sequence brings all processes into their
-                                            //!initial state. Required if a sequence is to be rerun
+                                            //!initial state. Required if a sequence is to be rerun.
                                             //!init and reset are synonomous
 		void								init();
 
@@ -56,6 +55,9 @@ class AT_AB ProcessSequence : public ATObject
         Process*                          	getCurrent() const;
         bool								selectProcess(Process* p);
 
+        void								setCategory(const string& c);
+        string								getCategory();
+
         void								setProjectName(const string& name);
         void								setFileFolder(const string& f);
 		void								setFileName(const string& f);
@@ -64,13 +66,17 @@ class AT_AB ProcessSequence : public ATObject
         string 								getFileFolder();
         int									getNumberOfProcesses(){return mProcesses.size();}
         ArrayBot*							getArrayBot(){return &mAB;}
-
         bool								moveForward(Process* ps);
         bool								moveBack(Process* ps);
 
     protected:
     	ArrayBot&							mAB;
 	    ProcessSequenceProject	 			mProject;
+
+        									//!Allow categorization of ProcessSequences
+                                            //!For example, "Preset" sequences and "General"
+                                            //!Categories are used in order to organize the UI
+		string								mCategory;
 
         									//!List of abstract Processes
 		mutable list<Process*>  			mProcesses;

@@ -10,7 +10,8 @@ using namespace mtk;
 ProcessSequence::ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& name, const string& fileExt)
 :
 mAB(ab),
-mProject(*this, ac, fileExt)
+mProject(*this, ac, fileExt),
+mCategory("General")
 {
 	mProcessIter = mProcesses.begin();
 }
@@ -81,6 +82,16 @@ bool ProcessSequence::moveBack(Process* ps)
 bool ProcessSequence::isFirst(Process* p)
 {
 	return p == *(mProcesses.begin());
+}
+
+string ProcessSequence::getCategory()
+{
+	return mCategory;
+}
+
+void ProcessSequence::setCategory(const string& c)
+{
+	mCategory = c;
 }
 
 void ProcessSequence::setProjectName(const string& name)
