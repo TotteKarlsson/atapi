@@ -31,9 +31,6 @@ Coordinates=46,321,96,123
 [blockNotesDS]
 Coordinates=456,71,84,123
 
-[processIDDS]
-Coordinates=47,771,78,51
-
 [preprocesstreatmentDS]
 Coordinates=456,1,131,51
 
@@ -84,4 +81,7 @@ Coordinates=456,355,89,123
 
 [fixativeTBL]
 Coordinates=625,211,69,51
+
+[specimenIDDS]
+Coordinates=47,771,78,51
 

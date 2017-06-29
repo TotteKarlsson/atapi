@@ -1,6 +1,6 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 922
+  Height = 1003
   Width = 887
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
@@ -29,7 +29,7 @@ object atdbDM: TatdbDM
       'VendorLibOsx=libmysqlclient.dylib'
       'HostName=localhost'
       'Database=atdb'
-      'User_Name=atdb_client'
+      'User_Name=atdb'
       'Password=atdb123'
       'MaxBlobSize=-1'
       'LocaleCode=0000'
@@ -39,15 +39,17 @@ object atdbDM: TatdbDM
       'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
   object blocksDataSource: TDataSource
     DataSet = blocksCDS
     Left = 336
-    Top = 240
+    Top = 352
   end
   object blocksCDS: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'blocksProvider'
@@ -58,7 +60,7 @@ object atdbDM: TatdbDM
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = blocksCDSCalcFields
     Left = 240
-    Top = 240
+    Top = 352
     object blocksCDSid: TIntegerField
       AutoGenerateValue = arAutoInc
       FieldName = 'id'
@@ -81,23 +83,18 @@ object atdbDM: TatdbDM
       FieldName = 'label'
       Size = 255
     end
-    object blocksCDSprocess_id: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'Process ID'
-      FieldName = 'process_id'
-    end
     object blocksCDSstatus: TSmallintField
       FieldName = 'status'
       Required = True
     end
     object blocksCDSLprocess_id: TIntegerField
-      DisplayLabel = 'Process ID'
+      DisplayLabel = 'Specimen ID'
       FieldKind = fkLookup
-      FieldName = 'Lprocess_id'
-      LookupDataSet = processIDDS
-      LookupKeyFields = 'process_id'
-      LookupResultField = 'process_id'
-      KeyFields = 'process_id'
+      FieldName = 'Lspecimen_id'
+      LookupDataSet = specimenIDDS
+      LookupKeyFields = 'specimen_id'
+      LookupResultField = 'specimen_id'
+      KeyFields = 'specimen_id'
       Lookup = True
     end
     object blocksCDSLBlockStatus: TStringField
@@ -244,36 +241,45 @@ object atdbDM: TatdbDM
       KeyFields = 'created_by'
       Lookup = True
     end
+    object blocksCDSspecimen_id: TIntegerField
+      FieldName = 'specimen_id'
+    end
   end
   object blocksProvider: TDataSetProvider
     DataSet = blocksDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
     Left = 136
-    Top = 240
+    Top = 352
   end
   object blocksDS: TSQLDataSet
     CommandText = 
-      'select * from blocks WHERE process_id = :process_id ORDER by id ' +
-      'DESC'
+      'select * from blocks WHERE specimen_id = :specimen_id ORDER by i' +
+      'd DESC'
     DataSource = specimenDataSource
     MaxBlobSize = 1
     Params = <
       item
         DataType = ftInteger
-        Name = 'process_id'
+        Name = 'specimen_id'
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
     Left = 40
-    Top = 240
+    Top = 352
     object blocksDSid: TIntegerField
       FieldName = 'id'
+      Required = True
     end
-    object blocksDSprocess_id: TIntegerField
-      FieldName = 'process_id'
+    object blocksDSspecimen_id: TIntegerField
+      FieldName = 'specimen_id'
     end
     object blocksDScreated: TSQLTimeStampField
       FieldName = 'created'
+      Required = True
+    end
+    object blocksDSstatus: TSmallintField
+      FieldName = 'status'
+      Required = True
     end
     object blocksDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -281,9 +287,6 @@ object atdbDM: TatdbDM
     end
     object blocksDSmodified: TSQLTimeStampField
       FieldName = 'modified'
-    end
-    object blocksDSstatus: TSmallintField
-      FieldName = 'status'
       Required = True
     end
     object blocksDSlabel: TStringField
@@ -327,6 +330,7 @@ object atdbDM: TatdbDM
     end
   end
   object usersDS: TSQLDataSet
+    Active = True
     CommandText = 'select * from users'
     MaxBlobSize = -1
     Params = <>
@@ -352,6 +356,7 @@ object atdbDM: TatdbDM
     Top = 88
   end
   object usersCDS: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -378,12 +383,12 @@ object atdbDM: TatdbDM
   object blockNotesDSource: TDataSource
     DataSet = blockNotesCDS
     Left = 368
-    Top = 312
+    Top = 424
   end
   object blockNotesProvider: TDataSetProvider
     DataSet = blockNotesDS
     Left = 160
-    Top = 312
+    Top = 424
   end
   object blockNotesCDS: TClientDataSet
     Aggregates = <>
@@ -392,7 +397,7 @@ object atdbDM: TatdbDM
     AfterPost = cdsAfterPost
     AfterDelete = cdsAfterDelete
     Left = 272
-    Top = 312
+    Top = 424
     object blockNotesCDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -461,7 +466,7 @@ object atdbDM: TatdbDM
   object mRibbonProvider: TDataSetProvider
     DataSet = ribbonsDS
     Left = 128
-    Top = 392
+    Top = 504
   end
   object mRibbonCDS: TClientDataSet
     Aggregates = <>
@@ -474,7 +479,7 @@ object atdbDM: TatdbDM
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = mRibbonCDSCalcFields
     Left = 240
-    Top = 392
+    Top = 504
     object mRibbonCDSid: TStringField
       FieldName = 'id'
       Size = 36
@@ -511,12 +516,12 @@ object atdbDM: TatdbDM
   object mRibbonDSource: TDataSource
     DataSet = mRibbonCDS
     Left = 336
-    Top = 392
+    Top = 504
   end
   object ribbonNotesProvider: TDataSetProvider
     DataSet = ribbonNotesDS
     Left = 152
-    Top = 472
+    Top = 584
   end
   object ribbonNotesCDS: TClientDataSet
     Aggregates = <>
@@ -524,7 +529,7 @@ object atdbDM: TatdbDM
     ProviderName = 'ribbonNotesProvider'
     AfterPost = cdsAfterPost
     Left = 264
-    Top = 472
+    Top = 584
     object ribbonNotesCDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -547,7 +552,7 @@ object atdbDM: TatdbDM
   object ribbonNotesDSource: TDataSource
     DataSet = ribbonNotesCDS
     Left = 360
-    Top = 472
+    Top = 584
   end
   object ribbonsDS: TSQLDataSet
     CommandText = 'SELECT * from ribbons where block_id=:id'
@@ -561,7 +566,7 @@ object atdbDM: TatdbDM
       end>
     SQLConnection = SQLConnection1
     Left = 32
-    Top = 392
+    Top = 504
     object ribbonsDSid: TStringField
       FieldName = 'id'
       Size = 36
@@ -609,7 +614,7 @@ object atdbDM: TatdbDM
       end>
     SQLConnection = SQLConnection1
     Left = 64
-    Top = 312
+    Top = 424
     object blockNotesDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -643,7 +648,7 @@ object atdbDM: TatdbDM
       end>
     SQLConnection = SQLConnection1
     Left = 48
-    Top = 472
+    Top = 584
     object ribbonNotesDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -661,33 +666,30 @@ object atdbDM: TatdbDM
     end
   end
   object specimenDS: TSQLDataSet
-    CommandText = 'SELECT * from specimens order by process_id DESC'
+    Active = True
+    CommandText = 'SELECT * from specimens order by specimen_id DESC'
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
     Left = 32
-    Top = 160
-    object specimenDSprocess_id: TIntegerField
-      FieldName = 'process_id'
+    Top = 272
+    object specimenDScase_id: TIntegerField
+      FieldName = 'case_id'
     end
-    object specimenDSspecimen_id: TStringField
+    object specimenDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
       Required = True
-      Size = 255
     end
-    object specimenDSspecie: TSmallintField
-      FieldName = 'specie'
+    object specimenDSlims_number: TIntegerField
+      FieldName = 'lims_number'
     end
-    object specimenDSadditional_identifier: TStringField
-      FieldName = 'additional_identifier'
+    object specimenDSvirus: TStringField
+      FieldName = 'virus'
       Size = 255
     end
     object specimenDSage: TStringField
       FieldName = 'age'
       Size = 255
-    end
-    object specimenDSlims_number: TIntegerField
-      FieldName = 'lims_number'
     end
     object specimenDSdeath_date: TDateField
       FieldName = 'death_date'
@@ -696,42 +698,38 @@ object atdbDM: TatdbDM
       FieldName = 'brain_region_dissection'
       Size = 255
     end
-    object specimenDSdate_received: TDateField
-      FieldName = 'date_received'
-    end
-    object specimenDSdate_entered: TSQLTimeStampField
-      FieldName = 'date_entered'
-    end
     object specimenDSentered_by: TIntegerField
       FieldName = 'entered_by'
       Required = True
+    end
+    object specimenDSculture_time: TIntegerField
+      FieldName = 'culture_time'
     end
   end
   object specimenProvider: TDataSetProvider
     DataSet = specimenDS
     Options = [poAutoRefresh, poUseQuoteChar]
     Left = 136
-    Top = 160
+    Top = 272
   end
   object specimenCDS: TClientDataSet
     Aggregates = <>
     FieldDefs = <
       item
-        Name = 'process_id'
+        Name = 'case_id'
         DataType = ftInteger
       end
       item
         Name = 'specimen_id'
         Attributes = [faRequired]
-        DataType = ftString
-        Size = 255
+        DataType = ftInteger
       end
       item
-        Name = 'specie'
-        DataType = ftSmallint
+        Name = 'lims_number'
+        DataType = ftInteger
       end
       item
-        Name = 'additional_identifier'
+        Name = 'virus'
         DataType = ftString
         Size = 255
       end
@@ -739,10 +737,6 @@ object atdbDM: TatdbDM
         Name = 'age'
         DataType = ftString
         Size = 255
-      end
-      item
-        Name = 'lims_number'
-        DataType = ftInteger
       end
       item
         Name = 'death_date'
@@ -754,16 +748,12 @@ object atdbDM: TatdbDM
         Size = 255
       end
       item
-        Name = 'date_received'
-        DataType = ftDate
-      end
-      item
-        Name = 'date_entered'
-        DataType = ftTimeStamp
-      end
-      item
         Name = 'entered_by'
         Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'culture_time'
         DataType = ftInteger
       end>
     IndexDefs = <>
@@ -778,73 +768,47 @@ object atdbDM: TatdbDM
     BeforeRefresh = cdsBeforeRefresh
     AfterRefresh = cdsAfterRefresh
     Left = 248
-    Top = 160
-    object specimenCDSprocess_id: TIntegerField
-      DisplayLabel = 'Process ID'
-      FieldName = 'process_id'
+    Top = 272
+    object specimenCDScase_id: TIntegerField
+      FieldName = 'case_id'
     end
-    object specimenCDSspeciment_id: TStringField
-      DisplayLabel = 'Specimen ID'
+    object specimenCDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
       Required = True
-      Size = 255
     end
-    object specimenCDSspecies: TIntegerField
-      DisplayLabel = 'Species'
-      FieldName = 'specie'
+    object specimenCDSlims_number: TIntegerField
+      FieldName = 'lims_number'
     end
-    object specimenCDSadditional_identifier: TStringField
-      DisplayLabel = 'Additional Identifier'
-      FieldName = 'additional_identifier'
+    object specimenCDSvirus: TStringField
+      FieldName = 'virus'
       Size = 255
     end
     object specimenCDSage: TStringField
-      DisplayLabel = 'Age'
       FieldName = 'age'
       Size = 255
     end
-    object specimenCDSlims_number: TIntegerField
-      DisplayLabel = 'LIMS'
-      FieldName = 'lims_number'
-    end
     object specimenCDSdeath_date: TDateField
-      DisplayLabel = 'DOD'
       FieldName = 'death_date'
     end
     object specimenCDSbrain_region_dissection: TStringField
-      DisplayLabel = 'From Brain Region'
       FieldName = 'brain_region_dissection'
       Size = 255
-    end
-    object specimenCDSdate_received: TDateField
-      DisplayLabel = 'Date Received'
-      FieldName = 'date_received'
-    end
-    object specimenCDSLspecie: TStringField
-      DisplayLabel = 'Specie'
-      FieldKind = fkLookup
-      FieldName = 'Lspecie'
-      LookupDataSet = speciesDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'name'
-      KeyFields = 'specie'
-      Size = 255
-      Lookup = True
-    end
-    object specimenCDSdate_entered: TSQLTimeStampField
-      FieldName = 'date_entered'
     end
     object specimenCDSentered_by: TIntegerField
       FieldName = 'entered_by'
       Required = True
     end
+    object specimenCDSculture_time: TIntegerField
+      FieldName = 'culture_time'
+    end
   end
   object specimenDataSource: TDataSource
     DataSet = specimenCDS
     Left = 344
-    Top = 160
+    Top = 272
   end
   object fixativeTBL: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
@@ -853,7 +817,7 @@ object atdbDM: TatdbDM
     Params = <>
     AfterPost = fixativeTBLAfterPost
     Left = 472
-    Top = 504
+    Top = 616
   end
   object speciesDS: TSimpleDataSet
     Aggregates = <>
@@ -863,9 +827,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 472
-    Top = 568
+    Top = 680
   end
   object preprocesstreatmentDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
@@ -873,9 +838,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 472
-    Top = 632
+    Top = 744
   end
   object fixationMethodDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from `fixationprotocols`'
@@ -883,9 +849,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 568
-    Top = 504
+    Top = 616
   end
   object postfix: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
@@ -893,9 +860,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 568
-    Top = 568
+    Top = 680
   end
   object cryoprotectionDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from cryoprotectionprotocols'
@@ -903,9 +871,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 576
-    Top = 632
+    Top = 744
   end
   object freezeprotocolDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from freezeprotocols'
@@ -913,9 +882,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 672
-    Top = 504
+    Top = 616
   end
   object substitutionProtocol: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from substitutionprotocols'
@@ -940,7 +910,7 @@ object atdbDM: TatdbDM
     Params = <>
     StoreDefs = True
     Left = 720
-    Top = 408
+    Top = 520
     object substitutionProtocolid: TSmallintField
       FieldName = 'id'
       Required = True
@@ -963,6 +933,7 @@ object atdbDM: TatdbDM
     end
   end
   object infiltrationProtocolDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from infiltrationprotocols'
@@ -970,9 +941,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 672
-    Top = 632
+    Top = 744
   end
   object embeddingProtocolDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from embeddingprotocols'
@@ -980,9 +952,10 @@ object atdbDM: TatdbDM
     DataSet.Params = <>
     Params = <>
     Left = 784
-    Top = 504
+    Top = 616
   end
   object blockstatusDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from blockstatuses'
@@ -991,19 +964,20 @@ object atdbDM: TatdbDM
     Params = <>
     AfterPost = fixativeTBLAfterPost
     Left = 472
-    Top = 440
+    Top = 552
   end
-  object processIDDS: TSimpleDataSet
+  object specimenIDDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT process_id  FROM specimens'
+    DataSet.CommandText = 'SELECT specimen_id  FROM specimens'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
     Left = 488
-    Top = 240
-    object processIDDSprocess_id: TIntegerField
-      FieldName = 'process_id'
+    Top = 352
+    object specimenIDDSspecimen_id: TIntegerField
+      FieldName = 'specimen_id'
       Required = True
     end
   end
@@ -1013,7 +987,7 @@ object atdbDM: TatdbDM
     Params = <>
     SQLConnection = SQLConnection1
     Left = 32
-    Top = 576
+    Top = 688
     object documentsDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -1035,14 +1009,15 @@ object atdbDM: TatdbDM
   object documentsProvider: TDataSetProvider
     DataSet = documentsDS
     Left = 136
-    Top = 576
+    Top = 688
   end
   object documentsCDS: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'documentsProvider'
     Left = 256
-    Top = 576
+    Top = 688
     object documentsCDSid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -1066,25 +1041,25 @@ object atdbDM: TatdbDM
   object documentsDSource: TDataSource
     DataSet = documentsCDS
     Left = 344
-    Top = 568
+    Top = 680
   end
   object ROnCoverSlipsSource: TDataSource
     DataSet = ROnCS_CDS
     Left = 320
-    Top = 760
+    Top = 872
   end
   object ROnCS_CDS: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'RibbonsOnCoverslipsProvider'
     Left = 200
-    Top = 752
+    Top = 864
   end
   object RibbonsOnCoverslipsProvider: TDataSetProvider
     DataSet = ribbonsOnCoverSlipsDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
     Left = 200
-    Top = 680
+    Top = 792
   end
   object ribbonsOnCoverSlipsDS: TSQLDataSet
     CommandText = 'SELECT * from ribbons where coverslip_id = :id'
@@ -1097,7 +1072,7 @@ object atdbDM: TatdbDM
       end>
     SQLConnection = SQLConnection1
     Left = 40
-    Top = 680
+    Top = 792
   end
   object settingsDS: TSQLDataSet
     CommandText = 'select * from settings order by id ASC'
@@ -1105,7 +1080,7 @@ object atdbDM: TatdbDM
     Params = <>
     SQLConnection = SQLConnection1
     Left = 32
-    Top = 832
+    Top = 944
     object settingsDSid: TIntegerField
       FieldName = 'id'
     end
@@ -1118,7 +1093,7 @@ object atdbDM: TatdbDM
   object settingsProvider: TDataSetProvider
     DataSet = settingsDS
     Left = 128
-    Top = 832
+    Top = 944
   end
   object settingsCDS: TClientDataSet
     Aggregates = <>
@@ -1126,7 +1101,7 @@ object atdbDM: TatdbDM
     ProviderName = 'settingsProvider'
     AfterPost = cdsAfterPost
     Left = 256
-    Top = 832
+    Top = 944
     object settingsCDSid: TIntegerField
       FieldName = 'id'
     end
@@ -1135,5 +1110,66 @@ object atdbDM: TatdbDM
       BlobType = ftMemo
       Size = 1
     end
+  end
+  object casesCDS: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'casesProvider'
+    Left = 256
+    Top = 192
+    object casesCDSid: TIntegerField
+      FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object casesCDSanimal_id: TStringField
+      FieldName = 'animal_id'
+      Required = True
+      Size = 64
+    end
+    object casesCDSintake_date: TSQLTimeStampField
+      FieldName = 'intake_date'
+    end
+    object casesCDSspecie: TSmallintField
+      FieldName = 'specie'
+      Required = True
+    end
+    object casesCDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+    end
+  end
+  object casesDS: TSQLDataSet
+    Active = True
+    CommandText = 'select * from cases order by intake_date DESC'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 40
+    Top = 192
+    object casesDSid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object casesDSanimal_id: TStringField
+      FieldName = 'animal_id'
+      Required = True
+      Size = 64
+    end
+    object casesDSintake_date: TSQLTimeStampField
+      FieldName = 'intake_date'
+    end
+    object casesDSspecie: TSmallintField
+      FieldName = 'specie'
+      Required = True
+    end
+    object casesDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+    end
+  end
+  object casesProvider: TDataSetProvider
+    DataSet = casesDS
+    Left = 144
+    Top = 192
   end
 end
