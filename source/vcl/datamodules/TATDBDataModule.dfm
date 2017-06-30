@@ -1,7 +1,7 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
   Height = 1003
-  Width = 887
+  Width = 1120
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
     LoginPrompt = False
@@ -39,7 +39,6 @@ object atdbDM: TatdbDM
       'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
-    Connected = True
     Left = 40
     Top = 24
   end
@@ -49,7 +48,6 @@ object atdbDM: TatdbDM
     Top = 352
   end
   object blocksCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'blocksProvider'
@@ -330,7 +328,6 @@ object atdbDM: TatdbDM
     end
   end
   object usersDS: TSQLDataSet
-    Active = True
     CommandText = 'select * from users'
     MaxBlobSize = -1
     Params = <>
@@ -356,7 +353,6 @@ object atdbDM: TatdbDM
     Top = 88
   end
   object usersCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -666,7 +662,6 @@ object atdbDM: TatdbDM
     end
   end
   object specimenDS: TSQLDataSet
-    Active = True
     CommandText = 'SELECT * from specimens order by specimen_id DESC'
     MaxBlobSize = 1
     Params = <>
@@ -801,6 +796,24 @@ object atdbDM: TatdbDM
     object specimenCDSculture_time: TIntegerField
       FieldName = 'culture_time'
     end
+    object specimenCDSLEnteredBy: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LEnteredBy'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'entered_by'
+      Lookup = True
+    end
+    object specimenCDSLCulturedTP: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LCulturedTP'
+      LookupDataSet = culturedTimePoints
+      LookupKeyFields = 'id'
+      LookupResultField = 'time_point'
+      KeyFields = 'culture_time'
+      Lookup = True
+    end
   end
   object specimenDataSource: TDataSource
     DataSet = specimenCDS
@@ -808,7 +821,6 @@ object atdbDM: TatdbDM
     Top = 272
   end
   object fixativeTBL: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
@@ -830,7 +842,6 @@ object atdbDM: TatdbDM
     Top = 680
   end
   object preprocesstreatmentDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
@@ -841,7 +852,6 @@ object atdbDM: TatdbDM
     Top = 744
   end
   object fixationMethodDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from `fixationprotocols`'
@@ -852,7 +862,6 @@ object atdbDM: TatdbDM
     Top = 616
   end
   object postfix: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
@@ -863,7 +872,6 @@ object atdbDM: TatdbDM
     Top = 680
   end
   object cryoprotectionDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from cryoprotectionprotocols'
@@ -874,7 +882,6 @@ object atdbDM: TatdbDM
     Top = 744
   end
   object freezeprotocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from freezeprotocols'
@@ -885,7 +892,6 @@ object atdbDM: TatdbDM
     Top = 616
   end
   object substitutionProtocol: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from substitutionprotocols'
@@ -933,7 +939,6 @@ object atdbDM: TatdbDM
     end
   end
   object infiltrationProtocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from infiltrationprotocols'
@@ -944,7 +949,6 @@ object atdbDM: TatdbDM
     Top = 744
   end
   object embeddingProtocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from embeddingprotocols'
@@ -955,7 +959,6 @@ object atdbDM: TatdbDM
     Top = 616
   end
   object blockstatusDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from blockstatuses'
@@ -967,7 +970,6 @@ object atdbDM: TatdbDM
     Top = 552
   end
   object specimenIDDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT specimen_id  FROM specimens'
@@ -1012,7 +1014,6 @@ object atdbDM: TatdbDM
     Top = 688
   end
   object documentsCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'documentsProvider'
@@ -1112,35 +1113,55 @@ object atdbDM: TatdbDM
     end
   end
   object casesCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'casesProvider'
     Left = 256
     Top = 192
     object casesCDSid: TIntegerField
+      DisplayWidth = 50
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
     object casesCDSanimal_id: TStringField
+      DisplayWidth = 50
       FieldName = 'animal_id'
       Required = True
       Size = 64
     end
     object casesCDSintake_date: TSQLTimeStampField
+      DisplayWidth = 50
       FieldName = 'intake_date'
     end
     object casesCDSspecie: TSmallintField
+      DisplayWidth = 50
       FieldName = 'specie'
       Required = True
     end
     object casesCDSentered_by: TIntegerField
+      DisplayWidth = 50
       FieldName = 'entered_by'
+    end
+    object casesCDSLUser: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LUser'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'entered_by'
+      Lookup = True
+    end
+    object casesCDSLSpecie: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LSpecie'
+      LookupDataSet = speciesDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'name'
+      KeyFields = 'specie'
+      Lookup = True
     end
   end
   object casesDS: TSQLDataSet
-    Active = True
     CommandText = 'select * from cases order by intake_date DESC'
     MaxBlobSize = -1
     Params = <>
@@ -1149,7 +1170,6 @@ object atdbDM: TatdbDM
     Top = 192
     object casesDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object casesDSanimal_id: TStringField
       FieldName = 'animal_id'
@@ -1171,5 +1191,15 @@ object atdbDM: TatdbDM
     DataSet = casesDS
     Left = 144
     Top = 192
+  end
+  object culturedTimePoints: TSimpleDataSet
+    Aggregates = <>
+    Connection = SQLConnection1
+    DataSet.CommandText = 'SELECT * from cultured_time_point'
+    DataSet.MaxBlobSize = -1
+    DataSet.Params = <>
+    Params = <>
+    Left = 488
+    Top = 208
   end
 end

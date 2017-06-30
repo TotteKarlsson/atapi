@@ -210,6 +210,11 @@ __published:	// IDE-managed Components
 	TSQLTimeStampField *casesDSintake_date;
 	TSmallintField *casesDSspecie;
 	TIntegerField *casesDSentered_by;
+	TStringField *casesCDSLUser;
+	TStringField *casesCDSLSpecie;
+	TStringField *specimenCDSLEnteredBy;
+	TSimpleDataSet *culturedTimePoints;
+	TStringField *specimenCDSLCulturedTP;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);

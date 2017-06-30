@@ -63,6 +63,7 @@ void __fastcall TatdbDM::afterConnect()
 
 	Log(lInfo) << "Connection established to: "<<mDataBase;
 	usersCDS->Active 	    = true;
+	casesCDS->Active 	    = true;
 	specimenCDS->Active  	= true;
     blocksCDS->Active 	    = true;
     mRibbonCDS->Active 	    = true;
@@ -80,6 +81,7 @@ void __fastcall TatdbDM::afterDisConnect()
 {
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
   	usersCDS->Active 	    = false;
+	casesCDS->Active 	    = false;
     blocksCDS->Active 	    = false;
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
