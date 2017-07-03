@@ -112,55 +112,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="arduino\atArduinoClient.cpp">
-            <BuildOrder>28</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoDevice.cpp">
-            <BuildOrder>29</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoIPCServerReceiver.cpp">
-            <BuildOrder>30</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoMessageProcessor.cpp">
-            <BuildOrder>31</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoSerialMessageSender.cpp">
-            <DependentOn>arduino\atArduinoSerialMessageSender.h</DependentOn>
-            <BuildOrder>32</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoServer.cpp">
-            <BuildOrder>33</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoServerCommand.cpp">
-            <BuildOrder>34</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atArduinoUtils.cpp">
-            <BuildOrder>35</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduino.cpp">
-            <BuildOrder>36</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atLightsArduinoClient.cpp">
-            <BuildOrder>37</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduino.cpp">
-            <BuildOrder>38</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arduino\atSensorsArduinoClient.cpp">
-            <BuildOrder>27</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arraycam\atArrayCamClient.cpp">
-            <DependentOn>arraycam\atArrayCamClient.h</DependentOn>
-            <BuildOrder>77</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arraycam\atArrayCamMessageProcessor.cpp">
-            <DependentOn>arraycam\atArrayCamMessageProcessor.h</DependentOn>
-            <BuildOrder>76</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="arraycam\atArrayCamProtocol.cpp">
-            <DependentOn>arraycam\atArrayCamProtocol.h</DependentOn>
-            <BuildOrder>76</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atATObject.cpp">
             <BuildOrder>68</BuildOrder>
         </CppCompile>
@@ -188,81 +139,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="camera\Dynamic_uc480.cpp">
-            <BuildOrder>52</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="camera\uc480class.cpp">
-            <BuildOrder>53</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="labelprinter\atTSCLIB.cpp">
-            <BuildOrder>73</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="navitar\atNavitarFocusPreset.cpp">
-            <DependentOn>navitar\atNavitarFocusPreset.h</DependentOn>
-            <BuildOrder>40</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="navitar\atNavitarMotor.cpp">
-            <DependentOn>navitar\atNavitarMotor.h</DependentOn>
-            <BuildOrder>76</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="navitar\atNavitarMotorController.cpp">
-            <DependentOn>navitar\atNavitarMotorController.h</DependentOn>
-            <BuildOrder>77</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="navitar\atNavitarPreset.cpp">
-            <BuildOrder>43</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="navitar\atNavitarZoomPreset.cpp">
-            <BuildOrder>42</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="resources\atResourceManager.cpp">
-            <BuildOrder>75</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="serial\atSerial.cpp">
-            <DependentOn>serial\atSerial.h</DependentOn>
-            <BuildOrder>53</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="serial\atSerialPort.cpp">
-            <DependentOn>serial\atSerialPort.h</DependentOn>
-            <BuildOrder>55</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="serial\atSerialWorker.cpp">
-            <DependentOn>serial\atSerialWorker.h</DependentOn>
-            <BuildOrder>52</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="sound\atApplicationSound.cpp">
-            <DependentOn>sound\atApplicationSound.h</DependentOn>
-            <BuildOrder>74</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="sound\atDirectSound.cpp">
-            <DependentOn>sound\atDirectSound.h</DependentOn>
-            <BuildOrder>57</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="sound\atSoundPlayer.cpp">
-            <DependentOn>sound\atSoundPlayer.h</DependentOn>
-            <BuildOrder>58</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="sound\atSounds.cpp">
-            <DependentOn>sound\atSounds.h</DependentOn>
-            <BuildOrder>56</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UC7\atCounter.cpp">
-            <BuildOrder>71</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UC7\atUC7Component.cpp">
-            <DependentOn>UC7\atUC7Component.h</DependentOn>
-            <BuildOrder>69</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UC7\atUC7Message.cpp">
-            <BuildOrder>70</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UC7\atUC7MessageReceiver.cpp">
-            <BuildOrder>73</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UC7\atUC7MessageSender.cpp">
-            <DependentOn>UC7\atUC7MessageSender.h</DependentOn>
-            <BuildOrder>73</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -317,7 +193,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">File P:\build\xe3_ide\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>

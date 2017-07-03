@@ -3,7 +3,7 @@
         <ProjectGuid>{411AB990-0071-458D-AA0B-E7383A75D9C5}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="source\atCore.cbproj">
+        <Projects Include="source\core\atCore.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\arraybot\atArrayBotCore.cbproj">
@@ -30,13 +30,13 @@
         </BorlandProject>
     </ProjectExtensions>
     <Target Name="atCore">
-        <MSBuild Projects="source\atCore.cbproj"/>
+        <MSBuild Projects="source\core\atCore.cbproj"/>
     </Target>
     <Target Name="atCore:Clean">
-        <MSBuild Projects="source\atCore.cbproj" Targets="Clean"/>
+        <MSBuild Projects="source\core\atCore.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="atCore:Make">
-        <MSBuild Projects="source\atCore.cbproj" Targets="Make"/>
+        <MSBuild Projects="source\core\atCore.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atArrayBotCore">
         <MSBuild Projects="source\arraybot\atArrayBotCore.cbproj"/>
