@@ -54,6 +54,11 @@ void __fastcall TStringInputDialog::STDStringLabeledEdit1KeyDown(TObject *Sender
     {
     	this->ModalResult = mrOk;
     }
+    else if(Key == vkEscape)
+    {
+		this->ModalResult = mrCancel;
+    }
 }
+
 
 

@@ -11,7 +11,8 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-class TSSHFrame : public TFrame
+
+class PACKAGE TSSHFrame : public TFrame
 {
 __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;

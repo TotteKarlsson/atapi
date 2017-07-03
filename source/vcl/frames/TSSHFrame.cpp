@@ -20,6 +20,7 @@ __fastcall TSSHFrame::TSSHFrame(TComponent* Owner)
 	: TFrame(Owner)
 {
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ScSSHClientAfterConnect(TObject *Sender)
 {
@@ -27,6 +28,7 @@ void __fastcall TSSHFrame::ScSSHClientAfterConnect(TObject *Sender)
     ConnectBtn->Caption = "Disconnect";
     ScSSHShell1->Connect();
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ScSSHClientServerKeyValidate(TObject *Sender, TScKey *NewServerKey,
           bool &Accept)
@@ -60,6 +62,7 @@ void __fastcall TSSHFrame::ScSSHClientServerKeyValidate(TObject *Sender, TScKey 
         }
 	}
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ScSSHClientAfterDisconnect(TObject *Sender)
 {
@@ -67,6 +70,7 @@ void __fastcall TSSHFrame::ScSSHClientAfterDisconnect(TObject *Sender)
     ConnectBtn->Caption = "Connect";
     ScSSHShell1->Disconnect();
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ScSSHClientBeforeConnect(TObject *Sender)
 {
@@ -80,6 +84,7 @@ void __fastcall TSSHFrame::ScSSHClientBeforeConnect(TObject *Sender)
     ScSSHClient->KeyStorage = ScFileStorage;
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ConnectBtnClick(TObject *Sender)
 {
     TCursor OldCursor = Screen->Cursor;
@@ -110,11 +115,13 @@ void __fastcall TSSHFrame::ScSSHShell1AsyncError(TObject *Sender, Exception *E)
 	Log(lError) << "There was an Error"<<stdstr(E->Message);
 }
 
+//---------------------------------------------------------------------------
 bool TSSHFrame::isConnected()
 {
 	return ScSSHChannel->Connected || ScSSHClient->Connected || ScSSHShell1->Connected;
 }
 
+//---------------------------------------------------------------------------
 void TSSHFrame::disconnect()
 {
     if(ScSSHChannel->Connected)

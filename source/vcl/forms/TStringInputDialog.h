@@ -11,7 +11,7 @@
 class PACKAGE TStringInputDialog : public TForm
 {
 __published:	// IDE-managed Components
-	TPanel *Panel1;
+	TPanel *BottomPanel;
 	TButton *Button1;
 	TButton *mOkBtn;
 	TSTDStringLabeledEdit *STDStringLabeledEdit1;
