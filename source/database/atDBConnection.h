@@ -1,7 +1,7 @@
 #ifndef abDBConnectionH
 #define abDBConnectionH
 #include "atDBExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "atDBUtils.h"
 #include <deque>
 //---------------------------------------------------------------------------

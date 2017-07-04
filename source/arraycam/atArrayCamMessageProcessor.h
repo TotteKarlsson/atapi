@@ -2,8 +2,8 @@
 #define atArrayCamMessageProcessorH
 #include <string>
 #include "mtkThread.h"
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
 //----------------------------------------------------------------
 
 using mtk::Thread;

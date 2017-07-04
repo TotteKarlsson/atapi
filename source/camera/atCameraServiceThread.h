@@ -1,7 +1,7 @@
 #ifndef atCameraServiceThreadH
 #define atCameraServiceThreadH
 #include "mtkThread.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 
 class Cuc480;
 using mtk::Thread;

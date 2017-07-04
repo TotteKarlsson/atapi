@@ -1,6 +1,6 @@
 #ifndef abJoyStickAxisStateEventDispatcherH
 #define abJoyStickAxisStateEventDispatcherH
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 typedef void (__closure *JoyStickAxisEvent)(int pos);

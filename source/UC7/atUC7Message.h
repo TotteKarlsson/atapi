@@ -1,6 +1,6 @@
 #ifndef atUC7MessageH
 #define atUC7MessageH
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 const int gStepperControllerAddress = 4;

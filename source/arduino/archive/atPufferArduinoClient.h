@@ -1,10 +1,10 @@
 #ifndef atPufferArduinoClientH
 #define atPufferArduinoClientH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE PufferArduinoClient : public ArduinoClient
+class AT_ARDUINO PufferArduinoClient : public ArduinoClient
 {
     public:
 			   			        PufferArduinoClient();

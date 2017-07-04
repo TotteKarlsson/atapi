@@ -4,7 +4,7 @@
 #include "atDeviceManager.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
-#include "atUtilities.h"
+#include "core/atUtilities.h"
 #include "atTCubeDCServo.h"
 #include "atTCubeStepperMotor.h"
 #include "atLongTravelStage.h"

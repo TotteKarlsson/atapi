@@ -1,8 +1,8 @@
 #ifndef atArduinoServerH
 #define atArduinoServerH
 //---------------------------------------------------------------------------
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
 //#include "atLightsArduino.h"
@@ -14,7 +14,7 @@ using mtk::IPCServer;
 using mtk::IPCMessage;
 using std::vector;
 
-mtk::SocketWorker* AT_CORE createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
+mtk::SocketWorker* AT_ARDUINO createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
 
 typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
@@ -27,7 +27,7 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //There are currently two Arduino boards, the 'Lights' board, and a 'Sensor' board containing sensors and
 //light controlling logic respectively.
 
-class AT_CORE ArduinoServer : public IPCServer, public ATObject
+class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
 {
     public:
                                             ArduinoServer(int portNumber = 50000);

@@ -3,7 +3,7 @@
 #include "TArrayBotBtn.h"
 #include "mtkLogger.h"
 #include "sound/atDirectSound.h"
-#include "atCore.h"
+#include "core/atCore.h"
 #include "mtkVCLUtils.h"
 #pragma package(smart_init)
 

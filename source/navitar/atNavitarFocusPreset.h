@@ -1,7 +1,7 @@
 #ifndef atNavitarFocusPresetH
 #define atNavitarFocusPresetH
-#include "atATObject.h"
-#include "atPreset.h"
+#include "core/atATObject.h"
+#include "core/atPreset.h"
 #include "atNavitarMotorController.h"
 //---------------------------------------------------------------------------
 

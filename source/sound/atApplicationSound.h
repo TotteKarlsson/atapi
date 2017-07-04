@@ -1,7 +1,7 @@
 #ifndef atApplicationSoundH
 #define atApplicationSoundH
 #include "mtkProperty.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "atDirectSound.h"
 #include "mtkConstants.h"
 #include "mtkStringList.h"

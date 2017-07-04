@@ -1,7 +1,7 @@
 #ifndef abRibbonControllerH
 #define abRibbonControllerH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 class ArduinoServer;

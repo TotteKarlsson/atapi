@@ -1,11 +1,11 @@
 #ifndef abSoundsH
 #define abSoundsH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include "mtkThread.h"
 #include <string>
 #include <deque>
 #include <mmsystem.h>
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkStringList.h"
 //---------------------------------------------------------------------------
 

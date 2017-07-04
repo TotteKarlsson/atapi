@@ -16,6 +16,7 @@
 #pragma comment(lib, "tinyxml2-static.lib")
 
 #pragma comment(lib, "atCore.lib")
+#pragma comment(lib, "atArduino.lib")
 
 //Thorlabs
 #pragma comment(lib, "Thorlabs.MotionControl.TDIEngineB.lib")

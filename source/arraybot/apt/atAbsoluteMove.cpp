@@ -3,7 +3,10 @@
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atProcessSequence.h"
+#include "mtkLogger.h"
 //---------------------------------------------------------------------------
+using namespace mtk;
+
 
 AbsoluteMove::AbsoluteMove(const string& lbl, APTMotor* mtr, double pos, double maxVel, double acc)
 :

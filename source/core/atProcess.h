@@ -1,7 +1,7 @@
 #ifndef atProcessH
 #define atProcessH
 #include <string>
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "Poco/TimeStamp.h"
 #include "Poco/Timespan.h"
 #include "mtkXMLUtils.h"

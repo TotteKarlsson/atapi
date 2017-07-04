@@ -2,7 +2,7 @@
 #define atReticleH
 #include <VCL.Graphics.hpp>
 #include <utility>
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 using std::pair;

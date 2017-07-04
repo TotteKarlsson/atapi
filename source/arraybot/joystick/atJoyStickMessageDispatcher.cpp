@@ -3,7 +3,7 @@
 #include "atArrayBotJoyStick.h"
 #include <bitset>
 #include "mtkLogger.h"
-#include "atExceptions.h"
+#include "core/atExceptions.h"
 //---------------------------------------------------------------------------
 
 using namespace std;

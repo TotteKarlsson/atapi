@@ -1,7 +1,7 @@
 #ifndef abJoystickAxisH
 #define abJoystickAxisH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 
 //---------------------------------------------------------------------------
 

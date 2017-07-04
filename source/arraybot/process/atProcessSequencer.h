@@ -2,7 +2,7 @@
 #define abProcessSequencerH
 #include <list>
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "atProcessSequence.h"
 #include "mtkTimer.h"
 #include "atProcessSequenceProject.h"

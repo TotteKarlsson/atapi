@@ -1,7 +1,10 @@
 #pragma hdrstop
 #include "atTriggerFunction.h"
 #include "apt/atAPTMotor.h"
+#include "mtkLogger.h"
 //---------------------------------------------------------------------------
+using namespace mtk;
+
 
 MoveAbsolute::MoveAbsolute(APTMotor* mtr, double pos, double v, double a)
 :

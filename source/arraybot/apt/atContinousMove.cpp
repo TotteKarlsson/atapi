@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atContinousMove.h"
 #include "atAPTMotor.h"
+#include "mtkUtils.h"
+#include "mtkLogger.h"
 //---------------------------------------------------------------------------
-
 using namespace mtk;
-
 
 ContinousMove::ContinousMove(const string& lbl, double v, double acc)
 :

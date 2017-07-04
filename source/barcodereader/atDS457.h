@@ -1,7 +1,7 @@
 #ifndef atDS457H
 #define atDS457H
 #include "atBarcodeReaderExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "../thirdparty/ssidll/SSIDLL.H"
 //-------------------------------------------------------------------------
 

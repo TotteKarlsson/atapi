@@ -6,6 +6,12 @@
         <Projects Include="source\core\atCore.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="source\serial\atSerialAPI.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="source\arduino\atArduino.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="source\arraybot\atArrayBotCore.cbproj">
             <Dependencies/>
         </Projects>
@@ -37,6 +43,24 @@
     </Target>
     <Target Name="atCore:Make">
         <MSBuild Projects="source\core\atCore.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atSerialAPI">
+        <MSBuild Projects="source\serial\atSerialAPI.cbproj"/>
+    </Target>
+    <Target Name="atSerialAPI:Clean">
+        <MSBuild Projects="source\serial\atSerialAPI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atSerialAPI:Make">
+        <MSBuild Projects="source\serial\atSerialAPI.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atArduino">
+        <MSBuild Projects="source\arduino\atArduino.cbproj"/>
+    </Target>
+    <Target Name="atArduino:Clean">
+        <MSBuild Projects="source\arduino\atArduino.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atArduino:Make">
+        <MSBuild Projects="source\arduino\atArduino.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atArrayBotCore">
         <MSBuild Projects="source\arraybot\atArrayBotCore.cbproj"/>
@@ -84,13 +108,13 @@
         <MSBuild Projects="source\vcl\atVCLCore.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="atCore;atArrayBotCore;atSSI;atBarcodeReader;atDatabase;atVCLCore"/>
+        <CallTarget Targets="atCore;atSerialAPI;atArduino;atArrayBotCore;atSSI;atBarcodeReader;atDatabase;atVCLCore"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atCore:Clean;atArrayBotCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atDatabase:Clean;atVCLCore:Clean"/>
+        <CallTarget Targets="atCore:Clean;atSerialAPI:Clean;atArduino:Clean;atArrayBotCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atDatabase:Clean;atVCLCore:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atCore:Make;atArrayBotCore:Make;atSSI:Make;atBarcodeReader:Make;atDatabase:Make;atVCLCore:Make"/>
+        <CallTarget Targets="atCore:Make;atSerialAPI:Make;atArduino:Make;atArrayBotCore:Make;atSSI:Make;atBarcodeReader:Make;atDatabase:Make;atVCLCore:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

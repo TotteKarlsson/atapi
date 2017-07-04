@@ -1,8 +1,9 @@
 #ifndef atStopAndResumeProcessH
 #define atStopAndResumeProcessH
-#include "atProcess.h"
+#include "core/atProcess.h"
 #include <vector>
 #include "mtkXMLUtils.h"
+#include "arraybot/atABExporter.h"
 //---------------------------------------------------------------------------
 using namespace std;
 

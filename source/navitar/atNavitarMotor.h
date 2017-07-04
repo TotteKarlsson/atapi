@@ -1,6 +1,6 @@
 #ifndef atNavitarMotorH
 #define atNavitarMotorH
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <string>
 //---------------------------------------------------------------------------
 

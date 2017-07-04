@@ -3,6 +3,8 @@
 #include "mtkUtils.h"
 #include "mtkWin32Utils.h"
 #include "mtkStringUtils.h"
+#include "mtkLogger.h"
+
 
 
 using namespace mtk;

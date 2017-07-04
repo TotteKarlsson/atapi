@@ -2,7 +2,7 @@
 #define abTriggerFunctionH
 //---------------------------------------------------------------------------
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <functional>
 #include "mtkXMLUtils.h"
 //---------------------------------------------------------------------------

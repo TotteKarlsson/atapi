@@ -1,6 +1,6 @@
 #ifndef abPairedMovesH
 #define abPairedMovesH
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "atPairedMove.h"
 #include <list>
 #include "mtkINIFile.h"

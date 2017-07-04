@@ -1,7 +1,7 @@
 #ifndef abATDBClientDBSessionH
 #define abATDBClientDBSessionH
 #include "atDBExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "atDBUtils.h"
 #include <deque>
 #include "atDBConnection.h"

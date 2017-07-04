@@ -1,6 +1,6 @@
 #ifndef atArduinoDeviceH
 #define atArduinoDeviceH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include <sstream>
 #include <iostream>
 #include "Poco/Mutex.h"
@@ -24,7 +24,7 @@ using mtk::StringList;
 
 typedef void (__closure *InitCallBack)();
 
-class AT_CORE ArduinoDevice : public ATObject
+class AT_ARDUINO ArduinoDevice : public ATObject
 {
 	friend ArduinoSerialMessageSender;
     public:

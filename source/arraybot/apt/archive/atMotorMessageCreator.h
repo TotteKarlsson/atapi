@@ -2,7 +2,7 @@
 #define abMotorMessageCreatorH
 #include "arraybot/atABExporter.h"
 #include <string>
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkThread.h"
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------

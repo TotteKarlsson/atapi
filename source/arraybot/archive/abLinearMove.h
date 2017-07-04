@@ -1,8 +1,8 @@
 #ifndef abMoveH
 #define abMoveH
 #include "arraybot/atABExporter.h"
-#include "atProcess.h"
-#include "atPosition.h"
+#include "core/atProcess.h"
+#include "core/atPosition.h"
 //---------------------------------------------------------------------------
 
 enum MoveType {mtAbsolute = 0, mtRelative, mtUnknown};

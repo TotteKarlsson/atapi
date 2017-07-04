@@ -1,7 +1,7 @@
 #ifndef abExceptionsH
 #define abExceptionsH
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
 #include <exception>
 #include <string>
 #include <sstream>

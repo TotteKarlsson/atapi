@@ -1,14 +1,15 @@
 #ifndef atArduinoServerCommandH
 #define atArduinoServerCommandH
-#include "atCoreExporter.h"
-#include "atProcess.h"
+#include "core/atCoreExporter.h"
+#include "core/atProcess.h"
+#include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 
 class ArduinoClient;
 
 //!Arraybot can execute a Arduino command, like Activate Vacuum using an
 //!Arduino server command.
-class AT_CORE ArduinoServerCommand : public Process
+class AT_ARDUINO ArduinoServerCommand : public Process
 {
     public:
         	   			                    ArduinoServerCommand(const string& lbl);

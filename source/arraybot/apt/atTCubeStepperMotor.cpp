@@ -3,7 +3,7 @@
 #include "Thorlabs.MotionControl.TCube.StepperMotor.h"
 #include "atTCubeStepperMotor.h"
 #include "mtkLogger.h"
-#include "atExceptions.h"
+#include "/core/atExceptions.h"
 #include "atMotorCommand.h"
 #include <bitset>
 using namespace std;

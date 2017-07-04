@@ -1,7 +1,7 @@
 #ifndef abCoverSlipAngleControllerH
 #define abCoverSlipAngleControllerH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkIniFile.h"
 #include "mtkProperties.h"
 #include "mtkINIFileProperties.h"

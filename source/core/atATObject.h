@@ -1,6 +1,6 @@
 #ifndef atATObjectH
 #define atATObjectH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include <string>
 //---------------------------------------------------------------------------
 using std::string;

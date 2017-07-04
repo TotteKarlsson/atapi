@@ -1,6 +1,8 @@
 #pragma hdrstop
 #include "atArduinoSerialMessageSender.h"
 #include "atArduinoDevice.h"
+#include "mtkLogger.h"
+#include "mtkUtils.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
 using Poco::Mutex;

@@ -2,7 +2,7 @@
 #define atQueryBuilderH
 #include <sstream>
 #include "atDBExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 class AT_DB QueryBuilder : public std::stringstream, public ATObject

@@ -2,6 +2,7 @@
 #include "atSerialWorker.h"
 #include "mtkLogger.h"
 #include "atSerial.h"
+#include "mtkWin32Utils.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
 

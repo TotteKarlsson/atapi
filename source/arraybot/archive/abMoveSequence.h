@@ -1,7 +1,7 @@
 #ifndef abMoveSequenceH
 #define abMoveSequenceH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <list>
 #include <vector>
 #include <string>

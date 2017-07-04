@@ -1,10 +1,10 @@
 #ifndef atLightsArduinoClientH
 #define atLightsArduinoClientH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE LightsArduinoClient : public ArduinoClient
+class AT_ARDUINO LightsArduinoClient : public ArduinoClient
 {
     public:
 			   			        			LightsArduinoClient();

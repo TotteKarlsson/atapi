@@ -1,7 +1,7 @@
 #ifndef abParallellProcessH
 #define abParallellProcessH
 #include "../atABExporter.h"
-#include "atProcess.h"
+#include "../core/atProcess.h"
 #include <vector>
 #include "mtkXMLUtils.h"
 //---------------------------------------------------------------------------

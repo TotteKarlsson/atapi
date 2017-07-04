@@ -2,8 +2,9 @@
 #define atArduinoMessageProcessorH
 #include <string>
 #include "mtkThread.h"
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
+#include "atArduinoExporter.h"
 //----------------------------------------------------------------
 
 using mtk::Thread;
@@ -19,7 +20,7 @@ typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
 //!The Arduino Message processor processes messages sent from a
 //!Arduino Server.
-class AT_CORE ArduinoMessageProcessor : public Thread, public ATObject
+class AT_ARDUINO ArduinoMessageProcessor : public Thread, public ATObject
 {
 
     public:

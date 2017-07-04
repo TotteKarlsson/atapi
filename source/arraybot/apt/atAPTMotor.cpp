@@ -1,9 +1,13 @@
 #pragma hdrstop
 #include "atAPTMotor.h"
 #include "mtkLogger.h"
-#include "atCore.h"
-
+#include "core/atCore.h"
+#include "mtkUtils.h"
 //---------------------------------------------------------------------------
+using namespace mtk;
+
+
+
 APTMotor::APTMotor(int serialNo)
 :
 	APTDevice(serialNo),

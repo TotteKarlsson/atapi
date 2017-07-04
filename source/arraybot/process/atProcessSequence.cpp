@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atProcessSequence.h"
-#include "atProcess.h"
+#include "core/atProcess.h"
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------

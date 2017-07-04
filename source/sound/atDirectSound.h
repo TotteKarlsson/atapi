@@ -1,13 +1,15 @@
 #ifndef atDirectSoundH
 #define atDirectSoundH
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <mmreg.h>
 #include <dsound.h>
 
 class AT_CORE DirectSound : public ATObject
 {
     public:
-							                        DirectSound(const string& resName, HWND hWnd = NULL);        virtual 					                ~DirectSound();        bool						                create(const string& resName, HWND hWnd = NULL);
+							                        DirectSound(const string& resName, HWND hWnd = NULL);
+        virtual 					                ~DirectSound();
+        bool						                create(const string& resName, HWND hWnd = NULL);
 
         bool			                            isValid() const;
 		virtual void	 			                setVolume(int volume);

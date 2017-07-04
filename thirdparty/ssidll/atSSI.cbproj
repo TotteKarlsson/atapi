@@ -52,12 +52,10 @@
     <PropertyGroup Condition="'$(Base)'!=''">
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
-        <ILINK_LibraryPath>P:\atZebra\source\ssidll\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppDynamicLibrary</ProjectType>
-        <IncludePath>P:\atZebra\source\ssidll\;$(IncludePath)</IncludePath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>

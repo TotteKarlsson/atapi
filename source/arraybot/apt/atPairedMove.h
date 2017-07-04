@@ -1,7 +1,7 @@
 #ifndef abPairedMoveH
 #define abPairedMoveH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <string>
 //---------------------------------------------------------------------------
 using std::string;

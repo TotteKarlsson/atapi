@@ -1,8 +1,9 @@
 #ifndef atMotorWigglerH
 #define atMotorWigglerH
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkProperty.h"
 #include "mtkTimer.h"
+#include "arraybot/atABExporter.h"
 //---------------------------------------------------------------------------
 
 using mtk::Property;

@@ -1,14 +1,14 @@
 #ifndef atLeicaUC7ControllerH
 #define atLeicaUC7ControllerH
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 //!The LeicaUC7 controller gives a client the possibility to execute actions on the UC7's
 //UI. This is done internally in the 'Leica Arduino' by automating the mouse on the UC7.
 
 class PufferArduino;
-class AT_CORE LeicaUC7Controller : public ATObject
+class AT_ARDUINO LeicaUC7Controller : public ATObject
 {
     public:
                                 LeicaUC7Controller(PufferArduino& p);

@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>barcodereader\;navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>barcodereader\;navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -112,6 +112,18 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\arraycam\atArrayCamClient.cpp">
+            <DependentOn>..\arraycam\atArrayCamClient.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\arraycam\atArrayCamMessageProcessor.cpp">
+            <DependentOn>..\arraycam\atArrayCamMessageProcessor.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\arraycam\atArrayCamProtocol.cpp">
+            <DependentOn>..\arraycam\atArrayCamProtocol.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atATObject.cpp">
             <BuildOrder>68</BuildOrder>
         </CppCompile>
@@ -139,6 +151,44 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\navitar\atNavitarFocusPreset.cpp">
+            <DependentOn>..\navitar\atNavitarFocusPreset.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\navitar\atNavitarMotor.cpp">
+            <DependentOn>..\navitar\atNavitarMotor.h</DependentOn>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\navitar\atNavitarMotorController.cpp">
+            <DependentOn>..\navitar\atNavitarMotorController.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\navitar\atNavitarPreset.cpp">
+            <DependentOn>..\navitar\atNavitarPreset.h</DependentOn>
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\navitar\atNavitarZoomPreset.cpp">
+            <DependentOn>..\navitar\atNavitarZoomPreset.h</DependentOn>
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\resources\atResourceManager.cpp">
+            <DependentOn>..\resources\atResourceManager.h</DependentOn>
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\sound\atApplicationSound.cpp">
+            <DependentOn>..\sound\atApplicationSound.h</DependentOn>
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\sound\atDirectSound.cpp">
+            <DependentOn>..\sound\atDirectSound.h</DependentOn>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\sound\atSoundPlayer.cpp">
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\sound\atSounds.cpp">
+            <BuildOrder>19</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

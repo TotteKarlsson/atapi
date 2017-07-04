@@ -1,7 +1,7 @@
 #ifndef abSoundPlayerH
 #define abSoundPlayerH
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "core/atCoreExporter.h"
+#include "core/atATObject.h"
 #include "atDirectSound.h"
 #include "mtkTimer.h"
 

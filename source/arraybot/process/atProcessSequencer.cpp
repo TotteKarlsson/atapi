@@ -1,7 +1,7 @@
  #pragma hdrstop
 #include "atProcessSequencer.h"
 #include "mtkLogger.h"
-#include "atProcess.h"
+#include "core/atProcess.h"
 #include "mtkUtils.h"
 #include "atStopAndResumeProcess.h"
 //---------------------------------------------------------------------------

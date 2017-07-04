@@ -1,9 +1,9 @@
 #ifndef atUC7MessageSenderH
 #define atUC7MessageSenderH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include <string>
 #include "mtkThread.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 
 //---------------------------------------------------------------------------
 class UC7;

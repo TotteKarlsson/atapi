@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atExceptions.h"
+#include "core/atExceptions.h"
 //---------------------------------------------------------------------------
 ATException::ATException(const string& desc)
 :

@@ -3,8 +3,8 @@
 #include "arraybot/atABExporter.h"
 #include "mtkProject.h"
 #include "mtkConstants.h"
-#include "atProcess.h"
-#include "atATObject.h"
+#include "core/atProcess.h"
+#include "core/atATObject.h"
 
 //---------------------------------------------------------------------------
 AT_AB extern const string gProcessSequenceProjectFileVersion;

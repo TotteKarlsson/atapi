@@ -1,7 +1,7 @@
 #ifndef abPositionH
 #define abPositionH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "Math/mtkPoint.h"
 #include <string>
 //---------------------------------------------------------------------------

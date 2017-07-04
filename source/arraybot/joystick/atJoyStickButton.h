@@ -1,7 +1,7 @@
 #ifndef abJoyStickButtonH
 #define abJoyStickButtonH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
 class APTMotor;

@@ -1,8 +1,8 @@
 #ifndef abXYZUnitH
 #define abXYZUnitH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
-#include "atUtilities.h"
+#include "core/atATObject.h"
+#include "core/atUtilities.h"
 #include "apt/atDeviceManager.h"
 #include "mtkProperties.h"
 #include "mtkINIFileProperties.h"

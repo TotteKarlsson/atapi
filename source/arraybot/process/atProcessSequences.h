@@ -1,7 +1,7 @@
 #ifndef abProcessSequencesH
 #define abProcessSequencesH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <deque>
 #include "atProcessSequence.h"
 #include "mtkConstants.h"

@@ -1,10 +1,10 @@
 #ifndef atSensorsArduinoClientH
 #define atSensorsArduinoClientH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE SensorsArduinoClient : public ArduinoClient
+class AT_ARDUINO SensorsArduinoClient : public ArduinoClient
 {
     public:
 			   			        			SensorsArduinoClient();

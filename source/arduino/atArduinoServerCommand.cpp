@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atArduinoServerCommand.h"
-#include "atXYZUnit.h"
+#include "arraybot/atXYZUnit.h"
 #include "mtkLogger.h"
 //#include "atArrayBot.h"
 //#include "atAPTMotor.h"

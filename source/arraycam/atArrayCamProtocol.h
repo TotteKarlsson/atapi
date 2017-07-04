@@ -1,7 +1,7 @@
 #ifndef atArrayCamProtocolH
 #define atArrayCamProtocolH
 #include <map>
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 //---------------------------------------------------------------------------
 using std::map;
 

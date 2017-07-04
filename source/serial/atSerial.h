@@ -1,7 +1,7 @@
 #ifndef abSerialH
 #define abSerialH
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "atSerialExporter.h"
+#include "core/atATObject.h"
 #include "mtkStringList.h"
 #include "Poco/Mutex.h"
 #include "Poco/Condition.h"
@@ -17,7 +17,7 @@ using mtk::IPCMessageBuilder;
 typedef void (*SerialMessageReceivedCallBackC)(const string& msg);
 typedef void (__closure *SerialMessageReceivedCallBack)(const string& msg);
 
-class AT_CORE Serial : public ATObject
+class AT_SERIAL Serial : public ATObject
 {
 	friend SerialWorker;
     public:

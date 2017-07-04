@@ -18,8 +18,8 @@
 
 #ifndef atSerialPortH
 #define atSerialPortH
-#include "atCoreExporter.h"
-#include "atATObject.h"
+#include "atSerialExporter.h"
+#include "core/atATObject.h"
 
 //////////////////////////////////////////////////////////////////////
 // The SERIAL_DEFAULT_OVERLAPPED defines if the default open mode uses
@@ -81,7 +81,7 @@
 //TK Changes: Renamed CSerial to SerialPort
 
 class SerialWorker;
-class AT_CORE SerialPort : public ATObject
+class AT_SERIAL SerialPort : public ATObject
 {
 // Class enumerations
 	friend SerialWorker;

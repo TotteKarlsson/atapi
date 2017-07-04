@@ -1,10 +1,10 @@
 #ifndef atArduinoSerialMessageSenderH
 #define atArduinoSerialMessageSenderH
-#include "atCoreExporter.h"
+#include "core/atCoreExporter.h"
 #include <string>
 #include "mtkThread.h"
-#include "atATObject.h"
-
+#include "core/atATObject.h"
+#include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 class ArduinoDevice;
 using mtk::gEmptyString;
@@ -14,7 +14,7 @@ using mtk::gEmptyString;
 //!the message, or messages are sent one by one over the serial port.
 //!A delay, ProcessTimeDelay can be used in order to no overflow the serial
 //!devices input buffer
-class AT_CORE ArduinoSerialMessageSender : public mtk::Thread, public ATObject
+class AT_ARDUINO ArduinoSerialMessageSender : public mtk::Thread, public ATObject
 {
     public:
                                                     ArduinoSerialMessageSender(ArduinoDevice& d);

@@ -1,9 +1,9 @@
 #ifndef abAPTDeviceH
 #define abAPTDeviceH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkProperties.h"
-#include "atUtilities.h"
+#include "core/atUtilities.h"
 #include "mtkINIFileProperties.h"
 #include "mtkIniFile.h"
 

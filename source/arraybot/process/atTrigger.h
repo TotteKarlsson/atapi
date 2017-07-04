@@ -1,12 +1,12 @@
 #ifndef abTriggerH
 #define abTriggerH
 #include "../atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include <string>
 #include "mtkTimer.h"
 #include <vector>
 #include "mtkXMLUtils.h"
-#include "atUtilities.h"
+#include "core/atUtilities.h"
 //---------------------------------------------------------------------------
 
 using std::string;

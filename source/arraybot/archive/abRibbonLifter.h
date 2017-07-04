@@ -1,7 +1,7 @@
 #ifndef abRibbonLifterH
 #define abRibbonLifterH
 #include "arraybot/atABExporter.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkProperty.h"
 #include "mtkIniFile.h"
 #include "atArrayBot.h"

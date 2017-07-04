@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 
 //!The puffer arduino class expose a simple interface to control the puffer arduino.
-class AT_CORE PufferArduino : public ArduinoDevice
+class AT_ARDUINO PufferArduino : public ArduinoDevice
 {
     public:
                                 PufferArduino(int portNr, int baudRate = 9600);

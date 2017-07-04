@@ -3,7 +3,7 @@
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "mtkThread.h"
-#include "atATObject.h"
+#include "core/atATObject.h"
 #include "mtkConstants.h"
 #include "mtkStringList.h"
 #include "atMotorMessageProcessor.h"
