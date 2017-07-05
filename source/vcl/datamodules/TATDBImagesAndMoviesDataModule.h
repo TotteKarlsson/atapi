@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 using std::string;
 
-class TImagesAndMoviesDM : public TDataModule
+class PACKAGE TImagesAndMoviesDM : public TDataModule
 {
     __published:	// IDE-managed Components
         TSQLDataSet *images;

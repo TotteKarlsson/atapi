@@ -2,15 +2,17 @@
 #include "TATDBImagesAndMoviesDataModule.h"
 #include "mtkLogger.h"
 #include "mtkVCLUtils.h"
-using namespace mtk;
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma link "DbxDevartSQLite"
 #pragma resource "*.dfm"
+//---------------------------------------------------------------------------
+
 TImagesAndMoviesDM *ImagesAndMoviesDM;
-extern bool gAppIsStartingUp;
+//extern bool gAppIsStartingUp;
+
+using namespace mtk;
 //---------------------------------------------------------------------------
 __fastcall TImagesAndMoviesDM::TImagesAndMoviesDM(TComponent* Owner)
 	: TDataModule(Owner)
@@ -55,10 +57,10 @@ void __fastcall TImagesAndMoviesDM::SQLConnection1AfterConnect(TObject *Sender)
 
 void __fastcall TImagesAndMoviesDM::afterConnect()
 {
-	if(gAppIsStartingUp)
-    {
-    	return;
-    }
+//	if(gAppIsStartingUp)
+//    {
+//    	return;
+//    }
 
 	Log(lInfo) << "After Connect (Images and Movies)";
     Log(lInfo) << "Connected to database: "<< stdstr(SQLConnection1->Params->Values["Database"]);

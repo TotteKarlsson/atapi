@@ -13,7 +13,7 @@ TatdbDM *atdbDM;
 using namespace mtk;
 using namespace std;
 
-extern bool gAppIsStartingUp;
+//extern bool gAppIsStartingUp;
 
 //---------------------------------------------------------------------------
 __fastcall TatdbDM::TatdbDM(TComponent* Owner)
@@ -56,10 +56,10 @@ void __fastcall TatdbDM::SQLConnection1AfterConnect(TObject *Sender)
 
 void __fastcall TatdbDM::afterConnect()
 {
-	if(gAppIsStartingUp)
-    {
-    	return;
-    }
+//	if(gAppIsStartingUp)
+//    {
+//    	return;
+//    }
 
 	Log(lInfo) << "Connection established to: "<<mDataBase;
 	usersCDS->Active 	    = true;
@@ -119,7 +119,7 @@ void __fastcall TatdbDM::cdsAfterDelete(TDataSet *DataSet)
 //---------------------------------------------------------------------------
 void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
 {
-	if(!SQLConnection1->Connected || gAppIsStartingUp)
+	if(!SQLConnection1->Connected)// || gAppIsStartingUp)
     {
     	return;
     }

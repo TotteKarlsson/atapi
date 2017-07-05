@@ -205,7 +205,6 @@ public:
 		EPortInUse        =  2		        // Port is in use
 	}
 	EPort;
-
     	                                            // Construction
                                                     SerialPort();
     	virtual 									~SerialPort();
@@ -318,13 +317,13 @@ public:
         EError 										GetError (void);
 
         											// Obtain the COMM and event handle
-        HANDLE 										GetCommHandle (void)		{ return m_hFile; }
+        HANDLE 										GetCommHandle (void);
 
         											// Check if com-port is opened
-        bool 										IsOpen (void) const		{ return (m_hFile != 0); }
+        bool 										IsOpen (void) const;
 
         											// Obtain last error status
-        LONG 										GetLastError (void) const	{ return m_lLastError; }
+        LONG 										GetLastError (void) const;
 
         											// Obtain CTS/DSR/RING/RLSD settings
         bool                                        GetCTS (void);

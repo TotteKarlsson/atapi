@@ -134,6 +134,23 @@ SerialPort::~SerialPort ()
 	}
 }
 
+
+HANDLE SerialPort::GetCommHandle (void)
+{
+	return m_hFile;
+}
+
+bool SerialPort::IsOpen (void) const
+{
+	return (m_hFile != 0);
+}
+
+
+LONG SerialPort::GetLastError (void) const
+{
+	return m_lLastError;
+}
+
 SerialPort::EPort SerialPort::CheckPort (LPCTSTR lpszDevice)
 {
 	// Try to open the device

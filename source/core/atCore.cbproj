@@ -47,8 +47,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\labelprinter\;..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\labelprinter\;..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -89,12 +89,12 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <PostBuildEvent><![CDATA[copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
-copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
-$(PostBuildEvent)]]></PostBuildEvent>
         <BCC_whid>false</BCC_whid>
         <PreBuildEvent><![CDATA[if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480
 xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y
+copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
+copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
+copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dsl\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
@@ -165,6 +165,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\labelprinter\atTSCLIB.cpp">
+            <BuildOrder>25</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\navitar\atNavitarFocusPreset.cpp">
             <DependentOn>..\navitar\atNavitarFocusPreset.h</DependentOn>
@@ -257,8 +260,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\DuneComponentsDD.bpl">Components by DuneScientific</Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\atVCLCore.bpl">File P:\build\xe3_ide\BPL\atVCLCore.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -276,11 +282,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
+        <PostBuildEvent/>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

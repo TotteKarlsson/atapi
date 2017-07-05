@@ -14,3 +14,4 @@
 //Navitar
 #pragma comment(lib, "navusbAPI_B1.lib")
 
+
