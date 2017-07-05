@@ -1,6 +1,8 @@
 #pragma hdrstop
 #include "atUC7MessageSender.h"
 #include "atUC7Component.h"
+#include "mtkLogger.h"
+#include "mtkUtils.h"
 //---------------------------------------------------------------------------
 
 using namespace mtk;

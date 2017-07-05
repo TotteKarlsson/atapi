@@ -1,11 +1,11 @@
 #ifndef atUC7MessageSenderH
 #define atUC7MessageSenderH
-#include "core/atCoreExporter.h"
 #include <string>
 #include "mtkThread.h"
 #include "core/atATObject.h"
-
+#include "atUC7Exporter.h"
 //---------------------------------------------------------------------------
+
 class UC7;
 using mtk::gEmptyString;
 
@@ -14,7 +14,7 @@ using mtk::gEmptyString;
 //!the message, or messages are sent one by one over the serial port.
 //!A delay, ProcessTimeDelay can be used in order to no overflow the serial
 //!devices input buffer
-class AT_CORE UC7MessageSender : public mtk::Thread, public ATObject
+class AT_UC7 UC7MessageSender : public mtk::Thread, public ATObject
 {
     public:
                                                     UC7MessageSender(UC7& uc7);

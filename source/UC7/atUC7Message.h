@@ -1,6 +1,7 @@
 #ifndef atUC7MessageH
 #define atUC7MessageH
 #include "core/atATObject.h"
+#include "atUC7Exporter.h"
 //---------------------------------------------------------------------------
 
 const int gStepperControllerAddress = 4;
@@ -38,7 +39,7 @@ UC7MessageEnum toCommandName(const string& cmd, int controllerAddress);
 string toShortString(UC7MessageEnum cmd);
 string toLongString(UC7MessageEnum cmd);
 
-class AT_CORE UC7Message : public ATObject
+class AT_UC7 UC7Message : public ATObject
 {
 	public:
 					            UC7Message(const string& cmd = "", bool hasCS = false, bool isResponse = false);

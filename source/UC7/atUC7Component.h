@@ -5,7 +5,8 @@
 #include "atUC7Message.h"
 #include <deque>
 #include "Poco/Mutex.h"
-#include "atCounter.h"
+#include "atUC7Exporter.h"
+#include "core/atCounter.h"
 #include "atUC7MessageSender.h"
 #include "atUC7MessageReceiver.h"
 #include "mtkTimer.h"
@@ -23,7 +24,7 @@ using mtk::gEmptyString;
 using std::deque;
 class UC7MessageReceiver;
 
-class AT_CORE UC7 : public ATObject
+class AT_UC7 UC7 : public ATObject
 {
 	friend UC7MessageReceiver;
 	friend UC7MessageSender;

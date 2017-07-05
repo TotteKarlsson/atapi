@@ -6,6 +6,7 @@
 #include "core/atATObject.h"
 #include "mtkConstants.h"
 #include "mtkStringList.h"
+#include "atUC7Exporter.h"
 //---------------------------------------------------------------------------
 class UC7;
 using mtk::gEmptyString;
@@ -14,7 +15,7 @@ using mtk::gEmptyString;
 //messages. When a new message is available, the message is popped
 //from the UC7 queue and propagated to the main UI, which is responsible
 //to handle it.
-class AT_CORE UC7MessageReceiver : public mtk::Thread, public ATObject
+class AT_UC7 UC7MessageReceiver : public mtk::Thread, public ATObject
 {
     public:
                                                     UC7MessageReceiver(UC7& list,  HWND__ *h, const string& threadName = gEmptyString);
