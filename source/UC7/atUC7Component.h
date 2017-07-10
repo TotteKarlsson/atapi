@@ -10,13 +10,14 @@
 #include "atUC7MessageSender.h"
 #include "atUC7MessageReceiver.h"
 #include "mtkTimer.h"
-
+#include "atUC7StatusHistory.h"
+#include "atUC7Miscellaneous.h"
 //---------------------------------------------------------------------------
 //!This class is named UC7, but unit is atUC7Component as not to conflict with
 //application name unit atUC7
 
 //!Observe that most "get" functions below don't return a result immediately. Instead, a request
-//!is sent to the UC7 hardware, and a response is be received at a laterstage.
+//!is sent to the UC7 hardware, and a response is to be received at a laterstage.
 //!If a client is querying the UC7 object itself, specify isRequest = false when calling
 //!getfunctions, the current (sw) state is returned.
 
@@ -24,13 +25,11 @@ using mtk::gEmptyString;
 using std::deque;
 class UC7MessageReceiver;
 
+
 class AT_UC7 UC7 : public ATObject
 {
 	friend UC7MessageReceiver;
 	friend UC7MessageSender;
-
-	public:
-        enum EStrokeState 				{ssCutting, ssAfterCutting, ssRetracting, ssBeforeCutting, ssUndefined};
 
 	public:
 										UC7(HWND__ *h);
@@ -90,8 +89,8 @@ class AT_UC7 UC7 : public ATObject
         bool							setKnifeStageJogStepPreset(uint preset);
         bool							setKnifeStageResumeDelta(uint delta);
 
-        bool							setStrokeState(EStrokeState state);
-        EStrokeState					getStrokeState(){return mStrokeState;}
+        bool							setStrokeState(UC7StrokeState state);
+        UC7StrokeState					getStrokeState(){return mStrokeState;}
 
         bool							setStageMoveDelay(int ms);
 
@@ -105,6 +104,8 @@ class AT_UC7 UC7 : public ATObject
         bool							isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
         bool							isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
         int								getLastNumberOfSections(){return mSectionCounter.getLastCount();}
+
+        UC7StatusHistory&				getStatusHistoryRef(){return mUC7StatusHistory;}
 
     protected:
         string							mINIFileSection;
@@ -136,7 +137,7 @@ class AT_UC7 UC7 : public ATObject
 
         								//Hardware states
                                         //!Feedrate in nm
-        EStrokeState	  				mStrokeState;
+        UC7StrokeState	  				mStrokeState;
 		uint	 						mFeedRate;
 		uint	 						mPresetFeedRate;
 		uint  							mKnifeStageJogPreset;
@@ -157,6 +158,9 @@ class AT_UC7 UC7 : public ATObject
         Counter							mRibbonOrderCounter;
 
 		mtk::Timer	   			        mCustomTimer;
+
+        								//!Keep history of the UC7 status
+        UC7StatusHistory 				mUC7StatusHistory;
 
         								//!Events
         void							onSerialMessage(const string& msg);

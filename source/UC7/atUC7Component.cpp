@@ -62,9 +62,29 @@ bool UC7::isConnected()
 	return mSerial.isConnected();// || mUC7MessageSender.isRunning() || mUC7MessageReceiver.isRunning();
 }
 
-bool UC7::setStrokeState(EStrokeState state)
+bool UC7::setStrokeState(UC7StrokeState state)
 {
 	mStrokeState = state;
+    mUC7StatusHistory.insert(UC7StatusPoint(mStrokeState));
+    switch(mStrokeState)
+    {
+    	case UC7StrokeState::ssBeforeCutting:
+
+        break;
+
+    	case UC7StrokeState::ssCutting:
+        break;
+
+    	case UC7StrokeState::ssAfterCutting:
+        break;
+
+    	case UC7StrokeState::ssRetracting:
+        break;
+
+        default:
+        break;
+
+    }
     if(state == ssCutting && mFeedRate == 0)
     {
     	mNumberOfZeroStrokes++;

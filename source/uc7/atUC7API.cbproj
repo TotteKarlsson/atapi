@@ -151,6 +151,14 @@
             <DependentOn>atUC7MessageSender.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atUC7Miscellaneous.cpp">
+            <DependentOn>atUC7Miscellaneous.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atUC7StatusHistory.cpp">
+            <DependentOn>atUC7StatusHistory.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
