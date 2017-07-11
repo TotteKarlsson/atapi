@@ -14,11 +14,32 @@ USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Typ
 USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
 USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
+USEFORM("datamodules\TATDBImagesAndMoviesDataModule.cpp", ImagesAndMoviesDM); /* TDataModule: File Type */
+USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
+USEFORM("datamodules\TCoverSlipDataModule.cpp", csDM); /* TDataModule: File Type */
+USEFORM("frames\TATDBConnectionFrame.cpp", ATDBConnectionFrame); /* TFrame: File Type */
+#include "TApplicationSoundsFrame.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 
 #pragma argsused
+
+
+
+static inline void ValidCtrCheck(TApplicationSoundsFrame *)
+{
+  new TApplicationSoundsFrame(NULL);
+}
+
+namespace Tapplicationsoundsframe
+{
+    void __fastcall PACKAGE Register()
+    {
+        TComponentClass classes[1] = {__classid(TApplicationSoundsFrame)};
+        RegisterComponents("AIComponents", classes, 0);
+    }
+}
 
 extern "C" int _libmain(unsigned long reason)
 {

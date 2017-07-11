@@ -5,7 +5,7 @@ object ApplicationSoundsFrame: TApplicationSoundsFrame
   Height = 241
   AutoSize = True
   TabOrder = 0
-  object GroupBox1: TGroupBox
+  object GBS: TGroupBox
     Left = 0
     Top = 0
     Width = 509
@@ -79,12 +79,5 @@ object ApplicationSoundsFrame: TApplicationSoundsFrame
         OnChange = VolumeTBChange
       end
     end
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    UseAppManager = True
-    Left = 148
-    Top = 165
   end
 end

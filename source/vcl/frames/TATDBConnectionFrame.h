@@ -17,7 +17,7 @@ using mtk::IniFileProperties;
 class PACKAGE TATDBConnectionFrame : public TFrame
 {
     __published:	// IDE-managed Components
-        TGroupBox *GroupBox1;
+	TGroupBox *GBox1;
         TSTDStringLabeledEdit *mServerIPE;
         TSTDStringLabeledEdit *mDBUserE;
         TSTDStringLabeledEdit *mPasswordE;

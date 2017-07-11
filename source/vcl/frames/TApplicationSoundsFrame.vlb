@@ -1,9 +1,6 @@
 ﻿[RepeatCB]
 Coordinates=10,122,95,51
 
-[GroupBox1]
-Coordinates=270,10,70,51
-
 [SoundCB]
 Coordinates=10,10,84,87
 
@@ -17,4 +14,7 @@ ExplicitSubNodes=Value
 
 [ApplicationSoundsLB]
 Coordinates=121,10,121,87
+
+[GBS]
+Coordinates=270,10,70,51
 

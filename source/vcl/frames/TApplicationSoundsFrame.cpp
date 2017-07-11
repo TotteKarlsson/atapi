@@ -7,13 +7,14 @@
 #include "sound/atApplicationSound.h"
 #include "atVCLUtils.h"
 //---------------------------------------------------------------------------
-
-using namespace mtk;
-
 #pragma package(smart_init)
 #pragma link "TIntLabel"
 #pragma resource "*.dfm"
+//---------------------------------------------------------------------------
 TApplicationSoundsFrame *ApplicationSoundsFrame;
+
+using namespace mtk;
+
 
 //---------------------------------------------------------------------------
 __fastcall TApplicationSoundsFrame::TApplicationSoundsFrame(TComponent* Owner)
@@ -65,6 +66,7 @@ void __fastcall TApplicationSoundsFrame::ApplicationSoundsLBClick(TObject *Sende
     }
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TApplicationSoundsFrame::SoundCBCloseUp(TObject *Sender)
 {
 	//Get selected item and repopulate
@@ -81,6 +83,7 @@ void __fastcall TApplicationSoundsFrame::SoundCBCloseUp(TObject *Sender)
     }
 }
 
+//---------------------------------------------------------------------------
 Property<ApplicationSound>* TApplicationSoundsFrame::getCurrentSoundProperty()
 {
     int itemIndex = ApplicationSoundsLB->ItemIndex;
@@ -92,6 +95,7 @@ Property<ApplicationSound>* TApplicationSoundsFrame::getCurrentSoundProperty()
     return NULL;
 }
 
+//---------------------------------------------------------------------------
 void __fastcall TApplicationSoundsFrame::PlayBtnClick(TObject *Sender)
 {
 	Property<ApplicationSound>* p = getCurrentSoundProperty();
@@ -116,7 +120,7 @@ void __fastcall TApplicationSoundsFrame::VolumeTBChange(TObject *Sender)
     }
 }
 
-
+//---------------------------------------------------------------------------
 void __fastcall TApplicationSoundsFrame::EnabledCBClick(TObject *Sender)
 {
     int itemIndex = ApplicationSoundsLB->ItemIndex;
@@ -131,5 +135,3 @@ void __fastcall TApplicationSoundsFrame::EnabledCBClick(TObject *Sender)
         }
     }
 }
-
-
