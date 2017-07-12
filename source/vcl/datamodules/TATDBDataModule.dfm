@@ -266,18 +266,15 @@ object atdbDM: TatdbDM
     Top = 352
     object blocksDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object blocksDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
     end
     object blocksDScreated: TSQLTimeStampField
       FieldName = 'created'
-      Required = True
     end
     object blocksDSstatus: TSmallintField
       FieldName = 'status'
-      Required = True
     end
     object blocksDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -285,16 +282,13 @@ object atdbDM: TatdbDM
     end
     object blocksDSmodified: TSQLTimeStampField
       FieldName = 'modified'
-      Required = True
     end
     object blocksDSlabel: TStringField
       FieldName = 'label'
-      Required = True
       Size = 255
     end
     object blocksDSserial: TSmallintField
       FieldName = 'serial'
-      Required = True
     end
     object blocksDSdate_embedded: TDateField
       FieldName = 'date_embedded'

@@ -125,24 +125,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>components\TArrayBotBtn.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <CppCompile Include="datamodules\TATDBDataModule.cpp">
-            <Form>atdbDM</Form>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>datamodules\TATDBDataModule.h</DependentOn>
-            <BuildOrder>34</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="datamodules\TATDBImagesAndMoviesDataModule.cpp">
-            <Form>ImagesAndMoviesDM</Form>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>datamodules\TATDBImagesAndMoviesDataModule.h</DependentOn>
-            <BuildOrder>35</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="datamodules\TCoverSlipDataModule.cpp">
-            <Form>csDM</Form>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>datamodules\TCoverSlipDataModule.h</DependentOn>
-            <BuildOrder>36</BuildOrder>
-        </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
         </PackageImport>
@@ -219,12 +201,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TATDBConnectionFrame.cpp">
-            <Form>ATDBConnectionFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>frames\TATDBConnectionFrame.h</DependentOn>
-            <BuildOrder>37</BuildOrder>
-        </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -273,14 +249,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="frames\TATDBConnectionFrame.dfm"/>
         <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
-        <FormResources Include="datamodules\TATDBImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
-        <FormResources Include="datamodules\TCoverSlipDataModule.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

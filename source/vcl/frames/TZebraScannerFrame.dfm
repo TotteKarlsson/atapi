@@ -11,10 +11,6 @@ object ZebraScannerFrame: TZebraScannerFrame
     Height = 352
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 1
-    ExplicitTop = -1
-    ExplicitWidth = 272
-    ExplicitHeight = 396
     object GroupBox3: TGroupBox
       Left = 1
       Top = 1
@@ -23,9 +19,6 @@ object ZebraScannerFrame: TZebraScannerFrame
       Align = alTop
       Caption = 'Zebra Connection'
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 15
-      ExplicitWidth = 266
       object mTopPanel: TPanel
         Left = 2
         Top = 15
@@ -34,7 +27,6 @@ object ZebraScannerFrame: TZebraScannerFrame
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 262
         object mComportCB: TComboBox
           Left = 8
           Top = 7
@@ -101,7 +93,6 @@ object ZebraScannerFrame: TZebraScannerFrame
       Align = alTop
       Caption = 'Beeper'
       TabOrder = 1
-      ExplicitWidth = 270
       object mBeepBtn: TButton
         Left = 16
         Top = 16
@@ -120,8 +111,6 @@ object ZebraScannerFrame: TZebraScannerFrame
       Align = alClient
       Caption = 'Session'
       TabOrder = 2
-      ExplicitWidth = 266
-      ExplicitHeight = 263
       object mDecodeSessionBtn: TButton
         AlignWithMargins = True
         Left = 17
@@ -135,8 +124,6 @@ object ZebraScannerFrame: TZebraScannerFrame
         Align = alClient
         Caption = 'Start'
         TabOrder = 0
-        ExplicitWidth = 236
-        ExplicitHeight = 141
       end
     end
     object mScannerEnabledRG: TRadioGroup
@@ -153,8 +140,6 @@ object ZebraScannerFrame: TZebraScannerFrame
         'Off')
       TabOrder = 3
       OnClick = SettingsRGClick
-      ExplicitLeft = 17
-      ExplicitTop = 16
     end
     object Panel1: TPanel
       Left = 1
@@ -164,8 +149,6 @@ object ZebraScannerFrame: TZebraScannerFrame
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 4
-      ExplicitTop = 59
-      ExplicitWidth = 270
       object mScannerIllumRG: TRadioGroup
         Left = 0
         Top = 0
@@ -193,7 +176,6 @@ object ZebraScannerFrame: TZebraScannerFrame
           'On'
           'Off')
         TabOrder = 1
-        ExplicitWidth = 158
       end
     end
   end

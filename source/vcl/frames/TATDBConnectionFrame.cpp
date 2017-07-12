@@ -56,7 +56,13 @@ bool TATDBConnectionFrame::purge()
 
 void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender)
 {
-	if(atdbDM->SQLConnection1->Connected)
+	if(!atdbDM)
+    {
+    	Log(lWarning) << "Datamodule not allocated";
+        return;
+    }
+
+	if( atdbDM->SQLConnection1->Connected)
     {
     	//Remove runtime indices
     	TClientDataSet* cds = atdbDM->specimenCDS;

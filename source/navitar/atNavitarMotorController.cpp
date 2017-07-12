@@ -7,6 +7,7 @@
 
 using namespace mtk;
 
+enum NavitarMotorEnum {nmZoom = 1, nmFocus};
 //---------------------------------------------------------------------------
 using namespace mtk;
 using Poco::DateTime;
@@ -15,8 +16,8 @@ using Poco::DateTime;
 NavitarMotorController::NavitarMotorController()
 :
 mMotorControllerHandle(0),
-mZoom( *this,2),
-mFocus(*this,1)
+mZoom( *this, nmZoom),
+mFocus(*this, nmFocus)
 {
 }
 

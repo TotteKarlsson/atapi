@@ -10,7 +10,7 @@ NavitarMotor::NavitarMotor(NavitarMotorController& mc, int ID)
 :
 mMotorController(mc),
 mID(ID),
-mLabel(ID == 1 ? "Focus" : "Zoom")
+mLabel(ID == 2 ? "Focus" : "Zoom")
 {
 	//Setup registers
 	mRegisters.USER_TARGET 			= mID == 1 ? REG_USER_TARGET_1 		  :  REG_USER_TARGET_2;

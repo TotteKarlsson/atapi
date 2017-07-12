@@ -14,10 +14,7 @@ USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Typ
 USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
 USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
-USEFORM("datamodules\TATDBImagesAndMoviesDataModule.cpp", ImagesAndMoviesDM); /* TDataModule: File Type */
-USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
-USEFORM("datamodules\TCoverSlipDataModule.cpp", csDM); /* TDataModule: File Type */
-USEFORM("frames\TATDBConnectionFrame.cpp", ATDBConnectionFrame); /* TFrame: File Type */
+//---------------------------------------------------------------------------
 #include "TApplicationSoundsFrame.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -25,7 +22,10 @@ USEFORM("frames\TATDBConnectionFrame.cpp", ATDBConnectionFrame); /* TFrame: File
 
 #pragma argsused
 
-
+extern "C" int _libmain(unsigned long reason)
+{
+	return 1;
+}
 
 static inline void ValidCtrCheck(TApplicationSoundsFrame *)
 {
@@ -41,10 +41,8 @@ namespace Tapplicationsoundsframe
     }
 }
 
-extern "C" int _libmain(unsigned long reason)
-{
-	return 1;
-}
+
+
 #pragma comment(lib, "mtkCommon.lib")
 #pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "atDataBase.lib")
