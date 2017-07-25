@@ -244,15 +244,15 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="forms\TTextInputDialog.dfm"/>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="forms\TStringInputDialog.dfm"/>
-        <FormResources Include="forms\TBlockEntryForm.dfm"/>
-        <FormResources Include="forms\TATDBServerEntry.dfm"/>
-        <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="forms\TBlockEntryForm.dfm"/>
+        <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
-        <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
+        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="frames\TZebraScannerFrame.dfm"/>
+        <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

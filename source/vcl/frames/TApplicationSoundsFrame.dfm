@@ -23,7 +23,7 @@ object ApplicationSoundsFrame: TApplicationSoundsFrame
       TabOrder = 0
       OnClick = ApplicationSoundsLBClick
     end
-    object GroupBox2: TGroupBox
+    object SoundPropsGB: TGroupBox
       Left = 249
       Top = 15
       Width = 258

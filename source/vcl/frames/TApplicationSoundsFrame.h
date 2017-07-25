@@ -28,7 +28,7 @@ class PACKAGE TApplicationSoundsFrame : public TFrame
         TCheckBox *RepeatCB;
 	TButton *PlayBtn;
 	TCheckBox *EnabledCB;
-	TGroupBox *GroupBox2;
+	TGroupBox *SoundPropsGB;
 	void __fastcall ApplicationSoundsLBClick(TObject *Sender);
 	void __fastcall SoundCBCloseUp(TObject *Sender);
 	void __fastcall PlayBtnClick(TObject *Sender);
