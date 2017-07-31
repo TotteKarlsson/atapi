@@ -63,18 +63,16 @@ object atdbDM: TatdbDM
       AutoGenerateValue = arAutoInc
       FieldName = 'id'
     end
-    object blocksCDScreated: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Created On'
-      FieldName = 'created'
-      OnGetText = TimeStampGetText
+    object blocksCDSslice_id: TIntegerField
+      FieldName = 'slice_id'
     end
-    object blocksCDScreated_by: TIntegerField
-      FieldName = 'created_by'
+    object blocksCDSentered_by: TIntegerField
+      FieldName = 'entered_by'
       Required = True
     end
-    object blocksCDSmodified: TSQLTimeStampField
-      FieldName = 'modified'
+    object blocksCDSentered_on: TSQLTimeStampField
+      FieldName = 'entered_on'
+      Required = True
     end
     object blocksCDSlabel: TStringField
       DisplayLabel = 'Label'
@@ -84,16 +82,6 @@ object atdbDM: TatdbDM
     object blocksCDSstatus: TSmallintField
       FieldName = 'status'
       Required = True
-    end
-    object blocksCDSLprocess_id: TIntegerField
-      DisplayLabel = 'Specimen ID'
-      FieldKind = fkLookup
-      FieldName = 'Lspecimen_id'
-      LookupDataSet = specimenIDDS
-      LookupKeyFields = 'specimen_id'
-      LookupResultField = 'specimen_id'
-      KeyFields = 'specimen_id'
-      Lookup = True
     end
     object blocksCDSLBlockStatus: TStringField
       DisplayLabel = 'Status'
@@ -113,25 +101,15 @@ object atdbDM: TatdbDM
       Required = True
     end
     object blocksCDSCBlockLabel: TStringField
+      DisplayLabel = 'Label'
       FieldKind = fkCalculated
       FieldName = 'Cblock_label'
       Size = 50
       Calculated = True
     end
     object blocksCDSdate_embedded: TDateField
+      DisplayLabel = 'Date Embedded'
       FieldName = 'date_embedded'
-    end
-    object blocksCDSpreprocess_treatment_protocol: TSmallintField
-      FieldName = 'preprocess_treatment_protocol'
-    end
-    object blocksCDSfixative_protocol: TSmallintField
-      FieldName = 'fixative_protocol'
-    end
-    object blocksCDSfixation_protocol: TSmallintField
-      FieldName = 'fixation_protocol'
-    end
-    object blocksCDSpostfix_protocol: TSmallintField
-      FieldName = 'postfix_protocol'
     end
     object blocksCDScryoprotection_protocol: TSmallintField
       FieldName = 'cryoprotection_protocol'
@@ -148,53 +126,18 @@ object atdbDM: TatdbDM
     object blocksCDSembedding_protocol: TSmallintField
       FieldName = 'embedding_protocol'
     end
-    object blocksCDSLPreprocessTreatmentProtocol: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LPreprocessTreatmentProtocol'
-      LookupDataSet = preprocesstreatmentDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'preprocess_treatment_protocol'
-      Lookup = True
-    end
-    object blocksCDSLFixativeProtocol: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LFixativeProtocol'
-      LookupDataSet = fixativeTBL
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'fixative_protocol'
-      Lookup = True
-    end
-    object blocksCDSLFixationProtocol: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LFixationProtocol'
-      LookupDataSet = fixationMethodDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'fixation_protocol'
-      Lookup = True
-    end
-    object blocksCDSLPostFixProtocol: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LPostFixProtocol'
-      LookupDataSet = postfix
-      LookupKeyFields = 'id'
-      LookupResultField = 'protocol'
-      KeyFields = 'postfix_protocol'
-      Lookup = True
-    end
     object blocksCDSLCryoProtectionProtocol: TStringField
+      DisplayLabel = 'Cryoprotection Protocol'
       FieldKind = fkLookup
       FieldName = 'LCryoProtectionProtocol'
       LookupDataSet = cryoprotectionDS
       LookupKeyFields = 'id'
       LookupResultField = 'protocol'
       KeyFields = 'cryoprotection_protocol'
-      Size = 0
       Lookup = True
     end
     object blocksCDSLFreezingProtocol: TStringField
+      DisplayLabel = 'Freezing Protocol'
       FieldKind = fkLookup
       FieldName = 'LFreezingProtocol'
       LookupDataSet = freezeprotocolDS
@@ -204,6 +147,7 @@ object atdbDM: TatdbDM
       Lookup = True
     end
     object blocksCDSLSubstitutionProtocol: TStringField
+      DisplayLabel = 'Substitution Protocol'
       FieldKind = fkLookup
       FieldName = 'LSubstitutionProtocol'
       LookupDataSet = substitutionProtocol
@@ -213,6 +157,7 @@ object atdbDM: TatdbDM
       Lookup = True
     end
     object blocksCDSLInfiltrationProtocol: TStringField
+      DisplayLabel = 'Infiltration Protocol'
       FieldKind = fkLookup
       FieldName = 'LInfiltrationProtocol'
       LookupDataSet = infiltrationProtocolDS
@@ -222,6 +167,7 @@ object atdbDM: TatdbDM
       Lookup = True
     end
     object blocksCDSLEmbeddingProtocol: TStringField
+      DisplayLabel = 'Embedding Protocol'
       FieldKind = fkLookup
       FieldName = 'LEmbeddingProtocol'
       LookupDataSet = embeddingProtocolDS
@@ -231,16 +177,14 @@ object atdbDM: TatdbDM
       Lookup = True
     end
     object blocksCDSLUser: TStringField
+      DisplayLabel = 'Entered By'
       FieldKind = fkLookup
-      FieldName = 'LUser'
+      FieldName = 'entered_byL'
       LookupDataSet = usersCDS
       LookupKeyFields = 'id'
       LookupResultField = 'user_name'
-      KeyFields = 'created_by'
+      KeyFields = 'entered_by'
       Lookup = True
-    end
-    object blocksCDSspecimen_id: TIntegerField
-      FieldName = 'specimen_id'
     end
   end
   object blocksProvider: TDataSetProvider
@@ -250,15 +194,13 @@ object atdbDM: TatdbDM
     Top = 352
   end
   object blocksDS: TSQLDataSet
-    CommandText = 
-      'select * from blocks WHERE specimen_id = :specimen_id ORDER by i' +
-      'd DESC'
-    DataSource = specimenDataSource
+    CommandText = 'select * from blocks WHERE slice_id = :id ORDER by id DESC'
+    DataSource = slicesDataSource
     MaxBlobSize = 1
     Params = <
       item
         DataType = ftInteger
-        Name = 'specimen_id'
+        Name = 'id'
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
@@ -267,21 +209,16 @@ object atdbDM: TatdbDM
     object blocksDSid: TIntegerField
       FieldName = 'id'
     end
-    object blocksDSspecimen_id: TIntegerField
-      FieldName = 'specimen_id'
-    end
-    object blocksDScreated: TSQLTimeStampField
-      FieldName = 'created'
+    object blocksDSslice_id: TIntegerField
+      FieldName = 'slice_id'
     end
     object blocksDSstatus: TSmallintField
       FieldName = 'status'
-    end
-    object blocksDScreated_by: TIntegerField
-      FieldName = 'created_by'
       Required = True
     end
-    object blocksDSmodified: TSQLTimeStampField
-      FieldName = 'modified'
+    object blocksDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
     end
     object blocksDSlabel: TStringField
       FieldName = 'label'
@@ -289,21 +226,10 @@ object atdbDM: TatdbDM
     end
     object blocksDSserial: TSmallintField
       FieldName = 'serial'
+      Required = True
     end
     object blocksDSdate_embedded: TDateField
       FieldName = 'date_embedded'
-    end
-    object blocksDSpreprocess_treatment_protocol: TSmallintField
-      FieldName = 'preprocess_treatment_protocol'
-    end
-    object blocksDSfixative_protocol: TSmallintField
-      FieldName = 'fixative_protocol'
-    end
-    object blocksDSfixation_protocol: TSmallintField
-      FieldName = 'fixation_protocol'
-    end
-    object blocksDSpostfix_protocol: TSmallintField
-      FieldName = 'postfix_protocol'
     end
     object blocksDScryoprotection_protocol: TSmallintField
       FieldName = 'cryoprotection_protocol'
@@ -319,6 +245,10 @@ object atdbDM: TatdbDM
     end
     object blocksDSembedding_protocol: TSmallintField
       FieldName = 'embedding_protocol'
+    end
+    object blocksDSentered_on: TSQLTimeStampField
+      FieldName = 'entered_on'
+      Required = True
     end
   end
   object usersDS: TSQLDataSet
@@ -655,66 +585,70 @@ object atdbDM: TatdbDM
       FieldName = 'created_by'
     end
   end
-  object specimenDS: TSQLDataSet
-    CommandText = 'SELECT * from specimens order by specimen_id DESC'
+  object slicesDS: TSQLDataSet
+    CommandText = 'SELECT * from slices where specimen_id = :id'
+    DataSource = specimenDataSource
     MaxBlobSize = 1
-    Params = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end>
     SQLConnection = SQLConnection1
     Left = 32
     Top = 272
-    object specimenDScase_id: TIntegerField
-      FieldName = 'case_id'
+    object slicesDSid: TIntegerField
+      FieldName = 'id'
     end
-    object specimenDSspecimen_id: TIntegerField
+    object slicesDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
-      Required = True
     end
-    object specimenDSlims_number: TIntegerField
-      FieldName = 'lims_number'
-    end
-    object specimenDSvirus: TStringField
+    object slicesDSvirus: TStringField
       FieldName = 'virus'
       Size = 255
     end
-    object specimenDSage: TStringField
-      FieldName = 'age'
-      Size = 255
-    end
-    object specimenDSdeath_date: TDateField
-      FieldName = 'death_date'
-    end
-    object specimenDSbrain_region_dissection: TStringField
+    object slicesDSbrain_region_dissection: TStringField
       FieldName = 'brain_region_dissection'
       Size = 255
     end
-    object specimenDSentered_by: TIntegerField
+    object slicesDSculture_time: TIntegerField
+      FieldName = 'culture_time'
+    end
+    object slicesDSpreprocess_treatment_protocol: TSmallintField
+      FieldName = 'preprocess_treatment_protocol'
+    end
+    object slicesDSfixative_protocol: TSmallintField
+      FieldName = 'fixative_protocol'
+    end
+    object slicesDSfixation_protocol: TSmallintField
+      FieldName = 'fixation_protocol'
+    end
+    object slicesDSpostfix_protocol: TSmallintField
+      FieldName = 'postfix_protocol'
+    end
+    object slicesDSvirus_dilution: TSingleField
+      FieldName = 'virus_dilution'
+    end
+    object slicesDSentered_by: TIntegerField
       FieldName = 'entered_by'
       Required = True
     end
-    object specimenDSculture_time: TIntegerField
-      FieldName = 'culture_time'
-    end
   end
-  object specimenProvider: TDataSetProvider
-    DataSet = specimenDS
-    Options = [poAutoRefresh, poUseQuoteChar]
+  object slicesProvider: TDataSetProvider
+    DataSet = slicesDS
     Left = 136
     Top = 272
   end
-  object specimenCDS: TClientDataSet
+  object slicesCDS: TClientDataSet
     Aggregates = <>
     FieldDefs = <
       item
-        Name = 'case_id'
+        Name = 'id'
         DataType = ftInteger
       end
       item
         Name = 'specimen_id'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'lims_number'
         DataType = ftInteger
       end
       item
@@ -723,94 +657,155 @@ object atdbDM: TatdbDM
         Size = 255
       end
       item
-        Name = 'age'
-        DataType = ftString
-        Size = 255
-      end
-      item
-        Name = 'death_date'
-        DataType = ftDate
-      end
-      item
         Name = 'brain_region_dissection'
         DataType = ftString
         Size = 255
       end
       item
-        Name = 'entered_by'
-        Attributes = [faRequired]
+        Name = 'culture_time'
         DataType = ftInteger
       end
       item
-        Name = 'culture_time'
+        Name = 'preprocess_treatment_protocol'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'fixative_protocol'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'fixation_protocol'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'postfix_protocol'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'virus_dilution'
+        DataType = ftSingle
+      end
+      item
+        Name = 'entered_by'
+        Attributes = [faRequired]
         DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
-    ProviderName = 'specimenProvider'
+    ProviderName = 'slicesProvider'
     StoreDefs = True
-    AfterOpen = specimenCDSAfterOpen
-    BeforeClose = specimenCDSBeforeClose
-    AfterClose = specimenCDSAfterClose
+    AfterOpen = slicesCDSAfterOpen
+    BeforeClose = slicesCDSBeforeClose
+    AfterClose = slicesCDSAfterClose
     AfterPost = cdsAfterPost
     AfterScroll = cdsAfterScroll
     BeforeRefresh = cdsBeforeRefresh
     AfterRefresh = cdsAfterRefresh
     Left = 248
     Top = 272
-    object specimenCDScase_id: TIntegerField
-      FieldName = 'case_id'
+    object slicesCDSid: TIntegerField
+      FieldName = 'id'
     end
-    object specimenCDSspecimen_id: TIntegerField
+    object slicesCDSspecimen_id: TIntegerField
+      DisplayLabel = 'Specimen ID'
       FieldName = 'specimen_id'
-      Required = True
     end
-    object specimenCDSlims_number: TIntegerField
-      FieldName = 'lims_number'
-    end
-    object specimenCDSvirus: TStringField
+    object slicesCDSvirus: TStringField
+      DisplayLabel = 'Virus'
       FieldName = 'virus'
       Size = 255
     end
-    object specimenCDSage: TStringField
-      FieldName = 'age'
-      Size = 255
+    object slicesCDSvirus_dilution: TSingleField
+      DisplayLabel = 'Virus Dilution'
+      FieldName = 'virus_dilution'
     end
-    object specimenCDSdeath_date: TDateField
-      FieldName = 'death_date'
-    end
-    object specimenCDSbrain_region_dissection: TStringField
+    object slicesCDSbrain_region_dissection: TStringField
+      DisplayLabel = 'Brain Region'
       FieldName = 'brain_region_dissection'
       Size = 255
     end
-    object specimenCDSentered_by: TIntegerField
-      FieldName = 'entered_by'
-      Required = True
-    end
-    object specimenCDSculture_time: TIntegerField
+    object slicesCDSculture_time: TIntegerField
       FieldName = 'culture_time'
     end
-    object specimenCDSLEnteredBy: TStringField
+    object slicesCDSculture_timeL: TStringField
+      DisplayLabel = 'Culture Time'
       FieldKind = fkLookup
-      FieldName = 'LEnteredBy'
-      LookupDataSet = usersCDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'user_name'
-      KeyFields = 'entered_by'
-      Lookup = True
-    end
-    object specimenCDSLCulturedTP: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LCulturedTP'
+      FieldName = 'culture_timeL'
       LookupDataSet = culturedTimePoints
       LookupKeyFields = 'id'
       LookupResultField = 'time_point'
       KeyFields = 'culture_time'
       Lookup = True
     end
+    object slicesCDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
+    end
+    object slicesCDSentered_byL: TStringField
+      DisplayLabel = 'Entered By'
+      FieldKind = fkLookup
+      FieldName = 'entered_byL'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'entered_by'
+      Lookup = True
+    end
+    object slicesCDSpreprocess_treatment_protocol: TSmallintField
+      FieldName = 'preprocess_treatment_protocol'
+    end
+    object slicesCDSLPre: TStringField
+      DisplayLabel = 'Preprocess Treatment'
+      FieldKind = fkLookup
+      FieldName = 'preprocess_treatment_protocolL'
+      LookupDataSet = preprocesstreatmentDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'preprocess_treatment_protocol'
+      Lookup = True
+    end
+    object slicesCDSfixative_protocol: TSmallintField
+      FieldName = 'fixative_protocol'
+    end
+    object slicesCDSfixative_protocolL: TStringField
+      DisplayLabel = 'Fixative Protocol'
+      FieldKind = fkLookup
+      FieldName = 'fixative_protocolL'
+      LookupDataSet = fixativeTBL
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'fixative_protocol'
+      Lookup = True
+    end
+    object slicesCDSfixation_protocol: TSmallintField
+      FieldName = 'fixation_protocol'
+    end
+    object slicesCDSfixation_protocolL: TStringField
+      DisplayLabel = 'Fixation Protocol'
+      FieldKind = fkLookup
+      FieldName = 'fixation_protocolL'
+      LookupDataSet = fixationMethodDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'fixation_protocol'
+      Lookup = True
+    end
+    object slicesCDSpostfix_protocol: TSmallintField
+      FieldName = 'postfix_protocol'
+    end
+    object slicesCDSpostfix_protocolL: TStringField
+      DisplayLabel = 'Postfix Protocol'
+      FieldKind = fkLookup
+      FieldName = 'postfix_protocolL'
+      LookupDataSet = postfix
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'postfix_protocol'
+      Lookup = True
+    end
   end
-  object specimenDataSource: TDataSource
-    DataSet = specimenCDS
+  object slicesDataSource: TDataSource
+    DataSet = slicesCDS
     Left = 344
     Top = 272
   end
@@ -922,15 +917,6 @@ object atdbDM: TatdbDM
     object substitutionProtocoldocument_id: TIntegerField
       FieldName = 'document_id'
     end
-    object substitutionProtocolLDocument: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LDocument'
-      LookupDataSet = documentsCDS
-      LookupKeyFields = 'document_name'
-      LookupResultField = 'id'
-      KeyFields = 'document_id'
-      Lookup = True
-    end
   end
   object infiltrationProtocolDS: TSimpleDataSet
     Aggregates = <>
@@ -962,81 +948,6 @@ object atdbDM: TatdbDM
     AfterPost = fixativeTBLAfterPost
     Left = 472
     Top = 552
-  end
-  object specimenIDDS: TSimpleDataSet
-    Aggregates = <>
-    Connection = SQLConnection1
-    DataSet.CommandText = 'SELECT specimen_id  FROM specimens'
-    DataSet.MaxBlobSize = -1
-    DataSet.Params = <>
-    Params = <>
-    Left = 488
-    Top = 352
-    object specimenIDDSspecimen_id: TIntegerField
-      FieldName = 'specimen_id'
-      Required = True
-    end
-  end
-  object documentsDS: TSQLDataSet
-    CommandText = 'SELECT * from documents'
-    MaxBlobSize = 1
-    Params = <>
-    SQLConnection = SQLConnection1
-    Left = 32
-    Top = 688
-    object documentsDSid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-    object documentsDSdocument_name: TStringField
-      FieldName = 'document_name'
-      Required = True
-      Size = 255
-    end
-    object documentsDSdocument: TBlobField
-      FieldName = 'document'
-      Size = 1
-    end
-    object documentsDStype: TStringField
-      FieldName = 'type'
-      Size = 16
-    end
-  end
-  object documentsProvider: TDataSetProvider
-    DataSet = documentsDS
-    Left = 136
-    Top = 688
-  end
-  object documentsCDS: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'documentsProvider'
-    Left = 256
-    Top = 688
-    object documentsCDSid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-    object documentsCDSdocument_name: TStringField
-      DisplayLabel = 'Name'
-      FieldName = 'document_name'
-      Required = True
-      Size = 255
-    end
-    object documentsCDSdocument: TBlobField
-      FieldName = 'document'
-      Size = 1
-    end
-    object documentsCDStype: TStringField
-      DisplayLabel = 'Type'
-      FieldName = 'type'
-      Size = 16
-    end
-  end
-  object documentsDSource: TDataSource
-    DataSet = documentsCDS
-    Left = 344
-    Top = 680
   end
   object ROnCoverSlipsSource: TDataSource
     DataSet = ROnCS_CDS
@@ -1106,46 +1017,36 @@ object atdbDM: TatdbDM
       Size = 1
     end
   end
-  object casesCDS: TClientDataSet
+  object specimenCDS: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'casesProvider'
+    ProviderName = 'specimenProvider'
+    AfterPost = cdsAfterPost
+    AfterScroll = cdsAfterScroll
     Left = 256
     Top = 192
-    object casesCDSid: TIntegerField
+    object specimenCDSid: TIntegerField
       DisplayWidth = 50
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object casesCDSanimal_id: TStringField
+    object specimenCDSanimal_id: TStringField
       DisplayWidth = 50
       FieldName = 'animal_id'
       Required = True
       Size = 64
     end
-    object casesCDSintake_date: TSQLTimeStampField
+    object specimenCDSintake_date: TSQLTimeStampField
       DisplayWidth = 50
       FieldName = 'intake_date'
     end
-    object casesCDSspecie: TSmallintField
+    object specimenCDSspecie: TSmallintField
       DisplayWidth = 50
       FieldName = 'specie'
       Required = True
     end
-    object casesCDSentered_by: TIntegerField
-      DisplayWidth = 50
-      FieldName = 'entered_by'
-    end
-    object casesCDSLUser: TStringField
-      FieldKind = fkLookup
-      FieldName = 'LUser'
-      LookupDataSet = usersCDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'user_name'
-      KeyFields = 'entered_by'
-      Lookup = True
-    end
-    object casesCDSLSpecie: TStringField
+    object specimenCDSLSpecie: TStringField
+      DisplayLabel = 'Specie'
       FieldKind = fkLookup
       FieldName = 'LSpecie'
       LookupDataSet = speciesDS
@@ -1154,35 +1055,60 @@ object atdbDM: TatdbDM
       KeyFields = 'specie'
       Lookup = True
     end
+    object specimenCDSsummary: TStringField
+      FieldName = 'summary'
+      Size = 256
+    end
+    object specimenCDSentered_by: TIntegerField
+      DisplayWidth = 50
+      FieldName = 'entered_by'
+      Required = True
+    end
+    object specimenCDSLUser: TStringField
+      DisplayLabel = 'User'
+      FieldKind = fkLookup
+      FieldName = 'LUser'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'entered_by'
+      Lookup = True
+    end
   end
-  object casesDS: TSQLDataSet
-    CommandText = 'select * from cases order by intake_date DESC'
-    MaxBlobSize = -1
+  object specimenDS: TSQLDataSet
+    CommandText = 'select * from specimen order by id DESC'
+    DataSource = specimenDataSource
+    MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
     Left = 40
     Top = 192
-    object casesDSid: TIntegerField
+    object specimenDSid: TIntegerField
       FieldName = 'id'
     end
-    object casesDSanimal_id: TStringField
+    object specimenDSanimal_id: TStringField
       FieldName = 'animal_id'
       Required = True
       Size = 64
     end
-    object casesDSintake_date: TSQLTimeStampField
+    object specimenDSintake_date: TSQLTimeStampField
       FieldName = 'intake_date'
     end
-    object casesDSspecie: TSmallintField
+    object specimenDSspecie: TSmallintField
       FieldName = 'specie'
       Required = True
     end
-    object casesDSentered_by: TIntegerField
+    object specimenDSentered_by: TIntegerField
       FieldName = 'entered_by'
+      Required = True
+    end
+    object specimenDSsummary: TStringField
+      FieldName = 'summary'
+      Size = 256
     end
   end
-  object casesProvider: TDataSetProvider
-    DataSet = casesDS
+  object specimenProvider: TDataSetProvider
+    DataSet = specimenDS
     Left = 144
     Top = 192
   end
@@ -1195,5 +1121,10 @@ object atdbDM: TatdbDM
     Params = <>
     Left = 488
     Top = 208
+  end
+  object specimenDataSource: TDataSource
+    DataSet = specimenCDS
+    Left = 368
+    Top = 184
   end
 end

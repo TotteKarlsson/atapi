@@ -13,7 +13,8 @@ TatdbDM *atdbDM;
 using namespace mtk;
 using namespace std;
 
-//extern bool gAppIsStartingUp;
+string zeroPadLeft(int nr, int width);
+string zeroPadRight(int nr, int width);
 
 //---------------------------------------------------------------------------
 __fastcall TatdbDM::TatdbDM(TComponent* Owner)
@@ -56,22 +57,16 @@ void __fastcall TatdbDM::SQLConnection1AfterConnect(TObject *Sender)
 
 void __fastcall TatdbDM::afterConnect()
 {
-//	if(gAppIsStartingUp)
-//    {
-//    	return;
-//    }
-
 	Log(lInfo) << "Connection established to: "<<mDataBase;
 	usersCDS->Active 	    = true;
-	casesCDS->Active 	    = true;
-	specimenCDS->Active  	= true;
+	specimenCDS->Active 	= true;
+	slicesCDS->Active  		= true;
     blocksCDS->Active 	    = true;
     mRibbonCDS->Active 	    = true;
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
     ribbonNotesCDS->Active  = true;
-	specimenCDS->Active  	= true;
-    documentsCDS->Active  	= true;
+	slicesCDS->Active  		= true;
     ROnCS_CDS->Active  		= true;
     settingsCDS->Active  	= true;
 }
@@ -81,12 +76,12 @@ void __fastcall TatdbDM::afterDisConnect()
 {
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
   	usersCDS->Active 	    = false;
-	casesCDS->Active 	    = false;
+	specimenCDS->Active 	    = false;
     blocksCDS->Active 	    = false;
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
-	specimenCDS->Active  	= false;
+	slicesCDS->Active  	= false;
 }
 
 //---------------------------------------------------------------------------
@@ -125,6 +120,14 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
     }
 
  	if(DataSet == specimenCDS)
+    {
+    	if(slicesCDS->Active)
+        {
+        	slicesCDS->Refresh();
+        }
+    }
+
+ 	if(DataSet == slicesCDS)
     {
     	if(blocksCDS->Active)
         {
@@ -166,7 +169,15 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
 
 void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)
 {
-	if(DataSet == blocksCDS)
+	if(DataSet == slicesCDS)
+    {
+    	if(blocksCDS->Active)
+        {
+    		blocksCDS->Refresh();
+        }
+    }
+
+	else if(DataSet == blocksCDS)
     {
     	if(mRibbonCDS->Active)
         {
@@ -201,22 +212,6 @@ void __fastcall TatdbDM::cdsBeforePost(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-string zeroPadLeft(int nr, int width)
-{
-	stringstream s;
-    s << std::setw(width) << std::setfill( '0' ) << std::right << nr;
-    return s.str();
-}
-
-//---------------------------------------------------------------------------
-string zeroPadRight(int nr, int width)
-{
-	stringstream s;
-    s << std::setw(width) << std::setfill( '0' ) << std::left << nr;
-    return s.str();
-}
-
-//---------------------------------------------------------------------------
 void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
@@ -242,7 +237,7 @@ void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 void __fastcall TatdbDM::fixativeTBLAfterPost(TDataSet *DataSet)
 {
 	fixativeTBL->ApplyUpdates(0);
-    specimenCDS->Refresh();
+    slicesCDS->Refresh();
 }
 
 //---------------------------------------------------------------------------
@@ -256,12 +251,13 @@ void __fastcall TatdbDM::blocksCDSCalcFields(TDataSet *DataSet)
 		if(f)
 		{
         	stringstream s;
+
             //Capture date with no time
-            StringList d(stdstr(blocksCDS->FieldByName("created")->AsString), ' ');
-            if(d.size())
-            {
-	            s << stdstr(d[0]) <<"\n";
-            }
+            StringList d(stdstr(blocksCDS->FieldByName("entered_on")->AsString), ' ');
+//            if(d.size())
+//            {
+//	            s << stdstr(d[0]) <<"\n";
+//            }
 
             s << stdstr(blocksCDS->FieldByName("label")->AsString);
             s <<"\n";
@@ -281,50 +277,50 @@ void __fastcall TatdbDM::blocksCDSblockLabelGetText(TField *Sender, UnicodeStrin
 void __fastcall TatdbDM::TimeStampGetText(TField *Sender, UnicodeString &Text,
           bool DisplayText)
 {
-	TField* field = dynamic_cast<TField*>(Sender);
-
-	if(field == blocksCDScreated)
-	{
-		StringList d(stdstr(blocksCDScreated->AsString), ' ');
-        if(d.size())
-        {
-			Text = vclstr(d[0]);
-        }
-	}
-    else if	(field == mRibbonCDScreated)
-	{
-		StringList d(stdstr(mRibbonCDScreated->AsString), ' ');
-        if(d.size())
-        {
-			Text = vclstr(d[0]);
-        }
-	}
+//	TField* field = dynamic_cast<TField*>(Sender);
+//
+//	if(field == blocksCDScreated)
+//	{
+//		StringList d(stdstr(blocksCDScreated->AsString), ' ');
+//        if(d.size())
+//        {
+//			Text = vclstr(d[0]);
+//        }
+//	}
+//    else if	(field == mRibbonCDScreated)
+//	{
+//		StringList d(stdstr(mRibbonCDScreated->AsString), ' ');
+//        if(d.size())
+//        {
+//			Text = vclstr(d[0]);
+//        }
+//	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TatdbDM::cdsBeforeRefresh(TDataSet *DataSet)
 {
-//	if(DataSet == specimenCDS)
+//	if(DataSet == slicesCDS)
 //    {
-//		specimenCDS->Active = false;
-//		specimenCDS->Active = true;
+//		slicesCDS->Active = false;
+//		slicesCDS->Active = true;
 //    }
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::specimenCDSBeforeClose(TDataSet *DataSet)
+void __fastcall TatdbDM::slicesCDSBeforeClose(TDataSet *DataSet)
 {
     //delete runtime indices
     Log(lDebug) << "Closing dataset";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::specimenCDSAfterClose(TDataSet *DataSet)
+void __fastcall TatdbDM::slicesCDSAfterClose(TDataSet *DataSet)
 {
     Log(lDebug) << "Closing dataset";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::specimenCDSAfterOpen(TDataSet *DataSet)
+void __fastcall TatdbDM::slicesCDSAfterOpen(TDataSet *DataSet)
 {
     Log(lDebug) << "After Open";
 }
@@ -340,5 +336,63 @@ int	__fastcall TatdbDM::getCurrentBlockID()
     	return -1;
     }
 }
+
+int __fastcall TatdbDM::getIDForSpecie(const string& specie)
+{
+	if(speciesDS->Active)
+    {
+    	TSQLQuery *q = new TSQLQuery(NULL);
+        q->SQLConnection = SQLConnection1;
+        q->SQL->Add("SELECT id FROM species WHERE name = '" + String(specie.c_str()) + "'");
+		q->Open();
+
+        if(q->Fields->Count)
+        {
+        	int id = (*q->Fields)[0]->AsInteger;
+            return id;
+        }
+    }
+
+    return -1;
+}
+
+//---------------------------------------------------------------------------
+String __fastcall TatdbDM::createBlockLabel()
+{
+    String lbl;
+    String specie = atdbDM->specimenCDS->FieldByName("Lspecie")->AsString;
+	if(specie == "Human")
+    {
+    	lbl = "H";
+    }
+    else if(specie == "Mouse")
+    {
+    	lbl = "M";
+    }
+    else if(specie == "Human Surgical")
+    {
+    	lbl = "HS";
+    }
+
+	lbl = lbl + atdbDM->specimenCDS->FieldByName("animal_id")->AsString + "-" + (atdbDM->blocksCDS->RecordCount + 1);
+	return lbl;
+}
+
+//---------------------------------------------------------------------------
+string zeroPadLeft(int nr, int width)
+{
+	stringstream s;
+    s << std::setw(width) << std::setfill( '0' ) << std::right << nr;
+    return s.str();
+}
+
+//---------------------------------------------------------------------------
+string zeroPadRight(int nr, int width)
+{
+	stringstream s;
+    s << std::setw(width) << std::setfill( '0' ) << std::left << nr;
+    return s.str();
+}
+
 
 

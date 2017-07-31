@@ -23,7 +23,7 @@ using namespace mtk;
 class AT_DB ATDBServerSession : public DBConnection
 {
     public:
-					        	        ATDBServerSession(const string& db, const string& host="127.0.0.1", const string& user="atdb_client", const string& password="atdb123");
+					        	        ATDBServerSession(const string& db, const string& host, const string& user, const string& password);
 					        	        ~ATDBServerSession();
 
 		StringList						getTableNames();
