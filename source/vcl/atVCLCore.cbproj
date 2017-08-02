@@ -125,6 +125,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>components\TArrayBotBtn.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
+        <CppCompile Include="datamodules\TATDBDataModule.cpp">
+            <Form>atdbDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TATDBDataModule.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
         </PackageImport>
@@ -201,6 +207,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TATDBConnectionFrame.cpp">
+            <DependentOn>frames\TATDBConnectionFrame.h</DependentOn>
+            <BuildOrder>34</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -254,6 +264,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

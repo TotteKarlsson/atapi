@@ -4,6 +4,7 @@
 #include "core/atATObject.h"
 #include "atDBUtils.h"
 #include <deque>
+#include "mtkConstants.h"
 //---------------------------------------------------------------------------
 
 namespace Poco
@@ -17,17 +18,18 @@ namespace Poco
 
 using Poco::Data::RecordSet;
 using Poco::Data::Session;
+using mtk::gEmptyString;
 
 //!The ATDB server session class encapsulate a database session
 //!with the ATDB MySQL database
 class AT_DB DBConnection : public ATObject
 {
     public:
-					        	        DBConnection(const string& host="127.0.0.1", const string& user="atdb_client", const string& password="atdb123", const string& db = "atdb");
+					        	        DBConnection(const string& host = gEmptyString, const string& user = gEmptyString, const string& password = gEmptyString, const string& db = gEmptyString);
 		virtual		        	        ~DBConnection();
 
 		bool							isConnected();
-		bool							connect(const string& host="127.0.0.1", const string& user="atdb_client", const string& password="atdb123", const string& db = "atdb");
+		bool							connect(const string& host=gEmptyString, const string& user = gEmptyString, const string& password = gEmptyString, const string& db = gEmptyString);
         bool							disConnect();
 
         								//ATDB specifics

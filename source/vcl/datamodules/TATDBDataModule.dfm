@@ -1,7 +1,7 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 1003
-  Width = 1120
+  Height = 926
+  Width = 1038
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
     LoginPrompt = False
@@ -432,6 +432,15 @@ object atdbDM: TatdbDM
       FieldName = 'coverslip_id'
       Required = True
     end
+    object mRibbonCDSstatusL: TStringField
+      FieldKind = fkLookup
+      FieldName = 'statusL'
+      LookupDataSet = ribbonStatusDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'status'
+      KeyFields = 'status'
+      Lookup = True
+    end
   end
   object mRibbonDSource: TDataSource
     DataSet = mRibbonCDS
@@ -475,12 +484,14 @@ object atdbDM: TatdbDM
     Top = 584
   end
   object ribbonsDS: TSQLDataSet
-    CommandText = 'SELECT * from ribbons where block_id=:id'
+    CommandText = 
+      'SELECT * from ribbons where block_id=:id ORDER by cutting_order ' +
+      'DESC'
     DataSource = blocksDataSource
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'id'
         ParamType = ptInput
       end>
@@ -627,8 +638,9 @@ object atdbDM: TatdbDM
     object slicesDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
     end
-    object slicesDSvirus_dilution: TSingleField
+    object slicesDSvirus_dilution: TStringField
       FieldName = 'virus_dilution'
+      Size = 16
     end
     object slicesDSentered_by: TIntegerField
       FieldName = 'entered_by'
@@ -683,7 +695,8 @@ object atdbDM: TatdbDM
       end
       item
         Name = 'virus_dilution'
-        DataType = ftSingle
+        DataType = ftString
+        Size = 16
       end
       item
         Name = 'entered_by'
@@ -715,9 +728,10 @@ object atdbDM: TatdbDM
       FieldName = 'virus'
       Size = 255
     end
-    object slicesCDSvirus_dilution: TSingleField
+    object slicesCDSvirus_dilution: TStringField
       DisplayLabel = 'Virus Dilution'
       FieldName = 'virus_dilution'
+      Size = 16
     end
     object slicesCDSbrain_region_dissection: TStringField
       DisplayLabel = 'Brain Region'
@@ -952,20 +966,20 @@ object atdbDM: TatdbDM
   object ROnCoverSlipsSource: TDataSource
     DataSet = ROnCS_CDS
     Left = 320
-    Top = 872
+    Top = 774
   end
   object ROnCS_CDS: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'RibbonsOnCoverslipsProvider'
     Left = 200
-    Top = 864
+    Top = 766
   end
   object RibbonsOnCoverslipsProvider: TDataSetProvider
     DataSet = ribbonsOnCoverSlipsDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
     Left = 200
-    Top = 792
+    Top = 694
   end
   object ribbonsOnCoverSlipsDS: TSQLDataSet
     CommandText = 'SELECT * from ribbons where coverslip_id = :id'
@@ -978,7 +992,7 @@ object atdbDM: TatdbDM
       end>
     SQLConnection = SQLConnection1
     Left = 40
-    Top = 792
+    Top = 694
   end
   object settingsDS: TSQLDataSet
     CommandText = 'select * from settings order by id ASC'
@@ -986,7 +1000,7 @@ object atdbDM: TatdbDM
     Params = <>
     SQLConnection = SQLConnection1
     Left = 32
-    Top = 944
+    Top = 846
     object settingsDSid: TIntegerField
       FieldName = 'id'
     end
@@ -999,7 +1013,7 @@ object atdbDM: TatdbDM
   object settingsProvider: TDataSetProvider
     DataSet = settingsDS
     Left = 128
-    Top = 944
+    Top = 846
   end
   object settingsCDS: TClientDataSet
     Aggregates = <>
@@ -1007,7 +1021,7 @@ object atdbDM: TatdbDM
     ProviderName = 'settingsProvider'
     AfterPost = cdsAfterPost
     Left = 256
-    Top = 944
+    Top = 846
     object settingsCDSid: TIntegerField
       FieldName = 'id'
     end
@@ -1126,5 +1140,56 @@ object atdbDM: TatdbDM
     DataSet = specimenCDS
     Left = 368
     Top = 184
+  end
+  object blockIDsDS: TSQLDataSet
+    CommandText = 'select id from blocks ORDER by id DESC'
+    MaxBlobSize = 1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 456
+    Top = 360
+    object blockIDsDSid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+  end
+  object blockIdsProvider: TDataSetProvider
+    DataSet = blockIDsDS
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
+    Left = 552
+    Top = 360
+  end
+  object blockIDSCDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'blockIdsProvider'
+    BeforePost = cdsBeforePost
+    AfterPost = cdsAfterPost
+    AfterDelete = cdsAfterDelete
+    AfterScroll = cdsAfterScroll
+    AfterRefresh = cdsAfterRefresh
+    OnCalcFields = blocksCDSCalcFields
+    Left = 656
+    Top = 360
+    object IntegerField4: TIntegerField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'id'
+    end
+  end
+  object blockIDsDataSource: TDataSource
+    DataSet = blockIDSCDS
+    Left = 752
+    Top = 360
+  end
+  object ribbonStatusDS: TSimpleDataSet
+    Aggregates = <>
+    Connection = SQLConnection1
+    DataSet.CommandText = 'SELECT * from ribbonstatuses'
+    DataSet.MaxBlobSize = 1
+    DataSet.Params = <>
+    Params = <>
+    AfterPost = fixativeTBLAfterPost
+    Left = 568
+    Top = 544
   end
 end

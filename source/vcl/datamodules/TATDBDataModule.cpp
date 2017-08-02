@@ -62,6 +62,7 @@ void __fastcall TatdbDM::afterConnect()
 	specimenCDS->Active 	= true;
 	slicesCDS->Active  		= true;
     blocksCDS->Active 	    = true;
+    blockIDSCDS->Active     = true;
     mRibbonCDS->Active 	    = true;
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
@@ -76,8 +77,9 @@ void __fastcall TatdbDM::afterDisConnect()
 {
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
   	usersCDS->Active 	    = false;
-	specimenCDS->Active 	    = false;
+	specimenCDS->Active 	= false;
     blocksCDS->Active 	    = false;
+    blockIDSCDS->Active     = false;
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
@@ -134,6 +136,7 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
         	blocksCDS->Refresh();
         }
     }
+
 
  	if(DataSet == blocksCDS)
     {
@@ -217,20 +220,20 @@ void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 	//Generate barcode as being composed of
 	//    	block_id: first 5 digits
     //		ribbon_id: next 7 digits
-	TField* field = blocksCDS->FieldByName("id");
-	if(field)
-	{
-		TField* f = mRibbonCDS->FieldByName("bar_code");
-		if(f)
-		{
-			stringstream s;
-			s << zeroPadRight(blocksCDS->FieldByName("id")->AsInteger,   4);
-			string str = s.str();
-            s << zeroPadLeft(mRibbonCDS->FieldByName("id")->AsInteger, 5);
-            str = s.str();
-			f->Value = toLong(str);
-		}
-	}
+//	TField* field = blocksCDS->FieldByName("id");
+//	if(field)
+//	{
+//		TField* f = mRibbonCDS->FieldByName("id");
+//		if(f)
+//		{
+//			stringstream s;
+//			s << zeroPadRight(blocksCDS->FieldByName("id")->AsInteger,   4);
+//			string str = s.str();
+//            s << zeroPadLeft(mRibbonCDS->FieldByName("id")->AsInteger, 5);
+//            str = s.str();
+//			f->Value = toLong(str);
+//		}
+//	}
 }
 
 //---------------------------------------------------------------------------
@@ -378,6 +381,94 @@ String __fastcall TatdbDM::createBlockLabel()
 	return lbl;
 }
 
+bool __fastcall	TatdbDM::insertBlockNote(int userID, int blockID, const string& note)
+{
+    try
+    {
+        //Query DB and show some info
+        TSQLQuery* tq = new TSQLQuery(NULL);
+        tq->SQLConnection = atdbDM->SQLConnection1;
+
+        stringstream q;
+        q <<"INSERT INTO notes (created_by, note) VAlUES(" << userID << ",'" << note <<"')";
+        Log(lDebug) << "Q: " <<q.str();
+        tq->SQL->Add(q.str().c_str());
+        tq->ExecSQL();
+        q.str("");
+
+        tq->SQL->Clear();
+        q << "SELECT MAX(id) FROM notes";
+        tq->SQL->Add(q.str().c_str());
+        tq->Open();
+        q.str("");
+
+        if(tq->Fields->Count)
+        {
+            int note_id = tq->Fields->FieldByNumber(1)->AsInteger;
+            tq->SQL->Clear();
+            q << "INSERT INTO block_note (block_id, note_id) VALUES("<<blockID<<","<<note_id <<")";
+            tq->SQL->Add(q.str().c_str());
+            tq->ExecSQL();
+        }
+
+        delete tq;
+
+    	atdbDM->blockNotesCDS->Refresh();
+	    atdbDM->blockNotesCDS->Last();
+        return true;
+    }
+    catch(...)
+    {
+        Log(lError) << "There was a DB exception..";
+        //handleMySQLException();
+        return false;
+    }
+}
+
+bool __fastcall	TatdbDM::insertRibbonNote(int userID, const string& ribbonID, const string& note)
+{
+    try
+    {
+        //Query DB and show some info
+        TSQLQuery* tq = new TSQLQuery(NULL);
+        tq->SQLConnection = atdbDM->SQLConnection1;
+
+        stringstream q;
+        q <<"INSERT INTO notes (created_by, note) VAlUES(" << userID << ",'" << note <<"')";
+        Log(lDebug) << "Q: " <<q.str();
+        tq->SQL->Add(q.str().c_str());
+        tq->ExecSQL();
+        q.str("");
+
+        tq->SQL->Clear();
+        q << "SELECT MAX(id) FROM notes";
+        tq->SQL->Add(q.str().c_str());
+        tq->Open();
+        q.str("");
+
+        if(tq->Fields->Count)
+        {
+            int note_id = tq->Fields->FieldByNumber(1)->AsInteger;
+            tq->SQL->Clear();
+            q << "INSERT INTO ribbon_note (ribbon_id, note_id) VALUES('"<<ribbonID<<"',"<<note_id <<")";
+            tq->SQL->Add(q.str().c_str());
+            tq->ExecSQL();
+        }
+	    atdbDM->ribbonNotesCDS->Refresh();
+    	atdbDM->ribbonNotesCDS->Last();
+
+        delete tq;
+        return true;
+    }
+    catch(...)
+    {
+        Log(lError) << "There was a DB exception..";
+	//        handleMySQLException();
+		return false;
+    }
+
+
+}
 //---------------------------------------------------------------------------
 string zeroPadLeft(int nr, int width)
 {
@@ -393,6 +484,5 @@ string zeroPadRight(int nr, int width)
     s << std::setw(width) << std::setfill( '0' ) << std::left << nr;
     return s.str();
 }
-
 
 

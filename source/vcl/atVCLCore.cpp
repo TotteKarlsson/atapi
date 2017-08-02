@@ -4,16 +4,17 @@ USEFORM("forms\TYesNoForm.cpp", YesNoForm);
 USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
 USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
 USEFORM("frames\TApplicationSoundsFrame.cpp", ApplicationSounds); /* TFrame: File Type */
-USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
-USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
-USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
-USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
-USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
+USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
+USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
+USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
-USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
 USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
+USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
+USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
+USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
+USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
 //---------------------------------------------------------------------------
 #include "TApplicationSoundsFrame.h"
 //---------------------------------------------------------------------------

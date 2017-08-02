@@ -184,8 +184,6 @@ __published:	// IDE-managed Components
 	TSmallintField *slicesCDSfixative_protocol;
 	TSmallintField *slicesCDSfixation_protocol;
 	TSmallintField *slicesCDSpostfix_protocol;
-	TSingleField *slicesDSvirus_dilution;
-	TSingleField *slicesCDSvirus_dilution;
 	TStringField *slicesCDSLPre;
 	TStringField *slicesCDSfixative_protocolL;
 	TStringField *slicesCDSpostfix_protocolL;
@@ -196,6 +194,16 @@ __published:	// IDE-managed Components
 	TIntegerField *blocksCDSentered_by;
 	TSQLTimeStampField *blocksDSentered_on;
 	TSQLTimeStampField *blocksCDSentered_on;
+	TStringField *slicesDSvirus_dilution;
+	TStringField *slicesCDSvirus_dilution;
+	TSQLDataSet *blockIDsDS;
+	TDataSetProvider *blockIdsProvider;
+	TClientDataSet *blockIDSCDS;
+	TIntegerField *IntegerField4;
+	TDataSource *blockIDsDataSource;
+	TIntegerField *blockIDsDSid;
+	TSimpleDataSet *ribbonStatusDS;
+	TStringField *mRibbonCDSstatusL;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -234,6 +242,8 @@ __published:	// IDE-managed Components
         int		__fastcall				getCurrentBlockID();
         int 	__fastcall				getIDForSpecie(const string& specie);
 		String __fastcall 				createBlockLabel();
+        bool	__fastcall				insertBlockNote(int userID, int blockID, const string& note);
+        bool	__fastcall				insertRibbonNote(int userID, const string& ribbonID, const string& note);
 };
 
 extern PACKAGE TatdbDM *atdbDM;
