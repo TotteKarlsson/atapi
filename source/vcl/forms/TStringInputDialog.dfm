@@ -60,7 +60,6 @@ object StringInputDialog: TStringInputDialog
     EditLabel.Width = 89
     EditLabel.Height = 23
     EditLabel.Caption = 'New Value'
-    PasswordChar = '*'
     TabOrder = 1
     OnChange = STDStringLabeledEdit1Change
     OnClick = STDStringLabeledEdit1Click

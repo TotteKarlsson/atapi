@@ -258,3 +258,9 @@ bool ProcessSequence::write(const string& folder)
     return saveRes;
 }
 
+string ProcessSequence::getXML()
+{
+	stringstream s;
+    s<<mProject.getXML();
+    return s.str();
+}

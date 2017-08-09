@@ -21,6 +21,7 @@ AT_CORE enum  ACMessageID
     acrBarcodeScanFailed,
     acrDisableBarcodeScanner,
     acrBarcodeScannerDisabled,
+    acrSetZoomAndFocus,
     acrUnknown
 };
 

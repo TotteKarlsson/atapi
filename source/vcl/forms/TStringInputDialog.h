@@ -7,6 +7,7 @@
 #include <Vcl.Forms.hpp>
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
+
 //---------------------------------------------------------------------------
 class PACKAGE TStringInputDialog : public TForm
 {

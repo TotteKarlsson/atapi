@@ -153,7 +153,7 @@ string getSelectedItem(TComboBox* cb)
 	return stdstr(cb->Items->Strings[cb->ItemIndex]);
 }
 
-int selectItem(TComboBox* cb, const string& name)
+int selectItem(TComboBox* cb, const string& name, bool addItem)
 {
 	if(!cb)
     {
@@ -169,6 +169,14 @@ int selectItem(TComboBox* cb, const string& name)
             return i;
         }
     }
+
+    //Seem the item did not exist.
+    if(addItem)
+    {
+    	cb->AddItem(vclstr(name), NULL);
+	    return selectItem(cb, name, addItem);
+    }
+
     return -1;
 }
 

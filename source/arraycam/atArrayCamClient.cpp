@@ -94,34 +94,42 @@ bool ArrayCamClient::postRequest(const string& msg)
     return SocketClient::request(msg);
 }
 
+bool ArrayCamClient::postRequest(const string& msg, int p1, int p2)
+{
+	stringstream m;
+    m << msg << ", " << p1 << ", " << p2;
+
+    return SocketClient::request(m.str());
+}
+
 bool ArrayCamClient::startVideo()
 {
-	postRequest(mProtocol[acrStartVideoRecorder]);
-    return true;
+	return postRequest(mProtocol[acrStartVideoRecorder]);
+}
+
+bool ArrayCamClient::setZoomAndFocus(int zoom, int focus)
+{
+	return postRequest(mProtocol[acrSetZoomAndFocus], zoom, focus);
 }
 
 bool ArrayCamClient::stopVideo()
 {
-	postRequest(mProtocol[acrStopVideoRecorder]);
-    return true;
+	return postRequest(mProtocol[acrStopVideoRecorder]);
 }
 
 bool ArrayCamClient::takeSnapShot()
 {
-	postRequest(mProtocol[acrTakeSnapShot]);
-    return true;
+	return postRequest(mProtocol[acrTakeSnapShot]);
 }
 
 bool ArrayCamClient::enableBarcodeScanner()
 {
-	postRequest(mProtocol[acrEnableBarcodeScanner]);
-    return true;
+	return postRequest(mProtocol[acrEnableBarcodeScanner]);
 }
 
 bool ArrayCamClient::disableBarcodeScanner()
 {
-	postRequest(mProtocol[acrDisableBarcodeScanner]);
-    return true;
+	return postRequest(mProtocol[acrDisableBarcodeScanner]);
 }
 
 

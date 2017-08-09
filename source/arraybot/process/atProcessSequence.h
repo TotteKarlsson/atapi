@@ -68,6 +68,7 @@ class AT_AB ProcessSequence : public ATObject
         ArrayBot*							getArrayBot(){return &mAB;}
         bool								moveForward(Process* ps);
         bool								moveBack(Process* ps);
+        string								getXML();
 
     protected:
     	ArrayBot&							mAB;

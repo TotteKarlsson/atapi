@@ -29,7 +29,7 @@ PACKAGE int                 selectAndClickListBoxItem(TListBox* lb, const string
 //Combo boxes
 PACKAGE bool 	            updateComboBoxItemCaption(TComboBox* cb, int indx, const string& name);
 PACKAGE string 	            getSelectedItem(TComboBox* lb);
-PACKAGE int 	            selectItem(TComboBox* lb, const string& name);
+PACKAGE int 	            selectItem(TComboBox* lb, const string& name, bool addItem = false);
 PACKAGE int 	            selectAndClickComboBoxItem(TComboBox* lb, const string& name);
 
 
