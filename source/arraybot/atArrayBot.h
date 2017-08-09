@@ -42,6 +42,7 @@ class AT_AB ArrayBot : public ATObject
 
         void											disableJoyStickAxes();
         void						                    stopAll();
+        void											homeAll();
 
         bool						                    isActive();
         bool						                    isShuttingDown();

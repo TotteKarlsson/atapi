@@ -3,8 +3,8 @@ object YesNoForm: TYesNoForm
   Top = 0
   BorderStyle = bsDialog
   Caption = 'YesNoForm'
-  ClientHeight = 374
-  ClientWidth = 600
+  ClientHeight = 437
+  ClientWidth = 711
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,15 +14,20 @@ object YesNoForm: TYesNoForm
   OldCreateOrder = False
   Position = poOwnerFormCenter
   DesignSize = (
-    600
-    374)
+    711
+    437)
   PixelsPerInch = 96
   TextHeight = 13
   object mInfoLabel: TLabel
-    Left = 72
-    Top = 32
-    Width = 143
-    Height = 35
+    AlignWithMargins = True
+    Left = 25
+    Top = 15
+    Width = 661
+    Height = 209
+    Margins.Left = 25
+    Margins.Top = 15
+    Margins.Right = 25
+    Align = alTop
     Caption = 'mInfoLabel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -30,11 +35,16 @@ object YesNoForm: TYesNoForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    Layout = tlCenter
+    WordWrap = True
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 711
   end
   object mYesBtn: TArrayBotButton
     AlignWithMargins = True
-    Left = 56
-    Top = 153
+    Left = 72
+    Top = 225
     Width = 150
     Height = 150
     Anchors = [akTop]
@@ -50,8 +60,8 @@ object YesNoForm: TYesNoForm
     SoundID = 'BUTTON_CLICK_4'
   end
   object mNoBtn: TArrayBotButton
-    Left = 384
-    Top = 153
+    Left = 461
+    Top = 225
     Width = 150
     Height = 150
     Anchors = [akTop]

@@ -45,7 +45,7 @@ class AT_CORE ArrayCamClient : public SocketClient, public ATObject
         bool								enableBarcodeScanner();
         bool								disableBarcodeScanner();
 
-									        //!Post a request
+									        //!Post a custom request
         bool 		                        postRequest(const string& msg);
         void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
 

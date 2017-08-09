@@ -149,7 +149,15 @@ int ProcessSequenceProject::loadProcesses()
         return 0;
     }
 
-	string category = sequence->Attribute("category");
+    string category("General");
+    if(sequence->Attribute("category"))
+    {
+		category = sequence->Attribute("category");
+    }
+    else
+    {
+    	Log(lWarning) << "The sequence: "<<this->getProjectName()<<" don't have a category. Category \"General\" is applied";
+    }
     mProcessSequence.setCategory(category);
 
     int nrOfObjects = 0;

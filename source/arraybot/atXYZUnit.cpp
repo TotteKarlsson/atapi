@@ -275,6 +275,12 @@ void XYZUnit::home()
     	Log(lDebug)<<"Homing Z Motor..";
 		mZMotor->home();
     }
+
+    if(mAngleMotor)
+    {
+    	Log(lDebug)<<"Homing Angle Motor..";
+		mAngleMotor->home();
+    }
 }
 
 void XYZUnit::attachJoyStick(ArrayBotJoyStick* js)

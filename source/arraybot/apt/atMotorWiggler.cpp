@@ -11,11 +11,11 @@ MotorWiggler::MotorWiggler(APTMotor* xmtr, APTMotor* ymtr)
 mMaxVelocity(0),
 mMaxAcceleration(0),
 mAmplitude(0),
-mXMotor(xmtr),
-mYMotor(ymtr),
 mPullRelaxVelocity(0),
 mPullRelaxAcceleration(0),
-mTimer(Poco::Timespan(100*Poco::Timespan::MILLISECONDS))
+mTimer(Poco::Timespan(100*Poco::Timespan::MILLISECONDS)),
+mXMotor(xmtr),
+mYMotor(ymtr)
 {
 	mTimer.assignTimerFunction(onTimer);
 }

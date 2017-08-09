@@ -412,9 +412,11 @@ object atdbDM: TatdbDM
       Required = True
     end
     object mRibbonCDScutting_order: TIntegerField
+      DisplayLabel = 'Cutting Order'
       FieldName = 'cutting_order'
     end
     object mRibbonCDSnr_of_sections: TSmallintField
+      DisplayLabel = 'Nr of Sections'
       FieldName = 'nr_of_sections'
     end
     object mRibbonCDScreated: TSQLTimeStampField
@@ -429,10 +431,12 @@ object atdbDM: TatdbDM
       Required = True
     end
     object mRibbonCDScoverslip_id: TIntegerField
+      DisplayLabel = 'Coverslip ID'
       FieldName = 'coverslip_id'
       Required = True
     end
     object mRibbonCDSstatusL: TStringField
+      DisplayLabel = 'Status'
       FieldKind = fkLookup
       FieldName = 'statusL'
       LookupDataSet = ribbonStatusDS

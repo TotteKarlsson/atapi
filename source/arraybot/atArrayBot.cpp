@@ -195,6 +195,13 @@ void ArrayBot::stopAll()
     mWhisker.stopAll();
 }
 
+void ArrayBot::homeAll()
+{
+    mJoyStick.disable();
+    mCoverSlip.home();
+    mWhisker.home();
+}
+
 bool ArrayBot::applyJoyStickSetting(const string& settingName)
 {
 	JoyStickSetting *jss = mJSSettings.getSetting(settingName);
