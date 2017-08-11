@@ -15,7 +15,9 @@ ArrayCamRequestProcess::ArrayCamRequestProcess(ArrayCamClient& acc, const string
 :
 Process(lbl, NULL),
 mRequest(ap.idFromString(request)),
-mArrayCamClient(acc)
+mArrayCamClient(acc),
+mParameter1(0),
+mParameter2(0)
 {
 	mProcessType = ptArrayCamRequestProcess;
     mArrayCamClient.assignOnMessageReceivedCallBack(onReceivedResponse);
@@ -58,6 +60,18 @@ XMLElement* ArrayCamRequestProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocumen
     XMLElement* request	  		= doc.NewElement("request");
 	request->SetText(ap[mRequest].c_str() );
     docRoot->InsertEndChild(request);
+
+	if(mRequest == acrSetZoomAndFocus) //Need parameters for this one
+    {
+        XMLElement* f = doc.NewElement("focus");
+        f->SetText(mParameter1.getValueAsString().c_str());
+        docRoot->InsertEndChild(f);
+
+        XMLElement* zoom = doc.NewElement("zoom");
+        zoom->SetText(mParameter2.getValueAsString().c_str());
+        docRoot->InsertEndChild(zoom);
+    }
+
     return request;
 }
 

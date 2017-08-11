@@ -26,6 +26,7 @@ class ArduinoServerCommand;
 //!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
 class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
 {
+	friend ArrayCamRequestProcess;
     public:
                                                 ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName = "Sequence 1.abp");
                                                 ~ProcessSequenceProject();

@@ -395,6 +395,23 @@ ArrayCamRequestProcess* ProcessSequenceProject::createArrayCamRequestProcess(XML
    	string name = element->Attribute("name");
     XMLElement* request = element->FirstChildElement("request");
     ArrayCamRequestProcess* p = new ArrayCamRequestProcess(mArrayCamClient, name, request->GetText());
+    if(p->getRequest() == acrSetZoomAndFocus)
+    {
+    	//Look for parameters
+	    XMLElement* data1 = element->FirstChildElement("focus");
+        if(data1 && data1->GetText())
+        {
+        	p->mParameter1.setValue(toDouble(data1->GetText()));
+			p->mParameter1.setLabel("focus");
+        }
+    	//Look for parameters
+	    XMLElement* data2 = element->FirstChildElement("zoom");
+        if(data2 && data2->GetText())
+        {
+        	p->mParameter2.setValue(toDouble(data2->GetText()));
+			p->mParameter2.setLabel("zoom");
+        }
+    }
     return p;
 }
 
