@@ -199,5 +199,21 @@ bool NavitarMotorController::setPreset(int zoom, int focus)
     mZoom.setPosition(zoom);
     mFocus.setPosition(focus);
     return true;
-
 }
+
+void NavitarMotorController::setZoom(int z)
+{
+	mZoom.setPosition(z);
+}
+
+void NavitarMotorController::setFocus(int f)
+{
+	mFocus.setPosition(f);
+}
+
+void NavitarMotorController::setFocusAndZoom(int f, int z)
+{
+	mFocus.setPosition(f);
+	mZoom.setPosition(z);
+}
+

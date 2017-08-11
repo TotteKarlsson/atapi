@@ -112,6 +112,10 @@ bool ArrayCamRequestProcess::start()
 	        mArrayCamClient.takeSnapShot();
 		break;
 
+     	case ACMessageID::acrSetZoomAndFocus:
+	        mArrayCamClient.setZoomAndFocus(mParameter1, mParameter2);
+		break;
+
 		default:
         	Log(lError) << "Bad ArrayCamRequest in process";
 			return false;
@@ -146,7 +150,7 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
     }
     ArrayCamProtocol p;
 
-    Log(lInfo) << "Got response: "<<msg;
+    Log(lInfo) << "Got ArrayCam Response: "<<msg;
 
     switch(mRequest)
     {
@@ -180,6 +184,13 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
 
     	case acrTakeSnapShot:
         	if(msg == p[acrSnapShotTaken])
+    		{
+                mIsProcessed = true;
+            }
+		break;
+
+    	case acrSetZoomAndFocus:
+        	if(msg == p[acrFocusAndZoomSet])
     		{
                 mIsProcessed = true;
             }
