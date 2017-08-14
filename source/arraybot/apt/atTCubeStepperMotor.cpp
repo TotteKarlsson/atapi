@@ -39,6 +39,7 @@ bool TCubeStepperMotor::connect()
 
         int en = SCC_EnableChannel(mSerial.c_str());
         Log(lDebug) << "Enabling Code: "<<en;
+
         //Set jog mode to continous
         setJogMoveMode(jmContinuous);
 
@@ -326,8 +327,29 @@ bool TCubeStepperMotor::setVelocityParameters(double v, double a, bool inThread)
    	return true;
 }
 
+double TCubeStepperMotor::getJogStep()
+{
+    int value = SCC_GetJogStepSize(mSerial.c_str());
+	return value / mScalingFactors.position;
+}
+
+bool TCubeStepperMotor::setJogStep(double newStep)
+{
+	mJogStep = newStep;
+	Log(lDebug) << "Setting Jog Step: "<<newStep;
+    int e = SCC_SetJogStepSize(mSerial.c_str(),  newStep * mScalingFactors.position);
+
+    if(e != 0)
+    {
+    	Log(lError) <<tlError(e);
+        return false;
+    }
+	return true;
+}
+
 bool TCubeStepperMotor::setJogMoveMode(JogMoveMode jm)
 {
+	mJogMoveMode = jm;
 	StopMode sm = getJogStopMode();
 	int e = SCC_SetJogMode(mSerial.c_str(), (MOT_JogModes) jm, (MOT_StopModes) sm);
     if(e)

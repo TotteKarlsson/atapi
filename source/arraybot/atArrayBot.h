@@ -39,8 +39,8 @@ class AT_AB ArrayBot : public ATObject
 
         												//!Allow buttons to work, while the axes don't
         void											enableJoyStickAxes();
-
         void											disableJoyStickAxes();
+
         void						                    stopAll();
         void											homeAll();
 

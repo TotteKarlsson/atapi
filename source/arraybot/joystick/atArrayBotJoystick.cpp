@@ -142,10 +142,10 @@ bool ArrayBotJoyStick::enable()
 {
     mEnabled = mJSMessageDispatcher.enable(mJoyStickID);
 
-    mCoverSlipAxesEnabled = mEnabled;
-    mWhiskerAxesEnabled = mEnabled;
-    mCoverSlipZButtonsEnabled = mEnabled;
-    mWhiskerZButtonsEnabled = mEnabled;
+    mCoverSlipAxesEnabled 		= mEnabled;
+    mWhiskerAxesEnabled 		= mEnabled;
+    mCoverSlipZButtonsEnabled 	= mEnabled;
+    mWhiskerZButtonsEnabled 	= mEnabled;
 
     return mEnabled;
 }

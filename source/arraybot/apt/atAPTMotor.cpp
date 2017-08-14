@@ -19,14 +19,20 @@ APTMotor::APTMotor(int serialNo)
     mAccelerationRange(0,0),
 	mManualJogVelocity(0),
 	mManualJogAcceleration(0),
+    mJogStep(0),
+    mJogMoveMode(jmJogModeUndefined),
 	mPotentiometerVelocity(0),
 	mMotorMessageProcessor(mMotorMessageContainer),
     mMotorCommandsPending(0),
     mDesiredPosition(-1),
     mStatusTimer(150, onStatusTimer)
 {
-    mProperties.add((BaseProperty*) &mManualJogVelocity.setup(		"MANUAL_JOG_VELOCITY"		    , 			0.1,                true));
-    mProperties.add((BaseProperty*) &mManualJogAcceleration.setup(	"MANUAL_JOG_ACCELERATION"	    , 			0.1,                true));
+
+
+    mProperties.add((BaseProperty*) &mJogMoveMode.setup(	  		"JOG_MODE"		                , 			jmSingleStep,       true));
+    mProperties.add((BaseProperty*) &mJogStep.setup(				"JOG_STEP"		                , 			5.0,                true));
+    mProperties.add((BaseProperty*) &mManualJogVelocity.setup(		"MANUAL_JOG_VELOCITY"		    , 			1,      	        true));
+    mProperties.add((BaseProperty*) &mManualJogAcceleration.setup(	"MANUAL_JOG_ACCELERATION"	    , 			1,          	    true));
     mProperties.add((BaseProperty*) &mPotentiometerVelocity.setup(	"POTENTIOMETER_VELOCITY"	    , 			1, 					true));
     mProperties.add((BaseProperty*) &mPositionRange.setup(			"POSITION_RANGE"			    , 			Range<double>(0,0), true));
     mProperties.add((BaseProperty*) &mPositionLimits.setup(			"POSITION_LIMITS"			    , 			Range<double>(0,0), true));
@@ -142,6 +148,8 @@ double APTMotor::getMaxPosition()
 
 bool APTMotor::applyProperties()
 {
+	setJogMoveMode(mJogMoveMode);
+    setJogStep(mJogStep);
 	setJogVelocity(mManualJogVelocity);
 	setJogAcceleration(mManualJogAcceleration);
     setPotentiometerVelocity(mPotentiometerVelocity);
@@ -247,4 +255,35 @@ bool APTMotor::setVelocityRange(DoubleRange vel)
 DoubleRange APTMotor::getVelocityRange()
 {
 	return mVelocityRange;
+}
+
+namespace mtk
+{
+string toString(const JogMoveMode& mode)
+{
+	switch(mode)
+    {
+    	case jmContinuous: 			return "Continous JogMoveMode";
+    	case jmSingleStep: 			return "Single Step JogMoveMode";
+        default:
+		 	return "Undefined JogMoveMode";
+    }
+}
+
+JogMoveMode	toJogMoveMode(const string& mode)
+{
+	if(mode == "Continous JogMoveMode")
+    {
+    	return jmContinuous;
+    }
+    else if(mode == "Single Step JogMoveMode")
+    {
+    	return jmSingleStep;
+    }
+    else
+    {
+	 	return jmJogModeUndefined;
+    }
+}
+
 }

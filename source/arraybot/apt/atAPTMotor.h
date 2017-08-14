@@ -11,6 +11,13 @@
 
 
 class TMotorFrame;
+
+namespace mtk
+{
+	AT_AB	string		toString(const JogMoveMode& mode);
+	AT_AB	JogMoveMode	toJogMoveMode(const string& mode);
+}
+
 //!An APT (Advanced Position Technology) Motor is an abstract class encaspulating properties/behaviour of a Thorlabs motor
 //The Thorlabs C API does unfortuntaly not allow a proper abstraction, meaning a lot of repetion of code in descendant
 //classes :(
@@ -97,6 +104,9 @@ class AT_AB APTMotor : public APTDevice
 
         virtual void		                jogForward(bool inThread = true) = 0;
         virtual void		                jogReverse(bool inThread = true) = 0;
+
+        virtual double                      getJogStep() = 0;
+        virtual bool	                    setJogStep(double step) = 0;
         virtual bool	                    setJogVelocity(double v) = 0;
         virtual bool	                    setJogAcceleration(double a) = 0;
 
@@ -148,6 +158,8 @@ class AT_AB APTMotor : public APTDevice
         Property<double>					mManualJogVelocity;
         Property<double>					mManualJogAcceleration;
         Property<double>					mPotentiometerVelocity;
+        Property<double>					mJogStep;
+        Property<JogMoveMode>   			mJogMoveMode;
 
 		void                                post(const MotorCommand& cmd);
         MotorMessageProcessor				mMotorMessageProcessor;
@@ -155,5 +167,67 @@ class AT_AB APTMotor : public APTDevice
 
         void								populateMotorMessageData(MotorMessageData* data);
 };
+
+
+//Enable JogMoveMode property
+template<>
+inline Property<JogMoveMode>::operator JogMoveMode() const
+{
+    return (*mValue);
+}
+
+//---------------------------------------------------------------------------
+template<> inline
+std::string Property< JogMoveMode >::getValueAsString() const
+{
+    return mtk::toString(getValue());
+}
+
+template<> inline
+bool Property< JogMoveMode >::write(IniFile* iniFile, const string& section)
+{
+    if(iniFile == NULL)
+    {
+        return false;
+    }
+
+    string toWrite;
+    toWrite = mtk::toString(getValue());
+    iniFile->writeString(mKey, toWrite, "", section);
+    return true;
+}
+
+template<> inline
+bool Property< JogMoveMode >::read(IniFile* iniFile, const string& section)
+{
+    if(iniFile == NULL)
+    {
+        return false;
+    }
+
+    string val = iniFile->readString(mKey, section, "");
+    JogMoveMode tempVal;
+
+    {
+    	tempVal = JogMoveMode(toJogMoveMode(val));
+    }
+
+    mWasRead = iniFile->wasItFound();
+    setValue( mWasRead ? tempVal : mDefaultValue);
+    return mWasRead;
+}
+
+template<> inline
+bool Property< JogMoveMode >::assignValueFromString(const string& v)
+{
+    return false;
+}
+
+template<> inline
+string Property< JogMoveMode >::getTypeName() const
+{
+    return "jogMoveMode";
+}
+
 
 #endif

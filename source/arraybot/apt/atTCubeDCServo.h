@@ -45,6 +45,8 @@ class AT_AB TCubeDCServo : public APTMotor
         void 		                    stopProfiled(bool inThread = true);
 
 										///Jogging
+        double              	        getJogStep();
+        bool	         	            setJogStep(double step);
         bool	                		setJogVelocity(double v);
         bool	                		setMaxJogVelocity(double v);
         bool	                		setJogAcceleration(double a);

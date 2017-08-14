@@ -174,10 +174,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="atArrayBotCore.cpp">
             <BuildOrder>55</BuildOrder>
         </CppCompile>
-        <CppCompile Include="atWhiskerUnit.cpp">
-            <DependentOn>atWhiskerUnit.h</DependentOn>
-            <BuildOrder>54</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atXYZUnit.cpp">
             <DependentOn>atXYZUnit.h</DependentOn>
             <BuildOrder>53</BuildOrder>

@@ -39,6 +39,7 @@ bool LongTravelStage::connect()
 
         int en = ISC_EnableChannel(mSerial.c_str());
         Log(lDebug) << "Enabling Code: "<<en;
+
         //Set jog mode to continous
         setJogMoveMode(jmContinuous);
 
@@ -324,6 +325,7 @@ bool LongTravelStage::setVelocityParameters(double v, double a, bool inThread)
 
 bool LongTravelStage::setJogMoveMode(JogMoveMode jm)
 {
+	mJogMoveMode = jm;
 	StopMode sm = getJogStopMode();
 	int e = ISC_SetJogMode(mSerial.c_str(), (MOT_JogModes) jm, (MOT_StopModes) sm);
     if(e)
@@ -384,8 +386,29 @@ double LongTravelStage::getJogVelocity()
     return v / mScalingFactors.velocity;
 }
 
+double LongTravelStage::getJogStep()
+{
+    int value = ISC_GetJogStepSize(mSerial.c_str());
+	return value / mScalingFactors.position;
+}
+
+bool LongTravelStage::setJogStep(double newStep)
+{
+	mJogStep = newStep;
+	Log(lDebug) << "Setting Jog Step: "<<newStep;
+    int e = ISC_SetJogStepSize(mSerial.c_str(),  newStep * mScalingFactors.position);
+
+    if(e != 0)
+    {
+    	Log(lError) <<tlError(e);
+        return false;
+    }
+	return true;
+}
+
 bool LongTravelStage::setJogVelocity(double newVel)
 {
+	mManualJogVelocity = newVel;
     int a, v;
     ISC_GetJogVelParams(mSerial.c_str(), &a, &v);
 

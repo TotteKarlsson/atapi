@@ -45,6 +45,8 @@ class AT_AB TCubeStepperMotor : public APTMotor
         void 		                    stopProfiled(bool inThread = true);
 
 										///Jogging
+        double              	        getJogStep();
+        bool	         	            setJogStep(double step);
         double	                		getJogVelocity();
         double	                		getJogAcceleration();
 

@@ -57,6 +57,11 @@ bool JoyStickMessageDispatcher::enable(int id)
     {
     	mEnabled = false;
     }
+
+    if(!mEnabled)
+    {
+    	Log(lWarning) << "Failed to enable JS Message Dispatcher";
+    }
     return mEnabled;
 }
 

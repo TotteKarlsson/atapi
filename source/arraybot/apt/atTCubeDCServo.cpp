@@ -319,8 +319,29 @@ bool TCubeDCServo::setVelocityParameters(double v, double a, bool inThread)
    	return true;
 }
 
+double TCubeDCServo::getJogStep()
+{
+    int value = CC_GetJogStepSize(mSerial.c_str());
+	return value / mScalingFactors.position;
+}
+
+bool TCubeDCServo::setJogStep(double newStep)
+{
+	mJogStep = newStep;
+	Log(lDebug) << "Setting Jog Step: "<<newStep;
+    int e = CC_SetJogStepSize(mSerial.c_str(),  newStep * mScalingFactors.position);
+
+    if(e != 0)
+    {
+    	Log(lError) <<tlError(e);
+        return false;
+    }
+	return true;
+}
+
 bool TCubeDCServo::setJogMoveMode(JogMoveMode jm)
 {
+	mJogMoveMode = jm;
 	StopMode sm = getJogStopMode();
 	int e = CC_SetJogMode(mSerial.c_str(), (MOT_JogModes) jm, (MOT_StopModes) sm);
 

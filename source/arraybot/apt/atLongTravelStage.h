@@ -32,6 +32,7 @@ class AT_AB LongTravelStage : public APTMotor
 
 				                        //!General commands
         bool		                    identify();
+
         double	                        getPosition();
         double	        		        getVelocity();
 
@@ -44,9 +45,12 @@ class AT_AB LongTravelStage : public APTMotor
         void 		                    stopProfiled(bool inThread = true);
 
 										///Jogging
+        bool	         	            setJogStep(double step);
+        double	                		getJogStep();
         bool	                		setJogVelocity(double v);
         bool	                		setMaxJogVelocity(double v);
         bool	                		setJogAcceleration(double a);
+
 
         double	                		getJogVelocity();
         double	                		getJogAcceleration();
