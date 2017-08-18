@@ -26,4 +26,5 @@
 #pragma comment(lib, "Thorlabs.MotionControl.IntegratedStepperMotorsB.lib")
 #pragma comment(lib, "Thorlabs.MotionControl.TCube.DCServoB.lib")
 #pragma comment(lib, "Thorlabs.MotionControl.TCube.BrushlessMotorB.lib")
+#pragma comment(lib, "Thorlabs.MotionControl.Benchtop.StepperMotorB.lib")
 

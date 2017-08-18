@@ -13,10 +13,11 @@ struct HardwareInformation;
 ///Enum holding Thorlab Device Type IDS
 enum DeviceTypeID
 {
-	didUnknown				= 0,
-    didLongTravelStage 		= 45,
-    didTCubeStepperMotor 	= 80,
-    didTCubeDCServo 		= 83
+	didUnknown				    = 0,
+    didLongTravelStage 		    = 45,
+    didTCubeStepperMotor 	    = 80,
+    didTCubeDCServo 		    = 83,
+    didBenchTopStepperMotor     = 40
 };
 
 

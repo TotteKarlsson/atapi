@@ -9,18 +9,19 @@ using namespace mtk;
 
 XYZUnit::XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder)
 :
-mAppDataFolder(appDataFolder),
 mXMotorSerialNr(-1),
 mYMotorSerialNr(-1),
 mZMotorSerialNr(-1),
 mAngleMotorSerialNr(-1),
 mName(name),
+mAppDataFolder(appDataFolder),
+mIniFile(iniFile),
 mXMotor(NULL),
 mYMotor(NULL),
 mZMotor(NULL),
 mAngleMotor(NULL),
-mJoyStick(NULL),
-mIniFile(iniFile)
+mJoyStick(NULL)
+
 {
 	//Setup properties
     mProperties.setSection(name);

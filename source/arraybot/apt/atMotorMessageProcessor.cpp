@@ -47,7 +47,7 @@ bool MotorMessageProcessor::start(bool inThread)
 {
 	if(isRunning())
 	{
-		Log(lWarning) << "Tried to start a runnning thread";
+		Log(lDebug3) << "Tried to start a runnning thread";
 		return true;
 	}
 	if(inThread)

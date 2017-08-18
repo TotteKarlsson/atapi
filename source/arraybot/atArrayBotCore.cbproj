@@ -121,6 +121,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\atAPTMotor.cpp">
             <BuildOrder>19</BuildOrder>
         </CppCompile>
+        <CppCompile Include="apt\atBenchTopStepperMotor.cpp">
+            <BuildOrder>22</BuildOrder>
+        </CppCompile>
         <CppCompile Include="apt\atContinousMove.cpp">
             <BuildOrder>20</BuildOrder>
         </CppCompile>
@@ -128,7 +131,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
         <CppCompile Include="apt\atLongTravelStage.cpp">
-            <BuildOrder>22</BuildOrder>
+            <BuildOrder>41</BuildOrder>
         </CppCompile>
         <CppCompile Include="apt\atMotorCommand.cpp">
             <BuildOrder>23</BuildOrder>

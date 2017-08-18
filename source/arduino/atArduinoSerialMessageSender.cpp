@@ -79,7 +79,7 @@ bool ArduinoSerialMessageSender::start(bool inThread)
 {
 	if(isRunning())
 	{
-		Log(lWarning) << "Tried to start a runnning thread for device: "<<mTheArduino.getName();
+		Log(lDebug3) << "Tried to start a runnning thread for device: "<<mTheArduino.getName();
 		return true;
 	}
 	if(inThread)
