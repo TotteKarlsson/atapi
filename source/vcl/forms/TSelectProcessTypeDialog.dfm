@@ -63,7 +63,8 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
       'Parallell Process'
       'Time Delay'
       'Stop/Start Dialog'
-      'ArrayCam Request')
+      'ArrayCam Request'
+      'AbsoluteMove')
     TabOrder = 1
   end
 end

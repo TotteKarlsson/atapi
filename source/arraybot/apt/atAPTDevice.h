@@ -28,7 +28,7 @@ class AT_AB APTDevice : public ATObject
     							                //Every APTDevice need to be created with a serial number
     					                        APTDevice(int serial);
 		virtual                                 ~APTDevice();
-        bool					                isConnected();
+        bool					                isConnected() const;
         virtual bool			                connect() = 0;
         virtual bool			                disconnect() = 0;
         virtual bool   	                        identify() = 0;
@@ -39,8 +39,8 @@ class AT_AB APTDevice : public ATObject
         virtual bool	                    	enable() = 0;
         virtual bool	                    	disable() = 0;
 
-        string					                getSerial();
-        string 									getName();
+        string					                getSerial() const;
+        string 									getName() const;
         void									setName(const string& name);
 
         bool									loadProperties(IniFile& iniFile);

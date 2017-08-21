@@ -231,6 +231,7 @@ void TCubeStepperMotor::stop(bool inThread)
     else
     {
 		int e = SCC_StopImmediate(mSerial.c_str());
+        mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -245,12 +246,11 @@ void TCubeStepperMotor::stopProfiled(bool inThread)
     	//Check if motor is moving to absolute position
 		MotorCommand cmd(mcStopProfiled);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {
-		mMotorCommandsPending--;
         int e = SCC_StopProfiled(mSerial.c_str());
+		mMotorCommandsPending--;
         if(e)
         {
             Log(lError) <<tlError(e);
@@ -258,7 +258,7 @@ void TCubeStepperMotor::stopProfiled(bool inThread)
     }
 }
 
-double TCubeStepperMotor::getPosition()
+double TCubeStepperMotor::getPosition() const
 {
     return SCC_GetPosition(mSerial.c_str()) / mScalingFactors.position;
 }
@@ -296,7 +296,6 @@ bool TCubeStepperMotor::setVelocityParameters(double v, double a, bool inThread)
     	//Check if motor is moving to absolute position
 		MotorCommand cmd(mcSetVelocityParameters, v, a);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {
@@ -464,6 +463,7 @@ void TCubeStepperMotor::jogForward(bool inThread)
     else
     {
         int e = SCC_MoveJog(mSerial.c_str(), MOT_Forwards);
+        mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -482,6 +482,7 @@ void TCubeStepperMotor::jogReverse(bool inThread)
     {
         //Todo: tell thorlabs about the MOT_Reverse flag name
         int e = SCC_MoveJog(mSerial.c_str(), MOT_Backwards);
+        mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -524,7 +525,6 @@ bool TCubeStepperMotor::moveToPosition(double pos, bool inThread)
 		mDesiredPosition = pos;
 		MotorCommand cmd(mcMoveToPosition, pos);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {

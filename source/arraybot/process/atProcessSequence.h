@@ -54,6 +54,7 @@ class AT_AB ProcessSequence : public ATObject
         Process*                          	getPrevious() const;
         Process*                          	getCurrent() const;
         bool								selectProcess(Process* p);
+        Process*							getProcessWithName(const string& name);
 
         void								setCategory(const string& c);
         string								getCategory();

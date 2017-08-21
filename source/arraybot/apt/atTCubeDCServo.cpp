@@ -235,6 +235,7 @@ void TCubeDCServo::stop(bool inThread)
     else
     {
 		int e = CC_StopImmediate(mSerial.c_str());
+		mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -251,7 +252,7 @@ void TCubeDCServo::stopProfiled(bool inThread)
     }
 }
 
-double TCubeDCServo::getPosition()
+double TCubeDCServo::getPosition() const
 {
     return CC_GetPosition(mSerial.c_str()) / mScalingFactors.position;
 }
@@ -288,7 +289,7 @@ bool TCubeDCServo::setVelocityParameters(double v, double a, bool inThread)
     {
 		MotorCommand cmd(mcSetVelocityParameters, v, a);
 		post(cmd);
-        mMotorCommandsPending++;
+        //mMotorCommandsPending++;
     }
     else
     {
@@ -457,6 +458,7 @@ void TCubeDCServo::jogForward(bool inThread)
     else
     {
         int e = CC_MoveJog(mSerial.c_str(), MOT_Forwards);
+   		mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -475,6 +477,7 @@ void TCubeDCServo::jogReverse(bool inThread)
     {
         //Todo: tell thorlabs about the MOT_Reverse flag name
         int e = CC_MoveJog(mSerial.c_str(), MOT_Backwards);
+		mMotorCommandsPending--;
         if(e != 0)
         {
             Log(lError) <<tlError(e);
@@ -517,7 +520,6 @@ bool TCubeDCServo::moveToPosition(double pos, bool inThread)
 		mDesiredPosition = pos;
 		MotorCommand cmd(mcMoveToPosition, pos);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {

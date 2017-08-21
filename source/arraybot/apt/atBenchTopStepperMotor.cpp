@@ -235,6 +235,7 @@ void BenchTopStepperMotor::stop(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+		mMotorCommandsPending--;
     }
 }
 
@@ -252,10 +253,11 @@ void BenchTopStepperMotor::stopProfiled(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+		mMotorCommandsPending--;
     }
 }
 
-double BenchTopStepperMotor::getPosition()
+double BenchTopStepperMotor::getPosition() const
 {
     return SBC_GetPosition(mSerial.c_str(),lChannel) / mScalingFactors.position;
 }
@@ -293,7 +295,6 @@ bool BenchTopStepperMotor::setVelocityParameters(double v, double a, bool inThre
     	//Check if motor is moving to absolute position
 		MotorCommand cmd(mcSetVelocityParameters, v, a);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {
@@ -466,6 +467,7 @@ void BenchTopStepperMotor::jogForward(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+		mMotorCommandsPending--;
     }
 }
 
@@ -484,6 +486,7 @@ void BenchTopStepperMotor::jogReverse(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+   		mMotorCommandsPending--;
     }
 }
 
@@ -522,7 +525,6 @@ bool BenchTopStepperMotor::moveToPosition(double pos, bool inThread)
 		mDesiredPosition = pos;
 		MotorCommand cmd(mcMoveToPosition, pos);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {

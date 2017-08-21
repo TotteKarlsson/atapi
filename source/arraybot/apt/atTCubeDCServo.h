@@ -35,7 +35,7 @@ class AT_AB TCubeDCServo : public APTMotor
         bool		                    identify();
         unsigned long	                getStatusBits();
 
-        double	                        getPosition();
+        double	                        getPosition() const;
         double	        		        getVelocity();
         double          		        getAcceleration();
 

@@ -23,17 +23,17 @@ void APTDevice::setName(const string& name)
 	mName = name;
 }
 
-string APTDevice::getName()
+string APTDevice::getName() const
 {
 	return mName.getValue();
 }
 
-string APTDevice::getSerial()
+string APTDevice::getSerial() const
 {
 	return mSerial.getValue();
 }
 
-bool APTDevice::isConnected()
+bool APTDevice::isConnected() const
 {
 	return mIsConnected;
 }

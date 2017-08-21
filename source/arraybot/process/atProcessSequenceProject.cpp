@@ -8,6 +8,7 @@
 #include "apt/atAbsoluteMove.h"
 #include "apt/atMove.h"
 #include "atTimedelay.h"
+#include "atAbsoluteMove.h"
 #include "atStopAndResumeProcess.h"
 #include "atArrayCamRequestProcess.h"
 #include "apt/atAPTMotor.h"
@@ -106,6 +107,18 @@ bool ProcessSequenceProject::save(const string& fName)
 			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
         }
 
+        else if(dynamic_cast<AbsoluteMove*>(p))
+	    {
+        	AbsoluteMove* td = dynamic_cast<AbsoluteMove*>(p);
+
+        	//Write subprocesses
+			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
+        }
+        else
+        {
+        	Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessType()<<" was NOT added to the XML document";
+        }
+
         p = mProcessSequence.getNext();
     }
 
@@ -202,6 +215,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
         case ptTimeDelay:       		        return createTimeDelayProcess(element);
         case ptStopAndResumeProcess:	        return createStopAndResumeProcess(element);
         case ptArrayCamRequestProcess:			return createArrayCamRequestProcess(element);
+        case ptAbsoluteMove:					return createAbsoluteMove(element);
     }
 
     return NULL;
@@ -362,6 +376,12 @@ AbsoluteMove* ProcessSequenceProject::createAbsoluteMove(XMLElement* element)
             }
         }
     }
+
+
+    //We need to associate the motor with 'name' with a
+    //real motor object provided for by ArrayBot
+    absMove->assignUnit(mProcessSequence.getArrayBot());
+
     return absMove;
 }
 

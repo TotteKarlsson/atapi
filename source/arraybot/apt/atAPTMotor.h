@@ -80,7 +80,7 @@ class AT_AB APTMotor : public APTDevice
 
 						                    //!General commands
         virtual bool		                identify() = 0;
-        virtual double	                    getPosition() = 0;
+        virtual double	                    getPosition() const = 0;
 
         virtual double	                    getVelocity() = 0;
         virtual bool	                    setVelocityParameters(double vel, double a = 0, bool inThread = true) = 0;

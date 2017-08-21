@@ -31,7 +31,7 @@ class AT_AB TCubeStepperMotor : public APTMotor
 				                        //!General commands
 
 
-        double	                        getPosition();
+        double	                        getPosition() const;
         double	        		        getVelocity();
 		bool	                    	setVelocityParameters(double v, double a = 0, bool inThread = true);
 	    double          		        getAcceleration();

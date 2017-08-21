@@ -138,6 +138,22 @@ bool ProcessSequence::selectProcess(Process* p)
     return false;
 }
 
+Process* ProcessSequence::getProcessWithName(const string& name)
+{
+    list<Process*>::iterator  iter;
+    iter = mProcesses.begin();
+	Process* test = *(iter);
+    while(test)
+    {
+    	if(test && test->getProcessName() == name)
+        {
+        	return test;
+        }
+        test = *(iter++);
+    }
+    return NULL;
+}
+
 bool ProcessSequence::add(Process* p)
 {
 	//Check label

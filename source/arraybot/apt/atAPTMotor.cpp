@@ -239,6 +239,9 @@ bool APTMotor::disconnect()
 void APTMotor::post(const MotorCommand& cmd)
 {
 	mMotorMessageContainer.post(cmd);
+
+    //OBSERVE, decrement this in the thread executing this command!
+    mMotorCommandsPending++;
 }
 
 MotorCommandEnum APTMotor::getLastCommand()

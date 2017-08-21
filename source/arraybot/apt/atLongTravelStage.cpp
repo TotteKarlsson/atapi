@@ -234,6 +234,7 @@ void LongTravelStage::stop(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+	    mMotorCommandsPending--;
     }
 }
 
@@ -251,10 +252,11 @@ void LongTravelStage::stopProfiled(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+   	    mMotorCommandsPending--;
     }
 }
 
-double LongTravelStage::getPosition()
+double LongTravelStage::getPosition() const
 {
     return ISC_GetPosition(mSerial.c_str()) / mScalingFactors.position;
 }
@@ -292,7 +294,6 @@ bool LongTravelStage::setVelocityParameters(double v, double a, bool inThread)
     	//Check if motor is moving to absolute position
 		MotorCommand cmd(mcSetVelocityParameters, v, a);
 		post(cmd);
-        mMotorCommandsPending++;
     }
     else
     {
@@ -312,8 +313,8 @@ bool LongTravelStage::setVelocityParameters(double v, double a, bool inThread)
         }
 
         int e = ISC_SetVelParamsBlock(mSerial.c_str(), &p);
-        mMotorCommandsPending--;
 
+        mMotorCommandsPending--;
         if(e)
         {
             Log(lError) <<tlError(e);
@@ -465,6 +466,7 @@ void LongTravelStage::jogForward(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+	    mMotorCommandsPending--;
     }
 }
 
@@ -483,6 +485,7 @@ void LongTravelStage::jogReverse(bool inThread)
         {
             Log(lError) <<tlError(e);
         }
+   	    mMotorCommandsPending--;
     }
 }
 
@@ -521,7 +524,7 @@ bool LongTravelStage::moveToPosition(double pos, bool inThread)
 		mDesiredPosition = pos;
 		MotorCommand cmd(mcMoveToPosition, pos);
 		post(cmd);
-        mMotorCommandsPending++;
+        //mMotorCommandsPending++;
     }
     else
     {
@@ -533,6 +536,7 @@ bool LongTravelStage::moveToPosition(double pos, bool inThread)
             Log(lError) <<"Tried to move to position: "<<pos<<" using the "<<getName()<<" device.";
             return false;
         }
+
     }
     return true;
 }
