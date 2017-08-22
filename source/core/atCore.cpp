@@ -12,12 +12,14 @@ extern "C" int _libmain(unsigned long reason)
 }
 
 //These integers are local data in the DLL
-static unsigned int WM_MOTOR_WARNING_MESSAGE = 0;
+static unsigned int WM_MOTOR_WARNING_MESSAGE 	= WM_APP + 100;
+static unsigned int WM_INFO_MESSAGE_DIALOG 		= WM_APP + 101;
 
 void initABCoreLib()
 {
 	HMODULE	handle 				= LoadLibraryA("atResources");
     WM_MOTOR_WARNING_MESSAGE 	= RegisterWindowMessageA(MOTOR_WARNING_MESSAGE);
+    WM_INFO_MESSAGE_DIALOG   	= RegisterWindowMessageA(INFO_MESSAGE_DIALOG);
 }
 
 unsigned int getABCoreMessageID(const string& msg)
@@ -26,6 +28,11 @@ unsigned int getABCoreMessageID(const string& msg)
     {
     	return WM_MOTOR_WARNING_MESSAGE;
     }
+    else if(compareStrings(msg, INFO_MESSAGE_DIALOG))
+    {
+    	return WM_INFO_MESSAGE_DIALOG;
+    }
+
     return 0;
 }
 

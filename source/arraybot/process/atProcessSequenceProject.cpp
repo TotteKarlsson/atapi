@@ -407,6 +407,14 @@ StopAndResumeProcess* ProcessSequenceProject::createStopAndResumeProcess(XMLElem
 {
     StopAndResumeProcess* p = new StopAndResumeProcess("");
    	p->setProcessName(element->Attribute("name"));
+
+    //Read info
+    XMLElement* data1 = element->FirstChildElement("info");
+    if(data1 && data1->GetText())
+    {
+        p->setInfoText(data1->GetText());
+    }
+
     return p;
 }
 

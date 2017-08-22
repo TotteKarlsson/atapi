@@ -26,6 +26,8 @@ class AT_AB StopAndResumeProcess : public Process
         bool 						            isProcessed();
         bool						            resume();
 
+		void 									showInfoMessageDialog();
+
 									            //Check if we are at proper position(s)
         bool 						            isDone();
        	bool	            		            undo(){return true;}

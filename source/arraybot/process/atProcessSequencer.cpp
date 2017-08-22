@@ -291,63 +291,65 @@ void ProcessSequencer::onTimerFunc()
     }
 
     Process* p = s->getCurrent();
-	if(p)
-    {
-    	//Check if we are to move forward in the sequence
-        if(p->isProcessed() == true)
-        {
-	        Log(lInfo) << "The process \"" << p->getProcessName() <<"\" finished";
-
-			if(mExecuteAutomatic)
-            {
-        		forward();
-            }
-            else
-            {
-	            mSequenceTimer.stop();
-            }
-        }
-        else if (s->isFirst(p) && p->isStarted() == false)
-        {
-	        Log(lInfo) << "Executing the first process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
-            if(!p->start())
-            {
-                Log(lError) << "Failed executing process: "<<p->getProcessName();
-				Log(lError) << "Aborting execution of process sequence: "<<s->getName();
-	            mSequenceTimer.stop();
-                return;
-            }
-        }
-       	else if(p->isStarted() && dynamic_cast<StopAndResumeProcess*>(p) != NULL)
-        {
-			StopAndResumeProcess* srp = dynamic_cast<StopAndResumeProcess*>(p);
-        	if(srp->isDone() && mExecuteAutomatic == false)
-            {
-                //The stop and resume process finished
-                mSequenceTimer.stop();
-                Log(lInfo) << "Finished processing process: "<<srp->getProcessName()<<" in the sequence: " << s->getName();
-                return;
-            }
-            else
-            {
-                //Tell the UI to show a dialog to resume processing...
-                pause();
-                Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
-            }
-		   ///This will mark this process as done..
-		   //srp->resume();
-	    }
-        else if(p->isTimedOut())
-        {
-        	Log(lError) << "The process \""<<p->getProcessName()<<"\" timed out";
-        	stop();
-        }
-    }
-    else
+	if(!p)
     {
         //Null process indicate that we have finished
         mSequenceTimer.stop();
         Log(lInfo) << "Finished processing sequence: " << s->getName();
+        return;
+    }
+
+    //Check if we are to move forward in the sequence
+    if(p->isProcessed() == true)
+    {
+        Log(lInfo) << "The process \"" << p->getProcessName() <<"\" finished";
+
+        if(mExecuteAutomatic)
+        {
+            forward();
+        }
+        else
+        {
+            mSequenceTimer.stop();
+        }
+    }
+    else if (s->isFirst(p) && p->isStarted() == false)
+    {
+        Log(lInfo) << "Executing the first process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
+        if(!p->start())
+        {
+            Log(lError) << "Failed executing process: "<<p->getProcessName();
+            Log(lError) << "Aborting execution of process sequence: "<<s->getName();
+            mSequenceTimer.stop();
+            return;
+        }
+    }
+    else if(p->isStarted() && dynamic_cast<StopAndResumeProcess*>(p) != NULL)
+    {
+        StopAndResumeProcess* srp = dynamic_cast<StopAndResumeProcess*>(p);
+        if(srp->isDone() && mExecuteAutomatic == false)
+        {
+            //The stop and resume process finished
+            mSequenceTimer.stop();
+            Log(lInfo) << "Finished processing process: "<<srp->getProcessName()<<" in the sequence: " << s->getName();
+            return;
+        }
+        else
+        {
+            //Tell the UI to show a dialog to resume processing...
+            pause();
+
+            //Show dialog showing the information for the StopAndResume process
+            srp->showInfoMessageDialog();
+            Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
+        }
+       ///This will mark this process as done..
+       //srp->resume();
+    }
+    else if(p->isTimedOut())
+    {
+        Log(lError) << "The process \""<<p->getProcessName()<<"\" timed out";
+        stop();
     }
 }
 

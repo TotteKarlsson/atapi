@@ -6,6 +6,8 @@
 #include "apt/atMove.h"
 #include "mtkXMLUtils.h"
 #include "atProcessSequence.h"
+#include "atGeneralIPCMessageData.h"
+#include "core/atCore.h"
 
 using namespace mtk;
 using namespace at;
@@ -18,6 +20,19 @@ Process(lbl, NULL),
 mResume(false)
 {
 	mProcessType = ptStopAndResumeProcess;
+}
+
+void StopAndResumeProcess::showInfoMessageDialog()
+{
+    GeneralIPCMessageData* msgData = new GeneralIPCMessageData;
+	msgData->mContent = getInfoText();
+
+    //Send windows message
+    int ret = PostMessage(HWND_BROADCAST, getABCoreMessageID(INFO_MESSAGE_DIALOG), reinterpret_cast<WPARAM> (msgData) , 0);
+    if(!ret)
+    {
+        Log(lError) << "Post message failed..";
+    }
 }
 
 void StopAndResumeProcess::clear()
