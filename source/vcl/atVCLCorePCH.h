@@ -3,7 +3,7 @@
 //#include "mtkVCLUtils.h"
 //#include "core/atProcess.h"
 //#include "atMove.h"
-//#include "atParallellProcess.h"
+//#include "atParallelProcess.h"
 //#include "mtkLogger.h"
 //#include "atArrayBot.h"
 //#include "atAPTMotor.h"

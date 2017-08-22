@@ -3,7 +3,7 @@
 #include "mtkXMLUtils.h"
 #include "mtkLogger.h"
 #include "atProcessSequence.h"
-#include "atParallellProcess.h"
+#include "atParallelProcess.h"
 #include "atArrayBot.h"
 #include "apt/atAbsoluteMove.h"
 #include "apt/atMove.h"
@@ -75,9 +75,9 @@ bool ProcessSequenceProject::save(const string& fName)
     {
         Log(lDebug) << "Saving process: " << p->getProcessName();
         XMLElement* xmlProc = p->addToXMLDocument(mTheXML, sequence);
-        if(dynamic_cast<ParallellProcess*>(p))
+        if(dynamic_cast<ParallelProcess*>(p))
 	    {
-        	ParallellProcess* clm = dynamic_cast<ParallellProcess*>(p);
+        	ParallelProcess* clm = dynamic_cast<ParallelProcess*>(p);
 
         	//Write subprocesses
 			clm->addToXMLDocumentAsChild(mTheXML, xmlProc);
@@ -211,7 +211,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
 	ProcessType pt = toProcessType(element->Attribute("type"));
     switch(pt)
     {
-    	case ptParallell: 				        return createParallellProcess(element);
+    	case ptParallel: 				        return createParallelProcess(element);
         case ptTimeDelay:       		        return createTimeDelayProcess(element);
         case ptStopAndResumeProcess:	        return createStopAndResumeProcess(element);
         case ptArrayCamRequestProcess:			return createArrayCamRequestProcess(element);
@@ -221,9 +221,9 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
     return NULL;
 }
 
-ParallellProcess* ProcessSequenceProject::createParallellProcess(XMLElement* element)
+ParallelProcess* ProcessSequenceProject::createParallelProcess(XMLElement* element)
 {
-    ParallellProcess* p = new ParallellProcess(element->Attribute("name"));
+    ParallelProcess* p = new ParallelProcess(element->Attribute("name"));
     p->assignProcessSequence(&mProcessSequence);
 
     //Read data

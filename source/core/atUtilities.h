@@ -19,7 +19,7 @@ enum ProcessType
 {
 	ptBaseType = 0,
     ptMaster,
-    ptParallell,
+    ptParallel,
     ptAbsoluteMove,
     ptArduinoServerCommand,
     ptTimeDelay,

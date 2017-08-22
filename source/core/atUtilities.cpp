@@ -37,7 +37,7 @@ string toString(ProcessType pt)
 	switch(pt)
     {
     	case ptAbsoluteMove: 			return "absoluteMove";
-    	case ptParallell: 		        return "parallellProcess";
+    	case ptParallel: 		        return "parallellProcess";
     	case ptTimeDelay: 		        return "timeDelay";
     	case ptStopAndResumeProcess:    return "stopAndResumeProcess";
     	case ptArrayCamRequestProcess:	return "arrayCamRequestProcess";
@@ -46,13 +46,13 @@ string toString(ProcessType pt)
     }
 }
 
-//enum ProcessType {ptBaseType = 0, ptMaster, ptParallell, ptAbsoluteMove, ptTimeDelay, ptUnknown};
+//enum ProcessType {ptBaseType = 0, ptMaster, ptParallel, ptAbsoluteMove, ptTimeDelay, ptUnknown};
 
 ProcessType toProcessType(const string& str)
 {
 	if(str == "parallellProcess")
     {
-    	return ptParallell;
+    	return ptParallel;
     }
 
 	if(str == "absoluteMove")

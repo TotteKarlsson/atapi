@@ -1,5 +1,5 @@
-#ifndef abParallellProcessH
-#define abParallellProcessH
+#ifndef abParallelProcessH
+#define abParallelProcessH
 #include "../atABExporter.h"
 #include "../core/atProcess.h"
 #include <vector>
@@ -12,11 +12,11 @@ using namespace std;
 //!When starting a parallell process, all parallell processes are started virtually simultaneously (occurs in a loop).
 //!A parallell process is not finished until all processes, including their triggered processes
 //!are processed, finished
-class AT_AB ParallellProcess : public Process
+class AT_AB ParallelProcess : public Process
 {
     public:
-        	   			                            ParallellProcess(const string& lbl);
-    	virtual			                            ~ParallellProcess(){}
+        	   			                            ParallelProcess(const string& lbl);
+    	virtual			                            ~ParallelProcess(){}
 		virtual void		   		                init(ArrayBot& ab);
 		const string 				                getTypeName() const;
         void						                clear();

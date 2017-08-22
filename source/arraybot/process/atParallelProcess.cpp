@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "atParallellProcess.h"
+#include "atParallelProcess.h"
 #include "atXYZUnit.h"
 #include "apt/atAPTMotor.h"
 #include "mtkLogger.h"
@@ -9,19 +9,19 @@ using namespace mtk;
 using namespace at;
 
 //---------------------------------------------------------------------------
-ParallellProcess::ParallellProcess(const string& lbl)
+ParallelProcess::ParallelProcess(const string& lbl)
 :
 Process(lbl, NULL)
 {
-	mProcessType = ptParallell;
+	mProcessType = ptParallel;
 }
 
-const string ParallellProcess::getTypeName() const
+const string ParallelProcess::getTypeName() const
 {
 	return toString(mProcessType);
 }
 
-void ParallellProcess::init(ArrayBot& ab)
+void ParallelProcess::init(ArrayBot& ab)
 {
 	Process::init(ab);
 
@@ -35,12 +35,12 @@ void ParallellProcess::init(ArrayBot& ab)
     }
 }
 
-void ParallellProcess::clear()
+void ParallelProcess::clear()
 {
 	mProcesses.clear();
 }
 
-bool ParallellProcess::write()
+bool ParallelProcess::write()
 {
 	if(mProcessSequence)
     {
@@ -49,7 +49,7 @@ bool ParallellProcess::write()
 	return false;
 }
 
-void ParallellProcess::addProcess(Process* lm)
+void ParallelProcess::addProcess(Process* lm)
 {
 	if(!lm)
     {
@@ -63,7 +63,7 @@ void ParallellProcess::addProcess(Process* lm)
 	mProcesses.push_back(lm);
 }
 
-bool ParallellProcess::removeProcess(const string& name)
+bool ParallelProcess::removeProcess(const string& name)
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -76,12 +76,12 @@ bool ParallellProcess::removeProcess(const string& name)
     return true;
 }
 
-bool ParallellProcess::removeProcess(Process* m)
+bool ParallelProcess::removeProcess(Process* m)
 {
 	return false;
 }
 
-Process* ParallellProcess::getProcess(int i)
+Process* ParallelProcess::getProcess(int i)
 {
 	if(i < mProcesses.size())
     {
@@ -90,7 +90,7 @@ Process* ParallellProcess::getProcess(int i)
     return NULL;
 }
 
-Process* ParallellProcess::getProcess(const string& lbl)
+Process* ParallelProcess::getProcess(const string& lbl)
 {
 	// look for item
     for(int i = 0 ; i < mProcesses.size(); i++)
@@ -104,7 +104,7 @@ Process* ParallellProcess::getProcess(const string& lbl)
     return NULL;
 }
 
-Process* ParallellProcess::getProcess(const Process* p)
+Process* ParallelProcess::getProcess(const Process* p)
 {
 	// look for item
     for(int i = 0 ; i < mProcesses.size(); i++)
@@ -118,7 +118,7 @@ Process* ParallellProcess::getProcess(const Process* p)
     return NULL;
 }
 
-XMLElement* ParallellProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+XMLElement* ParallelProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -130,7 +130,7 @@ XMLElement* ParallellProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc
     return dynamic_cast<XMLElement*>(docRoot);
 }
 
-bool ParallellProcess::isBeingProcessed()
+bool ParallelProcess::isBeingProcessed()
 {
 	if(isDone())
     {
@@ -143,7 +143,7 @@ bool ParallellProcess::isBeingProcessed()
     return mIsBeingProcessed;
 }
 
-bool ParallellProcess::isProcessed()
+bool ParallelProcess::isProcessed()
 {
     if(mIsProcessed == true)
     {
@@ -161,7 +161,7 @@ bool ParallellProcess::isProcessed()
 	return false;
 }
 
-bool ParallellProcess::isCommandPending()
+bool ParallelProcess::isCommandPending()
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -175,7 +175,7 @@ bool ParallellProcess::isCommandPending()
     return false;
 }
 
-bool ParallellProcess::areMotorsActive()
+bool ParallelProcess::areMotorsActive()
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -189,7 +189,7 @@ bool ParallellProcess::areMotorsActive()
     return false;
 }
 
-bool ParallellProcess::start()
+bool ParallelProcess::start()
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -200,7 +200,7 @@ bool ParallellProcess::start()
 	return Process::start();
 }
 
-bool ParallellProcess::stop()
+bool ParallelProcess::stop()
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
@@ -210,7 +210,7 @@ bool ParallellProcess::stop()
 	return Process::stop();
 }
 
-bool ParallellProcess::isDone()
+bool ParallelProcess::isDone()
 {
 	//Check all subprocesses here
 	for(int i = 0; i < mProcesses.size(); i++)
@@ -224,7 +224,7 @@ bool ParallellProcess::isDone()
     return true;
 }
 
-bool ParallellProcess::undo()
+bool ParallelProcess::undo()
 {
 	return false;
 }

@@ -20,7 +20,7 @@ class AbsoluteMove;
 class StopAndResumeProcess;
 class ArrayCamRequestProcess;
 class TimeDelay;
-class ParallellProcess;
+class ParallelProcess;
 class ArduinoServerCommand;
 
 //!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
@@ -42,7 +42,7 @@ class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
         int                                     loadProcesses();
 
         Process*				                createProcess(tinyxml2::XMLElement* element);
-		ParallellProcess*						createParallellProcess(tinyxml2::XMLElement* element);
+		ParallelProcess*						createParallelProcess(tinyxml2::XMLElement* element);
 		AbsoluteMove* 				  			createAbsoluteMove(tinyxml2::XMLElement* proc);
 		TimeDelay*								createTimeDelayProcess(tinyxml2::XMLElement* element);
 		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);

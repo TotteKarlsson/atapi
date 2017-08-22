@@ -6,7 +6,7 @@
 #include "mtkIniFile.h"
 #include "atArrayBot.h"
 #include "mtkINIFileProperties.h"
-#include "atParallellProcess.h"
+#include "atParallelProcess.h"
 
 //---------------------------------------------------------------------------
 //!The ribbon lifter class encapsulates data and logic for
@@ -77,8 +77,8 @@ class AT_AB RibbonLifter : public ATObject
                                         //!motor position etc, as the
                                         //!lifter is working
         Timer						    mProcessTimer;
-		ParallellProcess		 	    mMove1;
-		ParallellProcess		 	    mMove2;
+		ParallelProcess		 	    mMove1;
+		ParallelProcess		 	    mMove2;
 
 };
 #endif
