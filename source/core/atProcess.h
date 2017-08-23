@@ -41,7 +41,8 @@ class AT_CORE Process : public ATObject
         string									getInfoText(){return mInfoText;}
         void									setInfoText(const string& txt){mInfoText = txt;}
 
-		string 						            getProcessType();
+		virtual ProcessType 	   	            getProcessType();
+		string 						            getProcessTypeAsString();
 
 		virtual void	                        assignSubject(ATObject* o){mSubject = o;}
 		virtual void	                        assignProcessSequence(ProcessSequence* ps){mProcessSequence = ps;}

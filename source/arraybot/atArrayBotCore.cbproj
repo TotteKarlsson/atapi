@@ -217,6 +217,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="process\atArrayCamRequestProcess.cpp">
             <BuildOrder>41</BuildOrder>
         </CppCompile>
+        <CppCompile Include="process\atLiftAtAngleProcess.cpp">
+            <BuildOrder>43</BuildOrder>
+        </CppCompile>
         <CppCompile Include="process\atParallelProcess.cpp">
             <BuildOrder>6</BuildOrder>
         </CppCompile>

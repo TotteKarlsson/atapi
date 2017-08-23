@@ -18,17 +18,17 @@ using mtk::IniFile;
 enum ProcessType
 {
 	ptBaseType = 0,
-    ptMaster,
     ptParallel,
     ptAbsoluteMove,
     ptArduinoServerCommand,
     ptTimeDelay,
     ptStopAndResumeProcess,
     ptArrayCamRequestProcess,
+    ptLiftAtAngleProcess,
     ptUnknown
 };
 
-AT_CORE string toString(ProcessType tp);
+AT_CORE string 		toString(ProcessType tp);
 AT_CORE ProcessType toProcessType(const string& str);
 
 //!Logic operators, used in triggers
@@ -36,6 +36,8 @@ enum LogicOperator {loLargerThan = 0, loSmallerThan, loLargerThanOrEqual, loSmal
 
 AT_CORE string 			toString(LogicOperator o);
 AT_CORE LogicOperator 	toLogicOperator(const string& p);
+
+						//!Thorlab errors
 AT_CORE string 			tlError(int errCode);
 
 

@@ -116,7 +116,7 @@ bool ProcessSequenceProject::save(const string& fName)
         }
         else
         {
-        	Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessType()<<" was NOT added to the XML document";
+        	Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessTypeAsString()<<" was NOT added to the XML document";
         }
 
         p = mProcessSequence.getNext();

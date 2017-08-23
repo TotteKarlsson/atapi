@@ -20,7 +20,12 @@ mProcessSequence(NULL),
 mInfoText("Process Information..(click me!)")
 {}
 
-string Process::getProcessType()
+ProcessType Process::getProcessType()
+{
+	return mProcessType;
+}
+
+string Process::getProcessTypeAsString()
 {
 	return toString(mProcessType);
 }
@@ -66,7 +71,7 @@ XMLElement* Process::addToXMLDocument(tinyxml2::XMLDocument& doc, XMLNode* docRo
     XMLNode*    rootNode 		= doc.InsertFirstChild(processNode);
 
     //Attributes
-    processNode->SetAttribute("type", getProcessType().c_str());
+    processNode->SetAttribute("type", getProcessTypeAsString().c_str());
     processNode->SetAttribute("name", mProcessName.c_str());
 
 	XMLElement* dataval1 = doc.NewElement("info");

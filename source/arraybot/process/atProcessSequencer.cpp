@@ -111,7 +111,7 @@ bool ProcessSequencer::continueExecution()
     if(p)
     {
         mSequenceTimer.start();
-	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
+	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessTypeAsString();
         if(!p->start())
         {
             Log(lError) << "Failed executing a process: " << p->getProcessName();
@@ -182,7 +182,7 @@ bool ProcessSequencer::forward()
   	Log(lInfo) << "Sequence was forwarded";
     if(mExecuteAutomatic)
     {
-	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
+	    Log(lInfo) << "Executing process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessTypeAsString();
         if(!p->start())
         {
             Log(lError) << "Failed executing the process: " << p->getProcessName();
@@ -315,7 +315,7 @@ void ProcessSequencer::onTimerFunc()
     }
     else if (s->isFirst(p) && p->isStarted() == false)
     {
-        Log(lInfo) << "Executing the first process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessType();
+        Log(lInfo) << "Executing the first process \"" << p->getProcessName() <<"\" of type: "<<p->getProcessTypeAsString();
         if(!p->start())
         {
             Log(lError) << "Failed executing process: "<<p->getProcessName();
