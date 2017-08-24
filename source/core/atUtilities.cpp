@@ -40,7 +40,7 @@ LogicOperator toLogicOperator(const string& o)
 //    ptTimeDelay,
 //    ptStopAndResumeProcess,
 //    ptArrayCamRequestProcess,
-//    ptLiftAtAngleProcess,
+//    ptMoveCoverSlipAtAngleProcess,
 //    ptUnknown
 
 string toString(ProcessType pt)
@@ -51,9 +51,9 @@ string toString(ProcessType pt)
     	case ptAbsoluteMove: 			return "absoluteMove";
     	case ptArduinoServerCommand: 	return "arduinoServerCommand";
     	case ptTimeDelay: 		        return "timeDelay";
-    	case ptStopAndResumeProcess:    return "stopAndResumeProcess";
-    	case ptArrayCamRequestProcess:	return "arrayCamRequestProcess";
-    	case ptLiftAtAngleProcess:		return "liftAtAngleProcess";
+    	case ptStopAndResume:		    return "stopAndResumeProcess";
+    	case ptArrayCamRequest:			return "arrayCamRequestProcess";
+    	case ptMoveCoverSlipAtAngle:				return "liftAtAngleProcess";
         default: 				        return "unknownProcessType";
     }
 }
@@ -84,17 +84,17 @@ ProcessType toProcessType(const string& str)
 
 	if(str == "stopAndResumeProcess")
     {
-    	return ptStopAndResumeProcess;
+    	return ptStopAndResume;
     }
 
 	if(str == "arrayCamRequestProcess")
     {
-    	return ptArrayCamRequestProcess;
+    	return ptArrayCamRequest;
     }
 
 	if(str == "liftAtAngleProcess")
     {
-    	return ptLiftAtAngleProcess;
+    	return ptMoveCoverSlipAtAngle;
     }
 
 	return ptUnknown;

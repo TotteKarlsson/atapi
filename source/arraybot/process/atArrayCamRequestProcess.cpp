@@ -19,7 +19,7 @@ mArrayCamClient(acc),
 mParameter1(0),
 mParameter2(0)
 {
-	mProcessType = ptArrayCamRequestProcess;
+	mProcessType = ptArrayCamRequest;
     mArrayCamClient.assignOnMessageReceivedCallBack(onReceivedResponse);
 }
 

@@ -22,9 +22,9 @@ enum ProcessType
     ptAbsoluteMove,
     ptArduinoServerCommand,
     ptTimeDelay,
-    ptStopAndResumeProcess,
-    ptArrayCamRequestProcess,
-    ptLiftAtAngleProcess,
+    ptStopAndResume,
+    ptArrayCamRequest,
+    ptMoveCoverSlipAtAngle,
     ptUnknown
 };
 

@@ -217,7 +217,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="process\atArrayCamRequestProcess.cpp">
             <BuildOrder>41</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atLiftAtAngleProcess.cpp">
+        <CppCompile Include="process\atMoveCoverSlipAtAngleProcess.cpp">
             <BuildOrder>43</BuildOrder>
         </CppCompile>
         <CppCompile Include="process\atParallelProcess.cpp">

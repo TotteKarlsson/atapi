@@ -11,6 +11,7 @@
 #include "atAbsoluteMove.h"
 #include "atStopAndResumeProcess.h"
 #include "atArrayCamRequestProcess.h"
+#include "atMoveCoverSlipAtAngleProcess.h"
 #include "apt/atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "arduino/atArduinoServerCommand.h"
@@ -75,48 +76,75 @@ bool ProcessSequenceProject::save(const string& fName)
     {
         Log(lDebug) << "Saving process: " << p->getProcessName();
         XMLElement* xmlProc = p->addToXMLDocument(mTheXML, sequence);
-        if(dynamic_cast<ParallelProcess*>(p))
-	    {
-        	ParallelProcess* clm = dynamic_cast<ParallelProcess*>(p);
 
-        	//Write subprocesses
-			clm->addToXMLDocumentAsChild(mTheXML, xmlProc);
-        }
-
-        else if(dynamic_cast<TimeDelay*>(p))
-	    {
-        	TimeDelay* td = dynamic_cast<TimeDelay*>(p);
-
-        	//Write subprocesses
-			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
-        }
-
-        else if(dynamic_cast<StopAndResumeProcess*>(p))
-	    {
-        	StopAndResumeProcess* td = dynamic_cast<StopAndResumeProcess*>(p);
-
-        	//Write subprocesses
-			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
-        }
-
-        else if(dynamic_cast<ArrayCamRequestProcess*>(p))
-	    {
-        	ArrayCamRequestProcess* td = dynamic_cast<ArrayCamRequestProcess*>(p);
-
-        	//Write subprocesses
-			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
-        }
-
-        else if(dynamic_cast<AbsoluteMove*>(p))
-	    {
-        	AbsoluteMove* td = dynamic_cast<AbsoluteMove*>(p);
-
-        	//Write subprocesses
-			td->addToXMLDocumentAsChild(mTheXML, xmlProc);
-        }
-        else
+        switch(p->getProcessType())
         {
-        	Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessTypeAsString()<<" was NOT added to the XML document";
+            case ptParallel:
+            {
+                ParallelProcess* p1 = dynamic_cast<ParallelProcess*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+
+            case ptTimeDelay:
+            {
+                TimeDelay* p1 = dynamic_cast<TimeDelay*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+
+            case ptStopAndResume:
+            {
+                StopAndResumeProcess* p1 = dynamic_cast<StopAndResumeProcess*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+            case ptArrayCamRequest:
+            {
+                ArrayCamRequestProcess* p1 = dynamic_cast<ArrayCamRequestProcess*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+            case ptAbsoluteMove:
+            {
+                AbsoluteMove* p1 = dynamic_cast<AbsoluteMove*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+            case ptMoveCoverSlipAtAngle:
+            {
+                MoveCoverSlipAtAngleProcess* p1 = dynamic_cast<MoveCoverSlipAtAngleProcess*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+            default:
+            {
+                Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessTypeAsString()<<" was NOT added to the XML document";
+            }
         }
 
         p = mProcessSequence.getNext();
@@ -213,9 +241,10 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
     {
     	case ptParallel: 				        return createParallelProcess(element);
         case ptTimeDelay:       		        return createTimeDelayProcess(element);
-        case ptStopAndResumeProcess:	        return createStopAndResumeProcess(element);
-        case ptArrayCamRequestProcess:			return createArrayCamRequestProcess(element);
+        case ptStopAndResume:			        return createStopAndResumeProcess(element);
+        case ptArrayCamRequest:					return createArrayCamRequestProcess(element);
         case ptAbsoluteMove:					return createAbsoluteMove(element);
+        case ptMoveCoverSlipAtAngle:			return createMoveCoverSlipAtAngleProcess(element);
     }
 
     return NULL;
@@ -251,7 +280,7 @@ ParallelProcess* ProcessSequenceProject::createParallelProcess(XMLElement* eleme
                     p->addProcess(absMove);
                 }
 
-                else if(toProcessType(type) == ptArrayCamRequestProcess)
+                else if(toProcessType(type) == ptArrayCamRequest)
                 {
                 	ArrayCamRequestProcess* c = createArrayCamRequestProcess(proc);
     				c->assignProcessSequence(&mProcessSequence);
@@ -455,4 +484,44 @@ ArduinoServerCommand* ProcessSequenceProject::createArduinoServerCommand(XMLElem
     }
 	return c;
 }
+
+MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleProcess(XMLElement* element)
+{
+   	string name = element->Attribute("name");
+	MoveCoverSlipAtAngleProcess* p = new MoveCoverSlipAtAngleProcess(name);
+    XMLElement* data = element->FirstChildElement("info");
+    if(data && data->GetText())
+    {
+        p->setInfoText(data->GetText());
+    }
+
+    data = element->FirstChildElement("lift_velocity");
+    if(data && data->GetText())
+    {
+        p->setLiftVelocity(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_acceleration");
+    if(data && data->GetText())
+    {
+        p->setLiftAcceleration(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_angle");
+    if(data && data->GetText())
+    {
+        p->setLiftAngle(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_height");
+    if(data && data->GetText())
+    {
+        p->setLiftHeight(toDouble(data->GetText()));
+    }
+
+
+
+    return p;
+}
+
 

@@ -122,9 +122,9 @@ XMLElement* ParallelProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc,
 {
 	for(int i = 0; i < mProcesses.size(); i++)
     {
-    	Process* lm = mProcesses[i];
-        mtk::XMLElement* e = lm->addToXMLDocument(doc, docRoot);
-        lm->addToXMLDocumentAsChild(doc, e);
+    	Process* pp = mProcesses[i];
+        mtk::XMLElement* newElement = pp->addToXMLDocument(doc, docRoot);
+        pp->addToXMLDocumentAsChild(doc, newElement);
     }
 
     return dynamic_cast<XMLElement*>(docRoot);

@@ -111,18 +111,6 @@ void AbsoluteMove::addTrigger(Trigger* t)
 
 XMLElement* AbsoluteMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
 {
-    //Create XML for saving to file
-//    XMLElement* pn	  			= doc.NewElement("process");
-//    XMLNode*    rootNode 		= doc.InsertFirstChild(pn);
-
-//    //Attributes
-//    pn->SetAttribute("type", getTypeName().c_str());
-//    pn->SetAttribute("name", mProcessName.c_str());
-//
-//	XMLElement* dataval1 = doc.NewElement("info");
-//    dataval1->SetText(mInfoText.c_str());
-//	pn->InsertEndChild(dataval1);
-
 	XMLElement* dataval1 = doc.NewElement("motor_name");
     dataval1->SetText(mSubjectName.c_str());
 	docRoot->InsertEndChild(dataval1);
@@ -153,9 +141,7 @@ XMLElement* AbsoluteMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* doc
     	mTrigger->addToXMLDocumentAsChild(doc, docRoot);
     }
 
-//    dataval1->InsertEndChild(rootNode);
     docRoot->InsertEndChild(dataval1);
-
     return dataval1;
 }
 

@@ -22,6 +22,7 @@ class ArrayCamRequestProcess;
 class TimeDelay;
 class ParallelProcess;
 class ArduinoServerCommand;
+class MoveCoverSlipAtAngleProcess;
 
 //!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
 class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
@@ -48,6 +49,7 @@ class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
 		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);
 		ArrayCamRequestProcess* 				createArrayCamRequestProcess(tinyxml2::XMLElement* element);
 		ArduinoServerCommand* 					createArduinoServerCommand(tinyxml2::XMLElement* proc);
+		MoveCoverSlipAtAngleProcess* 			createMoveCoverSlipAtAngleProcess(tinyxml2::XMLElement* proc);
 };
 
 #endif

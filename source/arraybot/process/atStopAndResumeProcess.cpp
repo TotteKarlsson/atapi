@@ -19,7 +19,7 @@ StopAndResumeProcess::StopAndResumeProcess(const string& lbl)
 Process(lbl, NULL),
 mResume(false)
 {
-	mProcessType = ptStopAndResumeProcess;
+	mProcessType = ptStopAndResume;
 }
 
 void StopAndResumeProcess::showInfoMessageDialog()
