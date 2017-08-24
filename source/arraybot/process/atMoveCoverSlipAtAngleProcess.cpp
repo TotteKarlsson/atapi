@@ -20,8 +20,10 @@ mLiftAcceleration(0),
 mLiftAngle(0),
 mLiftHeight(0),
 mLateralVelocity(0),
-mLateralAcceleration(0){
-mProcessType = ptMoveCoverSlipAtAngle;
+mLateralAcceleration(0),
+mMoveWhiskerInParallel(false)
+{
+	mProcessType = ptMoveCoverSlipAtAngle;
 }
 
 const string MoveCoverSlipAtAngleProcess::getTypeName() const
@@ -34,8 +36,9 @@ void MoveCoverSlipAtAngleProcess::init(ArrayBot& ab)
 {
     if(assignMotors(ab.getCoverSlipUnit().getZMotor(), ab.getCoverSlipUnit().getYMotor(), ab.getWhiskerUnit().getZMotor(), ab.getWhiskerUnit().getYMotor()))
     {
+	    calculateLift();
     }
-    
+
 	Process::init(ab);
 }
 
@@ -71,9 +74,19 @@ bool MoveCoverSlipAtAngleProcess::calculateLift()
     if(mLiftAngle > 0 || mLiftAngle < 90)
     {
     	double tanVal = tan(toRadians(mLiftAngle));
-    	mLateralVelocity = mLiftVelocity / tanVal;
-	    mLateralAcceleration = mLiftAcceleration / tanVal;
-//        mFinalCSZ = mOriginalCSZ - mLiftHeight;
+        if(tanVal)
+        {
+            mLateralVelocity = mLiftVelocity / tanVal;
+            mLateralAcceleration = mLiftAcceleration / tanVal;
+            mTargetCSZ = mLiftHeight;
+            mTargetWHZ = mLiftHeight;
+            mTargetCSY = mTargetCSZ / tanVal;
+            mTargetWHY = mTargetCSZ / tanVal;
+        }
+        else
+        {
+        	return false;
+        }
     }
     else
     {
@@ -166,28 +179,45 @@ bool MoveCoverSlipAtAngleProcess::isProcessed()
 bool MoveCoverSlipAtAngleProcess::start()
 {
 	//Set motor parameters and move them to their position
-//        	m->setVelocityParameters(mMaxVelocity, mAcceleration);
-
     if(!mCSZMtr || !mCSYMtr || !mWHZMtr || !mWHYMtr)
     {
 		Log(lError) << "At least one motor in the LiftAtAngle process is NULL. Can't start process";
         return false;
     }
 
-    //Z
-    mCSZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
-	mWHZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
-
-    //Y
+    //Z & Y
+//    mCSZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
     mCSYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
-    mWHYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
-    
-    //Calculate goto positions
-    double targetCSZ = getCurrentCoverSlipZ() - mLiftHeight;
-    
-    mCSZMtr->moveToPosition(targetCSZ);
 
-    mCSYMtr->moveToPosition(targetCSZ);    
+	if(mMoveWhiskerInParallel)
+    {
+		mWHZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
+    	mWHYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
+    }
+
+    //Calculate goto positions
+    mTargetCSZR = mTargetCSZ + getMotorPosition(mCSZMtr);
+    mTargetCSYR = mTargetCSY + getMotorPosition(mCSYMtr);
+
+    mTargetWHZR = mTargetWHZ + getMotorPosition(mWHZMtr);
+    mTargetWHYR = mTargetWHY + getMotorPosition(mWHYMtr);
+
+
+    Log(lInfo) << "Moving motor: "<< mCSZMtr->getName() <<" to position: "<< mTargetCSZR;
+    Log(lInfo) << "Moving motor: "<< mCSYMtr->getName() <<" to position: "<< mTargetCSYR;
+
+    mCSZMtr->moveToPosition(mTargetCSZR);
+    mCSYMtr->moveToPosition(mTargetCSYR);
+
+	if(mMoveWhiskerInParallel)
+    {
+	    Log(lInfo) << "Moving motor: "<< mWHZMtr->getName() <<" to position: "<< mTargetWHZR;
+    	Log(lInfo) << "Moving motor: "<< mWHYMtr->getName() <<" to position: "<< mTargetWHYR;
+
+    	mWHZMtr->moveToPosition(mTargetWHZR);
+        mWHYMtr->moveToPosition(mTargetWHYR);
+    }
+
 	return Process::start();
 }
 
@@ -199,10 +229,10 @@ bool MoveCoverSlipAtAngleProcess::stop()
 bool MoveCoverSlipAtAngleProcess::isDone()
 {
 	//Check motor positions
-//    if(mOriginalCSZ - getCurrentCoverSlipZ() >= mLiftHeight)
-//    {
-//    	return true;
-//    }
+    if(isEqual(getMotorPosition(mCSZMtr), mTargetCSZR, 1.e-3) || isEqual(getMotorPosition(mCSYMtr), mTargetCSYR, 1.e-3))
+    {
+    	return true;
+    }
     return false;
 }
 
@@ -232,6 +262,10 @@ XMLElement* MoveCoverSlipAtAngleProcess::addToXMLDocumentAsChild(tinyxml2::XMLDo
 
 	dataval1 = doc.NewElement("lift_height");
     dataval1->SetText(toString(mLiftHeight).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+	dataval1 = doc.NewElement("move_whisker_in_parallel");
+    dataval1->SetText(toString(mMoveWhiskerInParallel).c_str());
 	docRoot->InsertEndChild(dataval1);
 
     return dynamic_cast<XMLElement*>(docRoot);

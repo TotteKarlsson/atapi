@@ -168,6 +168,7 @@ class AT_AB APTMotor : public APTDevice
         void								populateMotorMessageData(MotorMessageData* data);
 };
 
+double getMotorPosition(APTMotor* m);
 
 //Enable JogMoveMode property
 template<>

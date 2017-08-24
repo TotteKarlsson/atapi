@@ -300,7 +300,7 @@ void ProcessSequencer::onTimerFunc()
     }
 
     //Check if we are to move forward in the sequence
-    if(p->isProcessed() == true)
+    if(p->isStarted() && p->isProcessed() == true)
     {
         Log(lInfo) << "The process \"" << p->getProcessName() <<"\" finished";
 

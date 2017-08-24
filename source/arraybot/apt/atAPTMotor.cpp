@@ -6,8 +6,6 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-
-
 APTMotor::APTMotor(int serialNo)
 :
 	APTDevice(serialNo),
@@ -260,6 +258,15 @@ DoubleRange APTMotor::getVelocityRange()
 	return mVelocityRange;
 }
 
+
+double getMotorPosition(APTMotor* m)
+{
+	if(m)
+    {
+    	return m->getPosition();
+    }
+    return -1;
+}
 namespace mtk
 {
 string toString(const JogMoveMode& mode)
@@ -288,5 +295,4 @@ JogMoveMode	toJogMoveMode(const string& mode)
 	 	return jmJogModeUndefined;
     }
 }
-
 }

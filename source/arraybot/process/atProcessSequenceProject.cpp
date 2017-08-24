@@ -489,6 +489,8 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
 {
    	string name = element->Attribute("name");
 	MoveCoverSlipAtAngleProcess* p = new MoveCoverSlipAtAngleProcess(name);
+
+    //This code belongs in the process class!
     XMLElement* data = element->FirstChildElement("info");
     if(data && data->GetText())
     {
@@ -519,6 +521,11 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
         p->setLiftHeight(toDouble(data->GetText()));
     }
 
+    data = element->FirstChildElement("move_whisker_in_parallel");
+    if(data && data->GetText())
+    {
+        p->setMoveWhiskerInParallel(toBool(data->GetText()));
+    }
 
 
     return p;

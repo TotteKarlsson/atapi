@@ -44,6 +44,8 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
 
         double										getLateralVelocity(){return mLateralVelocity;}
         double										getLateralAcceleration(){return mLateralAcceleration;}
+        bool										getMoveWhiskerInParallel(){return mMoveWhiskerInParallel;}
+        bool										setMoveWhiskerInParallel(bool doIt){mMoveWhiskerInParallel = doIt;}
 
 
         bool										assignMotors(APTMotor* csz, APTMotor* csy, APTMotor* wz, APTMotor* wy);
@@ -53,6 +55,7 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
     	APTMotor* 									mCSYMtr;
     	APTMotor* 									mWHZMtr;
     	APTMotor* 									mWHYMtr;
+		bool										mMoveWhiskerInParallel;
 
         double										mLiftVelocity;
         double										mLiftAcceleration;
@@ -61,16 +64,17 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
         double										mLateralVelocity;
         double										mLateralAcceleration;
 
-
         											//!This is the initial z value
                                                     //!Process is done when current Z =< ZStart - mLiftHeight
-
         double										mTargetCSZ;
         double										mTargetCSY;
+        double										mTargetCSZR;
+        double										mTargetCSYR;
 
         double										mTargetWHZ;
         double										mTargetWHY;
-
+        double										mTargetWHZR;
+        double										mTargetWHYR;
         double										getCurrentCoverSlipZ();
 };
 
