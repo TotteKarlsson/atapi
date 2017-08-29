@@ -11,7 +11,8 @@ ProcessSequence::ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string&
 :
 mAB(ab),
 mProject(*this, ac, fileExt),
-mCategory("General")
+mCategory("General"),
+mOrder(0)
 {
 	mProcessIter = mProcesses.begin();
 }
@@ -92,6 +93,16 @@ string ProcessSequence::getCategory()
 void ProcessSequence::setCategory(const string& c)
 {
 	mCategory = c;
+}
+
+int ProcessSequence::getOrder()
+{
+	return mOrder;
+}
+
+void ProcessSequence::setOrder(const int& o)
+{
+	mOrder = o;
 }
 
 void ProcessSequence::setProjectName(const string& name)

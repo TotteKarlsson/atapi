@@ -21,7 +21,8 @@ mLiftAngle(0),
 mLiftHeight(0),
 mLateralVelocity(0),
 mLateralAcceleration(0),
-mMoveWhiskerInParallel(false)
+mMoveWhiskerInParallel(false),
+mFetchAngleFromCSAngleMotor(false)
 {
 	mProcessType = ptMoveCoverSlipAtAngle;
 }
@@ -36,7 +37,11 @@ void MoveCoverSlipAtAngleProcess::init(ArrayBot& ab)
 {
     if(assignMotors(ab.getCoverSlipUnit().getZMotor(), ab.getCoverSlipUnit().getYMotor(), ab.getWhiskerUnit().getZMotor(), ab.getWhiskerUnit().getYMotor()))
     {
-	    calculateLift();
+	    calculateLift(ab);
+    }
+    else
+    {
+    	Log(lError) << "At least one motor is missing for the MoveCSAtAngle process!";
     }
 
 	Process::init(ab);
@@ -66,8 +71,21 @@ double MoveCoverSlipAtAngleProcess::getCurrentCoverSlipZ()
 
 //The calculate move function uses move velocity and angle to calculate
 //velocities for lateral movement, as well as final positions
-bool MoveCoverSlipAtAngleProcess::calculateLift()
+bool MoveCoverSlipAtAngleProcess::calculateLift(ArrayBot& ab)
 {
+    if(mFetchAngleFromCSAngleMotor)
+    {
+        APTMotor* m = ab.getCoverSlipUnit().getAngleMotor();
+        if(m)
+        {
+            mLiftAngle = m->getPosition();
+        }
+        else
+        {
+            Log(lError) << "Failed getting CS Angle motor. Liftangle NOT updated";
+        }
+    }
+
 	//The knowns are Z velocity and acceleration, and theta
     //Calculate Y velocity and acceleration
     //We get Y velocity as ZVelocity/tan(theta)
@@ -186,21 +204,23 @@ bool MoveCoverSlipAtAngleProcess::start()
     }
 
     //Z & Y
-//    mCSZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
+    mCSZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
     mCSYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
 
 	if(mMoveWhiskerInParallel)
     {
-		mWHZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
-    	mWHYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
+		mWHZMtr->setVelocityParameters(mLiftVelocity, 		mLiftAcceleration);
+    	mWHYMtr->setVelocityParameters(mLateralVelocity, 	mLateralAcceleration);
     }
 
     //Calculate goto positions
-    mTargetCSZR = mTargetCSZ + getMotorPosition(mCSZMtr);
-    mTargetCSYR = mTargetCSY + getMotorPosition(mCSYMtr);
+    //The stages are configured so that z decreases during lift, while
+    //Y increases
+    mTargetCSZR = getMotorPosition(mCSZMtr) - mTargetCSZ;
+    mTargetCSYR = getMotorPosition(mCSYMtr) + mTargetCSY;
 
-    mTargetWHZR = mTargetWHZ + getMotorPosition(mWHZMtr);
-    mTargetWHYR = mTargetWHY + getMotorPosition(mWHYMtr);
+    mTargetWHZR = getMotorPosition(mWHZMtr) - mTargetWHZ;
+    mTargetWHYR = getMotorPosition(mWHYMtr) + mTargetWHY;
 
 
     Log(lInfo) << "Moving motor: "<< mCSZMtr->getName() <<" to position: "<< mTargetCSZR;
@@ -266,6 +286,10 @@ XMLElement* MoveCoverSlipAtAngleProcess::addToXMLDocumentAsChild(tinyxml2::XMLDo
 
 	dataval1 = doc.NewElement("move_whisker_in_parallel");
     dataval1->SetText(toString(mMoveWhiskerInParallel).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+	dataval1 = doc.NewElement("fetch_angle_from_CS_angle_motor");
+    dataval1->SetText(toString(mFetchAngleFromCSAngleMotor).c_str());
 	docRoot->InsertEndChild(dataval1);
 
     return dynamic_cast<XMLElement*>(docRoot);

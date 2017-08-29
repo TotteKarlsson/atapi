@@ -25,6 +25,7 @@ class AT_AB ArrayCamRequestProcess : public Process
         void						                onReceivedResponse(const string& msg);
 
         virtual bool	                            start();
+        virtual bool	                            resume(){return false;}
         virtual bool	                            stop();
         virtual bool	                            isBeingProcessed();
         bool 						                isProcessed();

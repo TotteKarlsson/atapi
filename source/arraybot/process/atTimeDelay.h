@@ -21,6 +21,7 @@ class AT_AB TimeDelay : public Process
         virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 
         virtual bool	                    start();
+        virtual bool	                    resume(){return false;}
         virtual bool	                    stop();
         virtual bool	                    isBeingProcessed();
         bool 						        isProcessed();

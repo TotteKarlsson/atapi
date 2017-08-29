@@ -68,7 +68,8 @@ bool ProcessSequenceProject::save(const string& fName)
 
     //For now, do a brute force save of Moleculix Objects
     XMLElement* sequence = newElement("sequence");
-	sequence->SetAttribute("category", mProcessSequence.getCategory().c_str());
+	sequence->SetAttribute("category", 	mProcessSequence.getCategory().c_str());
+	sequence->SetAttribute("order", 	toString(mProcessSequence.getOrder()).c_str());
 
     //First save Processes
     Process* p = mProcessSequence.getFirst();
@@ -190,6 +191,7 @@ int ProcessSequenceProject::loadProcesses()
         return 0;
     }
 
+    /// Category attribute
     string category("General");
     if(sequence->Attribute("category"))
     {
@@ -199,10 +201,23 @@ int ProcessSequenceProject::loadProcesses()
     {
     	Log(lWarning) << "The sequence: "<<this->getProjectName()<<" don't have a category. Category \"General\" is applied";
     }
+
     mProcessSequence.setCategory(category);
 
-    int nrOfObjects = 0;
+    int order(0);
+    /// order attribute
+    if(sequence->Attribute("order"))
+    {
+		order = toInt(sequence->Attribute("order"));
+    }
+    else
+    {
+    	Log(lWarning) << "The sequence: "<<this->getProjectName()<<" don't have an order attribute. Order \"0\" is applied";
+    }
 
+    mProcessSequence.setOrder(order);
+
+    int nrOfObjects = 0;
      //Load process by process
     XMLElement* p = sequence->FirstChildElement();
     while(p)
@@ -527,6 +542,11 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
         p->setMoveWhiskerInParallel(toBool(data->GetText()));
     }
 
+    data = element->FirstChildElement("fetch_angle_from_CS_angle_motor");
+    if(data && data->GetText())
+    {
+        p->setFetchAngleFromCSAngleMotor(toBool(data->GetText()));
+    }
 
     return p;
 }

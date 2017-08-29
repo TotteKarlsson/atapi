@@ -200,6 +200,17 @@ bool ParallelProcess::start()
 	return Process::start();
 }
 
+bool ParallelProcess::resume()
+{
+	for(int i = 0; i < mProcesses.size(); i++)
+    {
+    	mProcesses[i]->resume();
+        Log(lInfo) << "Started Action \"" << mProcesses[i]->getProcessName()<<"\"";
+    }
+
+	return Process::start();
+}
+
 bool ParallelProcess::stop()
 {
 	for(int i = 0; i < mProcesses.size(); i++)

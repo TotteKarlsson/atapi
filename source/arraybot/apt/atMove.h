@@ -23,6 +23,7 @@ class AT_AB Move : public Process
 		virtual void	                    assignUnit(ATObject* o);
 
         virtual bool	                    stop();
+
         virtual bool	                    isBeingProcessed();
         bool 						        isProcessed();
 		bool						        isMotorCommandPending();
@@ -31,7 +32,7 @@ class AT_AB Move : public Process
 									        //!Any subclass need to implement these
         virtual bool 				        isDone() 	= 0;
         virtual bool	                    start() 	= 0;
-
+        virtual bool 				        resume() 	= 0;
         bool	            		        isMotorActive();
 
         							        //!MotorVelocity

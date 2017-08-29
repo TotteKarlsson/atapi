@@ -23,33 +23,6 @@ ProcessSequencer::~ProcessSequencer()
 	mSequenceTimer.stop();
 }
 
-void ProcessSequencer::pause()
-{
-	mSequenceTimer.pause();
-}
-
-bool ProcessSequencer::resume()
-{
-	//Get current process, and 'resume' it
- 	ProcessSequence* s = mSequences.getCurrent();
-    if(!s)
-    {
-    	return false;
-    }
-
-	Process* p = s->getCurrent();
-    if(!p)
-    {
-    	Log(lInfo) << "The end of process pipeline was reached";
-        return false;
-    }
-
-    p->resume();
-	mSequenceTimer.resume();
-  	Log(lInfo) << "The process sequence was resumed";
-    return true;
-}
-
 bool ProcessSequencer::initCurrentSequence()
 {
  	ProcessSequence* s = mSequences.getCurrent();
@@ -86,6 +59,58 @@ void ProcessSequencer::start(bool autoExecute)
     {
     	Log(lError) << "There are no processes to execute in the process sequence!";
     }
+}
+
+void ProcessSequencer::stop()
+{
+	mSequenceTimer.stop();
+ 	ProcessSequence* s = mSequences.getCurrent();
+    if(!s)
+    {
+    	return;
+    }
+
+    if(s->getCurrent())
+    {
+	   s->getCurrent()->stop();
+    }
+}
+
+void ProcessSequencer::pause()
+{
+	mSequenceTimer.pause();
+ 	ProcessSequence* s = mSequences.getCurrent();
+    if(!s)
+    {
+    	return;
+    }
+
+    if(s->getCurrent())
+    {
+	   s->getCurrent()->stop();
+    }
+}
+
+bool ProcessSequencer::resume()
+{
+	//Get current process, and 'resume' it
+ 	ProcessSequence* s = mSequences.getCurrent();
+    if(!s)
+    {
+    	return false;
+    }
+
+	Process* p = s->getCurrent();
+    if(!p)
+    {
+    	Log(lInfo) << "The end of process pipeline was reached";
+        return false;
+    }
+
+    p->resume();
+	mSequenceTimer.resume();
+  	Log(lInfo) << "The process sequence was resumed";
+    return true;
 }
 
 bool ProcessSequencer::reset()
@@ -192,21 +217,6 @@ bool ProcessSequencer::forward()
         }
     }
     return true;
-}
-
-void ProcessSequencer::stop()
-{
-	mSequenceTimer.stop();
- 	ProcessSequence* s = mSequences.getCurrent();
-    if(!s)
-    {
-    	return;
-    }
-
-    if(s->getCurrent())
-    {
-	   s->getCurrent()->stop();
-    }
 }
 
 ProcessSequence* ProcessSequencer::getCurrentSequence()

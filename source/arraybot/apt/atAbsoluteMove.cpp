@@ -95,6 +95,33 @@ bool AbsoluteMove::start()
     return false;
 }
 
+//Resume is similar to start...
+bool AbsoluteMove::resume()
+{
+	APTMotor* m = dynamic_cast<APTMotor*>(mSubject);
+    if(m)
+    {
+		if(mMaxVelocity == 0 || mAcceleration == 0)
+        {
+        	Log(lError) << "Move cannot be executed with zero velocity or acceleration";
+            return false;
+        }
+
+		//Reset and enable trigger(s)
+        if(mTrigger)
+        {
+        	mTrigger->reset();
+	        mTrigger->enable();
+        }
+
+        Process::resume();
+    	m->setVelocityParameters(mMaxVelocity, mAcceleration);
+        return m->moveToPosition(mPosition);
+    }
+
+    return false;
+}
+
 void AbsoluteMove::addTrigger(Trigger* t)
 {
 	mTrigger = t;

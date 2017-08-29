@@ -14,7 +14,7 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
     public:
         	   			                            MoveCoverSlipAtAngleProcess(const string& lbl);
     	virtual			                            ~MoveCoverSlipAtAngleProcess(){}
-        bool										calculateLift();
+        bool										calculateLift(ArrayBot& ab);
         											//Virtuals
 		virtual void		   		                init(ArrayBot& ab);
 
@@ -45,8 +45,10 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
         double										getLateralVelocity(){return mLateralVelocity;}
         double										getLateralAcceleration(){return mLateralAcceleration;}
         bool										getMoveWhiskerInParallel(){return mMoveWhiskerInParallel;}
-        bool										setMoveWhiskerInParallel(bool doIt){mMoveWhiskerInParallel = doIt;}
+        bool										setMoveWhiskerInParallel(bool doIt){mMoveWhiskerInParallel = doIt; return true;}
 
+		bool        								setFetchAngleFromCSAngleMotor(bool doIt){mFetchAngleFromCSAngleMotor = doIt; return true;}
+		bool        								getFetchAngleFromCSAngleMotor(){return mFetchAngleFromCSAngleMotor;}
 
         bool										assignMotors(APTMotor* csz, APTMotor* csy, APTMotor* wz, APTMotor* wy);
 
@@ -56,6 +58,7 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
     	APTMotor* 									mWHZMtr;
     	APTMotor* 									mWHYMtr;
 		bool										mMoveWhiskerInParallel;
+		bool										mFetchAngleFromCSAngleMotor;
 
         double										mLiftVelocity;
         double										mLiftAcceleration;

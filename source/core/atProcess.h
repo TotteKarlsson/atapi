@@ -30,7 +30,7 @@ class AT_CORE Process : public ATObject
 
         virtual bool	                        start() 			= 0;
         virtual bool	                        stop() 				= 0;
-        virtual bool	                        resume() {return false;}
+        virtual bool	                        resume()			= 0;
         virtual	bool	                        undo() 				= 0;
         virtual bool 	  						isDone()			= 0;
 

@@ -34,6 +34,7 @@ class AT_AB ParallelProcess : public Process
 
         							                //!All moves starts at the same time
         virtual bool	                            start();
+        virtual bool	                            resume();
         virtual bool	                            stop();
         virtual bool	                            isBeingProcessed();
         bool 						                isProcessed();

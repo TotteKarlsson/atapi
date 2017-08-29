@@ -40,6 +40,14 @@ bool Process::start()
     return true;
 }
 
+bool Process::resume()
+{
+	mIsStarted 			= true;
+	mIsBeingProcessed 	= true;
+    mIsProcessed 		= false;
+    return true;
+}
+
 void Process::init(ArrayBot& ab)
 {
 	mIsBeingProcessed 	=  false;

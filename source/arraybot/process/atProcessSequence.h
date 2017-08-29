@@ -19,7 +19,7 @@ using mtk::Property;
 class Process;
 class ArrayBot;
 
-//!A ProcessSequence maintains a list of processes
+//!A ProcessSequence maintains a list of processes.
 //!The processsequencer takes a ProcessSequence as input and executes inidividual processes
 //!from the sequence
 class AT_AB ProcessSequence : public ATObject
@@ -59,6 +59,11 @@ class AT_AB ProcessSequence : public ATObject
         void								setCategory(const string& c);
         string								getCategory();
 
+		int 								getOrder();
+		void 								setOrder(const int& o);
+
+
+
         void								setProjectName(const string& name);
         void								setFileFolder(const string& f);
 		void								setFileName(const string& f);
@@ -79,6 +84,10 @@ class AT_AB ProcessSequence : public ATObject
                                             //!For example, "Preset" sequences and "General"
                                             //!Categories are used in order to organize the UI
 		string								mCategory;
+
+        									//!The order is used by any component that need to order
+                                            //!sequences.
+        int									mOrder;
 
         									//!List of abstract Processes
 		mutable list<Process*>  			mProcesses;

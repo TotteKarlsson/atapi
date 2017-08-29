@@ -22,7 +22,7 @@ void initABCoreLib()
     WM_INFO_MESSAGE_DIALOG   	= RegisterWindowMessageA(INFO_MESSAGE_DIALOG);
 }
 
-unsigned int getABCoreMessageID(const string& msg)
+const unsigned int getABCoreMessageID(const string& msg)
 {
 	if(compareStrings(msg, MOTOR_WARNING_MESSAGE))
     {

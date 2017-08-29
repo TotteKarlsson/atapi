@@ -27,6 +27,7 @@ class AT_ARDUINO ArduinoServerCommand : public Process
         void								setCommand(const string& c){mCommand = c;}
 
         virtual bool	                    start();
+        virtual bool	                    resume(){return 0;}
         virtual bool	                    stop(){return Process::stop();}
         virtual bool 				        isDone();
 
