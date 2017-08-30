@@ -100,9 +100,19 @@ int ProcessSequence::getOrder()
 	return mOrder;
 }
 
-void ProcessSequence::setOrder(const int& o)
+void ProcessSequence::setOrder(int o)
 {
 	mOrder = o;
+}
+
+bool ProcessSequence::getUseProcessController()
+{
+	return mUseProcessController;
+}
+
+void ProcessSequence::setUseProcessController(bool o)
+{
+	mUseProcessController = o;
 }
 
 void ProcessSequence::setProjectName(const string& name)

@@ -92,6 +92,47 @@ string  ProcessSequences::getFileFolder()
 	return mFileFolder;
 }
 
+struct categorySort
+{
+     bool operator ()(ProcessSequence* a,  ProcessSequence* b)
+     {
+     	if(a && b)
+        {
+        	return compareNoCase(a->getCategory(),b->getCategory());
+        }
+        else
+        {
+        	return false;
+        }
+     }
+};
+
+struct orderSort
+{
+     bool operator ()(ProcessSequence* a,  ProcessSequence* b)
+     {
+     	if(a && b)
+        {
+        	if(compareNoCase(a->getCategory(),b->getCategory()))
+            {
+        		return a->getOrder() < b->getOrder();
+            }
+        }
+       	return false;
+     }
+};
+
+void ProcessSequences::sortOnCategory()
+{
+	::sort(mProcessSequences.begin(), mProcessSequences.end(), categorySort());
+}
+
+void ProcessSequences::sortOnOrder()
+{
+	::sort(mProcessSequences.begin(), mProcessSequences.end(), orderSort());
+}
+
+
 bool ProcessSequences::load(const string& fName)
 {
 	if(fileExists(joinPath(mFileFolder, fName + ".abp")))

@@ -31,6 +31,8 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrBarcodeScannerDisabled]	= "Barcode Scanner Disabled";
     mIPCMessage[acrSetZoomAndFocus]			= "Set Focus and Zoom";
     mIPCMessage[acrFocusAndZoomSet]			= "Focus and Zoom Set";
+    mIPCMessage[acrStartUC7]				= "Start UC7";
+    mIPCMessage[acrStopUC7]					= "Stop  UC7";
 
     mIPCMessage[acrUnknown]					= "Unknown";
 }

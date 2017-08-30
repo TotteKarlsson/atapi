@@ -68,8 +68,9 @@ bool ProcessSequenceProject::save(const string& fName)
 
     //For now, do a brute force save of Moleculix Objects
     XMLElement* sequence = newElement("sequence");
-	sequence->SetAttribute("category", 	mProcessSequence.getCategory().c_str());
-	sequence->SetAttribute("order", 	toString(mProcessSequence.getOrder()).c_str());
+	sequence->SetAttribute("category", 					mProcessSequence.getCategory().c_str());
+	sequence->SetAttribute("order", 					toString(mProcessSequence.getOrder()).c_str());
+	sequence->SetAttribute("use_process_controller", 	toString(mProcessSequence.getUseProcessController()).c_str());
 
     //First save Processes
     Process* p = mProcessSequence.getFirst();
@@ -203,6 +204,7 @@ int ProcessSequenceProject::loadProcesses()
     }
 
     mProcessSequence.setCategory(category);
+	//==========================================================================================================================
 
     int order(0);
     /// order attribute
@@ -216,6 +218,22 @@ int ProcessSequenceProject::loadProcesses()
     }
 
     mProcessSequence.setOrder(order);
+	//==========================================================================================================================
+
+    int useProcessController(true);
+
+    /// useProcessController attribute
+    if(sequence->Attribute("use_process_controller"))
+    {
+		useProcessController = toInt(sequence->Attribute("use_process_controller"));
+    }
+    else
+    {
+    	Log(lWarning) << "The sequence: "<<this->getProjectName()<<" don't have an \"use_process_controller\" attribute. use_process_controller \"true\" is applied";
+    }
+
+    mProcessSequence.setUseProcessController(useProcessController);
+	//==========================================================================================================================
 
     int nrOfObjects = 0;
      //Load process by process

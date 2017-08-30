@@ -132,4 +132,13 @@ bool ArrayCamClient::disableBarcodeScanner()
 	return postRequest(mProtocol[acrDisableBarcodeScanner]);
 }
 
+bool ArrayCamClient::startUC7()
+{
+	return postRequest(mProtocol[acrStartUC7]);
+}
+
+bool ArrayCamClient::stopUC7()
+{
+	return postRequest(mProtocol[acrStopUC7]);
+}
 

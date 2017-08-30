@@ -60,8 +60,10 @@ class AT_AB ProcessSequence : public ATObject
         string								getCategory();
 
 		int 								getOrder();
-		void 								setOrder(const int& o);
+		void 								setOrder(int o);
 
+		bool 								getUseProcessController();
+		void 								setUseProcessController(bool o);
 
 
         void								setProjectName(const string& name);
@@ -88,6 +90,10 @@ class AT_AB ProcessSequence : public ATObject
         									//!The order is used by any component that need to order
                                             //!sequences.
         int									mOrder;
+
+        									//!Allow sequence to be executed without using
+                                            //!the process controller.
+		bool								mUseProcessController;
 
         									//!List of abstract Processes
 		mutable list<Process*>  			mProcesses;

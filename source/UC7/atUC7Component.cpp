@@ -39,13 +39,15 @@ bool UC7::connect(int com)
 {
 	Log(lInfo) << "Connecting UC7 client on COM"<<com;
 
-    mUC7MessageReceiver.start();
-    mUC7MessageSender.start();
 
     if(!mSerial.connect(com, 19200))
     {
 		return false;
     }
+
+    //Only start these on succesfull connection
+    mUC7MessageReceiver.start();
+    mUC7MessageSender.start();
 
     return true;
 }

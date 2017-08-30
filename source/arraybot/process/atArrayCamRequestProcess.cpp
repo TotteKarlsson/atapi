@@ -116,6 +116,14 @@ bool ArrayCamRequestProcess::start()
 	        mArrayCamClient.setZoomAndFocus(mParameter1, mParameter2);
 		break;
 
+     	case ACMessageID::acrStartUC7:
+	        mArrayCamClient.startUC7();
+		break;
+
+     	case ACMessageID::acrStopUC7:
+	        mArrayCamClient.stopUC7();
+		break;
+
 		default:
         	Log(lError) << "Bad ArrayCamRequest in process";
 			return false;
@@ -195,6 +203,20 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
                 mIsProcessed = true;
             }
 		break;
+
+        case acrStartUC7:
+        	if(msg == p[acrUC7Started] || msg == p[acrUC7IsRunning])
+    		{
+                mIsProcessed = true;
+            }
+        break;
+
+        case acrStopUC7:
+        	if(msg == p[acrUC7Stopped] || msg == p[acrUC7IsStopped])
+    		{
+                mIsProcessed = true;
+            }
+        break;
     }
 }
 

@@ -32,6 +32,8 @@ class AT_AB ProcessSequences : public ATObject
         ProcessSequence*                            getPrevious() const;
         ProcessSequence*                            getCurrent() const;
 		string										getCurrentSequenceName();
+        void										sortOnOrder();
+        void										sortOnCategory();
 
         											//!Loads a process sequence from file.
                                                     //Files have the same name as the

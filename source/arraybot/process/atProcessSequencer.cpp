@@ -353,8 +353,6 @@ void ProcessSequencer::onTimerFunc()
             srp->showInfoMessageDialog();
             Log(lInfo) << "Enable the resume flag for this process, and execute resume()!";
         }
-       ///This will mark this process as done..
-       //srp->resume();
     }
     else if(p->isTimedOut())
     {
