@@ -220,12 +220,12 @@ int ProcessSequenceProject::loadProcesses()
     mProcessSequence.setOrder(order);
 	//==========================================================================================================================
 
-    int useProcessController(true);
+    bool useProcessController(true);
 
     /// useProcessController attribute
     if(sequence->Attribute("use_process_controller"))
     {
-		useProcessController = toInt(sequence->Attribute("use_process_controller"));
+		useProcessController = toBool(sequence->Attribute("use_process_controller"));
     }
     else
     {

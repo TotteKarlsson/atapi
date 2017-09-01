@@ -34,7 +34,7 @@ class AT_ARDUINO ArduinoDevice : public ATObject
 		void						setName(const string& name){mName = name;}
         string						getName(){return mName;}
 
-        void		 				assignInitFunction(InitCallBack cb){init = cb;}
+        void		 				assignInitFunction(InitCallBack cb);
         void		 				assignSerialMessageReceivedCallBack(SerialMessageReceivedCallBack cb);
 
 		bool						connect(int portNr, int baudRate = 9600);
@@ -58,7 +58,7 @@ class AT_ARDUINO ArduinoDevice : public ATObject
 
         							//!The init callback is designed to give an ArduinoDevice client a
                                     //!way to update its state on initialization
-		InitCallBack				init;
+		InitCallBack				initCallBack;
 
     protected:
     								//!The arduino device name. Used in the INI file

@@ -5,7 +5,7 @@
 #include "core/atATObject.h"
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
-//#include "atLightsArduino.h"
+#include "atLightsArduino.h"
 #include "atSensorsArduino.h"
 
 #include <vector>
@@ -38,7 +38,7 @@ class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
                                             //!Requests are sent to the server from a client.
     	bool 					            processRequest(IPCMessage& msg);
 
-//    	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
+    	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
     	SensorsArduino& 	   	            getSensorsArduino(){return mSensorsArduino;}
         bool            		            shutDown();
 
@@ -50,17 +50,16 @@ class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
     							            //!Container for Arduino devices
 		vector<ArduinoDevice*> 	            mArduinos;
 
-
-//    	LightsArduino 			            mLightsArduino;
-
         									//We should create a mutex for each of these
                                             //devices...
+    	LightsArduino 			            mLightsArduino;
+
     	SensorsArduino 			            mSensorsArduino;
 
         OnMessageUpdateCB					onMessageUpdateCB;
 
 
-//		void					            lightsArduinoMessageReceived(const string& msg);
+		void					            lightsArduinoMessageReceived(const string& msg);
 		void					            sensorsArduinoMessageReceived(const string& msg);
 
         void								notifyClients(const string& msg);

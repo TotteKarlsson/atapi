@@ -31,6 +31,12 @@ bool LightsArduino::toggleLED()
     return (switcher) ? send(mLEDLightONLine) :	send(mLEDLightOFFLine);
 }
 
+bool LightsArduino::setLEDDrive(int drive)
+{
+	Log(lInfo) << "Setting LEDs Drive to: "<<drive;
+    return send("f" + toString(drive));
+}
+
 bool LightsArduino::getStatus()
 {
 	Log(lInfo) << "Requesting sensor arduino status";

@@ -13,6 +13,7 @@ class AT_ARDUINO LightsArduino : public ArduinoDevice
 		bool								toggleLED();
         bool								turnLEDLightsOn();
         bool								turnLEDLightsOff();
+        bool								setLEDDrive(int drive);
         bool								getStatus();
 
     protected:

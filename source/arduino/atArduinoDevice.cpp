@@ -8,8 +8,11 @@ using namespace mtk;
 ArduinoDevice::ArduinoDevice(int pNr, int baudRate)
 :
 mSerial(pNr, baudRate),
-mMessageSender(*this)
-{}
+mMessageSender(*this),
+initCallBack(NULL)
+{
+
+}
 
 ArduinoDevice::~ArduinoDevice()
 {
@@ -20,7 +23,17 @@ ArduinoDevice::~ArduinoDevice()
 bool ArduinoDevice::connect(int portNr, int baudRate)
 {
     mMessageSender.start();
-	return mSerial.connect(portNr, baudRate);
+	bool cRes = mSerial.connect(portNr, baudRate);
+    if(cRes && initCallBack)
+    {
+		initCallBack();
+    }
+    return cRes;
+}
+
+void ArduinoDevice::assignInitFunction(InitCallBack cb)
+{
+	initCallBack = cb;
 }
 
 bool ArduinoDevice::isConnected()
@@ -60,23 +73,7 @@ bool ArduinoDevice::send(const string& msg)
     //Send a signal
     mNewMessageToSendCondition.signal();
 	return true;
-
-//	return mSerial.send(msg);
 }
-
-//bool UC7::sendRawMessage(const string& msg)
-//{
-//	//Put the message on the utgoing queue
-//    {
-//        Poco::ScopedLock<Poco::Mutex> lock(mSendBufferMutex);
-//    	mOutgoingMessagesBuffer.push_back(msg);
-//    }
-//
-//    //Send a signal
-//    mNewMessageToSendCondition.signal();
-//	return true;
-//}
-
 
 void ArduinoDevice::assignSerialMessageReceivedCallBack(SerialMessageReceivedCallBack cb)
 {
