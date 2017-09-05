@@ -42,6 +42,7 @@ class AT_CORE ArrayCamClient : public SocketClient, public ATObject
         bool								stopVideo();
 
         bool								setZoomAndFocus(int zoom, int focus);
+        bool								setLEDIntensity(int intensity);
 
         bool								takeSnapShot();
         bool								enableBarcodeScanner();
@@ -52,15 +53,14 @@ class AT_CORE ArrayCamClient : public SocketClient, public ATObject
 
 									        //!Post a custom request
         bool 		                        postRequest(const string& msg);
+        bool 		                        postRequest(const string& msg, int p1);
         bool 		                        postRequest(const string& msg, int p1, int p2);
 
         void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
 
-
     protected:
         ArrayCamMessageProcessor   			mMessageProcessor;
         ArrayCamProtocol					mProtocol;
-
 };
 
 #endif

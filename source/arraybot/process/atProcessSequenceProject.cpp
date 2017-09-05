@@ -502,6 +502,17 @@ ArrayCamRequestProcess* ProcessSequenceProject::createArrayCamRequestProcess(XML
 			p->mParameter2.setLabel("zoom");
         }
     }
+	else if(p->getRequest() == acrSetLEDIntensity)
+    {
+    	//Look for parameters
+	    XMLElement* data1 = element->FirstChildElement("intensity");
+        if(data1 && data1->GetText())
+        {
+        	p->mParameter1.setValue(toInt(data1->GetText()));
+			p->mParameter1.setLabel("intensity");
+        }
+    }
+
     return p;
 }
 

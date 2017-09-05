@@ -102,6 +102,14 @@ bool ArrayCamClient::postRequest(const string& msg, int p1, int p2)
     return SocketClient::request(m.str());
 }
 
+bool ArrayCamClient::postRequest(const string& msg, int p1)
+{
+	stringstream m;
+    m << msg << ", " << p1;
+
+    return SocketClient::request(m.str());
+}
+
 bool ArrayCamClient::startVideo()
 {
 	return postRequest(mProtocol[acrStartVideoRecorder]);
@@ -110,6 +118,11 @@ bool ArrayCamClient::startVideo()
 bool ArrayCamClient::setZoomAndFocus(int zoom, int focus)
 {
 	return postRequest(mProtocol[acrSetZoomAndFocus], zoom, focus);
+}
+
+bool ArrayCamClient::setLEDIntensity(int i)
+{
+	return postRequest(mProtocol[acrSetLEDIntensity], i);
 }
 
 bool ArrayCamClient::stopVideo()

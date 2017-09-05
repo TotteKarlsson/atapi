@@ -4,19 +4,6 @@
 
 map<ACMessageID, string> ArrayCamProtocol::mIPCMessage;
 
-//	acrStartVideoRecording = 0,
-//  acrVideoRecorderStarted,
-//	acrStopVideoRecorder,
-//  acrVideoRecorderStopped,
-//	acrTakeSnapShot,
-//	acrSnapShotTaken,
-//  acrEnableBarcodeScanner,
-//  acrBarcodeScanSucceded,
-//  acrBarcodeScanFailed,
-//  acrDisableBarcodeScanner,
-//  acrBarcodeScannerDisabled,
-//  acrUnknown
-
 ArrayCamProtocol::ArrayCamProtocol()
 {
     mIPCMessage[acrStartVideoRecorder] 		= "Start Video Recorder";
@@ -33,6 +20,8 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrFocusAndZoomSet]			= "Focus and Zoom Set";
     mIPCMessage[acrStartUC7]				= "Start UC7";
     mIPCMessage[acrStopUC7]					= "Stop  UC7";
+    mIPCMessage[acrSetLEDIntensity]			= "Set LED Intensity";
+    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensityr set";
 
     mIPCMessage[acrUnknown]					= "Unknown";
 }

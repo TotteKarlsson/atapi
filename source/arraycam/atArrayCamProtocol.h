@@ -29,6 +29,8 @@ AT_CORE enum  ACMessageID
     acrStopUC7,
     acrUC7Stopped,
 	acrUC7IsStopped,
+    acrSetLEDIntensity,
+    acrLEDIntensitySet,
     acrUnknown
 };
 

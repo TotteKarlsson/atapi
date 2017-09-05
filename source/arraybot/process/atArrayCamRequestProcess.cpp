@@ -71,6 +71,12 @@ XMLElement* ArrayCamRequestProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocumen
         zoom->SetText(mParameter2.getValueAsString().c_str());
         docRoot->InsertEndChild(zoom);
     }
+	else if(mRequest == acrSetLEDIntensity) //Need parameters for this one
+    {
+        XMLElement* f = doc.NewElement("intensity");
+        f->SetText(mParameter1.getValueAsString().c_str());
+        docRoot->InsertEndChild(f);
+    }
 
     return request;
 }
@@ -122,6 +128,10 @@ bool ArrayCamRequestProcess::start()
 
      	case ACMessageID::acrStopUC7:
 	        mArrayCamClient.stopUC7();
+		break;
+
+     	case ACMessageID::acrSetLEDIntensity:
+	        mArrayCamClient.setLEDIntensity(mParameter1);
 		break;
 
 		default:
