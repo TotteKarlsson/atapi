@@ -7,6 +7,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
+#pragma link "DbxDevartPostgreSQL"
 #pragma resource "*.dfm"
 TatdbDM *atdbDM;
 

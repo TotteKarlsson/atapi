@@ -3,40 +3,34 @@ object atdbDM: TatdbDM
   Height = 926
   Width = 1038
   object SQLConnection1: TSQLConnection
-    DriverName = 'MySQL'
+    DriverName = 'DevartPostgreSQL'
     LoginPrompt = False
     Params.Strings = (
-      'DriverUnit=Data.DBXMySQL'
+      'DriverUnit=DbxDevartPostgreSQL'
       
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver170.' +
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver170.' +
         'bpl'
       
-        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
-        'nd.Data.DbxCommonDriver,Version=17.0.0.0,Culture=neutral,PublicK' +
-        'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
-        'iver170.bpl'
-      
-        'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
-        'ory,Borland.Data.DbxMySQLDriver,Version=17.0.0.0,Culture=neutral' +
-        ',PublicKeyToken=91d62ebb5b0d1b1b'
-      'GetDriverFunc=getSQLDriverMYSQL'
-      'LibraryName=dbxmys.dll'
-      'LibraryNameOsx=libsqlmys.dylib'
-      'VendorLib=LIBMYSQL.dll'
-      'VendorLibWin64=libmysql.dll'
-      'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=localhost'
-      'Database=atdb'
-      'User_Name=atdb'
-      'Password=atdb123'
-      'MaxBlobSize=-1'
+        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
+        ',DbxDevartPostgreSQLDriver170.bpl'
+      'ProductName=DevartPostgreSQL'
+      'GetDriverFunc=getSQLDriverPostgreSQL'
+      'LibraryName=dbexppgsql40.dll'
       'LocaleCode=0000'
-      'Compressed=False'
-      'Encrypted=False'
+      'IsolationLevel=ReadCommitted'
+      'MaxBlobSize=-1'
+      'FetchAll=True'
+      'UseQuoteChar=False'
+      'UseUnicode=True'
+      'IPVersion=IPv4'
+      'VendorLib=dbexppgsql40.dll'
       'BlobSize=-1'
-      'ErrorResourceFile=')
+      'HostName='
+      'SchemaName='
+      'DataBase='
+      'User_Name='
+      'Password='
+      'EnableBCD=True')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
     Left = 40
