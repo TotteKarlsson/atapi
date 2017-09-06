@@ -1,3 +1,61 @@
+Release 0.5.4 (Sept 5)
+=======================
+* Added setLEDIntensity to ArrayCam protocol
+* Re-enabled Lights arduino
+* Fixed usage of process controller
+* Updated the arraycam protocol to allow starting stopping the UC7
+* Added ability to sort, and bypass process control form for process sequences
+* Added order integer to a process sequence object
+* Added ability to pause and resume processes
+* Added fetch angle from angle controller executing a MoveAtAngle process
+* Time to test Move at angle process
+* Getting moveatangle process going
+* Added new process type ptLiftAtAngle
+* Added new unit for process
+* Refactoring: Parallell to Parallel
+* Added ability to send custom messages from arraybot API to calling application
+* Improved the StopAndResume Process
+* Added ability to add a single Absolute move to a process sequence, without having to create a parallel process object
+* Added utility function getProcessWithName to the process sequencer
+* Changed the how a posted command, i.e. threaded motor command, is enumerated
+* made a few class functions const
+* Added support for Thorlabs BenchTopStepperMotors
+* Added ability to set and get jogMove mode and a motors jogStep
+* Added setFocus and zoom functions to navitar controller
+* Added setFocusAndZoom to ArrayCam server/Client protocol
+* Added ability to save/retrieve from xml focus and zoom arraycam request parameters
+* Added feature to add item to combobox if not exists in selectItem function
+* Adding functionality to automate zoom and focus on the arraycam server
+* Added getXML function to process sequence class
+* Added homeAll function to arraybot class
+* Added default "General" sequence category.
+* Added some utility functions to atdbDM, insertBlock and ribbon notes
+* Added a dbsensors datamodule
+* Many changes to atdbDataModule due to schema changes
+* Fixed navitar motor mixup
+* Need more research on how to use datamodule from package
+* Some minor compilation speed updates
+* Added frames and datamodules to atVCLCore package
+* Added miscellaneous UC7 classes/code, e.g. uc7 status history
+* Added project file for UC7 components
+* Moved counter class to core
+* More refactoring
+* Added Serial and Arduino modules (DLL's)
+* Added common pch header
+* Restructered: core files into core folder
+* Preparing some frames for packaging.
+* Added lookup fields in case Client dataset
+* Changed schema to use "cases"
+* ProcessID -> specimen_id
+* Added client datasets, and associated components for cases data
+* Added ability to categorize Process sequences
+* Moved Arraybot related frames to Arraybot application source tree
+* Added Navitarpreset code
+* Moved some units into packages
+* Adding Preset classes
+* Refactored ab -> at
+* Updated version and Changelog
+
 Release 0.5.3 (June 19)
 =======================
 * Updated readme
