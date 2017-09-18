@@ -64,8 +64,9 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
       'Time Delay'
       'Stop/Start Dialog'
       'ArrayCam Request'
-      'AbsoluteMove'
-      'Lift at Angle')
+      'Absolute Move'
+      'Lift at Angle'
+      'Home Motor')
     TabOrder = 1
   end
 end

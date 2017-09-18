@@ -115,9 +115,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="apt\atAbsoluteMove.cpp">
             <BuildOrder>44</BuildOrder>
         </CppCompile>
-        <CppCompile Include="apt\atAHomeMotor.cpp">
-            <BuildOrder>17</BuildOrder>
-        </CppCompile>
         <CppCompile Include="apt\atAPTDevice.cpp">
             <BuildOrder>18</BuildOrder>
         </CppCompile>
@@ -135,6 +132,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="apt\atGeneralIPCMessageData.cpp">
             <BuildOrder>26</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\atHomeMotor.cpp">
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="apt\atLongTravelStage.cpp">
             <BuildOrder>41</BuildOrder>

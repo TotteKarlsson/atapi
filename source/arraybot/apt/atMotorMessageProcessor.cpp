@@ -111,42 +111,21 @@ void MotorMessageProcessor::worker()
 
                 switch(cmd.getCore())
                 {
-                    case mcNone:
-		    	        Log(lWarning) << "Processing NONE command";
-					break;
-
-                    case mcStopHard:
-                    	mMotor->stop(false);
-					break;
+                    case mcNone: Log(lWarning) << "Processing NONE command";                                                                        break;
+                    case mcStopHard: 		        mMotor->stop(false);                                                                            break;
+                    case mcForward: 		        mMotor->forward(false);                                                                         break;
+                    case mcReverse: 		        mMotor->reverse(false);                                                                         break;
+                    case mcJogForward:		        mMotor->jogForward(false);                                                                      break;
+                    case mcJogReverse: 		        mMotor->jogReverse(false);                                                                      break;
+                    case mcHome: 			        mMotor->home(false);   		                                                                    break;
+                    case mcMoveToPosition: 	        mMotor->moveToPosition(cmd.getFirstVariable(), false);                                          break;
+                    case mcSetVelocityParameters: 	mMotor->setVelocityParameters(cmd.getFirstVariable(), cmd.getSecondVariable(), false);          break;
+                    case mcSwitchDirection: 		mMotor->switchDirection(false);                                                                 break;
 
                     case mcStopProfiled:
                     	mMotor->stopProfiled(false);
                         while(mMotor->isActive())
                         { ; }
-					break;
-
-                    case mcForward:
-                    	mMotor->forward(false);
-					break;
-
-                    case mcReverse:
-                    	mMotor->reverse(false);
-					break;
-
-                    case mcJogForward:
-                    	mMotor->jogForward(false);
-					break;
-
-                    case mcJogReverse:
-                    	mMotor->jogReverse(false);
-					break;
-
-                    case mcMoveToPosition:
-                    	mMotor->moveToPosition(cmd.getFirstVariable(), false);
-					break;
-
-                    case mcSetVelocityParameters:
-                    	mMotor->setVelocityParameters(cmd.getFirstVariable(), cmd.getSecondVariable(), false);
 					break;
 
                     case mcSetVelocityForward:
@@ -159,10 +138,7 @@ void MotorMessageProcessor::worker()
                     	mMotor->jogReverse(false);
 					break;
 
-                    case mcSwitchDirection:
-                    	mMotor->switchDirection(false);
-					break;
-                    default: Log(lError) << "Motor Command: "<<toString(cmd.getCore())<<" was not reckognized!";
+                    default: Log(lError) << "Motor Command: "<<toString(cmd.getCore())<<" was not reckognized!";                            break;
 
                 }
                 mLastProcessedCommand = cmd.getCore();

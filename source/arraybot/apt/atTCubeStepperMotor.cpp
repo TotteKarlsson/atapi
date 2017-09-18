@@ -69,7 +69,7 @@ bool TCubeStepperMotor::disconnect()
 bool TCubeStepperMotor::enable()
 {
 	int e = SCC_EnableChannel(mSerial.c_str());
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -80,7 +80,7 @@ bool TCubeStepperMotor::enable()
 bool TCubeStepperMotor::disable()
 {
 	int e = SCC_DisableChannel(mSerial.c_str());
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -206,18 +206,26 @@ bool TCubeStepperMotor::stopPolling()
     return false;
 }
 
-void TCubeStepperMotor::home()
+void TCubeStepperMotor::home(bool inThread)
 {
-  	if(!SCC_CanHome(mSerial.c_str()))
+	if(inThread)
     {
-    	Log(lError) << "This device cannot be homed";
+		MotorCommand cmd(mcHome);
+		post(cmd);
     }
-
-    int res = SCC_Home(mSerial.c_str());
-
-    if(res)
+    else
     {
-    	//throw
+
+        if(!SCC_CanHome(mSerial.c_str()))
+        {
+            Log(lError) << "This device cannot be homed";
+        }
+
+        int e = SCC_Home(mSerial.c_str());
+        if(e)
+        {
+        	Log(lError) <<tlError(e);
+        }
     }
 }
 
@@ -232,7 +240,7 @@ void TCubeStepperMotor::stop(bool inThread)
     {
 		int e = SCC_StopImmediate(mSerial.c_str());
         mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -269,7 +277,7 @@ double TCubeStepperMotor::getVelocity()
 
 	int e = SCC_GetVelParams(mSerial.c_str(), &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -282,7 +290,7 @@ double TCubeStepperMotor::getAcceleration()
 
 	int e = SCC_GetVelParams(mSerial.c_str(), &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -338,7 +346,7 @@ bool TCubeStepperMotor::setJogStep(double newStep)
 	Log(lDebug) << "Setting Jog Step: "<<newStep;
     int e = SCC_SetJogStepSize(mSerial.c_str(),  newStep * mScalingFactors.position);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -363,7 +371,7 @@ bool TCubeStepperMotor::setJogStopMode(StopMode sm)
 {
 	JogMoveMode jm = getJogMoveMode();
 	int e = SCC_SetJogMode(mSerial.c_str(), (MOT_JogModes) jm, (MOT_StopModes) sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -376,7 +384,7 @@ JogMoveMode	TCubeStepperMotor::getJogMoveMode()
     MOT_JogModes jm;
 	MOT_StopModes sm;
 	int e = SCC_GetJogMode(mSerial.c_str(), &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (JogMoveMode) MOT_JogModeUndefined;
@@ -389,7 +397,7 @@ StopMode TCubeStepperMotor::getJogStopMode()
 	MOT_StopModes sm;
     MOT_JogModes jm;
 	int e = SCC_GetJogMode(mSerial.c_str(), &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (StopMode) MOT_StopModeUndefined;
@@ -401,7 +409,7 @@ double TCubeStepperMotor::getJogVelocity()
 {
     int a, v;
     int e = SCC_GetJogVelParams(mSerial.c_str(), &a, &v);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -417,7 +425,7 @@ bool TCubeStepperMotor::setJogVelocity(double newVel)
 	Log(lDebug) << "Setting Jog Velocity: "<<newVel;
     int e = SCC_SetJogVelParams(mSerial.c_str(), a, newVel * mScalingFactors.velocity);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -431,7 +439,7 @@ bool TCubeStepperMotor::setJogAcceleration(double newAcc)
     SCC_GetJogVelParams(mSerial.c_str(), &a, &v);
     int e = SCC_SetJogVelParams(mSerial.c_str(), newAcc * mScalingFactors.acceleration, v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -445,7 +453,7 @@ double TCubeStepperMotor::getJogAcceleration()
     int a, v;
     int e = SCC_GetJogVelParams(mSerial.c_str(), &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -464,7 +472,7 @@ void TCubeStepperMotor::jogForward(bool inThread)
     {
         int e = SCC_MoveJog(mSerial.c_str(), MOT_Forwards);
         mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -483,7 +491,7 @@ void TCubeStepperMotor::jogReverse(bool inThread)
         //Todo: tell thorlabs about the MOT_Reverse flag name
         int e = SCC_MoveJog(mSerial.c_str(), MOT_Backwards);
         mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -500,7 +508,7 @@ void TCubeStepperMotor::forward(bool inThread)
     else
     {
         int e = SCC_MoveAtVelocity(mSerial.c_str(), MOT_Forwards);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -530,7 +538,7 @@ bool TCubeStepperMotor::moveToPosition(double pos, bool inThread)
     {
         int e = SCC_MoveToPosition(mSerial.c_str(), pos * mScalingFactors.position );
 		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
             Log(lError) <<"Tried to move to position: "<<pos<<" using the "<<getName()<<" device.";

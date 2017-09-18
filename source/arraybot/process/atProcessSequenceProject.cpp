@@ -15,6 +15,7 @@
 #include "apt/atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "arduino/atArduinoServerCommand.h"
+#include "atHomeMotor.h"
 
 using namespace mtk;
 using namespace tinyxml2;
@@ -143,6 +144,17 @@ bool ProcessSequenceProject::save(const string& fName)
                 }
             }
             break;
+            case ptHomeMotor:
+            {
+                HomeMotor* p1 = dynamic_cast<HomeMotor*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+
             default:
             {
                 Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessTypeAsString()<<" was NOT added to the XML document";
@@ -278,6 +290,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
         case ptArrayCamRequest:					return createArrayCamRequestProcess(element);
         case ptAbsoluteMove:					return createAbsoluteMove(element);
         case ptMoveCoverSlipAtAngle:			return createMoveCoverSlipAtAngleProcess(element);
+        case ptHomeMotor:						return createHomeMotorProcess(element);
     }
 
     return NULL;
@@ -443,7 +456,6 @@ AbsoluteMove* ProcessSequenceProject::createAbsoluteMove(XMLElement* element)
     //We need to associate the motor with 'name' with a
     //real motor object provided for by ArrayBot
     absMove->assignUnit(mProcessSequence.getArrayBot());
-
     return absMove;
 }
 
@@ -580,4 +592,40 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
     return p;
 }
 
+HomeMotor* ProcessSequenceProject::createHomeMotorProcess(XMLElement* element)
+{
+   	string name = element->Attribute("name");
+	HomeMotor* p = new HomeMotor(name);
+
+    //This code belongs in the process class!
+    XMLElement* data = element->FirstChildElement("info");
+    if(data && data->GetText())
+    {
+        p->setInfoText(data->GetText());
+    }
+
+    data = element->FirstChildElement("motor_name");
+    if(data && data->GetText())
+    {
+        p->setSubjectName(data->GetText());
+    }
+
+    data = element->FirstChildElement("pre_dwell_time");
+    if(data && data->GetText())
+    {
+        p->setPreDwellTime(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("post_dwell_time");
+    if(data && data->GetText())
+    {
+        p->setPostDwellTime(toDouble(data->GetText()));
+    }
+
+    //We need to associate the motor with 'name' with a
+    //real motor object provided for by ArrayBot
+    p->assignUnit(mProcessSequence.getArrayBot());
+
+    return p;
+}
 

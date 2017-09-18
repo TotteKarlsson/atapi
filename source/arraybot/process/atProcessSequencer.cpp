@@ -12,7 +12,7 @@ ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc,  const str
 mAB(ab),
 mArrayCamClient(acc),
 mSequences(fileFolder, "abp", acc, mAB),
-mSequenceTimer(50)
+mSequenceTimer(Poco::Timespan::MILLISECONDS * 50)
 {
 	mSequenceTimer.assignTimerFunction(onTimerFunc);
 }

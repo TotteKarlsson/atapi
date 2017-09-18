@@ -74,9 +74,7 @@ bool MotorMessageContainer::hasMessage()
 
 int MotorMessageContainer::count()
 {
-//    mListMutex.lock();
     int sz = mCommands.size();
-//    mListMutex.unlock();
     return sz;
 }
 

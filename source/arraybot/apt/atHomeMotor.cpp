@@ -16,7 +16,7 @@ at::Move(lbl, mtr, 1, 1)
 
 const string HomeMotor::getTypeName() const
 {
-	return "absoluteMove";
+	return "homeMotor";
 }
 
 bool HomeMotor::write()
@@ -31,7 +31,11 @@ bool HomeMotor::write()
 bool HomeMotor::isDone()
 {
 	APTMotor* o = dynamic_cast<APTMotor*>(mSubject);
-    if(o)
+//    Log(lDebug) << "Elapsed process time: "<<getElapsedTimeSinceStart().totalMilliseconds();
+
+    //The motor takes really long time to set its home flag to false on start. So, don't check for the first 400ms or so
+    bool timeHasElapsed = getElapsedTimeSinceStart() > Poco::Timespan::MILLISECONDS * 400;
+    if(o && o->getNumberOfQueuedCommands() == 0 && timeHasElapsed)
     {
     	return o->isHomed();
     }
@@ -47,7 +51,7 @@ bool HomeMotor::start()
         //This will start the processs internal time checking that checks for
         //process events
         Process::start();
-    	m->home();
+    	m->home(true);
         return true;
     }
 

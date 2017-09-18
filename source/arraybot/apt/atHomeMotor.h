@@ -21,6 +21,7 @@ class AT_AB HomeMotor : public at::Move
 		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 
     protected:
+
 };
 
 #endif

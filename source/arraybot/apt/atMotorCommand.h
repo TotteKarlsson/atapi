@@ -25,7 +25,8 @@ enum MotorCommandEnum
     mcSetAcceleration,
     mcSwitchDirection,
     mcMoveDistance,
-    mcMoveToPosition
+    mcMoveToPosition,
+    mcHome
 };
 
 string toString(MotorCommandEnum e);
@@ -48,7 +49,6 @@ class AT_AB MotorCommand : public ATObject
 		MotorCommandEnum	mCommand;
     	double				mVariable1;
     	double				mVariable2;
-
-
 };
+
 #endif

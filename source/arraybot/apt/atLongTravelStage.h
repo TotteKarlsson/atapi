@@ -15,7 +15,7 @@ class AT_AB LongTravelStage : public APTMotor
         bool	                        disable();
 
 				                        ///Control commands
-		void 		                    home();
+		void 		                    home(bool inThread);
 
 		HardwareInformation		        getHWInfo();
         double				 			getEncoderCounts();

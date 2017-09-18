@@ -89,7 +89,7 @@ class AT_AB APTMotor : public APTDevice
 		virtual unsigned long 	            getStatusBits() = 0;
 
 						                    ///Control commands
-		virtual void 		                home() = 0;
+		virtual void 		                home(bool inThread = true) = 0;
         virtual void 		                stop(bool inThread = true) = 0;
         virtual void 		                stopProfiled(bool inThread = true) = 0;
 
@@ -114,7 +114,6 @@ class AT_AB APTMotor : public APTDevice
         virtual void		                reverse(bool inThread = true) = 0;
         virtual bool		                moveToPosition(double position, bool inThread = true) = 0;
         virtual void						setPotentiometerVelocity(double v) = 0;
-
 
     protected:
     										//!Motor commands are processed in a thread by the
