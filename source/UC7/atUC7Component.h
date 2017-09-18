@@ -57,8 +57,10 @@ class AT_UC7 UC7 : public ATObject
 
         								//!Set Feedrate in nm
         bool							setFeedRate(uint feedRate, bool isRequest = true);
-
 		bool							setNorthSouthStageAbsolutePosition(uint pos, bool isRequest = true);
+
+        bool                            setCuttingSpeed(uint speed, bool isRequest = true);
+        bool                            setReturnSpeed(uint speed, bool isRequest = true);
 
 										//status requests
                                         //!Get all statuses
@@ -146,6 +148,8 @@ class AT_UC7 UC7 : public ATObject
         uint	 						mNumberOfZeroStrokes;
         uint   							mNorthSouthStagePosition;
         uint							mNorthLimitPosition;
+        uint							mCuttingSpeed;
+        uint							mReturnSpeed;
 
         								//!When this boolean is true, UC7 commands may be sent to the leica
                                         //!when HW status is changing

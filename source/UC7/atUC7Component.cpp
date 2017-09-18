@@ -23,7 +23,9 @@ UC7::UC7(HWND__ *h)
     mNumberOfZeroStrokes(0),
     mNorthLimitPosition(0),
 	mKnifeStageJogPreset(0),
-    mKnifeStageResumeDelta(0)
+    mKnifeStageResumeDelta(0),
+	mCuttingSpeed(0),
+	mReturnSpeed(0)
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
     mCustomTimer.setInterval(5);
@@ -70,18 +72,10 @@ bool UC7::setStrokeState(UC7StrokeState state)
     mUC7StatusHistory.insert(UC7StatusPoint(mStrokeState));
     switch(mStrokeState)
     {
-    	case UC7StrokeState::ssBeforeCutting:
-
-        break;
-
-    	case UC7StrokeState::ssCutting:
-        break;
-
-    	case UC7StrokeState::ssAfterCutting:
-        break;
-
-    	case UC7StrokeState::ssRetracting:
-        break;
+    	case UC7StrokeState::ssBeforeCutting:       break;
+    	case UC7StrokeState::ssCutting:        		break;
+    	case UC7StrokeState::ssAfterCutting:        break;
+    	case UC7StrokeState::ssRetracting:        	break;
 
         default:
         break;
@@ -333,6 +327,32 @@ bool UC7::setKnifeStageResumeDelta(uint delta)
     return true;
 }
 
+bool UC7::setCuttingSpeed(uint speed, bool isRequest)
+{
+	if(isRequest)
+    {
+		string dataStr(zeroPadString(4, toHex(speed)));
+		return sendUC7Message(CUTTING_SPEED, "01", dataStr);
+		return false;
+    }
+
+    mCuttingSpeed = speed;
+    return true;
+}
+
+bool UC7::setReturnSpeed(uint speed, bool isRequest)
+{
+	if(isRequest)
+    {
+		string dataStr(zeroPadString(4, toHex(speed)));
+		return sendUC7Message(RETURN_SPEED, "01", dataStr);
+		return false;
+    }
+
+    mReturnSpeed = speed;
+    return true;
+}
+
 bool UC7::setFeedRate(uint feedRate, bool isRequest)
 {
 	if(isRequest)
@@ -381,34 +401,18 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 	//This function constructs a proper command to send to the UC7
     switch(msgName)
     {
-        case SOFTWARE_RESET:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case GET_PART_ID:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case LOGIN:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case COMMAND_TRANSMISSION_ERROR:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case GET_VERSION:
-  			Log(lInfo) << "Not implemented!";
- 		break;
+        case SOFTWARE_RESET:   				Log(lInfo) << "Not implemented!"; 		break;
+        case GET_PART_ID:  					Log(lInfo) << "Not implemented!"; 		break;
+        case LOGIN:  						Log(lInfo) << "Not implemented!"; 		break;
+        case COMMAND_TRANSMISSION_ERROR:  	Log(lInfo) << "Not implemented!"; 		break;
+        case GET_VERSION:		  			Log(lInfo) << "Not implemented!"; 		break;
 
         case FEEDRATE_MOTOR_CONTROL:
-       		cmd <<gStepperControllerAddress<<sender<<20<<data1;
+        	cmd <<gStepperControllerAddress<<sender<<20<<data1;
 	        mUC7Message.init(cmd.str());
  		break;
 
-        case SEND_POSITION_AT_MOTION:
-  			Log(lInfo) << "Not implemented!";
- 		break;
+        case SEND_POSITION_AT_MOTION:  	    Log(lInfo) << "Not implemented!"; 		break;
 
         case FEED:
        		cmd <<gStepperControllerAddress<<sender<<23<<data1<<data2;
@@ -438,11 +442,13 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
  		break;
 
         case CUTTING_SPEED:
-  			Log(lInfo) << "Not implemented!";
+			cmd <<gMotorControllerAddress<<sender<<30<<data1<<data2;
+	        mUC7Message.init(cmd.str());
  		break;
 
         case RETURN_SPEED:
-  			Log(lInfo) << "Not implemented!";
+			cmd <<gMotorControllerAddress<<sender<<31<<data1<<data2;
+	        mUC7Message.init(cmd.str());
  		break;
 
         case HANDWHEEL_POSITION:

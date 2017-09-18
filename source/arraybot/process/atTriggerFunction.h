@@ -1,6 +1,5 @@
 #ifndef abTriggerFunctionH
 #define abTriggerFunctionH
-//---------------------------------------------------------------------------
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include <functional>
