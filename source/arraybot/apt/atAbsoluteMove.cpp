@@ -55,7 +55,6 @@ bool AbsoluteMove::isDone()
 
                 //This return statement allows a trigger to 'finish' a process in a different
                 //position than its 'mother' process
-
                 return true;
             }
         }

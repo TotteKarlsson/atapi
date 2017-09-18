@@ -113,6 +113,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="apt\atAbsoluteMove.cpp">
+            <BuildOrder>44</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="apt\atAHomeMotor.cpp">
             <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="apt\atAPTDevice.cpp">
