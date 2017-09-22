@@ -21,7 +21,7 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrStartUC7]				= "Start UC7";
     mIPCMessage[acrStopUC7]					= "Stop  UC7";
     mIPCMessage[acrSetLEDIntensity]			= "Set LED Intensity";
-    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensityr set";
+    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensity set";
 
     mIPCMessage[acrUnknown]					= "Unknown";
 }

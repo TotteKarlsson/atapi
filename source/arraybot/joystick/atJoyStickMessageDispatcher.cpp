@@ -44,7 +44,7 @@ bool JoyStickMessageDispatcher::isValid()
 bool JoyStickMessageDispatcher::enable(int id)
 {
 	mJoyStickID = id;
-
+   	Log(lInfo) << "Enabling Joystick with ID:"<<id;
 	if(checkCapabilities(mJoyStickID))
     {
     	mEnabled = readCapabilities();
@@ -60,7 +60,7 @@ bool JoyStickMessageDispatcher::enable(int id)
 
     if(!mEnabled)
     {
-    	Log(lWarning) << "Failed to enable JS Message Dispatcher";
+    	Log(lWarning) << "Failed to enable JS Message Dispatcher using ID:"<<id;
     }
     return mEnabled;
 }
@@ -116,6 +116,7 @@ bool JoyStickMessageDispatcher::readCapabilities()
 			Log(lError) << "Invalid joystick parameter.";
         }
 
+        Log(lError) <<"This driver supports "<<joyGetNumDevs()<<" joystick devices";
         Log(lError) <<"Failed getting joystick capabilities";
         return false;
     }

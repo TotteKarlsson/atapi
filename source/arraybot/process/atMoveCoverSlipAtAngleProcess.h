@@ -6,7 +6,6 @@
 
 //!A LiftAtAngle process is a process combining up to 4 motors to move
 //!the coverslip and the whisker at a predefined angle.
-
 class APTMotor;
 
 class AT_AB MoveCoverSlipAtAngleProcess : public Process

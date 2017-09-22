@@ -214,6 +214,12 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
             }
 		break;
 
+        case acrSetLEDIntensity:
+        	if(msg == p[acrLEDIntensitySet])
+    		{
+                mIsProcessed = true;
+            }
+        break;
         case acrStartUC7:
         	if(msg == p[acrUC7Started] || msg == p[acrUC7IsRunning])
     		{
