@@ -3,5 +3,7 @@
 //---------------------------------------------------------------------------
 
 JoyStickButtonStateEventDispatcher::JoyStickButtonStateEventDispatcher()
-: mButtonState(bsUp)
+:
+mButtonState(bsUp),
+mClickEventOnly(true)
 {}

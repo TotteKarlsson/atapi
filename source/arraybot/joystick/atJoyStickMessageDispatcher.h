@@ -28,7 +28,7 @@ class AT_AB JoyStickMessageDispatcher : public ATObject
                                                 JoyStickMessageDispatcher(ArrayBotJoyStick& js, int nrOfButtons, int& ID);
                                                 ~JoyStickMessageDispatcher();
 
-        void				                    setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down);
+        void				                    setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down, bool clickOnly = true);
         void				                    setPOVButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down);
         void				                    setAxisEvent(int axis, JoyStickAxisEvent move);
 

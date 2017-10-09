@@ -118,18 +118,6 @@ Process* ParallelProcess::getProcess(const Process* p)
     return NULL;
 }
 
-XMLElement* ParallelProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
-{
-	for(int i = 0; i < mProcesses.size(); i++)
-    {
-    	Process* pp = mProcesses[i];
-        mtk::XMLElement* newElement = pp->addToXMLDocument(doc, docRoot);
-        pp->addToXMLDocumentAsChild(doc, newElement);
-    }
-
-    return dynamic_cast<XMLElement*>(docRoot);
-}
-
 bool ParallelProcess::isBeingProcessed()
 {
 	if(isDone())
@@ -239,3 +227,16 @@ bool ParallelProcess::undo()
 {
 	return false;
 }
+
+XMLElement* ParallelProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
+{
+	for(int i = 0; i < mProcesses.size(); i++)
+    {
+    	Process* pp = mProcesses[i];
+        mtk::XMLElement* newElement = pp->addToXMLDocument(doc, docRoot);
+        pp->addToXMLDocumentAsChild(doc, newElement);
+    }
+
+    return dynamic_cast<XMLElement*>(docRoot);
+}
+

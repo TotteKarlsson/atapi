@@ -35,8 +35,11 @@ class AT_CORE NavitarMotor : public ATObject
         						            //!Drive motor to the limit
 		void					            limit();
 
-        									//!Get the motors current position
+        									//!Set the motors current position
         int									setPosition(int pos);
+
+        									//!Add to current position
+        int									addToPosition(int pos);
 
         									//!Get the motors current position
         int									getPosition();

@@ -24,12 +24,12 @@ mJSMessageDispatcher(*this, 14, mJoyStickID)
 
     														//!Z-up
     mJSMessageDispatcher.setButtonEvents(4, mButton4.down,  mButton4.up);
-
-    mJSMessageDispatcher.setButtonEvents(5, mButton5.down,  mButton5.up);
-    mJSMessageDispatcher.setButtonEvents(6, mButton6.down,  mButton6.up);
-
-    mJSMessageDispatcher.setButtonEvents(7, mButton7.down,  mButton7.up);
-    mJSMessageDispatcher.setButtonEvents(8, mButton8.down,  mButton8.up);
+//
+//    mJSMessageDispatcher.setButtonEvents(5, mButton5.down,  mButton5.up);
+//    mJSMessageDispatcher.setButtonEvents(6, mButton6.down,  mButton6.up);
+//
+//    mJSMessageDispatcher.setButtonEvents(7, mButton7.down,  mButton7.up);
+//    mJSMessageDispatcher.setButtonEvents(8, mButton8.down,  mButton8.up);
 
     mJSMessageDispatcher.setPOVButtonEvents(1, mPOVButton1.down,  mPOVButton1.up);
     mJSMessageDispatcher.setPOVButtonEvents(2, mPOVButton2.down,  mPOVButton2.up);
@@ -71,9 +71,9 @@ bool ArrayBotJoyStick::setAxesMaxVelocity(double maxV)
     return true;
 }
 
-void ArrayBotJoyStick::setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down)
+void ArrayBotJoyStick::setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down, bool clickOnly)
 {
-	mJSMessageDispatcher.setButtonEvents(btnNr, up, down);
+	mJSMessageDispatcher.setButtonEvents(btnNr, up, down, clickOnly);
 }
 
 void ArrayBotJoyStick::setPOVButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down)
@@ -153,10 +153,10 @@ bool ArrayBotJoyStick::enable()
 bool ArrayBotJoyStick::disable()
 {
     mJSMessageDispatcher.disable();
-	mCoverSlipAxesEnabled = false;
-	mWhiskerAxesEnabled = false;
-    mCoverSlipZButtonsEnabled = false;
-    mWhiskerZButtonsEnabled = false;
+	mCoverSlipAxesEnabled 		= false;
+	mWhiskerAxesEnabled 		= false;
+    mCoverSlipZButtonsEnabled 	= false;
+    mWhiskerZButtonsEnabled 	= false;
 
 	mEnabled = false;
     return true;
@@ -195,10 +195,10 @@ JoyStickButton& ArrayBotJoyStick::getButton(int nr)
     	case 2:  return mButton2;
     	case 3:  return mButton3;
     	case 4:  return mButton4;
-
+    	case 5:  return mButton5;
+    	case 6:  return mButton6;
     	case 7:  return mButton7;
     	case 8:  return mButton8;
-
     	case 9:  return mButton9;
     	case 10: return mButton10;
 

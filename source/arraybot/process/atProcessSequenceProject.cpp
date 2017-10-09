@@ -39,7 +39,7 @@ mArrayCamClient(ac)
 ProcessSequenceProject::~ProcessSequenceProject()
 {}
 
-string ProcessSequenceProject::getPresentModelVersion()
+string ProcessSequenceProject::getPresentXMLModelVersion()
 {
     return gProcessSequenceProjectFileVersion;
 }
@@ -339,7 +339,12 @@ ParallelProcess* ProcessSequenceProject::createParallelProcess(XMLElement* eleme
     				c->assignProcessSequence(&mProcessSequence);
                     p->addProcess(c);
                 }
-
+                else if(toProcessType(type) == ptMoveCoverSlipAtAngle)
+                {
+                	MoveCoverSlipAtAngleProcess* c = createMoveCoverSlipAtAngleProcess(proc);
+    				c->assignProcessSequence(&mProcessSequence);
+                    p->addProcess(c);
+                }
             }
             proc = proc->NextSiblingElement();
         }
@@ -546,48 +551,7 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
    	string name = element->Attribute("name");
 	MoveCoverSlipAtAngleProcess* p = new MoveCoverSlipAtAngleProcess(name);
 
-    //This code belongs in the process class!
-    XMLElement* data = element->FirstChildElement("info");
-    if(data && data->GetText())
-    {
-        p->setInfoText(data->GetText());
-    }
-
-    data = element->FirstChildElement("lift_velocity");
-    if(data && data->GetText())
-    {
-        p->setLiftVelocity(toDouble(data->GetText()));
-    }
-
-    data = element->FirstChildElement("lift_acceleration");
-    if(data && data->GetText())
-    {
-        p->setLiftAcceleration(toDouble(data->GetText()));
-    }
-
-    data = element->FirstChildElement("lift_angle");
-    if(data && data->GetText())
-    {
-        p->setLiftAngle(toDouble(data->GetText()));
-    }
-
-    data = element->FirstChildElement("lift_height");
-    if(data && data->GetText())
-    {
-        p->setLiftHeight(toDouble(data->GetText()));
-    }
-
-    data = element->FirstChildElement("move_whisker_in_parallel");
-    if(data && data->GetText())
-    {
-        p->setMoveWhiskerInParallel(toBool(data->GetText()));
-    }
-
-    data = element->FirstChildElement("fetch_angle_from_CS_angle_motor");
-    if(data && data->GetText())
-    {
-        p->setFetchAngleFromCSAngleMotor(toBool(data->GetText()));
-    }
+    p->populateFromXML(element);
 
     return p;
 }

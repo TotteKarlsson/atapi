@@ -23,6 +23,10 @@ AT_CORE enum  ACMessageID
     acrBarcodeScannerDisabled,
     acrSetZoomAndFocus,
 	acrFocusAndZoomSet,
+    acrZoomIn,
+    acrZoomInSet,
+    acrZoomOut,
+    acrZoomOutSet,
     acrStartUC7,
     acrUC7Started,
 	acrUC7IsRunning,
@@ -44,7 +48,7 @@ class AT_CORE ArrayCamProtocol
     	static map<ACMessageID, string>   	mIPCMessage;
 
 	private:
-	    map<ACMessageID, string>::iterator	mIt;
+	    map<ACMessageID, string>::iterator	mIter;
 };
 
 #endif

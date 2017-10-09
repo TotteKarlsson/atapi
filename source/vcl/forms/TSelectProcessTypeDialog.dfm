@@ -12,6 +12,7 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 23
   object Panel1: TPanel

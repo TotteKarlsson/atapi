@@ -16,7 +16,7 @@ class PACKAGE TReticle : public ATObject
         void				        setCircleRadius(int r);
         void				        setReticleCenter(int x, int y);
         void						visible(bool vis);
-        bool						isVisible(){return mVisible;}
+        bool						isVisible();
 
     protected:
     	TCanvas* 			        mCanvas;

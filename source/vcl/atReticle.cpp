@@ -29,6 +29,11 @@ void TReticle::setReticleCenter(int x, int y)
 	mReticleCenter = pair<int,int>(x,y);
 }
 
+bool TReticle::isVisible()
+{
+	return mVisible;
+}
+
 void TReticle::draw(int w, int h)
 {
 	if(!mVisible)

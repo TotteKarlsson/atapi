@@ -35,7 +35,7 @@ class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
 
         bool                                    save(const string& fName = mtk::gEmptyString);
         bool                                    open();
-        string                                  getPresentModelVersion();
+        string                                  getPresentXMLModelVersion();
 
     protected:
         ProcessSequence&                        mProcessSequence;

@@ -298,6 +298,6 @@ bool ProcessSequence::write(const string& folder)
 string ProcessSequence::getXML()
 {
 	stringstream s;
-    s<<mProject.getXML();
+    s << mProject.getXML();
     return s.str();
 }

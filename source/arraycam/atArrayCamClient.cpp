@@ -120,6 +120,16 @@ bool ArrayCamClient::setZoomAndFocus(int zoom, int focus)
 	return postRequest(mProtocol[acrSetZoomAndFocus], zoom, focus);
 }
 
+bool ArrayCamClient::zoomIn(int val)
+{
+	return postRequest(mProtocol[acrZoomIn], val);
+}
+
+bool ArrayCamClient::zoomOut(int val)
+{
+	return postRequest(mProtocol[acrZoomOut], val);
+}
+
 bool ArrayCamClient::setLEDIntensity(int i)
 {
 	return postRequest(mProtocol[acrSetLEDIntensity], i);

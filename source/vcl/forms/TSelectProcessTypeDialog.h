@@ -15,12 +15,14 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TButton *mOkBtn;
 	TRadioGroup *mProcTypeRG;
+	void __fastcall FormShow(TObject *Sender);
 	private:
+		bool	mIsOpenedForParallelProcess;
 
 	public:
-				__fastcall TSelectProcessTypeDialog(TComponent* Owner);
+    		__fastcall 	TSelectProcessTypeDialog(TComponent* Owner);
+		void			setOpenedForParallelProcess(){mIsOpenedForParallelProcess =true;}
 };
-
 
 extern PACKAGE TSelectProcessTypeDialog *SelectProcessTypeDialog;
 #endif
