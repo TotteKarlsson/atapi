@@ -7,10 +7,10 @@
 
 using namespace mtk;
 
-ProcessSequence::ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& name, const string& fileExt)
+ProcessSequence::ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& sequenceName, const string& fileExt)
 :
 mAB(ab),
-mProject(*this, ac, fileExt),
+mProject(*this, ac, sequenceName),
 mCategory("General"),
 mOrder(0)
 {
@@ -29,6 +29,11 @@ bool ProcessSequence::assignSubject(ATObject* o)
         p = getNext();
     }
     return true;
+}
+
+string ProcessSequence::getName()
+{
+	return mProject.getProjectName();
 }
 
 void ProcessSequence::clear()

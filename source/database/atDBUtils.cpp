@@ -235,6 +235,10 @@ void handleMySQLException()
     {
         Log(lError) << e.message() << endl;
     }
+    catch(const string& msg)
+    {
+    	Log(lError) << "Exception: "<<msg;
+    }
     catch(...)
     {
     	Log(lError) << "Unhandled PocoDataMySQL exception...";

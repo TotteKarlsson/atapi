@@ -17,7 +17,6 @@ class PACKAGE TImagesAndMoviesDM : public TDataModule
 {
     __published:	// IDE-managed Components
         TSQLDataSet *images;
-        TSQLConnection *SQLConnection1;
         TDataSetProvider *DataSetProvider1;
         TDataSetProvider *imagesProvider;
         TClientDataSet *imagesCDS;
@@ -65,25 +64,17 @@ class PACKAGE TImagesAndMoviesDM : public TDataModule
 	TIntegerField *imageNotesDSimage_id;
 	TIntegerField *imageNotesDSnote_id;
         void __fastcall imagesCDSAfterScroll(TDataSet *DataSet);
-        void __fastcall SQLConnection1AfterConnect(TObject *Sender);
+
 	void __fastcall imagesCDSdateGetText(TField *Sender, UnicodeString &Text, bool DisplayText);
 	void __fastcall notesCDScreated_onGetText(TField *Sender, UnicodeString &Text,
           bool DisplayText);
 	void __fastcall notesCDSAfterScroll(TDataSet *DataSet);
-	void __fastcall SQLConnection1BeforeConnect(TObject *Sender);
+
 
 	private:	// User declarations
-    	string		mDataBaseUser;
-    	string		mDataBaseUserPassword;
-       	string		mDataBase;
-        string 		mDBIP;
 
 	public:		// User declarations
 				__fastcall TImagesAndMoviesDM(TComponent* Owner);
-
-		bool 	__fastcall connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
-        void    __fastcall afterConnect();
-        void    __fastcall afterDisConnect();
 
 };
 

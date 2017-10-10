@@ -6,7 +6,6 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
     CommandText = 'select * from umimage order by date desc'
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = SQLConnection1
     Left = 40
     Top = 112
     object imagesid: TIntegerField
@@ -22,47 +21,6 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
       FieldName = 'date'
       Required = True
     end
-  end
-  object SQLConnection1: TSQLConnection
-    ConnectionName = 'ATDBDebug'
-    DriverName = 'MySQL'
-    LoginPrompt = False
-    Params.Strings = (
-      'DriverUnit=Data.DBXMySQL'
-      
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver170.' +
-        'bpl'
-      
-        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
-        'nd.Data.DbxCommonDriver,Version=17.0.0.0,Culture=neutral,PublicK' +
-        'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
-        'iver170.bpl'
-      
-        'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
-        'ory,Borland.Data.DbxMySQLDriver,Version=17.0.0.0,Culture=neutral' +
-        ',PublicKeyToken=91d62ebb5b0d1b1b'
-      'GetDriverFunc=getSQLDriverMYSQL'
-      'LibraryName=dbxmys.dll'
-      'LibraryNameOsx=libsqlmys.dylib'
-      'VendorLib=LIBMYSQL.dll'
-      'VendorLibWin64=libmysql.dll'
-      'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=127.0.0.1'
-      'Database=umlocal'
-      'User_Name=atdb_client'
-      'Password=atdb123'
-      'MaxBlobSize=-1'
-      'LocaleCode=0000'
-      'Compressed=False'
-      'Encrypted=False'
-      'BlobSize=-1'
-      'ErrorResourceFile=')
-    AfterConnect = SQLConnection1AfterConnect
-    BeforeConnect = SQLConnection1BeforeConnect
-    Left = 32
-    Top = 32
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = imageNotesDS
@@ -97,12 +55,12 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
   end
   object imagesDS: TDataSource
     DataSet = imagesCDS
-    Left = 336
+    Left = 360
     Top = 112
   end
   object imageNotesDSource: TDataSource
     DataSet = imageNoteCDS
-    Left = 336
+    Left = 360
     Top = 184
   end
   object imageNoteCDS: TClientDataSet
@@ -136,7 +94,6 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
     CommandText = 'select * from sensor_data order by date desc'
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = SQLConnection1
     Left = 40
     Top = 344
     object sensorsid: TIntegerField
@@ -197,7 +154,6 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
         Name = 'id'
         ParamType = ptInput
       end>
-    SQLConnection = SQLConnection1
     Left = 40
     Top = 184
     object imageNotesDSid: TIntegerField
@@ -262,7 +218,6 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
     DataSource = notesDSource
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = SQLConnection1
     Left = 448
     Top = 64
   end
