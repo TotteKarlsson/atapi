@@ -262,9 +262,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
-        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

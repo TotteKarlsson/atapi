@@ -12,69 +12,35 @@
 #include "Poco/Mutex.h"
 //---------------------------------------------------------------------------
 using std::string;
-
-class PACKAGE TImagesAndMoviesDM : public TDataModule
+class  TImagesAndMoviesDM : public TDataModule
 {
-    __published:	// IDE-managed Components
-        TSQLDataSet *images;
-        TDataSetProvider *DataSetProvider1;
-        TDataSetProvider *imagesProvider;
-        TClientDataSet *imagesCDS;
-        TDataSource *imagesDS;
-	TDataSource *imageNotesDSource;
-        TClientDataSet *imageNoteCDS;
-	TSQLDataSet *sensors;
-	TDataSetProvider *DataSetProvider3;
-	TClientDataSet *sensorsCDS;
-	TDataSource *sensorsDS;
-	TIntegerField *sensorsid;
-	TIntegerField *sensorsdevice_id;
-	TSQLTimeStampField *sensorsdate;
-	TFloatField *sensorstemperature;
-	TFloatField *sensorshumidity;
-	TIntegerField *sensorsCDSdevice_id;
-	TSQLTimeStampField *sensorsCDSdate;
-	TFloatField *sensorsCDStemperature;
-	TFloatField *sensorsCDShumidity;
-	TIntegerField *imagesid;
-	TStringField *imagesfile_name;
-	TSQLTimeStampField *imagesdate;
-	TIntegerField *imagesCDSid;
-	TStringField *imagesCDSfile_name;
-	TSQLTimeStampField *imagesCDSdate;
-	TSQLDataSet *imageNotesDS;
-	TDataSource *notesDSource;
-	TClientDataSet *notesCDS;
-	TIntegerField *IntegerField1;
-	TMemoField *MemoField1;
-	TSQLTimeStampField *SQLTimeStampField1;
-	TIntegerField *IntegerField2;
-	TDataSetProvider *notesProvider;
-	TSQLDataSet *noteDS;
-	TIntegerField *imageNoteCDSid;
-	TMemoField *imageNoteCDSnote;
-	TSQLTimeStampField *imageNoteCDScreated_on;
-	TIntegerField *imageNoteCDScreated_by;
-	TIntegerField *imageNoteCDSimage_id;
-	TIntegerField *imageNoteCDSnote_id;
-	TIntegerField *imageNotesDSid;
-	TMemoField *imageNotesDSnote;
-	TSQLTimeStampField *imageNotesDScreated_on;
-	TIntegerField *imageNotesDScreated_by;
-	TIntegerField *imageNotesDSimage_id;
-	TIntegerField *imageNotesDSnote_id;
-        void __fastcall imagesCDSAfterScroll(TDataSet *DataSet);
-
-	void __fastcall imagesCDSdateGetText(TField *Sender, UnicodeString &Text, bool DisplayText);
-	void __fastcall notesCDScreated_onGetText(TField *Sender, UnicodeString &Text,
-          bool DisplayText);
-	void __fastcall notesCDSAfterScroll(TDataSet *DataSet);
+    __published:
+	TClientDataSet *MoviesByBlockIDCDS;
+	TStringField *MoviesByBlockIDCDSid;
+	TSQLTimeStampField *MoviesByBlockIDCDScreated;
+	TStringField *MoviesByBlockIDCDSfileextension;
+	TIntegerField *MoviesByBlockIDCDScreated_by;
+	TIntegerField *MoviesByBlockIDCDScoverslip_id;
+	TIntegerField *MoviesByBlockIDCDSblock_id;
+	TDataSource *MoviesDataSource;
+	TDataSetProvider *DataSetProvider1;
+	TSQLDataSet *MoviesByBlockIDDS;
+	TStringField *MoviesByBlockIDDSid;
+	TSQLTimeStampField *MoviesByBlockIDDScreated;
+	TStringField *MoviesByBlockIDDSfileextension;
+	TIntegerField *MoviesByBlockIDDScreated_by;
+	TIntegerField *MoviesByBlockIDDScoverslip_id;
+	TIntegerField *MoviesByBlockIDDSblock_id;
+	void __fastcall MoviesByBlockIDCDSAfterScroll(TDataSet *DataSet);
+	void __fastcall MoviesByBlockIDDSBeforeOpen(TDataSet *DataSet);
 
 
-	private:	// User declarations
 
-	public:		// User declarations
+	private:
+
+	public:
 				__fastcall TImagesAndMoviesDM(TComponent* Owner);
+		void				afterConnect();
 
 };
 

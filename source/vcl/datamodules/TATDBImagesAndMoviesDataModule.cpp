@@ -11,7 +11,6 @@
 //---------------------------------------------------------------------------
 
 TImagesAndMoviesDM *ImagesAndMoviesDM;
-//extern bool gAppIsStartingUp;
 
 using namespace mtk;
 //---------------------------------------------------------------------------
@@ -19,51 +18,49 @@ __fastcall TImagesAndMoviesDM::TImagesAndMoviesDM(TComponent* Owner)
 	: TDataModule(Owner)
 {}
 
-
-//---------------------------------------------------------------------------
-void __fastcall TImagesAndMoviesDM::imagesCDSAfterScroll(TDataSet *DataSet)
+void TImagesAndMoviesDM::afterConnect()
 {
-    TField* field = imagesCDS->FieldByName("id");
-    if(field)
+    if(!MoviesByBlockIDDS->SQLConnection)
     {
-        String val = field->AsString;
-//        imageNote->SQL->Text 	= "SELECT * from umimage_note where image_id ='" + val + "'";
-//        notesQ->SQL->Text 		= "SELECT * FROM note WHERE id IN (SELECT note_id FROM umimage_note WHERE image_id = '" + val + "')";
-//
-//
-//            imageNoteCDS->Refresh();
-//            notesCDS->Refresh();
+	    MoviesByBlockIDDS->SQLConnection = atdbDM->SQLConnection1;
     }
-//    imageNote->Active = true;
-//    notesQ->Active = true;
+	MoviesByBlockIDCDS->Active = true;
+
 }
 
 
-void __fastcall TImagesAndMoviesDM::imagesCDSdateGetText(TField *Sender, UnicodeString &Text,
-          bool DisplayText)
-{
-	Text = FormatDateTime( "yy-mm-dd", Sender->AsDateTime );
-}
 
-//---------------------------------------------------------------------------
-void __fastcall TImagesAndMoviesDM::notesCDScreated_onGetText(TField *Sender,
-          UnicodeString &Text, bool DisplayText)
+void __fastcall TImagesAndMoviesDM::MoviesByBlockIDCDSAfterScroll(TDataSet *DataSet)
+
 {
-	if(!Sender->IsNull)
+	if(!atdbDM->SQLConnection1->Connected)// || gAppIsStartingUp)
     {
-		Text = FormatDateTime( "yy-mm-dd", Sender->AsDateTime );
+    	return;
     }
-    else
+
+   	if(DataSet == atdbDM->blockIDSCDS)
     {
-    	Text = "";
+    	if(MoviesByBlockIDCDS->Active)
+        {
+        	MoviesByBlockIDCDS->Refresh();
+        }
+    }
+
+ 	if(DataSet == MoviesByBlockIDDS)
+    {
+    	if(MoviesByBlockIDCDS->Active)
+        {
+        	MoviesByBlockIDCDS->Refresh();
+        }
     }
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TImagesAndMoviesDM::notesCDSAfterScroll(TDataSet *DataSet)
+void __fastcall TImagesAndMoviesDM::MoviesByBlockIDDSBeforeOpen(TDataSet *DataSet)
+
 {
-	Log(lDebug3) <<"Note ID:" << notesCDS->FieldByName("id")->AsInteger;
+	//Make sure we have a connection
 }
 
 
-
+//---------------------------------------------------------------------------

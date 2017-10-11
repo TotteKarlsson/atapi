@@ -83,7 +83,7 @@ void __fastcall TatdbDM::afterDisConnect()
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
-	slicesCDS->Active  	= false;
+	slicesCDS->Active  		= false;
 }
 
 //---------------------------------------------------------------------------
@@ -199,6 +199,14 @@ void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)
         	ribbonNotesCDS->Refresh();
         }
     }
+//    else if(DataSet == blockIDSCDS)
+//    {
+//    	if(MoviesByBlockIDCDS->Active)
+//        {
+//        	MoviesByBlockIDCDS->Refresh();
+//        }
+//    }
+
 }
 
 //---------------------------------------------------------------------------
