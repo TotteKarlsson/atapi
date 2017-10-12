@@ -27,9 +27,9 @@ using namespace tinyxml2;
 
 const string gProcessSequenceProjectFileVersion    = "0.6";
 
-ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName)
+ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& projectFileName)
 :
-Project(fName, "abp"),
+Project(projectFileName, "abp"),
 mProcessSequence(ps),
 mArrayCamClient(ac)
 {
@@ -58,6 +58,7 @@ bool ProcessSequenceProject::resetXML()
 
     XMLElement* name 		= mTheXML.NewElement("name");
     XMLText* 	nameValue 	= mTheXML.NewText(mProcessSequence.getName().c_str());
+
 	name->InsertEndChild(nameValue);
     mProjectRoot->InsertEndChild(name);
     return true;
