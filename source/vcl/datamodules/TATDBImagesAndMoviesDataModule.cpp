@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
-#pragma link "DbxDevartSQLite"
+//#pragma link "DbxDevartSQLite"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 

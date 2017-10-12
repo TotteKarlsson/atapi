@@ -14,7 +14,7 @@ using std::string;
 
 //!The TatDM class encapsulate data exchange with the ATDB database
 //---------------------------------------------------------------------------
-class TatdbDM : public TDataModule
+class PACKAGE TatdbDM : public TDataModule
 {
 __published:	// IDE-managed Components
 	TSQLConnection *SQLConnection1;

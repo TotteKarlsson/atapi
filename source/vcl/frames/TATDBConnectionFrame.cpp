@@ -9,6 +9,7 @@
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
 #pragma link "TSTDStringLabeledEdit"
+#pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
 TATDBConnectionFrame *ATDBConnectionFrame;

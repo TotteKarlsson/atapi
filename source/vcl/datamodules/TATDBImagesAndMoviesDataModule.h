@@ -1,7 +1,7 @@
 #ifndef TATDBImagesAndMoviesDataModuleH
 #define TATDBImagesAndMoviesDataModuleH
 #include <System.Classes.hpp>
-#include "DbxDevartSQLite.hpp"
+//#include "DbxDevartSQLite.hpp"
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>

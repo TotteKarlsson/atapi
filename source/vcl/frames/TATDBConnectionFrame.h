@@ -4,12 +4,13 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TArrayBotBtn.h"
+#include "components/TArrayBotBtn.h"
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "mtkIniFile.h"
 #include "mtkIniFileProperties.h"
+#include "TArrayBotBtn.h"
 //---------------------------------------------------------------------------
 
 using mtk::IniFile;
