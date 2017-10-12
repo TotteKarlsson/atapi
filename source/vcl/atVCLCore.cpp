@@ -1,17 +1,17 @@
 #include <System.hpp>
 #pragma hdrstop
-USEFORM("forms\TYesNoForm.cpp", YesNoForm);
-USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
-USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
 USEFORM("frames\TApplicationSoundsFrame.cpp", ApplicationSounds); /* TFrame: File Type */
+USEFORM("forms\TYesNoForm.cpp", YesNoForm);
+USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
+USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
 USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
 USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
 USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
 USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
-USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
-USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
 USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
+USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
 USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
+USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
 USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
 USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */

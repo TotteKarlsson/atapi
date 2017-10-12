@@ -224,8 +224,6 @@ __published:	// IDE-managed Components
 	void __fastcall slicesCDSAfterClose(TDataSet *DataSet);
 	void __fastcall slicesCDSAfterOpen(TDataSet *DataSet);
 
-
-
 	private:
 
     protected:

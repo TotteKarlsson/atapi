@@ -1,6 +1,6 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 926
+  Height = 1042
   Width = 1038
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
@@ -27,8 +27,8 @@ object atdbDM: TatdbDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=localhost'
-      'Database=atdb'
+      'HostName=atdb'
+      'Database=atdb-live'
       'User_Name=atdb'
       'Password=atdb123'
       'MaxBlobSize=-1'
@@ -1182,7 +1182,7 @@ object atdbDM: TatdbDM
   end
   object blockIDsDataSource: TDataSource
     DataSet = blockIDSCDS
-    Left = 752
+    Left = 768
     Top = 360
   end
   object ribbonStatusDS: TSimpleDataSet
