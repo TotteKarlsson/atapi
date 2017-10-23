@@ -340,7 +340,15 @@ int	__fastcall TatdbDM::getCurrentBlockID()
 {
 	if(blocksCDS->Active)
     {
-    	return blocksCDS->FieldByName("id")->Text.ToInt();
+    	try
+        {
+	    	return blocksCDS->FieldByName("id")->Text.ToInt();
+        }
+        catch(...)
+        {
+         	return -1;
+        }
+
     }
     else
     {

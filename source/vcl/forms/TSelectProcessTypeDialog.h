@@ -21,7 +21,7 @@ __published:	// IDE-managed Components
 
 	public:
     		__fastcall 	TSelectProcessTypeDialog(TComponent* Owner);
-		void			setOpenedForParallelProcess(){mIsOpenedForParallelProcess =true;}
+		void			setOpenedForParallelProcess();
 };
 
 extern PACKAGE TSelectProcessTypeDialog *SelectProcessTypeDialog;

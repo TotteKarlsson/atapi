@@ -33,6 +33,7 @@ class  TImagesAndMoviesDM : public TDataModule
 	TIntegerField *MoviesByBlockIDDSblock_id;
 	void __fastcall MoviesByBlockIDCDSAfterScroll(TDataSet *DataSet);
 	void __fastcall MoviesByBlockIDDSBeforeOpen(TDataSet *DataSet);
+	void __fastcall MoviesByBlockIDCDSAfterRefresh(TDataSet *DataSet);
 
 
 

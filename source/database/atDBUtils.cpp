@@ -129,10 +129,6 @@ void handleSQLiteException()
     {
         Log(lError) << e.message() << endl;
     }
-    catch(const CorruptImageException& e )
-    {
-        Log(lError) << e.message() << endl;
-    }
     catch(const InvalidSQLStatementException& e )
     {
         Log(lError) << e.message() << endl;
@@ -141,10 +137,10 @@ void handleSQLiteException()
     {
         Log(lError) << e.message() << endl;
     }
-    catch(const Poco::Data::SQLite::SQLiteException& e)
-    {
-        Log(lError) << e.message() << endl;
-    }
+//    catch(const Poco::Data::SQLite::SQLiteException& e)
+//    {
+//        Log(lError) << e.message() << endl;
+//    }
     catch(...)
     {
     	Log(lError) << "Unhandled PocoDataMySQL exception...";

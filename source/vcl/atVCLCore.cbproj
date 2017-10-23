@@ -208,6 +208,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TATDBConnectionFrame.h</DependentOn>
             <BuildOrder>34</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TMovieItemFrame.cpp">
+            <Form>MovieItemFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TMovieItemFrame.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -262,6 +268,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="datamodules\TATDBDataModule.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="frames\TMovieItemFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

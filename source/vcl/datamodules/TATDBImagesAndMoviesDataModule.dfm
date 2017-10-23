@@ -7,6 +7,7 @@ object ImagesAndMoviesDM: TImagesAndMoviesDM
     Params = <>
     ProviderName = 'DataSetProvider1'
     AfterScroll = MoviesByBlockIDCDSAfterScroll
+    AfterRefresh = MoviesByBlockIDCDSAfterRefresh
     Left = 288
     Top = 103
     object MoviesByBlockIDCDSid: TStringField

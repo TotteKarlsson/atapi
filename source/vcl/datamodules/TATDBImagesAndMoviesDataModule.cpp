@@ -3,10 +3,8 @@
 #include "mtkLogger.h"
 #include "mtkVCLUtils.h"
 #include "TATDBDataModule.h"
-//---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
-//#pragma link "DbxDevartSQLite"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
@@ -24,16 +22,14 @@ void TImagesAndMoviesDM::afterConnect()
     {
 	    MoviesByBlockIDDS->SQLConnection = atdbDM->SQLConnection1;
     }
+
 	MoviesByBlockIDCDS->Active = true;
-
 }
-
-
 
 void __fastcall TImagesAndMoviesDM::MoviesByBlockIDCDSAfterScroll(TDataSet *DataSet)
 
 {
-	if(!atdbDM->SQLConnection1->Connected)// || gAppIsStartingUp)
+	if(!atdbDM->SQLConnection1->Connected)
     {
     	return;
     }
@@ -64,3 +60,11 @@ void __fastcall TImagesAndMoviesDM::MoviesByBlockIDDSBeforeOpen(TDataSet *DataSe
 
 
 //---------------------------------------------------------------------------
+void __fastcall TImagesAndMoviesDM::MoviesByBlockIDCDSAfterRefresh(TDataSet *DataSet)
+
+{
+	Log(lInfo) << "Data was refreshed";
+
+}
+
+

@@ -13,6 +13,11 @@ __fastcall TSelectProcessTypeDialog::TSelectProcessTypeDialog(TComponent* Owner)
 {
 }
 
+void TSelectProcessTypeDialog::setOpenedForParallelProcess()
+{
+	mIsOpenedForParallelProcess =true;
+}
+
 //---------------------------------------------------------------------------
 void __fastcall TSelectProcessTypeDialog::FormShow(TObject *Sender)
 {
