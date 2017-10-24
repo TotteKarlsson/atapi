@@ -18,7 +18,7 @@ using std::list;
 class TMovieItemFrame;
 
 //---------------------------------------------------------------------------
-class TMoviesFrame : public TFrame
+class PACKAGE TMoviesFrame : public TFrame
 {
     __published:	// IDE-managed Components
         TPanel *Panel22;

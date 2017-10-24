@@ -4,6 +4,7 @@
 #include "Poco/File.h"
 #include "frames/TMovieItemFrame.h"
 #include "mtkLogger.h"
+#include "mtkVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TIntLabel"

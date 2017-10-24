@@ -4,13 +4,13 @@
 #include "Poco/File.h"
 #include "frames/TImageItemFrame.h"
 #include "mtkLogger.h"
+#include "mtkVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TIntLabel"
 #pragma resource "*.dfm"
 TImagesFrame *ImagesFrame;
 using namespace mtk;
-
 
 //---------------------------------------------------------------------------
 __fastcall TImagesFrame::TImagesFrame(TComponent* Owner)

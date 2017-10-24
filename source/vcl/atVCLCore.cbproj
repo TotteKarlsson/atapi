@@ -214,6 +214,24 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TImageItemFrame.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TImagesFrame.cpp">
+            <Form>ImagesFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TImagesFrame.h</DependentOn>
+            <BuildOrder>38</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TMovieItemFrame.cpp">
+            <Form>MovieItemFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TMovieItemFrame.h</DependentOn>
+            <BuildOrder>37</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TMoviesFrame.cpp">
+            <Form>MoviesFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TMoviesFrame.h</DependentOn>
+            <BuildOrder>36</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -255,7 +273,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="frames\TImageItemFrame.dfm"/>
         <FormResources Include="forms\TYesNoForm.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
@@ -269,6 +286,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="forms\TBlockEntryForm.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
+        <FormResources Include="frames\TImageItemFrame.dfm"/>
+        <FormResources Include="frames\TMoviesFrame.dfm"/>
+        <FormResources Include="frames\TMovieItemFrame.dfm"/>
+        <FormResources Include="frames\TImagesFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
