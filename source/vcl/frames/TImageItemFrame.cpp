@@ -4,7 +4,6 @@
 #include "mtkLogger.h"
 #include <JPEG.hpp>
 #include "mtkVCLUtils.h"
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
@@ -27,7 +26,9 @@ __fastcall TImageItemFrame::TImageItemFrame(const File& file, TComponent* Owner)
     //Create thumbnail if not exist
     Path tnp(mItemFile.path());
 
-    tnp.setExtension("_tn.jpg");
+    tnp.setBaseName(tnp.getBaseName() + "_tn");
+    tnp.setExtension("jpg");
+
     mThumbNail = tnp;
     if(mThumbNail.exists())
     {
@@ -56,23 +57,17 @@ void TImageItemFrame::setItemName(const string& name)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TImageItemFrame::PlayBtnClick(TObject *Sender)
+void __fastcall TImageItemFrame::WarningImageClick(TObject *Sender)
 {
 	if(mItemFile.exists())
     {
-		Log(lInfo) << "Playing file: "<<mItemFile.path();
-		ShellExecuteA(NULL,NULL, "open", mItemFile.path().c_str(), NULL, SW_SHOWNORMAL);
+		Log(lInfo) << "Opening file: "<<mItemFile.path();
+		ShellExecuteA(NULL,"open", mItemFile.path().c_str(),NULL, NULL, SW_SHOWNORMAL);
     }
     else
     {
 		Log(lWarning) << "The file: "<<mItemFile.path()<<" don't exist!";
     }
-}
-
-//---------------------------------------------------------------------------
-void __fastcall TImageItemFrame::WarningImageClick(TObject *Sender)
-{
-	Log(lWarning) << "The file: "<<mItemFile.path()<<" don't exist!";
 }
 
 void TImageItemFrame::populateTNImage(int, int)

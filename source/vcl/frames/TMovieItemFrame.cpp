@@ -62,7 +62,7 @@ void __fastcall TMovieItemFrame::PlayBtnClick(TObject *Sender)
 	if(mMovieFile.exists())
     {
 		Log(lInfo) << "Playing file: "<<mMovieFile.path();
-		ShellExecuteA(NULL,NULL, "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe", mMovieFile.path().c_str(), NULL, SW_SHOWNORMAL);
+		ShellExecuteA(NULL, "open", mMovieFile.path().c_str(), NULL, NULL, SW_SHOWNORMAL);
     }
     else
     {

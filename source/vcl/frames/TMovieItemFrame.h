@@ -11,7 +11,7 @@
 #include "Poco/Path.h"
 #include "Poco/File.h"
 #include <Vcl.Imaging.pngimage.hpp>
-#include "core/atCreateThumbNailThread.h"
+#include "core/atCreateMovieThumbNailThread.h"
 //---------------------------------------------------------------------------
 using Poco::Path;
 using Poco::File;
@@ -30,7 +30,7 @@ class PACKAGE TMovieItemFrame : public TFrame
     	File		                mMovieFile;
 	    File 		                mThumbNail;
         string		                mItemName;
-		CreateThumbNailThread       mTNThread;
+		CreateMovieThumbNailThread  mTNThread;
         void						populateTNImage(int, int);
 
     public:

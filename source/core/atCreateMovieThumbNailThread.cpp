@@ -1,7 +1,5 @@
 #pragma hdrstop
-#include "atCreateThumbNailThread.h"
-//---------------------------------------------------------------------------
-#include "atCreateThumbNailThread.h"
+#include "atCreateMovieThumbNailThread.h"
 #include "mtkLogger.h"
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
@@ -11,49 +9,49 @@
 #include "mtkMathUtils.h"
 #include "Poco/Path.h"
 #include "Poco/File.h"
-using Poco::Path;
-
+//---------------------------------------------------------------------------
 using namespace Poco;
 using namespace mtk;
+using Poco::Path;
 
-CreateThumbNailThread::CreateThumbNailThread()
+CreateMovieThumbNailThread::CreateMovieThumbNailThread()
 :
 mFFMPEGLocation("ffmpeg.exe"),
 mFFMPEGOutFileArguments("-qscale:v 31 -vframes 1")
 {}
 
-CreateThumbNailThread::~CreateThumbNailThread()
+CreateMovieThumbNailThread::~CreateMovieThumbNailThread()
 {}
 
 
-void CreateThumbNailThread::setFFMPEGLocation(const string& loc)
+void CreateMovieThumbNailThread::setFFMPEGLocation(const string& loc)
 {
 	mFFMPEGLocation = loc;
 }
 
-void CreateThumbNailThread::setInputFile(const string& f)
+void CreateMovieThumbNailThread::setInputFile(const string& f)
 {
 	mInputFileName = f;
 }
 
-string CreateThumbNailThread::getInputFileName()
+string CreateMovieThumbNailThread::getInputFileName()
 {
 	return mInputFileName;
 }
 
-void CreateThumbNailThread::assignCallBacks(Callback one, Callback two, Callback three)
+void CreateMovieThumbNailThread::assignCallBacks(Callback one, Callback two, Callback three)
 {
 	onEnter 	= one;
     onProgress 	= two;
     onExit 		= three;
 }
 
-void CreateThumbNailThread::setFFMPEGOutFileArguments(const string& args)
+void CreateMovieThumbNailThread::setFFMPEGOutFileArguments(const string& args)
 {
 	mFFMPEGOutFileArguments = args;
 }
 
-void CreateThumbNailThread::run()
+void CreateMovieThumbNailThread::run()
 {
 	mIsStarted = true;
     if(onEnter)
@@ -130,7 +128,7 @@ void CreateThumbNailThread::run()
 	mIsFinished = true;
 }
 
-int CreateThumbNailThread::parseFFMPEGOutput(const string& s)
+int CreateMovieThumbNailThread::parseFFMPEGOutput(const string& s)
 {
 	//    Log(lDebug5) << "Parsing string: "<<s;
     //Check and parse string

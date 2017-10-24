@@ -145,8 +145,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atCounter.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <CppCompile Include="atCreateThumbNailThread.cpp">
+        <CppCompile Include="atCreateImageThumbNailThread.cpp">
             <BuildOrder>26</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atCreateMovieThumbNailThread.cpp">
+            <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="atEnvironmentalSensorReader.cpp">
             <BuildOrder>26</BuildOrder>

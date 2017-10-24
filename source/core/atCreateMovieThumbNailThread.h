@@ -1,5 +1,5 @@
-#ifndef atCreateThumbNailThreadH
-#define atCreateThumbNailThreadH
+#ifndef atCreateMovieThumbNailThreadH
+#define atCreateMovieThumbNailThreadH
 #include "core/atATObject.h"
 #include "mtkThread.h"
 #include <functional>
@@ -9,11 +9,11 @@
 
 typedef boost::function<void(int, int)> Callback;
 
-class AT_CORE CreateThumbNailThread : public mtk::Thread
+class AT_CORE CreateMovieThumbNailThread : public mtk::Thread
 {
     public:
-								CreateThumbNailThread();
-								~CreateThumbNailThread();
+								CreateMovieThumbNailThread();
+								~CreateMovieThumbNailThread();
 		void					setFFMPEGLocation(const string& loc);
         void					setFFMPEGOutFileArguments(const string& args);
 		void					setInputFile(const string& f);

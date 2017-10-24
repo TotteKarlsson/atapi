@@ -11,7 +11,7 @@
 #include "Poco/Path.h"
 #include "Poco/File.h"
 #include <Vcl.Imaging.pngimage.hpp>
-#include "core/atCreateThumbNailThread.h"
+#include "core/atCreateImageThumbNailThread.h"
 //---------------------------------------------------------------------------
 using Poco::Path;
 using Poco::File;
@@ -22,14 +22,13 @@ class PACKAGE TImageItemFrame : public TFrame
     TLabel *MovieLbl;
 	TImage *WarningImage;
 	TPanel *Panel1;
-	void __fastcall PlayBtnClick(TObject *Sender);
 	void __fastcall WarningImageClick(TObject *Sender);
 
     private:
     	File		                mItemFile;
 	    File 		                mThumbNail;
         string		                mItemName;
-		CreateThumbNailThread       mTNThread;
+		CreateImageThumbNailThread  mTNThread;
         void						populateTNImage(int, int);
 
     public:
