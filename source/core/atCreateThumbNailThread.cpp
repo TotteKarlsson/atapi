@@ -20,8 +20,7 @@ CreateThumbNailThread::CreateThumbNailThread()
 :
 mFFMPEGLocation("ffmpeg.exe"),
 mFFMPEGOutFileArguments("-qscale:v 31 -vframes 1")
-{
-}
+{}
 
 CreateThumbNailThread::~CreateThumbNailThread()
 {}
@@ -30,6 +29,11 @@ CreateThumbNailThread::~CreateThumbNailThread()
 void CreateThumbNailThread::setFFMPEGLocation(const string& loc)
 {
 	mFFMPEGLocation = loc;
+}
+
+void CreateThumbNailThread::setInputFile(const string& f)
+{
+	mInputFileName = f;
 }
 
 string CreateThumbNailThread::getInputFileName()
@@ -47,11 +51,6 @@ void CreateThumbNailThread::assignCallBacks(Callback one, Callback two, Callback
 void CreateThumbNailThread::setFFMPEGOutFileArguments(const string& args)
 {
 	mFFMPEGOutFileArguments = args;
-}
-
-void CreateThumbNailThread::setInputFile(const string& f)
-{
-	mInputFileName = f;
 }
 
 void CreateThumbNailThread::run()
