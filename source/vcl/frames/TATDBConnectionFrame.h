@@ -4,12 +4,13 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "components/TArrayBotBtn.h"
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "mtkIniFile.h"
 #include "mtkIniFileProperties.h"
+#include <System.Actions.hpp>
+#include <Vcl.ActnList.hpp>
 #include "TArrayBotBtn.h"
 //---------------------------------------------------------------------------
 
@@ -22,9 +23,12 @@ class PACKAGE TATDBConnectionFrame : public TFrame
         TSTDStringLabeledEdit *mServerIPE;
         TSTDStringLabeledEdit *mDBUserE;
         TSTDStringLabeledEdit *mPasswordE;
-        TArrayBotButton *mATDBServerBtnConnect;
         TSTDStringLabeledEdit *mDatabaseE;
-        void __fastcall mATDBServerBtnConnectClick(TObject *Sender);
+	TActionList *ActionList1;
+	TAction *ConnectA;
+	TArrayBotButton *ArrayBotButton1;
+
+	void __fastcall ConnectAExecute(TObject *Sender);
 
     private:
 		IniFile*				mIniFile;

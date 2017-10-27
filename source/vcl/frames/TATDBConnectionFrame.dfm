@@ -20,7 +20,7 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       EditLabel.Width = 45
       EditLabel.Height = 13
       EditLabel.Caption = 'Server IP'
-      TabOrder = 1
+      TabOrder = 0
       Text = '127.0.0.1'
       Value = '127.0.0.1'
     end
@@ -32,7 +32,7 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       EditLabel.Width = 22
       EditLabel.Height = 13
       EditLabel.Caption = 'User'
-      TabOrder = 2
+      TabOrder = 1
       Text = 'atdb-client'
       Value = 'atdb-client'
     end
@@ -44,19 +44,9 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       EditLabel.Width = 46
       EditLabel.Height = 13
       EditLabel.Caption = 'Password'
-      TabOrder = 3
+      TabOrder = 2
       Text = 'atdb123'
       Value = 'atdb123'
-    end
-    object mATDBServerBtnConnect: TArrayBotButton
-      Left = 87
-      Top = 126
-      Width = 124
-      Height = 64
-      Caption = 'Connect/Disconnect'
-      TabOrder = 0
-      OnClick = mATDBServerBtnConnectClick
-      SoundID = 'BUTTON_CLICK_4'
     end
     object mDatabaseE: TSTDStringLabeledEdit
       Left = 146
@@ -66,9 +56,27 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       EditLabel.Width = 46
       EditLabel.Height = 13
       EditLabel.Caption = 'Database'
-      TabOrder = 4
+      TabOrder = 3
       Text = 'atdb'
       Value = 'atdb'
+    end
+    object ArrayBotButton1: TArrayBotButton
+      Left = 88
+      Top = 128
+      Width = 113
+      Height = 41
+      Action = ConnectA
+      Caption = 'Connect'
+      TabOrder = 4
+      SoundID = 'BUTTON_CLICK_4'
+    end
+  end
+  object ActionList1: TActionList
+    Left = 32
+    Top = 136
+    object ConnectA: TAction
+      Caption = 'Connect'
+      OnExecute = ConnectAExecute
     end
   end
 end

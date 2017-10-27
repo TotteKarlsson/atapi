@@ -7,8 +7,8 @@
 #include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TArrayBotBtn"
 #pragma link "TSTDStringLabeledEdit"
+
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 
@@ -21,7 +21,7 @@ __fastcall TATDBConnectionFrame::TATDBConnectionFrame(TComponent* Owner)
 	: TFrame(Owner),
     mIniFile(NULL)
 {
-	mATDBServerBtnConnect->Caption = "Connect";
+	ConnectA->Caption = "Connect";
 }
 
 bool TATDBConnectionFrame::init(IniFile* inifile)
@@ -55,7 +55,18 @@ bool TATDBConnectionFrame::purge()
 	return mProperties.write();
 }
 
-void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender)
+void TATDBConnectionFrame::afterConnect()
+{
+	ConnectA->Caption = "Disconnect";
+}
+
+void TATDBConnectionFrame::afterDisconnect()
+{
+	ConnectA->Caption = "Connect";
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TATDBConnectionFrame::ConnectAExecute(TObject *Sender)
 {
 	if(!atdbDM)
     {
@@ -63,21 +74,33 @@ void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender
         return;
     }
 
-	if( atdbDM->SQLConnection1->Connected)
+	if( atdbDM->SQLConnection1 && atdbDM->SQLConnection1->Connected)
     {
     	//Remove runtime indices
     	TClientDataSet* cds = atdbDM->specimenCDS;
-	    cds->IndexDefs->Update();
-        for(int i = 0; i <cds->IndexDefs->Count; i++)
+        if(cds && cds->IndexDefs)
         {
-            String idxName = cds->IndexDefs->operator [](i)->Name;
-            Log(lDebug) <<"Removing index: "<< stdstr(idxName);
-            if(idxName != "DEFAULT_ORDER" && idxName != "CHANGEINDEX")
+            cds->IndexDefs->Update();
+//            for(int i = 0; i < cds->IndexDefs->Count; i++)
+			int count = 2;
+            for(int i = 0; i < count; i++)
             {
-                cds->DeleteIndex(idxName);
+                String idxName = cds->IndexDefs->operator [](i)->Name;
+                Log(lDebug) <<"Removing index: "<< stdstr(idxName);
+                if(idxName != "DEFAULT_ORDER" && idxName != "CHANGEINDEX")
+                {
+                    try
+                    {
+                        Log(lDebug) <<"Removing index: "<< stdstr(idxName);
+                        //Something bizare is happening here on startup.
+                        cds->DeleteIndex(idxName);
+                    }
+                    catch(...)
+                    {
+                    }
+                }
             }
         }
-
 	    atdbDM->SQLConnection1->Connected = false;
 	    atdbDM->SQLConnection1->Close();
     }
@@ -87,12 +110,4 @@ void __fastcall TATDBConnectionFrame::mATDBServerBtnConnectClick(TObject *Sender
     }
 }
 
-void TATDBConnectionFrame::afterConnect()
-{
-	mATDBServerBtnConnect->Caption = "Disconnect";
-}
 
-void TATDBConnectionFrame::afterDisconnect()
-{
-	mATDBServerBtnConnect->Caption = "Connect";
-}

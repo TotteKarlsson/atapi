@@ -2,8 +2,6 @@
 #define abVCLUtilsH
 #include <System.Classes.hpp>
 #include <string>
-#include "database/atATDBServerSession.h"
-#include "database/atATDBClientDBSession.h"
 //---------------------------------------------------------------------------
 using std::string;
 
@@ -32,9 +30,6 @@ PACKAGE string 	            getSelectedItem(TComboBox* lb);
 PACKAGE int 	            selectItem(TComboBox* lb, const string& name, bool addItem = false);
 PACKAGE int 	            selectAndClickComboBoxItem(TComboBox* lb, const string& name);
 
-
-PACKAGE void 	            populateUsersCB(TComboBox* mUsersCB, ATDBServerSession& ses);
-PACKAGE void 	            populateUsersCB(TComboBox* mUsersCB, ATDBClientDBSession& ses);
 PACKAGE int 	            getCurrentUserID(TComboBox* mUserCB);
 
 #endif

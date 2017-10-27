@@ -7,7 +7,6 @@
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-
 TImagesAndMoviesDM *ImagesAndMoviesDM;
 
 using namespace mtk;

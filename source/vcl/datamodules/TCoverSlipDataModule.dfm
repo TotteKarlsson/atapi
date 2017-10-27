@@ -55,13 +55,16 @@ object csDM: TcsDM
     Left = 304
     Top = 64
     object csCDSid: TIntegerField
+      DisplayLabel = 'ID'
       FieldName = 'id'
     end
     object csCDSstatus: TIntegerField
+      DisplayLabel = 'Status'
       FieldName = 'status'
       Required = True
     end
     object csCDStype: TIntegerField
+      DisplayLabel = 'Type'
       FieldName = 'type'
       Required = True
     end
@@ -86,6 +89,7 @@ object csDM: TcsDM
       Lookup = True
     end
     object csCDSnotes: TMemoField
+      DisplayLabel = 'Notes'
       FieldName = 'notes'
       BlobType = ftMemo
       Size = 1
@@ -101,6 +105,7 @@ object csDM: TcsDM
       FieldName = 'carboncoatbatch'
     end
     object csCDSfrom_lot: TStringField
+      DisplayLabel = 'From LOT#'
       FieldName = 'from_lot'
       Size = 128
     end
@@ -278,26 +283,32 @@ object csDM: TcsDM
     Left = 296
     Top = 312
     object csFreshBatchesCDSid: TIntegerField
+      DisplayLabel = 'ID'
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object csFreshBatchesCDSdate_created: TSQLTimeStampField
+      DisplayLabel = 'Date Entered'
       FieldName = 'date_created'
       Required = True
     end
     object csFreshBatchesCDScount: TIntegerField
+      DisplayLabel = 'Count'
       FieldName = 'count'
     end
     object csFreshBatchesCDStype: TIntegerField
+      DisplayLabel = 'Type'
       FieldName = 'type'
       Required = True
     end
     object csFreshBatchesCDSlot_number: TStringField
+      DisplayLabel = 'LOT #'
       FieldName = 'lot_number'
       Size = 128
     end
     object csFreshBatchesCDSbox_number: TIntegerField
+      DisplayLabel = 'Box #'
       FieldName = 'box_number'
       Required = True
     end

@@ -5,9 +5,23 @@
 #include "mtkConstants.h"
 //---------------------------------------------------------------------------
 
-const int gStepperControllerAddress = 4;
-const int gMotorControllerAddress   = 5;
-const int gSystemCommands  			= 8;
+const int gStepperControllerAddress             = 4;
+const int gMotorControllerAddress               = 5;
+const int gSystemCommands  			            = 8;
+
+
+//"Commands"
+const string gFeedRateMotorControl 	            = "20";
+const string gSendPositionAtMotionFeedRate      = "21";
+const string gFeed 					            = "23";
+const string gNorthSouthMotorMovement 	 		= "30";
+const string gSendPositionAtMotionNorthSouth    = "31";
+const string gEastWestMovement    				= "40";
+const string gSendPositionAtMotionEastWest      = "41";
+const string gCuttingMotorControl			    = "20";
+const string gCuttingSpeed					    = "30";
+const string gReturnSpeed					    = "31";
+const string gHandWheelPosition				    = "40";
 
 
 //!Simple enum to hold commands

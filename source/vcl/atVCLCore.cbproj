@@ -131,6 +131,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>datamodules\TATDBDataModule.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
+        <CppCompile Include="datamodules\TATDBImagesAndMoviesDataModule.cpp">
+            <Form>ImagesAndMoviesDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TATDBImagesAndMoviesDataModule.h</DependentOn>
+            <BuildOrder>39</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="datamodules\TCoverSlipDataModule.cpp">
+            <Form>csDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TCoverSlipDataModule.h</DependentOn>
+            <BuildOrder>40</BuildOrder>
+        </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
         </PackageImport>
@@ -204,10 +216,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TATDBConnectionFrame.cpp">
-            <DependentOn>frames\TATDBConnectionFrame.h</DependentOn>
-            <BuildOrder>34</BuildOrder>
-        </CppCompile>
         <CppCompile Include="frames\TImageItemFrame.cpp">
             <Form>ImageItemFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -273,23 +281,25 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="forms\TYesNoForm.dfm"/>
+        <FormResources Include="frames\TImageItemFrame.dfm"/>
+        <FormResources Include="frames\TMovieItemFrame.dfm"/>
+        <FormResources Include="frames\TImagesFrame.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="forms\TTextInputDialog.dfm"/>
         <FormResources Include="forms\TStringInputDialog.dfm"/>
-        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="forms\TYesNoForm.dfm"/>
+        <FormResources Include="forms\TTextInputDialog.dfm"/>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="frames\TMoviesFrame.dfm"/>
+        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
         <FormResources Include="datamodules\TATDBDataModule.dfm"/>
+        <FormResources Include="datamodules\TCoverSlipDataModule.dfm"/>
+        <FormResources Include="datamodules\TATDBImagesAndMoviesDataModule.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="forms\TBlockEntryForm.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
-        <FormResources Include="frames\TImageItemFrame.dfm"/>
-        <FormResources Include="frames\TMoviesFrame.dfm"/>
-        <FormResources Include="frames\TMovieItemFrame.dfm"/>
-        <FormResources Include="frames\TImagesFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

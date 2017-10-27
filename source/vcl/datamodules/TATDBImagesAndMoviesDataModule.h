@@ -1,7 +1,6 @@
 #ifndef TATDBImagesAndMoviesDataModuleH
 #define TATDBImagesAndMoviesDataModuleH
 #include <System.Classes.hpp>
-//#include "DbxDevartSQLite.hpp"
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>
@@ -12,7 +11,7 @@
 #include "Poco/Mutex.h"
 //---------------------------------------------------------------------------
 using std::string;
-class  TImagesAndMoviesDM : public TDataModule
+class PACKAGE TImagesAndMoviesDM : public TDataModule
 {
     __published:
 	TClientDataSet *MoviesByBlockIDCDS;

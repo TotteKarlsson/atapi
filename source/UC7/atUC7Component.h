@@ -32,6 +32,7 @@ class AT_UC7 UC7 : public ATObject
 	friend UC7MessageSender;
 
 	public:
+    	enum CutterStopMode				{smDirect = 0, smStopAtTop, smStopAtRetracting, smStopAfterCutting};
 										UC7(HWND__ *h);
 										~UC7();
 
@@ -45,7 +46,8 @@ class AT_UC7 UC7 : public ATObject
         bool							sendRawMessage(const string& msg);
 
         bool							startCutter();
-        bool							stopCutter();
+        bool							stopCutter(CutterStopMode sm = smDirect);
+
         bool							moveKnifeStageNSAbsolute(uint pos, bool isRequest = true);
 
         bool							jogKnifeStageSouth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
@@ -81,11 +83,11 @@ class AT_UC7 UC7 : public ATObject
         void							disableCounter();
         void							enableCounter();
 
-        bool							prepareForNewRibbon(){return mPrepareForNewRibbon;}
-        void							prepareForNewRibbon(bool what){mPrepareForNewRibbon = what;}
+        bool							prepareForNewRibbon();
+        void							prepareForNewRibbon(bool what);
 
-        bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
-        void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
+        bool							prepareToCutRibbon();
+        void							prepareToCutRibbon(bool what);
 
         bool							setFeedRatePreset(uint rate);
         bool							setKnifeStageJogStepPreset(uint preset);
@@ -116,6 +118,8 @@ class AT_UC7 UC7 : public ATObject
         								//!When active, zero stroke and knife stage movement will
                                         //!take place when the counter reaches ribbonLength
         bool							mIsActive;
+
+		CutterStopMode					mStopMode;
 
 										//Serial Components
         int								mCOMPort;
