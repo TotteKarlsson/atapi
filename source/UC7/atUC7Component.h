@@ -32,7 +32,7 @@ class AT_UC7 UC7 : public ATObject
 	friend UC7MessageSender;
 
 	public:
-    	enum CutterStopMode				{smDirect = 0, smStopAtTop, smStopAtRetracting, smStopAfterCutting};
+    	enum CutterStopMode				{smDirect = 0, smBeforeCutting, smAfterCutting, smBeforeRetracting};
 										UC7(HWND__ *h);
 										~UC7();
 

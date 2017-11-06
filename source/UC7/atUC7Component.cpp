@@ -94,7 +94,7 @@ bool UC7::setStrokeState(UC7StrokeState state)
     switch(mStrokeState)
     {
     	case UC7StrokeState::ssBeforeCutting:
-        	if(mStopMode == smStopAtTop)
+        	if(mStopMode == CutterStopMode::smBeforeCutting)
             {
             	stopCutter();
             }
@@ -102,13 +102,13 @@ bool UC7::setStrokeState(UC7StrokeState state)
         break;
     	case UC7StrokeState::ssCutting:        		break;
     	case UC7StrokeState::ssAfterCutting:
-           	if(mStopMode == CutterStopMode::smStopAfterCutting)
+           	if(mStopMode == CutterStopMode::smAfterCutting)
             {
             	stopCutter();
             }
         break;
     	case UC7StrokeState::ssRetracting:
-        	if(mStopMode == CutterStopMode::smStopAtRetracting)
+        	if(mStopMode == CutterStopMode::smBeforeRetracting)
             {
             	stopCutter();
             }

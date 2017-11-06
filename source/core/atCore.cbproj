@@ -151,7 +151,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <BuildOrder>26</BuildOrder>
         </CppCompile>
         <CppCompile Include="atCreateMovieThumbNailThread.cpp">
-            <BuildOrder>27</BuildOrder>
+            <BuildOrder>29</BuildOrder>
         </CppCompile>
         <CppCompile Include="atEnvironmentalSensorReader.cpp">
             <BuildOrder>26</BuildOrder>
@@ -167,9 +167,15 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="atProcess.cpp">
             <BuildOrder>39</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atSyncMySQLDataToPostgres.cpp">
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atUtilities.cpp">
             <DependentOn>atUtilities.h</DependentOn>
             <BuildOrder>27</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atVideoCompressorThread.cpp">
+            <BuildOrder>28</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>

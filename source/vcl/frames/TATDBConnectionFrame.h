@@ -19,16 +19,15 @@ using mtk::IniFileProperties;
 class PACKAGE TATDBConnectionFrame : public TFrame
 {
     __published:	// IDE-managed Components
-	TGroupBox *GBox1;
+		TGroupBox *GBox1;
         TSTDStringLabeledEdit *mServerIPE;
         TSTDStringLabeledEdit *mDBUserE;
         TSTDStringLabeledEdit *mPasswordE;
         TSTDStringLabeledEdit *mDatabaseE;
-	TActionList *ActionList1;
-	TAction *ConnectA;
-	TArrayBotButton *ArrayBotButton1;
-
-	void __fastcall ConnectAExecute(TObject *Sender);
+		TActionList *ActionList1;
+		TAction *ConnectA;
+		TArrayBotButton *ArrayBotButton1;
+		void __fastcall ConnectAExecute(TObject *Sender);
 
     private:
 		IniFile*				mIniFile;
@@ -36,8 +35,8 @@ class PACKAGE TATDBConnectionFrame : public TFrame
 
     public:
                 __fastcall 		TATDBConnectionFrame(TComponent* Owner);
-    	bool					init(IniFile* inifile);
-    	bool					purge();
+    	bool					init(IniFile* inifile, const string& iniFileSection);
+    	bool					writeParameters();
         void					afterConnect();
         void					afterDisconnect();
 };

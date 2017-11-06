@@ -6,11 +6,12 @@
 #include "Poco/Timespan.h"
 //---------------------------------------------------------------------------
 
-typedef boost::function<void(int, int)> Callback;
+
 
 
 class VideoCompressorThread : public mtk::Thread
 {
+	typedef boost::function<void(int, int)> Callback;
     public:
 								VideoCompressorThread();
 								~VideoCompressorThread();

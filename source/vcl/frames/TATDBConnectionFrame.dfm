@@ -17,9 +17,9 @@ object ATDBConnectionFrame: TATDBConnectionFrame
       Top = 40
       Width = 121
       Height = 21
-      EditLabel.Width = 45
+      EditLabel.Width = 74
       EditLabel.Height = 13
-      EditLabel.Caption = 'Server IP'
+      EditLabel.Caption = 'Server Address'
       TabOrder = 0
       Text = '127.0.0.1'
       Value = '127.0.0.1'
