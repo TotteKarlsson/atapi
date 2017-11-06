@@ -22,7 +22,12 @@ mLiftHeight(0),
 mLateralVelocity(0),
 mLateralAcceleration(0),
 mMoveWhiskerInParallel(false),
-mFetchAngleFromCSAngleMotor(false)
+mLeaveWhiskerByBeach(false),
+mLWBBDeltaZ(0),
+mLWBB_Y_Move(0),
+mStartWhiskerZ(0),
+mFetchAngleFromCSAngleMotor(false),
+mIsWhiskerLogicDone(false)
 {
 	mProcessType = ptMoveCoverSlipAtAngle;
 }
@@ -30,21 +35,6 @@ mFetchAngleFromCSAngleMotor(false)
 const string MoveCoverSlipAtAngleProcess::getTypeName() const
 {
 	return ::toString(mProcessType);
-}
-
-//Init is called by the sequencer BEFORE executing the process
-void MoveCoverSlipAtAngleProcess::init(ArrayBot& ab)
-{
-    if(assignMotors(ab.getCoverSlipUnit().getZMotor(), ab.getCoverSlipUnit().getYMotor(), ab.getWhiskerUnit().getZMotor(), ab.getWhiskerUnit().getYMotor()))
-    {
-	    calculateLift(ab);
-    }
-    else
-    {
-    	Log(lError) << "At least one motor is missing for the MoveCSAtAngle process!";
-    }
-
-	Process::init(ab);
 }
 
 bool MoveCoverSlipAtAngleProcess::assignMotors(APTMotor* csz, APTMotor* csy, APTMotor* wz, APTMotor* wy)
@@ -66,52 +56,6 @@ double MoveCoverSlipAtAngleProcess::getCurrentCoverSlipZ()
     }
 
     return -1;
-}
-
-
-//The calculate move function uses move velocity and angle to calculate
-//velocities for lateral movement, as well as final positions
-bool MoveCoverSlipAtAngleProcess::calculateLift(ArrayBot& ab)
-{
-    if(mFetchAngleFromCSAngleMotor)
-    {
-        APTMotor* m = ab.getCoverSlipUnit().getAngleMotor();
-        if(m)
-        {
-            mLiftAngle = m->getPosition();
-        }
-        else
-        {
-            Log(lError) << "Failed getting CS Angle motor. Liftangle NOT updated";
-        }
-    }
-
-	//The knowns are Z velocity and acceleration, and theta
-    //Calculate Y velocity and acceleration
-    //We get Y velocity as ZVelocity/tan(theta)
-    if(mLiftAngle > 0 || mLiftAngle < 90)
-    {
-    	double tanVal = tan(toRadians(mLiftAngle));
-        if(tanVal)
-        {
-            mLateralVelocity = mLiftVelocity / tanVal;
-            mLateralAcceleration = mLiftAcceleration / tanVal;
-            mTargetCSZ = mLiftHeight;
-            mTargetWHZ = mLiftHeight;
-            mTargetCSY = mTargetCSZ / tanVal;
-            mTargetWHY = mTargetCSZ / tanVal;
-        }
-        else
-        {
-        	return false;
-        }
-    }
-    else
-    {
-    	return false;
-    }
-
-	return true;
 }
 
 void MoveCoverSlipAtAngleProcess::setLiftVelocity(double val)
@@ -154,6 +98,16 @@ double MoveCoverSlipAtAngleProcess::getLiftHeight()
 	return mLiftHeight;
 }
 
+void MoveCoverSlipAtAngleProcess::setYMoveScaling(double val)
+{
+	mYMoveScaling = val;
+}
+
+double MoveCoverSlipAtAngleProcess::getYMoveScaling()
+{
+	return mYMoveScaling;
+}
+
 bool MoveCoverSlipAtAngleProcess::write()
 {
 	if(mProcessSequence)
@@ -194,6 +148,69 @@ bool MoveCoverSlipAtAngleProcess::isProcessed()
 	return false;
 }
 
+//Init is called by the sequencer BEFORE executing the process
+void MoveCoverSlipAtAngleProcess::init(ArrayBot& ab)
+{
+    if(assignMotors(ab.getCoverSlipUnit().getZMotor(), ab.getCoverSlipUnit().getYMotor(), ab.getWhiskerUnit().getZMotor(), ab.getWhiskerUnit().getYMotor()))
+    {
+	    calculateLift(ab);
+    }
+    else
+    {
+    	Log(lError) << "At least one motor is missing for the Move CoverSlip at angle process!";
+    }
+
+    mIsWhiskerLogicDone = false;
+	Process::init(ab);
+}
+
+
+//The calculate move function uses move velocity and angle to calculate
+//velocities for lateral movement, as well as final positions
+bool MoveCoverSlipAtAngleProcess::calculateLift(ArrayBot& ab)
+{
+    if(mFetchAngleFromCSAngleMotor)
+    {
+        APTMotor* m = ab.getCoverSlipUnit().getAngleMotor();
+        if(m)
+        {
+            mLiftAngle = m->getPosition();
+        }
+        else
+        {
+            Log(lError) << "Failed getting CS Angle motor. Liftangle NOT updated";
+        }
+    }
+
+	//The knowns are Z velocity and acceleration, and theta
+    //Calculate Y velocity and acceleration
+    //We get Y velocity as ZVelocity/tan(theta)
+    if(mLiftAngle > 0 || mLiftAngle < 90)
+    {
+    	double tanVal = tan(toRadians(mLiftAngle));
+        if(tanVal)
+        {
+            mLateralVelocity 		= (mLiftVelocity / tanVal) 		* mYMoveScaling;
+            mLateralAcceleration 	= (mLiftAcceleration / tanVal)  * mYMoveScaling;
+            mTargetCSZ = mLiftHeight;
+            mTargetWHZ = mLiftHeight;
+            mTargetCSY = mTargetCSZ / tanVal;
+            mTargetWHY = mTargetCSZ / tanVal;
+        }
+        else
+        {
+        	return false;
+        }
+    }
+    else
+    {
+    	return false;
+    }
+
+	return true;
+}
+
+
 bool MoveCoverSlipAtAngleProcess::start()
 {
 	//Set motor parameters and move them to their position
@@ -204,11 +221,12 @@ bool MoveCoverSlipAtAngleProcess::start()
     }
 
     //Z & Y
-    mCSZMtr->setVelocityParameters(mLiftVelocity, mLiftAcceleration);
-    mCSYMtr->setVelocityParameters(mLateralVelocity, mLateralAcceleration);
+    mCSZMtr->setVelocityParameters(mLiftVelocity, 		mLiftAcceleration);
+    mCSYMtr->setVelocityParameters(mLateralVelocity, 	mLateralAcceleration);
 
 	if(mMoveWhiskerInParallel)
     {
+	    mIsWhiskerLogicDone = false;
 		mWHZMtr->setVelocityParameters(mLiftVelocity, 		mLiftAcceleration);
     	mWHYMtr->setVelocityParameters(mLateralVelocity, 	mLateralAcceleration);
     }
@@ -222,6 +240,7 @@ bool MoveCoverSlipAtAngleProcess::start()
     mTargetWHZR = getMotorPosition(mWHZMtr) - mTargetWHZ;
     mTargetWHYR = getMotorPosition(mWHYMtr) + mTargetWHY;
 
+	mStartWhiskerZ = getMotorPosition(mWHZMtr);
 
     Log(lInfo) << "Moving motor: "<< mCSZMtr->getName() <<" to position: "<< mTargetCSZR;
     Log(lInfo) << "Moving motor: "<< mCSYMtr->getName() <<" to position: "<< mTargetCSYR;
@@ -243,15 +262,50 @@ bool MoveCoverSlipAtAngleProcess::start()
 
 bool MoveCoverSlipAtAngleProcess::stop()
 {
+	if(mCSZMtr)
+		mCSZMtr->stop();
+
+	if(mCSYMtr)
+		mCSYMtr->stop();
+
+	if(mWHZMtr)
+		mWHZMtr->stop();
+
+	if(mWHYMtr)
+		mWHYMtr->stop();
 	return Process::stop();
 }
 
+//The process sequencer will call this function periodically
 bool MoveCoverSlipAtAngleProcess::isDone()
 {
 	//Check motor positions
-    if(isEqual(getMotorPosition(mCSZMtr), mTargetCSZR, 1.e-3) || isEqual(getMotorPosition(mCSYMtr), mTargetCSYR, 1.e-3))
+    if(isEqual(getMotorPosition(mCSZMtr), mTargetCSZR, 1.e-3))
     {
+    	//The CS Z motor is the 'master'
+        mCSYMtr->stop();
+		mWHZMtr->stop();
+		mWHYMtr->stop();
+
     	return true;
+    }
+
+    //When leaving whisker by the beach...
+	if(mMoveWhiskerInParallel && mLeaveWhiskerByBeach)
+    {
+    	//Check for Delta Z
+    	if(fabs(mWHZMtr->getPosition() - mStartWhiskerZ) >= mLWBBDeltaZ)
+        {
+        	if(!mIsWhiskerLogicDone)
+            {
+            	mWHZMtr->setVelocityParameters(mLiftVelocity 	* 1.5, 		mLiftAcceleration * 1.5);
+		    	mWHYMtr->setVelocityParameters(mLateralVelocity * 1.5, 		mLateralAcceleration* 1.5);
+
+        		mWHYMtr->moveToPosition(mWHYMtr->getPosition() - mLWBB_Y_Move);
+	            mWHZMtr->moveToPosition(mWHZMtr->getPosition() - mLWBB_Z_Move);
+                mIsWhiskerLogicDone = true;
+            }
+        }
     }
     return false;
 }
@@ -284,8 +338,29 @@ XMLElement* MoveCoverSlipAtAngleProcess::addToXMLDocumentAsChild(tinyxml2::XMLDo
     dataval1->SetText(toString(mLiftHeight).c_str());
 	docRoot->InsertEndChild(dataval1);
 
+	dataval1 = doc.NewElement("y_move_scaling");
+    dataval1->SetText(toString(mYMoveScaling).c_str());
+	docRoot->InsertEndChild(dataval1);
+
 	dataval1 = doc.NewElement("move_whisker_in_parallel");
     dataval1->SetText(toString(mMoveWhiskerInParallel).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+    //Leave whisker by beach parameters
+	dataval1 = doc.NewElement("leave_whisker_by_beach");
+    dataval1->SetText(toString(mLeaveWhiskerByBeach).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+   	dataval1 = doc.NewElement("leave_whisker_by_beach_delta_z_trigger");
+    dataval1->SetText(toString(mLWBBDeltaZ).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+   	dataval1 = doc.NewElement("leave_whisker_by_beach_y_move");
+    dataval1->SetText(toString(mLWBB_Y_Move).c_str());
+	docRoot->InsertEndChild(dataval1);
+
+   	dataval1 = doc.NewElement("leave_whisker_by_beach_z_move");
+    dataval1->SetText(toString(mLWBB_Z_Move).c_str());
 	docRoot->InsertEndChild(dataval1);
 
 	dataval1 = doc.NewElement("fetch_angle_from_CS_angle_motor");
@@ -295,3 +370,82 @@ XMLElement* MoveCoverSlipAtAngleProcess::addToXMLDocumentAsChild(tinyxml2::XMLDo
     return dynamic_cast<XMLElement*>(docRoot);
 }
 
+bool MoveCoverSlipAtAngleProcess::populateFromXML(XMLElement* element)
+{
+    //This code belongs in the process class!
+    XMLElement* data = element->FirstChildElement("info");
+    if(data && data->GetText())
+    {
+        setInfoText(data->GetText());
+    }
+
+    data = element->FirstChildElement("lift_velocity");
+    if(data && data->GetText())
+    {
+        setLiftVelocity(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_acceleration");
+    if(data && data->GetText())
+    {
+        setLiftAcceleration(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_angle");
+    if(data && data->GetText())
+    {
+        setLiftAngle(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("lift_height");
+    if(data && data->GetText())
+    {
+        setLiftHeight(toDouble(data->GetText()));
+    }
+
+    data = element->FirstChildElement("y_move_scaling");
+    if(data && data->GetText())
+    {
+        mYMoveScaling = toDouble(data->GetText());
+    }
+
+    data = element->FirstChildElement("move_whisker_in_parallel");
+    if(data && data->GetText())
+    {
+        setMoveWhiskerInParallel(toBool(data->GetText()));
+    }
+
+    data = element->FirstChildElement("leave_whisker_by_beach");
+    if(data && data->GetText())
+    {
+        mLeaveWhiskerByBeach = toBool(data->GetText());
+    }
+
+    data = element->FirstChildElement("leave_whisker_by_beach_delta_z_trigger");
+    if(data && data->GetText())
+    {
+        mLWBBDeltaZ = toDouble(data->GetText());
+    }
+
+    data = element->FirstChildElement("leave_whisker_by_beach_y_move");
+    if(data && data->GetText())
+    {
+        mLWBB_Y_Move = toDouble(data->GetText());
+    }
+
+    data = element->FirstChildElement("leave_whisker_by_beach_z_move");
+    if(data && data->GetText())
+    {
+        mLWBB_Z_Move = toDouble(data->GetText());
+    }
+
+    data = element->FirstChildElement("fetch_angle_from_CS_angle_motor");
+    if(data && data->GetText())
+    {
+        setFetchAngleFromCSAngleMotor(toBool(data->GetText()));
+    }
+
+
+    return true;
+
+}

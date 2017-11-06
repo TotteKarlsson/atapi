@@ -15,6 +15,7 @@
 #include "apt/atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "arduino/atArduinoServerCommand.h"
+#include "atHomeMotor.h"
 
 using namespace mtk;
 using namespace tinyxml2;
@@ -26,9 +27,9 @@ using namespace tinyxml2;
 
 const string gProcessSequenceProjectFileVersion    = "0.6";
 
-ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName)
+ProcessSequenceProject::ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& projectFileName)
 :
-Project(fName, "abp"),
+Project(projectFileName, "abp"),
 mProcessSequence(ps),
 mArrayCamClient(ac)
 {
@@ -38,7 +39,7 @@ mArrayCamClient(ac)
 ProcessSequenceProject::~ProcessSequenceProject()
 {}
 
-string ProcessSequenceProject::getPresentModelVersion()
+string ProcessSequenceProject::getPresentXMLModelVersion()
 {
     return gProcessSequenceProjectFileVersion;
 }
@@ -57,6 +58,7 @@ bool ProcessSequenceProject::resetXML()
 
     XMLElement* name 		= mTheXML.NewElement("name");
     XMLText* 	nameValue 	= mTheXML.NewText(mProcessSequence.getName().c_str());
+
 	name->InsertEndChild(nameValue);
     mProjectRoot->InsertEndChild(name);
     return true;
@@ -143,6 +145,17 @@ bool ProcessSequenceProject::save(const string& fName)
                 }
             }
             break;
+            case ptHomeMotor:
+            {
+                HomeMotor* p1 = dynamic_cast<HomeMotor*>(p);
+
+				if(p1)
+                {
+                	p1->addToXMLDocumentAsChild(mTheXML, xmlProc);
+                }
+            }
+            break;
+
             default:
             {
                 Log(lError) << "The process: " <<p->getProcessName()<< " of type: "<<p->getProcessTypeAsString()<<" was NOT added to the XML document";
@@ -278,6 +291,7 @@ Process* ProcessSequenceProject::createProcess(tinyxml2::XMLElement* element)
         case ptArrayCamRequest:					return createArrayCamRequestProcess(element);
         case ptAbsoluteMove:					return createAbsoluteMove(element);
         case ptMoveCoverSlipAtAngle:			return createMoveCoverSlipAtAngleProcess(element);
+        case ptHomeMotor:						return createHomeMotorProcess(element);
     }
 
     return NULL;
@@ -326,7 +340,12 @@ ParallelProcess* ProcessSequenceProject::createParallelProcess(XMLElement* eleme
     				c->assignProcessSequence(&mProcessSequence);
                     p->addProcess(c);
                 }
-
+                else if(toProcessType(type) == ptMoveCoverSlipAtAngle)
+                {
+                	MoveCoverSlipAtAngleProcess* c = createMoveCoverSlipAtAngleProcess(proc);
+    				c->assignProcessSequence(&mProcessSequence);
+                    p->addProcess(c);
+                }
             }
             proc = proc->NextSiblingElement();
         }
@@ -443,7 +462,6 @@ AbsoluteMove* ProcessSequenceProject::createAbsoluteMove(XMLElement* element)
     //We need to associate the motor with 'name' with a
     //real motor object provided for by ArrayBot
     absMove->assignUnit(mProcessSequence.getArrayBot());
-
     return absMove;
 }
 
@@ -534,6 +552,16 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
    	string name = element->Attribute("name");
 	MoveCoverSlipAtAngleProcess* p = new MoveCoverSlipAtAngleProcess(name);
 
+    p->populateFromXML(element);
+
+    return p;
+}
+
+HomeMotor* ProcessSequenceProject::createHomeMotorProcess(XMLElement* element)
+{
+   	string name = element->Attribute("name");
+	HomeMotor* p = new HomeMotor(name);
+
     //This code belongs in the process class!
     XMLElement* data = element->FirstChildElement("info");
     if(data && data->GetText())
@@ -541,43 +569,28 @@ MoveCoverSlipAtAngleProcess* ProcessSequenceProject::createMoveCoverSlipAtAngleP
         p->setInfoText(data->GetText());
     }
 
-    data = element->FirstChildElement("lift_velocity");
+    data = element->FirstChildElement("motor_name");
     if(data && data->GetText())
     {
-        p->setLiftVelocity(toDouble(data->GetText()));
+        p->setSubjectName(data->GetText());
     }
 
-    data = element->FirstChildElement("lift_acceleration");
+    data = element->FirstChildElement("pre_dwell_time");
     if(data && data->GetText())
     {
-        p->setLiftAcceleration(toDouble(data->GetText()));
+        p->setPreDwellTime(toDouble(data->GetText()));
     }
 
-    data = element->FirstChildElement("lift_angle");
+    data = element->FirstChildElement("post_dwell_time");
     if(data && data->GetText())
     {
-        p->setLiftAngle(toDouble(data->GetText()));
+        p->setPostDwellTime(toDouble(data->GetText()));
     }
 
-    data = element->FirstChildElement("lift_height");
-    if(data && data->GetText())
-    {
-        p->setLiftHeight(toDouble(data->GetText()));
-    }
-
-    data = element->FirstChildElement("move_whisker_in_parallel");
-    if(data && data->GetText())
-    {
-        p->setMoveWhiskerInParallel(toBool(data->GetText()));
-    }
-
-    data = element->FirstChildElement("fetch_angle_from_CS_angle_motor");
-    if(data && data->GetText())
-    {
-        p->setFetchAngleFromCSAngleMotor(toBool(data->GetText()));
-    }
+    //We need to associate the motor with 'name' with a
+    //real motor object provided for by ArrayBot
+    p->assignUnit(mProcessSequence.getArrayBot());
 
     return p;
 }
-
 

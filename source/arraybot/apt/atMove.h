@@ -21,7 +21,6 @@ class AT_AB Move : public Process
 
 		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot) = 0;
 		virtual void	                    assignUnit(ATObject* o);
-
         virtual bool	                    stop();
 
         virtual bool	                    isBeingProcessed();

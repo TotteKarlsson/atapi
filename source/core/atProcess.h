@@ -68,6 +68,7 @@ class AT_CORE Process : public ATObject
 
         virtual mtk::XMLElement*           		addToXMLDocument(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
 		virtual mtk::XMLElement*                addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        Poco::Timespan							getElapsedTimeSinceStart();
 
     protected:
         							            //!The Process Name identifies the process in a sequence

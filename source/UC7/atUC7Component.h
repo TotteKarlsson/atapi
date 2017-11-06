@@ -32,6 +32,7 @@ class AT_UC7 UC7 : public ATObject
 	friend UC7MessageSender;
 
 	public:
+    	enum CutterStopMode				{smDirect = 0, smBeforeCutting, smAfterCutting, smBeforeRetracting};
 										UC7(HWND__ *h);
 										~UC7();
 
@@ -45,7 +46,8 @@ class AT_UC7 UC7 : public ATObject
         bool							sendRawMessage(const string& msg);
 
         bool							startCutter();
-        bool							stopCutter();
+        bool							stopCutter(CutterStopMode sm = smDirect);
+
         bool							moveKnifeStageNSAbsolute(uint pos, bool isRequest = true);
 
         bool							jogKnifeStageSouth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
@@ -57,8 +59,10 @@ class AT_UC7 UC7 : public ATObject
 
         								//!Set Feedrate in nm
         bool							setFeedRate(uint feedRate, bool isRequest = true);
-
 		bool							setNorthSouthStageAbsolutePosition(uint pos, bool isRequest = true);
+
+        bool                            setCuttingSpeed(uint speed, bool isRequest = true);
+        bool                            setReturnSpeed(uint speed, bool isRequest = true);
 
 										//status requests
                                         //!Get all statuses
@@ -79,11 +83,11 @@ class AT_UC7 UC7 : public ATObject
         void							disableCounter();
         void							enableCounter();
 
-        bool							prepareForNewRibbon(){return mPrepareForNewRibbon;}
-        void							prepareForNewRibbon(bool what){mPrepareForNewRibbon = what;}
+        bool							prepareForNewRibbon();
+        void							prepareForNewRibbon(bool what);
 
-        bool							prepareToCutRibbon(){return mPrepareToCutRibbon;}
-        void							prepareToCutRibbon(bool what){mPrepareToCutRibbon = what;}
+        bool							prepareToCutRibbon();
+        void							prepareToCutRibbon(bool what);
 
         bool							setFeedRatePreset(uint rate);
         bool							setKnifeStageJogStepPreset(uint preset);
@@ -114,6 +118,8 @@ class AT_UC7 UC7 : public ATObject
         								//!When active, zero stroke and knife stage movement will
                                         //!take place when the counter reaches ribbonLength
         bool							mIsActive;
+
+		CutterStopMode					mStopMode;
 
 										//Serial Components
         int								mCOMPort;
@@ -146,6 +152,8 @@ class AT_UC7 UC7 : public ATObject
         uint	 						mNumberOfZeroStrokes;
         uint   							mNorthSouthStagePosition;
         uint							mNorthLimitPosition;
+        uint							mCuttingSpeed;
+        uint							mReturnSpeed;
 
         								//!When this boolean is true, UC7 commands may be sent to the leica
                                         //!when HW status is changing

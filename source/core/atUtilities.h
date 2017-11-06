@@ -25,6 +25,7 @@ enum ProcessType
     ptStopAndResume,
     ptArrayCamRequest,
     ptMoveCoverSlipAtAngle,
+    ptHomeMotor,
     ptUnknown
 };
 

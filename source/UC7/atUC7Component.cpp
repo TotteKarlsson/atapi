@@ -23,7 +23,11 @@ UC7::UC7(HWND__ *h)
     mNumberOfZeroStrokes(0),
     mNorthLimitPosition(0),
 	mKnifeStageJogPreset(0),
-    mKnifeStageResumeDelta(0)
+    mKnifeStageResumeDelta(0),
+	mCuttingSpeed(0),
+	mReturnSpeed(0),
+    mStopMode(smDirect)
+
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
     mCustomTimer.setInterval(5);
@@ -48,7 +52,6 @@ bool UC7::connect(int com)
     //Only start these on succesfull connection
     mUC7MessageReceiver.start();
     mUC7MessageSender.start();
-
     return true;
 }
 
@@ -61,7 +64,27 @@ bool UC7::disConnect()
 
 bool UC7::isConnected()
 {
-	return mSerial.isConnected();// || mUC7MessageSender.isRunning() || mUC7MessageReceiver.isRunning();
+	return mSerial.isConnected();
+}
+
+bool UC7::prepareForNewRibbon()
+{
+	return mPrepareForNewRibbon;
+}
+
+void UC7::prepareForNewRibbon(bool what)
+{
+	mPrepareForNewRibbon = what;
+}
+
+bool UC7::prepareToCutRibbon()
+{
+	return mPrepareToCutRibbon;
+}
+
+void UC7::prepareToCutRibbon(bool what)
+{
+	mPrepareToCutRibbon = what;
 }
 
 bool UC7::setStrokeState(UC7StrokeState state)
@@ -71,16 +94,24 @@ bool UC7::setStrokeState(UC7StrokeState state)
     switch(mStrokeState)
     {
     	case UC7StrokeState::ssBeforeCutting:
+        	if(mStopMode == CutterStopMode::smBeforeCutting)
+            {
+            	stopCutter();
+            }
 
         break;
-
-    	case UC7StrokeState::ssCutting:
-        break;
-
+    	case UC7StrokeState::ssCutting:        		break;
     	case UC7StrokeState::ssAfterCutting:
+           	if(mStopMode == CutterStopMode::smAfterCutting)
+            {
+            	stopCutter();
+            }
         break;
-
     	case UC7StrokeState::ssRetracting:
+        	if(mStopMode == CutterStopMode::smBeforeRetracting)
+            {
+            	stopCutter();
+            }
         break;
 
         default:
@@ -156,17 +187,17 @@ bool UC7::setNorthLimitPosition(uint limit)
 void UC7::onPrepareToCutRibbon()
 {
     mCustomTimer.stop();
-	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
-    jogKnifeStageSouth(mKnifeStageJogPreset);
-    mRibbonOrderCounter.increase();
+//	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
+//    jogKnifeStageSouth(mKnifeStageJogPreset);
+//    mRibbonOrderCounter.increase();
 }
 
 void UC7::onPrepareForNewRibbon()
 {
     mCustomTimer.stop();
-    uint distance(mKnifeStageJogPreset - mKnifeStageResumeDelta);
-	Log(lInfo) << "Moving Knife stage ============ NORTH "<<distance<<" (nm) ==================";
-    jogKnifeStageNorth(distance);
+//    uint distance(mKnifeStageJogPreset - mKnifeStageResumeDelta);
+//	Log(lInfo) << "Moving Knife stage ============ NORTH "<<distance<<" (nm) ==================";
+//    jogKnifeStageNorth(distance);
 }
 
 bool UC7::getStatus()
@@ -245,9 +276,14 @@ bool UC7::startCutter()
 	return sendUC7Message(CUTTING_MOTOR_CONTROL, "01");
 }
 
-bool UC7::stopCutter()
+bool UC7::stopCutter(UC7::CutterStopMode sm)
 {
-	return sendUC7Message(CUTTING_MOTOR_CONTROL, "00");
+	mStopMode = sm;
+	if(mStopMode == smDirect)
+    {
+    	return sendUC7Message(CUTTING_MOTOR_CONTROL, "00");
+    }
+    return true;
 }
 
 bool UC7::getKnifeStagePosition()
@@ -317,8 +353,7 @@ void UC7::enableCounter()
 bool UC7::setFeedRatePreset(uint rate)
 {
 	mPresetFeedRate = rate;
-    setFeedRate(mPresetFeedRate);
-    return true;
+    return setFeedRate(mPresetFeedRate);
 }
 
 bool UC7::setKnifeStageJogStepPreset(uint preset)
@@ -330,6 +365,31 @@ bool UC7::setKnifeStageJogStepPreset(uint preset)
 bool UC7::setKnifeStageResumeDelta(uint delta)
 {
 	mKnifeStageResumeDelta = delta;
+    return true;
+}
+
+bool UC7::setCuttingSpeed(uint speed, bool isRequest)
+{
+	if(isRequest)
+    {
+		string dataStr(zeroPadString(4, toHex(speed)));
+		return sendUC7Message(CUTTING_SPEED, "01", dataStr);
+    }
+
+    mCuttingSpeed = speed;
+    return true;
+}
+
+bool UC7::setReturnSpeed(uint speed, bool isRequest)
+{
+	if(isRequest)
+    {
+		string dataStr(zeroPadString(4, toHex(speed)));
+		return sendUC7Message(RETURN_SPEED, "01", dataStr);
+		return false;
+    }
+
+    mReturnSpeed = speed;
     return true;
 }
 
@@ -351,8 +411,7 @@ bool UC7::setNorthSouthStageAbsolutePosition(uint pos, bool isRequest)
 	if(isRequest)
     {
     	Log(lWarning) << "Not implemented";
-
-		return false;
+ 		return false;
     }
 
     mNorthSouthStagePosition = pos;
@@ -381,34 +440,18 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 	//This function constructs a proper command to send to the UC7
     switch(msgName)
     {
-        case SOFTWARE_RESET:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case GET_PART_ID:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case LOGIN:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case COMMAND_TRANSMISSION_ERROR:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case GET_VERSION:
-  			Log(lInfo) << "Not implemented!";
- 		break;
+        case SOFTWARE_RESET:   				                    Log(lInfo) << "Not implemented!"; 		break;
+        case GET_PART_ID:  					                    Log(lInfo) << "Not implemented!"; 		break;
+        case LOGIN:  						                    Log(lInfo) << "Not implemented!"; 		break;
+        case COMMAND_TRANSMISSION_ERROR:  	                    Log(lInfo) << "Not implemented!"; 		break;
+        case GET_VERSION:		  			                    Log(lInfo) << "Not implemented!"; 		break;
 
         case FEEDRATE_MOTOR_CONTROL:
-       		cmd <<gStepperControllerAddress<<sender<<20<<data1;
+        	cmd <<gStepperControllerAddress<<sender<<20<<data1;
 	        mUC7Message.init(cmd.str());
  		break;
 
-        case SEND_POSITION_AT_MOTION:
-  			Log(lInfo) << "Not implemented!";
- 		break;
+        case SEND_POSITION_AT_MOTION:  	    					Log(lInfo) << "Not implemented!"; 		break;
 
         case FEED:
        		cmd <<gStepperControllerAddress<<sender<<23<<data1<<data2;
@@ -420,17 +463,9 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 	        mUC7Message.init(cmd.str());
  		break;
 
-        case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:
-  			Log(lInfo) << "Not implemented!";
-   		break;
-
-        case EAST_WEST_MOTOR_MOVEMENT:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        case SEND_POSITION_AT_MOVEMENT_EAST_WEST:
-  			Log(lInfo) << "Not implemented!";
- 		break;
+        case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:  			Log(lInfo) << "Not implemented!";   		break;
+        case EAST_WEST_MOTOR_MOVEMENT:  						Log(lInfo) << "Not implemented!"; 			break;
+        case SEND_POSITION_AT_MOVEMENT_EAST_WEST:  				Log(lInfo) << "Not implemented!"; 			break;
 
         case CUTTING_MOTOR_CONTROL:
        		cmd <<gMotorControllerAddress<<sender<<20<<data1;
@@ -438,26 +473,20 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
  		break;
 
         case CUTTING_SPEED:
-  			Log(lInfo) << "Not implemented!";
+			cmd <<gMotorControllerAddress<<sender<<30<<data1<<data2;
+	        mUC7Message.init(cmd.str());
  		break;
 
         case RETURN_SPEED:
-  			Log(lInfo) << "Not implemented!";
+			cmd <<gMotorControllerAddress<<sender<<31<<data1<<data2;
+	        mUC7Message.init(cmd.str());
  		break;
 
-        case HANDWHEEL_POSITION:
-  			Log(lInfo) << "Not implemented!";
- 		break;
-
-        default:
-        	Log(lInfo) << "Unhandled Message!";
-        break;
-
+        case HANDWHEEL_POSITION:  				                Log(lInfo) << "Not implemented!"; 			break;
+        default:        						                Log(lInfo) << "Unhandled Message!";        	break;
     }
 
     Log(lInfo) << "Sending UC7 command: "<<mUC7Message.getMessageNameAsString() <<"\t\t("<<mUC7Message.getFullMessage()<<")";
 	sendRawMessage(mUC7Message.getFullMessage());
     return true;
 }
-
-

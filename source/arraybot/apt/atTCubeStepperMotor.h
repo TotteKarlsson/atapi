@@ -39,7 +39,7 @@ class AT_AB TCubeStepperMotor : public APTMotor
         unsigned long	                getStatusBits();
 
 				                        ///Control commands
-		void 		                    home();
+		void 		                    home(bool inThread = true);
 
         void 		                    stop(bool inThread = true);
         void 		                    stopProfiled(bool inThread = true);

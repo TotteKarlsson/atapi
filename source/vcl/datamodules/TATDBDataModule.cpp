@@ -25,6 +25,9 @@ __fastcall TatdbDM::TatdbDM(TComponent* Owner)
   	SQLConnection1->Connected = false;
 }
 
+__fastcall TatdbDM::~TatdbDM()
+{}
+
 //---------------------------------------------------------------------------
 bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db)
 {
@@ -33,15 +36,30 @@ bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const s
     mDataBaseUserPassword = dbPassword;
     mDBIP = ip;
 
-    SQLConnection1->KeepConnection = true;
-    SQLConnection1->Connected = false;
-    SQLConnection1->Params->Values[_D("HostName")] = vclstr(mDBIP);
-    SQLConnection1->Params->Values[_D("Database")] = vclstr(mDataBase);
-    SQLConnection1->Params->Values[_D("User_Name")] = vclstr(mDataBaseUser);
-    SQLConnection1->Params->Values[_D("Password")] = vclstr(mDataBaseUserPassword);
-    SQLConnection1->Connected= true;
-    SQLConnection1->AutoClone = false;
-    return SQLConnection1->Connected;
+    try
+    {
+        SQLConnection1->KeepConnection = true;
+        SQLConnection1->Connected = false;
+        SQLConnection1->Params->Values[_D("HostName")] = vclstr(mDBIP);
+        SQLConnection1->Params->Values[_D("Database")] = vclstr(mDataBase);
+        SQLConnection1->Params->Values[_D("User_Name")] = vclstr(mDataBaseUser);
+        SQLConnection1->Params->Values[_D("Password")] = vclstr(mDataBaseUserPassword);
+
+        Log(lInfo) <<"Trying to connect to SQL server using parameters:\t"<<
+                    "Host="		<<stdstr(SQLConnection1->Params->Values[_D("HostName")])<<"\t"<<
+                    "UserNamet="<<stdstr(SQLConnection1->Params->Values[_D("User_Name")])<<"\t"<<
+                    "Password="	<<stdstr(SQLConnection1->Params->Values[_D("Password")])<<"\t"<<
+                    "Database="	<<stdstr(SQLConnection1->Params->Values[_D("Database")]);
+
+        SQLConnection1->AutoClone      = false;
+        SQLConnection1->KeepConnection = true;
+        SQLConnection1->Connected = true;
+        return SQLConnection1->Connected;
+    }
+    catch(const TDBXError& e)
+    {
+    	Log(lWarning) << stdstr(e.Message);
+    }
 }
 
 //---------------------------------------------------------------------------
@@ -84,7 +102,7 @@ void __fastcall TatdbDM::afterDisConnect()
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
-	slicesCDS->Active  	= false;
+	slicesCDS->Active  		= false;
 }
 
 //---------------------------------------------------------------------------
@@ -142,7 +160,7 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
  	if(DataSet == blocksCDS)
     {
         int bID = blocksCDS->FieldByName("id")->AsInteger;
-        if(bID == 0)
+        if(bID == -1)
         {
             blockNotesCDS->Active = false;
             mRibbonCDS->Active = false;
@@ -200,6 +218,14 @@ void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)
         	ribbonNotesCDS->Refresh();
         }
     }
+//    else if(DataSet == blockIDSCDS)
+//    {
+//    	if(MoviesByBlockIDCDS->Active)
+//        {
+//        	MoviesByBlockIDCDS->Refresh();
+//        }
+//    }
+
 }
 
 //---------------------------------------------------------------------------
@@ -333,7 +359,15 @@ int	__fastcall TatdbDM::getCurrentBlockID()
 {
 	if(blocksCDS->Active)
     {
-    	return blocksCDS->FieldByName("id")->Text.ToInt();
+    	try
+        {
+	    	return blocksCDS->FieldByName("id")->Text.ToInt();
+        }
+        catch(...)
+        {
+         	return -1;
+        }
+
     }
     else
     {

@@ -58,7 +58,7 @@
         <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <PackageImports>VCLCommon;fs17;frx17;bindcompfmx;DBXSqliteDriver;vcldbx;RaizeComponentsTrialVcl;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;DbxDevartSQLiteDriver170;vclie;HsBarcode1DRun;RaizeComponentsTrialVclDb;vcltouch;bcbsmp;websnap;CustomIPTransport;vclribbon;dsnap;IndyIPServer;IndyCore;vcl;fmxase;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;frxDB17;inet;fsDB17;fmxobj;vclx;frxe17;inetdbxpress;webdsnap;fmxdae;bdertl;DuneComponents;dbexpress;adortl;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
+        <PackageImports>VCLCommon;fs17;frx17;bindcompfmx;DBXSqliteDriver;vcldbx;RaizeComponentsTrialVcl;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;HsBarcode1DRun;RaizeComponentsTrialVclDb;vcltouch;bcbsmp;websnap;CustomIPTransport;vclribbon;dsnap;IndyIPServer;IndyCore;vcl;fmxase;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;frxDB17;inet;fsDB17;fmxobj;vclx;frxe17;inetdbxpress;webdsnap;fmxdae;bdertl;DuneComponents;dbexpress;adortl;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
@@ -131,6 +131,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>datamodules\TATDBDataModule.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
+        <CppCompile Include="datamodules\TATDBImagesAndMoviesDataModule.cpp">
+            <Form>ImagesAndMoviesDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TATDBImagesAndMoviesDataModule.h</DependentOn>
+            <BuildOrder>39</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="datamodules\TCoverSlipDataModule.cpp">
+            <Form>csDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TCoverSlipDataModule.h</DependentOn>
+            <BuildOrder>40</BuildOrder>
+        </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
         </PackageImport>
@@ -142,9 +154,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <PackageImport Include="DbxCommonDriver.bpi">
             <BuildOrder>46</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="DbxDevartSQLiteDriver170.bpi">
-            <BuildOrder>49</BuildOrder>
         </PackageImport>
         <PackageImport Include="DBXMySQLDriver.bpi">
             <BuildOrder>48</BuildOrder>
@@ -207,9 +216,29 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TArduinoServerCommandFrame.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
-        <CppCompile Include="frames\TATDBConnectionFrame.cpp">
-            <DependentOn>frames\TATDBConnectionFrame.h</DependentOn>
-            <BuildOrder>34</BuildOrder>
+        <CppCompile Include="frames\TImageItemFrame.cpp">
+            <Form>ImageItemFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TImageItemFrame.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TImagesFrame.cpp">
+            <Form>ImagesFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TImagesFrame.h</DependentOn>
+            <BuildOrder>38</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TMovieItemFrame.cpp">
+            <Form>MovieItemFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TMovieItemFrame.h</DependentOn>
+            <BuildOrder>37</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="frames\TMoviesFrame.cpp">
+            <Form>MoviesFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TMoviesFrame.h</DependentOn>
+            <BuildOrder>36</BuildOrder>
         </CppCompile>
         <CppCompile Include="frames\TNavitarMotorFrame.cpp">
             <Form>NavitarMotorFrame</Form>
@@ -250,21 +279,27 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PackageImport Include="vclx.bpi">
             <BuildOrder>19</BuildOrder>
         </PackageImport>
-        <FormResources Include="frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="forms\TYesNoForm.dfm"/>
         <FormResources Include="frames\TArduinoServerCommandFrame.dfm"/>
-        <FormResources Include="forms\TTextInputDialog.dfm"/>
-        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="forms\TBlockEntryForm.dfm"/>
-        <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="frames\TApplicationSoundsFrame.dfm"/>
+        <FormResources Include="frames\TImageItemFrame.dfm"/>
+        <FormResources Include="frames\TMovieItemFrame.dfm"/>
+        <FormResources Include="frames\TImagesFrame.dfm"/>
         <FormResources Include="forms\TShowFileContentForm.dfm"/>
-        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
+        <FormResources Include="forms\TStringInputDialog.dfm"/>
+        <FormResources Include="forms\TYesNoForm.dfm"/>
+        <FormResources Include="forms\TTextInputDialog.dfm"/>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="frames\TMoviesFrame.dfm"/>
+        <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
         <FormResources Include="datamodules\TATDBDataModule.dfm"/>
-        <FormResources Include="forms\TATDBServerEntry.dfm"/>
+        <FormResources Include="datamodules\TCoverSlipDataModule.dfm"/>
+        <FormResources Include="datamodules\TATDBImagesAndMoviesDataModule.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="forms\TBlockEntryForm.dfm"/>
+        <FormResources Include="forms\TATDBServerEntry.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

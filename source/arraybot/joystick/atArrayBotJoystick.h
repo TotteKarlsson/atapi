@@ -57,8 +57,8 @@ class AT_AB ArrayBotJoyStick : public ATObject
 
 		JoyStickButton&		                        getButton(int nr);
 		JoyStickButton&		                        getPOVButton(int nr);
-        void						                setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down);
-        void						                setPOVButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down);
+        void						                setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent jse, bool clickOnly = true);
+        void						                setPOVButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent jse);
         void				                        setAxisEvent(int axis, JoyStickAxisEvent move);
 
         bool										isValid();

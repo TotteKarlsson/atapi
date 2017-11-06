@@ -103,3 +103,10 @@ bool Process::isTimedOut()
 //    }
 	return false;
 }
+
+Poco::Timespan Process::getElapsedTimeSinceStart()
+{
+     	Poco::Timestamp now;
+        Poco::Timespan timeElapsed(now - mStartTime);
+        return timeElapsed;
+}

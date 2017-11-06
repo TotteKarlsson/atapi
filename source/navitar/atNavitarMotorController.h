@@ -22,6 +22,9 @@ class AT_CORE NavitarMotorController : public ATObject
 
         NavitarMotor&                   getZoom();
         void							setZoom(int z);
+        void							zoomIn(int val);
+        void							zoomOut(int val);
+
         NavitarMotor&                   getFocus();
         void							setFocus(int f);
         void							setFocusAndZoom(int f, int z);

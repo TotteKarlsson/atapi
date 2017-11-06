@@ -1,6 +1,6 @@
 object atdbDM: TatdbDM
   OldCreateOrder = False
-  Height = 926
+  Height = 1042
   Width = 1038
   object SQLConnection1: TSQLConnection
     DriverName = 'DevartPostgreSQL'
@@ -11,26 +11,32 @@ object atdbDM: TatdbDM
         'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver170.' +
         'bpl'
       
-        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
-        ',DbxDevartPostgreSQLDriver170.bpl'
-      'ProductName=DevartPostgreSQL'
-      'GetDriverFunc=getSQLDriverPostgreSQL'
-      'LibraryName=dbexppgsql40.dll'
-      'LocaleCode=0000'
-      'IsolationLevel=ReadCommitted'
+        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+        'nd.Data.DbxCommonDriver,Version=17.0.0.0,Culture=neutral,PublicK' +
+        'eyToken=91d62ebb5b0d1b1b'
+      
+        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
+        'iver170.bpl'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
+        'ory,Borland.Data.DbxMySQLDriver,Version=17.0.0.0,Culture=neutral' +
+        ',PublicKeyToken=91d62ebb5b0d1b1b'
+      'GetDriverFunc=getSQLDriverMYSQL'
+      'LibraryName=dbxmys.dll'
+      'LibraryNameOsx=libsqlmys.dylib'
+      'VendorLib=LIBMYSQL.dll'
+      'VendorLibWin64=libmysql.dll'
+      'VendorLibOsx=libmysqlclient.dylib'
+      'HostName=atdb'
+      'Database=atdb-live'
+      'User_Name=atdb'
+      'Password=atdb123'
       'MaxBlobSize=-1'
-      'FetchAll=True'
-      'UseQuoteChar=False'
-      'UseUnicode=True'
-      'IPVersion=IPv4'
-      'VendorLib=dbexppgsql40.dll'
+      'LocaleCode=0000'
+      'Compressed=False'
+      'Encrypted=False'
       'BlobSize=-1'
-      'HostName='
-      'SchemaName='
-      'DataBase='
-      'User_Name='
-      'Password='
-      'EnableBCD=True')
+      'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
     Left = 40
@@ -1176,7 +1182,7 @@ object atdbDM: TatdbDM
   end
   object blockIDsDataSource: TDataSource
     DataSet = blockIDSCDS
-    Left = 752
+    Left = 768
     Top = 360
   end
   object ribbonStatusDS: TSimpleDataSet

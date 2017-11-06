@@ -25,7 +25,7 @@ class ArrayBot;
 class AT_AB ProcessSequence : public ATObject
 {
     public:
-										    ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& name = "", const string& fileExt = "proc");
+										    ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& sequenceName = "", const string& fileExt = "ab");
 				        		            ~ProcessSequence();
 					        		        ProcessSequence(const ProcessSequence& s);
 
@@ -35,7 +35,7 @@ class AT_AB ProcessSequence : public ATObject
 		void								init();
 
 		void					            clear();
-        string								getName(){return mProject.getProjectName();}
+        string								getName();
 
         virtual bool	 		            read(const string& fName);
         virtual bool			            write(const string& folder = mtk::gEmptyString);

@@ -596,9 +596,9 @@ int CComThreads::RunStateMachine( int nEvent, unsigned char CmdCode, unsigned ch
 																	// ack while in host cmd pending and then we'll go to idle 
 							}
 							else
+                            {
 								ret_val = FALSE; // DENY USER REQUEST
-							break;
-
+                            }
 						break;
 					case USER_BATCHDATAREQ_EVENT:	// fall thru	
 					case USER_PARAMDATAREQ_EVENT:		

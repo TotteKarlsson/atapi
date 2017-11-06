@@ -70,7 +70,7 @@ bool BenchTopStepperMotor::disconnect()
 bool BenchTopStepperMotor::enable()
 {
 	int e = SBC_EnableChannel(mSerial.c_str(),lChannel);
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -81,7 +81,7 @@ bool BenchTopStepperMotor::enable()
 bool BenchTopStepperMotor::disable()
 {
 	int e = SBC_DisableChannel(mSerial.c_str(),lChannel);
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -206,18 +206,26 @@ bool BenchTopStepperMotor::stopPolling()
     return false;
 }
 
-void BenchTopStepperMotor::home()
+void BenchTopStepperMotor::home(bool inThread)
 {
-  	if(!SBC_CanHome(mSerial.c_str(),lChannel))
+	if(inThread)
     {
-    	Log(lError) << "This device cannot be homed";
+		MotorCommand cmd(mcHome);
+		post(cmd);
     }
-
-    int res = SBC_Home(mSerial.c_str(),lChannel);
-
-    if(res)
+    else
     {
-    	//throw
+        if(!SBC_CanHome(mSerial.c_str(),lChannel))
+        {
+            Log(lError) << "This device cannot be homed";
+        }
+
+        int e = SBC_Home(mSerial.c_str(),lChannel);
+
+        if(e)
+        {
+            Log(lError) <<tlError(e);
+        }
     }
 }
 
@@ -231,7 +239,7 @@ void BenchTopStepperMotor::stop(bool inThread)
     else
     {
 		int e = SBC_StopImmediate(mSerial.c_str(),lChannel);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -249,7 +257,7 @@ void BenchTopStepperMotor::stopProfiled(bool inThread)
     else
     {
         int e = SBC_StopProfiled(mSerial.c_str(),lChannel);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -268,7 +276,7 @@ double BenchTopStepperMotor::getVelocity()
 
 	int e = SBC_GetVelParams(mSerial.c_str(),lChannel, &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -281,7 +289,7 @@ double BenchTopStepperMotor::getAcceleration()
 
 	int e = SBC_GetVelParams(mSerial.c_str(),lChannel, &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -342,7 +350,7 @@ bool BenchTopStepperMotor::setJogStopMode(StopMode sm)
 {
 	JogMoveMode jm = getJogMoveMode();
 	int e = SBC_SetJogMode(mSerial.c_str(),lChannel, (MOT_JogModes) jm, (MOT_StopModes) sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -355,7 +363,7 @@ JogMoveMode	BenchTopStepperMotor::getJogMoveMode()
     MOT_JogModes jm;
 	MOT_StopModes sm;
 	int e = SBC_GetJogMode(mSerial.c_str(),lChannel, &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (JogMoveMode) MOT_JogModeUndefined;
@@ -368,7 +376,7 @@ StopMode BenchTopStepperMotor::getJogStopMode()
 	MOT_StopModes sm;
     MOT_JogModes jm;
 	int e = SBC_GetJogMode(mSerial.c_str(),lChannel, &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (StopMode) MOT_StopModeUndefined;
@@ -380,7 +388,7 @@ double BenchTopStepperMotor::getJogVelocity()
 {
     int a, v;
     int e = SBC_GetJogVelParams(mSerial.c_str(),lChannel, &a, &v);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -400,7 +408,7 @@ bool BenchTopStepperMotor::setJogStep(double newStep)
 	Log(lDebug) << "Setting Jog Step: "<<newStep;
     int e = SBC_SetJogStepSize(mSerial.c_str(), lChannel, newStep * mScalingFactors.position);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -417,7 +425,7 @@ bool BenchTopStepperMotor::setJogVelocity(double newVel)
 	Log(lDebug) << "Setting Jog Velocity: "<<newVel;
     int e = SBC_SetJogVelParams(mSerial.c_str(),lChannel, a, newVel * mScalingFactors.velocity);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -431,7 +439,7 @@ bool BenchTopStepperMotor::setJogAcceleration(double newAcc)
     SBC_GetJogVelParams(mSerial.c_str(),lChannel, &a, &v);
     int e = SBC_SetJogVelParams(mSerial.c_str(),lChannel, newAcc * mScalingFactors.acceleration, v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -463,7 +471,7 @@ void BenchTopStepperMotor::jogForward(bool inThread)
     else
     {
         int e = SBC_MoveJog(mSerial.c_str(),lChannel, MOT_Forwards);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -482,7 +490,7 @@ void BenchTopStepperMotor::jogReverse(bool inThread)
     {
         //Todo: tell thorlabs about the MOT_Reverse flag name
         int e = SBC_MoveJog(mSerial.c_str(),lChannel, MOT_Reverse);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -500,7 +508,7 @@ void BenchTopStepperMotor::forward(bool inThread)
     else
     {
     	int e = SBC_MoveAtVelocity(mSerial.c_str(),lChannel, MOT_Forwards);
-    	if(e != 0)
+    	if(e)
     	{
         	Log(lError) <<tlError(e);
         }
@@ -530,7 +538,7 @@ bool BenchTopStepperMotor::moveToPosition(double pos, bool inThread)
     {
         int e = SBC_MoveToPosition(mSerial.c_str(),lChannel, pos * mScalingFactors.position );
 		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
             Log(lError) <<"Tried to move to position: "<<pos<<" using the "<<getName()<<" device.";

@@ -15,7 +15,7 @@ using std::string;
 
 //!The TatDM class encapsulate data exchange with the ATDB database
 //---------------------------------------------------------------------------
-class TatdbDM : public TDataModule
+class PACKAGE TatdbDM : public TDataModule
 {
 __published:	// IDE-managed Components
 	TSQLConnection *SQLConnection1;
@@ -225,8 +225,6 @@ __published:	// IDE-managed Components
 	void __fastcall slicesCDSAfterClose(TDataSet *DataSet);
 	void __fastcall slicesCDSAfterOpen(TDataSet *DataSet);
 
-
-
 	private:
 
     protected:
@@ -237,6 +235,7 @@ __published:	// IDE-managed Components
 
 	public:
 				__fastcall           	TatdbDM(TComponent* Owner);
+				__fastcall           	~TatdbDM();
 		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
         void    __fastcall           	afterConnect();
         void    __fastcall           	afterDisConnect();

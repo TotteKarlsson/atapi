@@ -98,41 +98,15 @@ bool ArrayCamRequestProcess::start()
 {
 	switch(mRequest)
     {
-     	case ACMessageID::acrStartVideoRecorder:
-	        mArrayCamClient.startVideo();
-		break;
-
-     	case ACMessageID::acrStopVideoRecorder:
-	        mArrayCamClient.stopVideo();
-		break;
-
-     	case ACMessageID::acrEnableBarcodeScanner:
-	        mArrayCamClient.enableBarcodeScanner();
-		break;
-
-     	case ACMessageID::acrDisableBarcodeScanner:
-	        mArrayCamClient.disableBarcodeScanner();
-		break;
-
-     	case ACMessageID::acrTakeSnapShot:
-	        mArrayCamClient.takeSnapShot();
-		break;
-
-     	case ACMessageID::acrSetZoomAndFocus:
-	        mArrayCamClient.setZoomAndFocus(mParameter1, mParameter2);
-		break;
-
-     	case ACMessageID::acrStartUC7:
-	        mArrayCamClient.startUC7();
-		break;
-
-     	case ACMessageID::acrStopUC7:
-	        mArrayCamClient.stopUC7();
-		break;
-
-     	case ACMessageID::acrSetLEDIntensity:
-	        mArrayCamClient.setLEDIntensity(mParameter1);
-		break;
+     	case ACMessageID::acrStartVideoRecorder:	    mArrayCamClient.startVideo();			                        break;
+     	case ACMessageID::acrStopVideoRecorder:	        mArrayCamClient.stopVideo();			                        break;
+     	case ACMessageID::acrEnableBarcodeScanner:      mArrayCamClient.enableBarcodeScanner();	                        break;
+     	case ACMessageID::acrDisableBarcodeScanner:     mArrayCamClient.disableBarcodeScanner();		                break;
+     	case ACMessageID::acrTakeSnapShot:		        mArrayCamClient.takeSnapShot();			  		                break;
+     	case ACMessageID::acrSetZoomAndFocus:	        mArrayCamClient.setZoomAndFocus(mParameter1, mParameter2);		break;
+     	case ACMessageID::acrStartUC7:			        mArrayCamClient.startUC7();										break;
+     	case ACMessageID::acrStopUC7:			        mArrayCamClient.stopUC7();										break;
+     	case ACMessageID::acrSetLEDIntensity:	        mArrayCamClient.setLEDIntensity(mParameter1);					break;
 
 		default:
         	Log(lError) << "Bad ArrayCamRequest in process";
@@ -214,6 +188,12 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
             }
 		break;
 
+        case acrSetLEDIntensity:
+        	if(msg == p[acrLEDIntensitySet])
+    		{
+                mIsProcessed = true;
+            }
+        break;
         case acrStartUC7:
         	if(msg == p[acrUC7Started] || msg == p[acrUC7IsRunning])
     		{

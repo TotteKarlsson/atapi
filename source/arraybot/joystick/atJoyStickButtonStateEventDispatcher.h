@@ -22,6 +22,13 @@ class AT_AB JoyStickButtonStateEventDispatcher  : public ATObject
                                 //!and the associated Event is fired
 		JoyStickButtonState 	mButtonState;
     	ButtonEvents 			mEvents;
+
+        						//!Stting clickEventOnly means that the state
+                                //is only checked for a state change, i.e. going from
+                                //pressed to 'unpressed'.
+                                //If Click eventOnly is false, state is checked continously
+                                //in the event loop
+        bool					mClickEventOnly;
 };
 
 

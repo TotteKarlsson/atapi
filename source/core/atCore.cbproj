@@ -89,12 +89,14 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <PreLinkEvent><![CDATA[copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib
+$(PreLinkEvent)]]></PreLinkEvent>
         <BCC_whid>false</BCC_whid>
         <PreBuildEvent><![CDATA[if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480
-xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y
-copy $(AT_ROOT)thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
-copy $(AT_ROOT)thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
-copy $(AT_ROOT)thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib
+xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y
+copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib
+copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib
+copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dsl\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
@@ -145,6 +147,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atCounter.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atCreateImageThumbNailThread.cpp">
+            <BuildOrder>26</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atCreateMovieThumbNailThread.cpp">
+            <BuildOrder>29</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atEnvironmentalSensorReader.cpp">
             <BuildOrder>26</BuildOrder>
         </CppCompile>
@@ -159,9 +167,15 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="atProcess.cpp">
             <BuildOrder>39</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atSyncMySQLDataToPostgres.cpp">
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atUtilities.cpp">
             <DependentOn>atUtilities.h</DependentOn>
             <BuildOrder>27</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atVideoCompressorThread.cpp">
+            <BuildOrder>28</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>
@@ -260,7 +274,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
@@ -280,9 +293,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BUILD)\include\uc480 mkdir $(DEBUG_BUILD)\include\uc480&amp;&amp;xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BUILD)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BUILD)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BUILD)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
+        <PreLinkEvent>copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BUILD)\lib\navusbAPI_B1.lib</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
         <PostBuildEvent/>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>

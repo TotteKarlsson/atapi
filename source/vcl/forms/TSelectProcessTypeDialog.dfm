@@ -12,6 +12,7 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 23
   object Panel1: TPanel
@@ -64,8 +65,9 @@ object SelectProcessTypeDialog: TSelectProcessTypeDialog
       'Time Delay'
       'Stop/Start Dialog'
       'ArrayCam Request'
-      'AbsoluteMove'
-      'Lift at Angle')
+      'Absolute Move'
+      'Lift at Angle'
+      'Home Motor')
     TabOrder = 1
   end
 end

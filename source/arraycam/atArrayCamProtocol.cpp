@@ -18,10 +18,14 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrBarcodeScannerDisabled]	= "Barcode Scanner Disabled";
     mIPCMessage[acrSetZoomAndFocus]			= "Set Focus and Zoom";
     mIPCMessage[acrFocusAndZoomSet]			= "Focus and Zoom Set";
+    mIPCMessage[acrZoomIn]					= "Zoom In";
+    mIPCMessage[acrZoomInSet]	  			= "Zoom In set";
+    mIPCMessage[acrZoomOut]					= "Zoom Out";
+    mIPCMessage[acrZoomOutSet]	  			= "Zoom Out set";
     mIPCMessage[acrStartUC7]				= "Start UC7";
     mIPCMessage[acrStopUC7]					= "Stop  UC7";
     mIPCMessage[acrSetLEDIntensity]			= "Set LED Intensity";
-    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensityr set";
+    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensity set";
 
     mIPCMessage[acrUnknown]					= "Unknown";
 }

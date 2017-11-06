@@ -73,7 +73,7 @@ bool TCubeDCServo::disconnect()
 bool TCubeDCServo::enable()
 {
 	int e = CC_EnableChannel(mSerial.c_str());
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -84,7 +84,7 @@ bool TCubeDCServo::enable()
 bool TCubeDCServo::disable()
 {
 	int e = CC_DisableChannel(mSerial.c_str());
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
         return false;
@@ -210,18 +210,26 @@ bool TCubeDCServo::stopPolling()
     return false;
 }
 
-void TCubeDCServo::home()
+void TCubeDCServo::home(bool inThread)
 {
-  	if(!CC_CanHome(mSerial.c_str()))
+	if(inThread)
     {
-    	Log(lError) << "This device cannot be homed";
+		MotorCommand cmd(mcHome);
+		post(cmd);
     }
-
-    int res = CC_Home(mSerial.c_str());
-
-    if(res)
+    else
     {
-    	//throw
+        if(!CC_CanHome(mSerial.c_str()))
+        {
+            Log(lError) << "This device cannot be homed";
+        }
+
+        int e = CC_Home(mSerial.c_str());
+
+        if(e)
+        {
+            Log(lError) <<tlError(e);
+        }
     }
 }
 
@@ -236,7 +244,7 @@ void TCubeDCServo::stop(bool inThread)
     {
 		int e = CC_StopImmediate(mSerial.c_str());
 		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -246,7 +254,7 @@ void TCubeDCServo::stop(bool inThread)
 void TCubeDCServo::stopProfiled(bool inThread)
 {
     int e = CC_StopProfiled(mSerial.c_str());
-    if(e != 0)
+    if(e)
     {
         Log(lError) <<tlError(e);
     }
@@ -263,7 +271,7 @@ double TCubeDCServo::getVelocity()
 
 	int e = CC_GetVelParams(mSerial.c_str(), &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -276,7 +284,7 @@ double TCubeDCServo::getAcceleration()
 
 	int e = CC_GetVelParams(mSerial.c_str(), &a, &v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -332,7 +340,7 @@ bool TCubeDCServo::setJogStep(double newStep)
 	Log(lDebug) << "Setting Jog Step: "<<newStep;
     int e = CC_SetJogStepSize(mSerial.c_str(),  newStep * mScalingFactors.position);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -358,7 +366,7 @@ bool TCubeDCServo::setJogStopMode(StopMode sm)
 {
 	JogMoveMode jm = getJogMoveMode();
 	int e = CC_SetJogMode(mSerial.c_str(), (MOT_JogModes) jm, (MOT_StopModes) sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -371,7 +379,7 @@ JogMoveMode	TCubeDCServo::getJogMoveMode()
     MOT_JogModes jm;
 	MOT_StopModes sm;
 	int e = CC_GetJogMode(mSerial.c_str(), &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (JogMoveMode) MOT_JogModeUndefined;
@@ -384,7 +392,7 @@ StopMode TCubeDCServo::getJogStopMode()
 	MOT_StopModes sm;
     MOT_JogModes jm;
 	int e = CC_GetJogMode(mSerial.c_str(), &jm, &sm);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return (StopMode) MOT_StopModeUndefined;
@@ -396,7 +404,7 @@ double TCubeDCServo::getJogVelocity()
 {
     int a, v;
     int e = CC_GetJogVelParams(mSerial.c_str(), &a, &v);
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
     }
@@ -412,7 +420,7 @@ bool TCubeDCServo::setJogVelocity(double newVel)
 	Log(lDebug) << "Setting Jog Velocity: "<<newVel;
     int e = CC_SetJogVelParams(mSerial.c_str(), a, newVel * mScalingFactors.velocity);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -426,7 +434,7 @@ bool TCubeDCServo::setJogAcceleration(double newAcc)
     CC_GetJogVelParams(mSerial.c_str(), &a, &v);
     int e = CC_SetJogVelParams(mSerial.c_str(), newAcc * mScalingFactors.acceleration, v);
 
-    if(e != 0)
+    if(e)
     {
     	Log(lError) <<tlError(e);
         return false;
@@ -459,7 +467,7 @@ void TCubeDCServo::jogForward(bool inThread)
     {
         int e = CC_MoveJog(mSerial.c_str(), MOT_Forwards);
    		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -478,7 +486,7 @@ void TCubeDCServo::jogReverse(bool inThread)
         //Todo: tell thorlabs about the MOT_Reverse flag name
         int e = CC_MoveJog(mSerial.c_str(), MOT_Backwards);
 		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -495,7 +503,7 @@ void TCubeDCServo::forward(bool inThread)
     else
     {
     	int e = CC_MoveAtVelocity(mSerial.c_str(), MOT_Forwards);
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
         }
@@ -525,7 +533,7 @@ bool TCubeDCServo::moveToPosition(double pos, bool inThread)
     {
         int e = CC_MoveToPosition(mSerial.c_str(), pos * mScalingFactors.position);
 		mMotorCommandsPending--;
-        if(e != 0)
+        if(e)
         {
             Log(lError) <<tlError(e);
             Log(lError) <<"Tried to move to position: "<<pos<<" using the "<<getName()<<" device.";

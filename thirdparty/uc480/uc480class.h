@@ -12,7 +12,7 @@
 
 #include "uc480.h"
 #include "uc480_deprecated.h"
-#include "dynamic_uc480.h"
+#include "camera/dynamic_uc480.h"
 
 #include "core/atCoreExporter.h"
 

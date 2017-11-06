@@ -15,7 +15,7 @@ class AT_AB BenchTopStepperMotor : public APTMotor
         bool	                        disable();
 
 				                        ///Control commands
-		void 		                    home();
+		void 		                    home(bool inThread = true);
 
 		HardwareInformation		        getHWInfo();
         double				 			getEncoderCounts();
