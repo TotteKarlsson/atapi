@@ -2,6 +2,41 @@ object pgDM: TpgDM
   OldCreateOrder = False
   Height = 1042
   Width = 1038
+  object SQLConnection1: TSQLConnection
+    ConnectionName = 'LocalPG'
+    DriverName = 'DevartPostgreSQL'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=DevartPostgreSQL'
+      'DriverUnit=DbxDevartPostgreSQL'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver170.' +
+        'bpl'
+      
+        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
+        ',DbxDevartPostgreSQLDriver170.bpl'
+      'ProductName=DevartPostgreSQL'
+      'LibraryName=dbexppgsql40.dll'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'MaxBlobSize=-1'
+      'FetchAll=True'
+      'UseQuoteChar=False'
+      'UseUnicode=True'
+      'IPVersion=IPv4'
+      'VendorLib=dbexppgsql40.dll'
+      'BlobSize=-1'
+      'HostName=localhost'
+      'SchemaName='
+      'Database=shotgundb'
+      'User_Name=admin'
+      'Password=totte'
+      'EnableBCD=True')
+    AfterConnect = SQLConnection1AfterConnect
+    BeforeConnect = SQLConnection1BeforeConnect
+    Left = 40
+    Top = 24
+  end
   object blocksDataSource: TDataSource
     DataSet = blocksCDS
     Left = 336
@@ -34,7 +69,7 @@ object pgDM: TpgDM
       FieldName = 'entered_on'
       Required = True
     end
-    object blocksCDSlabel: TStringField
+    object blocksCDSlabel: TWideStringField
       DisplayLabel = 'Label'
       FieldName = 'label'
       Size = 255
@@ -43,7 +78,7 @@ object pgDM: TpgDM
       FieldName = 'status'
       Required = True
     end
-    object blocksCDSLBlockStatus: TStringField
+    object blocksCDSLBlockStatus: TWideStringField
       DisplayLabel = 'Status'
       FieldKind = fkLookup
       FieldName = 'LBlockStatus'
@@ -60,7 +95,7 @@ object pgDM: TpgDM
       FieldName = 'serial'
       Required = True
     end
-    object blocksCDSCBlockLabel: TStringField
+    object blocksCDSCBlockLabel: TWideStringField
       DisplayLabel = 'Label'
       FieldKind = fkCalculated
       FieldName = 'Cblock_label'
@@ -86,7 +121,7 @@ object pgDM: TpgDM
     object blocksCDSembedding_protocol: TSmallintField
       FieldName = 'embedding_protocol'
     end
-    object blocksCDSLCryoProtectionProtocol: TStringField
+    object blocksCDSLCryoProtectionProtocol: TWideStringField
       DisplayLabel = 'Cryoprotection Protocol'
       FieldKind = fkLookup
       FieldName = 'LCryoProtectionProtocol'
@@ -96,7 +131,7 @@ object pgDM: TpgDM
       KeyFields = 'cryoprotection_protocol'
       Lookup = True
     end
-    object blocksCDSLFreezingProtocol: TStringField
+    object blocksCDSLFreezingProtocol: TWideStringField
       DisplayLabel = 'Freezing Protocol'
       FieldKind = fkLookup
       FieldName = 'LFreezingProtocol'
@@ -106,7 +141,7 @@ object pgDM: TpgDM
       KeyFields = 'freezing_protocol'
       Lookup = True
     end
-    object blocksCDSLSubstitutionProtocol: TStringField
+    object blocksCDSLSubstitutionProtocol: TWideStringField
       DisplayLabel = 'Substitution Protocol'
       FieldKind = fkLookup
       FieldName = 'LSubstitutionProtocol'
@@ -116,7 +151,7 @@ object pgDM: TpgDM
       KeyFields = 'substitution_protocol'
       Lookup = True
     end
-    object blocksCDSLInfiltrationProtocol: TStringField
+    object blocksCDSLInfiltrationProtocol: TWideStringField
       DisplayLabel = 'Infiltration Protocol'
       FieldKind = fkLookup
       FieldName = 'LInfiltrationProtocol'
@@ -126,7 +161,7 @@ object pgDM: TpgDM
       KeyFields = 'infiltration_protocol'
       Lookup = True
     end
-    object blocksCDSLEmbeddingProtocol: TStringField
+    object blocksCDSLEmbeddingProtocol: TWideStringField
       DisplayLabel = 'Embedding Protocol'
       FieldKind = fkLookup
       FieldName = 'LEmbeddingProtocol'
@@ -136,7 +171,7 @@ object pgDM: TpgDM
       KeyFields = 'embedding_protocol'
       Lookup = True
     end
-    object blocksCDSLUser: TStringField
+    object blocksCDSLUser: TWideStringField
       DisplayLabel = 'Entered By'
       FieldKind = fkLookup
       FieldName = 'entered_byL'
@@ -172,21 +207,21 @@ object pgDM: TpgDM
     object blocksDSslice_id: TIntegerField
       FieldName = 'slice_id'
     end
-    object blocksDSentered_on: TSQLTimeStampField
-      FieldName = 'entered_on'
-    end
     object blocksDSstatus: TSmallintField
       FieldName = 'status'
+      Required = True
     end
     object blocksDSentered_by: TIntegerField
       FieldName = 'entered_by'
+      Required = True
     end
     object blocksDSlabel: TWideStringField
       FieldName = 'label'
       Size = 255
     end
-    object blocksDSserial: TIntegerField
+    object blocksDSserial: TSmallintField
       FieldName = 'serial'
+      Required = True
     end
     object blocksDSdate_embedded: TDateField
       FieldName = 'date_embedded'
@@ -206,6 +241,10 @@ object pgDM: TpgDM
     object blocksDSembedding_protocol: TSmallintField
       FieldName = 'embedding_protocol'
     end
+    object blocksDSentered_on: TSQLTimeStampField
+      FieldName = 'entered_on'
+      Required = True
+    end
   end
   object usersDS: TSQLDataSet
     CommandText = 'select * from users'
@@ -219,6 +258,7 @@ object pgDM: TpgDM
     end
     object usersDSuser_name: TWideStringField
       FieldName = 'user_name'
+      Required = True
       Size = 255
     end
     object usersDScreated: TSQLTimeStampField
@@ -241,7 +281,7 @@ object pgDM: TpgDM
     object usersCDSid: TIntegerField
       FieldName = 'id'
     end
-    object usersCDSuser_name: TStringField
+    object usersCDSuser_name: TWideStringField
       FieldName = 'user_name'
       Required = True
       Size = 255
@@ -277,7 +317,7 @@ object pgDM: TpgDM
       FieldName = 'id'
       Required = True
     end
-    object blockNotesCDSnote: TMemoField
+    object blockNotesCDSnote: TWideMemoField
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
@@ -318,7 +358,7 @@ object pgDM: TpgDM
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object notesCDSnote: TMemoField
+    object notesCDSnote: TWideMemoField
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
@@ -355,7 +395,7 @@ object pgDM: TpgDM
     OnCalcFields = mRibbonCDSCalcFields
     Left = 240
     Top = 504
-    object mRibbonCDSid: TStringField
+    object mRibbonCDSid: TWideStringField
       FieldName = 'id'
       Size = 36
     end
@@ -390,7 +430,7 @@ object pgDM: TpgDM
       FieldName = 'coverslip_id'
       Required = True
     end
-    object mRibbonCDSstatusL: TStringField
+    object mRibbonCDSstatusL: TWideStringField
       DisplayLabel = 'Status'
       FieldKind = fkLookup
       FieldName = 'statusL'
@@ -422,7 +462,7 @@ object pgDM: TpgDM
       FieldName = 'id'
       Required = True
     end
-    object ribbonNotesCDSnote: TMemoField
+    object ribbonNotesCDSnote: TWideMemoField
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
@@ -457,6 +497,37 @@ object pgDM: TpgDM
     SQLConnection = SQLConnection1
     Left = 32
     Top = 504
+    object ribbonsDSid: TWideStringField
+      FieldName = 'id'
+      Size = 36
+    end
+    object ribbonsDSstatus: TIntegerField
+      FieldName = 'status'
+    end
+    object ribbonsDSblock_id: TIntegerField
+      FieldName = 'block_id'
+      Required = True
+    end
+    object ribbonsDScutting_order: TIntegerField
+      FieldName = 'cutting_order'
+    end
+    object ribbonsDSnr_of_sections: TSmallintField
+      FieldName = 'nr_of_sections'
+    end
+    object ribbonsDScreated: TSQLTimeStampField
+      FieldName = 'created'
+    end
+    object ribbonsDSmodified: TSQLTimeStampField
+      FieldName = 'modified'
+    end
+    object ribbonsDScreated_by: TIntegerField
+      FieldName = 'created_by'
+      Required = True
+    end
+    object ribbonsDScoverslip_id: TIntegerField
+      FieldName = 'coverslip_id'
+      Required = True
+    end
   end
   object blockNotesDS: TSQLDataSet
     CommandText = 
@@ -476,23 +547,21 @@ object pgDM: TpgDM
     Top = 424
     object blockNotesDSid: TIntegerField
       FieldName = 'id'
+      Required = True
     end
     object blockNotesDSnote: TWideMemoField
       FieldName = 'note'
-      BlobType = ftWideMemo
-      Size = -1
+      Required = True
+      BlobType = ftMemo
+      Size = 1
     end
     object blockNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      Required = True
     end
     object blockNotesDScreated_by: TIntegerField
       FieldName = 'created_by'
-    end
-    object blockNotesDSblock_id: TIntegerField
-      FieldName = 'block_id'
-    end
-    object blockNotesDSnote_id: TIntegerField
-      FieldName = 'note_id'
+      Required = True
     end
   end
   object ribbonNotesDS: TSQLDataSet
@@ -514,7 +583,7 @@ object pgDM: TpgDM
       FieldName = 'id'
       Required = True
     end
-    object ribbonNotesDSnote: TMemoField
+    object ribbonNotesDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
       Size = 1
@@ -545,16 +614,9 @@ object pgDM: TpgDM
     object slicesDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
     end
-    object slicesDSentered_by: TIntegerField
-      FieldName = 'entered_by'
-    end
     object slicesDSvirus: TWideStringField
       FieldName = 'virus'
       Size = 255
-    end
-    object slicesDSvirus_dilution: TWideStringField
-      FieldName = 'virus_dilution'
-      Size = 16
     end
     object slicesDSbrain_region_dissection: TWideStringField
       FieldName = 'brain_region_dissection'
@@ -574,6 +636,14 @@ object pgDM: TpgDM
     end
     object slicesDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
+    end
+    object slicesDSvirus_dilution: TWideStringField
+      FieldName = 'virus_dilution'
+      Size = 16
+    end
+    object slicesDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
     end
   end
   object slicesProvider: TDataSetProvider
@@ -652,17 +722,17 @@ object pgDM: TpgDM
       DisplayLabel = 'Specimen ID'
       FieldName = 'specimen_id'
     end
-    object slicesCDSvirus: TStringField
+    object slicesCDSvirus: TWideStringField
       DisplayLabel = 'Virus'
       FieldName = 'virus'
       Size = 255
     end
-    object slicesCDSvirus_dilution: TStringField
+    object slicesCDSvirus_dilution: TWideStringField
       DisplayLabel = 'Virus Dilution'
       FieldName = 'virus_dilution'
       Size = 16
     end
-    object slicesCDSbrain_region_dissection: TStringField
+    object slicesCDSbrain_region_dissection: TWideStringField
       DisplayLabel = 'Brain Region'
       FieldName = 'brain_region_dissection'
       Size = 255
@@ -670,7 +740,7 @@ object pgDM: TpgDM
     object slicesCDSculture_time: TIntegerField
       FieldName = 'culture_time'
     end
-    object slicesCDSculture_timeL: TStringField
+    object slicesCDSculture_timeL: TWideStringField
       DisplayLabel = 'Culture Time'
       FieldKind = fkLookup
       FieldName = 'culture_timeL'
@@ -684,7 +754,7 @@ object pgDM: TpgDM
       FieldName = 'entered_by'
       Required = True
     end
-    object slicesCDSentered_byL: TStringField
+    object slicesCDSentered_byL: TWideStringField
       DisplayLabel = 'Entered By'
       FieldKind = fkLookup
       FieldName = 'entered_byL'
@@ -697,7 +767,7 @@ object pgDM: TpgDM
     object slicesCDSpreprocess_treatment_protocol: TSmallintField
       FieldName = 'preprocess_treatment_protocol'
     end
-    object slicesCDSLPre: TStringField
+    object slicesCDSLPre: TWideStringField
       DisplayLabel = 'Preprocess Treatment'
       FieldKind = fkLookup
       FieldName = 'preprocess_treatment_protocolL'
@@ -710,7 +780,7 @@ object pgDM: TpgDM
     object slicesCDSfixative_protocol: TSmallintField
       FieldName = 'fixative_protocol'
     end
-    object slicesCDSfixative_protocolL: TStringField
+    object slicesCDSfixative_protocolL: TWideStringField
       DisplayLabel = 'Fixative Protocol'
       FieldKind = fkLookup
       FieldName = 'fixative_protocolL'
@@ -723,7 +793,7 @@ object pgDM: TpgDM
     object slicesCDSfixation_protocol: TSmallintField
       FieldName = 'fixation_protocol'
     end
-    object slicesCDSfixation_protocolL: TStringField
+    object slicesCDSfixation_protocolL: TWideStringField
       DisplayLabel = 'Fixation Protocol'
       FieldKind = fkLookup
       FieldName = 'fixation_protocolL'
@@ -736,7 +806,7 @@ object pgDM: TpgDM
     object slicesCDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
     end
-    object slicesCDSpostfix_protocolL: TStringField
+    object slicesCDSpostfix_protocolL: TWideStringField
       DisplayLabel = 'Postfix Protocol'
       FieldKind = fkLookup
       FieldName = 'postfix_protocolL'
@@ -754,6 +824,7 @@ object pgDM: TpgDM
   end
   object fixativeTBL: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -764,6 +835,7 @@ object pgDM: TpgDM
   end
   object speciesDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from species'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -773,6 +845,7 @@ object pgDM: TpgDM
   end
   object preprocesstreatmentDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -782,6 +855,7 @@ object pgDM: TpgDM
   end
   object fixationMethodDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from `fixationprotocols`'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -791,6 +865,7 @@ object pgDM: TpgDM
   end
   object postfix: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -800,6 +875,7 @@ object pgDM: TpgDM
   end
   object cryoprotectionDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from cryoprotectionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -809,6 +885,7 @@ object pgDM: TpgDM
   end
   object freezeprotocolDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from freezeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -818,6 +895,7 @@ object pgDM: TpgDM
   end
   object substitutionProtocol: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from substitutionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -845,7 +923,7 @@ object pgDM: TpgDM
       FieldName = 'id'
       Required = True
     end
-    object substitutionProtocolprotocol: TStringField
+    object substitutionProtocolprotocol: TWideStringField
       FieldName = 'protocol'
       Size = 255
     end
@@ -855,6 +933,7 @@ object pgDM: TpgDM
   end
   object infiltrationProtocolDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from infiltrationprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -864,6 +943,7 @@ object pgDM: TpgDM
   end
   object embeddingProtocolDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'select * from embeddingprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -873,6 +953,7 @@ object pgDM: TpgDM
   end
   object blockstatusDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from blockstatuses'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -922,7 +1003,7 @@ object pgDM: TpgDM
     object settingsDSid: TIntegerField
       FieldName = 'id'
     end
-    object settingsDSlabel_printer_command: TMemoField
+    object settingsDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
       BlobType = ftMemo
       Size = 1
@@ -943,7 +1024,7 @@ object pgDM: TpgDM
     object settingsCDSid: TIntegerField
       FieldName = 'id'
     end
-    object settingsCDSlabel_printer_command: TMemoField
+    object settingsCDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
       BlobType = ftMemo
       Size = 1
@@ -962,7 +1043,7 @@ object pgDM: TpgDM
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object specimenCDSanimal_id: TStringField
+    object specimenCDSanimal_id: TWideStringField
       DisplayWidth = 50
       FieldName = 'animal_id'
       Required = True
@@ -977,7 +1058,7 @@ object pgDM: TpgDM
       FieldName = 'specie'
       Required = True
     end
-    object specimenCDSLSpecie: TStringField
+    object specimenCDSLSpecie: TWideStringField
       DisplayLabel = 'Specie'
       FieldKind = fkLookup
       FieldName = 'LSpecie'
@@ -987,7 +1068,7 @@ object pgDM: TpgDM
       KeyFields = 'specie'
       Lookup = True
     end
-    object specimenCDSsummary: TStringField
+    object specimenCDSsummary: TWideStringField
       FieldName = 'summary'
       Size = 256
     end
@@ -996,7 +1077,7 @@ object pgDM: TpgDM
       FieldName = 'entered_by'
       Required = True
     end
-    object specimenCDSLUser: TStringField
+    object specimenCDSLUser: TWideStringField
       DisplayLabel = 'User'
       FieldKind = fkLookup
       FieldName = 'LUser'
@@ -1008,7 +1089,6 @@ object pgDM: TpgDM
     end
   end
   object specimenDS: TSQLDataSet
-    Active = True
     CommandText = 'select * from specimen order by id DESC'
     DataSource = specimenDataSource
     MaxBlobSize = 1
@@ -1021,6 +1101,7 @@ object pgDM: TpgDM
     end
     object specimenDSanimal_id: TWideStringField
       FieldName = 'animal_id'
+      Required = True
       Size = 64
     end
     object specimenDSintake_date: TSQLTimeStampField
@@ -1028,16 +1109,15 @@ object pgDM: TpgDM
     end
     object specimenDSspecie: TSmallintField
       FieldName = 'specie'
+      Required = True
     end
     object specimenDSentered_by: TIntegerField
       FieldName = 'entered_by'
+      Required = True
     end
     object specimenDSsummary: TWideStringField
       FieldName = 'summary'
       Size = 256
-    end
-    object specimenDSlims_ID: TIntegerField
-      FieldName = 'lims_ID'
     end
   end
   object specimenProvider: TDataSetProvider
@@ -1047,6 +1127,7 @@ object pgDM: TpgDM
   end
   object culturedTimePoints: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from cultured_time_point'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -1063,6 +1144,7 @@ object pgDM: TpgDM
     CommandText = 'select id from blocks ORDER by id DESC'
     MaxBlobSize = 1
     Params = <>
+    SQLConnection = SQLConnection1
     Left = 456
     Top = 360
     object blockIDsDSid: TIntegerField
@@ -1100,6 +1182,7 @@ object pgDM: TpgDM
   end
   object ribbonStatusDS: TSimpleDataSet
     Aggregates = <>
+    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from ribbonstatuses'
     DataSet.MaxBlobSize = 1
     DataSet.Params = <>
@@ -1107,39 +1190,5 @@ object pgDM: TpgDM
     AfterPost = fixativeTBLAfterPost
     Left = 568
     Top = 544
-  end
-  object SQLConnection1: TSQLConnection
-    ConnectionName = 'LocalPG'
-    DriverName = 'DevartPostgreSQL'
-    LoginPrompt = False
-    Params.Strings = (
-      'DriverName=DevartPostgreSQL'
-      'DriverUnit=DbxDevartPostgreSQL'
-      
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver170.' +
-        'bpl'
-      
-        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
-        ',DbxDevartPostgreSQLDriver170.bpl'
-      'ProductName=DevartPostgreSQL'
-      'LibraryName=dbexppgsql40.dll'
-      'LocaleCode=0000'
-      'IsolationLevel=ReadCommitted'
-      'MaxBlobSize=-1'
-      'FetchAll=True'
-      'UseQuoteChar=False'
-      'UseUnicode=True'
-      'IPVersion=IPv4'
-      'VendorLib=dbexppgsql40.dll'
-      'BlobSize=-1'
-      'HostName=localhost'
-      'SchemaName='
-      'Database=shotgundb'
-      'User_Name=admin'
-      'Password=totte'
-      'EnableBCD=True')
-    Connected = True
-    Left = 40
-    Top = 24
   end
 end

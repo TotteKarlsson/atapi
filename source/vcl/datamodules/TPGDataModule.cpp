@@ -1,5 +1,6 @@
+#pragma link "DbxDevartPostgreSQL"
 #pragma hdrstop
-#include "TPGDataModule.h"
+#include "TATDBDataModule.h"
 #include "mtkVCLUtils.h"
 #include <sstream>
 #include "mtkLogger.h"
@@ -7,9 +8,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
-#pragma link "DbxDevartPostgreSQL"
 #pragma resource "*.dfm"
-TpgDM *pgDM;
+TatdbDM *atdbDM;
 
 using namespace mtk;
 using namespace std;
