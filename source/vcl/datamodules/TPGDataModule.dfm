@@ -1,47 +1,7 @@
-object atdbDM: TatdbDM
+object pgDM: TpgDM
   OldCreateOrder = False
   Height = 1042
   Width = 1038
-  object SQLConnection1: TSQLConnection
-    DriverName = 'MySQL'
-    LoginPrompt = False
-    Params.Strings = (
-      'DriverUnit=Data.DBXMySQL'
-      
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver170.' +
-        'bpl'
-      
-        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
-        'nd.Data.DbxCommonDriver,Version=17.0.0.0,Culture=neutral,PublicK' +
-        'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
-        'iver170.bpl'
-      
-        'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
-        'ory,Borland.Data.DbxMySQLDriver,Version=17.0.0.0,Culture=neutral' +
-        ',PublicKeyToken=91d62ebb5b0d1b1b'
-      'GetDriverFunc=getSQLDriverMYSQL'
-      'LibraryName=dbxmys.dll'
-      'LibraryNameOsx=libsqlmys.dylib'
-      'VendorLib=LIBMYSQL.dll'
-      'VendorLibWin64=libmysql.dll'
-      'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=atdb'
-      'Database=atdb-live'
-      'User_Name=atdb'
-      'Password=atdb123'
-      'MaxBlobSize=-1'
-      'LocaleCode=0000'
-      'Compressed=False'
-      'Encrypted=False'
-      'BlobSize=-1'
-      'ErrorResourceFile=')
-    AfterConnect = SQLConnection1AfterConnect
-    BeforeConnect = SQLConnection1BeforeConnect
-    Left = 40
-    Top = 24
-  end
   object blocksDataSource: TDataSource
     DataSet = blocksCDS
     Left = 336
@@ -212,21 +172,21 @@ object atdbDM: TatdbDM
     object blocksDSslice_id: TIntegerField
       FieldName = 'slice_id'
     end
+    object blocksDSentered_on: TSQLTimeStampField
+      FieldName = 'entered_on'
+    end
     object blocksDSstatus: TSmallintField
       FieldName = 'status'
-      Required = True
     end
     object blocksDSentered_by: TIntegerField
       FieldName = 'entered_by'
-      Required = True
     end
-    object blocksDSlabel: TStringField
+    object blocksDSlabel: TWideStringField
       FieldName = 'label'
       Size = 255
     end
-    object blocksDSserial: TSmallintField
+    object blocksDSserial: TIntegerField
       FieldName = 'serial'
-      Required = True
     end
     object blocksDSdate_embedded: TDateField
       FieldName = 'date_embedded'
@@ -246,10 +206,6 @@ object atdbDM: TatdbDM
     object blocksDSembedding_protocol: TSmallintField
       FieldName = 'embedding_protocol'
     end
-    object blocksDSentered_on: TSQLTimeStampField
-      FieldName = 'entered_on'
-      Required = True
-    end
   end
   object usersDS: TSQLDataSet
     CommandText = 'select * from users'
@@ -261,9 +217,8 @@ object atdbDM: TatdbDM
     object usersDSid: TIntegerField
       FieldName = 'id'
     end
-    object usersDSuser_name: TStringField
+    object usersDSuser_name: TWideStringField
       FieldName = 'user_name'
-      Required = True
       Size = 255
     end
     object usersDScreated: TSQLTimeStampField
@@ -502,37 +457,6 @@ object atdbDM: TatdbDM
     SQLConnection = SQLConnection1
     Left = 32
     Top = 504
-    object ribbonsDSid: TStringField
-      FieldName = 'id'
-      Size = 36
-    end
-    object ribbonsDSstatus: TIntegerField
-      FieldName = 'status'
-    end
-    object ribbonsDSblock_id: TIntegerField
-      FieldName = 'block_id'
-      Required = True
-    end
-    object ribbonsDScutting_order: TIntegerField
-      FieldName = 'cutting_order'
-    end
-    object ribbonsDSnr_of_sections: TSmallintField
-      FieldName = 'nr_of_sections'
-    end
-    object ribbonsDScreated: TSQLTimeStampField
-      FieldName = 'created'
-    end
-    object ribbonsDSmodified: TSQLTimeStampField
-      FieldName = 'modified'
-    end
-    object ribbonsDScreated_by: TIntegerField
-      FieldName = 'created_by'
-      Required = True
-    end
-    object ribbonsDScoverslip_id: TIntegerField
-      FieldName = 'coverslip_id'
-      Required = True
-    end
   end
   object blockNotesDS: TSQLDataSet
     CommandText = 
@@ -552,21 +476,23 @@ object atdbDM: TatdbDM
     Top = 424
     object blockNotesDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
-    object blockNotesDSnote: TMemoField
+    object blockNotesDSnote: TWideMemoField
       FieldName = 'note'
-      Required = True
-      BlobType = ftMemo
-      Size = 1
+      BlobType = ftWideMemo
+      Size = -1
     end
     object blockNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
-      Required = True
     end
     object blockNotesDScreated_by: TIntegerField
       FieldName = 'created_by'
-      Required = True
+    end
+    object blockNotesDSblock_id: TIntegerField
+      FieldName = 'block_id'
+    end
+    object blockNotesDSnote_id: TIntegerField
+      FieldName = 'note_id'
     end
   end
   object ribbonNotesDS: TSQLDataSet
@@ -619,11 +545,18 @@ object atdbDM: TatdbDM
     object slicesDSspecimen_id: TIntegerField
       FieldName = 'specimen_id'
     end
-    object slicesDSvirus: TStringField
+    object slicesDSentered_by: TIntegerField
+      FieldName = 'entered_by'
+    end
+    object slicesDSvirus: TWideStringField
       FieldName = 'virus'
       Size = 255
     end
-    object slicesDSbrain_region_dissection: TStringField
+    object slicesDSvirus_dilution: TWideStringField
+      FieldName = 'virus_dilution'
+      Size = 16
+    end
+    object slicesDSbrain_region_dissection: TWideStringField
       FieldName = 'brain_region_dissection'
       Size = 255
     end
@@ -641,14 +574,6 @@ object atdbDM: TatdbDM
     end
     object slicesDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
-    end
-    object slicesDSvirus_dilution: TStringField
-      FieldName = 'virus_dilution'
-      Size = 16
-    end
-    object slicesDSentered_by: TIntegerField
-      FieldName = 'entered_by'
-      Required = True
     end
   end
   object slicesProvider: TDataSetProvider
@@ -829,7 +754,6 @@ object atdbDM: TatdbDM
   end
   object fixativeTBL: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -840,7 +764,6 @@ object atdbDM: TatdbDM
   end
   object speciesDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from species'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -850,7 +773,6 @@ object atdbDM: TatdbDM
   end
   object preprocesstreatmentDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -860,7 +782,6 @@ object atdbDM: TatdbDM
   end
   object fixationMethodDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from `fixationprotocols`'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -870,7 +791,6 @@ object atdbDM: TatdbDM
   end
   object postfix: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -880,7 +800,6 @@ object atdbDM: TatdbDM
   end
   object cryoprotectionDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from cryoprotectionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -890,7 +809,6 @@ object atdbDM: TatdbDM
   end
   object freezeprotocolDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from freezeprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -900,7 +818,6 @@ object atdbDM: TatdbDM
   end
   object substitutionProtocol: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from substitutionprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -938,7 +855,6 @@ object atdbDM: TatdbDM
   end
   object infiltrationProtocolDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from infiltrationprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -948,7 +864,6 @@ object atdbDM: TatdbDM
   end
   object embeddingProtocolDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'select * from embeddingprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -958,7 +873,6 @@ object atdbDM: TatdbDM
   end
   object blockstatusDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from blockstatuses'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -1094,6 +1008,7 @@ object atdbDM: TatdbDM
     end
   end
   object specimenDS: TSQLDataSet
+    Active = True
     CommandText = 'select * from specimen order by id DESC'
     DataSource = specimenDataSource
     MaxBlobSize = 1
@@ -1104,9 +1019,8 @@ object atdbDM: TatdbDM
     object specimenDSid: TIntegerField
       FieldName = 'id'
     end
-    object specimenDSanimal_id: TStringField
+    object specimenDSanimal_id: TWideStringField
       FieldName = 'animal_id'
-      Required = True
       Size = 64
     end
     object specimenDSintake_date: TSQLTimeStampField
@@ -1114,15 +1028,16 @@ object atdbDM: TatdbDM
     end
     object specimenDSspecie: TSmallintField
       FieldName = 'specie'
-      Required = True
     end
     object specimenDSentered_by: TIntegerField
       FieldName = 'entered_by'
-      Required = True
     end
-    object specimenDSsummary: TStringField
+    object specimenDSsummary: TWideStringField
       FieldName = 'summary'
       Size = 256
+    end
+    object specimenDSlims_ID: TIntegerField
+      FieldName = 'lims_ID'
     end
   end
   object specimenProvider: TDataSetProvider
@@ -1132,7 +1047,6 @@ object atdbDM: TatdbDM
   end
   object culturedTimePoints: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from cultured_time_point'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
@@ -1149,7 +1063,6 @@ object atdbDM: TatdbDM
     CommandText = 'select id from blocks ORDER by id DESC'
     MaxBlobSize = 1
     Params = <>
-    SQLConnection = SQLConnection1
     Left = 456
     Top = 360
     object blockIDsDSid: TIntegerField
@@ -1187,7 +1100,6 @@ object atdbDM: TatdbDM
   end
   object ribbonStatusDS: TSimpleDataSet
     Aggregates = <>
-    Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from ribbonstatuses'
     DataSet.MaxBlobSize = 1
     DataSet.Params = <>
@@ -1195,5 +1107,39 @@ object atdbDM: TatdbDM
     AfterPost = fixativeTBLAfterPost
     Left = 568
     Top = 544
+  end
+  object SQLConnection1: TSQLConnection
+    ConnectionName = 'LocalPG'
+    DriverName = 'DevartPostgreSQL'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=DevartPostgreSQL'
+      'DriverUnit=DbxDevartPostgreSQL'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver170.' +
+        'bpl'
+      
+        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
+        ',DbxDevartPostgreSQLDriver170.bpl'
+      'ProductName=DevartPostgreSQL'
+      'LibraryName=dbexppgsql40.dll'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'MaxBlobSize=-1'
+      'FetchAll=True'
+      'UseQuoteChar=False'
+      'UseUnicode=True'
+      'IPVersion=IPv4'
+      'VendorLib=dbexppgsql40.dll'
+      'BlobSize=-1'
+      'HostName=localhost'
+      'SchemaName='
+      'Database=shotgundb'
+      'User_Name=admin'
+      'Password=totte'
+      'EnableBCD=True')
+    Connected = True
+    Left = 40
+    Top = 24
   end
 end

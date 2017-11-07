@@ -1,5 +1,5 @@
-#ifndef TATDBDataModuleH
-#define TATDBDataModuleH
+#ifndef TPGDataModuleH
+#define TPGDataModuleH
 #include <System.Classes.hpp>
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
@@ -8,16 +8,16 @@
 #include <Datasnap.Provider.hpp>
 #include <SimpleDS.hpp>
 #include <Data.DBXMySQL.hpp>
+#include "DbxDevartPostgreSQL.hpp"
 #include <string>
 
 using std::string;
 
 //!The TatDM class encapsulate data exchange with the ATDB database
 //---------------------------------------------------------------------------
-class PACKAGE TatdbDM : public TDataModule
+class PACKAGE TpgDM : public TDataModule
 {
 __published:	// IDE-managed Components
-	TSQLConnection *SQLConnection1;
 	TDataSource *blocksDataSource;
 	TClientDataSet *blocksCDS;
 	TDataSetProvider *blocksProvider;
@@ -36,9 +36,6 @@ __published:	// IDE-managed Components
 	TDataSetProvider *mRibbonProvider;
 	TClientDataSet *mRibbonCDS;
 	TDataSource *mRibbonDSource;
-	TIntegerField *usersDSid;
-	TStringField *usersDSuser_name;
-	TSQLTimeStampField *usersDScreated;
 	TIntegerField *usersCDSid;
 	TStringField *usersCDSuser_name;
 	TSQLTimeStampField *usersCDScreated;
@@ -55,10 +52,6 @@ __published:	// IDE-managed Components
 	TDataSource *ribbonNotesDSource;
 	TSQLDataSet *ribbonsDS;
 	TSQLDataSet *blockNotesDS;
-	TIntegerField *blockNotesDSid;
-	TMemoField *blockNotesDSnote;
-	TSQLTimeStampField *blockNotesDScreated_on;
-	TIntegerField *blockNotesDScreated_by;
 	TSQLDataSet *ribbonNotesDS;
 	TIntegerField *ribbonNotesDSid;
 	TMemoField *ribbonNotesDSnote;
@@ -69,13 +62,6 @@ __published:	// IDE-managed Components
 	TSQLTimeStampField *ribbonNotesCDScreated_on;
 	TIntegerField *ribbonNotesCDScreated_by;
 	TIntegerField *blocksCDSid;
-	TStringField *ribbonsDSid;
-	TIntegerField *ribbonsDSstatus;
-	TIntegerField *ribbonsDSblock_id;
-	TIntegerField *ribbonsDScutting_order;
-	TSmallintField *ribbonsDSnr_of_sections;
-	TSQLTimeStampField *ribbonsDScreated;
-	TSQLTimeStampField *ribbonsDSmodified;
 	TStringField *mRibbonCDSid;
 	TIntegerField *mRibbonCDSstatus;
 	TIntegerField *mRibbonCDSblock_id;
@@ -118,9 +104,7 @@ __published:	// IDE-managed Components
 	TStringField *blocksCDSLInfiltrationProtocol;
 	TStringField *blocksCDSLEmbeddingProtocol;
 	TStringField *blocksCDSLUser;
-	TIntegerField *ribbonsDScreated_by;
 	TIntegerField *mRibbonCDScreated_by;
-	TIntegerField *ribbonsDScoverslip_id;
 	TIntegerField *mRibbonCDScoverslip_id;
 	TDataSource *ROnCoverSlipsSource;
 	TClientDataSet *ROnCS_CDS;
@@ -141,45 +125,17 @@ __published:	// IDE-managed Components
 	TSQLTimeStampField *specimenCDSintake_date;
 	TSmallintField *specimenCDSspecie;
 	TIntegerField *specimenCDSentered_by;
-	TIntegerField *specimenDSid;
-	TStringField *specimenDSanimal_id;
-	TSQLTimeStampField *specimenDSintake_date;
-	TSmallintField *specimenDSspecie;
-	TIntegerField *specimenDSentered_by;
 	TStringField *specimenCDSLUser;
 	TStringField *specimenCDSLSpecie;
 	TSimpleDataSet *culturedTimePoints;
 	TDataSource *specimenDataSource;
-	TIntegerField *blocksDSid;
-	TIntegerField *blocksDSslice_id;
-	TSmallintField *blocksDSstatus;
-	TIntegerField *blocksDSentered_by;
-	TStringField *blocksDSlabel;
-	TSmallintField *blocksDSserial;
-	TDateField *blocksDSdate_embedded;
-	TSmallintField *blocksDScryoprotection_protocol;
-	TSmallintField *blocksDSfreezing_protocol;
-	TSmallintField *blocksDSsubstitution_protocol;
-	TSmallintField *blocksDSinfiltration_protocol;
-	TSmallintField *blocksDSembedding_protocol;
-	TStringField *specimenDSsummary;
 	TStringField *specimenCDSsummary;
-	TIntegerField *slicesDSid;
-	TIntegerField *slicesDSspecimen_id;
-	TStringField *slicesDSvirus;
-	TStringField *slicesDSbrain_region_dissection;
-	TIntegerField *slicesDSentered_by;
-	TIntegerField *slicesDSculture_time;
 	TIntegerField *slicesCDSid;
 	TIntegerField *slicesCDSspecimen_id;
 	TStringField *slicesCDSvirus;
 	TStringField *slicesCDSbrain_region_dissection;
 	TIntegerField *slicesCDSculture_time;
 	TIntegerField *slicesCDSentered_by;
-	TSmallintField *slicesDSpreprocess_treatment_protocol;
-	TSmallintField *slicesDSfixative_protocol;
-	TSmallintField *slicesDSfixation_protocol;
-	TSmallintField *slicesDSpostfix_protocol;
 	TSmallintField *slicesCDSpreprocess_treatment_protocol;
 	TSmallintField *slicesCDSfixative_protocol;
 	TSmallintField *slicesCDSfixation_protocol;
@@ -192,9 +148,7 @@ __published:	// IDE-managed Components
 	TStringField *slicesCDSculture_timeL;
 	TIntegerField *blocksCDSslice_id;
 	TIntegerField *blocksCDSentered_by;
-	TSQLTimeStampField *blocksDSentered_on;
 	TSQLTimeStampField *blocksCDSentered_on;
-	TStringField *slicesDSvirus_dilution;
 	TStringField *slicesCDSvirus_dilution;
 	TSQLDataSet *blockIDsDS;
 	TDataSetProvider *blockIdsProvider;
@@ -204,6 +158,47 @@ __published:	// IDE-managed Components
 	TIntegerField *blockIDsDSid;
 	TSimpleDataSet *ribbonStatusDS;
 	TStringField *mRibbonCDSstatusL;
+	TSQLConnection *SQLConnection1;
+	TIntegerField *usersDSid;
+	TWideStringField *usersDSuser_name;
+	TSQLTimeStampField *usersDScreated;
+	TIntegerField *specimenDSid;
+	TWideStringField *specimenDSanimal_id;
+	TSQLTimeStampField *specimenDSintake_date;
+	TSmallintField *specimenDSspecie;
+	TIntegerField *specimenDSentered_by;
+	TWideStringField *specimenDSsummary;
+	TIntegerField *specimenDSlims_ID;
+	TIntegerField *slicesDSid;
+	TIntegerField *slicesDSspecimen_id;
+	TIntegerField *slicesDSentered_by;
+	TWideStringField *slicesDSvirus;
+	TWideStringField *slicesDSvirus_dilution;
+	TWideStringField *slicesDSbrain_region_dissection;
+	TIntegerField *slicesDSculture_time;
+	TSmallintField *slicesDSpreprocess_treatment_protocol;
+	TSmallintField *slicesDSfixative_protocol;
+	TSmallintField *slicesDSfixation_protocol;
+	TSmallintField *slicesDSpostfix_protocol;
+	TIntegerField *blocksDSid;
+	TIntegerField *blocksDSslice_id;
+	TSQLTimeStampField *blocksDSentered_on;
+	TSmallintField *blocksDSstatus;
+	TIntegerField *blocksDSentered_by;
+	TWideStringField *blocksDSlabel;
+	TIntegerField *blocksDSserial;
+	TDateField *blocksDSdate_embedded;
+	TSmallintField *blocksDScryoprotection_protocol;
+	TSmallintField *blocksDSfreezing_protocol;
+	TSmallintField *blocksDSsubstitution_protocol;
+	TSmallintField *blocksDSinfiltration_protocol;
+	TSmallintField *blocksDSembedding_protocol;
+	TIntegerField *blockNotesDSid;
+	TWideMemoField *blockNotesDSnote;
+	TSQLTimeStampField *blockNotesDScreated_on;
+	TIntegerField *blockNotesDScreated_by;
+	TIntegerField *blockNotesDSblock_id;
+	TIntegerField *blockNotesDSnote_id;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -233,7 +228,7 @@ __published:	// IDE-managed Components
         string 		                    mDBIP;
 
 	public:
-				__fastcall           	TatdbDM(TComponent* Owner);
+				__fastcall           	TpgDM(TComponent* Owner);
 				__fastcall           	~TatdbDM();
 		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
         void    __fastcall           	afterConnect();
@@ -245,6 +240,6 @@ __published:	// IDE-managed Components
         bool	__fastcall				insertRibbonNote(int userID, const string& ribbonID, const string& note);
 };
 
-extern PACKAGE TatdbDM *atdbDM;
+extern PACKAGE TpgDM *pgDM;
 
 #endif

@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "TATDBDataModule.h"
+#include "TPGDataModule.h"
 #include "mtkVCLUtils.h"
 #include <sstream>
 #include "mtkLogger.h"
@@ -7,8 +7,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
+#pragma link "DbxDevartPostgreSQL"
 #pragma resource "*.dfm"
-TatdbDM *atdbDM;
+TpgDM *pgDM;
 
 using namespace mtk;
 using namespace std;
@@ -17,18 +18,18 @@ string zeroPadLeft(int nr, int width);
 string zeroPadRight(int nr, int width);
 
 //---------------------------------------------------------------------------
-__fastcall TatdbDM::TatdbDM(TComponent* Owner)
+__fastcall TpgDM::TpgDM(TComponent* Owner)
 	:
     TDataModule(Owner)
 {
   	SQLConnection1->Connected = false;
 }
 
-__fastcall TatdbDM::~TatdbDM()
+__fastcall TatdbDM::~TpgDM()
 {}
 
 //---------------------------------------------------------------------------
-bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db)
+bool __fastcall TpgDM::connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db)
 {
     mDataBase = db;
     mDataBaseUser = dbUser;
@@ -62,18 +63,18 @@ bool __fastcall TatdbDM::connect(const string& ip, const string& dbUser, const s
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::SQLConnection1BeforeConnect(TObject *Sender)
+void __fastcall TpgDM::SQLConnection1BeforeConnect(TObject *Sender)
 {
 	Log(lInfo) <<"Trying to connect to SQL server:" <<stdstr(SQLConnection1->Params->Values[_D("Database")]);
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::SQLConnection1AfterConnect(TObject *Sender)
+void __fastcall TpgDM::SQLConnection1AfterConnect(TObject *Sender)
 {
 	afterConnect();
 }
 
-void __fastcall TatdbDM::afterConnect()
+void __fastcall TpgDM::afterConnect()
 {
 	Log(lInfo) << "Connection established to: "<<mDataBase;
 	usersCDS->Active 	    = true;
@@ -91,7 +92,7 @@ void __fastcall TatdbDM::afterConnect()
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::afterDisConnect()
+void __fastcall TpgDM::afterDisConnect()
 {
 	Log(lInfo) << "Closed connection to: "<<mDataBase;
   	usersCDS->Active 	    = false;
@@ -105,7 +106,7 @@ void __fastcall TatdbDM::afterDisConnect()
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::cdsAfterPost(TDataSet *DataSet)
+void __fastcall TpgDM::cdsAfterPost(TDataSet *DataSet)
 {
 	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
 
@@ -119,7 +120,7 @@ void __fastcall TatdbDM::cdsAfterPost(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::cdsAfterDelete(TDataSet *DataSet)
+void __fastcall TpgDM::cdsAfterDelete(TDataSet *DataSet)
 {
 	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
 
@@ -132,7 +133,7 @@ void __fastcall TatdbDM::cdsAfterDelete(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
+void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
 {
 	if(!SQLConnection1->Connected)// || gAppIsStartingUp)
     {
@@ -188,7 +189,7 @@ void __fastcall TatdbDM::cdsAfterScroll(TDataSet *DataSet)
     }
 }
 
-void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)
+void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
 {
 	if(DataSet == slicesCDS)
     {
@@ -228,7 +229,7 @@ void __fastcall TatdbDM::cdsAfterRefresh(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::cdsBeforePost(TDataSet *DataSet)
+void __fastcall TpgDM::cdsBeforePost(TDataSet *DataSet)
 {
 	if(DataSet == blocksCDS)
     {
@@ -241,7 +242,7 @@ void __fastcall TatdbDM::cdsBeforePost(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
+void __fastcall TpgDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
 	//    	block_id: first 5 digits
@@ -263,14 +264,14 @@ void __fastcall TatdbDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::fixativeTBLAfterPost(TDataSet *DataSet)
+void __fastcall TpgDM::fixativeTBLAfterPost(TDataSet *DataSet)
 {
 	fixativeTBL->ApplyUpdates(0);
     slicesCDS->Refresh();
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::blocksCDSCalcFields(TDataSet *DataSet)
+void __fastcall TpgDM::blocksCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
 	TField* field = blocksCDS->FieldByName("id");
@@ -297,13 +298,13 @@ void __fastcall TatdbDM::blocksCDSCalcFields(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::blocksCDSblockLabelGetText(TField *Sender, UnicodeString &Text, bool DisplayText)
+void __fastcall TpgDM::blocksCDSblockLabelGetText(TField *Sender, UnicodeString &Text, bool DisplayText)
 {
 	Text = "Test";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::TimeStampGetText(TField *Sender, UnicodeString &Text,
+void __fastcall TpgDM::TimeStampGetText(TField *Sender, UnicodeString &Text,
           bool DisplayText)
 {
 //	TField* field = dynamic_cast<TField*>(Sender);
@@ -326,7 +327,7 @@ void __fastcall TatdbDM::TimeStampGetText(TField *Sender, UnicodeString &Text,
 //	}
 }
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::cdsBeforeRefresh(TDataSet *DataSet)
+void __fastcall TpgDM::cdsBeforeRefresh(TDataSet *DataSet)
 {
 //	if(DataSet == slicesCDS)
 //    {
@@ -336,25 +337,25 @@ void __fastcall TatdbDM::cdsBeforeRefresh(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::slicesCDSBeforeClose(TDataSet *DataSet)
+void __fastcall TpgDM::slicesCDSBeforeClose(TDataSet *DataSet)
 {
     //delete runtime indices
     Log(lDebug) << "Closing dataset";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::slicesCDSAfterClose(TDataSet *DataSet)
+void __fastcall TpgDM::slicesCDSAfterClose(TDataSet *DataSet)
 {
     Log(lDebug) << "Closing dataset";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TatdbDM::slicesCDSAfterOpen(TDataSet *DataSet)
+void __fastcall TpgDM::slicesCDSAfterOpen(TDataSet *DataSet)
 {
     Log(lDebug) << "After Open";
 }
 
-int	__fastcall TatdbDM::getCurrentBlockID()
+int	__fastcall TpgDM::getCurrentBlockID()
 {
 	if(blocksCDS->Active)
     {
@@ -374,7 +375,7 @@ int	__fastcall TatdbDM::getCurrentBlockID()
     }
 }
 
-int __fastcall TatdbDM::getIDForSpecie(const string& specie)
+int __fastcall TpgDM::getIDForSpecie(const string& specie)
 {
 	if(speciesDS->Active)
     {
@@ -394,10 +395,10 @@ int __fastcall TatdbDM::getIDForSpecie(const string& specie)
 }
 
 //---------------------------------------------------------------------------
-String __fastcall TatdbDM::createBlockLabel()
+String __fastcall TpgDM::createBlockLabel()
 {
     String lbl;
-    String specie = atdbDM->specimenCDS->FieldByName("Lspecie")->AsString;
+    String specie = pgDM->specimenCDS->FieldByName("Lspecie")->AsString;
 	if(specie == "Human")
     {
     	lbl = "H";
@@ -411,17 +412,17 @@ String __fastcall TatdbDM::createBlockLabel()
     	lbl = "HS";
     }
 
-	lbl = lbl + atdbDM->specimenCDS->FieldByName("animal_id")->AsString + "-" + (atdbDM->blocksCDS->RecordCount + 1);
+	lbl = lbl + pgDM->specimenCDS->FieldByName("animal_id")->AsString + "-" + (pgDM->blocksCDS->RecordCount + 1);
 	return lbl;
 }
 
-bool __fastcall	TatdbDM::insertBlockNote(int userID, int blockID, const string& note)
+bool __fastcall	TpgDM::insertBlockNote(int userID, int blockID, const string& note)
 {
     try
     {
         //Query DB and show some info
         TSQLQuery* tq = new TSQLQuery(NULL);
-        tq->SQLConnection = atdbDM->SQLConnection1;
+        tq->SQLConnection = pgDM->SQLConnection1;
 
         stringstream q;
         q <<"INSERT INTO notes (created_by, note) VAlUES(" << userID << ",'" << note <<"')";
@@ -447,8 +448,8 @@ bool __fastcall	TatdbDM::insertBlockNote(int userID, int blockID, const string& 
 
         delete tq;
 
-    	atdbDM->blockNotesCDS->Refresh();
-	    atdbDM->blockNotesCDS->Last();
+    	pgDM->blockNotesCDS->Refresh();
+	    pgDM->blockNotesCDS->Last();
         return true;
     }
     catch(...)
@@ -459,13 +460,13 @@ bool __fastcall	TatdbDM::insertBlockNote(int userID, int blockID, const string& 
     }
 }
 
-bool __fastcall	TatdbDM::insertRibbonNote(int userID, const string& ribbonID, const string& note)
+bool __fastcall	TpgDM::insertRibbonNote(int userID, const string& ribbonID, const string& note)
 {
     try
     {
         //Query DB and show some info
         TSQLQuery* tq = new TSQLQuery(NULL);
-        tq->SQLConnection = atdbDM->SQLConnection1;
+        tq->SQLConnection = pgDM->SQLConnection1;
 
         stringstream q;
         q <<"INSERT INTO notes (created_by, note) VAlUES(" << userID << ",'" << note <<"')";
@@ -488,8 +489,8 @@ bool __fastcall	TatdbDM::insertRibbonNote(int userID, const string& ribbonID, co
             tq->SQL->Add(q.str().c_str());
             tq->ExecSQL();
         }
-	    atdbDM->ribbonNotesCDS->Refresh();
-    	atdbDM->ribbonNotesCDS->Last();
+	    pgDM->ribbonNotesCDS->Refresh();
+    	pgDM->ribbonNotesCDS->Last();
 
         delete tq;
         return true;
