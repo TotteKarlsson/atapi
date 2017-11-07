@@ -129,7 +129,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <Form>atdbDM</Form>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>datamodules\TATDBDataModule.h</DependentOn>
-            <BuildOrder>35</BuildOrder>
+            <BuildOrder>40</BuildOrder>
         </CppCompile>
         <CppCompile Include="datamodules\TATDBImagesAndMoviesDataModule.cpp">
             <Form>ImagesAndMoviesDM</Form>
@@ -142,6 +142,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>datamodules\TCoverSlipDataModule.h</DependentOn>
             <BuildOrder>40</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="datamodules\TPGDataModule.cpp">
+            <Form>pgDM</Form>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>datamodules\TPGDataModule.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
         </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
@@ -294,12 +300,13 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
-        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
-        <FormResources Include="datamodules\TCoverSlipDataModule.dfm"/>
         <FormResources Include="datamodules\TATDBImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="datamodules\TPGDataModule.dfm"/>
+        <FormResources Include="datamodules\TCoverSlipDataModule.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="forms\TBlockEntryForm.dfm"/>
         <FormResources Include="forms\TATDBServerEntry.dfm"/>
+        <FormResources Include="datamodules\TATDBDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

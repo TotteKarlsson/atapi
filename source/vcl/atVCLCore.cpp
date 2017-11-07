@@ -15,12 +15,13 @@ USEFORM("frames\TMoviesFrame.cpp", MoviesFrame); /* TFrame: File Type */
 USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
 USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
 USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
-USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
-USEFORM("datamodules\TCoverSlipDataModule.cpp", csDM); /* TDataModule: File Type */
 USEFORM("datamodules\TATDBImagesAndMoviesDataModule.cpp", ImagesAndMoviesDM); /* TDataModule: File Type */
+USEFORM("datamodules\TPGDataModule.cpp", pgDM); /* TDataModule: File Type */
+USEFORM("datamodules\TCoverSlipDataModule.cpp", csDM); /* TDataModule: File Type */
 USEFORM("forms\TamFileEditor.cpp", amFileEditor);
 USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
 USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
+USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
 //---------------------------------------------------------------------------
 #include "TApplicationSoundsFrame.h"
 //#include "TATDBConnectionFrame.h"
@@ -80,5 +81,5 @@ namespace Tapplicationsoundsframe
 
 #pragma comment(lib, "DuneComponents.bpi")
 
-
+#pragma comment(lib, "DBXDevartPostgreSQLDriver170.bpi")
 

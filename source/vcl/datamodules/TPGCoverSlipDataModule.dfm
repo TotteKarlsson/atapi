@@ -1,4 +1,4 @@
-object csDM: TcsDM
+object csPGDM: TcsPGDM
   OldCreateOrder = False
   Height = 638
   Width = 602

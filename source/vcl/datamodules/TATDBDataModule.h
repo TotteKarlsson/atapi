@@ -204,6 +204,7 @@ __published:	// IDE-managed Components
 	TIntegerField *blockIDsDSid;
 	TSimpleDataSet *ribbonStatusDS;
 	TStringField *mRibbonCDSstatusL;
+	TStringField *mRibbonCDScreated_byL;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);

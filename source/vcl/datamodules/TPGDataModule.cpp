@@ -1,6 +1,6 @@
 #pragma link "DbxDevartPostgreSQL"
 #pragma hdrstop
-#include "TATDBDataModule.h"
+#include "TPGDataModule.h"
 #include "mtkVCLUtils.h"
 #include <sstream>
 #include "mtkLogger.h"
@@ -9,8 +9,7 @@
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
-TatdbDM *atdbDM;
-
+TpgDM *pgDM;
 using namespace mtk;
 using namespace std;
 
@@ -25,7 +24,7 @@ __fastcall TpgDM::TpgDM(TComponent* Owner)
   	SQLConnection1->Connected = false;
 }
 
-__fastcall TatdbDM::~TpgDM()
+__fastcall TpgDM::~TpgDM()
 {}
 
 //---------------------------------------------------------------------------
@@ -71,7 +70,14 @@ void __fastcall TpgDM::SQLConnection1BeforeConnect(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TpgDM::SQLConnection1AfterConnect(TObject *Sender)
 {
-	afterConnect();
+	try
+    {
+		afterConnect();
+    }
+    catch(TDBXError& e)
+    {
+    	Log(lError) << " Failed to connect...";
+    }
 }
 
 void __fastcall TpgDM::afterConnect()
@@ -142,6 +148,7 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
 
  	if(DataSet == specimenCDS)
     {
+	    specimenCDS->Refresh();
     	if(slicesCDS->Active)
         {
         	slicesCDS->Refresh();
@@ -155,7 +162,6 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
         	blocksCDS->Refresh();
         }
     }
-
 
  	if(DataSet == blocksCDS)
     {

@@ -1,5 +1,5 @@
-#ifndef TCoverSlipDataModuleH
-#define TCoverSlipDataModuleH
+#ifndef TPGCoverSlipDataModuleH
+#define TPGCoverSlipDataModuleH
 #include <System.Classes.hpp>
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
@@ -8,7 +8,7 @@
 #include <Datasnap.Provider.hpp>
 
 //---------------------------------------------------------------------------
-class PACKAGE TcsDM : public TDataModule
+class PACKAGE TcsPGDM : public TDataModule
 {
     __published:	// IDE-managed Components
         TSQLDataSet *csDS;
@@ -72,12 +72,12 @@ class PACKAGE TcsDM : public TDataModule
 
         public:
 			TNotifyEvent	   csDustAssayCDSOnDataChanged;
-                    __fastcall TcsDM(TComponent* Owner);
+                    __fastcall TcsPGDM(TComponent* Owner);
         	void    __fastcall afterConnect(TSQLConnection *SQLConnection1);
             void    __fastcall afterDisConnect();
 
 
 };
 
-extern PACKAGE TcsDM *csDM;
+extern PACKAGE TcsPGDM *csPGDM;
 #endif

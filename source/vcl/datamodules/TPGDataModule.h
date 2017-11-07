@@ -1,5 +1,5 @@
-#ifndef TATDBDataModuleH
-#define TATDBDataModuleH
+#ifndef TPGDataModuleH
+#define TPGDataModuleH
 #include <System.Classes.hpp>
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
@@ -181,16 +181,6 @@ __published:	// IDE-managed Components
 	TSmallintField *slicesDSfixative_protocol;
 	TSmallintField *slicesDSfixation_protocol;
 	TSmallintField *slicesDSpostfix_protocol;
-	TSmallintField *slicesCDSpreprocess_treatment_protocol;
-	TSmallintField *slicesCDSfixative_protocol;
-	TSmallintField *slicesCDSfixation_protocol;
-	TSmallintField *slicesCDSpostfix_protocol;
-	TWideStringField *slicesCDSLPre;
-	TWideStringField *slicesCDSfixative_protocolL;
-	TWideStringField *slicesCDSpostfix_protocolL;
-	TWideStringField *slicesCDSfixation_protocolL;
-	TWideStringField *slicesCDSentered_byL;
-	TWideStringField *slicesCDSculture_timeL;
 	TIntegerField *blocksCDSslice_id;
 	TIntegerField *blocksCDSentered_by;
 	TSQLTimeStampField *blocksDSentered_on;
@@ -205,6 +195,16 @@ __published:	// IDE-managed Components
 	TIntegerField *blockIDsDSid;
 	TSimpleDataSet *ribbonStatusDS;
 	TWideStringField *mRibbonCDSstatusL;
+	TStringField *slicesCDSentered_byL;
+	TSmallintField *slicesCDSpreprocess_treatment_protocol;
+	TStringField *slicesCDSpreprocess_treatment_protocolL;
+	TSmallintField *slicesCDSfixative_protocol;
+	TStringField *slicesCDSfixative_protocolL;
+	TSmallintField *slicesCDSfixation_protocol;
+	TStringField *slicesCDSfixation_protocolL;
+	TSmallintField *slicesCDSpostfix_protocol;
+	TStringField *slicesCDSpostfix_protocolL;
+	TStringField *slicesCDSculture_timeL;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -235,7 +235,7 @@ __published:	// IDE-managed Components
 
 	public:
 				__fastcall           	TpgDM(TComponent* Owner);
-				__fastcall           	~TatdbDM();
+				__fastcall           	~TpgDM();
 		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
         void    __fastcall           	afterConnect();
         void    __fastcall           	afterDisConnect();

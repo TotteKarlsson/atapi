@@ -39,6 +39,7 @@ object atdbDM: TatdbDM
       'ErrorResourceFile=')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -443,6 +444,15 @@ object atdbDM: TatdbDM
       LookupKeyFields = 'id'
       LookupResultField = 'status'
       KeyFields = 'status'
+      Lookup = True
+    end
+    object mRibbonCDScreated_byL: TStringField
+      FieldKind = fkLookup
+      FieldName = 'created_byL'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'created_by'
       Lookup = True
     end
   end

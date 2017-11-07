@@ -22,9 +22,6 @@ Coordinates=93,915,71,105
 [atdbDM.specimenCDS]
 Coordinates=440,143,124,267
 
-[csDustAssayDS]
-Coordinates=817,335,93,51
-
 [atdbDM.speciesDS]
 Coordinates=817,1,107,51
 
@@ -57,9 +54,6 @@ Coordinates=817,545,126,51
 
 [atdbDM.usersCDS]
 Coordinates=615,607,104,105
-
-[csDustAssayCDS]
-Coordinates=817,615,100,51
 
 [atdbDM.notesCDS]
 Coordinates=23,143,104,123
@@ -111,4 +105,7 @@ Coordinates=817,965,140,51
 
 [atdbDM.ribbonNotesCDS]
 Coordinates=440,1,137,123
+
+[]
+Coordinates=817,615,100,51
 

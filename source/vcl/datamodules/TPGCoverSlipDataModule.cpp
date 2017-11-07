@@ -1,22 +1,22 @@
 #pragma hdrstop
-#include "TCoverSlipDataModule.h"
+#include "TPGCoverSlipDataModule.h"
 #include "mtkLogger.h"
 //#include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
-TcsDM *csDM;
+TcsPGDM *csPGDM;
 using namespace mtk;
 
 //---------------------------------------------------------------------------
-__fastcall TcsDM::TcsDM(TComponent* Owner)
+__fastcall TcsPGDM::TcsPGDM(TComponent* Owner)
 	: TDataModule(Owner),
     csDustAssayCDSOnDataChanged(NULL)
 {
 }
 
-void __fastcall TcsDM::afterConnect(TSQLConnection *c)
+void __fastcall TcsPGDM::afterConnect(TSQLConnection *c)
 {
 	Log(lInfo) << "Initializing coverslip datamodule";
 
@@ -37,17 +37,17 @@ void __fastcall TcsDM::afterConnect(TSQLConnection *c)
     csFreshBatchesCDS->Active 	= true;
 }
 
-void __fastcall TcsDM::afterDisConnect()
+void __fastcall TcsPGDM::afterDisConnect()
 {}
 
 //---------------------------------------------------------------------------
-void __fastcall TcsDM::csDSBeforeOpen(TDataSet *DataSet)
+void __fastcall TcsPGDM::csDSBeforeOpen(TDataSet *DataSet)
 {
 //	Log(lInfo) <<"Opening coverslip dataset";
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TcsDM::CDSAfterPost(TDataSet *DataSet)
+void __fastcall TcsPGDM::CDSAfterPost(TDataSet *DataSet)
 {
 	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
 
@@ -60,7 +60,7 @@ void __fastcall TcsDM::CDSAfterPost(TDataSet *DataSet)
     cds->Refresh();
 }
 
-void __fastcall TcsDM::CDSAfterDelete(TDataSet *DataSet)
+void __fastcall TcsPGDM::CDSAfterDelete(TDataSet *DataSet)
 {
 	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
 
@@ -74,7 +74,7 @@ void __fastcall TcsDM::CDSAfterDelete(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TcsDM::CDSAfterScroll(TDataSet *DataSet)
+void __fastcall TcsPGDM::CDSAfterScroll(TDataSet *DataSet)
 {
  	if(DataSet == csCDS)
     {
@@ -91,7 +91,7 @@ void __fastcall TcsDM::CDSAfterScroll(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TcsDM::csDustAsssayDSourceDataChange(TObject *Sender, TField *Field)
+void __fastcall TcsPGDM::csDustAsssayDSourceDataChange(TObject *Sender, TField *Field)
 {
 	if(csDustAssayCDSOnDataChanged)
     {

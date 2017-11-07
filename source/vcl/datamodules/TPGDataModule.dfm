@@ -21,7 +21,7 @@ object pgDM: TpgDM
       'IsolationLevel=ReadCommitted'
       'MaxBlobSize=-1'
       'FetchAll=True'
-      'UseQuoteChar=False'
+      'UseQuoteChar=True'
       'UseUnicode=True'
       'IPVersion=IPv4'
       'VendorLib=dbexppgsql40.dll'
@@ -34,6 +34,7 @@ object pgDM: TpgDM
       'EnableBCD=True')
     AfterConnect = SQLConnection1AfterConnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -272,6 +273,7 @@ object pgDM: TpgDM
     Top = 88
   end
   object usersCDS: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -321,7 +323,6 @@ object pgDM: TpgDM
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
-      Size = 1
     end
     object blockNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
@@ -362,7 +363,6 @@ object pgDM: TpgDM
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
-      Size = 1
     end
     object notesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
@@ -466,7 +466,6 @@ object pgDM: TpgDM
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
-      Size = 1
     end
     object ribbonNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
@@ -490,7 +489,7 @@ object pgDM: TpgDM
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id'
         ParamType = ptInput
       end>
@@ -553,7 +552,7 @@ object pgDM: TpgDM
       FieldName = 'note'
       Required = True
       BlobType = ftMemo
-      Size = 1
+      Size = -1
     end
     object blockNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
@@ -572,7 +571,7 @@ object pgDM: TpgDM
     MaxBlobSize = 1
     Params = <
       item
-        DataType = ftString
+        DataType = ftWideString
         Name = 'id'
         ParamType = ptInput
       end>
@@ -586,7 +585,7 @@ object pgDM: TpgDM
     object ribbonNotesDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
-      Size = 1
+      Size = -1
     end
     object ribbonNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
@@ -664,12 +663,12 @@ object pgDM: TpgDM
       end
       item
         Name = 'virus'
-        DataType = ftString
+        DataType = ftWideString
         Size = 255
       end
       item
         Name = 'brain_region_dissection'
-        DataType = ftString
+        DataType = ftWideString
         Size = 255
       end
       item
@@ -694,7 +693,7 @@ object pgDM: TpgDM
       end
       item
         Name = 'virus_dilution'
-        DataType = ftString
+        DataType = ftWideString
         Size = 16
       end
       item
@@ -740,7 +739,7 @@ object pgDM: TpgDM
     object slicesCDSculture_time: TIntegerField
       FieldName = 'culture_time'
     end
-    object slicesCDSculture_timeL: TWideStringField
+    object slicesCDSculture_timeL: TStringField
       DisplayLabel = 'Culture Time'
       FieldKind = fkLookup
       FieldName = 'culture_timeL'
@@ -754,7 +753,7 @@ object pgDM: TpgDM
       FieldName = 'entered_by'
       Required = True
     end
-    object slicesCDSentered_byL: TWideStringField
+    object slicesCDSentered_byL: TStringField
       DisplayLabel = 'Entered By'
       FieldKind = fkLookup
       FieldName = 'entered_byL'
@@ -767,7 +766,7 @@ object pgDM: TpgDM
     object slicesCDSpreprocess_treatment_protocol: TSmallintField
       FieldName = 'preprocess_treatment_protocol'
     end
-    object slicesCDSLPre: TWideStringField
+    object slicesCDSpreprocess_treatment_protocolL: TStringField
       DisplayLabel = 'Preprocess Treatment'
       FieldKind = fkLookup
       FieldName = 'preprocess_treatment_protocolL'
@@ -780,7 +779,7 @@ object pgDM: TpgDM
     object slicesCDSfixative_protocol: TSmallintField
       FieldName = 'fixative_protocol'
     end
-    object slicesCDSfixative_protocolL: TWideStringField
+    object slicesCDSfixative_protocolL: TStringField
       DisplayLabel = 'Fixative Protocol'
       FieldKind = fkLookup
       FieldName = 'fixative_protocolL'
@@ -793,7 +792,7 @@ object pgDM: TpgDM
     object slicesCDSfixation_protocol: TSmallintField
       FieldName = 'fixation_protocol'
     end
-    object slicesCDSfixation_protocolL: TWideStringField
+    object slicesCDSfixation_protocolL: TStringField
       DisplayLabel = 'Fixation Protocol'
       FieldKind = fkLookup
       FieldName = 'fixation_protocolL'
@@ -806,7 +805,7 @@ object pgDM: TpgDM
     object slicesCDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
     end
-    object slicesCDSpostfix_protocolL: TWideStringField
+    object slicesCDSpostfix_protocolL: TStringField
       DisplayLabel = 'Postfix Protocol'
       FieldKind = fkLookup
       FieldName = 'postfix_protocolL'
@@ -823,6 +822,7 @@ object pgDM: TpgDM
     Top = 272
   end
   object fixativeTBL: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
@@ -844,6 +844,7 @@ object pgDM: TpgDM
     Top = 680
   end
   object preprocesstreatmentDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
@@ -854,9 +855,10 @@ object pgDM: TpgDM
     Top = 744
   end
   object fixationMethodDS: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
-    DataSet.CommandText = 'select * from `fixationprotocols`'
+    DataSet.CommandText = 'select * from fixationprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
@@ -864,6 +866,7 @@ object pgDM: TpgDM
     Top = 616
   end
   object postfix: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
@@ -903,11 +906,11 @@ object pgDM: TpgDM
       item
         Name = 'id'
         Attributes = [faRequired]
-        DataType = ftSmallint
+        DataType = ftInteger
       end
       item
         Name = 'protocol'
-        DataType = ftString
+        DataType = ftWideString
         Size = 255
       end
       item
@@ -1006,7 +1009,7 @@ object pgDM: TpgDM
     object settingsDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
       BlobType = ftMemo
-      Size = 1
+      Size = -1
     end
   end
   object settingsProvider: TDataSetProvider
@@ -1027,7 +1030,6 @@ object pgDM: TpgDM
     object settingsCDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
       BlobType = ftMemo
-      Size = 1
     end
   end
   object specimenCDS: TClientDataSet
@@ -1036,7 +1038,8 @@ object pgDM: TpgDM
     ProviderName = 'specimenProvider'
     AfterPost = cdsAfterPost
     AfterScroll = cdsAfterScroll
-    Left = 256
+    AfterRefresh = cdsAfterRefresh
+    Left = 264
     Top = 192
     object specimenCDSid: TIntegerField
       DisplayWidth = 50
@@ -1126,6 +1129,7 @@ object pgDM: TpgDM
     Top = 192
   end
   object culturedTimePoints: TSimpleDataSet
+    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from cultured_time_point'
