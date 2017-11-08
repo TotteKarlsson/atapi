@@ -4,7 +4,7 @@ object csDM: TcsDM
   Width = 602
   object csDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
-    CommandText = 'SELECT * FROM coverslips'
+    CommandText = 'SELECT * FROM `coverslips`'
     MaxBlobSize = 1
     Params = <>
     Left = 64
@@ -117,7 +117,7 @@ object csDM: TcsDM
   end
   object csStatusDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
-    CommandText = 'SELECT * FROM coverslipstatuses ORDER by id'
+    CommandText = 'SELECT * FROM `coverslipstatuses` ORDER by id'
     MaxBlobSize = 1
     Params = <>
     Left = 64
@@ -169,7 +169,7 @@ object csDM: TcsDM
   end
   object csTypeDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
-    CommandText = 'SELECT * FROM coversliptypes ORDER by id'
+    CommandText = 'SELECT * FROM `coversliptypes` ORDER by id'
     MaxBlobSize = 1
     Params = <>
     Left = 64
@@ -218,6 +218,40 @@ object csDM: TcsDM
     DataSet = csTypeCDS
     Left = 432
     Top = 208
+  end
+  object csDustAssayDS: TSQLDataSet
+    BeforeOpen = csDSBeforeOpen
+    CommandText = 'SELECT * FROM coverslipdustassays where coverslip_id = :id'
+    DataSource = csDSource
+    MaxBlobSize = 1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end>
+    Left = 48
+    Top = 488
+  end
+  object csDustAssayP: TDataSetProvider
+    DataSet = csDustAssayDS
+    Left = 184
+    Top = 488
+  end
+  object csDustAssayCDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'csDustAssayP'
+    AfterPost = CDSAfterPost
+    AfterDelete = CDSAfterDelete
+    Left = 304
+    Top = 488
+  end
+  object csDustAsssayDSource: TDataSource
+    DataSet = csDustAssayCDS
+    OnDataChange = csDustAsssayDSourceDataChange
+    Left = 424
+    Top = 488
   end
   object csFreshBatchesDSource: TDataSource
     DataSet = csFreshBatchesCDS

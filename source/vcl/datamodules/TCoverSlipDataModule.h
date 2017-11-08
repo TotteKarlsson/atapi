@@ -46,6 +46,10 @@ class PACKAGE TcsDM : public TDataModule
         TStringField *csCDSLType;
         TMemoField *csDSnotes;
         TMemoField *csCDSnotes;
+        TSQLDataSet *csDustAssayDS;
+        TDataSetProvider *csDustAssayP;
+        TClientDataSet *csDustAssayCDS;
+        TDataSource *csDustAsssayDSource;
 	TClientDataSet *csFreshBatchesCDS;
 	TIntegerField *csFreshBatchesCDSid;
 	TSQLTimeStampField *csFreshBatchesCDSdate_created;
@@ -71,9 +75,9 @@ class PACKAGE TcsDM : public TDataModule
         private:
 
         public:
-			TNotifyEvent	   csDustAssayCDSOnDataChanged;
+			TNotifyEvent		  csDustAssayCDSOnDataChanged;
                     __fastcall TcsDM(TComponent* Owner);
-        	void    __fastcall afterConnect(TSQLConnection *SQLConnection1);
+        	void    __fastcall afterConnect();
             void    __fastcall afterDisConnect();
 
 

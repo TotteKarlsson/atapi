@@ -1,7 +1,7 @@
 object pgDM: TpgDM
   OldCreateOrder = False
   Height = 1042
-  Width = 1038
+  Width = 1566
   object SQLConnection1: TSQLConnection
     ConnectionName = 'LocalPG'
     DriverName = 'DevartPostgreSQL'
@@ -40,8 +40,8 @@ object pgDM: TpgDM
   end
   object blocksDataSource: TDataSource
     DataSet = blocksCDS
-    Left = 336
-    Top = 352
+    Left = 464
+    Top = 360
   end
   object blocksCDS: TClientDataSet
     Aggregates = <>
@@ -53,7 +53,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = blocksCDSCalcFields
-    Left = 240
+    Left = 336
     Top = 352
     object blocksCDSid: TIntegerField
       AutoGenerateValue = arAutoInc
@@ -186,7 +186,7 @@ object pgDM: TpgDM
   object blocksProvider: TDataSetProvider
     DataSet = blocksDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
-    Left = 136
+    Left = 192
     Top = 352
   end
   object blocksDS: TSQLDataSet
@@ -269,16 +269,15 @@ object pgDM: TpgDM
   object usersProvider: TDataSetProvider
     DataSet = usersDS
     Options = [poFetchBlobsOnDemand, poUseQuoteChar]
-    Left = 136
+    Left = 192
     Top = 88
   end
   object usersCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
     AfterPost = cdsAfterPost
-    Left = 240
+    Left = 336
     Top = 88
     object usersCDSid: TIntegerField
       FieldName = 'id'
@@ -294,17 +293,17 @@ object pgDM: TpgDM
   end
   object usersDataSource: TDataSource
     DataSet = usersCDS
-    Left = 336
-    Top = 88
+    Left = 464
+    Top = 96
   end
   object blockNotesDSource: TDataSource
     DataSet = blockNotesCDS
-    Left = 368
-    Top = 424
+    Left = 464
+    Top = 432
   end
   object blockNotesProvider: TDataSetProvider
     DataSet = blockNotesDS
-    Left = 160
+    Left = 192
     Top = 424
   end
   object blockNotesCDS: TClientDataSet
@@ -313,7 +312,7 @@ object pgDM: TpgDM
     ProviderName = 'blockNotesProvider'
     AfterPost = cdsAfterPost
     AfterDelete = cdsAfterDelete
-    Left = 272
+    Left = 336
     Top = 424
     object blockNotesCDSid: TIntegerField
       FieldName = 'id'
@@ -339,21 +338,21 @@ object pgDM: TpgDM
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
-    Left = 472
-    Top = 56
+    Left = 624
+    Top = 64
   end
   object notesProvider: TDataSetProvider
     DataSet = noteDS
-    Left = 568
-    Top = 56
+    Left = 744
+    Top = 72
   end
   object notesCDS: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'notesProvider'
     AfterPost = cdsAfterPost
-    Left = 672
-    Top = 56
+    Left = 848
+    Top = 72
     object notesCDSid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -375,12 +374,12 @@ object pgDM: TpgDM
   end
   object notesDSource: TDataSource
     DataSet = notesCDS
-    Left = 768
-    Top = 56
+    Left = 944
+    Top = 72
   end
   object mRibbonProvider: TDataSetProvider
     DataSet = ribbonsDS
-    Left = 128
+    Left = 192
     Top = 504
   end
   object mRibbonCDS: TClientDataSet
@@ -393,7 +392,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = mRibbonCDSCalcFields
-    Left = 240
+    Left = 336
     Top = 504
     object mRibbonCDSid: TWideStringField
       FieldName = 'id'
@@ -443,12 +442,12 @@ object pgDM: TpgDM
   end
   object mRibbonDSource: TDataSource
     DataSet = mRibbonCDS
-    Left = 336
-    Top = 504
+    Left = 464
+    Top = 512
   end
   object ribbonNotesProvider: TDataSetProvider
     DataSet = ribbonNotesDS
-    Left = 152
+    Left = 192
     Top = 584
   end
   object ribbonNotesCDS: TClientDataSet
@@ -456,7 +455,7 @@ object pgDM: TpgDM
     Params = <>
     ProviderName = 'ribbonNotesProvider'
     AfterPost = cdsAfterPost
-    Left = 264
+    Left = 336
     Top = 584
     object ribbonNotesCDSid: TIntegerField
       FieldName = 'id'
@@ -478,8 +477,8 @@ object pgDM: TpgDM
   end
   object ribbonNotesDSource: TDataSource
     DataSet = ribbonNotesCDS
-    Left = 360
-    Top = 584
+    Left = 464
+    Top = 592
   end
   object ribbonsDS: TSQLDataSet
     CommandText = 
@@ -494,7 +493,7 @@ object pgDM: TpgDM
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
-    Left = 32
+    Left = 40
     Top = 504
     object ribbonsDSid: TWideStringField
       FieldName = 'id'
@@ -542,7 +541,7 @@ object pgDM: TpgDM
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
-    Left = 64
+    Left = 40
     Top = 424
     object blockNotesDSid: TIntegerField
       FieldName = 'id'
@@ -576,7 +575,7 @@ object pgDM: TpgDM
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
-    Left = 48
+    Left = 40
     Top = 584
     object ribbonNotesDSid: TIntegerField
       FieldName = 'id'
@@ -605,7 +604,7 @@ object pgDM: TpgDM
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
-    Left = 32
+    Left = 40
     Top = 272
     object slicesDSid: TIntegerField
       FieldName = 'id'
@@ -647,7 +646,7 @@ object pgDM: TpgDM
   end
   object slicesProvider: TDataSetProvider
     DataSet = slicesDS
-    Left = 136
+    Left = 192
     Top = 272
   end
   object slicesCDS: TClientDataSet
@@ -712,7 +711,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     BeforeRefresh = cdsBeforeRefresh
     AfterRefresh = cdsAfterRefresh
-    Left = 248
+    Left = 336
     Top = 272
     object slicesCDSid: TIntegerField
       FieldName = 'id'
@@ -739,7 +738,7 @@ object pgDM: TpgDM
     object slicesCDSculture_time: TIntegerField
       FieldName = 'culture_time'
     end
-    object slicesCDSculture_timeL: TStringField
+    object slicesCDSculture_timeL: TWideStringField
       DisplayLabel = 'Culture Time'
       FieldKind = fkLookup
       FieldName = 'culture_timeL'
@@ -753,7 +752,7 @@ object pgDM: TpgDM
       FieldName = 'entered_by'
       Required = True
     end
-    object slicesCDSentered_byL: TStringField
+    object slicesCDSentered_byL: TWideStringField
       DisplayLabel = 'Entered By'
       FieldKind = fkLookup
       FieldName = 'entered_byL'
@@ -766,7 +765,7 @@ object pgDM: TpgDM
     object slicesCDSpreprocess_treatment_protocol: TSmallintField
       FieldName = 'preprocess_treatment_protocol'
     end
-    object slicesCDSpreprocess_treatment_protocolL: TStringField
+    object slicesCDSpreprocess_treatment_protocolL: TWideStringField
       DisplayLabel = 'Preprocess Treatment'
       FieldKind = fkLookup
       FieldName = 'preprocess_treatment_protocolL'
@@ -779,7 +778,7 @@ object pgDM: TpgDM
     object slicesCDSfixative_protocol: TSmallintField
       FieldName = 'fixative_protocol'
     end
-    object slicesCDSfixative_protocolL: TStringField
+    object slicesCDSfixative_protocolL: TWideStringField
       DisplayLabel = 'Fixative Protocol'
       FieldKind = fkLookup
       FieldName = 'fixative_protocolL'
@@ -792,7 +791,7 @@ object pgDM: TpgDM
     object slicesCDSfixation_protocol: TSmallintField
       FieldName = 'fixation_protocol'
     end
-    object slicesCDSfixation_protocolL: TStringField
+    object slicesCDSfixation_protocolL: TWideStringField
       DisplayLabel = 'Fixation Protocol'
       FieldKind = fkLookup
       FieldName = 'fixation_protocolL'
@@ -805,7 +804,7 @@ object pgDM: TpgDM
     object slicesCDSpostfix_protocol: TSmallintField
       FieldName = 'postfix_protocol'
     end
-    object slicesCDSpostfix_protocolL: TStringField
+    object slicesCDSpostfix_protocolL: TWideStringField
       DisplayLabel = 'Postfix Protocol'
       FieldKind = fkLookup
       FieldName = 'postfix_protocolL'
@@ -818,11 +817,10 @@ object pgDM: TpgDM
   end
   object slicesDataSource: TDataSource
     DataSet = slicesCDS
-    Left = 344
-    Top = 272
+    Left = 464
+    Top = 280
   end
   object fixativeTBL: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from fixativeprotocols'
@@ -830,8 +828,8 @@ object pgDM: TpgDM
     DataSet.Params = <>
     Params = <>
     AfterPost = fixativeTBLAfterPost
-    Left = 472
-    Top = 616
+    Left = 624
+    Top = 656
   end
   object speciesDS: TSimpleDataSet
     Aggregates = <>
@@ -840,41 +838,38 @@ object pgDM: TpgDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 472
-    Top = 680
+    Left = 624
+    Top = 720
   end
   object preprocesstreatmentDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from  preprocesstreatmentprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 472
-    Top = 744
+    Left = 624
+    Top = 784
   end
   object fixationMethodDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from fixationprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 568
-    Top = 616
+    Left = 760
+    Top = 656
   end
   object postfix: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from postfixprotocols'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 568
-    Top = 680
+    Left = 760
+    Top = 720
   end
   object cryoprotectionDS: TSimpleDataSet
     Aggregates = <>
@@ -883,8 +878,8 @@ object pgDM: TpgDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 576
-    Top = 744
+    Left = 760
+    Top = 784
   end
   object freezeprotocolDS: TSimpleDataSet
     Aggregates = <>
@@ -893,8 +888,8 @@ object pgDM: TpgDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 672
-    Top = 616
+    Left = 896
+    Top = 656
   end
   object substitutionProtocol: TSimpleDataSet
     Aggregates = <>
@@ -905,7 +900,6 @@ object pgDM: TpgDM
     FieldDefs = <
       item
         Name = 'id'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -920,8 +914,8 @@ object pgDM: TpgDM
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 720
-    Top = 520
+    Left = 896
+    Top = 592
     object substitutionProtocolid: TSmallintField
       FieldName = 'id'
       Required = True
@@ -941,8 +935,8 @@ object pgDM: TpgDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 672
-    Top = 744
+    Left = 896
+    Top = 784
   end
   object embeddingProtocolDS: TSimpleDataSet
     Aggregates = <>
@@ -951,8 +945,8 @@ object pgDM: TpgDM
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 784
-    Top = 616
+    Left = 896
+    Top = 720
   end
   object blockstatusDS: TSimpleDataSet
     Aggregates = <>
@@ -962,26 +956,26 @@ object pgDM: TpgDM
     DataSet.Params = <>
     Params = <>
     AfterPost = fixativeTBLAfterPost
-    Left = 472
-    Top = 552
+    Left = 624
+    Top = 592
   end
   object ROnCoverSlipsSource: TDataSource
     DataSet = ROnCS_CDS
-    Left = 320
+    Left = 464
     Top = 774
   end
   object ROnCS_CDS: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'RibbonsOnCoverslipsProvider'
-    Left = 200
-    Top = 766
+    Left = 344
+    Top = 782
   end
   object RibbonsOnCoverslipsProvider: TDataSetProvider
     DataSet = ribbonsOnCoverSlipsDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
-    Left = 200
-    Top = 694
+    Left = 192
+    Top = 686
   end
   object ribbonsOnCoverSlipsDS: TSQLDataSet
     CommandText = 'SELECT * from ribbons where coverslip_id = :id'
@@ -1001,7 +995,7 @@ object pgDM: TpgDM
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
-    Left = 32
+    Left = 40
     Top = 846
     object settingsDSid: TIntegerField
       FieldName = 'id'
@@ -1014,7 +1008,7 @@ object pgDM: TpgDM
   end
   object settingsProvider: TDataSetProvider
     DataSet = settingsDS
-    Left = 128
+    Left = 192
     Top = 846
   end
   object settingsCDS: TClientDataSet
@@ -1022,7 +1016,7 @@ object pgDM: TpgDM
     Params = <>
     ProviderName = 'settingsProvider'
     AfterPost = cdsAfterPost
-    Left = 256
+    Left = 336
     Top = 846
     object settingsCDSid: TIntegerField
       FieldName = 'id'
@@ -1039,7 +1033,7 @@ object pgDM: TpgDM
     AfterPost = cdsAfterPost
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
-    Left = 264
+    Left = 336
     Top = 192
     object specimenCDSid: TIntegerField
       DisplayWidth = 50
@@ -1125,31 +1119,30 @@ object pgDM: TpgDM
   end
   object specimenProvider: TDataSetProvider
     DataSet = specimenDS
-    Left = 144
+    Left = 192
     Top = 192
   end
   object culturedTimePoints: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from cultured_time_point'
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 488
-    Top = 208
+    Left = 624
+    Top = 192
   end
   object specimenDataSource: TDataSource
     DataSet = specimenCDS
-    Left = 368
-    Top = 184
+    Left = 464
+    Top = 192
   end
   object blockIDsDS: TSQLDataSet
     CommandText = 'select id from blocks ORDER by id DESC'
     MaxBlobSize = 1
     Params = <>
     SQLConnection = SQLConnection1
-    Left = 456
+    Left = 624
     Top = 360
     object blockIDsDSid: TIntegerField
       FieldName = 'id'
@@ -1159,7 +1152,7 @@ object pgDM: TpgDM
   object blockIdsProvider: TDataSetProvider
     DataSet = blockIDsDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
-    Left = 552
+    Left = 760
     Top = 360
   end
   object blockIDSCDS: TClientDataSet
@@ -1172,7 +1165,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = blocksCDSCalcFields
-    Left = 656
+    Left = 864
     Top = 360
     object IntegerField4: TIntegerField
       AutoGenerateValue = arAutoInc
@@ -1181,7 +1174,7 @@ object pgDM: TpgDM
   end
   object blockIDsDataSource: TDataSource
     DataSet = blockIDSCDS
-    Left = 768
+    Left = 976
     Top = 360
   end
   object ribbonStatusDS: TSimpleDataSet
@@ -1192,7 +1185,7 @@ object pgDM: TpgDM
     DataSet.Params = <>
     Params = <>
     AfterPost = fixativeTBLAfterPost
-    Left = 568
-    Top = 544
+    Left = 760
+    Top = 600
   end
 end

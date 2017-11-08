@@ -7,6 +7,7 @@ object csPGDM: TcsPGDM
     CommandText = 'SELECT * FROM coverslips'
     MaxBlobSize = 1
     Params = <>
+    SQLConnection = pgDM.SQLConnection1
     Left = 64
     Top = 56
     object csDSid: TIntegerField
@@ -14,20 +15,17 @@ object csPGDM: TcsPGDM
     end
     object csDSstatus: TIntegerField
       FieldName = 'status'
-      Required = True
     end
     object csDStype: TIntegerField
       FieldName = 'type'
-      Required = True
     end
-    object csDSnotes: TMemoField
+    object csDSnotes: TWideMemoField
       FieldName = 'notes'
-      BlobType = ftMemo
-      Size = 1
+      BlobType = ftWideMemo
+      Size = -1
     end
     object csDSfreshCSBatch: TIntegerField
       FieldName = 'freshCSBatch'
-      Required = True
     end
     object csDScleanCSBatch: TIntegerField
       FieldName = 'cleanCSBatch'
@@ -35,9 +33,15 @@ object csPGDM: TcsPGDM
     object csDScarboncoatbatch: TIntegerField
       FieldName = 'carboncoatbatch'
     end
-    object csDSfrom_lot: TStringField
+    object csDSfrom_lot: TWideStringField
       FieldName = 'from_lot'
       Size = 128
+    end
+    object csDSsilanizedCSBatch: TIntegerField
+      FieldName = 'silanizedCSBatch'
+    end
+    object csDSmodified: TSQLTimeStampField
+      FieldName = 'modified'
     end
   end
   object csP: TDataSetProvider
@@ -68,7 +72,7 @@ object csPGDM: TcsPGDM
       FieldName = 'type'
       Required = True
     end
-    object csCDSLStatus: TStringField
+    object csCDSLStatus: TWideStringField
       DisplayLabel = 'Status'
       FieldKind = fkLookup
       FieldName = 'LStatus'
@@ -78,7 +82,7 @@ object csPGDM: TcsPGDM
       KeyFields = 'status'
       Lookup = True
     end
-    object csCDSLType: TStringField
+    object csCDSLType: TWideStringField
       DisplayLabel = 'Type'
       FieldKind = fkLookup
       FieldName = 'LType'
@@ -88,7 +92,7 @@ object csPGDM: TcsPGDM
       KeyFields = 'type'
       Lookup = True
     end
-    object csCDSnotes: TMemoField
+    object csCDSnotes: TWideMemoField
       DisplayLabel = 'Notes'
       FieldName = 'notes'
       BlobType = ftMemo
@@ -104,7 +108,7 @@ object csPGDM: TcsPGDM
     object csCDScarboncoatbatch: TIntegerField
       FieldName = 'carboncoatbatch'
     end
-    object csCDSfrom_lot: TStringField
+    object csCDSfrom_lot: TWideStringField
       DisplayLabel = 'From LOT#'
       FieldName = 'from_lot'
       Size = 128
@@ -120,17 +124,18 @@ object csPGDM: TcsPGDM
     CommandText = 'SELECT * FROM coverslipstatuses ORDER by id'
     MaxBlobSize = 1
     Params = <>
+    SQLConnection = pgDM.SQLConnection1
     Left = 64
     Top = 136
     object csStatusDSid: TIntegerField
       FieldName = 'id'
     end
-    object csStatusDSstatus: TStringField
+    object csStatusDSstatus: TWideStringField
       FieldName = 'status'
       Required = True
       Size = 255
     end
-    object csStatusDSnote: TMemoField
+    object csStatusDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
       Size = 1
@@ -151,12 +156,12 @@ object csPGDM: TcsPGDM
     object csStatusCDSid: TIntegerField
       FieldName = 'id'
     end
-    object csStatusCDSstatus: TStringField
+    object csStatusCDSstatus: TWideStringField
       FieldName = 'status'
       Required = True
       Size = 255
     end
-    object csStatusCDSnote: TMemoField
+    object csStatusCDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
       Size = 1
@@ -172,17 +177,18 @@ object csPGDM: TcsPGDM
     CommandText = 'SELECT * FROM coversliptypes ORDER by id'
     MaxBlobSize = 1
     Params = <>
+    SQLConnection = pgDM.SQLConnection1
     Left = 64
     Top = 208
     object csTypeDSid: TIntegerField
       FieldName = 'id'
     end
-    object csTypeDStype: TStringField
+    object csTypeDStype: TWideStringField
       FieldName = 'type'
       Required = True
       Size = 255
     end
-    object csTypeDSnote: TMemoField
+    object csTypeDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
       Size = 1
@@ -203,12 +209,12 @@ object csPGDM: TcsPGDM
     object csTypeCDSid: TIntegerField
       FieldName = 'id'
     end
-    object csTypeCDStype: TStringField
+    object csTypeCDStype: TWideStringField
       FieldName = 'type'
       Required = True
       Size = 255
     end
-    object csTypeCDSnote: TMemoField
+    object csTypeCDSnote: TWideMemoField
       FieldName = 'note'
       BlobType = ftMemo
       Size = 1
@@ -237,6 +243,7 @@ object csPGDM: TcsPGDM
     DataSource = csDSource
     MaxBlobSize = 1
     Params = <>
+    SQLConnection = pgDM.SQLConnection1
     Left = 56
     Top = 312
   end
@@ -268,7 +275,7 @@ object csPGDM: TcsPGDM
       FieldName = 'type'
       Required = True
     end
-    object csFreshBatchesCDSlot_number: TStringField
+    object csFreshBatchesCDSlot_number: TWideStringField
       DisplayLabel = 'LOT #'
       FieldName = 'lot_number'
       Size = 128

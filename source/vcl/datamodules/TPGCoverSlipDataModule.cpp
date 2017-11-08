@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "TPGCoverSlipDataModule.h"
 #include "mtkLogger.h"
-//#include "TATDBDataModule.h"
+#include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
@@ -14,26 +14,21 @@ __fastcall TcsPGDM::TcsPGDM(TComponent* Owner)
 	: TDataModule(Owner),
     csDustAssayCDSOnDataChanged(NULL)
 {
+	if(pgDM)
+    {
+        csDS->SQLConnection = pgDM->SQLConnection1;
+        csStatusDS->SQLConnection = pgDM->SQLConnection1;
+        csTypeDS->SQLConnection = pgDM->SQLConnection1;
+        csFreshBatchesDS->SQLConnection = pgDM->SQLConnection1;
+    }
 }
 
-void __fastcall TcsPGDM::afterConnect(TSQLConnection *c)
+void __fastcall TcsPGDM::afterConnect()
 {
 	Log(lInfo) << "Initializing coverslip datamodule";
-
-	if(!c)
-    {
-    	return;
-    }
-    csDS->SQLConnection = c;
-    csStatusDS->SQLConnection = c;
-    csTypeDS->SQLConnection = c;
-    csDustAssayDS->SQLConnection = c;
-    csFreshBatchesDS->SQLConnection = c;
-
     csCDS->Active 				= true;
     csStatusCDS->Active 		= true;
     csTypeCDS->Active 			= true;
-    csDustAssayCDS->Active 		= true;
     csFreshBatchesCDS->Active 	= true;
 }
 
@@ -78,14 +73,9 @@ void __fastcall TcsPGDM::CDSAfterScroll(TDataSet *DataSet)
 {
  	if(DataSet == csCDS)
     {
-    	if(csDustAssayCDS->Active)
-        {
-        	csDustAssayCDS->Refresh();
-        }
-
-//        if(atdbDM->ROnCS_CDS->Active)
+//        if(pgDM->ROnCS_CDS->Active)
 //        {
-//			atdbDM->ROnCS_CDS->Refresh();
+//			pgDM->ROnCS_CDS->Refresh();
 //        }
     }
 }

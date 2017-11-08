@@ -10,7 +10,7 @@ object PGConnectionFrame: TPGConnectionFrame
     Top = 0
     Width = 286
     Height = 201
-    Caption = 'ATDB Connection'
+    Caption = 'PostGres Connection'
     TabOrder = 0
     object mServerIPE: TSTDStringLabeledEdit
       Left = 16

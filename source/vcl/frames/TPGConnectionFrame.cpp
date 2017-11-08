@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TPGConnectionFrame.h"
-#include "database/atDBUtils.h"
+//#include "database/atDBUtils.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
 #include "TPGDataModule.h"
@@ -13,7 +13,7 @@
 
 TPGConnectionFrame *PGConnectionFrame;
 using namespace mtk;
-using namespace at;
+//using namespace at;
 
 //---------------------------------------------------------------------------
 __fastcall TPGConnectionFrame::TPGConnectionFrame(TComponent* Owner)
