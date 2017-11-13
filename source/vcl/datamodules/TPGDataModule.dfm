@@ -384,59 +384,59 @@ object pgDM: TpgDM
     Left = 944
     Top = 72
   end
-  object mRibbonProvider: TDataSetProvider
+  object ribbonsProvider: TDataSetProvider
     DataSet = ribbonsDS
     Left = 192
     Top = 504
   end
-  object mRibbonCDS: TClientDataSet
+  object ribbonsCDS: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'mRibbonProvider'
+    ProviderName = 'ribbonsProvider'
     BeforePost = cdsBeforePost
     AfterPost = cdsAfterPost
     AfterDelete = cdsAfterDelete
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
-    OnCalcFields = mRibbonCDSCalcFields
+    OnCalcFields = ribbonsCDSCalcFields
     Left = 336
     Top = 504
-    object mRibbonCDSid: TWideStringField
+    object ribbonsCDSid: TWideStringField
       FieldName = 'id'
       Size = 36
     end
-    object mRibbonCDSstatus: TIntegerField
+    object ribbonsCDSstatus: TIntegerField
       FieldName = 'status'
     end
-    object mRibbonCDSblock_id: TIntegerField
+    object ribbonsCDSblock_id: TIntegerField
       FieldName = 'block_id'
       Required = True
     end
-    object mRibbonCDScutting_order: TIntegerField
+    object ribbonsCDScutting_order: TIntegerField
       DisplayLabel = 'Cutting Order'
       FieldName = 'cutting_order'
     end
-    object mRibbonCDSnr_of_sections: TSmallintField
+    object ribbonsCDSnr_of_sections: TSmallintField
       DisplayLabel = 'Nr of Sections'
       FieldName = 'nr_of_sections'
     end
-    object mRibbonCDScreated: TSQLTimeStampField
-      FieldName = 'created'
+    object ribbonsCDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
       OnGetText = TimeStampGetText
     end
-    object mRibbonCDSmodified: TSQLTimeStampField
+    object ribbonsCDSmodified: TSQLTimeStampField
       FieldName = 'modified'
     end
-    object mRibbonCDScreated_by: TIntegerField
+    object ribbonsCDScreated_by: TIntegerField
       FieldName = 'created_by'
       Required = True
     end
-    object mRibbonCDScoverslip_id: TIntegerField
+    object ribbonsCDScoverslip_id: TIntegerField
       DisplayLabel = 'Coverslip ID'
       FieldName = 'coverslip_id'
       Required = True
     end
-    object mRibbonCDSstatusL: TWideStringField
+    object ribbonsCDSstatusL: TWideStringField
       DisplayLabel = 'Status'
       FieldKind = fkLookup
       FieldName = 'statusL'
@@ -447,8 +447,8 @@ object pgDM: TpgDM
       Lookup = True
     end
   end
-  object mRibbonDSource: TDataSource
-    DataSet = mRibbonCDS
+  object ribbonsDSource: TDataSource
+    DataSet = ribbonsCDS
     Left = 464
     Top = 512
   end
@@ -519,9 +519,6 @@ object pgDM: TpgDM
     object ribbonsDSnr_of_sections: TSmallintField
       FieldName = 'nr_of_sections'
     end
-    object ribbonsDScreated: TSQLTimeStampField
-      FieldName = 'created'
-    end
     object ribbonsDSmodified: TSQLTimeStampField
       FieldName = 'modified'
     end
@@ -532,6 +529,9 @@ object pgDM: TpgDM
     object ribbonsDScoverslip_id: TIntegerField
       FieldName = 'coverslip_id'
       Required = True
+    end
+    object ribbonsDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
     end
   end
   object blockNotesDS: TSQLDataSet
@@ -569,7 +569,7 @@ object pgDM: TpgDM
     CommandText = 
       'SELECT * FROM notes n '#13#10'INNER JOIN ribbon_note rn '#13#10'ON (rn.note_' +
       'id = n.id) '#13#10'WHERE ribbon_id = :id '#13#10'ORDER BY created_on ASC'
-    DataSource = mRibbonDSource
+    DataSource = ribbonsDSource
     MaxBlobSize = 1
     Params = <
       item

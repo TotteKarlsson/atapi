@@ -19,9 +19,6 @@ Coordinates=233,561,63,123
 [usersCDS]
 Coordinates=0,0,63,105
 
-[mRibbonCDS]
-Coordinates=550,330,80,231
-
 [blockNotesCDS]
 Coordinates=312,477,91,123
 
@@ -105,4 +102,7 @@ Coordinates=0,1041,148,249
 
 [slicesCDS]
 Coordinates=558,686,154,357
+
+[ribbonsCDS]
+Coordinates=550,330,80,231
 

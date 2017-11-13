@@ -90,7 +90,7 @@ void __fastcall TpgDM::afterConnect()
 	slicesCDS->Active  		= true;
     blocksCDS->Active 	    = true;
     blockIDSCDS->Active     = true;
-    mRibbonCDS->Active 	    = true;
+    ribbonsCDS->Active 	    = true;
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
     ribbonNotesCDS->Active  = true;
@@ -189,19 +189,19 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
         if(bID == -1)
         {
             blockNotesCDS->Active = false;
-            mRibbonCDS->Active = false;
+            ribbonsCDS->Active = false;
         }
         else
         {
             blockNotesCDS->Active = true;
-            mRibbonCDS->Active = true;
+            ribbonsCDS->Active = true;
         }
         cdsAfterRefresh(blocksCDS);
     }
 
-	if(DataSet == mRibbonCDS)
+	if(DataSet == ribbonsCDS)
     {
-        String rID = mRibbonCDS->FieldByName("id")->AsString;
+        String rID = ribbonsCDS->FieldByName("id")->AsString;
         if(rID == "")
         {
             ribbonNotesCDS->Active = false;
@@ -211,7 +211,7 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
             ribbonNotesCDS->Active = true;
 
         }
-        cdsAfterRefresh(mRibbonCDS);
+        cdsAfterRefresh(ribbonsCDS);
     }
 }
 
@@ -227,9 +227,9 @@ void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
 
 	else if(DataSet == blocksCDS)
     {
-    	if(mRibbonCDS->Active)
+    	if(ribbonsCDS->Active)
         {
-    		mRibbonCDS->Refresh();
+    		ribbonsCDS->Refresh();
         }
 
         if(blockNotesCDS->Active)
@@ -237,7 +237,7 @@ void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
 			blockNotesCDS->Refresh();
         }
     }
-    else if(DataSet == mRibbonCDS)
+    else if(DataSet == ribbonsCDS)
     {
     	if(ribbonNotesCDS->Active)
         {
@@ -261,14 +261,14 @@ void __fastcall TpgDM::cdsBeforePost(TDataSet *DataSet)
     {
 		Log(lInfo) << "Before Posting Block Data";
     }
-    else if(DataSet == mRibbonCDS)
+    else if(DataSet == ribbonsCDS)
     {
 		Log(lInfo) << "Before Posting Ribbon Data";
     }
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TpgDM::mRibbonCDSCalcFields(TDataSet *DataSet)
+void __fastcall TpgDM::ribbonsCDSCalcFields(TDataSet *DataSet)
 {
 	//Generate barcode as being composed of
 	//    	block_id: first 5 digits
@@ -276,13 +276,13 @@ void __fastcall TpgDM::mRibbonCDSCalcFields(TDataSet *DataSet)
 //	TField* field = blocksCDS->FieldByName("id");
 //	if(field)
 //	{
-//		TField* f = mRibbonCDS->FieldByName("id");
+//		TField* f = ribbonsCDS->FieldByName("id");
 //		if(f)
 //		{
 //			stringstream s;
 //			s << zeroPadRight(blocksCDS->FieldByName("id")->AsInteger,   4);
 //			string str = s.str();
-//            s << zeroPadLeft(mRibbonCDS->FieldByName("id")->AsInteger, 5);
+//            s << zeroPadLeft(ribbonsCDS->FieldByName("id")->AsInteger, 5);
 //            str = s.str();
 //			f->Value = toLong(str);
 //		}
@@ -343,9 +343,9 @@ void __fastcall TpgDM::TimeStampGetText(TField *Sender, UnicodeString &Text,
 //			Text = vclstr(d[0]);
 //        }
 //	}
-//    else if	(field == mRibbonCDScreated)
+//    else if	(field == ribbonsCDScreated)
 //	{
-//		StringList d(stdstr(mRibbonCDScreated->AsString), ' ');
+//		StringList d(stdstr(ribbonsCDScreated->AsString), ' ');
 //        if(d.size())
 //        {
 //			Text = vclstr(d[0]);

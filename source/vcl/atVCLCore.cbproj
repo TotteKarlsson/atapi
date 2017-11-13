@@ -283,10 +283,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
-        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="datamodules\TPGDataModule.dfm"/>
         <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
