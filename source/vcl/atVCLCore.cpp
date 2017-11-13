@@ -1,28 +1,25 @@
 #include <System.hpp>
 #pragma hdrstop
-USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
 USEFORM("frames\TApplicationSoundsFrame.cpp", ApplicationSounds); /* TFrame: File Type */
-USEFORM("frames\TImageItemFrame.cpp", ImageItemFrame); /* TFrame: File Type */
-USEFORM("frames\TMovieItemFrame.cpp", MovieItemFrame); /* TFrame: File Type */
-USEFORM("frames\TImagesFrame.cpp", ImagesFrame); /* TFrame: File Type */
-USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
-USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
-USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
 USEFORM("forms\TYesNoForm.cpp", YesNoForm);
+USEFORM("frames\TArduinoServerCommandFrame.cpp", ArduinoServerCommandFrame); /* TFrame: File Type */
+USEFORM("frames\TImagesFrame.cpp", ImagesFrame); /* TFrame: File Type */
+USEFORM("frames\TImageItemFrame.cpp", ImageItemFrame); /* TFrame: File Type */
+USEFORM("forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
+USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
+USEFORM("forms\TShowFileContentForm.cpp", ShowFileContentForm);
 USEFORM("forms\TTextInputDialog.cpp", TextInputDialog);
+USEFORM("forms\TStringInputDialog.cpp", StringInputDialog);
+USEFORM("frames\TMovieItemFrame.cpp", MovieItemFrame); /* TFrame: File Type */
 USEFORM("frames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
 USEFORM("frames\TMoviesFrame.cpp", MoviesFrame); /* TFrame: File Type */
 USEFORM("frames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
 USEFORM("frames\TZebraScannerFrame.cpp", ZebraScannerFrame); /* TFrame: File Type */
 USEFORM("frames\TSoundsFrame.cpp", SoundsFrame); /* TFrame: File Type */
-USEFORM("forms\TBlockEntryForm.cpp", BlockEntryForm);
-USEFORM("datamodules\TATDBDataModule.cpp", atdbDM); /* TDataModule: File Type */
-USEFORM("datamodules\TCoverSlipDataModule.cpp", csDM); /* TDataModule: File Type */
-USEFORM("datamodules\TATDBImagesAndMoviesDataModule.cpp", ImagesAndMoviesDM); /* TDataModule: File Type */
-USEFORM("forms\TATDBServerEntry.cpp", ATDBServerEntry);
-USEFORM("forms\TamFileEditor.cpp", amFileEditor);
-USEFORM("datamodules\TPGDataModule.cpp", pgDM); /* TDataModule: File Type */
 USEFORM("datamodules\TPGCoverSlipDataModule.cpp", csPGDM); /* TDataModule: File Type */
+USEFORM("datamodules\TPGDataModule.cpp", pgDM); /* TDataModule: File Type */
+USEFORM("forms\TamFileEditor.cpp", amFileEditor);
+USEFORM("datamodules\TPGImagesAndMoviesDataModule.cpp", ImagesAndMoviesDM); /* TDataModule: File Type */
 //---------------------------------------------------------------------------
 #include "TApplicationSoundsFrame.h"
 //#include "TATDBConnectionFrame.h"

@@ -13,9 +13,6 @@ TpgDM *pgDM;
 using namespace mtk;
 using namespace std;
 
-string zeroPadLeft(int nr, int width);
-string zeroPadRight(int nr, int width);
-
 //---------------------------------------------------------------------------
 __fastcall TpgDM::TpgDM(TComponent* Owner)
 	:
@@ -27,22 +24,17 @@ __fastcall TpgDM::TpgDM(TComponent* Owner)
 __fastcall TpgDM::~TpgDM()
 {}
 
-//---------------------------------------------------------------------------
-bool __fastcall TpgDM::connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db)
+bool __fastcall TpgDM::connect(const DBCredentials& c)
 {
-    mDataBase = db;
-    mDataBaseUser = dbUser;
-    mDataBaseUserPassword = dbPassword;
-    mDBIP = ip;
-
     try
     {
+	    mCredentials = c;
         SQLConnection1->KeepConnection = true;
         SQLConnection1->Connected = false;
-        SQLConnection1->Params->Values[_D("HostName")] = vclstr(mDBIP);
-        SQLConnection1->Params->Values[_D("Database")] = vclstr(mDataBase);
-        SQLConnection1->Params->Values[_D("User_Name")] = vclstr(mDataBaseUser);
-        SQLConnection1->Params->Values[_D("Password")] = vclstr(mDataBaseUserPassword);
+        SQLConnection1->Params->Values[_D("HostName")] = vclstr(c.getHost());
+        SQLConnection1->Params->Values[_D("Database")] = vclstr(c.getDB());
+        SQLConnection1->Params->Values[_D("User_Name")] = vclstr(c.getUserName());
+        SQLConnection1->Params->Values[_D("Password")] = vclstr(c.getUserPassword());
 
         Log(lInfo) <<"Trying to connect to SQL server using parameters:\t"<<
                     "Host="		<<stdstr(SQLConnection1->Params->Values[_D("HostName")])<<"\t"<<
@@ -61,6 +53,16 @@ bool __fastcall TpgDM::connect(const string& ip, const string& dbUser, const str
     }
 }
 
+//---------------------------------------------------------------------------
+bool __fastcall TpgDM::connect(const string& host, const string& db, const string& user, const string& pwd)
+{
+    return connect(DBCredentials(host, db, user, pwd));
+}
+
+bool TpgDM::isConnected()
+{
+	return SQLConnection1->Connected;
+}
 //---------------------------------------------------------------------------
 void __fastcall TpgDM::SQLConnection1BeforeConnect(TObject *Sender)
 {
@@ -82,7 +84,7 @@ void __fastcall TpgDM::SQLConnection1AfterConnect(TObject *Sender)
 
 void __fastcall TpgDM::afterConnect()
 {
-	Log(lInfo) << "Connection established to: "<<mDataBase;
+	Log(lInfo) << "Connection established to: "<< mCredentials.getHost();
 	usersCDS->Active 	    = true;
 	specimenCDS->Active 	= true;
 	slicesCDS->Active  		= true;
@@ -92,7 +94,6 @@ void __fastcall TpgDM::afterConnect()
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
     ribbonNotesCDS->Active  = true;
-	slicesCDS->Active  		= true;
     ROnCS_CDS->Active  		= true;
     settingsCDS->Active  	= true;
 }
@@ -100,15 +101,21 @@ void __fastcall TpgDM::afterConnect()
 //---------------------------------------------------------------------------
 void __fastcall TpgDM::afterDisConnect()
 {
-	Log(lInfo) << "Closed connection to: "<<mDataBase;
+	Log(lInfo) << "Closed connection to: "<<mCredentials.getHost();
   	usersCDS->Active 	    = false;
 	specimenCDS->Active 	= false;
+	slicesCDS->Active  		= false;
     blocksCDS->Active 	    = false;
     blockIDSCDS->Active     = false;
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
-	slicesCDS->Active  		= false;
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TpgDM::SQLConnection1AfterDisconnect(TObject *Sender)
+{
+	afterDisConnect();
 }
 
 //---------------------------------------------------------------------------
@@ -148,7 +155,7 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
 
  	if(DataSet == specimenCDS)
     {
-	    specimenCDS->Refresh();
+	    //specimenCDS->Refresh();
     	if(slicesCDS->Active)
         {
         	slicesCDS->Refresh();
@@ -504,26 +511,50 @@ bool __fastcall	TpgDM::insertRibbonNote(int userID, const string& ribbonID, cons
     catch(...)
     {
         Log(lError) << "There was a DB exception..";
-	//        handleMySQLException();
 		return false;
     }
-
-
-}
-//---------------------------------------------------------------------------
-string zeroPadLeft(int nr, int width)
-{
-	stringstream s;
-    s << std::setw(width) << std::setfill( '0' ) << std::right << nr;
-    return s.str();
 }
 
 //---------------------------------------------------------------------------
-string zeroPadRight(int nr, int width)
+StringList TpgDM::getTableNames()
 {
-	stringstream s;
-    s << std::setw(width) << std::setfill( '0' ) << std::left << nr;
-    return s.str();
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection...";
+        return StringList();
+    }
+
+    TSQLQuery* tq = new TSQLQuery(NULL);
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+//SELECT table_name
+//  FROM information_schema.tables
+// WHERE table_schema='public'
+//   AND table_type='BASE TABLE';
+
+    stringstream q;
+    q <<"SELECT table_name \
+		 FROM information_schema.tables \
+         WHERE table_schema='public' \
+         AND table_type='BASE TABLE' \
+         ORDER BY 1" ;
+    Log(lDebug) << "Get table names query: " <<q.str();
+    tq->SQL->Add(q.str().c_str());
+
+	tq->Open();
+
+    int nrRows = tq->RecordCount;
+	tq->First();
+
+	StringList res;
+    while(!tq->Eof)
+    {
+        string val = stdstr(tq->FieldByName("table_name")->AsString);
+        res.append(val);
+		tq->Next();
+    }
+
+    return res;
 }
 
 

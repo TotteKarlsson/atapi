@@ -1,10 +1,8 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TPGConnectionFrame.h"
-//#include "database/atDBUtils.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
-#include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
@@ -13,7 +11,6 @@
 
 TPGConnectionFrame *PGConnectionFrame;
 using namespace mtk;
-//using namespace at;
 
 //---------------------------------------------------------------------------
 __fastcall TPGConnectionFrame::TPGConnectionFrame(TComponent* Owner)
@@ -42,11 +39,13 @@ bool TPGConnectionFrame::init(IniFile* inifile, const string& iniFileSection)
 	mProperties.read();
 
 	//Update
-    mDBUserE->update();
-    mPasswordE->update();
-    mDatabaseE->update();
-	mServerIPE->update();
+    updateUI();
     return true;
+}
+
+DBCredentials TPGConnectionFrame::getCredentials()
+{
+	return DBCredentials(mServerIPE->getValue(), mDatabaseE->getValue(), mDBUserE->getValue(), mPasswordE->getValue());
 }
 
 bool TPGConnectionFrame::writeParameters()
@@ -54,13 +53,31 @@ bool TPGConnectionFrame::writeParameters()
 	return mProperties.write();
 }
 
+void TPGConnectionFrame::updateUI()
+{
+    mDBUserE->update();
+    mPasswordE->update();
+    mDatabaseE->update();
+	mServerIPE->update();
+}
+
 void TPGConnectionFrame::afterConnect()
 {
+    mDBUserE->Enabled 	= false;
+    mPasswordE->Enabled = false;
+    mDatabaseE->Enabled = false;
+	mServerIPE->Enabled = false;
+    updateUI();
 	ConnectA->Caption = "Disconnect";
 }
 
 void TPGConnectionFrame::afterDisconnect()
 {
+    mDBUserE->Enabled = true;
+    mPasswordE->Enabled = true;
+    mDatabaseE->Enabled = true;
+	mServerIPE->Enabled = true;
+
 	ConnectA->Caption = "Connect";
 }
 
@@ -105,8 +122,18 @@ void __fastcall TPGConnectionFrame::ConnectAExecute(TObject *Sender)
     }
     else
     {
-	    pgDM->connect(mServerIPE->getValue(), mDBUserE->getValue(), mPasswordE->getValue(), mDatabaseE->getValue());
+	    pgDM->connect(mServerIPE->getValue(), mDatabaseE->getValue(), mDBUserE->getValue(), mPasswordE->getValue());
     }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TPGConnectionFrame::GBox1Click(TObject *Sender)
+{
+    mDBUserE->update();
+    mPasswordE->update();
+    mDatabaseE->update();
+	mServerIPE->update();
+
 }
 
 

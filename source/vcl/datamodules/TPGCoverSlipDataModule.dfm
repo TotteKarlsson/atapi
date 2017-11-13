@@ -25,10 +25,10 @@ object csPGDM: TcsPGDM
       Size = -1
     end
     object csDSfreshCSBatch: TIntegerField
-      FieldName = 'freshCSBatch'
+      FieldName = 'freshcsbatch'
     end
     object csDScleanCSBatch: TIntegerField
-      FieldName = 'cleanCSBatch'
+      FieldName = 'cleancsbatch'
     end
     object csDScarboncoatbatch: TIntegerField
       FieldName = 'carboncoatbatch'
@@ -38,7 +38,7 @@ object csPGDM: TcsPGDM
       Size = 128
     end
     object csDSsilanizedCSBatch: TIntegerField
-      FieldName = 'silanizedCSBatch'
+      FieldName = 'silanizedcsbatch'
     end
     object csDSmodified: TSQLTimeStampField
       FieldName = 'modified'
@@ -99,11 +99,11 @@ object csPGDM: TcsPGDM
       Size = 1
     end
     object csCDSfreshCSBatch: TIntegerField
-      FieldName = 'freshCSBatch'
+      FieldName = 'freshcsbatch'
       Required = True
     end
     object csCDScleanCSBatch: TIntegerField
-      FieldName = 'cleanCSBatch'
+      FieldName = 'cleancsbatch'
     end
     object csCDScarboncoatbatch: TIntegerField
       FieldName = 'carboncoatbatch'

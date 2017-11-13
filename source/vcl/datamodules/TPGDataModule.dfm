@@ -21,7 +21,7 @@ object pgDM: TpgDM
       'IsolationLevel=ReadCommitted'
       'MaxBlobSize=-1'
       'FetchAll=True'
-      'UseQuoteChar=True'
+      'UseQuoteChar=False'
       'UseUnicode=True'
       'IPVersion=IPv4'
       'VendorLib=dbexppgsql40.dll'
@@ -33,8 +33,8 @@ object pgDM: TpgDM
       'Password=totte'
       'EnableBCD=True')
     AfterConnect = SQLConnection1AfterConnect
+    AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
-    Connected = True
     Left = 40
     Top = 24
   end
@@ -1187,5 +1187,208 @@ object pgDM: TpgDM
     AfterPost = fixativeTBLAfterPost
     Left = 760
     Top = 600
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 1048
+    Top = 304
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'blocksProvider'
+    BeforePost = cdsBeforePost
+    AfterPost = cdsAfterPost
+    AfterDelete = cdsAfterDelete
+    AfterScroll = cdsAfterScroll
+    AfterRefresh = cdsAfterRefresh
+    OnCalcFields = blocksCDSCalcFields
+    Left = 920
+    Top = 296
+    object IntegerField1: TIntegerField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'id'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'slice_id'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
+    end
+    object SQLTimeStampField1: TSQLTimeStampField
+      FieldName = 'entered_on'
+      Required = True
+    end
+    object WideStringField1: TWideStringField
+      DisplayLabel = 'Label'
+      FieldName = 'label'
+      Size = 255
+    end
+    object SmallintField1: TSmallintField
+      FieldName = 'status'
+      Required = True
+    end
+    object WideStringField2: TWideStringField
+      DisplayLabel = 'Status'
+      FieldKind = fkLookup
+      FieldName = 'LBlockStatus'
+      LookupDataSet = blockstatusDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'status'
+      KeyFields = 'status'
+      Size = 255
+      Lookup = True
+    end
+    object SmallintField2: TSmallintField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Serial'
+      FieldName = 'serial'
+      Required = True
+    end
+    object WideStringField3: TWideStringField
+      DisplayLabel = 'Label'
+      FieldKind = fkCalculated
+      FieldName = 'Cblock_label'
+      Size = 50
+      Calculated = True
+    end
+    object DateField1: TDateField
+      DisplayLabel = 'Date Embedded'
+      FieldName = 'date_embedded'
+    end
+    object SmallintField3: TSmallintField
+      FieldName = 'cryoprotection_protocol'
+    end
+    object SmallintField4: TSmallintField
+      FieldName = 'freezing_protocol'
+    end
+    object SmallintField5: TSmallintField
+      FieldName = 'substitution_protocol'
+    end
+    object SmallintField6: TSmallintField
+      FieldName = 'infiltration_protocol'
+    end
+    object SmallintField7: TSmallintField
+      FieldName = 'embedding_protocol'
+    end
+    object WideStringField4: TWideStringField
+      DisplayLabel = 'Cryoprotection Protocol'
+      FieldKind = fkLookup
+      FieldName = 'LCryoProtectionProtocol'
+      LookupDataSet = cryoprotectionDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'cryoprotection_protocol'
+      Lookup = True
+    end
+    object WideStringField5: TWideStringField
+      DisplayLabel = 'Freezing Protocol'
+      FieldKind = fkLookup
+      FieldName = 'LFreezingProtocol'
+      LookupDataSet = freezeprotocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'freezing_protocol'
+      Lookup = True
+    end
+    object WideStringField6: TWideStringField
+      DisplayLabel = 'Substitution Protocol'
+      FieldKind = fkLookup
+      FieldName = 'LSubstitutionProtocol'
+      LookupDataSet = substitutionProtocol
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'substitution_protocol'
+      Lookup = True
+    end
+    object WideStringField7: TWideStringField
+      DisplayLabel = 'Infiltration Protocol'
+      FieldKind = fkLookup
+      FieldName = 'LInfiltrationProtocol'
+      LookupDataSet = infiltrationProtocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'infiltration_protocol'
+      Lookup = True
+    end
+    object WideStringField8: TWideStringField
+      DisplayLabel = 'Embedding Protocol'
+      FieldKind = fkLookup
+      FieldName = 'LEmbeddingProtocol'
+      LookupDataSet = embeddingProtocolDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'protocol'
+      KeyFields = 'embedding_protocol'
+      Lookup = True
+    end
+    object WideStringField9: TWideStringField
+      DisplayLabel = 'Entered By'
+      FieldKind = fkLookup
+      FieldName = 'entered_byL'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'entered_by'
+      Lookup = True
+    end
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = AllBlocksDS
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
+    Left = 776
+    Top = 296
+  end
+  object AllBlocksDS: TSQLDataSet
+    CommandText = 'select * from blocks ORDER by id DESC'
+    MaxBlobSize = 1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 624
+    Top = 296
+    object IntegerField5: TIntegerField
+      FieldName = 'id'
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'slice_id'
+    end
+    object SmallintField8: TSmallintField
+      FieldName = 'status'
+      Required = True
+    end
+    object IntegerField7: TIntegerField
+      FieldName = 'entered_by'
+      Required = True
+    end
+    object WideStringField10: TWideStringField
+      FieldName = 'label'
+      Size = 255
+    end
+    object SmallintField9: TSmallintField
+      FieldName = 'serial'
+      Required = True
+    end
+    object DateField2: TDateField
+      FieldName = 'date_embedded'
+    end
+    object SmallintField10: TSmallintField
+      FieldName = 'cryoprotection_protocol'
+    end
+    object SmallintField11: TSmallintField
+      FieldName = 'freezing_protocol'
+    end
+    object SmallintField12: TSmallintField
+      FieldName = 'substitution_protocol'
+    end
+    object SmallintField13: TSmallintField
+      FieldName = 'infiltration_protocol'
+    end
+    object SmallintField14: TSmallintField
+      FieldName = 'embedding_protocol'
+    end
+    object SQLTimeStampField2: TSQLTimeStampField
+      FieldName = 'entered_on'
+      Required = True
+    end
   end
 end

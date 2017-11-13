@@ -10,10 +10,13 @@
 #include <Data.DBXMySQL.hpp>
 #include "DbxDevartPostgreSQL.hpp"
 #include <string>
+#include "atDBCredentials.h"
+#include "mtkStringList.h"
 
+using mtk::StringList;
 using std::string;
 
-//!The TatDM class encapsulate data exchange with the ATDB database
+//!The TpgDM class encapsulate data exchange with the ATDB database
 //---------------------------------------------------------------------------
 class PACKAGE TpgDM : public TDataModule
 {
@@ -205,6 +208,44 @@ __published:	// IDE-managed Components
 	TSmallintField *slicesCDSpostfix_protocol;
 	TWideStringField *slicesCDSpostfix_protocolL;
 	TWideStringField *slicesCDSculture_timeL;
+	TDataSource *DataSource1;
+	TClientDataSet *ClientDataSet1;
+	TIntegerField *IntegerField1;
+	TIntegerField *IntegerField2;
+	TIntegerField *IntegerField3;
+	TSQLTimeStampField *SQLTimeStampField1;
+	TWideStringField *WideStringField1;
+	TSmallintField *SmallintField1;
+	TWideStringField *WideStringField2;
+	TSmallintField *SmallintField2;
+	TWideStringField *WideStringField3;
+	TDateField *DateField1;
+	TSmallintField *SmallintField3;
+	TSmallintField *SmallintField4;
+	TSmallintField *SmallintField5;
+	TSmallintField *SmallintField6;
+	TSmallintField *SmallintField7;
+	TWideStringField *WideStringField4;
+	TWideStringField *WideStringField5;
+	TWideStringField *WideStringField6;
+	TWideStringField *WideStringField7;
+	TWideStringField *WideStringField8;
+	TWideStringField *WideStringField9;
+	TDataSetProvider *DataSetProvider1;
+	TSQLDataSet *AllBlocksDS;
+	TIntegerField *IntegerField5;
+	TIntegerField *IntegerField6;
+	TSmallintField *SmallintField8;
+	TIntegerField *IntegerField7;
+	TWideStringField *WideStringField10;
+	TSmallintField *SmallintField9;
+	TDateField *DateField2;
+	TSmallintField *SmallintField10;
+	TSmallintField *SmallintField11;
+	TSmallintField *SmallintField12;
+	TSmallintField *SmallintField13;
+	TSmallintField *SmallintField14;
+	TSQLTimeStampField *SQLTimeStampField2;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -224,26 +265,29 @@ __published:	// IDE-managed Components
 	void __fastcall slicesCDSBeforeClose(TDataSet *DataSet);
 	void __fastcall slicesCDSAfterClose(TDataSet *DataSet);
 	void __fastcall slicesCDSAfterOpen(TDataSet *DataSet);
+	void __fastcall SQLConnection1AfterDisconnect(TObject *Sender);
 
 	private:
 
     protected:
-    	string		                    mDataBaseUser;
-    	string		                    mDataBaseUserPassword;
-       	string		                    mDataBase;
-        string 		                    mDBIP;
+	    DBCredentials					mCredentials;
 
 	public:
 				__fastcall           	TpgDM(TComponent* Owner);
 				__fastcall           	~TpgDM();
-		bool 	__fastcall           	connect(const string& ip, const string& dbUser, const string& dbPassword, const string& db);
+		bool 	__fastcall           	connect(const string& host, const string& db, const string& user, const string& pwd);
+		bool 	__fastcall           	connect(const DBCredentials& c);
         void    __fastcall           	afterConnect();
         void    __fastcall           	afterDisConnect();
+        bool							isConnected();
         int		__fastcall				getCurrentBlockID();
         int 	__fastcall				getIDForSpecie(const string& specie);
 		String __fastcall 				createBlockLabel();
         bool	__fastcall				insertBlockNote(int userID, int blockID, const string& note);
         bool	__fastcall				insertRibbonNote(int userID, const string& ribbonID, const string& note);
+
+        StringList 						getTableNames();
+
 };
 
 extern PACKAGE TpgDM *pgDM;

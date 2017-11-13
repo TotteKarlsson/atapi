@@ -5,6 +5,8 @@
 #include "frames/TImageItemFrame.h"
 #include "mtkLogger.h"
 #include "mtkVCLUtils.h"
+#include "TPGImagesAndMoviesDataModule.h"
+#include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TIntLabel"

@@ -1,6 +1,5 @@
 #ifndef TMoviesFrameH
 #define TMoviesFrameH
-//---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>

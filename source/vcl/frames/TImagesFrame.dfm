@@ -57,7 +57,7 @@ object ImagesFrame: TImagesFrame
     end
   end
   object GetImagesQuery: TSQLQuery
-    DataSource = atdbDM.blockIDsDataSource
+    DataSource = pgDM.blockIDsDataSource
     MaxBlobSize = -1
     Params = <
       item
@@ -69,7 +69,7 @@ object ImagesFrame: TImagesFrame
       
         'SELECT id,created from images where block_id=:id ORDER by create' +
         'd DESC')
-    SQLConnection = atdbDM.SQLConnection1
+    SQLConnection = pgDM.SQLConnection1
     Left = 109
     Top = 304
   end

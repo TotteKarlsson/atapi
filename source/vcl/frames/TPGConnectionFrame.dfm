@@ -12,6 +12,7 @@ object PGConnectionFrame: TPGConnectionFrame
     Height = 201
     Caption = 'PostGres Connection'
     TabOrder = 0
+    OnClick = GBox1Click
     object mServerIPE: TSTDStringLabeledEdit
       Left = 16
       Top = 40
@@ -32,7 +33,7 @@ object PGConnectionFrame: TPGConnectionFrame
       EditLabel.Width = 22
       EditLabel.Height = 13
       EditLabel.Caption = 'User'
-      TabOrder = 1
+      TabOrder = 2
       Text = 'atdb-client'
       Value = 'atdb-client'
     end
@@ -44,7 +45,7 @@ object PGConnectionFrame: TPGConnectionFrame
       EditLabel.Width = 46
       EditLabel.Height = 13
       EditLabel.Caption = 'Password'
-      TabOrder = 2
+      TabOrder = 3
       Text = 'atdb123'
       Value = 'atdb123'
     end
@@ -56,7 +57,7 @@ object PGConnectionFrame: TPGConnectionFrame
       EditLabel.Width = 46
       EditLabel.Height = 13
       EditLabel.Caption = 'Database'
-      TabOrder = 3
+      TabOrder = 1
       Text = 'atdb'
       Value = 'atdb'
     end
@@ -71,7 +72,7 @@ object PGConnectionFrame: TPGConnectionFrame
       SoundID = 'BUTTON_CLICK_4'
     end
   end
-  object ActionList1: TActionList
+  object PGConnectionsActions: TActionList
     Left = 32
     Top = 136
     object ConnectA: TAction

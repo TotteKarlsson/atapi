@@ -125,6 +125,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atDBConnection.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atDBCredentials.cpp">
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atDBUtils.cpp">
             <DependentOn>atDBUtils.h</DependentOn>
             <BuildOrder>5</BuildOrder>

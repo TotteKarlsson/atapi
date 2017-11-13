@@ -57,7 +57,7 @@ object MoviesFrame: TMoviesFrame
     end
   end
   object GetMoviesQuery: TSQLQuery
-    DataSource = atdbDM.blockIDsDataSource
+    DataSource = pgDM.blockIDsDataSource
     MaxBlobSize = -1
     Params = <
       item
@@ -69,7 +69,7 @@ object MoviesFrame: TMoviesFrame
       
         'SELECT id,created from movies where block_id=:id ORDER by create' +
         'd DESC')
-    SQLConnection = atdbDM.SQLConnection1
+    SQLConnection = pgDM.SQLConnection1
     Left = 69
     Top = 96
   end
