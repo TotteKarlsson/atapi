@@ -72,7 +72,6 @@ __published:	// IDE-managed Components
 	TIntegerField *ribbonsCDSblock_id;
 	TIntegerField *ribbonsCDScutting_order;
 	TSmallintField *ribbonsCDSnr_of_sections;
-	TSQLTimeStampField *ribbonsCDScreated_on;
 	TSQLTimeStampField *ribbonsCDSmodified;
 	TSQLDataSet *slicesDS;
 	TDataSetProvider *slicesProvider;
@@ -249,6 +248,8 @@ __published:	// IDE-managed Components
 	TWideMemoField *blockNotesCDSnote;
 	TSQLTimeStampField *blockNotesCDScreated_on;
 	TIntegerField *blockNotesCDScreated_by;
+	TStringField *ribbonsCDScreated_byL;
+	TSQLTimeStampField *ribbonsCDScreated_on;
 	TSQLTimeStampField *ribbonsDScreated_on;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
