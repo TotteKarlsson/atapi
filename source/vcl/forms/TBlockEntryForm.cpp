@@ -33,49 +33,49 @@ void __fastcall TBlockEntryForm::FormShow(TObject *Sender)
 	//Populate user drop down
     try
     {
-        //Fetch data
-        RecordSet *rs =  mServerSession.getUsers();
-        if(!rs->rowCount())
-        {
-            Log(lInfo) << "There are no users...";
-        }
-        else
-        {
-            int cols = rs->columnCount();
-            int rows = rs->rowCount();
-
-            // iterate over all rows and columns
-            for (RecordSet::Iterator it = rs->begin(); it != rs->end(); ++it)
-            {
-                Poco::Data::Row& row = *it;
-                string user(row[1].convert<std::string>());
-				mUserCB->Items->Add(user.c_str());
-                Log(lInfo) <<user;
-            }
-            mUserCB->ItemIndex = 0;
-        }
-    }
-    catch(const Poco::Data::MySQL::StatementException& e)
-    {
-        Log(lError) << e.message() << endl;
-    }
-    catch(const Poco::Data::MySQL::MySQLException& e)
-    {
-        Log(lError) << e.message() << endl;
-    }
-    catch(const Poco::NullPointerException& e)
-    {
-    	Log(lError) << "Null Pointer exception..";
-    }
-    catch(...)
-    {
-    	Log(lError) << "Unhandled exception...";
-    }
+//        //Fetch data
+//        RecordSet *rs =  mServerSession.getUsers();
+//        if(!rs->rowCount())
+//        {
+//            Log(lInfo) << "There are no users...";
+//        }
+//        else
+//        {
+//            int cols = rs->columnCount();
+//            int rows = rs->rowCount();
+//
+//            // iterate over all rows and columns
+//            for (RecordSet::Iterator it = rs->begin(); it != rs->end(); ++it)
+//            {
+//                Poco::Data::Row& row = *it;
+//                string user(row[1].convert<std::string>());
+//				mUserCB->Items->Add(user.c_str());
+//                Log(lInfo) <<user;
+//            }
+//            mUserCB->ItemIndex = 0;
+//        }
+//    }
+//    catch(const Poco::Data::MySQL::StatementException& e)
+//    {
+//        Log(lError) << e.message() << endl;
+//    }
+//    catch(const Poco::Data::MySQL::MySQLException& e)
+//    {
+//        Log(lError) << e.message() << endl;
+//    }
+//    catch(const Poco::NullPointerException& e)
+//    {
+//    	Log(lError) << "Null Pointer exception..";
+//    }
+//    catch(...)
+//    {
+//    	Log(lError) << "Unhandled exception...";
+//    }
 }
 
-void __fastcall TBlockEntryForm::mValidateTimerTimer(TObject *Sender)
-{
-	 mSubmitButton->Enabled  =  (mBlockLabel->Text.Length() > 10) ? true : false;
-}
+//void __fastcall TBlockEntryForm::mValidateTimerTimer(TObject *Sender)
+//{
+//	 mSubmitButton->Enabled  =  (mBlockLabel->Text.Length() > 10) ? true : false;
+//}
 //---------------------------------------------------------------------------
 

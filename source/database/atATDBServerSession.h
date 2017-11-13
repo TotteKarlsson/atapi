@@ -26,28 +26,28 @@ class AT_DB ATDBServerSession : public DBConnection
 					        	        ATDBServerSession(const string& db, const string& host, const string& user, const string& password);
 					        	        ~ATDBServerSession();
 
-		StringList						getTableNames();
-
-										//!Statements
-		Poco::Data::RecordSet* 	    	getBlocks(at::dbSQLKeyword kw = at::dbDescending);
-        bool							insertBlock(int userID, const string& lbl, const string& note);
-        bool							deleteBlock(int bId);
-        bool							deleteNotesForBlock(int bId);
-        bool							deleteRibbonsForBlock(int bId);
-
-		Poco::Data::RecordSet*      	getNotesForBlock(int blockID);
-		bool							addNoteForBlock(int blockID, int userID, const string& note);
-
-		bool							addNoteForRibbon(const string& ribbonID, int userID, const string& note);
-        bool							deleteNotesForRibbon(const string& bId);
-
-		bool							deleteNote(int noteID);
-		bool							updateNote(int noteID, const string& note);
-
-		Poco::Data::RecordSet* 	  		getUsers(at::dbSQLKeyword kw = at::dbAscending);
-
-										//Sensor data
-        bool							insertSensorData(int sensorID, double val1, double val2);
+//		StringList						getTableNames();
+//
+//										//!Statements
+//		Poco::Data::RecordSet* 	    	getBlocks(at::dbSQLKeyword kw = at::dbDescending);
+//        bool							insertBlock(int userID, const string& lbl, const string& note);
+//        bool							deleteBlock(int bId);
+//        bool							deleteNotesForBlock(int bId);
+//        bool							deleteRibbonsForBlock(int bId);
+//
+//		Poco::Data::RecordSet*      	getNotesForBlock(int blockID);
+//		bool							addNoteForBlock(int blockID, int userID, const string& note);
+//
+//		bool							addNoteForRibbon(const string& ribbonID, int userID, const string& note);
+//        bool							deleteNotesForRibbon(const string& bId);
+//
+//		bool							deleteNote(int noteID);
+//		bool							updateNote(int noteID, const string& note);
+//
+//		Poco::Data::RecordSet* 	  		getUsers(at::dbSQLKeyword kw = at::dbAscending);
+//
+//										//Sensor data
+//        bool							insertSensorData(int sensorID, double val1, double val2);
 
 
     protected:

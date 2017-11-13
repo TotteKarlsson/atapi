@@ -133,7 +133,6 @@ void __fastcall TPGConnectionFrame::GBox1Click(TObject *Sender)
     mPasswordE->update();
     mDatabaseE->update();
 	mServerIPE->update();
-
 }
 
 

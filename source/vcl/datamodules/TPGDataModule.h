@@ -10,7 +10,7 @@
 #include <Data.DBXMySQL.hpp>
 #include "DbxDevartPostgreSQL.hpp"
 #include <string>
-#include "atDBCredentials.h"
+#include "database/atDBCredentials.h"
 #include "mtkStringList.h"
 
 using mtk::StringList;
@@ -46,23 +46,11 @@ __published:	// IDE-managed Components
 	TIntegerField *usersCDSid;
 	TWideStringField *usersCDSuser_name;
 	TSQLTimeStampField *usersCDScreated;
-	TIntegerField *blockNotesCDSid;
-	TWideMemoField *blockNotesCDSnote;
-	TSQLTimeStampField *blockNotesCDScreated_on;
-	TIntegerField *blockNotesCDScreated_by;
-	TIntegerField *notesCDSid;
-	TWideMemoField *notesCDSnote;
-	TSQLTimeStampField *notesCDScreated_on;
-	TIntegerField *notesCDScreated_by;
 	TDataSetProvider *ribbonNotesProvider;
 	TClientDataSet *ribbonNotesCDS;
 	TDataSource *ribbonNotesDSource;
 	TSQLDataSet *ribbonsDS;
 	TSQLDataSet *blockNotesDS;
-	TIntegerField *blockNotesDSid;
-	TWideMemoField *blockNotesDSnote;
-	TSQLTimeStampField *blockNotesDScreated_on;
-	TIntegerField *blockNotesDScreated_by;
 	TSQLDataSet *ribbonNotesDS;
 	TIntegerField *ribbonNotesDSid;
 	TWideMemoField *ribbonNotesDSnote;
@@ -246,6 +234,22 @@ __published:	// IDE-managed Components
 	TSmallintField *SmallintField13;
 	TSmallintField *SmallintField14;
 	TSQLTimeStampField *SQLTimeStampField2;
+	TIntegerField *noteDSid;
+	TWideMemoField *noteDSnote;
+	TSQLTimeStampField *noteDScreated_on;
+	TIntegerField *noteDScreated_by;
+	TIntegerField *notesCDSid;
+	TWideMemoField *notesCDSnote;
+	TSQLTimeStampField *notesCDScreated_on;
+	TIntegerField *notesCDScreated_by;
+	TIntegerField *blockNotesDSid;
+	TWideMemoField *blockNotesDSnote;
+	TSQLTimeStampField *blockNotesDScreated_on;
+	TIntegerField *blockNotesDScreated_by;
+	TIntegerField *blockNotesCDSid;
+	TWideMemoField *blockNotesCDSnote;
+	TSQLTimeStampField *blockNotesCDScreated_on;
+	TIntegerField *blockNotesCDScreated_by;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -266,6 +270,7 @@ __published:	// IDE-managed Components
 	void __fastcall slicesCDSAfterClose(TDataSet *DataSet);
 	void __fastcall slicesCDSAfterOpen(TDataSet *DataSet);
 	void __fastcall SQLConnection1AfterDisconnect(TObject *Sender);
+	void __fastcall cdsbeforeDelete(TDataSet *DataSet);
 
 	private:
 
@@ -287,6 +292,7 @@ __published:	// IDE-managed Components
         bool	__fastcall				insertRibbonNote(int userID, const string& ribbonID, const string& note);
 
         StringList 						getTableNames();
+		bool							addNoteForBlock(int blockID, int userID, const string& note);
 
 };
 

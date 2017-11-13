@@ -169,11 +169,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>forms\TamFileEditor.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
-        <CppCompile Include="forms\TBlockEntryForm.cpp">
-            <Form>BlockEntryForm</Form>
-            <DependentOn>forms\TBlockEntryForm.h</DependentOn>
-            <BuildOrder>33</BuildOrder>
-        </CppCompile>
         <CppCompile Include="forms\TSelectProcessTypeDialog.cpp">
             <Form>SelectProcessTypeDialog</Form>
             <DependentOn>forms\TSelectProcessTypeDialog.h</DependentOn>
@@ -292,7 +287,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="datamodules\TPGDataModule.dfm"/>
         <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="forms\TBlockEntryForm.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

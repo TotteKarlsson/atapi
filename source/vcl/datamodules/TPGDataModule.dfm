@@ -28,13 +28,14 @@ object pgDM: TpgDM
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName='
-      'Database=shotgundb'
+      'Database=sg2'
       'User_Name=admin'
       'Password=totte'
       'EnableBCD=True')
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -49,6 +50,7 @@ object pgDM: TpgDM
     ProviderName = 'blocksProvider'
     BeforePost = cdsBeforePost
     AfterPost = cdsAfterPost
+    BeforeDelete = cdsbeforeDelete
     AfterDelete = cdsAfterDelete
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
@@ -185,7 +187,7 @@ object pgDM: TpgDM
   end
   object blocksProvider: TDataSetProvider
     DataSet = blocksDS
-    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
+    Options = [poFetchBlobsOnDemand, poUseQuoteChar]
     Left = 192
     Top = 352
   end
@@ -316,20 +318,16 @@ object pgDM: TpgDM
     Top = 424
     object blockNotesCDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object blockNotesCDSnote: TWideMemoField
       FieldName = 'note'
-      Required = True
-      BlobType = ftMemo
+      BlobType = ftWideMemo
     end
     object blockNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
-      Required = True
     end
     object blockNotesCDScreated_by: TIntegerField
       FieldName = 'created_by'
-      Required = True
     end
   end
   object noteDS: TSQLDataSet
@@ -340,6 +338,20 @@ object pgDM: TpgDM
     SQLConnection = SQLConnection1
     Left = 624
     Top = 64
+    object noteDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object noteDSnote: TWideMemoField
+      FieldName = 'note'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object noteDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
+    end
+    object noteDScreated_by: TIntegerField
+      FieldName = 'created_by'
+    end
   end
   object notesProvider: TDataSetProvider
     DataSet = noteDS
@@ -355,21 +367,16 @@ object pgDM: TpgDM
     Top = 72
     object notesCDSid: TIntegerField
       FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
     object notesCDSnote: TWideMemoField
       FieldName = 'note'
-      Required = True
-      BlobType = ftMemo
+      BlobType = ftWideMemo
     end
     object notesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
-      Required = True
     end
     object notesCDScreated_by: TIntegerField
       FieldName = 'created_by'
-      Required = True
     end
   end
   object notesDSource: TDataSource
@@ -533,7 +540,6 @@ object pgDM: TpgDM
       'd = n.id) '#13#10'WHERE block_id = :id '#13#10'ORDER BY created_on ASC'
     DataSource = blocksDataSource
     MaxBlobSize = 1
-    ParamCheck = False
     Params = <
       item
         DataType = ftInteger
@@ -545,21 +551,18 @@ object pgDM: TpgDM
     Top = 424
     object blockNotesDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object blockNotesDSnote: TWideMemoField
       FieldName = 'note'
-      Required = True
-      BlobType = ftMemo
+      BlobType = ftWideMemo
       Size = -1
     end
     object blockNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
-      Required = True
+      ProviderFlags = [pfInUpdate]
     end
     object blockNotesDScreated_by: TIntegerField
       FieldName = 'created_by'
-      Required = True
     end
   end
   object ribbonNotesDS: TSQLDataSet

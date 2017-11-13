@@ -133,6 +133,19 @@ void __fastcall TpgDM::cdsAfterPost(TDataSet *DataSet)
 }
 
 //---------------------------------------------------------------------------
+void __fastcall TpgDM::cdsbeforeDelete(TDataSet *DataSet)
+{
+	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
+
+    if(!cds)
+    {
+    	return;
+    }
+	Log(lInfo) << "Deleting..";
+}
+
+
+//---------------------------------------------------------------------------
 void __fastcall TpgDM::cdsAfterDelete(TDataSet *DataSet)
 {
 	TClientDataSet* cds = dynamic_cast<TClientDataSet*>(DataSet);
@@ -527,22 +540,17 @@ StringList TpgDM::getTableNames()
     TSQLQuery* tq = new TSQLQuery(NULL);
     tq->SQLConnection = pgDM->SQLConnection1;
 
-//SELECT table_name
-//  FROM information_schema.tables
-// WHERE table_schema='public'
-//   AND table_type='BASE TABLE';
-
     stringstream q;
     q <<"SELECT table_name \
 		 FROM information_schema.tables \
          WHERE table_schema='public' \
          AND table_type='BASE TABLE' \
          ORDER BY 1" ;
+
     Log(lDebug) << "Get table names query: " <<q.str();
+
     tq->SQL->Add(q.str().c_str());
-
 	tq->Open();
-
     int nrRows = tq->RecordCount;
 	tq->First();
 
@@ -555,6 +563,42 @@ StringList TpgDM::getTableNames()
     }
 
     return res;
+}
+
+bool TpgDM::addNoteForBlock(int blockID, int userID, const string& note)
+{
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection...";
+        return false;
+    }
+
+    stringstream q;
+    q << "INSERT INTO notes (created_by, note) VALUES(:userID, :theNote) RETURNING id";
+
+    TSQLQuery* tq = new TSQLQuery(NULL);
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+    tq->SQL->Add(q.str().c_str());
+    tq->Params->ParamByName("userID")->AsInteger = userID;
+    tq->Params->ParamByName("theNote")->AsString = note.c_str();
+	tq->Open();
+
+    //Get last insert ID for the note cleanCS batch and update coverslips
+    int noteID = tq->FieldByName("id")->AsInteger;
+
+	tq->Close();
+    //Associate note and block
+    tq->SQL->Clear();
+	q.str("");
+    q << "INSERT INTO block_note (block_id, note_id) VALUES(:bID, :nID)";
+    tq->SQL->Add(q.str().c_str());
+    tq->ParamByName("bID")->Value 		= blockID;
+    tq->ParamByName("nID")->Value 		= noteID;
+	tq->ExecSQL();
+
+    delete tq;
+    return true;
 }
 
 
