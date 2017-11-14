@@ -250,7 +250,6 @@ __published:	// IDE-managed Components
 	TIntegerField *blockNotesCDScreated_by;
 	TSQLTimeStampField *ribbonsCDScreated_on;
 	TSQLTimeStampField *ribbonsDScreated_on;
-	TStringField *ribbonsCDScreated_byL;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);

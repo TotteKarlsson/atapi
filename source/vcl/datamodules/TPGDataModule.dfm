@@ -445,16 +445,6 @@ object pgDM: TpgDM
       KeyFields = 'status'
       Lookup = True
     end
-    object ribbonsCDScreated_byL: TStringField
-      FieldKind = fkLookup
-      FieldName = 'created_byL'
-      LookupDataSet = usersCDS
-      LookupKeyFields = 'id'
-      LookupResultField = 'user_name'
-      KeyFields = 'created_by'
-      Size = 256
-      Lookup = True
-    end
   end
   object ribbonsDSource: TDataSource
     DataSet = ribbonsCDS
