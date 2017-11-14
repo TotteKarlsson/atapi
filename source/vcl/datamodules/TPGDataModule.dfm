@@ -324,6 +324,7 @@ object pgDM: TpgDM
     end
     object blockNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
     end
     object blockNotesCDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -362,7 +363,7 @@ object pgDM: TpgDM
     Params = <>
     ProviderName = 'notesProvider'
     AfterPost = cdsAfterPost
-    Left = 848
+    Left = 888
     Top = 72
     object notesCDSid: TIntegerField
       FieldName = 'id'
@@ -380,8 +381,8 @@ object pgDM: TpgDM
   end
   object notesDSource: TDataSource
     DataSet = notesCDS
-    Left = 944
-    Top = 72
+    Left = 1040
+    Top = 80
   end
   object ribbonsProvider: TDataSetProvider
     DataSet = ribbonsDS
@@ -421,9 +422,11 @@ object pgDM: TpgDM
     end
     object ribbonsCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
     end
     object ribbonsCDSmodified: TSQLTimeStampField
       FieldName = 'modified'
+      ProviderFlags = [pfInUpdate]
     end
     object ribbonsCDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -477,6 +480,7 @@ object pgDM: TpgDM
     end
     object ribbonNotesCDSnote: TWideMemoField
       FieldName = 'note'
+      ProviderFlags = [pfInUpdate]
       BlobType = ftWideMemo
     end
     object ribbonNotesCDScreated_on: TSQLTimeStampField
@@ -592,6 +596,7 @@ object pgDM: TpgDM
     end
     object ribbonNotesDSnote: TWideMemoField
       FieldName = 'note'
+      ProviderFlags = [pfInUpdate]
       BlobType = ftWideMemo
       Size = -1
     end
@@ -978,8 +983,8 @@ object pgDM: TpgDM
     Aggregates = <>
     Params = <>
     ProviderName = 'RibbonsOnCoverslipsProvider'
-    Left = 344
-    Top = 782
+    Left = 336
+    Top = 766
   end
   object RibbonsOnCoverslipsProvider: TDataSetProvider
     DataSet = ribbonsOnCoverSlipsDS
@@ -1175,7 +1180,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = blocksCDSCalcFields
-    Left = 864
+    Left = 888
     Top = 360
     object IntegerField4: TIntegerField
       AutoGenerateValue = arAutoInc
@@ -1184,7 +1189,7 @@ object pgDM: TpgDM
   end
   object blockIDsDataSource: TDataSource
     DataSet = blockIDSCDS
-    Left = 976
+    Left = 1040
     Top = 360
   end
   object ribbonStatusDS: TSimpleDataSet
@@ -1200,7 +1205,7 @@ object pgDM: TpgDM
   end
   object DataSource1: TDataSource
     DataSet = ClientDataSet1
-    Left = 1048
+    Left = 1040
     Top = 304
   end
   object ClientDataSet1: TClientDataSet
@@ -1213,7 +1218,7 @@ object pgDM: TpgDM
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
     OnCalcFields = blocksCDSCalcFields
-    Left = 920
+    Left = 888
     Top = 296
     object IntegerField1: TIntegerField
       AutoGenerateValue = arAutoInc

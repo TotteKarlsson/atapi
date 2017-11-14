@@ -129,7 +129,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <Form>csPGDM</Form>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>datamodules\TPGCoverSlipDataModule.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
+            <BuildOrder>37</BuildOrder>
         </CppCompile>
         <CppCompile Include="datamodules\TPGDataModule.cpp">
             <Form>pgDM</Form>
@@ -138,10 +138,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
         <CppCompile Include="datamodules\TPGImagesAndMoviesDataModule.cpp">
-            <Form>ImagesAndMoviesDM</Form>
+            <Form>PGImagesAndMoviesDM</Form>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>datamodules\TPGImagesAndMoviesDataModule.h</DependentOn>
-            <BuildOrder>39</BuildOrder>
+            <BuildOrder>38</BuildOrder>
         </CppCompile>
         <PackageImport Include="dbexpress.bpi">
             <BuildOrder>45</BuildOrder>
@@ -154,6 +154,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </PackageImport>
         <PackageImport Include="DbxCommonDriver.bpi">
             <BuildOrder>46</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DbxDevartPostgreSQLDriver170.bpi">
+            <BuildOrder>36</BuildOrder>
         </PackageImport>
         <PackageImport Include="DBXMySQLDriver.bpi">
             <BuildOrder>48</BuildOrder>
@@ -283,11 +286,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
-        <FormResources Include="datamodules\TPGDataModule.dfm"/>
-        <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
+        <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
+        <FormResources Include="datamodules\TPGDataModule.dfm"/>
         <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -349,6 +352,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayCamPackage.bpl">File p:\build\debug\BPL\ArrayCamPackage.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayBotPackage.bpl">File p:\build\debug\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>

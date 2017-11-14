@@ -18,7 +18,10 @@ __fastcall TpgDM::TpgDM(TComponent* Owner)
 	:
     TDataModule(Owner)
 {
-  	SQLConnection1->Connected = false;
+	if(SQLConnection1)
+    {
+  		SQLConnection1->Connected = false;
+    }
 }
 
 __fastcall TpgDM::~TpgDM()

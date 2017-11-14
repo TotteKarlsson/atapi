@@ -48,7 +48,7 @@ object PGImagesAndMoviesDM: TPGImagesAndMoviesDM
   end
   object MoviesByBlockIDDS: TSQLDataSet
     CommandText = 'SELECT * from movies where block_id = :id'
-    DataSource = atdbDM.blockIDsDataSource
+    DataSource = pgDM.blockIDsDataSource
     MaxBlobSize = -1
     Params = <
       item
@@ -56,7 +56,7 @@ object PGImagesAndMoviesDM: TPGImagesAndMoviesDM
         Name = 'id'
         ParamType = ptInput
       end>
-    SQLConnection = atdbDM.SQLConnection1
+    SQLConnection = pgDM.SQLConnection1
     Left = 48
     Top = 103
     object MoviesByBlockIDDSid: TWideStringField
