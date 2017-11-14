@@ -35,6 +35,7 @@ object pgDM: TpgDM
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -337,7 +338,7 @@ object pgDM: TpgDM
     Params = <>
     SQLConnection = SQLConnection1
     Left = 624
-    Top = 64
+    Top = 72
     object noteDSid: TIntegerField
       FieldName = 'id'
     end
@@ -976,37 +977,6 @@ object pgDM: TpgDM
     Left = 624
     Top = 592
   end
-  object ROnCoverSlipsSource: TDataSource
-    DataSet = ROnCS_CDS
-    Left = 464
-    Top = 774
-  end
-  object ROnCS_CDS: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'RibbonsOnCoverslipsProvider'
-    Left = 336
-    Top = 766
-  end
-  object RibbonsOnCoverslipsProvider: TDataSetProvider
-    DataSet = ribbonsOnCoverSlipsDS
-    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
-    Left = 192
-    Top = 686
-  end
-  object ribbonsOnCoverSlipsDS: TSQLDataSet
-    CommandText = 'SELECT * from ribbons where coverslip_id = :id'
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id'
-        ParamType = ptInput
-      end>
-    SQLConnection = SQLConnection1
-    Left = 40
-    Top = 694
-  end
   object settingsDS: TSQLDataSet
     CommandText = 'select * from settings order by id ASC'
     MaxBlobSize = 1
@@ -1208,7 +1178,7 @@ object pgDM: TpgDM
   object DataSource1: TDataSource
     DataSet = ClientDataSet1
     Left = 1040
-    Top = 304
+    Top = 296
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>

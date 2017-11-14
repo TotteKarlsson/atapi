@@ -11,14 +11,13 @@ using namespace mtk;
 
 //---------------------------------------------------------------------------
 __fastcall TcsPGDM::TcsPGDM(TComponent* Owner)
-	: TDataModule(Owner),
-    csDustAssayCDSOnDataChanged(NULL)
+	: TDataModule(Owner)
 {
 	if(pgDM)
     {
-        csDS->SQLConnection = pgDM->SQLConnection1;
-        csStatusDS->SQLConnection = pgDM->SQLConnection1;
-        csTypeDS->SQLConnection = pgDM->SQLConnection1;
+        csDS->SQLConnection 		    = pgDM->SQLConnection1;
+        csStatusDS->SQLConnection 	    = pgDM->SQLConnection1;
+        csTypeDS->SQLConnection 	    = pgDM->SQLConnection1;
         csFreshBatchesDS->SQLConnection = pgDM->SQLConnection1;
     }
 }
@@ -29,6 +28,7 @@ void __fastcall TcsPGDM::afterConnect()
     csCDS->Active 				= true;
     csStatusCDS->Active 		= true;
     csTypeCDS->Active 			= true;
+    ROnCS_CDS->Active  			= true;
     csFreshBatchesCDS->Active 	= true;
 }
 
@@ -73,18 +73,11 @@ void __fastcall TcsPGDM::CDSAfterScroll(TDataSet *DataSet)
 {
  	if(DataSet == csCDS)
     {
-//        if(pgDM->ROnCS_CDS->Active)
-//        {
-//			pgDM->ROnCS_CDS->Refresh();
-//        }
+        if(ROnCS_CDS->Active)
+        {
+			ROnCS_CDS->Refresh();
+        }
     }
 }
 
-//---------------------------------------------------------------------------
-void __fastcall TcsPGDM::csDustAsssayDSourceDataChange(TObject *Sender, TField *Field)
-{
-	if(csDustAssayCDSOnDataChanged)
-    {
-    	csDustAssayCDSOnDataChanged(Sender);
-    }
-}
+

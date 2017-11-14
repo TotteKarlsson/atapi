@@ -97,7 +97,6 @@ void __fastcall TpgDM::afterConnect()
     notesCDS->Active   	    = true;
 	blockNotesCDS->Active  	= true;
     ribbonNotesCDS->Active  = true;
-    ROnCS_CDS->Active  		= true;
     settingsCDS->Active  	= true;
 }
 
@@ -637,3 +636,4 @@ bool TpgDM::addNoteForRibbon(const string& ribbonID, int userID, const string& n
     delete tq;
     return true;
 }
+

@@ -42,6 +42,7 @@ object csPGDM: TcsPGDM
     end
     object csDSmodified: TSQLTimeStampField
       FieldName = 'modified'
+      ProviderFlags = [pfInUpdate]
     end
   end
   object csP: TDataSetProvider
@@ -55,6 +56,7 @@ object csPGDM: TcsPGDM
     Params = <>
     ProviderName = 'csP'
     AfterPost = CDSAfterPost
+    AfterDelete = CDSAfterDelete
     AfterScroll = CDSAfterScroll
     Left = 304
     Top = 64
@@ -227,7 +229,6 @@ object csPGDM: TcsPGDM
   end
   object csFreshBatchesDSource: TDataSource
     DataSet = csFreshBatchesCDS
-    OnDataChange = csDustAsssayDSourceDataChange
     Left = 432
     Top = 312
   end
@@ -246,6 +247,26 @@ object csPGDM: TcsPGDM
     SQLConnection = pgDM.SQLConnection1
     Left = 56
     Top = 312
+    object csFreshBatchesDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object csFreshBatchesDSdate_created: TSQLTimeStampField
+      FieldName = 'date_created'
+      ProviderFlags = [pfInUpdate]
+    end
+    object csFreshBatchesDScount: TIntegerField
+      FieldName = 'count'
+    end
+    object csFreshBatchesDStype: TIntegerField
+      FieldName = 'type'
+    end
+    object csFreshBatchesDSlot_number: TWideStringField
+      FieldName = 'lot_number'
+      Size = 128
+    end
+    object csFreshBatchesDSbox_number: TIntegerField
+      FieldName = 'box_number'
+    end
   end
   object csFreshBatchesCDS: TClientDataSet
     Aggregates = <>
@@ -284,6 +305,120 @@ object csPGDM: TcsPGDM
       DisplayLabel = 'Box #'
       FieldName = 'box_number'
       Required = True
+    end
+  end
+  object ROnCoverSlipsSource: TDataSource
+    DataSet = ROnCS_CDS
+    Left = 432
+    Top = 414
+  end
+  object ROnCS_CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'RibbonsOnCoverslipsProvider'
+    Left = 336
+    Top = 414
+    object ROnCS_CDSid: TWideStringField
+      FieldName = 'id'
+      Size = 36
+    end
+    object ROnCS_CDSstatus: TIntegerField
+      FieldName = 'status'
+    end
+    object ROnCS_CDSblock_id: TIntegerField
+      DisplayLabel = 'Block ID'
+      FieldName = 'block_id'
+    end
+    object ROnCS_CDScutting_order: TIntegerField
+      DisplayLabel = 'Cutting Order'
+      FieldName = 'cutting_order'
+    end
+    object ROnCS_CDSnr_of_sections: TSmallintField
+      DisplayLabel = '# of Sections'
+      FieldName = 'nr_of_sections'
+    end
+    object ROnCS_CDScreated_on: TSQLTimeStampField
+      DisplayLabel = 'Cut on Date'
+      FieldName = 'created_on'
+    end
+    object ROnCS_CDSmodified: TSQLTimeStampField
+      FieldName = 'modified'
+    end
+    object ROnCS_CDScreated_by: TIntegerField
+      FieldName = 'created_by'
+    end
+    object ROnCS_CDScoverslip_id: TIntegerField
+      FieldName = 'coverslip_id'
+    end
+    object ROnCS_CDScreated_byL: TStringField
+      DisplayLabel = 'Created By'
+      FieldKind = fkLookup
+      FieldName = 'created_byL'
+      LookupDataSet = pgDM.usersDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'created_by'
+      LookupCache = True
+      Lookup = True
+    end
+    object ROnCS_CDSstatusL: TStringField
+      FieldKind = fkLookup
+      FieldName = 'statusL'
+      LookupDataSet = pgDM.ribbonStatusDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'status'
+      KeyFields = 'status'
+      Lookup = True
+    end
+  end
+  object RibbonsOnCoverslipsProvider: TDataSetProvider
+    DataSet = ribbonsOnCoverSlipsDS
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
+    Left = 200
+    Top = 414
+  end
+  object ribbonsOnCoverSlipsDS: TSQLDataSet
+    CommandText = 'SELECT * from ribbons where coverslip_id = :id'
+    DataSource = csDSource
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end>
+    SQLConnection = pgDM.SQLConnection1
+    Left = 48
+    Top = 414
+    object ribbonsOnCoverSlipsDSid: TWideStringField
+      FieldName = 'id'
+      Size = 36
+    end
+    object ribbonsOnCoverSlipsDSstatus: TIntegerField
+      FieldName = 'status'
+    end
+    object ribbonsOnCoverSlipsDSblock_id: TIntegerField
+      FieldName = 'block_id'
+    end
+    object ribbonsOnCoverSlipsDScutting_order: TIntegerField
+      FieldName = 'cutting_order'
+    end
+    object ribbonsOnCoverSlipsDSnr_of_sections: TSmallintField
+      FieldName = 'nr_of_sections'
+    end
+    object ribbonsOnCoverSlipsDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
+    end
+    object ribbonsOnCoverSlipsDSmodified: TSQLTimeStampField
+      FieldName = 'modified'
+      ProviderFlags = [pfInUpdate]
+    end
+    object ribbonsOnCoverSlipsDScreated_by: TIntegerField
+      FieldName = 'created_by'
+    end
+    object ribbonsOnCoverSlipsDScoverslip_id: TIntegerField
+      FieldName = 'coverslip_id'
     end
   end
 end

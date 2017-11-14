@@ -104,10 +104,6 @@ __published:	// IDE-managed Components
 	TIntegerField *ribbonsCDScreated_by;
 	TIntegerField *ribbonsDScoverslip_id;
 	TIntegerField *ribbonsCDScoverslip_id;
-	TDataSource *ROnCoverSlipsSource;
-	TClientDataSet *ROnCS_CDS;
-	TDataSetProvider *RibbonsOnCoverslipsProvider;
-	TSQLDataSet *ribbonsOnCoverSlipsDS;
 	TSQLDataSet *settingsDS;
 	TDataSetProvider *settingsProvider;
 	TClientDataSet *settingsCDS;
@@ -272,6 +268,7 @@ __published:	// IDE-managed Components
 	void __fastcall slicesCDSAfterOpen(TDataSet *DataSet);
 	void __fastcall SQLConnection1AfterDisconnect(TObject *Sender);
 	void __fastcall cdsbeforeDelete(TDataSet *DataSet);
+
 
 	private:
 

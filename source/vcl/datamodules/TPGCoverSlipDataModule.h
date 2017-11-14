@@ -63,22 +63,48 @@ class PACKAGE TcsPGDM : public TDataModule
 	TWideStringField *csDSfrom_lot;
 	TIntegerField *csDSsilanizedCSBatch;
 	TSQLTimeStampField *csDSmodified;
+	TIntegerField *csFreshBatchesDSid;
+	TSQLTimeStampField *csFreshBatchesDSdate_created;
+	TIntegerField *csFreshBatchesDScount;
+	TIntegerField *csFreshBatchesDStype;
+	TWideStringField *csFreshBatchesDSlot_number;
+	TIntegerField *csFreshBatchesDSbox_number;
+	TDataSource *ROnCoverSlipsSource;
+	TClientDataSet *ROnCS_CDS;
+	TDataSetProvider *RibbonsOnCoverslipsProvider;
+	TSQLDataSet *ribbonsOnCoverSlipsDS;
+	TWideStringField *ribbonsOnCoverSlipsDSid;
+	TIntegerField *ribbonsOnCoverSlipsDSstatus;
+	TIntegerField *ribbonsOnCoverSlipsDSblock_id;
+	TIntegerField *ribbonsOnCoverSlipsDScutting_order;
+	TSmallintField *ribbonsOnCoverSlipsDSnr_of_sections;
+	TSQLTimeStampField *ribbonsOnCoverSlipsDScreated_on;
+	TSQLTimeStampField *ribbonsOnCoverSlipsDSmodified;
+	TIntegerField *ribbonsOnCoverSlipsDScreated_by;
+	TIntegerField *ribbonsOnCoverSlipsDScoverslip_id;
+	TWideStringField *ROnCS_CDSid;
+	TIntegerField *ROnCS_CDSstatus;
+	TIntegerField *ROnCS_CDSblock_id;
+	TIntegerField *ROnCS_CDScutting_order;
+	TSmallintField *ROnCS_CDSnr_of_sections;
+	TSQLTimeStampField *ROnCS_CDScreated_on;
+	TSQLTimeStampField *ROnCS_CDSmodified;
+	TIntegerField *ROnCS_CDScreated_by;
+	TIntegerField *ROnCS_CDScoverslip_id;
+	TStringField *ROnCS_CDScreated_byL;
+	TStringField *ROnCS_CDSstatusL;
         void __fastcall csDSBeforeOpen(TDataSet *DataSet);
         void __fastcall CDSAfterPost(TDataSet *DataSet);
         void __fastcall CDSAfterScroll(TDataSet *DataSet);
-	void __fastcall csDustAsssayDSourceDataChange(TObject *Sender, TField *Field);
 	void __fastcall CDSAfterDelete(TDataSet *DataSet);
 
 
         private:
 
         public:
-			TNotifyEvent	   csDustAssayCDSOnDataChanged;
                     __fastcall TcsPGDM(TComponent* Owner);
         	void    __fastcall afterConnect();
             void    __fastcall afterDisConnect();
-
-
 };
 
 extern PACKAGE TcsPGDM *csPGDM;

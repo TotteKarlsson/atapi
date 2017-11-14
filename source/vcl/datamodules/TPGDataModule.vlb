@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=0,0,115,267
+Coordinates=95,1,134,213
 
 [blocksCDS]
 Coordinates=58,124,117,429
@@ -70,9 +70,6 @@ Coordinates=625,211,69,105
 [ribbonStatusDS]
 Coordinates=172,841,92,105
 
-[ribbonsOnCoverSlipsDS]
-Coordinates=95,1,134,213
-
 [blockIDSCDS]
 Coordinates=296,375,80,69
 
@@ -90,9 +87,6 @@ Coordinates=826,1,113,87
 
 [culturedTimePoints]
 Coordinates=410,337,110,87
-
-[ROnCS_CDS]
-Coordinates=271,841,77,213
 
 [blockIDsDS]
 Coordinates=93,841,71,69
