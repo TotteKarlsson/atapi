@@ -245,6 +245,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>frames\TNavitarPresetFrame.h</DependentOn>
             <BuildOrder>32</BuildOrder>
         </CppCompile>
+        <CppCompile Include="frames\TPGConnectionFrame.cpp">
+            <Form>PGConnectionFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>frames\TPGConnectionFrame.h</DependentOn>
+            <BuildOrder>39</BuildOrder>
+        </CppCompile>
         <CppCompile Include="frames\TSoundsFrame.cpp">
             <Form>SoundsFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -287,10 +293,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="datamodules\TPGDataModule.dfm"/>
-        <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="forms\TamFileEditor.dfm"/>
+        <FormResources Include="frames\TPGConnectionFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

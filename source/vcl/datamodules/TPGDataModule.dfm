@@ -448,6 +448,7 @@ object pgDM: TpgDM
       Lookup = True
     end
     object ribbonsCDScreated_byL: TStringField
+      DisplayLabel = 'Created By'
       FieldKind = fkLookup
       FieldName = 'created_byL'
       LookupDataSet = usersCDS
@@ -473,6 +474,7 @@ object pgDM: TpgDM
     Params = <>
     ProviderName = 'ribbonNotesProvider'
     AfterPost = cdsAfterPost
+    AfterDelete = cdsAfterDelete
     Left = 336
     Top = 584
     object ribbonNotesCDSid: TIntegerField
