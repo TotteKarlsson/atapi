@@ -598,39 +598,39 @@ bool TpgDM::addNoteForBlock(int blockID, int userID, const string& note)
     return true;
 }
 
-//bool TpgDM::addNoteForRibbon(const string& ribbonID, int userID, const string& note)
-//{
-//   if(!pgDM->SQLConnection1)
-//    {
-//        Log(lError) << "No SQL connection...";
-//        return false;
-//    }
-//
-//    stringstream q;
-//    q << "INSERT INTO notes (created_by, note) VALUES(:userID, :theNote) RETURNING id";
-//
-//    TSQLQuery* tq = new TSQLQuery(NULL);
-//    tq->SQLConnection = pgDM->SQLConnection1;
-//
-//    tq->SQL->Add(q.str().c_str());
-//    tq->Params->ParamByName("userID")->AsInteger = userID;
-//    tq->Params->ParamByName("theNote")->AsString = note.c_str();
-//	tq->Open();
-//
-//    //Get last insert ID for the note cleanCS batch and update coverslips
-//    int noteID = tq->FieldByName("id")->AsInteger;
-//
-//	tq->Close();
-//
-//    //Associate note and ribbon
-//    tq->SQL->Clear();
-//	q.str("");
-//    q << "INSERT INTO ribbon_note (ribbon_id, note_id) VALUES(:rID, :nID)";
-//    tq->SQL->Add(q.str().c_str());
-//    tq->ParamByName("rID")->Value 		= ribbonID.c_str();
-//    tq->ParamByName("nID")->Value 		= noteID;
-//	tq->ExecSQL();
-//
-//    delete tq;
-//    return true;
-//}
+bool TpgDM::addNoteForRibbon(const string& ribbonID, int userID, const string& note)
+{
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection...";
+        return false;
+    }
+
+    stringstream q;
+    q << "INSERT INTO notes (created_by, note) VALUES(:userID, :theNote) RETURNING id";
+
+    TSQLQuery* tq = new TSQLQuery(NULL);
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+    tq->SQL->Add(q.str().c_str());
+    tq->Params->ParamByName("userID")->AsInteger = userID;
+    tq->Params->ParamByName("theNote")->AsString = note.c_str();
+	tq->Open();
+
+    //Get last insert ID for the note cleanCS batch and update coverslips
+    int noteID = tq->FieldByName("id")->AsInteger;
+
+	tq->Close();
+
+    //Associate note and ribbon
+    tq->SQL->Clear();
+	q.str("");
+    q << "INSERT INTO ribbon_note (ribbon_id, note_id) VALUES(:rID, :nID)";
+    tq->SQL->Add(q.str().c_str());
+    tq->ParamByName("rID")->Value 		= ribbonID.c_str();
+    tq->ParamByName("nID")->Value 		= noteID;
+	tq->ExecSQL();
+
+    delete tq;
+    return true;
+}

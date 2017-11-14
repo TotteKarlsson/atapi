@@ -445,6 +445,16 @@ object pgDM: TpgDM
       KeyFields = 'status'
       Lookup = True
     end
+    object ribbonsCDScreated_byL: TStringField
+      FieldKind = fkLookup
+      FieldName = 'created_byL'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'created_by'
+      Size = 256
+      Lookup = True
+    end
   end
   object ribbonsDSource: TDataSource
     DataSet = ribbonsCDS
@@ -465,20 +475,16 @@ object pgDM: TpgDM
     Top = 584
     object ribbonNotesCDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object ribbonNotesCDSnote: TWideMemoField
       FieldName = 'note'
-      Required = True
-      BlobType = ftMemo
+      BlobType = ftWideMemo
     end
     object ribbonNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
-      Required = True
     end
     object ribbonNotesCDScreated_by: TIntegerField
       FieldName = 'created_by'
-      Required = True
     end
   end
   object ribbonNotesDSource: TDataSource
@@ -520,6 +526,7 @@ object pgDM: TpgDM
     end
     object ribbonsDSmodified: TSQLTimeStampField
       FieldName = 'modified'
+      ProviderFlags = [pfInUpdate]
     end
     object ribbonsDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -531,6 +538,8 @@ object pgDM: TpgDM
     end
     object ribbonsDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
+      Required = True
     end
   end
   object blockNotesDS: TSQLDataSet
@@ -581,15 +590,15 @@ object pgDM: TpgDM
     Top = 584
     object ribbonNotesDSid: TIntegerField
       FieldName = 'id'
-      Required = True
     end
     object ribbonNotesDSnote: TWideMemoField
       FieldName = 'note'
-      BlobType = ftMemo
+      BlobType = ftWideMemo
       Size = -1
     end
     object ribbonNotesDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
     end
     object ribbonNotesDScreated_by: TIntegerField
       FieldName = 'created_by'

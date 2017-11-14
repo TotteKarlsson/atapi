@@ -52,14 +52,6 @@ __published:	// IDE-managed Components
 	TSQLDataSet *ribbonsDS;
 	TSQLDataSet *blockNotesDS;
 	TSQLDataSet *ribbonNotesDS;
-	TIntegerField *ribbonNotesDSid;
-	TWideMemoField *ribbonNotesDSnote;
-	TSQLTimeStampField *ribbonNotesDScreated_on;
-	TIntegerField *ribbonNotesDScreated_by;
-	TIntegerField *ribbonNotesCDSid;
-	TWideMemoField *ribbonNotesCDSnote;
-	TSQLTimeStampField *ribbonNotesCDScreated_on;
-	TIntegerField *ribbonNotesCDScreated_by;
 	TIntegerField *blocksCDSid;
 	TWideStringField *ribbonsDSid;
 	TIntegerField *ribbonsDSstatus;
@@ -250,6 +242,15 @@ __published:	// IDE-managed Components
 	TIntegerField *blockNotesCDScreated_by;
 	TSQLTimeStampField *ribbonsCDScreated_on;
 	TSQLTimeStampField *ribbonsDScreated_on;
+	TStringField *ribbonsCDScreated_byL;
+	TIntegerField *ribbonNotesDSid;
+	TWideMemoField *ribbonNotesDSnote;
+	TSQLTimeStampField *ribbonNotesDScreated_on;
+	TIntegerField *ribbonNotesDScreated_by;
+	TIntegerField *ribbonNotesCDSid;
+	TWideMemoField *ribbonNotesCDSnote;
+	TSQLTimeStampField *ribbonNotesCDScreated_on;
+	TIntegerField *ribbonNotesCDScreated_by;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -293,7 +294,7 @@ __published:	// IDE-managed Components
 
         StringList 						getTableNames();
 		bool							addNoteForBlock(int blockID, int userID, const string& note);
-
+		bool							addNoteForRibbon(const string& ribbonID, int userID, const string& note);
 };
 
 extern PACKAGE TpgDM *pgDM;
