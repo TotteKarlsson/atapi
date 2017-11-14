@@ -420,6 +420,9 @@ object pgDM: TpgDM
       DisplayLabel = 'Nr of Sections'
       FieldName = 'nr_of_sections'
     end
+    object ribbonsCDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
+    end
     object ribbonsCDSmodified: TSQLTimeStampField
       FieldName = 'modified'
     end
@@ -443,17 +446,14 @@ object pgDM: TpgDM
       Lookup = True
     end
     object ribbonsCDScreated_byL: TStringField
-      DisplayLabel = 'Created By'
       FieldKind = fkLookup
       FieldName = 'created_byL'
       LookupDataSet = usersCDS
       LookupKeyFields = 'id'
       LookupResultField = 'user_name'
       KeyFields = 'created_by'
+      Size = 256
       Lookup = True
-    end
-    object ribbonsCDScreated_on: TSQLTimeStampField
-      FieldName = 'created_on'
     end
   end
   object ribbonsDSource: TDataSource

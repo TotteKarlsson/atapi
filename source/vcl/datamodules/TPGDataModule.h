@@ -248,9 +248,9 @@ __published:	// IDE-managed Components
 	TWideMemoField *blockNotesCDSnote;
 	TSQLTimeStampField *blockNotesCDScreated_on;
 	TIntegerField *blockNotesCDScreated_by;
-	TStringField *ribbonsCDScreated_byL;
 	TSQLTimeStampField *ribbonsCDScreated_on;
 	TSQLTimeStampField *ribbonsDScreated_on;
+	TStringField *ribbonsCDScreated_byL;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
