@@ -1,3 +1,51 @@
+Release 0.5.5 (Nov 11)
+=======================
+* Removed Auto datamodule connection
+* Moved datasets for quering of ribbons on coverslips to coverslip datamodule
+* Moved bunch of frames to package
+* Added after delete handler for ribbon notes
+* Fixing creation of Datamodules living in a package
+* Make sure dbmodule have a closed connection on start!
+* Fixed memo fields to match postgres
+* Something funky about lookup field
+* Fixed problem with string lookup field -> set SIZE
+* Added addNotefor block datamodule function
+* Phasing out ATDBServerSession class
+* Archived MySQL db stuff
+* Added a DBCredentials class
+* Added datamodules for PostGres
+* Now working datamodules for PostGres
+* Added PostGres connection frame
+* Created TPGCoverSlipDataModule
+* Phasing out MySQL data usage
+* TStringField => TWideStringField
+* TMemoField -> TWideMemoField
+* Reverted ATDB Datamodule to be pure PostGres
+* Added a PG datamodule
+* Merge branch 'develop' into postgres
+* Added logic for syncing data from local MySQL DB to PostGres
+* Added stopping of cutter at various positions
+* Some struggles with code in the ATDBConnection frame
+* Added image and movies frame to vcl package
+* Added frames for looking at images and movies
+* Added ImageItemFrame
+* Added thread for creation of movie thumbnails
+* Added thread for videocompression
+* Added frame for movie item
+* Fixed so that a ProcessSequence properly populate its name from the XML
+* Updated joystick button click mechanism, allowing reading down/up or "click"
+* Improved the move coverslip at angle process, allowing camera to stay at the beach while lifting
+* Added zoom in and out to the arraycam client protocol, and the navitar motor controller
+* Updated Reticle class
+* Fixed set LED intensity response
+* Added home APTMotor member function
+* Various refactoring
+* Fixed bug in the process sequencer class, causing the timer to run at highest speed always.
+* Added creation of a home motor process to the ProcessProject
+* Adding new processtype: homing motor
+* Added set and get UC7 cutting and return speed
+* Will need to create PostGres datamodules
+
 Release 0.5.4 (Sept 5)
 =======================
 * Added setLEDIntensity to ArrayCam protocol
