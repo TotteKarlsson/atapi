@@ -53,6 +53,7 @@ bool __fastcall TpgDM::connect(const DBCredentials& c)
     catch(const TDBXError& e)
     {
     	Log(lWarning) << stdstr(e.Message);
+        return false;
     }
 }
 

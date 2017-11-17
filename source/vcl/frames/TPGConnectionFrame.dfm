@@ -3,7 +3,6 @@ object PGConnectionFrame: TPGConnectionFrame
   Top = 0
   Width = 286
   Height = 201
-  AutoSize = True
   TabOrder = 0
   object GBox1: TGroupBox
     Left = 0
