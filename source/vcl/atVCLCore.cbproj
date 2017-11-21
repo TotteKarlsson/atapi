@@ -301,9 +301,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="frames\TSoundsFrame.dfm"/>
         <FormResources Include="forms\TSelectProcessTypeDialog.dfm"/>
         <FormResources Include="datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="datamodules\TPGImagesAndMoviesDataModule.dfm"/>
         <FormResources Include="datamodules\TPGDataModule.dfm"/>
+        <FormResources Include="forms\TamFileEditor.dfm"/>
         <FormResources Include="datamodules\TSensorsDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

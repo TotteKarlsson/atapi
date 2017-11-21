@@ -27,6 +27,11 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrSetLEDIntensity]			= "Set LED Intensity";
     mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensity set";
 
+    mIPCMessage[acmBeforeCutting]	 		= "Before Cutting";
+    mIPCMessage[acmCutting]	 				= "Cutting";
+    mIPCMessage[acmAfterCutting]			= "After Cutting";
+    mIPCMessage[acmRetracting]				= "Retracting";
+    mIPCMessage[abrMoveWhiskerForward]		= "Move Whisker Forward";
     mIPCMessage[acrUnknown]					= "Unknown";
 }
 
