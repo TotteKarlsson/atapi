@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include <windows.h>
-#include "Thorlabs.MotionControl.Benchtop.StepperMotor.h"
+#include "thirdparty/thorlabs/Thorlabs.MotionControl.Benchtop.StepperMotor.h"
 #include "atBenchTopStepperMotor.h"
 
 #include "mtkLogger.h"

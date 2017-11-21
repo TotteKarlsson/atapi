@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include <windows.h>
-#include "Thorlabs.MotionControl.TCube.StepperMotor.h"
+#include "thirdparty/thorlabs/Thorlabs.MotionControl.TCube.StepperMotor.h"
 #include "atTCubeStepperMotor.h"
 #include "mtkLogger.h"
 #include "/core/atExceptions.h"

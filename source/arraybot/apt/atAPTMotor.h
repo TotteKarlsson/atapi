@@ -43,7 +43,7 @@ class AT_AB APTMotor : public APTDevice
         virtual Range<double>               getVelocityRange();
 		virtual bool	                    setVelocityRange(DoubleRange vr);
 
-        virtual bool		                moveRelative(double position, bool inThread = true);
+        virtual bool		                moveRelative(double distance, bool inThread = true);
         virtual bool						setJogMoveParameters(double v, double a);
         MotorCommandEnum					getLastCommand();
 

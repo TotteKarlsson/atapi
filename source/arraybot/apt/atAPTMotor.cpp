@@ -182,10 +182,11 @@ bool APTMotor::switchDirection(bool inThread)
 	return false;
 }
 
-bool APTMotor::moveRelative(double position, bool inThread)
+bool APTMotor::moveRelative(double distance, bool inThread)
 {
 	double curr_pos = getPosition();
-    return moveToPosition(curr_pos + position);
+    Log(lDebug) << "Moving motor relative ("<<curr_pos<<":"<<distance<<":"<<curr_pos + distance<<")";
+    return moveToPosition(curr_pos + distance, inThread);
 }
 
 double APTMotor::getManualJogVelocity()
