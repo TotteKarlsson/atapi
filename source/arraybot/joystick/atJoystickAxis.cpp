@@ -9,7 +9,7 @@ using namespace mtk;
 JoyStickAxis::JoyStickAxis()
 :
 	mMaxPosition(65535),
-    mNumberOfGears(10000),
+    mNumberOfGears(25),
     mMaxVelocity(0),
 	mAcceleration(0),
     mIsEnabled(false),
@@ -113,7 +113,7 @@ void JoyStickAxis::Move(int newPosition)
     double scaledPosition 	= ((newPosition)  - mMaxPosition/2.0 ); //-32767.5 -> +32767.5
     scaledPosition 			= (scaledPosition/mMaxPosition) * 2.0; //-1 -> +1
 
-    //Accomodate for deadzonez
+    //Accomodate for deadzones
     MotorCommandEnum lastCommand = mMotor->getLastCommand();
     bool stopMotor(false);
     if(scaledPosition < 0) //Negative
@@ -137,6 +137,7 @@ void JoyStickAxis::Move(int newPosition)
         {
         	if(lastCommand != mcStopProfiled)
             {
+
             	mMotor->stopProfiled();
             }
         }
@@ -148,17 +149,17 @@ void JoyStickAxis::Move(int newPosition)
 
     mMotorVelocity = pow(scaledPosition, 3.0) * mSenseOfDirection;
    	mMotorVelocity *= mMaxVelocity;
-    if( fabs(mMotorVelocity) <= stepSize)
-    {
-    	MotorCommandEnum c = mMotor->getLastCommand();
-    	if(mMotor->isActive() &&  c != mcStopHard)
-        {
-        	//Bring down velocity manually to zero
-            double v = mMotor->getJogVelocity();
-       		mMotor->stopProfiled();
-        }
-    }
-    else
+//    if(fabs(mMotorVelocity) <= stepSize)
+//    {
+//    	MotorCommandEnum c = mMotor->getLastCommand();
+//    	if(mMotor->isActive() &&  c != mcStopHard)
+//        {
+//        	//Bring down velocity manually to zero
+//            double v = mMotor->getJogVelocity();
+//       		mMotor->stopProfiled();
+//        }
+//    }
+//    else
     {
 	    Log(lDebug3) << "Axis numbers: ("<<newPosition<<","<<scaledPosition<<","<<stepSize<<")";
         Log(lDebug3) << "Setting jog velocity: "<<fabs(mMotorVelocity);

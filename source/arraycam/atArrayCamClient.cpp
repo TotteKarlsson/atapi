@@ -110,58 +110,22 @@ bool ArrayCamClient::postRequest(const string& msg, int p1)
     return SocketClient::request(m.str());
 }
 
-bool ArrayCamClient::startVideo()
-{
-	return postRequest(mProtocol[acrStartVideoRecorder]);
-}
+bool ArrayCamClient::startVideo(){return postRequest(mProtocol[acrStartVideoRecorder]);}
+bool ArrayCamClient::setZoomAndFocus(int zoom, int focus){return postRequest(mProtocol[acrSetZoomAndFocus], zoom, focus);}
 
-bool ArrayCamClient::setZoomAndFocus(int zoom, int focus)
-{
-	return postRequest(mProtocol[acrSetZoomAndFocus], zoom, focus);
-}
+bool ArrayCamClient::zoomIn(int val){return postRequest(mProtocol[acrZoomIn], val);}
+bool ArrayCamClient::zoomOut(int val){return postRequest(mProtocol[acrZoomOut], val);}
 
-bool ArrayCamClient::zoomIn(int val)
-{
-	return postRequest(mProtocol[acrZoomIn], val);
-}
+bool ArrayCamClient::setLEDIntensity(int i){return postRequest(mProtocol[acrSetLEDIntensity], i);}
+bool ArrayCamClient::stopVideo(){return postRequest(mProtocol[acrStopVideoRecorder]);}
+bool ArrayCamClient::takeSnapShot(){return postRequest(mProtocol[acrTakeSnapShot]);}
 
-bool ArrayCamClient::zoomOut(int val)
-{
-	return postRequest(mProtocol[acrZoomOut], val);
-}
+bool ArrayCamClient::enableBarcodeScanner(){return postRequest(mProtocol[acrEnableBarcodeScanner]);}
+bool ArrayCamClient::disableBarcodeScanner(){return postRequest(mProtocol[acrDisableBarcodeScanner]);}
 
-bool ArrayCamClient::setLEDIntensity(int i)
-{
-	return postRequest(mProtocol[acrSetLEDIntensity], i);
-}
+bool ArrayCamClient::startUC7(){return postRequest(mProtocol[acrStartUC7]);}
+bool ArrayCamClient::stopUC7(){return postRequest(mProtocol[acrStopUC7]);}
 
-bool ArrayCamClient::stopVideo()
-{
-	return postRequest(mProtocol[acrStopVideoRecorder]);
-}
-
-bool ArrayCamClient::takeSnapShot()
-{
-	return postRequest(mProtocol[acrTakeSnapShot]);
-}
-
-bool ArrayCamClient::enableBarcodeScanner()
-{
-	return postRequest(mProtocol[acrEnableBarcodeScanner]);
-}
-
-bool ArrayCamClient::disableBarcodeScanner()
-{
-	return postRequest(mProtocol[acrDisableBarcodeScanner]);
-}
-
-bool ArrayCamClient::startUC7()
-{
-	return postRequest(mProtocol[acrStartUC7]);
-}
-
-bool ArrayCamClient::stopUC7()
-{
-	return postRequest(mProtocol[acrStopUC7]);
-}
+bool ArrayCamClient::setWhiskerSyncOff(){return postRequest(mProtocol[acrSetMoveWhiskerForwardOff]);}
+bool ArrayCamClient::setWhiskerSyncOn(){return postRequest(mProtocol[acrSetMoveWhiskerForwardOn]);}
 

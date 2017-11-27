@@ -171,33 +171,54 @@ void JoyStickMessageDispatcher::refresh()
         return;
     }
 
-    //Check X1 Axis
+    //Coverslip X Axis
     if(mJoyStick.mCoverSlipAxesEnabled && mX1Axis.mEvent)
     {
-        mX1Axis.mEvent(mJoyInfo.dwXpos);
+      	static DWORD val(0);
+        if(val != mJoyInfo.dwXpos)
+        {
+        	val = mJoyInfo.dwXpos;
+	        mX1Axis.mEvent(mJoyInfo.dwXpos);
+        }
     }
 
-    mX1Axis.mPosition = mJoyInfo.dwXpos;
-
+    //Coverslip Y Axis
     if(mJoyStick.mCoverSlipAxesEnabled && mY1Axis.mEvent)
     {
-        mY1Axis.mEvent(mJoyInfo.dwYpos);
+      	static DWORD val(0);
+        if(val != mJoyInfo.dwYpos)
+        {
+        	val = mJoyInfo.dwYpos;
+        	mY1Axis.mEvent(mJoyInfo.dwYpos);
+        }
     }
-    mY1Axis.mPosition = mJoyInfo.dwYpos;
-
 
     //Whisker X
     if(mJoyStick.mWhiskerAxesEnabled && mX2Axis.mEvent)
     {
-        mX2Axis.mEvent(mJoyInfo.dwZpos);
+      	static DWORD val(0);
+        if(val != mJoyInfo.dwZpos)
+        {
+        	val = mJoyInfo.dwZpos;
+	        mX2Axis.mEvent(val);
+        }
     }
-    mX2Axis.mPosition = mJoyInfo.dwZpos;
 
+    //Whisker Y
     if(mJoyStick.mWhiskerAxesEnabled && mY2Axis.mEvent)
     {
-        mY2Axis.mEvent(mJoyInfo.dwRpos);
+    	static DWORD val(0);
+        if(val != mJoyInfo.dwRpos)
+        {
+        	val = mJoyInfo.dwRpos;
+        	mY2Axis.mEvent(val);
+        }
     }
-    mY2Axis.mPosition = mJoyInfo.dwRpos;
+
+    mX1Axis.mPosition = mJoyInfo.dwXpos;
+    mY1Axis.mPosition = mJoyInfo.dwYpos;
+    mX2Axis.mPosition = mJoyInfo.dwZpos;
+	mY2Axis.mPosition = mJoyInfo.dwRpos;
 
     //Process retrieved buttons states
     bitset<32> buttonStates(mJoyInfo.dwButtons);

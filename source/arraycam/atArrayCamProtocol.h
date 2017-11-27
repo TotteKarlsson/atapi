@@ -38,11 +38,18 @@ AT_CORE enum  ACMessageID
 	acrUC7IsStopped,
     acrSetLEDIntensity,
     acrLEDIntensitySet,
+
     acmBeforeCutting,
     acmCutting,
     acmAfterCutting,
     acmRetracting,
-    abrMoveWhiskerForward, //!The cmd needs three arguments, distance, speed and acceleration
+
+    abrMoveWhiskerForward, 			//!The cmd needs three arguments, distance, speed and acceleration
+
+    acrSetMoveWhiskerForwardOn,
+    acrMoveWhiskerForwardOnSet,
+    acrSetMoveWhiskerForwardOff,
+    acrMoveWhiskerForwardOffSet,
     acrUnknown
 };
 

@@ -6,33 +6,40 @@ map<ACMessageID, string> ArrayCamProtocol::mIPCMessage;
 
 ArrayCamProtocol::ArrayCamProtocol()
 {
-    mIPCMessage[acrStartVideoRecorder] 		= "Start Video Recorder";
-    mIPCMessage[acrVideoRecorderStarted] 	= "Video Recorder Started";
-    mIPCMessage[acrStopVideoRecorder] 		= "Stop Video Recorder";
-    mIPCMessage[acrTakeSnapShot] 			= "Take Snapshot";
-    mIPCMessage[acrSnapShotTaken] 			= "Snapshot Taken";
-    mIPCMessage[acrEnableBarcodeScanner] 	= "Enable Barcode Scanner";
-    mIPCMessage[acrBarcodeScanSucceded] 	= "Barcode Scan Succeded";
-    mIPCMessage[acrBarcodeScanFailed] 		= "Barcode Scan Failed";
-    mIPCMessage[acrDisableBarcodeScanner]	= "Disable Barcode Scanner";
-    mIPCMessage[acrBarcodeScannerDisabled]	= "Barcode Scanner Disabled";
-    mIPCMessage[acrSetZoomAndFocus]			= "Set Focus and Zoom";
-    mIPCMessage[acrFocusAndZoomSet]			= "Focus and Zoom Set";
-    mIPCMessage[acrZoomIn]					= "Zoom In";
-    mIPCMessage[acrZoomInSet]	  			= "Zoom In set";
-    mIPCMessage[acrZoomOut]					= "Zoom Out";
-    mIPCMessage[acrZoomOutSet]	  			= "Zoom Out set";
-    mIPCMessage[acrStartUC7]				= "Start UC7";
-    mIPCMessage[acrStopUC7]					= "Stop  UC7";
-    mIPCMessage[acrSetLEDIntensity]			= "Set LED Intensity";
-    mIPCMessage[acrLEDIntensitySet]	  		= "LED Intensity set";
+    mIPCMessage[acrStartVideoRecorder] 		    = "Start Video Recorder";
+    mIPCMessage[acrVideoRecorderStarted] 	    = "Video Recorder Started";
+    mIPCMessage[acrStopVideoRecorder] 		    = "Stop Video Recorder";
+    mIPCMessage[acrTakeSnapShot] 			    = "Take Snapshot";
+    mIPCMessage[acrSnapShotTaken] 			    = "Snapshot Taken";
+    mIPCMessage[acrEnableBarcodeScanner] 	    = "Enable Barcode Scanner";
+    mIPCMessage[acrBarcodeScanSucceded] 	    = "Barcode Scan Succeded";
+    mIPCMessage[acrBarcodeScanFailed] 		    = "Barcode Scan Failed";
+    mIPCMessage[acrDisableBarcodeScanner]	    = "Disable Barcode Scanner";
+    mIPCMessage[acrBarcodeScannerDisabled]	    = "Barcode Scanner Disabled";
+    mIPCMessage[acrSetZoomAndFocus]			    = "Set Focus and Zoom";
+    mIPCMessage[acrFocusAndZoomSet]			    = "Focus and Zoom Set";
+    mIPCMessage[acrZoomIn]					    = "Zoom In";
+    mIPCMessage[acrZoomInSet]	  			    = "Zoom In set";
+    mIPCMessage[acrZoomOut]					    = "Zoom Out";
+    mIPCMessage[acrZoomOutSet]	  			    = "Zoom Out set";
+    mIPCMessage[acrStartUC7]				    = "Start UC7";
+    mIPCMessage[acrStopUC7]					    = "Stop  UC7";
+    mIPCMessage[acrSetLEDIntensity]			    = "Set LED Intensity";
+    mIPCMessage[acrLEDIntensitySet]	  		    = "LED Intensity set";
 
-    mIPCMessage[acmBeforeCutting]	 		= "Before Cutting";
-    mIPCMessage[acmCutting]	 				= "Cutting";
-    mIPCMessage[acmAfterCutting]			= "After Cutting";
-    mIPCMessage[acmRetracting]				= "Retracting";
-    mIPCMessage[abrMoveWhiskerForward]		= "Move Whisker Forward";
-    mIPCMessage[acrUnknown]					= "Unknown";
+    mIPCMessage[acmBeforeCutting]	 		    = "Before Cutting";
+    mIPCMessage[acmCutting]	 				    = "Cutting";
+    mIPCMessage[acmAfterCutting]			    = "After Cutting";
+    mIPCMessage[acmRetracting]				    = "Retracting";
+    mIPCMessage[abrMoveWhiskerForward]		    = "Move Whisker Forward";
+
+
+    mIPCMessage[acrSetMoveWhiskerForwardOn]		= "Set Move Whisker Forward ON";
+    mIPCMessage[acrMoveWhiskerForwardOnSet]     = "Move Whisker Forward ON set";
+    mIPCMessage[acrSetMoveWhiskerForwardOff]    = "Set Move Whisker Forward OFF";
+    mIPCMessage[acrMoveWhiskerForwardOffSet]    = "Move Whisker Forward OFF set";
+
+    mIPCMessage[acrUnknown]						= "Unknown";
 }
 
 ACMessageID ArrayCamProtocol::idFromString(const string& r)

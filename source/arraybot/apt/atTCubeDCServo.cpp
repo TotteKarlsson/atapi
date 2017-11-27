@@ -297,7 +297,6 @@ bool TCubeDCServo::setVelocityParameters(double v, double a, bool inThread)
     {
 		MotorCommand cmd(mcSetVelocityParameters, v, a);
 		post(cmd);
-        //mMotorCommandsPending++;
     }
     else
     {

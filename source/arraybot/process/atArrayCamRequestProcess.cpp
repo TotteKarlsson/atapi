@@ -58,6 +58,7 @@ XMLElement* ArrayCamRequestProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocumen
     //Create XML for saving to file
 	ArrayCamProtocol ap; //To get string value
     XMLElement* request	  		= doc.NewElement("request");
+
 	request->SetText(ap[mRequest].c_str() );
     docRoot->InsertEndChild(request);
 
@@ -100,13 +101,20 @@ bool ArrayCamRequestProcess::start()
     {
      	case ACMessageID::acrStartVideoRecorder:	    mArrayCamClient.startVideo();			                        break;
      	case ACMessageID::acrStopVideoRecorder:	        mArrayCamClient.stopVideo();			                        break;
+
      	case ACMessageID::acrEnableBarcodeScanner:      mArrayCamClient.enableBarcodeScanner();	                        break;
      	case ACMessageID::acrDisableBarcodeScanner:     mArrayCamClient.disableBarcodeScanner();		                break;
+
      	case ACMessageID::acrTakeSnapShot:		        mArrayCamClient.takeSnapShot();			  		                break;
      	case ACMessageID::acrSetZoomAndFocus:	        mArrayCamClient.setZoomAndFocus(mParameter1, mParameter2);		break;
+
      	case ACMessageID::acrStartUC7:			        mArrayCamClient.startUC7();										break;
      	case ACMessageID::acrStopUC7:			        mArrayCamClient.stopUC7();										break;
+
      	case ACMessageID::acrSetLEDIntensity:	        mArrayCamClient.setLEDIntensity(mParameter1);					break;
+
+     	case ACMessageID::acrSetMoveWhiskerForwardOff:  mArrayCamClient.setWhiskerSyncOff();							break;
+     	case ACMessageID::acrSetMoveWhiskerForwardOn:  mArrayCamClient.setWhiskerSyncOn();								break;
 
 		default:
         	Log(lError) << "Bad ArrayCamRequest in process";
@@ -203,6 +211,20 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
 
         case acrStopUC7:
         	if(msg == p[acrUC7Stopped] || msg == p[acrUC7IsStopped])
+    		{
+                mIsProcessed = true;
+            }
+        break;
+
+        case acrSetMoveWhiskerForwardOn:
+        	if(msg == p[acrMoveWhiskerForwardOnSet])
+    		{
+                mIsProcessed = true;
+            }
+        break;
+
+        case acrSetMoveWhiskerForwardOff:
+        	if(msg == p[acrMoveWhiskerForwardOffSet])
     		{
                 mIsProcessed = true;
             }

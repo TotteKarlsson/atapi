@@ -41,6 +41,9 @@ class AT_CORE ArrayCamClient : public SocketClient, public ATObject
         bool								startVideo();
         bool								stopVideo();
 
+        bool								setWhiskerSyncOff();
+        bool								setWhiskerSyncOn();
+
         bool								setZoomAndFocus(int zoom, int focus);
         bool								zoomIn(int val);
         bool								zoomOut(int val);

@@ -297,7 +297,14 @@ void ArrayBot::enableJoyStickAxes()
 	mWhisker.enableJSAxes();
     mCoverSlip.enableJSAxes();
 
-	applyJoyStickSetting(mJSSettings.getCurrent()->getLabel());
+    if(mJSSettings.getCurrent())
+    {
+		applyJoyStickSetting(mJSSettings.getCurrent()->getLabel());
+    }
+    else
+    {
+    	Log(lError) << "No JOYSTICK setting to set! Setup ini file!!";
+    }
 }
 
 void ArrayBot::disableJoyStickAxes()
