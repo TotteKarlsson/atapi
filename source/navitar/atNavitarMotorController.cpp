@@ -221,6 +221,17 @@ void NavitarMotorController::setFocus(int f)
 	mFocus.setPosition(f);
 }
 
+void NavitarMotorController::focusIn(int val)
+{
+	mFocus.addToPosition(val);
+}
+
+void NavitarMotorController::focusOut(int val)
+{
+	mFocus.addToPosition(-1 * val);
+}
+
+
 void NavitarMotorController::setFocusAndZoom(int f, int z)
 {
 	mFocus.setPosition(f);

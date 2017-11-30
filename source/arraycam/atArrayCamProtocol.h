@@ -30,6 +30,10 @@ AT_CORE enum  ACMessageID
     acrZoomInSet,
     acrZoomOut,
     acrZoomOutSet,
+    acrFocusIn,
+    acrFocusInSet,
+    acrFocusOut,
+    acrFocusOutSet,
     acrStartUC7,
     acrUC7Started,
 	acrUC7IsRunning,
@@ -43,6 +47,9 @@ AT_CORE enum  ACMessageID
     acmCutting,
     acmAfterCutting,
     acmRetracting,
+
+    acrTriggerRibbonSeparator,
+    acrRibbonSeparatorTriggered,
 
     abrMoveWhiskerForward, 			//!The cmd needs three arguments, distance, speed and acceleration
 

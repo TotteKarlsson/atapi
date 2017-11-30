@@ -24,7 +24,8 @@ mNrOfButtons(nrOfButtons)
     //Setup buttons
     for(int i = 0; i < mNrOfButtons; i++)
     {
-    	mButtons.push_back(JoyStickButtonStateEventDispatcher());
+    	//mButtons.push_back(JoyStickButtonStateEventDispatcher());
+		mButtonStates.push_back(JoyStickButtonStateEventDispatcher(js.getButton(i+1)));
     }
 }
 
@@ -125,8 +126,8 @@ bool JoyStickMessageDispatcher::readCapabilities()
 
 void JoyStickMessageDispatcher::setButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down, bool clickOnly)
 {
-	mButtons[btnNr  - 1].mEvents = ButtonEvents(up, down);
-	mButtons[btnNr  - 1].mClickEventOnly = clickOnly;
+	mButtonStates[btnNr  - 1].mEvents = ButtonEvents(up, down);
+	mButtonStates[btnNr  - 1].mClickEventOnly = clickOnly;
 }
 
 void JoyStickMessageDispatcher::setPOVButtonEvents(int btnNr, JoyStickEvent up, JoyStickEvent down)
@@ -242,24 +243,24 @@ void JoyStickMessageDispatcher::refresh()
     {
         for(int i = 0; i < 4; i++)
         {
-            if(buttonStates.at(i) && mButtons[i].mButtonState == bsUp)
+            if(buttonStates.at(i) && mButtonStates[i].getButtonState() == bsUp)
             {
-                if(mButtons[i].mEvents.first)
+                if(mButtonStates[i].mEvents.first)
                 {
                     Log(lDebug5) << "Calling OnButton"<<i + 1<<"Down";
-                    mButtons[i].mEvents.first();
+                    mButtonStates[i].mEvents.first();
                 }
-                mButtons[i].mButtonState = bsDown;
+                mButtonStates[i].setButtonState(bsDown);
             }
 
-            else if(!buttonStates.at(i) && mButtons[i].mButtonState == bsDown)
+            else if(!buttonStates.at(i) && mButtonStates[i].getButtonState() == bsDown)
             {
-                if(mButtons[i].mEvents.second)
+                if(mButtonStates[i].mEvents.second)
                 {
                     Log(lDebug5) << "Calling OnButton"<<i + 1<<"Up";
-                    mButtons[i].mEvents.second();
+                    mButtonStates[i].mEvents.second();
                 }
-                mButtons[i].mButtonState = bsUp;
+                mButtonStates[i].setButtonState(bsUp);
             }
         }
     }
@@ -268,44 +269,44 @@ void JoyStickMessageDispatcher::refresh()
     {
         if(buttonStates.at(i))
         {
-            if(mButtons[i].mClickEventOnly)
+            if(mButtonStates[i].mClickEventOnly)
             {
-                if(mButtons[i].mButtonState == bsUp)
+                if(mButtonStates[i].getButtonState() == bsUp)
                 {
-                    mButtons[i].mButtonState = bsDown;
-                    if(mButtons[i].mEvents.first)
+                    mButtonStates[i].setButtonState(bsDown);
+                    if(mButtonStates[i].mEvents.first)
                     {
 	                    Log(lDebug5) << "Calling OnButton"<<i + 1<<" Down";
-                        mButtons[i].mEvents.first();
+                        mButtonStates[i].mEvents.first();
                     }
                 }
             }
             else
             {
-                if(mButtons[i].mEvents.first)
+                if(mButtonStates[i].mEvents.first)
                 {
                     Log(lDebug5) << "Calling OnButton"<<i + 1<<" Down";
-                    mButtons[i].mEvents.first();
+                    mButtonStates[i].mEvents.first();
                 }
             }
         }
         else
         {
-            if(mButtons[i].mClickEventOnly)
+            if(mButtonStates[i].mClickEventOnly)
             {
-                mButtons[i].mButtonState = bsUp;
-                if(mButtons[i].mEvents.second)
+                mButtonStates[i].setButtonState(bsUp);
+                if(mButtonStates[i].mEvents.second)
                 {
 	                Log(lDebug5) << "Calling OnButton"<<i + 1<<" Up";
-                    mButtons[i].mEvents.second();
+                    mButtonStates[i].mEvents.second();
                 }
             }
             else
             {
-                if(mButtons[i].mEvents.second)
+                if(mButtonStates[i].mEvents.second)
                 {
                     Log(lDebug5) << "Calling OnButton"<<i + 1<<" Up";
-                    mButtons[i].mEvents.second();
+                    mButtonStates[i].mEvents.second();
                 }
             }
         }

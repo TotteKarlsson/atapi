@@ -27,6 +27,9 @@ class AT_CORE NavitarMotorController : public ATObject
 
         NavitarMotor&                   getFocus();
         void							setFocus(int f);
+        void							focusIn(int val);
+        void							focusOut(int val);
+
         void							setFocusAndZoom(int f, int z);
 		string				            getProductID();
 		string				            getDriverSoftwareBuildDate();

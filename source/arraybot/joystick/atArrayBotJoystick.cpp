@@ -201,7 +201,10 @@ JoyStickButton& ArrayBotJoyStick::getButton(int nr)
     	case 8:  return mButton8;
     	case 9:  return mButton9;
     	case 10: return mButton10;
-
+    	case 11: return mButton11;
+    	case 12: return mButton12;
+    	case 13: return mButton13;
+    	case 14: return mButton14;
         default:
         	Log(lError) <<"We don't have that button";
             throw("Bad stuff..");

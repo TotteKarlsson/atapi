@@ -11,7 +11,7 @@
 
 using mtk::Timer;
 using std::deque;
-typedef deque<JoyStickButtonStateEventDispatcher> 	ButtonDeque;
+typedef deque<JoyStickButtonStateEventDispatcher> 	ButtonStateDeque;
 typedef JoyStickAxisStateEventDispatcher 			JSAxis;
 typedef JoyStickPOVStateEventDispatcher 			JSPOV; //!Point of view dispatcher
 
@@ -57,7 +57,7 @@ class AT_AB JoyStickMessageDispatcher : public ATObject
             const int			                mNrOfButtons;
             bool 				                readCapabilities();
 			bool								checkCapabilities(int ID);
-			ButtonDeque 		                mButtons;
+			ButtonStateDeque   	                mButtonStates;
 
             							        //!Joystick axes X1,Y1 to the left and X2,Y2 to the right.
             JSAxis		        		        mX1Axis;

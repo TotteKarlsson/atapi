@@ -22,17 +22,25 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrZoomInSet]	  			    = "Zoom In set";
     mIPCMessage[acrZoomOut]					    = "Zoom Out";
     mIPCMessage[acrZoomOutSet]	  			    = "Zoom Out set";
+
+    mIPCMessage[acrFocusIn]					    = "Focus In";
+    mIPCMessage[acrFocusInSet]	  			    = "Focus In set";
+    mIPCMessage[acrFocusOut]					= "Focus Out";
+    mIPCMessage[acrFocusOutSet]	  			    = "Focus Out set";
+
     mIPCMessage[acrStartUC7]				    = "Start UC7";
     mIPCMessage[acrStopUC7]					    = "Stop  UC7";
     mIPCMessage[acrSetLEDIntensity]			    = "Set LED Intensity";
     mIPCMessage[acrLEDIntensitySet]	  		    = "LED Intensity set";
+
+    mIPCMessage[acrTriggerRibbonSeparator]      = "Trigger Ribbon Separator";
+    mIPCMessage[acrRibbonSeparatorTriggered]    = "Ribbon Separator Triggered";
 
     mIPCMessage[acmBeforeCutting]	 		    = "Before Cutting";
     mIPCMessage[acmCutting]	 				    = "Cutting";
     mIPCMessage[acmAfterCutting]			    = "After Cutting";
     mIPCMessage[acmRetracting]				    = "Retracting";
     mIPCMessage[abrMoveWhiskerForward]		    = "Move Whisker Forward";
-
 
     mIPCMessage[acrSetMoveWhiskerForwardOn]		= "Set Move Whisker Forward ON";
     mIPCMessage[acrMoveWhiskerForwardOnSet]     = "Move Whisker Forward ON set";

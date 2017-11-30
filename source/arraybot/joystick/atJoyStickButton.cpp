@@ -8,12 +8,22 @@ using namespace mtk;
 JoyStickButton::JoyStickButton()
 :
 	mIsForward(true),
-    mIsEnabled(false)
+    mIsEnabled(false),
+    mButtonState(bsUp)
 {}
 
 JoyStickButton::~JoyStickButton()
 {}
 
+void JoyStickButton::setState(JoyStickButtonState s)
+{
+	mButtonState = s;
+}
+
+JoyStickButtonState JoyStickButton::getState()
+{
+	return mButtonState;
+}
 
 void JoyStickButton::assignMotor(APTMotor* motor)
 {
@@ -30,6 +40,11 @@ void JoyStickButton::disable()
 	mIsEnabled = false;
 }
 
+bool JoyStickButton::isDown()
+{
+	return (mButtonState == bsDown) ? true : false;
+}
+
 void JoyStickButton::setForward()
 {
 	mIsForward = true;
@@ -42,6 +57,7 @@ void JoyStickButton::setReverse()
 
 void JoyStickButton::down()
 {
+	mButtonState = bsDown;
     Log(lDebug3) << "JSButton Down.";
 	if(!mMotor || !mIsEnabled)
     {
@@ -61,6 +77,7 @@ void JoyStickButton::down()
 
 void JoyStickButton::up()
 {
+	mButtonState = bsUp;
     Log(lDebug3) << "JSButton Up.";
     if(!mMotor || !mIsEnabled)
     {

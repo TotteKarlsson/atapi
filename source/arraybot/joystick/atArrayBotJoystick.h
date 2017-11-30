@@ -94,7 +94,6 @@ class AT_AB ArrayBotJoyStick : public ATObject
         JoyStickButton		                        mButton5;
         JoyStickButton		                        mButton6;
 
-        											//Z2 on whisker
         JoyStickButton		                        mButton7;
         JoyStickButton		                        mButton8;
 
@@ -105,6 +104,12 @@ class AT_AB ArrayBotJoyStick : public ATObject
 
         JoyStickButton		                        mButton9;
         JoyStickButton		                        mButton10;
+
+													//These are not used..
+        JoyStickButton		                        mButton11;
+        JoyStickButton		                        mButton12;
+        JoyStickButton		                        mButton13;
+        JoyStickButton		                        mButton14;
 };
 
 #endif
