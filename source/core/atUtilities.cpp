@@ -41,6 +41,7 @@ string toString(ProcessType pt)
     	case ptTimeDelay: 		        return "timeDelay";
     	case ptStopAndResume:		    return "stopAndResumeProcess";
     	case ptArrayCamRequest:			return "arrayCamRequestProcess";
+    	case ptArrayBotRequest:			return "arrayBotRequestProcess";
     	case ptMoveCoverSlipAtAngle:   	return "liftAtAngleProcess";
     	case ptHomeMotor:   			return "homeMotor";
         default: 				        return "unknownProcessType";
@@ -79,6 +80,11 @@ ProcessType toProcessType(const string& str)
 	if(str == "arrayCamRequestProcess")
     {
     	return ptArrayCamRequest;
+    }
+
+	if(str == "arrayBotRequestProcess")
+    {
+    	return ptArrayBotRequest;
     }
 
 	if(str == "liftAtAngleProcess")

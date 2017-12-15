@@ -1,5 +1,5 @@
-#ifndef abUtilitiesH
-#define abUtilitiesH
+#ifndef atUtilitiesH
+#define atUtilitiesH
 #include "core/atCoreExporter.h"
 #include <vector>
 #include <string>
@@ -24,13 +24,14 @@ enum ProcessType
     ptTimeDelay,
     ptStopAndResume,
     ptArrayCamRequest,
+    ptArrayBotRequest,
     ptMoveCoverSlipAtAngle,
     ptHomeMotor,
     ptUnknown
 };
 
-AT_CORE string 		toString(ProcessType tp);
-AT_CORE ProcessType toProcessType(const string& str);
+AT_CORE string 			toString(ProcessType tp);
+AT_CORE ProcessType 	toProcessType(const string& str);
 
 //!Logic operators, used in triggers
 enum LogicOperator {loLargerThan = 0, loSmallerThan, loLargerThanOrEqual, loSmallerThanOrEqual, loEqualTo, loUndefined};
