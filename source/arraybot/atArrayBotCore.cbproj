@@ -180,8 +180,14 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atArrayBot.h</DependentOn>
             <BuildOrder>52</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atArrayBotClient.cpp">
+            <BuildOrder>46</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atArrayBotCore.cpp">
             <BuildOrder>55</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="atArrayBotMessageProcessor.cpp">
+            <BuildOrder>47</BuildOrder>
         </CppCompile>
         <CppCompile Include="atXYZUnit.cpp">
             <DependentOn>atXYZUnit.h</DependentOn>
@@ -217,8 +223,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="joystick\atJoyStickSettings.cpp">
             <BuildOrder>35</BuildOrder>
         </CppCompile>
-        <CppCompile Include="process\atArrayCamRequestProcess.cpp">
+        <CppCompile Include="process\atArrayBotRequestProcess.cpp">
             <BuildOrder>41</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="process\atArrayCamRequestProcess.cpp">
+            <BuildOrder>48</BuildOrder>
         </CppCompile>
         <CppCompile Include="process\atMoveCoverSlipAtAngleProcess.cpp">
             <BuildOrder>43</BuildOrder>
