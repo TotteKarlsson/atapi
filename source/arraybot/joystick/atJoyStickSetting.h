@@ -1,5 +1,5 @@
-#ifndef abJoyStickSettingH
-#define abJoyStickSettingH
+#ifndef atJoyStickSettingH
+#define atJoyStickSettingH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include <string>

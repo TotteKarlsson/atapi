@@ -1,5 +1,5 @@
-#ifndef abLongTravelStageH
-#define abLongTravelStageH
+#ifndef atLongTravelStageH
+#define atLongTravelStageH
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 

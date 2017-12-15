@@ -1,5 +1,5 @@
-#ifndef abMotorCommandH
-#define abMotorCommandH
+#ifndef atMotorCommandH
+#define atMotorCommandH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include <string>

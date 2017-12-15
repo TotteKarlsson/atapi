@@ -1,5 +1,5 @@
-#ifndef abJoyStickButtonStateEventDispatcherH
-#define abJoyStickButtonStateEventDispatcherH
+#ifndef atJoyStickButtonStateEventDispatcherH
+#define atJoyStickButtonStateEventDispatcherH
 #include "core/atATObject.h"
 #include "atEnums.h"
 #include <utility>

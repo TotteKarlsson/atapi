@@ -1,5 +1,5 @@
-#ifndef abExceptionsH
-#define abExceptionsH
+#ifndef atExceptionsH
+#define atExceptionsH
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include <exception>

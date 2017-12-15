@@ -1,5 +1,5 @@
-#ifndef abTSCLIBH
-#define abTSCLIBH
+#ifndef atTSCLIBH
+#define atTSCLIBH
 #include <string>
 #include <windows.h>
 #include "core/atCoreExporter.h"

@@ -1,5 +1,5 @@
-#ifndef abTCubeDCServoH
-#define abTCubeDCServoH
+#ifndef atTCubeDCServoH
+#define atTCubeDCServoH
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 

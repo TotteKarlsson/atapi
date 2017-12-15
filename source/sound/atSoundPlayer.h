@@ -1,5 +1,5 @@
-#ifndef abSoundPlayerH
-#define abSoundPlayerH
+#ifndef atSoundPlayerH
+#define atSoundPlayerH
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include "atDirectSound.h"

@@ -1,5 +1,5 @@
-#ifndef abSerialH
-#define abSerialH
+#ifndef atSerialH
+#define atSerialH
 #include "atSerialExporter.h"
 #include "core/atATObject.h"
 #include "mtkStringList.h"

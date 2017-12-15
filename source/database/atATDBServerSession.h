@@ -1,5 +1,5 @@
-#ifndef abATDBServerSessionH
-#define abATDBServerSessionH
+#ifndef atATDBServerSessionH
+#define atATDBServerSessionH
 #include "atDBExporter.h"
 #include "core/atATObject.h"
 #include "atDBUtils.h"

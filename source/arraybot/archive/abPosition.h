@@ -1,5 +1,5 @@
-#ifndef abPositionH
-#define abPositionH
+#ifndef atPositionH
+#define atPositionH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include "Math/mtkPoint.h"

@@ -1,5 +1,5 @@
-#ifndef abGeneralIPCMessageDataH
-#define abGeneralIPCMessageDataH
+#ifndef atGeneralIPCMessageDataH
+#define atGeneralIPCMessageDataH
 #include "arraybot/atABExporter.h"
 #include <string>
 

@@ -1,5 +1,5 @@
-#ifndef abATDBClientDBSessionH
-#define abATDBClientDBSessionH
+#ifndef atATDBClientDBSessionH
+#define atATDBClientDBSessionH
 #include "atDBExporter.h"
 #include "core/atATObject.h"
 #include "atDBUtils.h"

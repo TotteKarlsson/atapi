@@ -1,5 +1,5 @@
-#ifndef abContinousMoveH
-#define abContinousMoveH
+#ifndef atContinousMoveH
+#define atContinousMoveH
 #include "atMove.h"
 //---------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
-#ifndef abSoundsH
-#define abSoundsH
+#ifndef atSoundsH
+#define atSoundsH
 #include "core/atCoreExporter.h"
 #include "mtkThread.h"
 #include <string>

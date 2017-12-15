@@ -1,5 +1,5 @@
-#ifndef abEnumsH
-#define abEnumsH
+#ifndef atEnumsH
+#define atEnumsH
 
 //!A joystick button is either up or down.
 enum JoyStickButtonState {bsUp = 0, bsDown};

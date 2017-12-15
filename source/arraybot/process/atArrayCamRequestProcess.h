@@ -1,5 +1,5 @@
-#ifndef abArrayCamRequestH
-#define abArrayCamRequestH
+#ifndef atArrayCamRequestH
+#define atArrayCamRequestH
 #include "../atABExporter.h"
 #include "core/atProcess.h"
 #include "mtkXMLUtils.h"

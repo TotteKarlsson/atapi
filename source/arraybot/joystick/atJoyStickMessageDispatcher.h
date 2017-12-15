@@ -1,5 +1,5 @@
-#ifndef abJoyStickMessageDispatcherH
-#define abJoyStickMessageDispatcherH
+#ifndef atJoyStickMessageDispatcherH
+#define atJoyStickMessageDispatcherH
 #include "atJoyStickButtonStateEventDispatcher.h"
 #include "atJoyStickAxisStateEventDispatcher.h"
 #include "atJoyStickPOVStateEventDispatcher.h"

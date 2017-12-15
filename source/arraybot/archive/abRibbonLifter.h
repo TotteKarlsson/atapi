@@ -1,5 +1,5 @@
-#ifndef abRibbonLifterH
-#define abRibbonLifterH
+#ifndef atRibbonLifterH
+#define atRibbonLifterH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include "mtkProperty.h"

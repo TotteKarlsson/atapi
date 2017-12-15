@@ -1,5 +1,5 @@
-#ifndef abDataStructuresH
-#define abDataStructuresH
+#ifndef atDataStructuresH
+#define atDataStructuresH
 
 //!Scaling factors are used to convert a motors position, velocity and accelertation
 //!expressed in device units, into world physical units.

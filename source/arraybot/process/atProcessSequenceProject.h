@@ -1,5 +1,5 @@
-#ifndef abProcessSequenceProjectH
-#define abProcessSequenceProjectH
+#ifndef atProcessSequenceProjectH
+#define atProcessSequenceProjectH
 #include "arraybot/atABExporter.h"
 #include "mtkProject.h"
 #include "mtkConstants.h"

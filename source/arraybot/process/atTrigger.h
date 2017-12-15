@@ -1,5 +1,5 @@
-#ifndef abTriggerH
-#define abTriggerH
+#ifndef atTriggerH
+#define atTriggerH
 #include "../atABExporter.h"
 #include "core/atATObject.h"
 #include <string>

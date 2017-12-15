@@ -1,5 +1,5 @@
-#ifndef abPairedMovesH
-#define abPairedMovesH
+#ifndef atPairedMovesH
+#define atPairedMovesH
 #include "core/atATObject.h"
 #include "atPairedMove.h"
 #include <list>

@@ -1,5 +1,5 @@
-#ifndef abXYZUnitH
-#define abXYZUnitH
+#ifndef atXYZUnitH
+#define atXYZUnitH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include "core/atUtilities.h"

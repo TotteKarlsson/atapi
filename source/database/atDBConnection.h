@@ -1,5 +1,5 @@
-#ifndef abDBConnectionH
-#define abDBConnectionH
+#ifndef atDBConnectionH
+#define atDBConnectionH
 #include "atDBExporter.h"
 #include "core/atATObject.h"
 #include "atDBUtils.h"

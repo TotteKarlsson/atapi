@@ -1,5 +1,5 @@
-#ifndef abParallelProcessH
-#define abParallelProcessH
+#ifndef atParallelProcessH
+#define atParallelProcessH
 #include "../atABExporter.h"
 #include "../core/atProcess.h"
 #include <vector>

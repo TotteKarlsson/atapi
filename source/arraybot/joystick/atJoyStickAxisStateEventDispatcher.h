@@ -1,5 +1,5 @@
-#ifndef abJoyStickAxisStateEventDispatcherH
-#define abJoyStickAxisStateEventDispatcherH
+#ifndef atJoyStickAxisStateEventDispatcherH
+#define atJoyStickAxisStateEventDispatcherH
 #include "core/atATObject.h"
 //---------------------------------------------------------------------------
 

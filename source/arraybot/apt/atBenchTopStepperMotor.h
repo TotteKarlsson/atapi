@@ -1,5 +1,5 @@
-#ifndef abBenchTopStepperMotorH
-#define abBenchTopStepperMotorH
+#ifndef atBenchTopStepperMotorH
+#define atBenchTopStepperMotorH
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 

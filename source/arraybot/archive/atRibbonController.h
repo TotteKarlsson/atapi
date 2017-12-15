@@ -1,5 +1,5 @@
-#ifndef abRibbonControllerH
-#define abRibbonControllerH
+#ifndef atRibbonControllerH
+#define atRibbonControllerH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 //---------------------------------------------------------------------------

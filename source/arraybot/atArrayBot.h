@@ -1,6 +1,7 @@
-#ifndef abArrayBotH
-#define abArrayBotH
+#ifndef atArrayBotH
+#define atArrayBotH
 #include "arraybot/atABExporter.h"
+#include "arraybot/atArrayBotServer.h"
 #include "core/atATObject.h"
 #include "atXYZUnit.h"
 #include "atWhiskerUnit.h"
@@ -78,7 +79,7 @@ class AT_AB ArrayBot : public ATObject
 
         							                    //!List of Lifts
         PairedMoves					                    mLifts;
-
+        ArrayBotServer									mServer;
 };
 
 #endif

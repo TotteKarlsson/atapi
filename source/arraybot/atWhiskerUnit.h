@@ -1,5 +1,5 @@
-#ifndef abWhiskerUnitH
-#define abWhiskerUnitH
+#ifndef atWhiskerUnitH
+#define atWhiskerUnitH
 #include "arraybot/atABExporter.h"
 #include "atXYZUnit.h"
 //---------------------------------------------------------------------------

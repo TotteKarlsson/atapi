@@ -1,5 +1,5 @@
-#ifndef abSerialWorkerH
-#define abSerialWorkerH
+#ifndef atSerialWorkerH
+#define atSerialWorkerH
 #include "mtkIPCMessageBuilder.h"
 #include "mtkThread.h"
 #include "atSerialPort.h"

@@ -1,5 +1,5 @@
-#ifndef abTCubeStepperMotorH
-#define abTCubeStepperMotorH
+#ifndef atTCubeStepperMotorH
+#define atTCubeStepperMotorH
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 

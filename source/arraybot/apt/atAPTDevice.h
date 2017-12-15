@@ -1,5 +1,5 @@
-#ifndef abAPTDeviceH
-#define abAPTDeviceH
+#ifndef atAPTDeviceH
+#define atAPTDeviceH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include "mtkProperties.h"

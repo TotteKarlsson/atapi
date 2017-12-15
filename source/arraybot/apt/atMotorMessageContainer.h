@@ -1,5 +1,5 @@
-#ifndef abMotorMessageContainerH
-#define abMotorMessageContainerH
+#ifndef atMotorMessageContainerH
+#define atMotorMessageContainerH
 #include <deque>
 #include "arraybot/atABExporter.h"
 #include "Poco/Condition.h"

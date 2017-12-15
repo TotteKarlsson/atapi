@@ -1,5 +1,5 @@
-#ifndef abEnvironmentalSensorReaderH
-#define abEnvironmentalSensorReaderH
+#ifndef atEnvironmentalSensorReaderH
+#define atEnvironmentalSensorReaderH
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include <utility>

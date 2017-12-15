@@ -1,5 +1,5 @@
-#ifndef abAbsoluteMoveH
-#define abAbsoluteMoveH
+#ifndef atAbsoluteMoveH
+#define atAbsoluteMoveH
 #include "atMove.h"
 //---------------------------------------------------------------------------
 

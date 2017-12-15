@@ -1,5 +1,5 @@
-#ifndef abTimeDelayH
-#define abTimeDelayH
+#ifndef atTimeDelayH
+#define atTimeDelayH
 #include "core/atProcess.h"
 #include <vector>
 #include "mtkXMLUtils.h"

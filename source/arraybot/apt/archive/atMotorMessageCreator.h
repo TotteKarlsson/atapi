@@ -1,5 +1,5 @@
-#ifndef abMotorMessageCreatorH
-#define abMotorMessageCreatorH
+#ifndef atMotorMessageCreatorH
+#define atMotorMessageCreatorH
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "core/atATObject.h"

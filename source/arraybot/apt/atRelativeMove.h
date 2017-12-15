@@ -1,5 +1,5 @@
-#ifndef abRelativeMoveH
-#define abRelativeMoveH
+#ifndef atRelativeMoveH
+#define atRelativeMoveH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include "atMove.h"

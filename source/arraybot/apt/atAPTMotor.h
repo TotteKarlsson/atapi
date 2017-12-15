@@ -1,5 +1,5 @@
-#ifndef abAPTMotorH
-#define abAPTMotorH
+#ifndef atAPTMotorH
+#define atAPTMotorH
 #include "atAPTDevice.h"
 #include "mtkTimer.h"
 #include "arraybot/atDataStructures.h"

@@ -1,5 +1,5 @@
-#ifndef abMotorMessageProcessorH
-#define abMotorMessageProcessorH
+#ifndef atMotorMessageProcessorH
+#define atMotorMessageProcessorH
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "mtkThread.h"

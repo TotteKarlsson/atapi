@@ -1,5 +1,5 @@
-#ifndef abProcessSequenceH
-#define abProcessSequenceH
+#ifndef atProcessSequenceH
+#define atProcessSequenceH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include <list>

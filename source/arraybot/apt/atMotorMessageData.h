@@ -1,5 +1,5 @@
-#ifndef abMotorMessageDataH
-#define abMotorMessageDataH
+#ifndef atMotorMessageDataH
+#define atMotorMessageDataH
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "mtkProperty.h"
