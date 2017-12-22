@@ -27,7 +27,8 @@ mLeftJoyStickYRightDeadZone(0),
 mJSSettings("JOYSTICK SETTINGS",	mIniFile),
 mCoverSlip(	"COVERSLIP UNIT", 		mIniFile, appFolder),
 mWhisker(	"WHISKER UNIT", 		mIniFile, appFolder),
-mLifts(		"PAIRED_MOVES", 		mIniFile)
+mLifts(		"PAIRED_MOVES", 		mIniFile),
+mServer(*this)
 {
 	//Setup UI properties
     mProperties.setSection("ARRAYBOT_GENERAL");

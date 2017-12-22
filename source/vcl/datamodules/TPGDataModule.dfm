@@ -26,11 +26,11 @@ object pgDM: TpgDM
       'IPVersion=IPv4'
       'VendorLib=dbexppgsql40.dll'
       'BlobSize=-1'
-      'HostName=localhost'
+      'HostName=atdb'
       'SchemaName='
-      'Database=sg2'
+      'Database=shotgundb'
       'User_Name=admin'
-      'Password=totte'
+      'Password=atdb123'
       'EnableBCD=True')
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
@@ -988,7 +988,7 @@ object pgDM: TpgDM
     end
     object settingsDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
-      BlobType = ftMemo
+      BlobType = ftWideMemo
       Size = -1
     end
   end
@@ -1009,7 +1009,7 @@ object pgDM: TpgDM
     end
     object settingsCDSlabel_printer_command: TWideMemoField
       FieldName = 'label_printer_command'
-      BlobType = ftMemo
+      BlobType = ftWideMemo
     end
   end
   object specimenCDS: TClientDataSet

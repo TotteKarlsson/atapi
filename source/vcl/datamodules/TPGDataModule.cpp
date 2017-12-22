@@ -113,6 +113,7 @@ void __fastcall TpgDM::afterDisConnect()
     notesCDS->Active	    = false;
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
+    settingsCDS->Active  	= false;
 }
 
 //---------------------------------------------------------------------------

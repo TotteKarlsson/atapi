@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "arraybot/arraybot.h"
+#include "arraybot/atArrayBot.h"
 #include "atArrayBotServer.h"
 #include "mtkLogger.h"
 #include "mtkSocketWorker.h"
@@ -8,20 +8,20 @@
 //---------------------------------------------------------------------------
 using namespace mtk;
 
-ArrayBotServer::ArrayBotServer(ArrayBot& mf, int portNumber)
+ArrayBotServer::ArrayBotServer(ArrayBot& ab, int portNumber)
 :
 IPCServer(portNumber, "ArrayBot_SERVER", createArrayBotIPCReceiver),
-mMainForm(mf)
+mArrayBot(ab)
 {
 }
 
 ArrayBotServer::~ArrayBotServer()
 {}
 
-void ArrayBotServer::assignOnUpdateCallBack(OnMessageUpdateCB cb)
-{
-	onMessageUpdateCB = cb;
-}
+//void ArrayBotServer::assignOnUpdateCallBack(OnMessageUpdateCB cb)
+//{
+//	onMessageUpdateCB = cb;
+//}
 
 bool ArrayBotServer::shutDown()
 {
@@ -60,7 +60,7 @@ void ArrayBotServer::broadcast(ABMessageID id, const string& arg1, const string&
 void ArrayBotServer::broadcastStatus()
 {
     stringstream msg;
-    msg << "IS_RECORDING="<<mtk::toString(mMainForm.mCaptureVideoTimer->Enabled);
+//    msg << "IS_RECORDING="<<mtk::toString(mMainForm.mCaptureVideoTimer->Enabled);
    	notifyClients(msg.str());
 }
 
@@ -71,11 +71,11 @@ void ArrayBotServer::notifyClients(const string& msg)
     	return;
     }
 
-    if(onMessageUpdateCB)
-    {
-    	//This one is synchronized
-        onMessageUpdateCB(msg);
-    }
+//    if(onMessageUpdateCB)
+//    {
+//    	//This one is synchronized
+//        onMessageUpdateCB(msg);
+//    }
 
     IPCServer::broadcast(msg);
 }
@@ -98,271 +98,25 @@ bool ArrayBotServer::processRequest(IPCMessage& msg)
     StringList msgList(msg, ',');
 
     /* CAMERA */
-    if(compareStrings(ap[acrStartVideoRecorder], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Starting recording video";
-        TThread::Synchronize(NULL, mMainForm.startRecordingMovie);
+//    if(compareStrings(ap[acrStartVideoRecorder], msgList[0], csCaseInsensitive))
+//    {
+//    	Log(lInfo) << "Starting recording video";
+//        TThread::Synchronize(NULL, mMainForm.startRecordingMovie);
+//
+//    }
+//    else if(compareStrings(ap[acrStopVideoRecorder], msgList[0], csCaseInsensitive))
+//    {
+//    	Log(lInfo) << "Stop recording video";
+//       	TThread::Synchronize(NULL, mMainForm.stopRecordingMovie);
+//
+//    }
+//
+//    else if(compareStrings(ap[acrTakeSnapShot], msgList[0], csCaseInsensitive))
+//    {
+//    	Log(lInfo) << "Take snapshot";
+//        TThread::Synchronize(NULL, mMainForm.takeSnapShot);
+//    }
 
-    }
-    else if(compareStrings(ap[acrStopVideoRecorder], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Stop recording video";
-       	TThread::Synchronize(NULL, mMainForm.stopRecordingMovie);
-
-    }
-
-    else if(compareStrings(ap[acrTakeSnapShot], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Take snapshot";
-        TThread::Synchronize(NULL, mMainForm.takeSnapShot);
-    }
-
-	/* Navitar controller */
-    else if(compareStrings(ap[acrSetZoomAndFocus], msgList[0], csCaseInsensitive))
-    {
-
-    	Log(lInfo) << "Setting Navitar zoom and focus";
-
-        struct TLocalArgs
-	    {
-    	    int focus;
-            int zoom;
-	        ArrayBot*	MainForm;
-        	void __fastcall setZoomAndFocus()
-	        {
-    	        MainForm->setFocusAndZoom(focus, zoom);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 3)
-        {
-	    	Args.focus = toInt(msgList[1]);
-	        Args.zoom = toInt(msgList[2]);
-        }
-
-        Args.MainForm = &mMainForm;
-
-        TThread::Synchronize(NULL, Args.setZoomAndFocus);
-    }
-
-	/* Navitar controller */
-    else if(compareStrings(ap[acrFocusIn], msgList[0], csCaseInsensitive))
-    {
-
-    	Log(lInfo) << "Focus in";
-
-        struct TLocalArgs
-	    {
-            int f;
-	        ArrayBot*	MainForm;
-        	void __fastcall focusIn()
-	        {
-    	        MainForm->focusIn(f);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 2)
-        {
-	        Args.f = toInt(msgList[1]);
-        }
-
-        Args.MainForm = &mMainForm;
-        TThread::Synchronize(NULL, Args.focusIn);
-    }
-
-	/* Navitar controller */
-    else if(compareStrings(ap[acrFocusOut], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Focus out";
-        struct TLocalArgs
-	    {
-            int f;
-	        ArrayBot*	MainForm;
-        	void __fastcall focusOut()
-	        {
-    	        MainForm->focusOut(f);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 2)
-        {
-	        Args.f = toInt(msgList[1]);
-        }
-
-        Args.MainForm = &mMainForm;
-
-        TThread::Synchronize(NULL, Args.focusOut);
-    }
-
-	/* Navitar controller */
-    else if(compareStrings(ap[acrZoomIn], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Zoom in";
-        struct TLocalArgs
-	    {
-            int zoom;
-	        ArrayBot*	MainForm;
-        	void __fastcall zoomIn()
-	        {
-    	        MainForm->zoomIn(zoom);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 2)
-        {
-	        Args.zoom = toInt(msgList[1]);
-        }
-
-        Args.MainForm = &mMainForm;
-        TThread::Synchronize(NULL, Args.zoomIn);
-    }
-
-	/* Navitar controller */
-    else if(compareStrings(ap[acrZoomOut], msgList[0], csCaseInsensitive))
-    {
-
-    	Log(lInfo) << "Zoom out";
-
-        struct TLocalArgs
-	    {
-            int zoom;
-	        ArrayBot*	MainForm;
-        	void __fastcall zoomOut()
-	        {
-    	        MainForm->zoomOut(zoom);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 2)
-        {
-	        Args.zoom = toInt(msgList[1]);
-        }
-
-        Args.MainForm = &mMainForm;
-
-        TThread::Synchronize(NULL, Args.zoomOut);
-    }
-
-
-	/* LED */
-    else if(compareStrings(ap[acrSetLEDIntensity], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Setting LED intensity";
-        struct TLocalArgs
-	    {
-    	    int intensity;
-	        ArrayBot*	MainForm;
-        	void __fastcall cb()
-	        {
-    	        MainForm->setLEDIntensity(intensity);
-        	}
-    	};
-
-    	TLocalArgs Args;
-
-        if(msgList.count() == 2)
-        {
-	    	Args.intensity = toInt(msgList[1]);
-        }
-
-        Args.MainForm = &mMainForm;
-
-        TThread::Synchronize(NULL, Args.cb);
-    }
-
-	/* Barcode Scanner */
-    else if(compareStrings(ap[acrEnableBarcodeScanner], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Enabling barcode scanner";
-        if(mMainForm.DecodeSessionBtn->Caption == "Stop Scan")
-        {
-        	Log(lError) << "Scanner already enabled.";
-        }
-        else
-        {
-	        TThread::Synchronize(NULL, mMainForm.DecodeSessionBtn->Click);
-        }
-    }
-
-    else if(compareStrings(ap[acrDisableBarcodeScanner], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Disable Barcode scanner";
-        if(mMainForm.DecodeSessionBtn->Caption == "Scan Barcode")
-        {
-        	Log(lError) << "Scanner already disabled.";
-        }
-        else
-        {
-        	TThread::Synchronize(NULL, mMainForm.DecodeSessionBtn->Click);
-        }
-    }
-    /*******    UC7 REQUESTS  *******/
-    else if(compareStrings(ap[acrStartUC7], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Starting UC7";
-        if(mMainForm.StartStopBtn->Caption == "Stop")
-        {
-        	Log(lError) << "UC7 already running.";
-        }
-        else
-        {
-        	TThread::Synchronize(NULL, mMainForm.StartStopBtn->Click);
-        }
-    }
-
-    else if(compareStrings(ap[acrStopUC7], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Stopping UC7";
-        if(mMainForm.StartStopBtn->Caption == "Start")
-        {
-        	Log(lError) << "UC7 already stopped.";
-        }
-        else
-        {
-        	TThread::Synchronize(NULL, mMainForm.StartStopBtn->Click);
-        }
-    }
-
-    /* Enable/disable whisker sync logic */
-    else if(compareStrings(ap[acrSetMoveWhiskerForwardOn], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Setting Move Whisker forward CB ON";
-        TThread::Synchronize(NULL, mMainForm.checkSyncWhiskerCB);
-    }
-
-    else if(compareStrings(ap[acrSetMoveWhiskerForwardOff], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Setting Move Whisker forward CB";
-        TThread::Synchronize(NULL, mMainForm.unCheckSyncWhiskerCB);
-    }
-
-    /* Set off ribbon separator */
-    else if(compareStrings(ap[acrTriggerRibbonSeparator], msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Setting off ribbon separator";
-        TThread::Synchronize(NULL, mMainForm.fireRibbonSeparator);
-    }
-
-    else if(compareStrings("GET_SERVER_STATUS", msgList[0], csCaseInsensitive))
-    {
-    	Log(lInfo) << "Broadcast status";
-		broadcastStatus();
-    }
-
-    else
-    {
-    	Log(lError) << "UNHANDLED SERVER MESSAGE: "<<msgList[0];
-    }
 
     if(clientMessage.str().size())
     {

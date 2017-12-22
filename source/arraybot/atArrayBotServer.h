@@ -3,8 +3,7 @@
 #include "mtkIPCServer.h"
 #include "mtkSocketWorker.h"
 #include <vector>
-
-#include "arraybot/atArrayBot.h"
+//#include "arraybot/atArrayBot.h"
 #include "arraybot/atArrayBotProtocol.h"
 #include "mtkIPCMessage.h"
 #include "mtkConstants.h"
@@ -14,6 +13,7 @@ using mtk::IPCServer;
 using mtk::gEmptyString;
 mtk::SocketWorker* createArrayBotIPCReceiver(int portNr, int socketHandle, void* parent);
 
+class ArrayBot;
 //typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
 //!The ArrayBot server is a component that serve clients with an ArrayBot connection over a
@@ -23,7 +23,7 @@ mtk::SocketWorker* createArrayBotIPCReceiver(int portNr, int socketHandle, void*
 class AT_CORE ArrayBotServer : public IPCServer
 {
     public:
-//                                            ArrayBotServer(ArrayBot& ab, int portNumber = 50000);
+                                            ArrayBotServer(ArrayBot& ab, int portNumber = 50000);
 	                                        ~ArrayBotServer();
 
 											//!Requests are sent to the server from a client.

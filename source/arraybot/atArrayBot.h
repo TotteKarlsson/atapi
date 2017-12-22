@@ -12,6 +12,7 @@
 //---------------------------------------------------------------------------
 
 class ArduinoClient;
+//class ArrayBotServer;
 class AT_AB ArrayBot : public ATObject
 {
     public:
@@ -80,6 +81,7 @@ class AT_AB ArrayBot : public ATObject
         							                    //!List of Lifts
         PairedMoves					                    mLifts;
         ArrayBotServer									mServer;
+
 };
 
 #endif

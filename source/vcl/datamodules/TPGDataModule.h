@@ -107,10 +107,6 @@ __published:	// IDE-managed Components
 	TSQLDataSet *settingsDS;
 	TDataSetProvider *settingsProvider;
 	TClientDataSet *settingsCDS;
-	TIntegerField *settingsCDSid;
-	TWideMemoField *settingsCDSlabel_printer_command;
-	TIntegerField *settingsDSid;
-	TWideMemoField *settingsDSlabel_printer_command;
 	TClientDataSet *specimenCDS;
 	TSQLDataSet *specimenDS;
 	TDataSetProvider *specimenProvider;
@@ -247,6 +243,10 @@ __published:	// IDE-managed Components
 	TWideMemoField *ribbonNotesCDSnote;
 	TSQLTimeStampField *ribbonNotesCDScreated_on;
 	TIntegerField *ribbonNotesCDScreated_by;
+	TIntegerField *settingsCDSid;
+	TWideMemoField *settingsCDSlabel_printer_command;
+	TIntegerField *settingsDSid;
+	TWideMemoField *settingsDSlabel_printer_command;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
