@@ -99,6 +99,8 @@ void __fastcall TpgDM::afterConnect()
 	blockNotesCDS->Active  	= true;
     ribbonNotesCDS->Active  = true;
     settingsCDS->Active  	= true;
+    knifesCDS->Active  		= true;
+	knifeNotesCDS->Active 	= true;
 }
 
 //---------------------------------------------------------------------------
@@ -114,6 +116,8 @@ void __fastcall TpgDM::afterDisConnect()
 	blockNotesCDS->Active  	= false;
     ribbonNotesCDS->Active  = false;
     settingsCDS->Active  	= false;
+    knifesCDS->Active  		= false;
+	knifeNotesCDS->Active 	= false;
 }
 
 //---------------------------------------------------------------------------
@@ -131,6 +135,11 @@ void __fastcall TpgDM::cdsAfterPost(TDataSet *DataSet)
     {
     	return;
     }
+ 	else
+    {
+    	Log(lDebug) << "Executing \"After post\" for Client Dataset: " << stdstr(DataSet->Name);
+    }
+
 
 	cds->ApplyUpdates(0);
     cds->Refresh();
@@ -217,6 +226,21 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
         }
         cdsAfterRefresh(ribbonsCDS);
     }
+
+	if(DataSet == knifesCDS)
+    {
+        int id = knifesCDS->FieldByName("id")->AsInteger;
+        if(id == -1)
+        {
+            knifeNotesCDS->Active = false;
+        }
+        else
+        {
+            knifeNotesCDS->Active = true;
+
+        }
+        cdsAfterRefresh(knifesCDS);
+    }
 }
 
 void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
@@ -248,6 +272,15 @@ void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
         	ribbonNotesCDS->Refresh();
         }
     }
+
+	else if(DataSet == knifesCDS)
+    {
+        if(knifeNotesCDS->Active)
+        {
+			knifeNotesCDS->Refresh();
+        }
+    }
+
 //    else if(DataSet == blockIDSCDS)
 //    {
 //    	if(MoviesByBlockIDCDS->Active)
@@ -638,4 +671,42 @@ bool TpgDM::addNoteForRibbon(const string& ribbonID, int userID, const string& n
     delete tq;
     return true;
 }
+
+bool TpgDM::addNoteForKnife(int knifeID, int userID, const string& note)
+{
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection...";
+        return false;
+    }
+
+    stringstream q;
+    q << "INSERT INTO notes (created_by, note) VALUES(:userID, :theNote) RETURNING id";
+
+    TSQLQuery* tq = new TSQLQuery(NULL);
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+    tq->SQL->Add(q.str().c_str());
+    tq->Params->ParamByName("userID")->AsInteger = userID;
+    tq->Params->ParamByName("theNote")->AsString = note.c_str();
+	tq->Open();
+
+    //Get last insert ID for the note cleanCS batch and update coverslips
+    int noteID = tq->FieldByName("id")->AsInteger;
+
+	tq->Close();
+
+    //Associate note and ribbon
+    tq->SQL->Clear();
+	q.str("");
+    q << "INSERT INTO knife_notes (knife_id, note_id) VALUES(:kID, :nID)";
+    tq->SQL->Add(q.str().c_str());
+    tq->ParamByName("kID")->Value 		= knifeID;
+    tq->ParamByName("nID")->Value 		= noteID;
+	tq->ExecSQL();
+
+    delete tq;
+    return true;
+}
+
 

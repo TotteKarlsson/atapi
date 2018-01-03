@@ -247,6 +247,28 @@ __published:	// IDE-managed Components
 	TWideMemoField *settingsCDSlabel_printer_command;
 	TIntegerField *settingsDSid;
 	TWideMemoField *settingsDSlabel_printer_command;
+	TSQLDataSet *knifesDS;
+	TDataSetProvider *knifesProvider;
+	TClientDataSet *knifesCDS;
+	TIntegerField *knifesDSid;
+	TDateField *knifesDSdate_entered;
+	TIntegerField *knifesCDSid;
+	TDateField *knifesCDSdate_entered;
+	TSQLDataSet *knifeNotesDS;
+	TDataSetProvider *knifeNotesProvider;
+	TClientDataSet *knifeNotesCDS;
+	TDataSource *knifesDSource;
+	TIntegerField *knifeNotesDSid;
+	TWideMemoField *knifeNotesDSnote;
+	TSQLTimeStampField *knifeNotesDScreated_on;
+	TIntegerField *knifeNotesDScreated_by;
+	TIntegerField *knifeNotesCDSid;
+	TWideMemoField *knifeNotesCDSnote;
+	TSQLTimeStampField *knifeNotesCDScreated_on;
+	TIntegerField *knifeNotesCDScreated_by;
+	TDataSource *knifeNotesDataSource;
+	TIntegerField *ribbonsDSknife_id;
+	TIntegerField *ribbonsCDSknife_id;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);
@@ -292,6 +314,7 @@ __published:	// IDE-managed Components
         StringList 						getTableNames();
 		bool							addNoteForBlock(int blockID, int userID, const string& note);
 		bool							addNoteForRibbon(const string& ribbonID, int userID, const string& note);
+		bool							addNoteForKnife(int knifeID, int userID, const string& note);
 };
 
 extern PACKAGE TpgDM *pgDM;

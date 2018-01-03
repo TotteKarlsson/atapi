@@ -240,7 +240,7 @@ object csPGDM: TcsPGDM
   end
   object csFreshBatchesDS: TSQLDataSet
     BeforeOpen = csDSBeforeOpen
-    CommandText = 'SELECT * FROM freshCSBatches ORDER by date_created DESC'
+    CommandText = 'SELECT * FROM freshcsbatches ORDER by date_created DESC'
     DataSource = csDSource
     MaxBlobSize = 1
     Params = <>

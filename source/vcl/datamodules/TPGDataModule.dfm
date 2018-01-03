@@ -35,6 +35,7 @@ object pgDM: TpgDM
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
+    Connected = True
     Left = 40
     Top = 24
   end
@@ -432,6 +433,10 @@ object pgDM: TpgDM
       FieldName = 'created_by'
       Required = True
     end
+    object ribbonsCDSknife_id: TIntegerField
+      DisplayLabel = 'Knife ID'
+      FieldName = 'knife_id'
+    end
     object ribbonsCDScoverslip_id: TIntegerField
       DisplayLabel = 'Coverslip ID'
       FieldName = 'coverslip_id'
@@ -545,6 +550,9 @@ object pgDM: TpgDM
       FieldName = 'created_on'
       ProviderFlags = [pfInUpdate]
       Required = True
+    end
+    object ribbonsDSknife_id: TIntegerField
+      FieldName = 'knife_id'
     end
   end
   object blockNotesDS: TSQLDataSet
@@ -1376,5 +1384,112 @@ object pgDM: TpgDM
       FieldName = 'entered_on'
       Required = True
     end
+  end
+  object knifesDS: TSQLDataSet
+    CommandText = 'select * from knifes'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 40
+    Top = 672
+    object knifesDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object knifesDSdate_entered: TDateField
+      FieldName = 'date_entered'
+      ProviderFlags = [pfInUpdate]
+    end
+  end
+  object knifesProvider: TDataSetProvider
+    DataSet = knifesDS
+    Left = 184
+    Top = 672
+  end
+  object knifesCDS: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'knifesProvider'
+    AfterScroll = cdsAfterScroll
+    AfterRefresh = cdsAfterRefresh
+    Left = 336
+    Top = 672
+    object knifesCDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object knifesCDSdate_entered: TDateField
+      FieldName = 'date_entered'
+      ProviderFlags = [pfInUpdate]
+    end
+  end
+  object knifeNotesDS: TSQLDataSet
+    CommandText = 
+      'SELECT * FROM notes n '#13#10'INNER JOIN knife_notes kn '#13#10'ON (kn.note_' +
+      'id = n.id) '#13#10'WHERE knife_id = :id '#13#10'ORDER BY created_on ASC'
+    DataSource = knifesDSource
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end>
+    SQLConnection = SQLConnection1
+    Left = 32
+    Top = 752
+    object knifeNotesDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object knifeNotesDSnote: TWideMemoField
+      FieldName = 'note'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object knifeNotesDScreated_on: TSQLTimeStampField
+      FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
+    end
+    object knifeNotesDScreated_by: TIntegerField
+      FieldName = 'created_by'
+    end
+  end
+  object knifeNotesProvider: TDataSetProvider
+    DataSet = knifeNotesDS
+    Left = 176
+    Top = 752
+  end
+  object knifeNotesCDS: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'knifeNotesProvider'
+    AfterPost = cdsAfterPost
+    Left = 336
+    Top = 752
+    object knifeNotesCDSid: TIntegerField
+      FieldName = 'id'
+    end
+    object knifeNotesCDSnote: TWideMemoField
+      FieldName = 'note'
+      BlobType = ftWideMemo
+    end
+    object knifeNotesCDScreated_on: TSQLTimeStampField
+      DisplayLabel = 'Date'
+      FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
+    end
+    object knifeNotesCDScreated_by: TIntegerField
+      FieldName = 'created_by'
+    end
+  end
+  object knifesDSource: TDataSource
+    DataSet = knifesCDS
+    Left = 464
+    Top = 672
+  end
+  object knifeNotesDataSource: TDataSource
+    DataSet = knifeNotesCDS
+    Left = 456
+    Top = 752
   end
 end
