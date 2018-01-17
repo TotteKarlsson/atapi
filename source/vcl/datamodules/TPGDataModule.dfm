@@ -275,6 +275,7 @@ object pgDM: TpgDM
     Top = 88
   end
   object usersCDS: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -506,7 +507,7 @@ object pgDM: TpgDM
     CommandText = 
       'SELECT * from ribbons where block_id=:id ORDER by cutting_order ' +
       'DESC'
-    DataSource = blocksDataSource
+    DataSource = allBlocksDataSource
     MaxBlobSize = -1
     Params = <
       item
@@ -1182,25 +1183,26 @@ object pgDM: TpgDM
     Left = 760
     Top = 600
   end
-  object DataSource1: TDataSource
-    DataSet = ClientDataSet1
+  object allBlocksDataSource: TDataSource
+    DataSet = allBlocksCDS
     Left = 1040
     Top = 296
   end
-  object ClientDataSet1: TClientDataSet
+  object allBlocksCDS: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'blocksProvider'
+    ProviderName = 'allBlocksProvider'
     BeforePost = cdsBeforePost
     AfterPost = cdsAfterPost
     AfterDelete = cdsAfterDelete
     AfterScroll = cdsAfterScroll
     AfterRefresh = cdsAfterRefresh
-    OnCalcFields = blocksCDSCalcFields
     Left = 888
     Top = 296
     object IntegerField1: TIntegerField
+      Alignment = taLeftJustify
       AutoGenerateValue = arAutoInc
+      DisplayLabel = 'Block ID'
       FieldName = 'id'
     end
     object IntegerField2: TIntegerField
@@ -1327,13 +1329,13 @@ object pgDM: TpgDM
       Lookup = True
     end
   end
-  object DataSetProvider1: TDataSetProvider
-    DataSet = AllBlocksDS
+  object allBlocksProvider: TDataSetProvider
+    DataSet = allBlocksDS
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poRetainServerOrder, poUseQuoteChar]
     Left = 776
     Top = 296
   end
-  object AllBlocksDS: TSQLDataSet
+  object allBlocksDS: TSQLDataSet
     CommandText = 'select * from blocks ORDER by id DESC'
     MaxBlobSize = 1
     Params = <>
@@ -1415,11 +1417,14 @@ object pgDM: TpgDM
     Left = 336
     Top = 672
     object knifesCDSid: TIntegerField
+      DisplayLabel = 'ID'
       FieldName = 'id'
     end
     object knifesCDSdate_entered: TDateField
+      DisplayLabel = 'Date Entered'
       FieldName = 'date_entered'
       ProviderFlags = [pfInUpdate]
+      ReadOnly = True
     end
   end
   object knifeNotesDS: TSQLDataSet
@@ -1480,6 +1485,16 @@ object pgDM: TpgDM
     end
     object knifeNotesCDScreated_by: TIntegerField
       FieldName = 'created_by'
+    end
+    object knifeNotesCDSLcreated_by: TStringField
+      DisplayLabel = 'Created By'
+      FieldKind = fkLookup
+      FieldName = 'Lcreated_by'
+      LookupDataSet = usersCDS
+      LookupKeyFields = 'id'
+      LookupResultField = 'user_name'
+      KeyFields = 'created_by'
+      Lookup = True
     end
   end
   object knifesDSource: TDataSource

@@ -179,7 +179,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="atVideoCompressorThread.cpp">
-            <BuildOrder>28</BuildOrder>
+            <DependentOn>atVideoCompressorThread.h</DependentOn>
+            <BuildOrder>30</BuildOrder>
         </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>

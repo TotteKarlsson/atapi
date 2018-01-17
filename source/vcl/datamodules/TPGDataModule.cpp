@@ -101,6 +101,7 @@ void __fastcall TpgDM::afterConnect()
     settingsCDS->Active  	= true;
     knifesCDS->Active  		= true;
 	knifeNotesCDS->Active 	= true;
+	allBlocksCDS->Active 	= true;
 }
 
 //---------------------------------------------------------------------------
@@ -118,6 +119,7 @@ void __fastcall TpgDM::afterDisConnect()
     settingsCDS->Active  	= false;
     knifesCDS->Active  		= false;
 	knifeNotesCDS->Active 	= false;
+	allBlocksCDS->Active 	= false;
 }
 
 //---------------------------------------------------------------------------
@@ -212,6 +214,22 @@ void __fastcall TpgDM::cdsAfterScroll(TDataSet *DataSet)
         cdsAfterRefresh(blocksCDS);
     }
 
+ 	if(DataSet == allBlocksCDS)
+    {
+        int bID = blocksCDS->FieldByName("id")->AsInteger;
+        if(bID == -1)
+        {
+            blockNotesCDS->Active = false;
+            ribbonsCDS->Active = false;
+        }
+        else
+        {
+            blockNotesCDS->Active = true;
+            ribbonsCDS->Active = true;
+        }
+        cdsAfterRefresh(allBlocksCDS);
+    }
+
 	if(DataSet == ribbonsCDS)
     {
         String rID = ribbonsCDS->FieldByName("id")->AsString;
@@ -265,6 +283,19 @@ void __fastcall TpgDM::cdsAfterRefresh(TDataSet *DataSet)
 			blockNotesCDS->Refresh();
         }
     }
+	else if(DataSet == allBlocksCDS)
+    {
+    	if(ribbonsCDS->Active)
+        {
+    		ribbonsCDS->Refresh();
+        }
+
+        if(blockNotesCDS->Active)
+        {
+			blockNotesCDS->Refresh();
+        }
+    }
+
     else if(DataSet == ribbonsCDS)
     {
     	if(ribbonNotesCDS->Active)

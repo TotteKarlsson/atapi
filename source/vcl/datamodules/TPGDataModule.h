@@ -178,8 +178,8 @@ __published:	// IDE-managed Components
 	TSmallintField *slicesCDSpostfix_protocol;
 	TWideStringField *slicesCDSpostfix_protocolL;
 	TWideStringField *slicesCDSculture_timeL;
-	TDataSource *DataSource1;
-	TClientDataSet *ClientDataSet1;
+	TDataSource *allBlocksDataSource;
+	TClientDataSet *allBlocksCDS;
 	TIntegerField *IntegerField1;
 	TIntegerField *IntegerField2;
 	TIntegerField *IntegerField3;
@@ -201,8 +201,8 @@ __published:	// IDE-managed Components
 	TWideStringField *WideStringField7;
 	TWideStringField *WideStringField8;
 	TWideStringField *WideStringField9;
-	TDataSetProvider *DataSetProvider1;
-	TSQLDataSet *AllBlocksDS;
+	TDataSetProvider *allBlocksProvider;
+	TSQLDataSet *allBlocksDS;
 	TIntegerField *IntegerField5;
 	TIntegerField *IntegerField6;
 	TSmallintField *SmallintField8;
@@ -269,6 +269,7 @@ __published:	// IDE-managed Components
 	TDataSource *knifeNotesDataSource;
 	TIntegerField *ribbonsDSknife_id;
 	TIntegerField *ribbonsCDSknife_id;
+	TStringField *knifeNotesCDSLcreated_by;
 	void __fastcall cdsAfterPost(TDataSet *DataSet);
 	void __fastcall cdsAfterDelete(TDataSet *DataSet);
 	void __fastcall cdsAfterScroll(TDataSet *DataSet);

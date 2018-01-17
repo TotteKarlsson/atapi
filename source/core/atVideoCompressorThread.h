@@ -4,12 +4,10 @@
 #include <functional>
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
+#include "core/atCoreExporter.h"
 //---------------------------------------------------------------------------
 
-
-
-
-class VideoCompressorThread : public mtk::Thread
+class AT_CORE VideoCompressorThread : public mtk::Thread
 {
 	typedef boost::function<void(int, int)> Callback;
     public:
