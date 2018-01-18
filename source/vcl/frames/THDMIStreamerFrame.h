@@ -16,19 +16,30 @@
 class PACKAGE THDMIStreamerFrame : public TFrame
 {
     __published:
-        TGroupBox *GroupBox1;
+	TGroupBox *SettingsGB;
         TIntegerLabeledEdit *BitrateE;
         TPropertyCheckBox *AppendTimeStampCB;
-        TArrayBotButton *StartStreamerBtn;
-	TSTDStringLabeledEdit *FileOutputFolderE;
+	TSTDStringLabeledEdit *OutputFileFolderE;
 	TSTDStringLabeledEdit *OutputFileNameE;
+	TTimer *CheckStatus;
+	TArrayBotButton *StartRecordingBtn;
 	void __fastcall StartStreamerBtnClick(TObject *Sender);
+	void __fastcall CheckStatusTimer(TObject *Sender);
 
     private:
-		HDMIStreamerProcess					mStreamer;
+		HDMIStreamerProcess			   	mStreamer;
+  	    void 				            onEnter(int i, int j);
+	    void 				            onProgress(int i, int j);
+	    void 				            onExit(int i, int j);
 
     public:
         		__fastcall 				THDMIStreamerFrame(TComponent* Owner);
+        		__fastcall 				~THDMIStreamerFrame();
+		bool							isStreamerAlive();
+		bool							shutDownStreamer();
+        void							enableSettings();
+        void							disableSettings();
+
 };
 
 extern PACKAGE THDMIStreamerFrame *HDMIStreamerFrame;

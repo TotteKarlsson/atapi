@@ -83,11 +83,15 @@ void CreateMovieThumbNailThread::run()
         //Capture output
         Pipe outPipe;
 
+        //Tell process to start/stop stuff
+        Pipe inPipe;
+
 		//Capture stdout and stderr to outPipe
-        ProcessHandle ph = Process::launch(mFFMPEGLocation, args, NULL, &outPipe, &outPipe);
+        ProcessHandle ph = Process::launch(mFFMPEGLocation, args, &inPipe, &outPipe, &outPipe);
 
         //Use stream objects to read and write to the pipes
         PipeInputStream istr(outPipe);
+		PipeOutputStream ostr(inPipe);
 
         string s;
 		int progress(0);
