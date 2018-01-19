@@ -25,14 +25,6 @@ object HDMIStreamerFrame: THDMIStreamerFrame
       Text = '25000'
       Value = 25000
     end
-    object AppendTimeStampCB: TPropertyCheckBox
-      Left = 32
-      Top = 174
-      Width = 121
-      Height = 17
-      Caption = 'Append TimeStamp'
-      TabOrder = 1
-    end
     object OutputFileFolderE: TSTDStringLabeledEdit
       Left = 16
       Top = 96
@@ -41,7 +33,7 @@ object HDMIStreamerFrame: THDMIStreamerFrame
       EditLabel.Width = 86
       EditLabel.Height = 13
       EditLabel.Caption = 'Output File Folder'
-      TabOrder = 2
+      TabOrder = 1
       Text = 'P:\\Temp'
       Value = 'P:\\Temp'
     end
@@ -53,7 +45,7 @@ object HDMIStreamerFrame: THDMIStreamerFrame
       EditLabel.Width = 83
       EditLabel.Height = 13
       EditLabel.Caption = 'Output File Name'
-      TabOrder = 3
+      TabOrder = 2
       Text = 'Temp.ts'
       Value = 'Temp.ts'
     end
@@ -68,7 +60,6 @@ object HDMIStreamerFrame: THDMIStreamerFrame
     TabOrder = 1
     OnClick = StartStreamerBtnClick
     SoundID = 'BUTTON_CLICK_4'
-    ExplicitTop = 247
   end
   object CheckStatus: TTimer
     Enabled = False

@@ -48,7 +48,7 @@ object csPGDM: TcsPGDM
   object csP: TDataSetProvider
     DataSet = csDS
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 176
+    Left = 215
     Top = 56
   end
   object csCDS: TClientDataSet
@@ -58,7 +58,7 @@ object csPGDM: TcsPGDM
     AfterPost = CDSAfterPost
     AfterDelete = CDSAfterDelete
     AfterScroll = CDSAfterScroll
-    Left = 304
+    Left = 345
     Top = 64
     object csCDSid: TIntegerField
       DisplayLabel = 'ID'
@@ -118,7 +118,7 @@ object csPGDM: TcsPGDM
   end
   object csDSource: TDataSource
     DataSet = csCDS
-    Left = 424
+    Left = 465
     Top = 56
   end
   object csStatusDS: TSQLDataSet
@@ -145,7 +145,7 @@ object csPGDM: TcsPGDM
   end
   object csStatusP: TDataSetProvider
     DataSet = csStatusDS
-    Left = 192
+    Left = 208
     Top = 136
   end
   object csStatusCDS: TClientDataSet
@@ -153,7 +153,7 @@ object csPGDM: TcsPGDM
     Params = <>
     ProviderName = 'csStatusP'
     AfterPost = CDSAfterPost
-    Left = 312
+    Left = 353
     Top = 136
     object csStatusCDSid: TIntegerField
       FieldName = 'id'
@@ -171,7 +171,7 @@ object csPGDM: TcsPGDM
   end
   object csStatusDSource: TDataSource
     DataSet = csStatusCDS
-    Left = 432
+    Left = 473
     Top = 136
   end
   object csTypeDS: TSQLDataSet
@@ -198,7 +198,7 @@ object csPGDM: TcsPGDM
   end
   object csTypeP: TDataSetProvider
     DataSet = csTypeDS
-    Left = 192
+    Left = 208
     Top = 208
   end
   object csTypeCDS: TClientDataSet
@@ -206,7 +206,7 @@ object csPGDM: TcsPGDM
     Params = <>
     ProviderName = 'csTypeP'
     AfterPost = CDSAfterPost
-    Left = 312
+    Left = 353
     Top = 208
     object csTypeCDSid: TIntegerField
       FieldName = 'id'
@@ -224,18 +224,18 @@ object csPGDM: TcsPGDM
   end
   object csTypeDSource: TDataSource
     DataSet = csTypeCDS
-    Left = 432
+    Left = 473
     Top = 208
   end
   object csFreshBatchesDSource: TDataSource
     DataSet = csFreshBatchesCDS
-    Left = 432
+    Left = 473
     Top = 312
   end
   object csFreshBatchP: TDataSetProvider
     DataSet = csFreshBatchesDS
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 192
+    Left = 208
     Top = 312
   end
   object csFreshBatchesDS: TSQLDataSet
@@ -274,7 +274,7 @@ object csPGDM: TcsPGDM
     ProviderName = 'csFreshBatchP'
     AfterPost = CDSAfterPost
     AfterDelete = CDSAfterDelete
-    Left = 296
+    Left = 337
     Top = 312
     object csFreshBatchesCDSid: TIntegerField
       DisplayLabel = 'ID'
@@ -309,7 +309,7 @@ object csPGDM: TcsPGDM
   end
   object ROnCoverSlipsSource: TDataSource
     DataSet = ROnCS_CDS
-    Left = 432
+    Left = 471
     Top = 414
   end
   object ROnCS_CDS: TClientDataSet

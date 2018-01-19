@@ -275,7 +275,6 @@ object pgDM: TpgDM
     Top = 88
   end
   object usersCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -493,6 +492,7 @@ object pgDM: TpgDM
     end
     object ribbonNotesCDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
+      ProviderFlags = [pfInUpdate]
     end
     object ribbonNotesCDScreated_by: TIntegerField
       FieldName = 'created_by'
@@ -550,7 +550,6 @@ object pgDM: TpgDM
     object ribbonsDScreated_on: TSQLTimeStampField
       FieldName = 'created_on'
       ProviderFlags = [pfInUpdate]
-      Required = True
     end
     object ribbonsDSknife_id: TIntegerField
       FieldName = 'knife_id'
@@ -1408,7 +1407,6 @@ object pgDM: TpgDM
     Top = 672
   end
   object knifesCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'knifesProvider'
@@ -1464,7 +1462,6 @@ object pgDM: TpgDM
     Top = 752
   end
   object knifeNotesCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'knifeNotesProvider'

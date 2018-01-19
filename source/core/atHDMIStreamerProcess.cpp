@@ -90,7 +90,7 @@ void HDMIStreamerProcess::run()
         StringList args;
         args.append("-a");		//Start recording immediately
         args.append("-b" + mtk::toString(mBitRate));
-        args.append("-f" + mOutputFileName );
+        args.append("-f" + mOutputFileName);
 
         //Capture output
         Pipe outPipe;

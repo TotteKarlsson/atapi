@@ -18,7 +18,6 @@ class PACKAGE THDMIStreamerFrame : public TFrame
     __published:
 	TGroupBox *SettingsGB;
         TIntegerLabeledEdit *BitrateE;
-        TPropertyCheckBox *AppendTimeStampCB;
 	TSTDStringLabeledEdit *OutputFileFolderE;
 	TSTDStringLabeledEdit *OutputFileNameE;
 	TTimer *CheckStatus;

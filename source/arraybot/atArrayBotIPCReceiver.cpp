@@ -49,12 +49,12 @@ void ArrayBotIPCReceiver::Worker()
 
                 if(aMessage.isComplete() )
                 {
-                    int msgID          = getArrayBotIPCMessageID(aMessage.getMessage());
-                    IPCMessage msg     = IPCMessage(msgID, aMessage.getMessage(), this->getSocketHandle());
-                    if(mServer)
-                    {
-                        mServer->postRequest(msg);
-                    }
+//                    int msgID          = getArrayBotIPCMessageID(aMessage.getMessage());
+//                    IPCMessage msg     = IPCMessage(msgID, aMessage.getMessage(), this->getSocketHandle());
+//                    if(mServer)
+//                    {
+//                        mServer->postRequest(msg);
+//                    }
 
                     aMessage.reset();
                 }
