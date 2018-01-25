@@ -3,9 +3,8 @@
 #include "Poco/Data/SQLite/SQLiteException.h"
 #include "Poco/Data/MySQL/MySqlException.h"
 #include "mtkLogger.h"
-
-
 //---------------------------------------------------------------------------
+
 namespace at
 {
 using namespace Poco::Data;
@@ -240,6 +239,5 @@ void handleMySQLException()
     	Log(lError) << "Unhandled PocoDataMySQL exception...";
     }
 }
-
-}//Namespace ab
+}
 

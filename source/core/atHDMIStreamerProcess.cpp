@@ -30,6 +30,13 @@ void HDMIStreamerProcess::assignCallBacks(Callback one, Callback two, Callback t
     onExit 		= three;
 }
 
+void HDMIStreamerProcess::assignCallBacks2(Callback one, Callback two, Callback three)
+{
+	onEnter2 		= one;
+    onProgress2 	= two;
+    onExit2 		= three;
+}
+
 void HDMIStreamerProcess::exit()
 {
 	this->stopStreaming();
@@ -61,11 +68,25 @@ bool HDMIStreamerProcess::stopStreaming()
 
 bool HDMIStreamerProcess::startRecording(const string& fName, int bitRate)
 {
+	Log(lInfo) << "Starting recording HDMI using outputFileName = "<<fName<<" and bitrate = "<<bitRate;
 	//Change file name
     mOutputFileName = fName;
     mBitRate = bitRate;
-	startStreaming();
-	return false;
+
+	//Make sure output folder exists, if not create it
+    if(!folderExists(getFilePath(fName)))
+    {
+		string folder(getFilePath(fName));
+        Log(lInfo) << "Creating folder: " <<folder;
+		if(!createFolder(folder))
+        {
+	        Log(lError) << "Failed creating folder: " <<folder;
+	        Log(lError) << "Failed starting HDMI streamer";
+        	return false;
+        }
+    }
+
+	return startStreaming();
 }
 
 bool HDMIStreamerProcess::stopRecording()
@@ -82,6 +103,11 @@ void HDMIStreamerProcess::run()
     	onEnter(0,0);
     }
 
+    if(onEnter2)
+    {
+    	onEnter2(0,0);
+    }
+
 	mIsRunning = true;
 
 	try
@@ -92,6 +118,9 @@ void HDMIStreamerProcess::run()
         args.append("-b" + mtk::toString(mBitRate));
         args.append("-f" + mOutputFileName);
 
+
+        Log(lInfo) <<"Entered streamerthread";
+        Log(lInfo) <<"Calling "<<mBMStreamerExecutable<<" using args "<<args.asString();
         //Capture output
         Pipe outPipe;
 
@@ -119,25 +148,25 @@ void HDMIStreamerProcess::run()
                 Log(lDebug5) << s;
                 s.clear();
 
+                Poco::File aFile(mOutputFileName);
+                long sz(0);
+                if(aFile.exists())
+                {
+                    sz = aFile.getSize();
+                }
+
                 if(onProgress)
                 {
-        		    Poco::File aFile(mOutputFileName);
-                    if(aFile.exists())
-                    {
-		            	long sz = aFile.getSize();
-		                onProgress(sz, 0);
-                    }
+	                onProgress(sz, 0);
+                }
+
+                if(onProgress2)
+                {
+	                onProgress2(sz, 0);
                 }
             }
 
-//            if(istr.peek() != EOF)
-            {
-            	c = istr.get();
-            }
-//            else
-//            {
-//            	c = 0;
-//            }
+           	c = istr.get();
 
 			if(mIsTimeToDie)
             {
@@ -148,18 +177,21 @@ void HDMIStreamerProcess::run()
         //Thread is exiting
         //Waith for managed process to exit
         int ec = ph.wait();
-        Log(lInfo) <<"Process exit code: "<<ec;
+        Log(lInfo) <<"Streamer thread exited with code: "<<ec;
     }
     catch(...)
     {
 		Log(lError) << "Unhandled exception..";
     }
 
-	Log(lInfo) << "Exiting thread..";
-
     if(onExit)
     {
     	onExit(0,0);
+    }
+
+    if(onExit2)
+    {
+    	onExit2(0,0);
     }
 
 	mIsRunning = false;

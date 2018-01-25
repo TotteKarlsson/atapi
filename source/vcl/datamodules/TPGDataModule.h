@@ -307,10 +307,13 @@ __published:	// IDE-managed Components
         void    __fastcall           	afterDisConnect();
         bool							isConnected();
         int		__fastcall				getCurrentBlockID();
+        int		__fastcall				getCurrentBlockIDFromAllBlocks();
         int 	__fastcall				getIDForSpecie(const string& specie);
 		String __fastcall 				createBlockLabel();
         bool	__fastcall				insertBlockNote(int userID, int blockID, const string& note);
         bool	__fastcall				insertRibbonNote(int userID, const string& ribbonID, const string& note);
+        int 	__fastcall				updateMovieTableWithRibbonID(const string& rID, int csID);
+        int		__fastcall				updateImagesTableWithRibbonID(const string& rID, int csID);
 
         StringList 						getTableNames();
 		bool							addNoteForBlock(int blockID, int userID, const string& note);

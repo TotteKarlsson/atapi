@@ -35,7 +35,6 @@ object pgDM: TpgDM
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
-    Connected = True
     Left = 40
     Top = 24
   end
@@ -422,6 +421,7 @@ object pgDM: TpgDM
       FieldName = 'nr_of_sections'
     end
     object ribbonsCDScreated_on: TSQLTimeStampField
+      DisplayLabel = 'Created On'
       FieldName = 'created_on'
       ProviderFlags = [pfInUpdate]
     end
@@ -505,8 +505,8 @@ object pgDM: TpgDM
   end
   object ribbonsDS: TSQLDataSet
     CommandText = 
-      'SELECT * from ribbons where block_id=:id ORDER by cutting_order ' +
-      'DESC'
+      'SELECT * from ribbons where block_id=:id ORDER by created_on DES' +
+      'C'
     DataSource = allBlocksDataSource
     MaxBlobSize = -1
     Params = <
@@ -515,6 +515,7 @@ object pgDM: TpgDM
         Name = 'id'
         ParamType = ptInput
       end>
+    SortFieldNames = ' created_on '
     SQLConnection = SQLConnection1
     Left = 40
     Top = 504

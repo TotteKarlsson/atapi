@@ -30,7 +30,6 @@ class PACKAGE TMoviesFrame : public TFrame
     private:
 		StringList				fetchRecords();
 		void			        clearMovieFrames();
-        int						mBlockID;
 
     public:
                 __fastcall 			TMoviesFrame(TComponent* Owner);

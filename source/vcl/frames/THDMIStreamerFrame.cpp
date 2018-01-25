@@ -3,6 +3,7 @@
 #include "THDMIStreamerFrame.h"
 #include "mtkLogger.h"
 #include "mtkVCLUtils.h"
+#include "ArrayCamUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
@@ -34,6 +35,11 @@ __fastcall THDMIStreamerFrame::~THDMIStreamerFrame()
     }
 }
 
+HDMIStreamerProcess& THDMIStreamerFrame::getStreamer()
+{
+	return mStreamer;
+}
+
 void THDMIStreamerFrame::enableSettings()
 {
 	enableDisableGroupBox(SettingsGB, true);
@@ -52,23 +58,24 @@ bool THDMIStreamerFrame::isStreamerAlive()
 bool THDMIStreamerFrame::shutDownStreamer()
 {
    	mStreamer.exit();
+    return true;
+}
+
+void THDMIStreamerFrame::setPathPostFix(const string& f)
+{
+	mPathPostFix = f;
 }
 
 //---------------------------------------------------------------------------
 void __fastcall THDMIStreamerFrame::StartStreamerBtnClick(TObject *Sender)
 {
-	TArrayBotButton* b = dynamic_cast<TArrayBotButton*>(Sender);
-
-    if(b == StartRecordingBtn)
+    if(StartRecordingBtn->Caption == "Start Recording")
     {
-        if(b->Caption == "Start Recording")
-        {
-            mStreamer.startRecording(joinPath(OutputFileFolderE->getValue(), OutputFileNameE->getValue()), BitrateE->getValue());
-        }
-        else
-        {
-            mStreamer.stopRecording();
-        }
+        mStreamer.startRecording(joinPath(OutputFileFolderE->getValue(), mPathPostFix, OutputFileNameE->getValue()), BitrateE->getValue());
+    }
+    else
+    {
+        mStreamer.stopRecording();
     }
 }
 
@@ -78,7 +85,7 @@ void THDMIStreamerFrame::onEnter(int i, int j)
     {
         int i, j;
         THDMIStreamerFrame* f;
-        void __fastcall onEnter()
+        void __fastcall fn()
         {
             Log(lInfo) << "HDMI Streamer Thread was entered..";
 			f->StartRecordingBtn->Caption = "Stop Recording";
@@ -89,7 +96,7 @@ void THDMIStreamerFrame::onEnter(int i, int j)
     lcl.i = i;
     lcl.j = j;
     lcl.f = this;
-    TThread::Synchronize(0, &lcl.onEnter);
+    TThread::Synchronize(0, &lcl.fn);
 }
 
 void THDMIStreamerFrame::onProgress(int i, int j)
@@ -98,7 +105,7 @@ void THDMIStreamerFrame::onProgress(int i, int j)
     {
         int i, j;
         THDMIStreamerFrame* f;
-        void __fastcall onProgress()
+        void __fastcall fn()
         {
         	//Check current file size
         	f->StartRecordingBtn->Caption = "Stop Recording\n" + vclstr(getHumanReadableFileSize(i));
@@ -108,7 +115,7 @@ void THDMIStreamerFrame::onProgress(int i, int j)
     lcl.i = i;
     lcl.j = j;
     lcl.f = this;
-    TThread::Synchronize(0, &lcl.onProgress);
+    TThread::Synchronize(0, &lcl.fn);
 }
 
 void THDMIStreamerFrame::onExit(int i, int j)
@@ -117,7 +124,7 @@ void THDMIStreamerFrame::onExit(int i, int j)
     {
         int i, j;
         THDMIStreamerFrame* f;
-        void __fastcall onEnter()
+        void __fastcall fn()
         {
             Log(lInfo) << "HDMI Streamer Thread exited..";
 			f->StartRecordingBtn->Caption = "Start Recording";
@@ -128,15 +135,7 @@ void THDMIStreamerFrame::onExit(int i, int j)
     lcl.i = i;
     lcl.j = j;
     lcl.f = this;
-    TThread::Synchronize(0, &lcl.onEnter);
-}
-
-void __fastcall THDMIStreamerFrame::CheckStatusTimer(TObject *Sender)
-{
-	if(mStreamer.isRunning())
-    {
-
-    }
+    TThread::Synchronize(0, &lcl.fn);
 }
 
 

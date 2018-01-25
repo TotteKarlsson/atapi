@@ -108,6 +108,7 @@ class AT_UC7 UC7 : public ATObject
         bool							isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
         bool							isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
         int								getLastNumberOfSections(){return mSectionCounter.getLastCount();}
+        int								getCurrentSectionCount(){return mSectionCounter.getCount();}
 
         UC7StatusHistory&				getStatusHistoryRef(){return mUC7StatusHistory;}
 

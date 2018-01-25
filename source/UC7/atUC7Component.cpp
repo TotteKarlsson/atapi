@@ -189,7 +189,7 @@ void UC7::onPrepareToCutRibbon()
     mCustomTimer.stop();
 //	Log(lInfo) << "Moving Knife stage ============ SOUTH "<<mKnifeStageJogPreset<<" (nm) ==================";
 //    jogKnifeStageSouth(mKnifeStageJogPreset);
-//    mRibbonOrderCounter.increase();
+    mRibbonOrderCounter.increase();
 }
 
 void UC7::onPrepareForNewRibbon()

@@ -466,6 +466,24 @@ int	__fastcall TpgDM::getCurrentBlockID()
    	return -1;
 }
 
+int	__fastcall TpgDM::getCurrentBlockIDFromAllBlocks()
+{
+	if(allBlocksCDS->Active)
+    {
+    	try
+        {
+	    	return allBlocksCDS->FieldByName("id")->Text.ToInt();
+        }
+        catch(...)
+        {
+         	return -1;
+        }
+
+    }
+   	return -1;
+}
+
+
 int __fastcall TpgDM::getIDForSpecie(const string& specie)
 {
 	if(speciesDS->Active)
@@ -741,4 +759,44 @@ bool TpgDM::addNoteForKnife(int knifeID, int userID, const string& note)
 }
 
 
+int __fastcall	TpgDM::updateMovieTableWithRibbonID(const string& rID, int csID)
+{
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection!";
+        return false;
+    }
+
+    stringstream q;
+    q << "UPDATE movies SET ribbon_id = :rID WHERE coverslip_id = :cID AND ribbon_id LIKE '-1'" ;
+
+    auto_ptr<TSQLQuery> tq = auto_ptr<TSQLQuery>(new TSQLQuery(NULL));
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+    tq->SQL->Add(q.str().c_str());
+    tq->Params->ParamByName("rID")->AsString = rID.c_str();
+    tq->Params->ParamByName("cID")->AsInteger = csID;
+	return tq->ExecSQL();
+}
+
+int __fastcall	TpgDM::updateImagesTableWithRibbonID(const string& rID, int csID)
+{
+   if(!pgDM->SQLConnection1)
+    {
+        Log(lError) << "No SQL connection!";
+        return false;
+    }
+
+    stringstream q;
+    q << "UPDATE images SET ribbon_id = :rID WHERE coverslip_id = :cID AND ribbon_id = -1";
+
+    auto_ptr<TSQLQuery> tq = auto_ptr<TSQLQuery>(new TSQLQuery(NULL));
+
+    tq->SQLConnection = pgDM->SQLConnection1;
+
+    tq->SQL->Add(q.str().c_str());
+    tq->Params->ParamByName("rID")->AsString = rID.c_str();
+    tq->Params->ParamByName("cID")->AsInteger = csID;
+	return tq->ExecSQL();
+}
 

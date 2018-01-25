@@ -10,7 +10,7 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "atHDMIStreamerProcess.h"
+#include "core/atHDMIStreamerProcess.h"
 //---------------------------------------------------------------------------
 
 class PACKAGE THDMIStreamerFrame : public TFrame
@@ -23,7 +23,6 @@ class PACKAGE THDMIStreamerFrame : public TFrame
 	TTimer *CheckStatus;
 	TArrayBotButton *StartRecordingBtn;
 	void __fastcall StartStreamerBtnClick(TObject *Sender);
-	void __fastcall CheckStatusTimer(TObject *Sender);
 
     private:
 		HDMIStreamerProcess			   	mStreamer;
@@ -31,13 +30,18 @@ class PACKAGE THDMIStreamerFrame : public TFrame
 	    void 				            onProgress(int i, int j);
 	    void 				            onExit(int i, int j);
 
+        								//!Typically block ID
+        string							mPathPostFix;
+
     public:
         		__fastcall 				THDMIStreamerFrame(TComponent* Owner);
         		__fastcall 				~THDMIStreamerFrame();
 		bool							isStreamerAlive();
+        void							setPathPostFix(const string& f);
 		bool							shutDownStreamer();
         void							enableSettings();
         void							disableSettings();
+		HDMIStreamerProcess&			getStreamer();
 
 };
 

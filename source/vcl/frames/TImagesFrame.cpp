@@ -16,8 +16,7 @@ using namespace mtk;
 
 //---------------------------------------------------------------------------
 __fastcall TImagesFrame::TImagesFrame(TComponent* Owner)
-	: TFrame(Owner),
-    mBlockID(0)
+	: TFrame(Owner)
 {
 }
 
@@ -36,7 +35,6 @@ void TImagesFrame::populate(int blockID, Poco::Path& mediaPath)
 
         //Create path
         Poco::Path p(mediaPath);
-        p.append("Images");
         p.append(mtk::toString(blockID));
         Log(lDebug) << "Looking for images in folder: " << p.toString();
 

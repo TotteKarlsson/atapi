@@ -67,8 +67,8 @@ object MoviesFrame: TMoviesFrame
       end>
     SQL.Strings = (
       
-        'SELECT id,created from movies where block_id=:id ORDER by create' +
-        'd DESC')
+        'SELECT id,created,fileextension from movies where block_id=:id O' +
+        'RDER by created DESC')
     SQLConnection = pgDM.SQLConnection1
     Left = 69
     Top = 96

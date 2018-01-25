@@ -31,7 +31,6 @@ class PACKAGE TImagesFrame : public TFrame
     private:
 		StringList				fetchRecords();
 		void			        clearItemFrames();
-        int						mBlockID;
 
     public:
                 __fastcall 			TImagesFrame(TComponent* Owner);

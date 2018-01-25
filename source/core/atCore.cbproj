@@ -164,6 +164,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>atExceptions.h</DependentOn>
             <BuildOrder>35</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atHDMIStreamerProcess.cpp">
+            <DependentOn>atHDMIStreamerProcess.h</DependentOn>
+            <BuildOrder>31</BuildOrder>
+        </CppCompile>
         <CppCompile Include="atPreset.cpp">
             <DependentOn>atPreset.h</DependentOn>
             <BuildOrder>41</BuildOrder>

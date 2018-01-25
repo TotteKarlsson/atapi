@@ -48,6 +48,10 @@ __fastcall TMovieItemFrame::TMovieItemFrame(const File& file, TComponent* Owner)
             mTNThread.setInputFile(mMovieFile.path());
             mTNThread.run();
         }
+        else
+        {
+        	Log(lError) << "The Movie file: "<<mMovieFile.path()<<" don't exist";
+        }
     }
 }
 

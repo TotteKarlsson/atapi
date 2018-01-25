@@ -17,8 +17,7 @@ using namespace mtk;
 
 //---------------------------------------------------------------------------
 __fastcall TMoviesFrame::TMoviesFrame(TComponent* Owner)
-	: TFrame(Owner),
-    mBlockID(0)
+	: TFrame(Owner)
 {
 }
 
@@ -37,7 +36,6 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
 
         //Create path
         Poco::Path p(mediaPath);
-        p.append("Movies");
         p.append(mtk::toString(blockID));
         Log(lDebug) << "Looking for movies in folder: " << p.toString();
 
@@ -70,9 +68,11 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
         ScrollBox2->VertScrollBar->Visible = true;
         NrOfRecordsLbl->setValue(l.count());
     }
-    catch(...)
+    catch(const Exception& e)
     {
-    	Log(lError) << "There was a problem...";
+    	Log(lError) << "There was a problem:" << stdstr(e.Message);
+//        St
+        MessageDlg(String("Error: ") + e.Message, mtError, TMsgDlgButtons() << mbOK, 0);
     }
 }
 
@@ -82,7 +82,7 @@ StringList TMoviesFrame::fetchRecords()
     while(!GetMoviesQuery->Eof)
     {
 		stringstream rec;
-        rec <<stdstr(GetMoviesQuery->FieldByName("created")->AsString) <<"," <<stdstr(GetMoviesQuery->FieldByName("id")->AsString) <<".mp4";
+        rec <<stdstr(GetMoviesQuery->FieldByName("created")->AsString) <<"," <<stdstr(GetMoviesQuery->FieldByName("id")->AsString) <<"."<<stdstr(GetMoviesQuery->FieldByName("fileextension")->AsString);
         records.append(rec.str());
         Log(lDebug4) << "Got record: "<< stdstr(GetMoviesQuery->FieldByName("id")->AsString) << " at " << stdstr(GetMoviesQuery->FieldByName("created")->AsString);
         GetMoviesQuery->Next();

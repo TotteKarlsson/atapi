@@ -34,8 +34,8 @@ object HDMIStreamerFrame: THDMIStreamerFrame
       EditLabel.Height = 13
       EditLabel.Caption = 'Output File Folder'
       TabOrder = 1
-      Text = 'P:\\Temp'
-      Value = 'P:\\Temp'
+      Text = 'P:\\AC'
+      Value = 'P:\\AC'
     end
     object OutputFileNameE: TSTDStringLabeledEdit
       Left = 16
@@ -64,7 +64,6 @@ object HDMIStreamerFrame: THDMIStreamerFrame
   object CheckStatus: TTimer
     Enabled = False
     Interval = 150
-    OnTimer = CheckStatusTimer
     Left = 40
     Top = 264
   end

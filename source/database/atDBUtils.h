@@ -14,7 +14,6 @@ std::string AT_DB toString(dbSQLKeyword kw);
 //!MySQL stuff
 void AT_DB handleMySQLException();
 
-
 //!SQLite stuff
 void AT_DB handleSQLiteException();
 

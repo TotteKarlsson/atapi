@@ -7,7 +7,7 @@
 #include <fstream>
 #include "mtkThread.h"
 #include "Poco/PipeStream.h"
-
+#include "core/atATObject.h"
 //---------------------------------------------------------------------------
 using namespace mtk;
 using Poco::Process;
@@ -22,7 +22,7 @@ typedef boost::function<void(int, int)> Callback;
 
 //!The HDMIStreamer process manages a BlackMagic HDMI streamer process, BMStreamer.
 //!The BMStreamer streams HDMI content to an anonomous pipe and, optionally to a file.
-class HDMIStreamerProcess : public mtk::Thread
+class AT_CORE HDMIStreamerProcess : public mtk::Thread
 {
 	public:
 						                HDMIStreamerProcess(const string& bmExecutable = gEmptyString, const string& pipeName = gEmptyString);
@@ -36,6 +36,7 @@ class HDMIStreamerProcess : public mtk::Thread
         bool			                setOutputFileFolder(const string& folder);
         bool			                setOutputFileName(const string& fName);
 		void							assignCallBacks(Callback one, Callback two, Callback three);
+		void							assignCallBacks2(Callback one, Callback two, Callback three);
         virtual void            		run();
         void							exit();
 
@@ -50,6 +51,9 @@ class HDMIStreamerProcess : public mtk::Thread
 	    Callback 						onEnter;
 	    Callback 						onProgress;
 	    Callback 						onExit;
+	    Callback 						onEnter2;
+	    Callback 						onProgress2;
+	    Callback 						onExit2;
 	    int								parseOutput(const string& str);
 		PipeOutputStream* 				mOutStream;
 };
