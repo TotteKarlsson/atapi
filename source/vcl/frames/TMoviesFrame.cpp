@@ -18,8 +18,23 @@ using namespace mtk;
 //---------------------------------------------------------------------------
 __fastcall TMoviesFrame::TMoviesFrame(TComponent* Owner)
 	: TFrame(Owner)
+{}
+
+StringList TMoviesFrame::fetchRecords()
 {
+	StringList records;
+    while(!GetMoviesQuery->Eof)
+    {
+		stringstream rec;
+        rec <<stdstr(GetMoviesQuery->FieldByName("created")->AsString) <<"," <<stdstr(GetMoviesQuery->FieldByName("id")->AsString) <<"."<<stdstr(GetMoviesQuery->FieldByName("fileextension")->AsString);
+        records.append(rec.str());
+        Log(lDebug4) << "Got record: "<< stdstr(GetMoviesQuery->FieldByName("id")->AsString) << " at " << stdstr(GetMoviesQuery->FieldByName("created")->AsString);
+        GetMoviesQuery->Next();
+    }
+
+	return records;
 }
+
 
 void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
 {
@@ -71,24 +86,67 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
     catch(const Exception& e)
     {
     	Log(lError) << "There was a problem:" << stdstr(e.Message);
-//        St
         MessageDlg(String("Error: ") + e.Message, mtError, TMsgDlgButtons() << mbOK, 0);
     }
 }
 
-StringList TMoviesFrame::fetchRecords()
+void TMoviesFrame::populate(int blockID, const string& ribbonID, Poco::Path& mediaPath)
 {
-	StringList records;
-    while(!GetMoviesQuery->Eof)
+	try
     {
-		stringstream rec;
-        rec <<stdstr(GetMoviesQuery->FieldByName("created")->AsString) <<"," <<stdstr(GetMoviesQuery->FieldByName("id")->AsString) <<"."<<stdstr(GetMoviesQuery->FieldByName("fileextension")->AsString);
-        records.append(rec.str());
-        Log(lDebug4) << "Got record: "<< stdstr(GetMoviesQuery->FieldByName("id")->AsString) << " at " << stdstr(GetMoviesQuery->FieldByName("created")->AsString);
-        GetMoviesQuery->Next();
-    }
+	    GetMoviesQuery->SQL->Clear();
+		GetMoviesQuery->SQL->Add("SELECT id,created,fileextension from movies where block_id=:bid AND ribbon_id=:rid ORDER by created DESC");
 
-	return records;
+		GetMoviesQuery->Params->ParamByName("bid")->Value = blockID;
+		GetMoviesQuery->Params->ParamByName("rid")->Value = ribbonID.c_str();
+		GetMoviesQuery->Open();
+	    StringList l = fetchRecords();
+		GetMoviesQuery->Close();
+        clearMovieFrames();
+        if(l.count())
+        {
+            ScrollBox2->VertScrollBar->Visible = false;
+        }
+
+        //Create path
+        Poco::Path p(mediaPath);
+        p.append(mtk::toString(blockID));
+        Log(lDebug) << "Looking for movies in folder: " << p.toString();
+
+        for(int i = 0; i < l.count(); i++)
+        {
+            StringList item(l[i], ',');
+            if(item.count() == 2)
+            {
+                Poco::File f(Poco::Path(p, item[1]));
+
+                TMovieItemFrame* frame = new TMovieItemFrame(f,this);
+                frame->Visible = false;
+                frame->MovieLbl->Caption = item[0].c_str();
+                mMovies.push_back(frame);
+            }
+            else
+            {
+                Log(lError) << "Bad movie record..";
+            }
+        }
+
+        list<TMovieItemFrame*>::iterator i = mMovies.begin();
+        while(i != mMovies.end())
+        {
+            (*i)->Parent = FlowPanel1;;
+            (*i)->Visible = true;
+            i++;
+        }
+
+        ScrollBox2->VertScrollBar->Visible = true;
+        NrOfRecordsLbl->setValue(l.count());
+    }
+    catch(const Exception& e)
+    {
+    	Log(lError) << "There was a problem:" << stdstr(e.Message);
+        MessageDlg(String("Error: ") + e.Message, mtError, TMsgDlgButtons() << mbOK, 0);
+    }
 }
 
 void TMoviesFrame::clearMovieFrames()

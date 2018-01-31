@@ -9,6 +9,7 @@ ArrayCamProtocol::ArrayCamProtocol()
     mIPCMessage[acrStartVideoRecorder] 		    = "Start Video Recorder";
     mIPCMessage[acrVideoRecorderStarted] 	    = "Video Recorder Started";
     mIPCMessage[acrStopVideoRecorder] 		    = "Stop Video Recorder";
+    mIPCMessage[acrVideoRecorderStopped] 	    = "Video Recorder Stoppped";
     mIPCMessage[acrTakeSnapShot] 			    = "Take Snapshot";
     mIPCMessage[acrSnapShotTaken] 			    = "Snapshot Taken";
     mIPCMessage[acrEnableBarcodeScanner] 	    = "Enable Barcode Scanner";

@@ -118,6 +118,7 @@ bool UC7::setStrokeState(UC7StrokeState state)
         break;
 
     }
+
     if(state == ssCutting && mFeedRate == 0)
     {
     	mNumberOfZeroStrokes++;
@@ -463,9 +464,9 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 	        mUC7Message.init(cmd.str());
  		break;
 
-        case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:  			Log(lInfo) << "Not implemented!";   		break;
-        case EAST_WEST_MOTOR_MOVEMENT:  						Log(lInfo) << "Not implemented!"; 			break;
-        case SEND_POSITION_AT_MOVEMENT_EAST_WEST:  				Log(lInfo) << "Not implemented!"; 			break;
+        case SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH:  			Log(lInfo) << "Not implemented!";   	break;
+        case EAST_WEST_MOTOR_MOVEMENT:  						Log(lInfo) << "Not implemented!"; 		break;
+        case SEND_POSITION_AT_MOVEMENT_EAST_WEST:  				Log(lInfo) << "Not implemented!"; 		break;
 
         case CUTTING_MOTOR_CONTROL:
        		cmd <<gMotorControllerAddress<<sender<<20<<data1;
@@ -482,8 +483,8 @@ bool UC7::sendUC7Message(const UC7MessageEnum& msgName, const string& data1, con
 	        mUC7Message.init(cmd.str());
  		break;
 
-        case HANDWHEEL_POSITION:  				                Log(lInfo) << "Not implemented!"; 			break;
-        default:        						                Log(lInfo) << "Unhandled Message!";        	break;
+        case HANDWHEEL_POSITION:  				                Log(lInfo) << "Not implemented!"; 		break;
+        default:        						                Log(lInfo) << "Unhandled Message!";     break;
     }
 
     Log(lInfo) << "Sending UC7 command: "<<mUC7Message.getMessageNameAsString() <<"\t\t("<<mUC7Message.getFullMessage()<<")";

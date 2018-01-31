@@ -55,7 +55,7 @@ bool HDMIStreamerProcess::startStreaming()
 
 bool HDMIStreamerProcess::stopStreaming()
 {
-	if(mOutStream)
+	if(mOutStream && mIsTimeToDie == false)
     {
     	(*mOutStream) << std::string(1, 'q');
     	(*mOutStream) << endl;

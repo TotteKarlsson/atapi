@@ -169,14 +169,14 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
 		break;
 
     	case acrStartVideoRecorder:
-        	if(msg == p[acrVideoRecorderStarted])
+        	if(msg == p[acrVideoRecorderStarted] || msg == "IS_RECORDING=true")
     		{
                 mIsProcessed = true;
             }
 		break;
 
     	case acrStopVideoRecorder:
-        	if(msg == p[acrVideoRecorderStopped])
+        	if(msg == p[acrVideoRecorderStopped] || msg == "IS_RECORDING=false")
     		{
                 mIsProcessed = true;
             }

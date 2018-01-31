@@ -34,6 +34,7 @@ class PACKAGE TMoviesFrame : public TFrame
     public:
                 __fastcall 			TMoviesFrame(TComponent* Owner);
         void						populate(int blockID, Poco::Path& mediaPath);
+        void						populate(int blockID, const string& ribbonID, Poco::Path& mediaPath);
 		list<TMovieItemFrame*>      mMovies;
 };
 
