@@ -40,7 +40,12 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
 {
 	try
     {
+	    GetMoviesQuery->SQL->Clear();
+		GetMoviesQuery->SQL->Add("SELECT id,created,fileextension from movies where block_id=:bid ORDER by created DESC");
+
+		GetMoviesQuery->Params->ParamByName("bid")->Value = blockID;
 		GetMoviesQuery->Open();
+
 	    StringList l = fetchRecords();
 		GetMoviesQuery->Close();
         clearMovieFrames();

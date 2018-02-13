@@ -293,6 +293,7 @@ __published:	// IDE-managed Components
 	void __fastcall cdsbeforeDelete(TDataSet *DataSet);
 
 
+
 	private:
 
     protected:
