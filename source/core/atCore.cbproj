@@ -189,6 +189,14 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>47</BuildOrder>
         </CppCompile>
+        <CppCompile Include="WatchDogSensor.cpp">
+            <DependentOn>WatchDogSensor.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="WatchDogServer.cpp">
+            <DependentOn>WatchDogServer.h</DependentOn>
+            <BuildOrder>33</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\labelprinter\atTSCLIB.cpp">
             <BuildOrder>25</BuildOrder>
         </CppCompile>

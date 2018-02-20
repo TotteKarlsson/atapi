@@ -6,7 +6,11 @@
 #include <Data.SqlExpr.hpp>
 #include <Datasnap.DBClient.hpp>
 #include <Datasnap.Provider.hpp>
+#include <string>
+#include "core/WatchDogSensor.h"
 //---------------------------------------------------------------------------
+
+using std::string;
 
 
 class PACKAGE TSensorsDataModule : public TDataModule
@@ -20,7 +24,7 @@ class PACKAGE TSensorsDataModule : public TDataModule
 
     public:
                         __fastcall 	TSensorsDataModule(TComponent* Owner);
-        bool 						insertSensorData(int sensorID, double val1, double val2);
+        bool 						insertSensorData(WatchDogSensor& s);
 };
 
 

@@ -6,6 +6,7 @@ object SensorsDataModule: TSensorsDataModule
     CommandText = 'SELECT * from sensordata order by date_time'
     MaxBlobSize = -1
     Params = <>
+    SQLConnection = pgDM.SQLConnection1
     Left = 48
     Top = 88
   end

@@ -16,7 +16,7 @@ __fastcall TSensorsDataModule::TSensorsDataModule(TComponent* Owner)
 {}
 
 //---------------------------------------------------------------------------
-bool TSensorsDataModule::insertSensorData(int sensorID, double val1, double val2)
+bool TSensorsDataModule::insertSensorData(WatchDogSensor& s)
 {
     if(!pgDM || pgDM->SQLConnection1->Connected == false)
     {
@@ -24,23 +24,19 @@ bool TSensorsDataModule::insertSensorData(int sensorID, double val1, double val2
         return false;
     }
 
-    //Create some local variables
-    int sensor_id(sensorID);
-
-    //Add image to database
-    //Make sure the barcode exists in the database..
     static TSQLQuery* tq = new TSQLQuery(NULL);
     tq->SQLConnection = pgDM->SQLConnection1;
     tq->SQLConnection->AutoClone = false;
     stringstream q;
-    q <<"INSERT INTO sensordata (sensor_id, data1, data2) VALUES ('"
-                <<sensor_id<<"', '"
-                <<val1<<"', '"
-                <<val2
+    q <<"INSERT INTO sensordata (location, sensor_id, data1, data2, data3) VALUES ('"
+                <<s.getLocationID()	<<"', '"
+                <<s.getDeviceID()	<<"', '"
+                <<s.getTemperature()<<"', '"
+                <<s.getHumidity()	<<"', '"
+                <<s.getDewPoint()
                 <<"')";
 
-    string s(q.str());
-    Log(lDebug) <<"Sensor Data Insertion Query: "<<s;
+    Log(lDebug) <<"Sensor Data Insertion Query: "<<q.str();
     tq->SQL->Add(q.str().c_str());
     tq->ExecSQL();
     tq->Close();
