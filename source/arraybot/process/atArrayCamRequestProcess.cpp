@@ -150,7 +150,7 @@ void ArrayCamRequestProcess::onReceivedResponse(const string& msg)
     }
     ArrayCamProtocol p;
 
-    Log(lInfo) << "Got ArrayCam Response: "<<msg;
+    Log(lDebug5) << "Got ArrayCam Response: "<<msg;
 
     switch(mRequest)
     {

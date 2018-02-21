@@ -92,9 +92,9 @@ bool XYZUnit::isActive()
 
 bool XYZUnit::initialize()
 {
+    Log(lInfo) << "Initializing XYZUnit: "<< mName;
     mProperties.read();
 	mDeviceManager.reBuildDeviceList();
-    Log(lInfo) << "Initializing XYZUnit: "<< mName;
 
 	//Setup all the motors
     mXMotor = dynamic_cast<APTMotor*>(mDeviceManager.connectDevice(mXMotorSerialNr));

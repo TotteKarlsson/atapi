@@ -16,18 +16,29 @@ AvailableOID("1.4"),
 TemperatureOID("1.5"),
 HumidityOID("1.6"),
 DewPointOID("1.7"),
-mLocationID(0)
+mLocationID(0),
+mReadCycleTime(0)
 {
     mProperties.setSection("WATCHDOG_SERVER");
 	mProperties.add((BaseProperty*)  &mServerIP.setup(				"SERVER_IP",    	 		"192.168.123.123"));
 	mProperties.add((BaseProperty*)  &mInBuiltSensorID.setup(		"INBUILT_SENSOR_ID",    	"-1"));
 	mProperties.add((BaseProperty*)  &mLocationID.setup(			"LOCATION_ID",    			-1));
-
+	mProperties.add((BaseProperty*)  &mReadCycleTime.setup(			"READ_CYCLE_TIME",    		0));
 	mProperties.setIniFile(&mIniFile);
 }
 
 WatchDogServer::~WatchDogServer()
 {}
+
+Property<string>& WatchDogServer::getServerIPProperty()
+{
+	return mServerIP;
+}
+
+Property<int>& WatchDogServer::getReadCycleTimeProperty()
+{
+	return mReadCycleTime;
+}
 
 //Rename this to, readAndSetup
 bool WatchDogServer::readIniParameters()
@@ -41,7 +52,6 @@ bool WatchDogServer::readIniParameters()
     mInbuiltSensor.setLocationID(mLocationID);
     addSensor(&mInbuiltSensor);
 
-
     //Check for external sensors
     StringList secs = mIniFile.getListOfSections();
     for(int i = 0; i < secs.count(); i++)
@@ -50,9 +60,8 @@ bool WatchDogServer::readIniParameters()
         {
         	IniSection* sec = mIniFile.getSection(secs[i]);
             WatchDogSensor* sensor = new WatchDogSensor();
-
-            sensor->mDeviceID = sec->getKey("SENSOR_ID")->mValue;
-            sensor->mInstance = mtk::toInt(sec->getKey("INSTANCE_ID_IN_TREE")->mValue);
+            sensor->mDeviceID	= sec->getKey("SENSOR_ID")->mValue;
+            sensor->mInstance 	= mtk::toInt(sec->getKey("INSTANCE_ID_IN_TREE")->mValue);
             sensor->mLocationID = mtk::toInt(sec->getKey("LOCATION_ID")->mValue);
             sensor->mSubRootOID = 9;
             addSensor(sensor);
@@ -63,7 +72,7 @@ bool WatchDogServer::readIniParameters()
 
 bool WatchDogServer::writeIniParameters()
 {
-    mProperties.write();
+    return mProperties.write();
 }
 
 void WatchDogServer::setIP(const string& ip)
@@ -74,6 +83,7 @@ void WatchDogServer::setIP(const string& ip)
 bool WatchDogServer::addSensor(WatchDogSensor* sensor)
 {
 	mSensors.push_back(sensor);
+    return true;
 }
 
 int WatchDogServer::getNumberOfSensors()
