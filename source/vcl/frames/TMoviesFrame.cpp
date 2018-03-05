@@ -70,19 +70,13 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
                 frame->Visible = false;
                 frame->MovieLbl->Caption = item[0].c_str();
                 mMovies.push_back(frame);
+	            frame->Parent = FlowPanel1;
+                frame->Visible = true;
             }
             else
             {
                 Log(lError) << "Bad movie record..";
             }
-        }
-
-        list<TMovieItemFrame*>::iterator i = mMovies.begin();
-        while(i != mMovies.end())
-        {
-            (*i)->Parent = FlowPanel1;;
-            (*i)->Visible = true;
-            i++;
         }
 
         ScrollBox2->VertScrollBar->Visible = true;

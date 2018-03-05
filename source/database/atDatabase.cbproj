@@ -109,28 +109,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atATDBClientDBSession.cpp">
-            <DependentOn>atATDBClientDBSession.h</DependentOn>
-            <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atATDBServerSession.cpp">
-            <DependentOn>atATDBServerSession.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atDatabase.cpp">
             <DependentOn>atDatabase.h</DependentOn>
             <BuildOrder>34</BuildOrder>
         </CppCompile>
-        <CppCompile Include="atDBConnection.cpp">
-            <DependentOn>atDBConnection.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atDBCredentials.cpp">
             <BuildOrder>7</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atDBUtils.cpp">
-            <DependentOn>atDBUtils.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="atQueryBuilder.cpp">
             <BuildOrder>6</BuildOrder>

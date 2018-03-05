@@ -800,3 +800,4 @@ int __fastcall	TpgDM::updateImagesTableWithRibbonID(const string& rID, int csID)
 	return tq->ExecSQL();
 }
 
+
