@@ -11,12 +11,13 @@ object MovieItemFrame: TMovieItemFrame
   object MovieLbl: TLabel
     Left = 25
     Top = 232
-    Width = 41
+    Width = 257
     Height = 13
     Align = alBottom
     Alignment = taCenter
     Caption = 'MovieLbl'
     Layout = tlCenter
+    ExplicitWidth = 41
   end
   object WarningImage: TImage
     Left = 25
@@ -369,9 +370,6 @@ object MovieItemFrame: TMovieItemFrame
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 50
-    ExplicitTop = 166
-    ExplicitWidth = 207
     object PlayBtn: TArrayBotButton
       Left = 0
       Top = 0
@@ -382,9 +380,6 @@ object MovieItemFrame: TMovieItemFrame
       TabOrder = 0
       OnClick = PlayBtnClick
       SoundID = 'BUTTON_CLICK_4'
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitHeight = 39
     end
   end
 end

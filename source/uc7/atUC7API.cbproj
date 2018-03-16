@@ -106,6 +106,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Defines>POCO_STATIC;$(Defines)</Defines>
         <DynamicRTL>true</DynamicRTL>
         <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
         <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
@@ -204,9 +205,11 @@
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\vlcComponent.bpl">File p:\build\debug\BPL\vlcComponent.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayBotPackage.bpl">File p:\build\debug\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayCamPackage.bpl">File p:\build\debug\BPL\ArrayCamPackage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="P:\build\xe3_ide\BPL\ArrayBotPackage.bpl">ArrayBotPackage</Excluded_Packages>
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment/>

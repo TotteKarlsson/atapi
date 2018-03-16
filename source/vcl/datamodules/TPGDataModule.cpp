@@ -488,6 +488,7 @@ int __fastcall TpgDM::getIDForSpecie(const string& specie)
 {
 	if(speciesDS->Active)
     {
+    	//TODO: use smart pointer
     	TSQLQuery *q = new TSQLQuery(NULL);
         q->SQLConnection = SQLConnection1;
         q->SQL->Add("SELECT id FROM species WHERE name = '" + String(specie.c_str()) + "'");

@@ -11,9 +11,5 @@
 
 #pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "poco_foundation-static.lib")
-//#pragma comment(lib, "poco_data-static.lib")
-//#pragma comment(lib, "poco_mysql_connector-static.lib")
-//#pragma comment(lib, "poco_sqlite_connector-static.lib")
-//#pragma comment(lib, "libmysqlB.lib")
 
 
