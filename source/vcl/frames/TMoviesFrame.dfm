@@ -2,15 +2,16 @@ object MoviesFrame: TMoviesFrame
   Left = 0
   Top = 0
   Width = 849
-  Height = 693
+  Height = 514
   TabOrder = 0
   object Panel22: TPanel
     Left = 0
-    Top = 638
+    Top = 459
     Width = 849
     Height = 55
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 638
     object Label4: TLabel
       Left = 32
       Top = 24
@@ -42,18 +43,20 @@ object MoviesFrame: TMoviesFrame
     Left = 0
     Top = 0
     Width = 849
-    Height = 638
+    Height = 459
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 638
     object FlowPanel1: TFlowPanel
       Left = 0
       Top = 0
-      Width = 845
+      Width = 828
       Height = 521
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 845
     end
   end
   object GetMoviesQuery: TSQLQuery

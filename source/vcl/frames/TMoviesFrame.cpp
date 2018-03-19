@@ -36,7 +36,7 @@ StringList TMoviesFrame::fetchRecords()
 }
 
 
-void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
+void TMoviesFrame::populate(int blockID, const Poco::Path& mediaPath)
 {
 	try
     {
@@ -89,7 +89,7 @@ void TMoviesFrame::populate(int blockID, Poco::Path& mediaPath)
     }
 }
 
-void TMoviesFrame::populate(int blockID, const string& ribbonID, Poco::Path& mediaPath)
+void TMoviesFrame::populate(int blockID, const string& ribbonID, const Poco::Path& mediaPath)
 {
 	try
     {

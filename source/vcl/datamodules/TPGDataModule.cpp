@@ -29,7 +29,7 @@ __fastcall TpgDM::~TpgDM()
 
 bool __fastcall TpgDM::connect(const DBCredentials& c)
 {
-    try
+    try    //todo, move this try/catch to higher level)
     {
 	    mCredentials = c;
         SQLConnection1->KeepConnection = true;
