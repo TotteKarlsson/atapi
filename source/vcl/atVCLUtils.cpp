@@ -4,7 +4,7 @@
 #include "mtkVCLUtils.h"
 #include "mtkStringUtils.h"
 #include "mtkLogger.h"
-#include "Poco/Data/RecordSet.h"
+//#include "Poco/Data/RecordSet.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init,weak)
 

@@ -43,8 +43,8 @@ bool TArrayBotButton::init(HWND wnd)
 
 void __fastcall TArrayBotButton::WndProc(TMessage& msg)
 {
-	const int WM_POINTERDOWN 	= 0x0246;
-    const int WM_POINTERUP 		= 0x247;
+//	int WM_POINTERDOWN 	= 0x0246;
+//    const int WM_POINTERUP 		= 0x247;
 
     switch (msg.Msg)
     {

@@ -7,10 +7,10 @@
 #include "Poco/Timespan.h"
 //---------------------------------------------------------------------------
 
-typedef boost::function<void(int, int)> Callback;
 
 class AT_CORE CreateMovieThumbNailThread : public mtk::Thread
 {
+	typedef boost::function<void(int, int)> Callback;
     public:
 								CreateMovieThumbNailThread();
 								~CreateMovieThumbNailThread();

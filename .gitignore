@@ -47,3 +47,4 @@ Debug
 /apps/ArduinoServer/crash_dump_2
 /docs/html
 *.~dsk
+*.stat

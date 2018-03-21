@@ -70,14 +70,9 @@ namespace Tapplicationsoundsframe
 #pragma comment(lib, "atResources.lib")
 #pragma comment(lib, "atBarcodeReader.lib")
 
-//We will just use DBExpress throughout the application
-//#pragma comment(lib, "libmysqlB.lib")
-//#pragma comment(lib, "poco_mysql_connector-static.lib")
-//#pragma comment(lib, "poco_sqlite_connector-static.lib")
-//#pragma comment(lib, "poco_data-static.lib")
-
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "tinyxml2-static.lib")
 #pragma comment(lib, "DuneComponents.bpi")
-#pragma comment(lib, "DBXDevartPostgreSQLDriver170.bpi")
+
+#pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
 

@@ -109,8 +109,8 @@
         <Defines>POCO_STATIC;$(Defines)</Defines>
         <DynamicRTL>true</DynamicRTL>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
-        <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
+        <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
+        <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

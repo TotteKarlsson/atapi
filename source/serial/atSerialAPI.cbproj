@@ -109,8 +109,8 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <Defines>POCO_STATIC;$(Defines)</Defines>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
-        <BPILibOutputDir>$(DEBUG_BUILD)\lib</BPILibOutputDir>
+        <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
+        <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
