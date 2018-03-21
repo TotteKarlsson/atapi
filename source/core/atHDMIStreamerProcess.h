@@ -17,13 +17,11 @@ using Poco::PipeOutputStream;
 using Poco::Pipe;
 using mtk::Thread;
 
-typedef boost::function<void(int, int)> Callback;
-
-
 //!The HDMIStreamer process manages a BlackMagic HDMI streamer process, BMStreamer.
 //!The BMStreamer streams HDMI content to an anonomous pipe and, optionally to a file.
 class AT_CORE HDMIStreamerProcess : public mtk::Thread
 {
+typedef boost::function<void(int, int)> Callback;
 	public:
 						                HDMIStreamerProcess(const string& bmExecutable = gEmptyString, const string& pipeName = gEmptyString);
 						                ~HDMIStreamerProcess();

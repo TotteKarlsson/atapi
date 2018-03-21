@@ -65,7 +65,7 @@
         <IncludePath>$(KINESIS_LIBS);$(IncludePath)</IncludePath>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <PackageImports>VCLCommon;vtk;bindcompfmx;DBXSqliteDriver;vcldbx;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;bcbsmp;websnap;CustomIPTransport;vclribbon;dsnap;IndyIPServer;Intraweb;IndyCore;vcl;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;inet;vclx;inetdbxpress;webdsnap;bdertl;DuneComponents;dbexpress;adortl;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
+        <PackageImports>vtk;bindcompfmx;DBXSqliteDriver;vcldbx;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;bcbsmp;websnap;CustomIPTransport;vclribbon;dsnap;IndyIPServer;Intraweb;IndyCore;vcl;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;inet;vclx;inetdbxpress;webdsnap;bdertl;DuneComponents;dbexpress;adortl;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <IncludePath>$(DEBUG_BCC32)\include;$(IncludePath)</IncludePath>
@@ -746,9 +746,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480&amp;&amp;xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480&amp;&amp;xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent>copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreLinkEvent>
+        <PreLinkEvent>copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
         <PostBuildEvent/>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
