@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atXYZUnit.h"
-#include "atArrayBotJoyStick.h"
+#include "joystick/atArrayBotJoyStick.h"
 #include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 

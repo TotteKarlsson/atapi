@@ -4,6 +4,7 @@
 #include "core/atCoreExporter.h"
 //---------------------------------------------------------------------------
 using std::map;
+using std::string;
 
 //Put this in a header to be shared between server/client
 //!Valid requests/responses enums

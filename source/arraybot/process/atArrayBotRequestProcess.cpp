@@ -9,7 +9,7 @@
 using namespace dsl;
 using namespace tinyxml2;
 
-ArrayBotProtocol ap;
+static ArrayBotProtocol ap;
 //---------------------------------------------------------------------------
 ArrayBotRequestProcess::ArrayBotRequestProcess(ArrayBotClient& acc, const string& lbl, const string& request)
 :

@@ -9,7 +9,7 @@
 using namespace dsl;
 using namespace tinyxml2;
 
-ArrayCamProtocol ap;
+static ArrayCamProtocol ap;
 //---------------------------------------------------------------------------
 ArrayCamRequestProcess::ArrayCamRequestProcess(ArrayCamClient& acc, const string& lbl, const string& request)
 :

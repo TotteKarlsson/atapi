@@ -2,7 +2,7 @@
 #include "atDirectSound.h"
 #include <mmsystem.h>
 #include "dslLogger.h"
-
+#include "dslWin32Utils.h"
 using namespace dsl;
 
 DWORD DirectSound::mNrOfInstances;

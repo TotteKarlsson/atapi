@@ -1,8 +1,9 @@
 #pragma hdrstop
 #include "WatchDogServer.h"
 #include "WatchDogSensor.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
-
+using namespace dsl;
 
 WatchDogServer::WatchDogServer(IniFile& ifile)
 :

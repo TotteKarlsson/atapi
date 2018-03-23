@@ -3,7 +3,7 @@
 #include "dslWin32Utils.h"
 #include <windows.h>
 #include "resources/atResourceManager.h"
-
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 //Non exports
 //string 	                getSoundResourceName(ABSound a);

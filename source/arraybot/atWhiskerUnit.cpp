@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "atWhiskerUnit.h"
 #include "dslProperties.h"
-#include "atArrayBotJoyStick.h"
+#include "joystick/atArrayBotJoyStick.h"
 #include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
