@@ -1,9 +1,9 @@
 #ifndef WatchDogSensorH
 #define WatchDogSensorH
 #include "core/atCoreExporter.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 class WatchDogServer;
 

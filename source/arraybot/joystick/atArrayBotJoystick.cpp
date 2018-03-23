@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atArrayBotJoystick.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 ArrayBotJoyStick::ArrayBotJoyStick(int& joyStickID)
 :

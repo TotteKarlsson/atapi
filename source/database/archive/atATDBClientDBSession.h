@@ -5,7 +5,7 @@
 #include "atDBUtils.h"
 #include <deque>
 #include "atDBConnection.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 namespace Poco
 {
@@ -23,12 +23,12 @@ using Poco::Data::Session;
 class AT_DB ATDBClientDBSession : public DBConnection
 {
     public:
-					        	        ATDBClientDBSession(const string& db, const string& host=mtk::gEmptyString, const string& user=mtk::gEmptyString, const string& password=mtk::gEmptyString);
+					        	        ATDBClientDBSession(const string& db, const string& host=dsl::gEmptyString, const string& user=dsl::gEmptyString, const string& password=dsl::gEmptyString);
 					        	        ~ATDBClientDBSession();
 
 										//!Statements
-		bool							insertImageFile(const string& fName, int userID, const string& note=mtk::gEmptyString);
-		bool							insertImageNote(int imageID, int userID, const string& note=mtk::gEmptyString);
+		bool							insertImageFile(const string& fName, int userID, const string& note=dsl::gEmptyString);
+		bool							insertImageNote(int imageID, int userID, const string& note=dsl::gEmptyString);
 
         bool							insertSensorData(int id, double t, double h);
 		RecordSet* 	    				getBlocks(at::dbSQLKeyword kw =at::dbDescending);

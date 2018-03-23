@@ -1,8 +1,8 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TSSHFrame.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "ScBridge"
@@ -13,7 +13,7 @@
 #pragma resource "*.dfm"
 TSSHFrame *SSHFrame;
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TSSHFrame::TSSHFrame(TComponent* Owner)

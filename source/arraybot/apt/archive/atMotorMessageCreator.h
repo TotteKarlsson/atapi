@@ -3,14 +3,14 @@
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "core/atATObject.h"
-#include "mtkThread.h"
-#include "mtkConstants.h"
+#include "dslThread.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 
-//class AT_AB MotorMessageCreator : public mtk::Thread, public ATObject
+//class AT_AB MotorMessageCreator : public dsl::Thread, public ATObject
 //{
 //	public:
-//													MotorMessageCreator(const string& threadName = mtk::gEmptyString);
+//													MotorMessageCreator(const string& threadName = dsl::gEmptyString);
 //													~MotorMessageCreator();
 //
 //													// overridden from Thread

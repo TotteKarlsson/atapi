@@ -12,7 +12,7 @@
 using Poco::Mutex;
 using Poco::Condition;
 using std::deque;
-using mtk::StringList;
+using dsl::StringList;
 
 /*
     The ArduinoDevice and Serial classes are based on classes

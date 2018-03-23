@@ -7,16 +7,16 @@
 #include "TIntLabel.h"
 #include <System.Rtti.hpp>
 #include <Vcl.ComCtrls.hpp>
-#include "mtkProperty.h"
+#include "dslProperty.h"
 #include "sound/atApplicationSound.h"
 //---------------------------------------------------------------------------
 
-namespace mtk
+namespace dsl
 {
 	class IniFileProperties;
 }
 
-using mtk::IniFileProperties;
+using dsl::IniFileProperties;
 
 class PACKAGE TApplicationSoundsFrame : public TFrame
 {

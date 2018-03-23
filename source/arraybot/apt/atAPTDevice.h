@@ -2,12 +2,12 @@
 #define atAPTDeviceH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
-#include "mtkProperties.h"
+#include "dslProperties.h"
 #include "core/atUtilities.h"
-#include "mtkINIFileProperties.h"
-#include "mtkIniFile.h"
+#include "dslINIFileProperties.h"
+#include "dslIniFile.h"
 
-using namespace mtk;
+using namespace dsl;
 struct HardwareInformation;
 
 ///Enum holding Thorlab Device Type IDS
@@ -65,7 +65,7 @@ class AT_AB APTDevice : public ATObject
 //template<> inline
 //std::string Property< DeviceTypeID >::getValueAsString() const
 //{
-//    return mtk::toString(getValue());
+//    return dsl::toString(getValue());
 //}
 //
 //template<> inline
@@ -77,7 +77,7 @@ class AT_AB APTDevice : public ATObject
 //    }
 //
 //    string toWrite;
-//    toWrite = mtk::toString(getValue());
+//    toWrite = dsl::toString(getValue());
 //    iniFile->writeString(mKey, toWrite, "", section);
 //    return true;
 //}
@@ -90,7 +90,7 @@ class AT_AB APTDevice : public ATObject
 //        return false;
 //    }
 //
-//    string val(iniFile->readString(mKey, section, mtk::toString(mDefaultValue)));
+//    string val(iniFile->readString(mKey, section, dsl::toString(mDefaultValue)));
 //
 //    DeviceTypeID tempVal = getDeviceTypeID(val);
 //    mWasRead = iniFile->wasItFound();

@@ -2,9 +2,9 @@
 #include "atRibbonController.h"
 #include <sstream>
 #include "atArduinoServer.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using namespace std;
 
 RibbonController::RibbonController(ArduinoServer& s)

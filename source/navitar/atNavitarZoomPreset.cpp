@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atNavitarZoomPreset.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 NavitarZoomPreset::NavitarZoomPreset(NavitarMotorController& mc, const string& name, const int& z)

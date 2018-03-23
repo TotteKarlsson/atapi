@@ -1,17 +1,17 @@
 #ifndef atArrayBotIPCReceiverH
 #define atArrayBotIPCReceiverH
-#include "mtkIPCReceiver.h"
-#include "mtkIPCServer.h"
+#include "dslIPCReceiver.h"
+#include "dslIPCServer.h"
 #include "arraybot/atABExporter.h"
 //---------------------------------------------------------------------------
 
-using mtk::SocketWorker;
+using dsl::SocketWorker;
 SocketWorker* AT_AB createArrayBotIPCReceiver(int portNr, int socketHandle, void* server);
 
-class AT_AB ArrayBotIPCReceiver : public mtk::IPCReceiver
+class AT_AB ArrayBotIPCReceiver : public dsl::IPCReceiver
 {
     public:
-						        		ArrayBotIPCReceiver(int portNr = -1, int socket_handle = -1, mtk::IPCServer* server = NULL);
+						        		ArrayBotIPCReceiver(int portNr = -1, int socket_handle = -1, dsl::IPCServer* server = NULL);
 						        		~ArrayBotIPCReceiver();
 		virtual void                    Worker();
 

@@ -1,20 +1,20 @@
 #ifndef atArduinoMessageProcessorH
 #define atArduinoMessageProcessorH
 #include <string>
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include "atArduinoExporter.h"
 //----------------------------------------------------------------
 
-using mtk::Thread;
+using dsl::Thread;
 
-namespace mtk
+namespace dsl
 {
 	class MessageContainer;
 }
 
-using mtk::MessageContainer;
+using dsl::MessageContainer;
 class ArduinoClient;
 typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 

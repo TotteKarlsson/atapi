@@ -2,14 +2,14 @@
 #include "atDBUtils.h"
 #include "Poco/Data/SQLite/SQLiteException.h"
 #include "Poco/Data/MySQL/MySqlException.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 
 namespace at
 {
 using namespace Poco::Data;
 using namespace Poco::Data::SQLite;
-using namespace mtk;
+using namespace dsl;
 using namespace std;
 
 string toString(dbSQLKeyword kw)

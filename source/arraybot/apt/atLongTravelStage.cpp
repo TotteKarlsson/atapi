@@ -3,7 +3,7 @@
 #include "thirdparty/thorlabs/Thorlabs.MotionControl.IntegratedStepperMotors.h"
 #include "atLongTravelStage.h"
 
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "core/atExceptions.h"
 #include <bitset>
 using namespace std;

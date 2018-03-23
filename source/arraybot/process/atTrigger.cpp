@@ -4,7 +4,7 @@
 #include "atXYZUnit.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 using Poco::Timespan;
 
 Trigger::Trigger(ATObject* s, LogicOperator lt)

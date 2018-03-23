@@ -2,12 +2,12 @@
 #define atMotorMessageDataH
 #include "arraybot/atABExporter.h"
 #include <string>
-#include "mtkProperty.h"
-#include "mtkRange.h"
+#include "dslProperty.h"
+#include "dslRange.h"
 //--------------------------------------------------------------------
 using std::string;
-using mtk::Property;
-using mtk::Range;
+using dsl::Property;
+using dsl::Range;
 
 //!Motor message data may be send as a windows message to communicate that something
 //!is happening regarding the motor. It is up to the listening UI to communicate this

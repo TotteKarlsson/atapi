@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atTimeDelay.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atXYZUnit.h"
 #include "apt/atAPTMotor.h"
 #include "apt/atMove.h"
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 #include "atProcessSequence.h"
-using namespace mtk;
+using namespace dsl;
 using namespace at;
 using namespace tinyxml2;
 
@@ -40,7 +40,7 @@ XMLElement* TimeDelay::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNo
 {
     //Create XML for saving to file
 	XMLElement* delay = doc.NewElement("delay");
-	delay->SetText(mtk::toString( (long) mTimeDelay.totalMicroseconds()).c_str() );
+	delay->SetText(dsl::toString( (long) mTimeDelay.totalMicroseconds()).c_str() );
 
     docRoot->InsertEndChild(delay);
     return delay;

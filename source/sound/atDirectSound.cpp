@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atDirectSound.h"
 #include <mmsystem.h>
-#include "mtkLogger.h"
+#include "dslLogger.h"
 
-using namespace mtk;
+using namespace dsl;
 
 DWORD DirectSound::mNrOfInstances;
 

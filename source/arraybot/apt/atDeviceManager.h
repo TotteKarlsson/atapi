@@ -4,15 +4,15 @@
 #include <map>
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
-#include "mtkConstants.h"
-#include "mtkStringList.h"
+#include "dslConstants.h"
+#include "dslStringList.h"
 #include "atAPTDevice.h"
 //---------------------------------------------------------------------------
 using std::string;
 using std::map;
 using std::ostream;
-using mtk::gEmptyString;
-using mtk::StringList;
+using dsl::gEmptyString;
+using dsl::StringList;
 
 //Thorlabs device
 class APTDevice;

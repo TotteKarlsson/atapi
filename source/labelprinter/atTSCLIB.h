@@ -4,12 +4,12 @@
 #include <windows.h>
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 
 
 //---------------------------------------------------------------------------
 using std::string;
-using mtk::StringList;
+using dsl::StringList;
 //Function pointers
 typedef int (__stdcall *f_int_void)();
 typedef int (__stdcall *f_int_cchar)(const char*);

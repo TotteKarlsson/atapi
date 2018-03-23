@@ -1,14 +1,14 @@
 #ifndef atCreateMovieThumbNailThreadH
 #define atCreateMovieThumbNailThreadH
 #include "core/atATObject.h"
-#include "mtkThread.h"
+#include "dslThread.h"
 #include <functional>
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
 //---------------------------------------------------------------------------
 
 
-class AT_CORE CreateMovieThumbNailThread : public mtk::Thread
+class AT_CORE CreateMovieThumbNailThread : public dsl::Thread
 {
 	typedef boost::function<void(int, int)> Callback;
     public:

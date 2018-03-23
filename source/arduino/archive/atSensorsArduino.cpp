@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atSensorsArduino.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 SensorsArduino::SensorsArduino(int portNr, int baudRate)

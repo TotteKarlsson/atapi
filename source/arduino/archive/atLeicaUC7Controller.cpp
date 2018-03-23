@@ -3,7 +3,7 @@
 #include "atPufferArduino.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 LeicaUC7Controller::LeicaUC7Controller(PufferArduino& p)
 :

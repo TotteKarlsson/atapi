@@ -1,9 +1,9 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TTextInputDialog.h"
-#include "mtkVCLUtils.h"
+#include "dslVCLUtils.h"
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

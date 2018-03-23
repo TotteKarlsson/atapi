@@ -1,14 +1,14 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "atVCLUtils.h"
-#include "mtkVCLUtils.h"
-#include "mtkStringUtils.h"
-#include "mtkLogger.h"
+#include "dslVCLUtils.h"
+#include "dslStringUtils.h"
+#include "dslLogger.h"
 //#include "Poco/Data/RecordSet.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init,weak)
 
-using namespace mtk;
+using namespace dsl;
 using namespace Poco;
 
 int getCurrentUserID(TComboBox* mUserCB)

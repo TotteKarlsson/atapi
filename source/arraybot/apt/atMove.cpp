@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atMove.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atArrayBot.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
@@ -8,7 +8,7 @@ namespace at
 {
 
 //using namespace std::tr1;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 Move::Move(const string& lbl, APTMotor* mtr, double maxVel, double acc)

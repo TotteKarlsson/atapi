@@ -17,7 +17,7 @@ class AT_ARDUINO ArduinoServerCommand : public Process
 		const string 						getTypeName() const;
 		virtual void		   		        init(ArrayBot& ab);
 		virtual bool 			  	        write(){return false;}
-		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
         virtual bool	                    isBeingProcessed();
         bool 						        isProcessed();

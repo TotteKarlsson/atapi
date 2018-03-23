@@ -11,9 +11,9 @@
 #include "DbxDevartPostgreSQL.hpp"
 #include <string>
 #include "database/atDBCredentials.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 
-using mtk::StringList;
+using dsl::StringList;
 using std::string;
 
 //!The TpgDM class encapsulate data exchange with the ATDB database

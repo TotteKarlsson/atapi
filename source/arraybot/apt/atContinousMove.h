@@ -12,7 +12,7 @@ class AT_AB ContinousMove : public at::Move
 
         bool						isDone();
 		bool 						start();
-		virtual mtk::XMLElement*    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement*    addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
 
     protected:

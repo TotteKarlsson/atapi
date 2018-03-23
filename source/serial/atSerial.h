@@ -2,7 +2,7 @@
 #define atSerialH
 #include "atSerialExporter.h"
 #include "core/atATObject.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 #include "Poco/Mutex.h"
 #include "Poco/Condition.h"
 #include "atSerialPort.h"
@@ -11,8 +11,8 @@
 using Poco::Mutex;
 using Poco::Condition;
 
-using mtk::StringList;
-using mtk::IPCMessageBuilder;
+using dsl::StringList;
+using dsl::IPCMessageBuilder;
 
 typedef void (*SerialMessageReceivedCallBackC)(const string& msg);
 typedef void (__closure *SerialMessageReceivedCallBack)(const string& msg);

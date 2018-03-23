@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "thirdparty/thorlabs/Thorlabs.MotionControl.TCube.DCServo.h"
 #include "atTCubeDCServo.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "core/atExceptions.h"
 #include <bitset>
 using namespace std;

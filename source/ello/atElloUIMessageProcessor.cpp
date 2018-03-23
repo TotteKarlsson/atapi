@@ -1,14 +1,14 @@
 #pragma hdrstop
-#include "mtkStringUtils.h"
-#include "mtkMessageContainer.h"
-#include "mtkSocketClient.h"
-#include "mtkLogger.h"
+#include "dslStringUtils.h"
+#include "dslMessageContainer.h"
+#include "dslSocketClient.h"
+#include "dslLogger.h"
 #include "atElloUIMessageProcessor.h"
-#include "mtkMessageContainer.h"
+#include "dslMessageContainer.h"
 #include "Poco/Mutex.h"
 #include "atElloUIClient.h"
 //----------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ElloUIMessageProcessor::ElloUIMessageProcessor(ElloUIClient& client)
 :

@@ -1,11 +1,11 @@
 #pragma hdrstop
 #include "atMoveCoverSlipAtAngleProcess.h"
 #include "atArrayBot.h"
-#include "mtkMathUtils.h"
+#include "dslMathUtils.h"
 #include "atAPTMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 MoveCoverSlipAtAngleProcess::MoveCoverSlipAtAngleProcess(const string& lbl)

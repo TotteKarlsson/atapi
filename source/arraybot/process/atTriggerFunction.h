@@ -3,7 +3,7 @@
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
 #include <functional>
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 //---------------------------------------------------------------------------
 
 //!A trigger function can be called and saved together with a Trigger.
@@ -29,7 +29,7 @@ class AT_AB TriggerFunction : public ATObject
         virtual bool		   				isActive() = 0;
 
         									//!Ability to read/write trigger objects occurs using xml
-		virtual mtk::XMLElement* 			addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot) = 0;
+		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
 };
 
 //!Move absolute is a subclass of TriggerFunction.
@@ -57,7 +57,7 @@ class AT_AB MoveAbsolute : public  TriggerFunction
         double								getPosition(){return mPosition;}
         void								setPosition(double a){mPosition = a;}
 
-		virtual mtk::XMLElement* 			addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
 	protected:
         APTMotor*		                    mMotor;

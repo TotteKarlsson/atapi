@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "atATDBClientDBSession.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "Poco/Data/MySQL/Connector.h"
 #include "Poco/Data/MySQL/MySQLException.h"
 #include "Poco/Data/SessionFactory.h"
-#include "mtkFileUtils.h"
+#include "dslFileUtils.h"
 #include "Poco/Data/RecordSet.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using namespace at;
 using namespace Poco::Data;
 using namespace Poco::Data::Keywords;
@@ -29,7 +29,7 @@ RecordSet* ATDBClientDBSession::getBlocks(dbSQLKeyword kw)
     }
 
     Statement select(*mTheSession);
-    select << "SELECT * FROM block ORDER BY id " << mtk::toString(kw);
+    select << "SELECT * FROM block ORDER BY id " << dsl::toString(kw);
 
     int nrRows = select.execute();
     return new RecordSet(select);

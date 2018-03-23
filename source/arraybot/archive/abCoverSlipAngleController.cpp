@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atAngleController.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 AngleController::AngleController(const string& name, IniFile& iniFile)
 :

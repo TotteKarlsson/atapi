@@ -3,8 +3,8 @@
 #include "TImagesFrame.h"
 #include "Poco/File.h"
 #include "frames/TImageItemFrame.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #include "TPGImagesAndMoviesDataModule.h"
 #include "TPGDataModule.h"
 //---------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 #pragma link "TIntLabel"
 #pragma resource "*.dfm"
 TImagesFrame *ImagesFrame;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TImagesFrame::TImagesFrame(TComponent* Owner)
@@ -35,7 +35,7 @@ void TImagesFrame::populate(int blockID, Poco::Path& mediaPath)
 
         //Create path
         Poco::Path p(mediaPath);
-        p.append(mtk::toString(blockID));
+        p.append(dsl::toString(blockID));
         Log(lDebug) << "Looking for images in folder: " << p.toString();
 
         for(int i = 0; i < l.count(); i++)

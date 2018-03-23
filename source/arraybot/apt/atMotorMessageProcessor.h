@@ -2,21 +2,21 @@
 #define atMotorMessageProcessorH
 #include "arraybot/atABExporter.h"
 #include <string>
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "core/atATObject.h"
-#include "mtkConstants.h"
-#include "mtkStringList.h"
+#include "dslConstants.h"
+#include "dslStringList.h"
 #include "atMotorMessageProcessor.h"
 #include "atMotorCommand.h"
 //---------------------------------------------------------------------------
 class MotorMessageContainer;
 class APTMotor;
-using mtk::StringList;
+using dsl::StringList;
 
-using mtk::gEmptyString;
+using dsl::gEmptyString;
 typedef void __fastcall (__closure *UICallback)(void);
 
-class AT_AB MotorMessageProcessor : public mtk::Thread, public ATObject
+class AT_AB MotorMessageProcessor : public dsl::Thread, public ATObject
 {
     public:
                                                     MotorMessageProcessor(MotorMessageContainer& list, const string& threadName=gEmptyString);

@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atSerialWorker.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atSerial.h"
-#include "mtkWin32Utils.h"
+#include "dslWin32Utils.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 void SerialWorker::run()
 {

@@ -3,10 +3,10 @@
 #include "core/atATObject.h"
 #include "atPairedMove.h"
 #include <list>
-#include "mtkINIFile.h"
+#include "dslINIFile.h"
 //---------------------------------------------------------------------------
 using std::list;
-using mtk::IniFile;
+using dsl::IniFile;
 
 typedef list<PairedMove> PMList;
 

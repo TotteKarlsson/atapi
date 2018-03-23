@@ -1,18 +1,18 @@
 //#pragma hdrstop
 ////#include <System.Classes.hpp>
 //#include "atMotorMessageCreator.h"
-//#include "mtkStringUtils.h"
+//#include "dslStringUtils.h"
 //#include "atMotorMessageContainer.h"
 //#include "Poco/Mutex.h"
 //#include "Poco/DateTime.h"
 //#include "Poco/DateTimeFormatter.h"
-//#include "mtkLogger.h"
+//#include "dslLogger.h"
 //#include "Poco/DateTime.h"
-//#include "mtkUtils.h"
+//#include "dslUtils.h"
 ////---------------------------------------------------------------------------
 //
 //using Poco::Mutex;
-//using namespace mtk;
+//using namespace dsl;
 ////----------------------------------------------------------------
 //MotorMessageCreator::MotorMessageCreator(const string& threadName)
 //:
@@ -34,7 +34,7 @@
 //void MotorMessageCreator::stop()
 //{
 //	//Sets time to die to true
-//	mtk::Thread::stop();
+//	dsl::Thread::stop();
 //
 //	if(mThread.isRunning())//The dtor will call shutdown. If already shutdown, the thread object is NULL
 //	{
@@ -70,7 +70,7 @@
 //{
 //	if(inThread)
 //	{
-//		return mtk::Thread::start();
+//		return dsl::Thread::start();
 //	}
 //	else
 //	{

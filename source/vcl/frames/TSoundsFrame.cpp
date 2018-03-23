@@ -1,9 +1,9 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TSoundsFrame.h"
-#include "mtkVCLUtils.h"
+#include "dslVCLUtils.h"
 #include "sound/atSounds.h"
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

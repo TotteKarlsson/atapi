@@ -4,12 +4,12 @@
 #include "atNavitarZoomPreset.h"
 #include "atNavitarFocusPreset.h"
 #include "atNavitarMotorController.h"
-#include "mtkINIFileProperties.h"
+#include "dslINIFileProperties.h"
 //---------------------------------------------------------------------------
 
-using mtk::ObjectType;
-using mtk::IniFile;
-using mtk::IniFileProperties;
+using dsl::ObjectType;
+using dsl::IniFile;
+using dsl::IniFileProperties;
 
 class AT_CORE NavitarPreset	: public IniFileProperties
 {

@@ -2,7 +2,7 @@
 #define atArrayCamRequestH
 #include "../atABExporter.h"
 #include "core/atProcess.h"
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 #include "arraycam/atArrayCamProtocol.h"
 #include "atProcessSequenceProject.h"
 
@@ -21,7 +21,7 @@ class AT_AB ArrayCamRequestProcess : public Process
         bool						                setRequest(const string& request);
 		const string 				                getTypeName() const;
 	    void						                clear();
-        virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        virtual dsl::XMLElement*                    addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
         void						                onReceivedResponse(const string& msg);
 
         virtual bool	                            start();

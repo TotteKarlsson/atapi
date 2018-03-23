@@ -6,9 +6,9 @@
 #include "Poco/Data/SessionFactory.h"
 #include "Poco/Data/RecordSet.h"
 #include "atDBUtils.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using namespace at;
 
 using namespace Poco::Data;

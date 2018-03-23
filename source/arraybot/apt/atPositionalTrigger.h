@@ -28,7 +28,7 @@ class AT_AB PositionalTrigger : public Trigger
         double								getPosition(){return mPosition;}
         void								setPosition(double p){mPosition = p;}
 
-		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
     protected:
         double					            mPosition;

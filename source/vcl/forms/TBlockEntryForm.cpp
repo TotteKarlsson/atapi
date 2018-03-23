@@ -1,7 +1,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TBlockEntryForm.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include <Poco/Data/MySQL/MySQLException.h>
 #include "Poco/Data/RecordSet.h"
 //---------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 #pragma resource "*.dfm"
 TBlockEntryForm *BlockEntryForm;
 
-using namespace mtk;
+using namespace dsl;
 using Poco::Data::RecordSet;
 //---------------------------------------------------------------------------
 __fastcall TBlockEntryForm::TBlockEntryForm(ATDBServerSession& dbs, TComponent* Owner)

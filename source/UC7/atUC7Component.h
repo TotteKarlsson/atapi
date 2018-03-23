@@ -9,7 +9,7 @@
 #include "core/atCounter.h"
 #include "atUC7MessageSender.h"
 #include "atUC7MessageReceiver.h"
-#include "mtkTimer.h"
+#include "dslTimer.h"
 #include "atUC7StatusHistory.h"
 #include "atUC7Miscellaneous.h"
 //---------------------------------------------------------------------------
@@ -21,7 +21,7 @@
 //!If a client is querying the UC7 object itself, specify isRequest = false when calling
 //!getfunctions, the current (sw) state is returned.
 
-using mtk::gEmptyString;
+using dsl::gEmptyString;
 using std::deque;
 class UC7MessageReceiver;
 
@@ -166,7 +166,7 @@ class AT_UC7 UC7 : public ATObject
         Counter							                    mSectionCounter;
         Counter							                    mRibbonOrderCounter;
 
-		mtk::Timer	   			                            mCustomTimer;
+		dsl::Timer	   			                            mCustomTimer;
 
         								                    //!Keep history of the UC7 status
         UC7StatusHistory 				                    mUC7StatusHistory;

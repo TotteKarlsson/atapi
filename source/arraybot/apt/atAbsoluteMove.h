@@ -18,7 +18,7 @@ class AT_AB AbsoluteMove : public at::Move
         virtual bool	  			        isDone();
 		bool 						        start();
 		bool 						        resume();
-		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
     protected:
            				                    //!The position is the location which to achieve by the move

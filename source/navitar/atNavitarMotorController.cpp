@@ -1,15 +1,15 @@
 #pragma hdrstop
 #include "atNavitarMotorController.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "poco/DateTime.h"
 
-#include "mtkUtils.h"
+#include "dslUtils.h"
 
-using namespace mtk;
+using namespace dsl;
 
 enum NavitarMotorEnum {nmZoom = 1, nmFocus};
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using Poco::DateTime;
 
 //---------------------------------------------------------------------------

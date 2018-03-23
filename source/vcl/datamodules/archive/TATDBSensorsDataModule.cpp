@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "TATDBSensorsDataModule.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 TatdbSensorsDM *atdbSensorsDM;
 

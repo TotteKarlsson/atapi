@@ -1,8 +1,8 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TPGConnectionFrame.h"
-#include "mtkVCLUtils.h"
-#include "mtkLogger.h"
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
@@ -10,7 +10,7 @@
 #pragma resource "*.dfm"
 
 TPGConnectionFrame *PGConnectionFrame;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TPGConnectionFrame::TPGConnectionFrame(TComponent* Owner)

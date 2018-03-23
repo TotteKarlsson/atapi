@@ -4,18 +4,18 @@
 #include "core/atATObject.h"
 #include "core/atUtilities.h"
 #include "apt/atDeviceManager.h"
-#include "mtkProperties.h"
-#include "mtkINIFileProperties.h"
-#include "mtkINIFile.h"
+#include "dslProperties.h"
+#include "dslINIFileProperties.h"
+#include "dslINIFile.h"
 //#include "atPositions.h"
 //---------------------------------------------------------------------------
 
 class APTMotor;
 class ArrayBotJoyStick;
 class MoveSequencer;
-using mtk::IniFileProperties;
-using mtk::Property;
-using mtk::IniFile;
+using dsl::IniFileProperties;
+using dsl::Property;
+using dsl::IniFile;
 
 class AT_AB XYZUnit : public ATObject
 {

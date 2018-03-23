@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atHDMIStreamerProcess.h"
-#include "mtkFileUtils.h"
-#include "mtkLogger.h"
+#include "dslFileUtils.h"
+#include "dslLogger.h"
 #include "Poco/File.h"
-using namespace mtk;
+using namespace dsl;
 using namespace Poco;
 
 //---------------------------------------------------------------------------
@@ -40,14 +40,14 @@ void HDMIStreamerProcess::assignCallBacks2(Callback one, Callback two, Callback 
 void HDMIStreamerProcess::exit()
 {
 	this->stopStreaming();
-    mtk::Thread::stop();
+    dsl::Thread::stop();
 }
 
 bool HDMIStreamerProcess::startStreaming()
 {
 	if(!this->isRunning())
     {
-    	mtk::Thread::run();
+    	dsl::Thread::run();
     }
 
 	return false;
@@ -115,7 +115,7 @@ void HDMIStreamerProcess::run()
         //Setup arguments
         StringList args;
         args.append("-a");		//Start recording immediately
-        args.append("-b" + mtk::toString(mBitRate));
+        args.append("-b" + dsl::toString(mBitRate));
         args.append("-f" + mOutputFileName);
 
 

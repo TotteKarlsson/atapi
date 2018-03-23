@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atArduinoIPCServerReceiver.h"
-#include "mtkIPCServer.h"
-#include "mtkLogger.h"
-#include "mtkIPCMessageBuilder.h"
+#include "dslIPCServer.h"
+#include "dslLogger.h"
+#include "dslIPCMessageBuilder.h"
 #include "atArduinoUtils.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 SocketWorker* createArduinoIPCReceiver(int portNr, int socketHandle, void* server)
 {

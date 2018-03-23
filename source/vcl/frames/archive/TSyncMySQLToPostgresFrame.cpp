@@ -1,17 +1,17 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TSyncMySQLToPostgresFrame.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
-#include "mtkUtils.h"
-#include "mtkFileUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
+#include "dslUtils.h"
+#include "dslFileUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 TSyncMySQLToPostgresFrame *SyncMySQLToPostgresFrame;
 
-using namespace mtk;
+using namespace dsl;
 
 
 //---------------------------------------------------------------------------

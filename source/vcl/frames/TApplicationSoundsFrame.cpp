@@ -1,8 +1,8 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TApplicationSoundsFrame.h"
-#include "mtkIniFileProperties.h"
-#include "mtkVCLUtils.h"
+#include "dslIniFileProperties.h"
+#include "dslVCLUtils.h"
 #include "sound/atSounds.h"
 #include "sound/atApplicationSound.h"
 #include "atVCLUtils.h"
@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 TApplicationSoundsFrame *ApplicationSoundsFrame;
 
-using namespace mtk;
+using namespace dsl;
 
 
 //---------------------------------------------------------------------------

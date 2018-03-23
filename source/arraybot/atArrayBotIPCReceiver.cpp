@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atArrayBotIPCReceiver.h"
-#include "mtkIPCServer.h"
-#include "mtkLogger.h"
-#include "mtkIPCMessageBuilder.h"
+#include "dslIPCServer.h"
+#include "dslLogger.h"
+#include "dslIPCMessageBuilder.h"
 //#include "ArrayBotUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-using namespace mtk;
+using namespace dsl;
 
 SocketWorker* createArrayBotIPCReceiver(int portNr, int socketHandle, void* server)
 {

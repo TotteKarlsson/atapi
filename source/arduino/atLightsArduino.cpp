@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atLightsArduino.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 LightsArduino::LightsArduino(int portNr, int baudRate)

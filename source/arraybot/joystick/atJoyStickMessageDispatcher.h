@@ -5,11 +5,11 @@
 #include "atJoyStickPOVStateEventDispatcher.h"
 #include <windows.h>
 #include <mmsystem.h>
-#include "mtkTimer.h"
+#include "dslTimer.h"
 #include <utility>
 #include <deque>
 
-using mtk::Timer;
+using dsl::Timer;
 using std::deque;
 typedef deque<JoyStickButtonStateEventDispatcher> 	ButtonStateDeque;
 typedef JoyStickAxisStateEventDispatcher 			JSAxis;

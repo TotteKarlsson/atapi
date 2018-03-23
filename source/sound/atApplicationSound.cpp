@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace mtk;
+using namespace dsl;
 
 ApplicationSound::ApplicationSound(const string& name, long vol, bool repeats, bool enabled, HWND handle)
 :
@@ -54,12 +54,12 @@ bool ApplicationSound::play(DWORD sPos, bool loop)
     return true;
 }
 
-namespace mtk
+namespace dsl
 {
     string	toString(const ApplicationSound& sound)
     {
         stringstream s;
-        s << sound.getName()<<","<<sound.getVolume()<<","<<mtk::toString(sound.repeats())<<","<<mtk::toString(sound.enabled());
+        s << sound.getName()<<","<<sound.getVolume()<<","<<dsl::toString(sound.repeats())<<","<<dsl::toString(sound.enabled());
         return s.str();
     }
 }

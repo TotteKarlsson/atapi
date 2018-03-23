@@ -1,20 +1,20 @@
 #pragma hdrstop
 #include "atUC7MessageReceiver.h"
-#include "mtkStringUtils.h"
+#include "dslStringUtils.h"
 #include "Poco/Mutex.h"
-#include "mtkLogger.h"
-#include "mtkUtils.h"
+#include "dslLogger.h"
+#include "dslUtils.h"
 #include "atUC7Component.h"
 #include "atUC7ApplicationMessages.h"
 #include "atUC7DataStructures.h"
 //---------------------------------------------------------------------------
 
 using Poco::Mutex;
-using namespace mtk;
+using namespace dsl;
 //----------------------------------------------------------------
 UC7MessageReceiver::UC7MessageReceiver(UC7& messageContainer,  HWND__ *h, const string& threadName)
 :
-mtk::Thread(threadName),
+dsl::Thread(threadName),
 mAllowProcessing(true),
 mUC7(messageContainer),
 mProcessedCount(0),
@@ -40,7 +40,7 @@ bool UC7MessageReceiver::start(bool inThread)
 	}
 	if(inThread)
 	{
-		return mtk::Thread::start();
+		return dsl::Thread::start();
 	}
 	else
 	{
@@ -62,7 +62,7 @@ void UC7MessageReceiver::resumeProcessing()
 void UC7MessageReceiver::stop()
 {
 	//Sets time to die to true
-	mtk::Thread::stop();
+	dsl::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
 	mUC7.mNewReceivedMessageCondition.signal();

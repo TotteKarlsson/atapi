@@ -7,16 +7,16 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "mtkIniFile.h"
-#include "mtkIniFileProperties.h"
+#include "dslIniFile.h"
+#include "dslIniFileProperties.h"
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
 #include "TArrayBotBtn.h"
 #include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 
-using mtk::IniFile;
-using mtk::IniFileProperties;
+using dsl::IniFile;
+using dsl::IniFileProperties;
 
 class PACKAGE TPGConnectionFrame : public TFrame
 {

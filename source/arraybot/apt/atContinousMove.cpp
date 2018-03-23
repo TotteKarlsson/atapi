@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atContinousMove.h"
 #include "atAPTMotor.h"
-#include "mtkUtils.h"
-#include "mtkLogger.h"
+#include "dslUtils.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ContinousMove::ContinousMove(const string& lbl, double v, double acc)
 :
@@ -46,10 +46,10 @@ XMLElement* ContinousMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* do
     processNode->SetAttribute("name", mProcessName.c_str());
     processNode->SetAttribute("type", getTypeName().c_str());
 	processNode->SetAttribute("motor_name", mSubjectName.c_str());
-	processNode->SetAttribute("max_velocity", mtk::toString(getMaxVelocity()).c_str());
-	processNode->SetAttribute("acc", mtk::toString(getAcceleration()).c_str());
-	processNode->SetAttribute("pre_dwell_time", mtk::toString(getPreDwellTime()).c_str());
-	processNode->SetAttribute("post_dwell_time", mtk::toString(getPostDwellTime()).c_str());
+	processNode->SetAttribute("max_velocity", dsl::toString(getMaxVelocity()).c_str());
+	processNode->SetAttribute("acc", dsl::toString(getAcceleration()).c_str());
+	processNode->SetAttribute("pre_dwell_time", dsl::toString(getPreDwellTime()).c_str());
+	processNode->SetAttribute("post_dwell_time", dsl::toString(getPostDwellTime()).c_str());
 
     processNode->InsertEndChild(rootNode);
     docRoot->InsertEndChild(processNode);

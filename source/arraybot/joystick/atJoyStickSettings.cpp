@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atJoyStickSettings.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 JoyStickSettings::JoyStickSettings(const string& iniSection, IniFile& iniFile)
 :

@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atPairedMove.h"
-#include "mtkBaseProperty.h"
-#include "mtkMathUtils.h"
-#include "mtkLogger.h"
+#include "dslBaseProperty.h"
+#include "dslMathUtils.h"
+#include "dslLogger.h"
 #include "atAPTMotor.h"
 
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 PairedMove::PairedMove(const string& name, double d, double v, double a)
 :

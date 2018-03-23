@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "TPGCoverSlipDataModule.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
 TcsPGDM *csPGDM;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TcsPGDM::TcsPGDM(TComponent* Owner)

@@ -2,22 +2,22 @@
 #define atArduinoClientH
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
-#include "mtkProperty.h"
-#include "mtkMessageContainer.h"
+#include "dslProperty.h"
+#include "dslMessageContainer.h"
 #include "atArduinoMessageProcessor.h"
-#include "mtkSocketClient.h"
+#include "dslSocketClient.h"
 
-namespace mtk
+namespace dsl
 {
 	class SocketClient;
     class Thread;
 }
 
-using mtk::SocketClient;
-using mtk::Thread;
-using mtk::Property;
-using mtk::MessageContainer;
-using mtk::SocketReceiver;
+using dsl::SocketClient;
+using dsl::Thread;
+using dsl::Property;
+using dsl::MessageContainer;
+using dsl::SocketReceiver;
 
 //!The Arduino (socket) client class connects to a server over a socket.
 //!Messages are received, over the socket, by a socket receiver and placed in a message container.
@@ -30,10 +30,10 @@ class AT_ARDUINO ArduinoClient : public SocketClient, public ATObject
     	virtual                             ~ArduinoClient();
         virtual bool                        shutDown();
 
-        virtual bool                        init(int pNumber = 50010, const string& hostname = mtk::gEmptyString, bool connectOnInit = true);
+        virtual bool                        init(int pNumber = 50010, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
         bool                                isConnected();
         bool                                disConnect();
-        bool                                connect(int pNumber = -1, const string& host = mtk::gEmptyString);
+        bool                                connect(int pNumber = -1, const string& host = dsl::gEmptyString);
 
 		virtual void	 					getBoardStatus(){}
 		void								getServerStatus();

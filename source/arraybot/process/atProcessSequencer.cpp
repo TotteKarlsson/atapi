@@ -1,11 +1,11 @@
  #pragma hdrstop
 #include "atProcessSequencer.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "core/atProcess.h"
-#include "mtkUtils.h"
+#include "dslUtils.h"
 #include "atStopAndResumeProcess.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc,  const string& fileFolder)
 :

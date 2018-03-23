@@ -2,8 +2,8 @@
 #include <windows.h>
 #include "thirdparty/thorlabs/Thorlabs.MotionControl.TCube.StepperMotor.h"
 #include "atDeviceManager.h"
-#include "mtkLogger.h"
-#include "mtkUtils.h"
+#include "dslLogger.h"
+#include "dslUtils.h"
 #include "core/atUtilities.h"
 #include "atTCubeDCServo.h"
 #include "atTCubeStepperMotor.h"
@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace mtk;
+using namespace dsl;
 
 DeviceManager::DeviceManager()
 {

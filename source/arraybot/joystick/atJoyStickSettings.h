@@ -4,10 +4,10 @@
 #include "core/atATObject.h"
 #include "atJoyStickSetting.h"
 #include <list>
-#include "mtkINIFile.h"
+#include "dslINIFile.h"
 //---------------------------------------------------------------------------
 using std::list;
-using mtk::IniFile;
+using dsl::IniFile;
 
 typedef list<JoyStickSetting> JSSettings;
 

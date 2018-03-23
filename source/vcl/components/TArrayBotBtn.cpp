@@ -1,13 +1,13 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TArrayBotBtn.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "sound/atDirectSound.h"
 #include "core/atCore.h"
-#include "mtkVCLUtils.h"
+#include "dslVCLUtils.h"
 #pragma package(smart_init)
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TArrayBotButton::TArrayBotButton(TComponent* Owner)

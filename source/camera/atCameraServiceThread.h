@@ -1,10 +1,10 @@
 #ifndef atCameraServiceThreadH
 #define atCameraServiceThreadH
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "core/atATObject.h"
 
 class Cuc480;
-using mtk::Thread;
+using dsl::Thread;
 
 namespace System
 {

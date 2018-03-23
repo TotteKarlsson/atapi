@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "TSensorsDataModule.h"
 #include "TPGDataModule.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 TSensorsDataModule *sensorsDM;
 
 //---------------------------------------------------------------------------

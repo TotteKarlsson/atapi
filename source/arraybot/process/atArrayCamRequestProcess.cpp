@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atArrayCamRequestProcess.h"
 #include "atXYZUnit.h"
-#include "mtkLogger.h"
-#include "mtkXMLUtils.h"
+#include "dslLogger.h"
+#include "dslXMLUtils.h"
 #include "arraycam/atArrayCamClient.h"
 #include "atProcessSequence.h"
 
-using namespace mtk;
+using namespace dsl;
 using namespace tinyxml2;
 
 ArrayCamProtocol ap;

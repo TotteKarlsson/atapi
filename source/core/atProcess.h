@@ -4,7 +4,7 @@
 #include "core/atATObject.h"
 #include "Poco/TimeStamp.h"
 #include "Poco/Timespan.h"
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 #include "atUtilities.h"
 //---------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ using std::string;
 using Poco::Timestamp;
 using Poco::Timestamp::TimeDiff;
 
-namespace mtk
+namespace dsl
 {
 	class IniSection;
 }
@@ -66,8 +66,8 @@ class AT_CORE Process : public ATObject
         virtual	bool 			 	            isStarted() 		{return mIsStarted;}
 
 
-        virtual mtk::XMLElement*           		addToXMLDocument(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
-		virtual mtk::XMLElement*                addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        virtual dsl::XMLElement*           		addToXMLDocument(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
+		virtual dsl::XMLElement*                addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
         Poco::Timespan							getElapsedTimeSinceStart();
 
     protected:

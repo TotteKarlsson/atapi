@@ -2,8 +2,8 @@
 #pragma hdrstop
 #include "TATDBConnectionFrame.h"
 #include "database/atDBUtils.h"
-#include "mtkVCLUtils.h"
-#include "mtkLogger.h"
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
 #include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -13,7 +13,7 @@
 #pragma resource "*.dfm"
 
 TATDBConnectionFrame *ATDBConnectionFrame;
-using namespace mtk;
+using namespace dsl;
 using namespace at;
 
 //---------------------------------------------------------------------------

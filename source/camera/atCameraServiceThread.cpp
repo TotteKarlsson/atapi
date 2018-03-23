@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atCameraServiceThread.h"
-#include "mtkWin32Utils.h"
+#include "dslWin32Utils.h"
 #include "uc480/uc480class.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 
-using namespace mtk;
+using namespace dsl;
 
 
 CameraServiceThread::CameraServiceThread(Cuc480& camera, int id, HWND handle)

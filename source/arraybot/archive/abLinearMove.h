@@ -20,7 +20,7 @@ class AT_AB Move : public Process
         string						getMotorName(){return mMotorName;}
         void						setMotorName(const string& n){mMotorName = n;}
 
-		virtual mtk::XMLElement*    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+		virtual dsl::XMLElement*    addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 		virtual void	            assignUnit(ATObject* o);
 
         virtual bool	            start();

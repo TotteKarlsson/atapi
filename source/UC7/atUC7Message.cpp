@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atUC7Message.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 int getDataPartSum(const string& mData);
 

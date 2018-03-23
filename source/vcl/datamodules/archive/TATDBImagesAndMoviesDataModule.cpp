@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "TATDBImagesAndMoviesDataModule.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #include "TATDBDataModule.h"
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 TImagesAndMoviesDM *ImagesAndMoviesDM;
 
-using namespace mtk;
+using namespace dsl;
 //---------------------------------------------------------------------------
 __fastcall TImagesAndMoviesDM::TImagesAndMoviesDM(TComponent* Owner)
 	: TDataModule(Owner)

@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atTSCLIB.h"
-#include "mtkUtils.h"
-#include "mtkLogger.h"
-using namespace mtk;
+#include "dslUtils.h"
+#include "dslLogger.h"
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 

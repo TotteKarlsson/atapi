@@ -2,10 +2,10 @@
 #define atRibbonLifterH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
-#include "mtkProperty.h"
-#include "mtkIniFile.h"
+#include "dslProperty.h"
+#include "dslIniFile.h"
 #include "atArrayBot.h"
-#include "mtkINIFileProperties.h"
+#include "dslINIFileProperties.h"
 #include "atParallelProcess.h"
 
 //---------------------------------------------------------------------------
@@ -15,10 +15,10 @@
 //!lifting position, the process continues with a coordinated lift
 //!At one point, the whisker unit is accelerated 'away' and stowed out of
 //!position, allowing the coverslip to be fully lifted out of the boat
-using mtk::Property;
-using mtk::IniFile;
-using mtk::IniSection;
-using mtk::IniFileProperties;
+using dsl::Property;
+using dsl::IniFile;
+using dsl::IniSection;
+using dsl::IniFileProperties;
 
 //typedef void (__closure *RibbonLifterOnTimer)();
 

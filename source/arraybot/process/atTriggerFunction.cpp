@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atTriggerFunction.h"
 #include "apt/atAPTMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 MoveAbsolute::MoveAbsolute(APTMotor* mtr, double pos, double v, double a)
@@ -34,7 +34,7 @@ bool MoveAbsolute::isActive()
 	return mMotor ? mMotor->isActive() : false;
 }
 
-mtk::XMLElement* MoveAbsolute::addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot)
+dsl::XMLElement* MoveAbsolute::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot)
 {
     //Create XML for saving to file
     XMLElement* e	  			= doc.NewElement("trigger_function");

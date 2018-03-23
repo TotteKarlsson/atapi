@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "atArduinoServer.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atArduinoIPCServerReceiver.h"
-#include "mtkSocketWorker.h"
+#include "dslSocketWorker.h"
 #include "atArduinoUtils.h"
-#include "mtkStringUtils.h"
+#include "dslStringUtils.h"
 
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ArduinoServer::ArduinoServer(int portNumber)
 :
