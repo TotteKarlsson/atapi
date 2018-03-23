@@ -1,3 +1,60 @@
+Release 0.5.6 (March 23)
+=======================
+* Merge branch 'tokyo' of https://github.com/TotteKarlsson/atapi into tokyo
+# Conflicts:
+#	source/atCore.cbproj
+#	source/barcodereader/atBarcodeReader.cbproj
+#	source/database/atDatabase.cbproj
+#	source/resources/atResources.cbproj
+#	source/vcl/atVCLCore.cbproj
+#	thirdparty/ssidll/atSSI.cbproj
+* Changed DEBUG_BUILD -> DEBUG_BUILD32
+* Improving movies frame
+* Moved obsolete files to archive folder
+* Removed references to obsolete ATDBServerSession
+* Chasing a bug..
+* Added Geist Sensor module code
+* Added Geist server/client classes
+* Updated movie frame class
+* Fixed bug in HDMI streamer - writing to a closed pipe
+* Added videorecorderStopped protocol
+* Some whitespace changes
+* Improved movie frame to properly figure out movie extension
+* Improvements to HDMIStreamer frame
+* Added DB code to register ribbon id in the movies table
+* Implementing HDMI streamer into ArrayCam
+* Finishing up HDMI streamer
+* Added source code for streaming HDMI
+* Added Knife and knife_notes table
+* Added datasets and dataset providers for handling knife records
+* Refactoring ab -> at in header include guards
+* Added Arraybot server class
+* Setting up arraybot to be a server
+* Added focus in/out functions to Navitar class
+* Added focus in/out to Arraycam protocol
+* Added trigger ribbonseparator to arraycam protocol
+* Added ability to focus and zoom using joystick toggle button
+* Added state logic to Joystick button class
+* Added reference to joystickbutton in the JoyStickButtonStateEventDispatcher class
+* Fixed at resources to use dynamic RTL
+* Added   acrSetMoveWhiskerForwardOn,
+#    acrMoveWhiskerForwardOnSet,
+#    acrSetMoveWhiskerForwardOff,
+#    acrMoveWhiskerForwardOffSet,
+* to the arraycam protocol
+* Added setWhiskerSyncOff and ON to the arraycam client
+* Changed logic in joystick axes, and zero (0) speed.
+* Changed joystick gears to 25, from 10000 (seem to make no tactile difference)
+* Found bug related to absent joystick setting, when enabling the joystick
+* * Added more messages to the arraycam protocol:
+# "Before Cutting"
+# "Cutting"
+# "After Cutting"
+# "Retracting"
+# "Move Whisker Forward"
+* Created a TSensorsDataModule
+
+===================== 2018 ======================================
 Release 0.5.5 (Nov 11)
 =======================
 * Removed Auto datamodule connection
