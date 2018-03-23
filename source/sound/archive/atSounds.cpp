@@ -2,7 +2,7 @@
 #include "atSounds.h"
 #include "dslWin32Utils.h"
 #include <windows.h>
-#include "resources/atResourceManager.h"
+#include "atResourceManager.h"
 #include "dslLogger.h"
 //---------------------------------------------------------------------------
 //Non exports

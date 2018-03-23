@@ -1,10 +1,13 @@
 #ifndef atDirectSoundH
 #define atDirectSoundH
 #include "core/atATObject.h"
+#include <windows.h>
 #include <mmreg.h>
 #include <dsound.h>
+//Mmreg.h
+//#include <windows.h>
 
-class AT_CORE DirectSound : public ATObject
+class AT_CORE DirectSound //: public ATObject
 {
     public:
 							                        DirectSound(const string& resName, HWND hWnd = NULL);
@@ -41,6 +44,6 @@ class AT_CORE DirectSound : public ATObject
         string						                mResourceName;
 };
 
-#pragma message("linking with Microsoft's DirectSound library ...")
+#pragma message("Linking with Microsoft's DirectSound library ...")
 #pragma comment(lib, "dsound.lib")
 #endif
