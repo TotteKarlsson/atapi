@@ -43,18 +43,15 @@ bool TArrayBotButton::init(HWND wnd)
 
 void __fastcall TArrayBotButton::WndProc(TMessage& msg)
 {
-//	int WM_POINTERDOWN 	= 0x0246;
-//    const int WM_POINTERUP 		= 0x247;
-
     switch (msg.Msg)
     {
     	case WM_POINTERDOWN:        	Log(lDebug) << "Touch Down";        break;
         case WM_POINTERUP:        		Log(lDebug) << "Touch Up";        	break;
 //        case WM_LBUTTONUP:            	mSound.play(0, false);				break;
 
-        case WM_LBUTTONDOWN:
-        //            mSound.Play(0, false);
-        break;
+//        case WM_LBUTTONDOWN:
+//        //            mSound.Play(0, false);
+//        break;
     }
 
     TBitBtn::WndProc(msg);
