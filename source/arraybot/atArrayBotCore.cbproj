@@ -102,7 +102,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <BCC_wcsu>false</BCC_wcsu>
         <BCC_PCHInject>..\at_pch.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;dbrtl.bpi;dbxcds.bpi;dsnap.bpi;DBXMySQLDriver.bpi;DuneComponents.bpi;vclactnband.bpi;vclx.bpi;VCLCommon.bpi;vclimg.bpi;bindcomp.bpi;bindengine.bpi;bindcompvcl.bpi;Tee.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;dbrtl.bpi;dbxcds.bpi;dsnap.bpi;DBXMySQLDriver.bpi;DuneComponents.bpi;vclactnband.bpi;vclx.bpi;;vclimg.bpi;bindcomp.bpi;bindengine.bpi;bindcompvcl.bpi;Tee.bpi</LinkPackageImports>
         <Defines>POCO_STATIC;AT_AB_SHARED;$(Defines)</Defines>
         <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BCC32)\lib;$(KINESIS_LIBS);$(ILINK_LibraryPath)</ILINK_LibraryPath>
@@ -771,11 +771,15 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y</PreBuildEvent>
+        <PreBuildEvent>if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480
+&amp;&amp;xcopy $(AT_ROOT)thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y
+</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
+        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib
+&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib
+</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
