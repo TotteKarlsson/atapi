@@ -109,6 +109,8 @@
         <PreLinkEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
         <BCC_PCHName>pch.csm</BCC_PCHName>
+        <PostBuildEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
+$(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -979,7 +981,7 @@ $(PreLinkEvent)]]></PreLinkEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent>C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent/>
+        <PostBuildEvent>C:\cygwin64\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
