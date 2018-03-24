@@ -5,7 +5,7 @@
     #if defined(AT_STATIC)
         #define AT_UC7
     #else
-        #if defined(AT_UC7_SHARED)
+        #if defined(AT_EXPORT_UC7)
             #define AT_UC7 __declspec(dllexport)
         #else
             #define AT_UC7 __declspec(dllimport)

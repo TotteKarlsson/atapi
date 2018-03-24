@@ -54,7 +54,6 @@
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppPackage</ProjectType>
-        <PackageImports>CloudService;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACIBDriver;FireDACSqliteDriver;inet;RESTBackendComponents;RESTComponents;soapmidas;soaprtl;soapserver;$(PackageImports)</PackageImports>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
@@ -107,6 +106,7 @@
         <ILINK_LibraryPath>$(DSL_ROOT)\VCL\Components;$(AT_ROOT)\source\VCL\Frames;$(AT_ROOT)\source\VCL\Forms;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <BCC_PCHInject>atVVCLVisualComponentsPCH.h</BCC_PCHInject>
         <Defines>POCO_STATIC;$(Defines)</Defines>
+        <ILINK_GenerateLibFile>false</ILINK_GenerateLibFile>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -245,19 +245,19 @@
         <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TNavitarPresetFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

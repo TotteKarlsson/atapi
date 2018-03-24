@@ -7,7 +7,7 @@
 #include <Datasnap.Provider.hpp>
 #include <SimpleDS.hpp>
 #include <System.Classes.hpp>
-#include <Data.DBXMySQL.hpp>
+//#include <Data.DBXMySQL.hpp>
 #include "DbxDevartPostgreSQL.hpp"
 #include "database/atDBCredentials.h"
 #include "dslStringList.h"

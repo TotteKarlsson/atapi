@@ -56,8 +56,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <IncludePath>..\..\source\database\;..\..\source\arraybot\;..\..\..\dsl\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\database\;..\..\source\arraybot\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\ello\;..\..\source\UC7\;..\..\source\database\;..\..\source\arraybot\;..\..\..\dsl\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\ello\;..\..\source\UC7\;..\..\source\database\;..\..\source\arraybot\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>atFoundation</SanitizedProjectName>
     </PropertyGroup>
@@ -104,7 +104,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
-        <Defines>POCO_STATIC;AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;$(Defines)</Defines>
+        <Defines>POCO_STATIC;AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;AT_EXPORT_UC7;$(Defines)</Defines>
         <BCC_PCHInject>atFoundationPCH.h</BCC_PCHInject>
         <PreLinkEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
@@ -461,6 +461,13 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="..\..\source\database\atDBCredentials.cpp">
             <BuildOrder>98</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\ello\atElloUIClient.cpp">
+            <BuildOrder>106</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\ello\atElloUIMessageProcessor.cpp">
+            <DependentOn>..\..\source\ello\atElloUIMessageProcessor.h</DependentOn>
+            <BuildOrder>107</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\labelprinter\atTSCLIB.cpp">
             <BuildOrder>96</BuildOrder>
         </CppCompile>
@@ -505,6 +512,25 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </CppCompile>
         <CppCompile Include="..\..\source\sound\atSounds.cpp">
             <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7Component.cpp">
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7Message.cpp">
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7MessageReceiver.cpp">
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7MessageSender.cpp">
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7Miscellaneous.cpp">
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\UC7\atUC7StatusHistory.cpp">
+            <DependentOn>..\..\source\UC7\atUC7StatusHistory.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

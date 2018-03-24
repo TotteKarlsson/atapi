@@ -58,6 +58,7 @@ class AT_BCR DS457 : public ATObject
 		bool					            LEDsOff();
 
 		const unsigned char*			   	getMemoryBuffer() const;
+
     private:
     	HWND					            mHandle;
         int						            mCOMPort;
@@ -65,10 +66,6 @@ class AT_BCR DS457 : public ATObject
 
 		unsigned char 						mVideoData[MAX_VIDEO_LEN];
 		unsigned char*						g_pImageData;
-
-
-
 };
-
 
 #endif
