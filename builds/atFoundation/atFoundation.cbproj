@@ -56,8 +56,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <IncludePath>..\..\source\arraybot\;..\..\..\dsl\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\arraybot\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\database\;..\..\source\arraybot\;..\..\..\dsl\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\database\;..\..\source\arraybot\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>atFoundation</SanitizedProjectName>
     </PropertyGroup>
@@ -104,7 +104,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
-        <Defines>AT_EXPORT_CORE;AT_EXPORT_ARDUINO;POCO_STATIC;AT_EXPORT_SERIAL;AT_EXPORT_AB;$(Defines)</Defines>
+        <Defines>POCO_STATIC;AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;$(Defines)</Defines>
         <BCC_PCHInject>atFoundationPCH.h</BCC_PCHInject>
         <PreLinkEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
@@ -386,7 +386,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <BuildOrder>84</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\barcodereader\atDS457.cpp">
-            <BuildOrder>92</BuildOrder>
+            <DependentOn>..\..\source\barcodereader\atDS457.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\camera\atCameraServiceThread.cpp">
             <DependentOn>..\..\source\camera\atCameraServiceThread.h</DependentOn>
@@ -457,6 +458,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\core\WatchDogServer.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\database\atDBCredentials.cpp">
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\labelprinter\atTSCLIB.cpp">
             <BuildOrder>96</BuildOrder>
         </CppCompile>
@@ -497,6 +501,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         </CppCompile>
         <CppCompile Include="..\..\source\sound\atDirectSound.cpp">
             <DependentOn>..\..\source\sound\atDirectSound.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\sound\atSounds.cpp">
             <BuildOrder>99</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

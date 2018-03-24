@@ -9,8 +9,8 @@
 #include "atArrayBot.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TFloatLabeledEdit"
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTFloatLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma resource "*.dfm"
 TXYZProcessSequencerFrame *XYZProcessSequencerFrame;
 //---------------------------------------------------------------------------

@@ -53,3 +53,6 @@ extern "C" int _libmain(unsigned long reason)
 //navitar
 #pragma comment(lib, "navitarUSBAPI_Borland.lib")
 
+//Barcodereader (DS457)
+#pragma comment(lib, "atSSI.lib")
+

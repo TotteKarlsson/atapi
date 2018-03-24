@@ -7,7 +7,7 @@
 #include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"

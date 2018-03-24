@@ -5,7 +5,7 @@
     #if defined(AT_STATIC)
         #define AT_BCR
     #else
-        #if defined(AT_SHARED)
+        #if defined(AT_EXPORT_BARCODEREADER)
             #define AT_BCR __declspec(dllexport)
         #else
             #define AT_BCR __declspec(dllimport)

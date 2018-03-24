@@ -44,18 +44,6 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
-        <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
@@ -72,8 +60,8 @@
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>atVisualComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
@@ -86,11 +74,9 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <BCC_PCHName_Clang>atVVCLVisualComponents.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>adortl;appanalytics;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
-        <BCC_PCHName_Clang>atVVCLVisualComponents.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -118,17 +104,13 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ILINK_Description>AT Frames and Forms</ILINK_Description>
-        <ILINK_LibraryPath>P:\libs\dslib\VCL\Components;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(DSL_ROOT)\VCL\Components;$(AT_ROOT)\source\VCL\Frames;$(AT_ROOT)\source\VCL\Forms;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <BCC_PCHInject>atVVCLVisualComponentsPCH.h</BCC_PCHInject>
+        <Defines>POCO_STATIC;$(Defines)</Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <BCC_PCHName_Clang>atVVCLVisualComponents.h</BCC_PCHName_Clang>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <BCC_PCHName_Clang>atVVCLVisualComponents.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="atVisualComponents.cpp">
@@ -167,6 +149,12 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>..\..\source\vcl\datamodules\TSensorsDataModule.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\forms\TTextInputDialog.cpp">
+            <Form>TextInputDialog</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\forms\TTextInputDialog.h</DependentOn>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
@@ -246,13 +234,6 @@
             <DependentOn>..\..\source\vcl\frames\TSoundsFrame.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TSSHFrame.cpp">
-            <Form>SSHFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TSSHFrame.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TZebraScannerFrame.cpp">
             <Form>ZebraScannerFrame</Form>
             <FormType>dfm</FormType>
@@ -260,23 +241,23 @@
             <DependentOn>..\..\source\vcl\frames\TZebraScannerFrame.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <FormResources Include="..\..\source\vcl\frames\TNavitarPresetFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TZebraScannerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TSSHFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -303,10 +284,7 @@
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">
@@ -339,6 +317,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="P:\build\bcc32\debug\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>atVisualComponents.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
@@ -364,7 +348,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="P:\build\bcc32\debug\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>atVisualComponents.tds</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -382,12 +366,6 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
                     <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>atVisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

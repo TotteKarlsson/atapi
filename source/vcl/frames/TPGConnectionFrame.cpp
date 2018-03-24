@@ -5,7 +5,7 @@
 #include "dslLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma link "TArrayBotBtn"
 #pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"

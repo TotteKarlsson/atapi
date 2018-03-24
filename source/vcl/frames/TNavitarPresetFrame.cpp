@@ -4,7 +4,7 @@
 #include "navitar/atNavitarMotorController.h"
 #include "navitar/atNavitarPreset.h"
 #pragma package(smart_init)
-#pragma link "TIntegerLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
 #pragma link "dslTIntegerLabeledEdit"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------

@@ -7,7 +7,7 @@ using namespace dsl;
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma resource "*.dfm"
 TStringInputDialog *StringInputDialog;
 //---------------------------------------------------------------------------

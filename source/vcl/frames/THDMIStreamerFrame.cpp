@@ -7,9 +7,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
-#pragma link "TIntegerLabeledEdit"
-#pragma link "TPropertyCheckBox"
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTPropertyCheckBox"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma link "dslTIntegerLabeledEdit"
 #pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"

@@ -8,7 +8,7 @@
 #include "Common/atVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TIntLabel"
+#pragma link "dslTIntLabel"
 #pragma link "dslTFloatLabeledEdit"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------

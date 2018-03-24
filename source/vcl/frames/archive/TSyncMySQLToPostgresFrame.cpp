@@ -7,7 +7,7 @@
 #include "dslFileUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma resource "*.dfm"
 TSyncMySQLToPostgresFrame *SyncMySQLToPostgresFrame;
 
