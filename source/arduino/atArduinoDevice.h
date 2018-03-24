@@ -8,6 +8,7 @@
 #include "serial/atSerial.h"
 #include <deque>
 #include "atArduinoSerialMessageSender.h"
+#include "dslStringList.h"
 
 using Poco::Mutex;
 using Poco::Condition;
@@ -23,6 +24,7 @@ using dsl::StringList;
 */
 
 typedef void (__closure *InitCallBack)();
+typedef void (__closure *SerialMessageReceivedCallBack)(const string& msg);
 
 class AT_ARDUINO ArduinoDevice : public ATObject
 {

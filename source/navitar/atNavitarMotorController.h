@@ -1,6 +1,6 @@
 #ifndef atNavitarMotorControllerH
 #define atNavitarMotorControllerH
-#include "navitar/navusbAPI.h"
+#include "thirdparty/navitar/navusbAPI.h"
 #include <string>
 #include "core/atATObject.h"
 #include "atNavitarMotor.h"

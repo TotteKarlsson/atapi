@@ -3,13 +3,13 @@
         <ProjectGuid>{029F25A0-05BA-400F-B292-F86D433AD968}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="..\..\dslib\builds\dslFoundation\dslFoundation.cbproj">
+        <Projects Include="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\dslib\builds\dslVCLCommon\dslVCLCommon.cbproj">
+        <Projects Include="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\dslib\builds\dslVCLComponents\dslVCLComponents.cbproj">
+        <Projects Include="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="atResources\atResources.cbproj">
@@ -36,31 +36,31 @@
         </BorlandProject>
     </ProjectExtensions>
     <Target Name="dslFoundation">
-        <MSBuild Projects="..\..\dslib\builds\dslFoundation\dslFoundation.cbproj"/>
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj"/>
     </Target>
     <Target Name="dslFoundation:Clean">
-        <MSBuild Projects="..\..\dslib\builds\dslFoundation\dslFoundation.cbproj" Targets="Clean"/>
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="dslFoundation:Make">
-        <MSBuild Projects="..\..\dslib\builds\dslFoundation\dslFoundation.cbproj" Targets="Make"/>
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj" Targets="Make"/>
     </Target>
     <Target Name="dslVCLCommon">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLCommon\dslVCLCommon.cbproj"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj"/>
     </Target>
     <Target Name="dslVCLCommon:Clean">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Clean"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="dslVCLCommon:Make">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Make"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Make"/>
     </Target>
     <Target Name="dslVCLComponents">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLComponents\dslVCLComponents.cbproj"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj"/>
     </Target>
     <Target Name="dslVCLComponents:Clean">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Clean"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="dslVCLComponents:Make">
-        <MSBuild Projects="..\..\dslib\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Make"/>
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atResources">
         <MSBuild Projects="atResources\atResources.cbproj"/>

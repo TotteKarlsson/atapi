@@ -4,8 +4,6 @@
 #include <windows.h>
 #include <mmreg.h>
 #include <dsound.h>
-//Mmreg.h
-//#include <windows.h>
 
 class AT_CORE DirectSound //: public ATObject
 {

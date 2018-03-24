@@ -56,8 +56,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <IncludePath>..\..\source\arraybot\;..\..\..\dslib\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;P:\libs\atapi\source\resources\;P:\libs\atapi\source\sound\;P:\libs\atapi\source\labelprinter\;P:\libs\atapi\source\camera\;P:\libs\atapi\source\barcodereader\;P:\libs\atapi\source\navitar\;P:\libs\atapi\source\arraycam\;P:\libs\atapi\source\arraybot\apt\;P:\libs\atapi\source\arraybot\joystick\;P:\libs\atapi\source\arraybot\process\;P:\libs\atapi\source\arraybot\;P:\libs\atapi\source\serial\;P:\libs\atapi\source\core\;P:\libs\dslib\IPC\;P:\libs\atapi\source\;P:\libs\atapi\source\arduino\;P:\builds\atLibs\atFoundation\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\arraybot\;..\..\..\dslib\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;P:\libs\atapi\source\resources\;P:\libs\atapi\source\sound\;P:\libs\atapi\source\labelprinter\;P:\libs\atapi\source\camera\;P:\libs\atapi\source\barcodereader\;P:\libs\atapi\source\navitar\;P:\libs\atapi\source\arraycam\;P:\libs\atapi\source\arraybot\apt\;P:\libs\atapi\source\arraybot\joystick\;P:\libs\atapi\source\arraybot\process\;P:\libs\atapi\source\arraybot\;P:\libs\atapi\source\serial\;P:\libs\atapi\source\core\;P:\libs\dslib\IPC\;P:\libs\atapi\source\;P:\libs\atapi\source\arduino\;P:\builds\atLibs\atFoundation\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\arraybot\;..\..\..\dsl\IPC\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\arraybot\;..\..\source\serial\;..\..\source\arraycam\;..\..\source\;..\..\source\arraybot\joystick\;..\..\source\arraybot\apt\;..\..\source\barcodereader\;..\..\source\sound\;..\..\source\core\;..\..\source\arraybot\process\;..\..\source\camera\;..\..\source\arduino\;..\..\source\navitar\;..\..\source\labelprinter\;$(DEBUG_BCC32)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>atFoundation</SanitizedProjectName>
     </PropertyGroup>
@@ -106,6 +106,9 @@
         <Manifest_File>(None)</Manifest_File>
         <Defines>AT_EXPORT_CORE;AT_EXPORT_ARDUINO;POCO_STATIC;AT_EXPORT_SERIAL;AT_EXPORT_AB;$(Defines)</Defines>
         <BCC_PCHInject>atFoundationPCH.h</BCC_PCHInject>
+        <PreLinkEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
+$(PreLinkEvent)]]></PreLinkEvent>
+        <BCC_PCHName>pch.csm</BCC_PCHName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -380,9 +383,6 @@
             <DependentOn>..\..\source\arraycam\atArrayCamProtocol.h</DependentOn>
             <BuildOrder>84</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\auto_link_foundation.cpp">
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\..\source\barcodereader\atDS457.cpp">
             <BuildOrder>92</BuildOrder>
         </CppCompile>
@@ -497,10 +497,6 @@
             <DependentOn>..\..\source\sound\atDirectSound.h</DependentOn>
             <BuildOrder>99</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\dslib\IPC\dslIPCReceiver.cpp">
-            <DependentOn>..\..\..\dslib\IPC\dslIPCReceiver.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
-        </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -524,10 +520,7 @@
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">
@@ -555,7 +548,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\bcc32\debug\bin\atFoundation.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>atFoundation.dll</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -586,14 +579,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile LocalName="p:\build\bcc32\debug\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>atFoundation.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>atFoundation.tds</RemoteName>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -981,4 +974,12 @@
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent>C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent/>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
 </Project>

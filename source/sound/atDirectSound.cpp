@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include <mmsystem.h>
+//#include <mmsystem.h>
 #include "dslWin32Utils.h"
 #include "atDirectSound.h"
 #include "dslLogger.h"

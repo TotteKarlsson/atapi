@@ -1,5 +1,6 @@
 #pragma hdrstop
 #include "atArrayCamProtocol.h"
+#include <string>
 //---------------------------------------------------------------------------
 
 map<ACMessageID, string> ArrayCamProtocol::mIPCMessage;
