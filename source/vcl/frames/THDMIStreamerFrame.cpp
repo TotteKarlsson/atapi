@@ -3,13 +3,15 @@
 #include "THDMIStreamerFrame.h"
 #include "dslLogger.h"
 #include "dslVCLUtils.h"
-#include "ArrayCamUtils.h"
+//#include "ArrayCamUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
 #pragma link "TIntegerLabeledEdit"
 #pragma link "TPropertyCheckBox"
 #pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 THDMIStreamerFrame *HDMIStreamerFrame;
 using namespace dsl;

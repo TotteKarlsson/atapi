@@ -5,7 +5,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TSTDStringLabeledEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 class PACKAGE TTextInputDialog : public TForm

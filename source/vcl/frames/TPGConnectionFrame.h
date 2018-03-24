@@ -4,7 +4,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TSTDStringLabeledEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "dslIniFile.h"
@@ -13,6 +13,7 @@
 #include <Vcl.ActnList.hpp>
 #include "TArrayBotBtn.h"
 #include "TPGDataModule.h"
+#include "dslTSTDStringLabeledEdit.h"
 //---------------------------------------------------------------------------
 
 using dsl::IniFile;

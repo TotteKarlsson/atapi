@@ -7,6 +7,7 @@
 #pragma package(smart_init)
 #pragma link "TSTDStringLabeledEdit"
 #pragma link "TArrayBotBtn"
+#pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 
 TPGConnectionFrame *PGConnectionFrame;

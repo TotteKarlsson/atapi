@@ -10,6 +10,8 @@
 #pragma link "ScSSHClient"
 #pragma link "TIntegerLabeledEdit"
 #pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 TSSHFrame *SSHFrame;
 

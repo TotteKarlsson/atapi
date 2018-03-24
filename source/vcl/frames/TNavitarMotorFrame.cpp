@@ -6,7 +6,9 @@
 #include "dslVCLUtils.h"
 #pragma package(smart_init)
 #pragma link "TIntegerLabeledEdit"
-#pragma link "TIntLabel"
+#pragma link "dslTIntLabel"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTIntLabel"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 

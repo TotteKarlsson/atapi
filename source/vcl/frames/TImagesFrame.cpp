@@ -9,7 +9,8 @@
 #include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TIntLabel"
+
+#pragma link "dslTIntLabel"
 #pragma resource "*.dfm"
 TImagesFrame *ImagesFrame;
 using namespace dsl;

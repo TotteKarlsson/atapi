@@ -7,9 +7,11 @@
 #include "ScBridge.hpp"
 #include "ScSSHChannel.hpp"
 #include "ScSSHClient.hpp"
-#include "TIntegerLabeledEdit.h"
-#include "TSTDStringLabeledEdit.h"
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 //---------------------------------------------------------------------------
 
 class PACKAGE TSSHFrame : public TFrame

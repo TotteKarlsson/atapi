@@ -1,12 +1,14 @@
 #pragma hdrstop
 #include "TPGDataModule.h"
-#include "dslVCLUtils.h"
 #include <sstream>
-#include "dslLogger.h"
 #include <iomanip>
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
+#pragma link "DbxDevartPostgreSQL"
 #pragma resource "*.dfm"
 #pragma link "DbxDevartPostgreSQL"
 

@@ -2,7 +2,7 @@ object ArduinoServerCommandFrame: TArduinoServerCommandFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 305
   Align = alClient
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object ArduinoServerCommandFrame: TArduinoServerCommandFrame
   Font.Style = []
   ParentFont = False
   TabOrder = 0
+  ExplicitHeight = 304
   object mMainGB: TGroupBox
     Left = 0
     Top = 0

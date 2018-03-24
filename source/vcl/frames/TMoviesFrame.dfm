@@ -11,7 +11,6 @@ object MoviesFrame: TMoviesFrame
     Height = 55
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 638
     object Label4: TLabel
       Left = 32
       Top = 24
@@ -46,7 +45,6 @@ object MoviesFrame: TMoviesFrame
     Height = 459
     Align = alClient
     TabOrder = 1
-    ExplicitHeight = 638
     object FlowPanel1: TFlowPanel
       Left = 0
       Top = 0
@@ -56,7 +54,6 @@ object MoviesFrame: TMoviesFrame
       AutoSize = True
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 845
     end
   end
   object GetMoviesQuery: TSQLQuery

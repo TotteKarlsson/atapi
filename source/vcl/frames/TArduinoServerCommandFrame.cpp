@@ -4,7 +4,7 @@
 #include "arduino/atArduinoServerCommand.h"
 #include "dslVCLUtils.h"
 #include "arraybot/atArrayBot.h"
-#include "TTextInputDialog.h"
+#include "forms/TTextInputDialog.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TFloatLabeledEdit"
