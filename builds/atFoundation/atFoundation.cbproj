@@ -106,10 +106,10 @@
         <Manifest_File>(None)</Manifest_File>
         <Defines>POCO_STATIC;AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;AT_EXPORT_UC7;$(Defines)</Defines>
         <BCC_PCHInject>atFoundationPCH.h</BCC_PCHInject>
-        <PreLinkEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
+        <PreLinkEvent><![CDATA[C:\cygwin\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
         <BCC_PCHName>pch.csm</BCC_PCHName>
-        <PostBuildEvent><![CDATA[C:\cygwin64\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
+        <PostBuildEvent><![CDATA[C:\cygwin\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
 $(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -555,7 +555,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">
@@ -1012,9 +1015,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
         <PreBuildEvent/>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent>C:\cygwin64\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
+        <PreLinkEvent>C:\cygwin\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>C:\cygwin64\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
+        <PostBuildEvent>C:\cygwin\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
