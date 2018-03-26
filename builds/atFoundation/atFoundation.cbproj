@@ -461,6 +461,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="..\..\source\database\atDBCredentials.cpp">
             <BuildOrder>98</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\database\atQueryBuilder.cpp">
+            <BuildOrder>108</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\ello\atElloUIClient.cpp">
             <BuildOrder>106</BuildOrder>
         </CppCompile>
@@ -586,7 +589,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\bcc32\debug\bin\atFoundation.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>atFoundation.dll</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -617,7 +620,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\bcc32\debug\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>atFoundation.tds</RemoteName>
                         <Overwrite>true</Overwrite>

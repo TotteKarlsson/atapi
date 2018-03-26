@@ -150,11 +150,29 @@
             <DependentOn>..\..\source\vcl\datamodules\TSensorsDataModule.h</DependentOn>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.cpp">
+            <Form>SelectProcessTypeDialog</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\forms\TSelectProcessTypeDialog.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\forms\TStringInputDialog.cpp">
+            <Form>StringInputDialog</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\forms\TStringInputDialog.h</DependentOn>
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\vcl\forms\TTextInputDialog.cpp">
             <Form>TextInputDialog</Form>
             <FormType>dfm</FormType>
             <DependentOn>..\..\source\vcl\forms\TTextInputDialog.h</DependentOn>
             <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\forms\TYesNoForm.cpp">
+            <Form>YesNoForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\forms\TYesNoForm.h</DependentOn>
+            <BuildOrder>22</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
             <Form>ApplicationSoundsFrame</Form>
@@ -240,23 +258,26 @@
             <DependentOn>..\..\source\vcl\frames\TZebraScannerFrame.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TZebraScannerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TNavitarPresetFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TYesNoForm.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -319,12 +340,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="P:\build\bcc32\debug\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>atVisualComponents.bpl</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
@@ -350,7 +365,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="P:\build\bcc32\debug\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>atVisualComponents.tds</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -368,6 +383,12 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
                     <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>atVisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
