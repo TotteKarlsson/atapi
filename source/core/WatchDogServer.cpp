@@ -1,8 +1,9 @@
 #pragma hdrstop
 #include "WatchDogServer.h"
 #include "WatchDogSensor.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
-
+using namespace dsl;
 
 WatchDogServer::WatchDogServer(IniFile& ifile)
 :
@@ -61,8 +62,8 @@ bool WatchDogServer::readIniParameters()
         	IniSection* sec = mIniFile.getSection(secs[i]);
             WatchDogSensor* sensor = new WatchDogSensor();
             sensor->mDeviceID	= sec->getKey("SENSOR_ID")->mValue;
-            sensor->mInstance 	= mtk::toInt(sec->getKey("INSTANCE_ID_IN_TREE")->mValue);
-            sensor->mLocationID = mtk::toInt(sec->getKey("LOCATION_ID")->mValue);
+            sensor->mInstance 	= dsl::toInt(sec->getKey("INSTANCE_ID_IN_TREE")->mValue);
+            sensor->mLocationID = dsl::toInt(sec->getKey("LOCATION_ID")->mValue);
             sensor->mSubRootOID = 9;
             addSensor(sensor);
         }

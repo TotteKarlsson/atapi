@@ -1,17 +1,17 @@
 #pragma hdrstop
 #include "atCreateMovieThumbNailThread.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
 #include "Poco/StreamCopier.h"
 #include <fstream>
-#include "mtkFileUtils.h"
-#include "mtkMathUtils.h"
+#include "dslFileUtils.h"
+#include "dslMathUtils.h"
 #include "Poco/Path.h"
 #include "Poco/File.h"
 //---------------------------------------------------------------------------
 using namespace Poco;
-using namespace mtk;
+using namespace dsl;
 using Poco::Path;
 
 CreateMovieThumbNailThread::CreateMovieThumbNailThread()

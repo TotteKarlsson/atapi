@@ -1,15 +1,15 @@
 #pragma hdrstop
 #include "atArrayBotRequestProcess.h"
 #include "atXYZUnit.h"
-#include "mtkLogger.h"
-#include "mtkXMLUtils.h"
+#include "dslLogger.h"
+#include "dslXMLUtils.h"
 #include "ArrayBot/atArrayBotClient.h"
 #include "atProcessSequence.h"
 
-using namespace mtk;
+using namespace dsl;
 using namespace tinyxml2;
 
-ArrayBotProtocol ap;
+static ArrayBotProtocol ap;
 //---------------------------------------------------------------------------
 ArrayBotRequestProcess::ArrayBotRequestProcess(ArrayBotClient& acc, const string& lbl, const string& request)
 :

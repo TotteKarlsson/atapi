@@ -1,18 +1,18 @@
 #ifndef atSoundsH
 #define atSoundsH
 #include "core/atCoreExporter.h"
-#include "mtkThread.h"
+#include "dslThread.h"
 #include <string>
 #include <deque>
 #include <mmsystem.h>
 #include "core/atATObject.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
 
 using std::string;
 using std::deque;
-using mtk::Thread;
-using mtk::StringList;
+using dsl::Thread;
+using dsl::StringList;
 
 ////These are names of sounds available
 ////These will be replaced by usage of properties instead
@@ -40,7 +40,7 @@ AT_CORE StringList		getSoundResources();
 
 //class SoundPlayer;
 //
-//class SoundWorker : public mtk::Thread, public ATObject
+//class SoundWorker : public dsl::Thread, public ATObject
 //{
 //	public:
 //    						SoundWorker(deque<ABSound>& soundDeck , Poco::Mutex bufferMutex);

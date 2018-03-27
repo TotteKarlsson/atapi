@@ -1,17 +1,17 @@
 #ifndef atArrayBotServerH
 #define atArrayBotServerH
-#include "mtkIPCServer.h"
-#include "mtkSocketWorker.h"
+#include "dslIPCServer.h"
+#include "dslSocketWorker.h"
 #include <vector>
 //#include "arraybot/atArrayBot.h"
 #include "arraybot/atArrayBotProtocol.h"
-#include "mtkIPCMessage.h"
-#include "mtkConstants.h"
+#include "dslIPCMessage.h"
+#include "dslConstants.h"
 #include "arraybot/atArrayBot.h"
 //---------------------------------------------------------------------------
-using mtk::IPCServer;
-using mtk::gEmptyString;
-mtk::SocketWorker* createArrayBotIPCReceiver(int portNr, int socketHandle, void* parent);
+using dsl::IPCServer;
+using dsl::gEmptyString;
+dsl::SocketWorker* createArrayBotIPCReceiver(int portNr, int socketHandle, void* parent);
 
 class ArrayBot;
 //typedef void (__closure *OnMessageUpdateCB)(const string& msg);
@@ -29,7 +29,7 @@ class AT_CORE ArrayBotServer : public IPCServer
 											//!Requests are sent to the server from a client.
                                             //!The process request is an overide from the IPCServer base class.
                                             //!ProcessRequest implements the ArrayBot server specific processing.
-    	bool 					            processRequest(mtk::IPCMessage& msg);
+    	bool 					            processRequest(dsl::IPCMessage& msg);
         bool            		            shutDown();
 //        void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
 		void								onUpdateClientsTimer();

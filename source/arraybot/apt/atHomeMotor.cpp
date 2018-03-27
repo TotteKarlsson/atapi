@@ -2,9 +2,9 @@
 #include "atHomeMotor.h"
 #include "atAPTMotor.h"
 #include "atProcessSequence.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 HomeMotor::HomeMotor(const string& lbl, APTMotor* mtr)

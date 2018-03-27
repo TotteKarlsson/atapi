@@ -1,19 +1,20 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TApplicationSoundsFrame.h"
-#include "mtkIniFileProperties.h"
-#include "mtkVCLUtils.h"
+#include "dslIniFileProperties.h"
+#include "dslVCLUtils.h"
 #include "sound/atSounds.h"
 #include "sound/atApplicationSound.h"
-#include "atVCLUtils.h"
+#include "Common/atVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TIntLabel"
+#pragma link "dslTIntLabel"
+#pragma link "dslTFloatLabeledEdit"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 TApplicationSoundsFrame *ApplicationSoundsFrame;
 
-using namespace mtk;
+using namespace dsl;
 
 
 //---------------------------------------------------------------------------

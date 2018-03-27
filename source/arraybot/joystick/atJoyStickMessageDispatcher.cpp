@@ -2,12 +2,12 @@
 #include "atJoyStickMessageDispatcher.h"
 #include "atArrayBotJoyStick.h"
 #include <bitset>
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "core/atExceptions.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace mtk;
+using namespace dsl;
 
 JoyStickMessageDispatcher::JoyStickMessageDispatcher(ArrayBotJoyStick& js, int nrOfButtons, int& id)
 :

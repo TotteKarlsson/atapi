@@ -1,19 +1,18 @@
 #ifndef TPGDataModuleH
 #define TPGDataModuleH
-#include <System.Classes.hpp>
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>
 #include <Datasnap.DBClient.hpp>
 #include <Datasnap.Provider.hpp>
 #include <SimpleDS.hpp>
-#include <Data.DBXMySQL.hpp>
+#include <System.Classes.hpp>
+//#include <Data.DBXMySQL.hpp>
 #include "DbxDevartPostgreSQL.hpp"
-#include <string>
 #include "database/atDBCredentials.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 
-using mtk::StringList;
+using dsl::StringList;
 using std::string;
 
 //!The TpgDM class encapsulate data exchange with the ATDB database

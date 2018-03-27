@@ -2,17 +2,17 @@
 #define atCoverSlipAngleControllerH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
-#include "mtkIniFile.h"
-#include "mtkProperties.h"
-#include "mtkINIFileProperties.h"
+#include "dslIniFile.h"
+#include "dslProperties.h"
+#include "dslINIFileProperties.h"
 #include "atDeviceManager.h"
 #include <string>
 //---------------------------------------------------------------------------
 
 using std::string;
-using mtk::IniFile;
-using mtk::IniFileProperties;
-using mtk::Property;
+using dsl::IniFile;
+using dsl::IniFileProperties;
+using dsl::Property;
 class APTMotor;
 
 class AT_AB CoverSlipAngleController : public ATObject

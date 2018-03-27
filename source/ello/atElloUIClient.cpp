@@ -1,10 +1,10 @@
 #pragma hdrstop
-#include "mtkStringUtils.h"
+#include "dslStringUtils.h"
 #include "atElloUIClient.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 ElloUIClient::ElloUIClient()
 :

@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atPairedMoves.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 PairedMoves::PairedMoves(const string& iniSection, IniFile& iniFile)
 :

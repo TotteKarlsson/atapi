@@ -2,17 +2,19 @@
 #pragma hdrstop
 #include "TNavitarMotorFrame.h"
 #include "navitar/atNavitarMotor.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #pragma package(smart_init)
-#pragma link "TIntegerLabeledEdit"
-#pragma link "TIntLabel"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTIntLabel"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTIntLabel"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
 TNavitarMotorFrame *NavitarMotorFrame;
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TNavitarMotorFrame::TNavitarMotorFrame(TComponent* Owner)

@@ -2,11 +2,11 @@
 #define atResourceManagerH
 #include <string>
 #include "core/atCoreExporter.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
 
 using std::string;
-using mtk::StringList;
+using dsl::StringList;
 
 struct ResourceInfo
 {

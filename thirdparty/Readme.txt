@@ -14,3 +14,5 @@ The uc480 DLL implement communication with Thorlab's Cameras
 *** Thorlabs ***
 The Thorlab folder contain DLL's required for control of Thorlab stepper and DC motors
 
+*** TSC ***
+The TSCLIB.dll contain function to control a TSC Barcode printer

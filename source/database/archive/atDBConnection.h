@@ -4,7 +4,7 @@
 #include "core/atATObject.h"
 #include "atDBUtils.h"
 #include <deque>
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 
 namespace Poco
@@ -18,7 +18,7 @@ namespace Poco
 
 using Poco::Data::RecordSet;
 using Poco::Data::Session;
-using mtk::gEmptyString;
+using dsl::gEmptyString;
 
 //!The ATDB server session class encapsulate a database session
 //!with the ATDB MySQL database

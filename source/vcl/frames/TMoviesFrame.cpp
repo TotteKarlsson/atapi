@@ -3,16 +3,16 @@
 #include "TMoviesFrame.h"
 #include "Poco/File.h"
 #include "frames/TMovieItemFrame.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #include "TPGImagesAndMoviesDataModule.h"
 #include "TPGDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TIntLabel"
+#pragma link "dslTIntLabel"
 #pragma resource "*.dfm"
 TMoviesFrame *MoviesFrame;
-using namespace mtk;
+using namespace dsl;
 
 
 //---------------------------------------------------------------------------
@@ -56,7 +56,7 @@ void TMoviesFrame::populate(int blockID, const Poco::Path& mediaPath)
 
         //Create path
         Poco::Path p(mediaPath);
-        p.append(mtk::toString(blockID));
+        p.append(dsl::toString(blockID));
         Log(lDebug) << "Looking for movies in folder: " << p.toString();
 
         for(int i = 0; i < l.count(); i++)
@@ -109,7 +109,7 @@ void TMoviesFrame::populate(int blockID, const string& ribbonID, const Poco::Pat
 
         //Create path
         Poco::Path p(mediaPath);
-        p.append(mtk::toString(blockID));
+        p.append(dsl::toString(blockID));
         Log(lDebug) << "Looking for movies in folder: " << p.toString();
 
         for(int i = 0; i < l.count(); i++)

@@ -3,7 +3,7 @@
 #include "../atABExporter.h"
 #include "../core/atProcess.h"
 #include <vector>
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 //---------------------------------------------------------------------------
 using namespace std;
 
@@ -21,7 +21,7 @@ class AT_AB ParallelProcess : public Process
 		const string 				                getTypeName() const;
         void						                clear();
 		virtual bool 			  					write();
-	    virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+	    virtual dsl::XMLElement*                    addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
         int							                getNumberOfProcesses(){return mProcesses.size();}
 
 		virtual void	                            addProcess(Process* lm);

@@ -19,7 +19,7 @@ class AT_AB Move : public Process
         string								getMotorName();
 		virtual void		   		        init(ArrayBot& ab);
 
-		virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot) = 0;
+		virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
 		virtual void	                    assignUnit(ATObject* o);
         virtual bool	                    stop();
 

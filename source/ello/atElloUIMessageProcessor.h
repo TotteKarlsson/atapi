@@ -1,19 +1,19 @@
 #ifndef atElloUIMessageProcessorH
 #define atElloUIMessageProcessorH
 #include <string>
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 //----------------------------------------------------------------
 
-using mtk::Thread;
+using dsl::Thread;
 
-namespace mtk
+namespace dsl
 {
 	class MessageContainer;
 }
 
-using mtk::MessageContainer;
+using dsl::MessageContainer;
 class ElloUIClient;
 typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 

@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atPositionalTrigger.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 PositionalTrigger::PositionalTrigger(APTMotor* m, double position, LogicOperator lt)

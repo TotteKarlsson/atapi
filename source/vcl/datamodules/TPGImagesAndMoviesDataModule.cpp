@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "TPGImagesAndMoviesDataModule.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #include "TPGDataModule.h"
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 TPGImagesAndMoviesDM *PGImagesAndMoviesDM;
 
-using namespace mtk;
+using namespace dsl;
 //---------------------------------------------------------------------------
 __fastcall TPGImagesAndMoviesDM::TPGImagesAndMoviesDM(TComponent* Owner)
 	: TDataModule(Owner)

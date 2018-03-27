@@ -6,10 +6,10 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "barcodereader/atDS457.h"
-#include "mtkProperty.h"
+#include "dslProperty.h"
 //---------------------------------------------------------------------------
 
-using mtk::Property;
+using dsl::Property;
 
 class PACKAGE TZebraScannerFrame : public TFrame
 {
@@ -35,8 +35,8 @@ class PACKAGE TZebraScannerFrame : public TFrame
     private:
                                     //!The barcode reader
             DS457					mZebra;
-			mtk::Property<int>	    mZebraCOMPort;
-			mtk::Property<int>	    mZebraBaudRate;
+			dsl::Property<int>	    mZebraCOMPort;
+			dsl::Property<int>	    mZebraBaudRate;
 
 	        int						getZebraCOMPortNumber();
 			void __fastcall 		onConnectedToZebra();

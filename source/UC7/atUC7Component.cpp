@@ -1,11 +1,11 @@
 #pragma hdrstop
 #include "atUC7Component.h"
-#include "mtkIniFile.h"
-#include "mtkLogger.h"
-#include "mtkStringUtils.h"
+#include "dslIniFile.h"
+#include "dslLogger.h"
+#include "dslStringUtils.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 UC7::UC7(HWND__ *h)
 :

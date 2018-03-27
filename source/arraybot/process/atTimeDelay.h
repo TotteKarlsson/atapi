@@ -2,7 +2,7 @@
 #define atTimeDelayH
 #include "core/atProcess.h"
 #include <vector>
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 #include "arraybot/atABExporter.h"
 //---------------------------------------------------------------------------
 using namespace std;
@@ -18,7 +18,7 @@ class AT_AB TimeDelay : public Process
 		virtual bool 			            write();
 	    void						        clear();
 
-        virtual mtk::XMLElement*            addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+        virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
         virtual bool	                    start();
         virtual bool	                    resume(){return false;}

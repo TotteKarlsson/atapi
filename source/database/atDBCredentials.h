@@ -1,11 +1,11 @@
 #ifndef atDBCredentialsH
 #define atDBCredentialsH
 #include "atDBExporter.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 
 using std::string;
-using mtk::gNoneString;
+using dsl::gNoneString;
 
 class AT_DB DBCredentials
 {

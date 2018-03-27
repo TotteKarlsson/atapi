@@ -4,15 +4,15 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TIntLabel.h"
+#include "dslTIntLabel.h"
 #include <Data.DB.hpp>
 #include <Data.FMTBcd.hpp>
 #include <Data.SqlExpr.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "mtkStringList.h"
+#include "dslStringList.h"
 #include <list>
 #include "Poco/Path.h"
-using mtk::StringList;
+using dsl::StringList;
 using std::list;
 class TMovieItemFrame;
 

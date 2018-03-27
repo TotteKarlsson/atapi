@@ -1,13 +1,13 @@
 #ifndef atVideoCompressorThreadH
 #define atVideoCompressorThreadH
-#include "mtkThread.h"
+#include "dslThread.h"
 #include <functional>
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
 #include "core/atCoreExporter.h"
 //---------------------------------------------------------------------------
 
-class AT_CORE VideoCompressorThread : public mtk::Thread
+class AT_CORE VideoCompressorThread : public dsl::Thread
 {
 	typedef boost::function<void(int, int)> Callback;
     public:

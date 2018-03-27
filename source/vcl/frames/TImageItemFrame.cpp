@@ -1,16 +1,16 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TImageItemFrame.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include <JPEG.hpp>
-#include "mtkVCLUtils.h"
+#include "dslVCLUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 TImageItemFrame *ImageItemFrame;
 
-using namespace mtk;
+using namespace dsl;
 static int frameNr = 0;
 
 //---------------------------------------------------------------------------

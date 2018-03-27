@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atArrayBot.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 
 ArrayBot::ArrayBot(IniFile& ini, const string& appFolder)
 :

@@ -1,0 +1,132 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{029F25A0-05BA-400F-B292-F86D433AD968}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\thirdparty\ssidll\atSSI.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atResources\atResources.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atFoundation\atFoundation.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atVCLCommon\atVCLCommon.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atComponents\atComponents.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atVCLVisualComponents\atVisualComponents.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="dslFoundation">
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj"/>
+    </Target>
+    <Target Name="dslFoundation:Clean">
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dslFoundation:Make">
+        <MSBuild Projects="..\..\dsl\builds\dslFoundation\dslFoundation.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="dslVCLCommon">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj"/>
+    </Target>
+    <Target Name="dslVCLCommon:Clean">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dslVCLCommon:Make">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLCommon\dslVCLCommon.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="dslVCLComponents">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj"/>
+    </Target>
+    <Target Name="dslVCLComponents:Clean">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dslVCLComponents:Make">
+        <MSBuild Projects="..\..\dsl\builds\dslVCLComponents\dslVCLComponents.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atSSI">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj"/>
+    </Target>
+    <Target Name="atSSI:Clean">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atSSI:Make">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atResources">
+        <MSBuild Projects="atResources\atResources.cbproj"/>
+    </Target>
+    <Target Name="atResources:Clean">
+        <MSBuild Projects="atResources\atResources.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atResources:Make">
+        <MSBuild Projects="atResources\atResources.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atFoundation">
+        <MSBuild Projects="atFoundation\atFoundation.cbproj"/>
+    </Target>
+    <Target Name="atFoundation:Clean">
+        <MSBuild Projects="atFoundation\atFoundation.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atFoundation:Make">
+        <MSBuild Projects="atFoundation\atFoundation.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atVCLCommon">
+        <MSBuild Projects="atVCLCommon\atVCLCommon.cbproj"/>
+    </Target>
+    <Target Name="atVCLCommon:Clean">
+        <MSBuild Projects="atVCLCommon\atVCLCommon.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atVCLCommon:Make">
+        <MSBuild Projects="atVCLCommon\atVCLCommon.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atComponents">
+        <MSBuild Projects="atComponents\atComponents.cbproj"/>
+    </Target>
+    <Target Name="atComponents:Clean">
+        <MSBuild Projects="atComponents\atComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atComponents:Make">
+        <MSBuild Projects="atComponents\atComponents.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atVisualComponents">
+        <MSBuild Projects="atVCLVisualComponents\atVisualComponents.cbproj"/>
+    </Target>
+    <Target Name="atVisualComponents:Clean">
+        <MSBuild Projects="atVCLVisualComponents\atVisualComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atVisualComponents:Make">
+        <MSBuild Projects="atVCLVisualComponents\atVisualComponents.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="dslFoundation;dslVCLCommon;dslVCLComponents;atSSI;atResources;atFoundation;atVCLCommon;atComponents;atVisualComponents"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="dslFoundation:Clean;dslVCLCommon:Clean;dslVCLComponents:Clean;atSSI:Clean;atResources:Clean;atFoundation:Clean;atVCLCommon:Clean;atComponents:Clean;atVisualComponents:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="dslFoundation:Make;dslVCLCommon:Make;dslVCLComponents:Make;atSSI:Make;atResources:Make;atFoundation:Make;atVCLCommon:Make;atComponents:Make;atVisualComponents:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

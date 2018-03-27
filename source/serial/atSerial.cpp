@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "atSerial.h"
-#include "mtkUtils.h"
-#include "mtkWin32Utils.h"
-#include "mtkStringUtils.h"
-#include "mtkLogger.h"
+#include "dslUtils.h"
+#include "dslWin32Utils.h"
+#include "dslStringUtils.h"
+#include "dslLogger.h"
 
 
 
-using namespace mtk;
+using namespace dsl;
 
 Serial::Serial(int portNr, int baudRate, char ld, char rd, SerialPort::EHandshake handShake)
 :

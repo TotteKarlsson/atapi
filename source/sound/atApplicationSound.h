@@ -1,18 +1,18 @@
 #ifndef atApplicationSoundH
 #define atApplicationSoundH
-#include "mtkProperty.h"
+#include "dslProperty.h"
 #include "core/atATObject.h"
 #include "atDirectSound.h"
-#include "mtkConstants.h"
-#include "mtkStringList.h"
-#include "mtkUtils.h"
+#include "dslConstants.h"
+#include "dslStringList.h"
+#include "dslUtils.h"
 
 
-using mtk::Property;
-using mtk::StringList;
-using mtk::IniFile;
+using dsl::Property;
+using dsl::StringList;
+using dsl::IniFile;
 class ApplicationSound;
-namespace mtk
+namespace dsl
 {
 	AT_CORE	string	toString(const ApplicationSound& sound);
 }
@@ -22,7 +22,7 @@ namespace mtk
 class AT_CORE ApplicationSound : public DirectSound
 {
 	public:
-							            ApplicationSound(const string& name = mtk::gEmptyString, long vol = 0, bool repeats = false, bool enabled = false, HWND handle = NULL);
+							            ApplicationSound(const string& name = dsl::gEmptyString, long vol = 0, bool repeats = false, bool enabled = false, HWND handle = NULL);
 							            ApplicationSound(const ApplicationSound& s);
 		ApplicationSound&	            operator=(const ApplicationSound& rhs);
 
@@ -52,7 +52,7 @@ inline Property<ApplicationSound>::operator ApplicationSound() const
 template<> inline
 std::string Property< ApplicationSound >::getValueAsString() const
 {
-    return mtk::toString(getValue());
+    return dsl::toString(getValue());
 }
 
 template<> inline
@@ -64,7 +64,7 @@ bool Property< ApplicationSound >::write(IniFile* iniFile, const string& section
     }
 
     string toWrite;
-    toWrite = mtk::toString(getValue());
+    toWrite = dsl::toString(getValue());
     iniFile->writeString(mKey, toWrite, "", section);
     return true;
 }
@@ -81,7 +81,7 @@ bool Property< ApplicationSound >::read(IniFile* iniFile, const string& section)
     ApplicationSound tempVal;
     if(val.size() == 4)
     {
-    	tempVal = ApplicationSound(val[0], mtk::toInt(val[1]), toBool(val[2]), toBool(val[3]));
+    	tempVal = ApplicationSound(val[0], dsl::toInt(val[1]), toBool(val[2]), toBool(val[3]));
     }
 
     mWasRead = iniFile->wasItFound();

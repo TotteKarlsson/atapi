@@ -1,18 +1,18 @@
 #ifndef atAPTMotorH
 #define atAPTMotorH
 #include "atAPTDevice.h"
-#include "mtkTimer.h"
+#include "dslTimer.h"
 #include "arraybot/atDataStructures.h"
 #include "atMotorMessageProcessor.h"
 #include "atMotorMessageContainer.h"
-#include "mtkRange.h"
+#include "dslRange.h"
 #include "atMotorMessageData.h"
 //---------------------------------------------------------------------------
 
 
 class TMotorFrame;
 
-namespace mtk
+namespace dsl
 {
 	AT_AB	string		toString(const JogMoveMode& mode);
 	AT_AB	JogMoveMode	toJogMoveMode(const string& mode);
@@ -180,7 +180,7 @@ inline Property<JogMoveMode>::operator JogMoveMode() const
 template<> inline
 std::string Property< JogMoveMode >::getValueAsString() const
 {
-    return mtk::toString(getValue());
+    return dsl::toString(getValue());
 }
 
 template<> inline
@@ -192,7 +192,7 @@ bool Property< JogMoveMode >::write(IniFile* iniFile, const string& section)
     }
 
     string toWrite;
-    toWrite = mtk::toString(getValue());
+    toWrite = dsl::toString(getValue());
     iniFile->writeString(mKey, toWrite, "", section);
     return true;
 }

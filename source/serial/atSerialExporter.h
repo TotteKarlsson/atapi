@@ -5,7 +5,7 @@
     #if defined(AT_STATIC)
         #define AT_SERIAL
     #else
-        #if defined(AT_SERIAL_SHARED)
+        #if defined(AT_EXPORT_SERIAL)
             #define AT_SERIAL __declspec(dllexport)
         #else
             #define AT_SERIAL __declspec(dllimport)

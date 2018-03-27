@@ -4,19 +4,21 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TIntLabel.h"
+#include "dslTIntLabel.h"
 #include <System.Rtti.hpp>
 #include <Vcl.ComCtrls.hpp>
-#include "mtkProperty.h"
+#include "dslProperty.h"
 #include "sound/atApplicationSound.h"
+#include "dslTFloatLabeledEdit.h"
+#include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 
-namespace mtk
+namespace dsl
 {
 	class IniFileProperties;
 }
 
-using mtk::IniFileProperties;
+using dsl::IniFileProperties;
 
 class PACKAGE TApplicationSoundsFrame : public TFrame
 {
@@ -29,6 +31,7 @@ class PACKAGE TApplicationSoundsFrame : public TFrame
 	TButton *PlayBtn;
 	TCheckBox *EnabledCB;
 	TGroupBox *SoundPropsGB;
+	TFloatLabeledEdit *FloatLabeledEdit1;
 	void __fastcall ApplicationSoundsLBClick(TObject *Sender);
 	void __fastcall SoundCBCloseUp(TObject *Sender);
 	void __fastcall PlayBtnClick(TObject *Sender);

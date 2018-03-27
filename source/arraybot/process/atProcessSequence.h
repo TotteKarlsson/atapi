@@ -5,17 +5,17 @@
 #include <list>
 #include <deque>
 #include <string>
-#include "mtkINISection.h"
-#include "mtkProperty.h"
+#include "dslINISection.h"
+#include "dslProperty.h"
 #include "atProcessSequenceProject.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 
 using std::list;
 using std::deque;
 using std::string;
-using mtk::IniSection;
-using mtk::Property;
+using dsl::IniSection;
+using dsl::Property;
 class Process;
 class ArrayBot;
 
@@ -38,7 +38,7 @@ class AT_AB ProcessSequence : public ATObject
         string								getName();
 
         virtual bool	 		            read(const string& fName);
-        virtual bool			            write(const string& folder = mtk::gEmptyString);
+        virtual bool			            write(const string& folder = dsl::gEmptyString);
 
 		virtual bool	   		            assignSubject(ATObject* o);
 

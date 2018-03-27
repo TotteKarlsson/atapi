@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atAPTMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "core/atCore.h"
-#include "mtkUtils.h"
+#include "dslUtils.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 APTMotor::APTMotor(int serialNo)
 :
@@ -268,7 +268,7 @@ double getMotorPosition(APTMotor* m)
     }
     return -1;
 }
-namespace mtk
+namespace dsl
 {
 string toString(const JogMoveMode& mode)
 {

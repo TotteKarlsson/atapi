@@ -3,9 +3,9 @@
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include "atDirectSound.h"
-#include "mtkTimer.h"
+#include "dslTimer.h"
 
-using mtk::Timer;
+using dsl::Timer;
 //---------------------------------------------------------------------------
 
 //class AT_CORE SoundPlayer : public ATObject

@@ -1,20 +1,20 @@
 #pragma hdrstop
 #include "atMotorMessageProcessor.h"
-#include "mtkStringUtils.h"
+#include "dslStringUtils.h"
 #include "atMotorMessageContainer.h"
 #include "Poco/Mutex.h"
-#include "mtkLogger.h"
-#include "mtkUtils.h"
+#include "dslLogger.h"
+#include "dslUtils.h"
 #include "atAPTMotor.h"
 //---------------------------------------------------------------------------
 
 using Poco::Mutex;
-using namespace mtk;
+using namespace dsl;
 
 //----------------------------------------------------------------
 MotorMessageProcessor::MotorMessageProcessor(MotorMessageContainer& messageContainer,  const string& threadName)
 :
-mtk::Thread(threadName),
+dsl::Thread(threadName),
 mAllowProcessing(true),
 mMotorMessageContainer(messageContainer),
 mProcessedCount(0),
@@ -52,7 +52,7 @@ bool MotorMessageProcessor::start(bool inThread)
 	}
 	if(inThread)
 	{
-		return mtk::Thread::start();
+		return dsl::Thread::start();
 	}
 	else
 	{
@@ -74,7 +74,7 @@ void MotorMessageProcessor::resumeProcessing()
 void MotorMessageProcessor::stop()
 {
 	//Sets time to die to true
-	mtk::Thread::stop();
+	dsl::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
 	mMotorMessageContainer.mNewCommandCondition.signal();

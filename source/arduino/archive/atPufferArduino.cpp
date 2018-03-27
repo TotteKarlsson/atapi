@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atPufferArduino.h"
 #include <sstream>
-#include "mtkLogger.h";
+#include "dslLogger.h";
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 using namespace std;
 
 PufferArduino::PufferArduino(int portNr, int baudRate)

@@ -1,15 +1,15 @@
 #pragma hdrstop
 #include "atSounds.h"
-#include "mtkWin32Utils.h"
+#include "dslWin32Utils.h"
 #include <windows.h>
-#include "resources/atResourceManager.h"
-
+#include "atResourceManager.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 //Non exports
 //string 	                getSoundResourceName(ABSound a);
 //bool 			        PlayResource(const string& resName, long flags = 0);
 
-using namespace mtk;
+using namespace dsl;
 
 //string getSoundResourceName(ABSound a)
 //{

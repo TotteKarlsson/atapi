@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include <windows.h>
 #include "atCore.h"
-#include "mtkStringUtils.h"
-#include "mtkWin32Utils.h"
-using namespace mtk;
+#include "dslStringUtils.h"
+#include "dslWin32Utils.h"
+using namespace dsl;
 
 //Module entry point..
 extern "C" int _libmain(unsigned long reason)

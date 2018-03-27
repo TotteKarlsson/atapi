@@ -4,10 +4,10 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "TIntegerLabeledEdit.h"
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "TIntLabel.h"
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTIntLabel.h"
 //---------------------------------------------------------------------------
 
 

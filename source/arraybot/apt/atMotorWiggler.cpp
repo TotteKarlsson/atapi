@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atMotorWiggler.h"
 #include "apt/atAPTMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 MotorWiggler::MotorWiggler(APTMotor* xmtr, APTMotor* ymtr)

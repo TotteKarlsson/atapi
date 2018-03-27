@@ -2,12 +2,12 @@
 #define atPositionH
 #include "arraybot/atABExporter.h"
 #include "core/atATObject.h"
-#include "Math/mtkPoint.h"
+#include "Math/dslPoint.h"
 #include <string>
 //---------------------------------------------------------------------------
 
 using std::string;
-using mtk::Point;
+using dsl::Point;
 
 //! A Position is a point in XYZ space.
 /*!
@@ -28,7 +28,7 @@ class AT_AB Position : public ATObject
         double 					z() const;
 
 	protected:
-    	mtk::Point				mPosition;
+    	dsl::Point				mPosition;
         string					mLabel;
         double					mResolution;
 };

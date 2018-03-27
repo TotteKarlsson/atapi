@@ -2,7 +2,7 @@
 #define atUC7MessageH
 #include "core/atATObject.h"
 #include "atUC7Exporter.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
 
 const int gStepperControllerAddress             = 4;
@@ -57,7 +57,7 @@ string toLongString(UC7MessageEnum cmd);
 class AT_UC7 UC7Message : public ATObject
 {
 	public:
-					            UC7Message(const string& cmd = mtk::gEmptyString, bool hasCS = false, bool isResponse = false);
+					            UC7Message(const string& cmd = dsl::gEmptyString, bool hasCS = false, bool isResponse = false);
 		bool					init(const string& cmd, bool hasCS = false);
         string		            getReceiver() const;
         string		            getSender() const;

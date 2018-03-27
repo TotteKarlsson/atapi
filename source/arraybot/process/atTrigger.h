@@ -3,9 +3,9 @@
 #include "../atABExporter.h"
 #include "core/atATObject.h"
 #include <string>
-#include "mtkTimer.h"
+#include "dslTimer.h"
 #include <vector>
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 #include "core/atUtilities.h"
 //---------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ class AT_AB Trigger : public ATObject
         TriggerFunction* 					getTriggerFunction(){return mTriggerFunction;}
 
         									//!Ability to read/write trigger objects occurs using xml
-		virtual mtk::XMLElement* 			addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot) = 0;
+		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
 
     protected:
         									//!The subject name is the name of the device being monitored
@@ -68,7 +68,7 @@ class AT_AB Trigger : public ATObject
 
     										//!The Trigger timer checks for a satisified trigger condition.
                                             //!Todo: Add timeout logic..
-        mtk::Timer				            mTriggerTimer;
+        dsl::Timer				            mTriggerTimer;
 
         						            //!The test function is a function called
                                             //!in the triggers timer function and used to test for the trigger condition

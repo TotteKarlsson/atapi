@@ -1,11 +1,11 @@
 #pragma hdrstop
 #include "atXYZUnit.h"
-#include "atArrayBotJoyStick.h"
-#include "mtkLogger.h"
+#include "joystick/atArrayBotJoyStick.h"
+#include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 XYZUnit::XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder)
 :

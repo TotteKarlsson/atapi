@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "thirdparty/thorlabs/Thorlabs.MotionControl.TCube.StepperMotor.h"
 #include "atTCubeStepperMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "/core/atExceptions.h"
 #include "atMotorCommand.h"
 #include <bitset>

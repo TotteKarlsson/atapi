@@ -2,13 +2,13 @@
 #pragma hdrstop
 #include "TArduinoServerCommandFrame.h"
 #include "arduino/atArduinoServerCommand.h"
-#include "mtkVCLUtils.h"
+#include "dslVCLUtils.h"
 #include "arraybot/atArrayBot.h"
-#include "TTextInputDialog.h"
+#include "forms/TTextInputDialog.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TFloatLabeledEdit"
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTFloatLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 TArduinoServerCommandFrame *ArduinoServerCommandFrame;

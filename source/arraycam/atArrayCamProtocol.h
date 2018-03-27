@@ -4,6 +4,7 @@
 #include "core/atCoreExporter.h"
 //---------------------------------------------------------------------------
 using std::map;
+using std::string;
 
 //Put this in a header to be shared between server/client
 //!Valid requests/responses enums
@@ -11,7 +12,7 @@ using std::map;
 //acm <==> miscellaneous server message that clients may handle as they wish
 //abr <==> arraybot server request. For now mingled here...
 
-AT_CORE enum  ACMessageID
+enum  ACMessageID
 {
 	acrStartVideoRecorder = 0,
     acrVideoRecorderStarted,
@@ -71,6 +72,8 @@ class AT_CORE ArrayCamProtocol
 
 	private:
 	    map<ACMessageID, string>::iterator	mIter;
+        static map<ACMessageID, string>     createProtocol();
+
 };
 
 #endif

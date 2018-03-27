@@ -1,8 +1,8 @@
 #ifndef atProcessSequenceProjectH
 #define atProcessSequenceProjectH
 #include "arraybot/atABExporter.h"
-#include "mtkProject.h"
-#include "mtkConstants.h"
+#include "dslProject.h"
+#include "dslConstants.h"
 #include "core/atProcess.h"
 #include "core/atATObject.h"
 
@@ -26,14 +26,14 @@ class MoveCoverSlipAtAngleProcess;
 class HomeMotor;
 
 //!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
-class AT_AB ProcessSequenceProject : public mtk::Project, public ATObject
+class AT_AB ProcessSequenceProject : public dsl::Project, public ATObject
 {
 	friend ArrayCamRequestProcess;
     public:
                                                 ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName = "Sequence 1.abp");
                                                 ~ProcessSequenceProject();
 
-        bool                                    save(const string& fName = mtk::gEmptyString);
+        bool                                    save(const string& fName = dsl::gEmptyString);
         bool                                    open();
         string                                  getPresentXMLModelVersion();
 

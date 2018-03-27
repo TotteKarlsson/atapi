@@ -1,14 +1,14 @@
 #pragma hdrstop
-#include "mtkStringUtils.h"
-#include "mtkMessageContainer.h"
-#include "mtkSocketClient.h"
-#include "mtkLogger.h"
+#include "dslStringUtils.h"
+#include "dslMessageContainer.h"
+#include "dslSocketClient.h"
+#include "dslLogger.h"
 #include "atArrayCamMessageProcessor.h"
-#include "mtkMessageContainer.h"
+#include "dslMessageContainer.h"
 #include "Poco/Mutex.h"
 #include "atArrayCamClient.h"
 //----------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ArrayCamMessageProcessor::ArrayCamMessageProcessor(ArrayCamClient& client)
 :

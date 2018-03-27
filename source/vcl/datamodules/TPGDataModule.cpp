@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "TPGDataModule.h"
-#include "mtkVCLUtils.h"
 #include <sstream>
-#include "mtkLogger.h"
 #include <iomanip>
+#include "dslVCLUtils.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
@@ -11,7 +11,7 @@
 #pragma link "DbxDevartPostgreSQL"
 
 TpgDM *pgDM;
-using namespace mtk;
+using namespace dsl;
 using namespace std;
 
 //---------------------------------------------------------------------------

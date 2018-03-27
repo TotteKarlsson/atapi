@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "TCoverSlipDataModule.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "TATDBDataModule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma classgroup "System.Classes.TPersistent"
 #pragma resource "*.dfm"
 TcsDM *csDM;
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TcsDM::TcsDM(TComponent* Owner)

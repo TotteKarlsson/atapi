@@ -4,11 +4,11 @@
 #include "core/atATObject.h"
 #include <deque>
 #include "atProcessSequence.h"
-#include "mtkConstants.h"
+#include "dslConstants.h"
 
 //---------------------------------------------------------------------------
 using std::deque;
-using namespace mtk;
+using namespace dsl;
 
 class ProcessSequencer;
 

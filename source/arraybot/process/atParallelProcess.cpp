@@ -2,10 +2,10 @@
 #include "atParallelProcess.h"
 #include "atXYZUnit.h"
 #include "apt/atAPTMotor.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "apt/atMove.h"
 #include "arraybot/process/atProcessSequence.h"
-using namespace mtk;
+using namespace dsl;
 using namespace at;
 
 //---------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void ParallelProcess::addProcess(Process* lm)
     }
 	if(lm->getProcessName() =="")
     {
-    	lm->setProcessName("Action " + mtk::toString((mProcesses.size() + 1)));
+    	lm->setProcessName("Action " + dsl::toString((mProcesses.size() + 1)));
     }
 
 	mProcesses.push_back(lm);
@@ -233,7 +233,7 @@ XMLElement* ParallelProcess::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc,
 	for(int i = 0; i < mProcesses.size(); i++)
     {
     	Process* pp = mProcesses[i];
-        mtk::XMLElement* newElement = pp->addToXMLDocument(doc, docRoot);
+        dsl::XMLElement* newElement = pp->addToXMLDocument(doc, docRoot);
         pp->addToXMLDocumentAsChild(doc, newElement);
     }
 

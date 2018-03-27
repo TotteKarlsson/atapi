@@ -1,8 +1,8 @@
 #pragma hdrstop
 
-#pragma comment(lib, "mtkCommon.lib")
-#pragma comment(lib, "mtkMath.lib")
-#pragma comment(lib, "mtkIPC.lib")
+#pragma comment(lib, "dslCommon.lib")
+#pragma comment(lib, "dslMath.lib")
+#pragma comment(lib, "dslIPC.lib")
 
 
 #pragma comment(lib, "poco_foundation-static.lib")

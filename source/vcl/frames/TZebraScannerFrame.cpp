@@ -1,9 +1,9 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "TZebraScannerFrame.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 #pragma package(smart_init)
 #pragma resource "*.dfm"

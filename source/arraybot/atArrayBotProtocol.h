@@ -15,7 +15,7 @@ using std::string;
 AT_CORE enum  ABMessageID
 {
 
-    abrSetJoyStickSpeed, 				//!The cmd needs one arguments: setting name, e.g. fast, medium  or slow
+    abrSetJoyStickSpeed=0, 				//!The cmd needs one arguments: setting name, e.g. fast, medium  or slow
     abrUnknown
 };
 

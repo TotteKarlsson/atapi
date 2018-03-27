@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atProcessSequences.h"
-#include "mtkFileUtils.h"
+#include "dslFileUtils.h"
 #include <sstream>
-#include "mtkUtils.h"
-#include "mtkLogger.h"
+#include "dslUtils.h"
+#include "dslLogger.h"
 
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using namespace std;
 
 ProcessSequences::ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayCamClient& ac, ArrayBot& ab)

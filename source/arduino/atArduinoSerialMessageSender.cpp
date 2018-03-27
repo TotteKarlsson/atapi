@@ -1,16 +1,16 @@
 #pragma hdrstop
 #include "atArduinoSerialMessageSender.h"
 #include "atArduinoDevice.h"
-#include "mtkLogger.h"
-#include "mtkUtils.h"
+#include "dslLogger.h"
+#include "dslUtils.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using Poco::Mutex;
 
 //----------------------------------------------------------------
 ArduinoSerialMessageSender::ArduinoSerialMessageSender(ArduinoDevice& d)
 :
-mtk::Thread(""),
+dsl::Thread(""),
 mProcessTimeDelay(1),
 mTheArduino(d)
 {}
@@ -84,7 +84,7 @@ bool ArduinoSerialMessageSender::start(bool inThread)
 	}
 	if(inThread)
 	{
-		return mtk::Thread::start();
+		return dsl::Thread::start();
 	}
 	else
 	{
@@ -97,7 +97,7 @@ bool ArduinoSerialMessageSender::start(bool inThread)
 void ArduinoSerialMessageSender::stop()
 {
 	//Sets time to die to true
-	mtk::Thread::stop();
+	dsl::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
 	mTheArduino.mNewMessageToSendCondition.signal();

@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "arraybot/atArrayBot.h"
 #include "atArrayBotServer.h"
-#include "mtkLogger.h"
-#include "mtkSocketWorker.h"
-#include "mtkStringUtils.h"
+#include "dslLogger.h"
+#include "dslSocketWorker.h"
+#include "dslStringUtils.h"
 #include "ArrayBot/atArrayBotProtocol.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ArrayBotServer::ArrayBotServer(ArrayBot& ab, int portNumber)
 :
@@ -60,7 +60,7 @@ void ArrayBotServer::broadcast(ABMessageID id, const string& arg1, const string&
 void ArrayBotServer::broadcastStatus()
 {
     stringstream msg;
-//    msg << "IS_RECORDING="<<mtk::toString(mMainForm.mCaptureVideoTimer->Enabled);
+//    msg << "IS_RECORDING="<<dsl::toString(mMainForm.mCaptureVideoTimer->Enabled);
    	notifyClients(msg.str());
 }
 

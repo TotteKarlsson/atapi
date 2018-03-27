@@ -5,12 +5,14 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include "TArrayBotBtn.h"
-#include "TIntegerLabeledEdit.h"
-#include "TPropertyCheckBox.h"
-#include "TSTDStringLabeledEdit.h"
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTPropertyCheckBox.h"
+#include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "core/atHDMIStreamerProcess.h"
+#include "dslTIntegerLabeledEdit.h"
+#include "dslTSTDStringLabeledEdit.h"
 //---------------------------------------------------------------------------
 
 class PACKAGE THDMIStreamerFrame : public TFrame

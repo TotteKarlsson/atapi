@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atResourceManager.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 ResourceManager::ResourceManager()
 {

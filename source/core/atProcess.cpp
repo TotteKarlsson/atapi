@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "core/atProcess.h"
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 //---------------------------------------------------------------------------
 
 using Poco::Timespan;
-using namespace mtk;
+using namespace dsl;
 
 Process::Process(const string& lbl, ATObject* ao)
 :

@@ -1,19 +1,19 @@
 #ifndef atArrayBotMessageProcessorH
 #define atArrayBotMessageProcessorH
 #include <string>
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 //----------------------------------------------------------------
 
-using mtk::Thread;
+using dsl::Thread;
 using std::vector;
-namespace mtk
+namespace dsl
 {
 	class MessageContainer;
 }
 
-using mtk::MessageContainer;
+using dsl::MessageContainer;
 class ArrayBotClient;
 typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 

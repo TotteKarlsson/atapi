@@ -78,6 +78,18 @@ object ApplicationSoundsFrame: TApplicationSoundsFrame
         TickStyle = tsNone
         OnChange = VolumeTBChange
       end
+      object FloatLabeledEdit1: TFloatLabeledEdit
+        Left = 56
+        Top = 184
+        Width = 121
+        Height = 21
+        EditLabel.Width = 85
+        EditLabel.Height = 13
+        EditLabel.Caption = 'FloatLabeledEdit1'
+        TabOrder = 5
+        Text = '-1.0000'
+        Value = -1.000000000000000000
+      end
     end
   end
 end

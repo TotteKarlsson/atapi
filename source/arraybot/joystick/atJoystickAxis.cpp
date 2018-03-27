@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atJoystickAxis.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "apt/atAPTMotor.h"
-#include "mtkUtils.h"
+#include "dslUtils.h"
 
-using namespace mtk;
+using namespace dsl;
 
 JoyStickAxis::JoyStickAxis()
 :

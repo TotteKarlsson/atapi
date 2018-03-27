@@ -1,11 +1,11 @@
 #pragma hdrstop
 #include "atUtilities.h"
 #include <sstream>
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace mtk;
+using namespace dsl;
 
 string toString(LogicOperator o)
 {

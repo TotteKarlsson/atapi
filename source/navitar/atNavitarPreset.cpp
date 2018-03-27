@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atNavitarPreset.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 NavitarPreset::NavitarPreset(NavitarMotorController& mc, const string& name, const int& z, const int& f)

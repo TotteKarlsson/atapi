@@ -35,7 +35,6 @@ object pgDM: TpgDM
     AfterConnect = SQLConnection1AfterConnect
     AfterDisconnect = SQLConnection1AfterDisconnect
     BeforeConnect = SQLConnection1BeforeConnect
-    Connected = True
     Left = 40
     Top = 24
   end
@@ -45,7 +44,6 @@ object pgDM: TpgDM
     Top = 360
   end
   object blocksCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'blocksProvider'
@@ -276,7 +274,6 @@ object pgDM: TpgDM
     Top = 88
   end
   object usersCDS: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'usersProvider'
@@ -901,7 +898,6 @@ object pgDM: TpgDM
     Top = 720
   end
   object cryoprotectionDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from cryoprotectionprotocols'
@@ -912,7 +908,6 @@ object pgDM: TpgDM
     Top = 784
   end
   object freezeprotocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from freezeprotocols'
@@ -923,7 +918,6 @@ object pgDM: TpgDM
     Top = 656
   end
   object substitutionProtocol: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from substitutionprotocols'
@@ -961,7 +955,6 @@ object pgDM: TpgDM
     end
   end
   object infiltrationProtocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from infiltrationprotocols'
@@ -972,7 +965,6 @@ object pgDM: TpgDM
     Top = 784
   end
   object embeddingProtocolDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'select * from embeddingprotocols'
@@ -983,7 +975,6 @@ object pgDM: TpgDM
     Top = 720
   end
   object blockstatusDS: TSimpleDataSet
-    Active = True
     Aggregates = <>
     Connection = SQLConnection1
     DataSet.CommandText = 'SELECT * from blockstatuses'

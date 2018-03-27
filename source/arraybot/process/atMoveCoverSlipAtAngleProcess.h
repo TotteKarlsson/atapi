@@ -2,7 +2,7 @@
 #define atMoveCoverSlipAtAngleProcessH
 #include "../core/atProcess.h"
 #include "arraybot/atABExporter.h"
-#include "mtkXMLUtils.h"
+#include "dslXMLUtils.h"
 //---------------------------------------------------------------------------
 
 //!A LiftAtAngle process is a process combining up to 4 motors to move
@@ -12,7 +12,7 @@
 //!out of the water
 class APTMotor;
 
-using mtk::XMLElement;
+using dsl::XMLElement;
 
 class AT_AB MoveCoverSlipAtAngleProcess : public Process
 {
@@ -33,7 +33,7 @@ class AT_AB MoveCoverSlipAtAngleProcess : public Process
 		virtual bool 			  					write();
 
 		const string 				                getTypeName() const;
-	    virtual mtk::XMLElement*                    addToXMLDocumentAsChild(mtk::XMLDocument& doc, mtk::XMLNode* docRoot);
+	    virtual dsl::XMLElement*                    addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
         void										setLiftVelocity(double l);
         double										getLiftVelocity();

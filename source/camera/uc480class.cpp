@@ -1,9 +1,9 @@
 #pragma hdrstop
 //#include "stdafx.h"
 #include "uc480/uc480class.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 
-using namespace mtk;
+using namespace dsl;
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

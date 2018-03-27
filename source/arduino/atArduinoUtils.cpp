@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atArduinoUtils.h"
-#include "mtkUtils.h"
-#include "mtkIPCMessageEnums.h"
+#include "dslUtils.h"
+#include "dslIPCMessageEnums.h"
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 int getArduinoIPCMessageID(const string& cs)

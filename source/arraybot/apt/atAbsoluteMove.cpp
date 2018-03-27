@@ -3,9 +3,9 @@
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
 #include "atProcessSequence.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 
 AbsoluteMove::AbsoluteMove(const string& lbl, APTMotor* mtr, double pos, double maxVel, double acc)

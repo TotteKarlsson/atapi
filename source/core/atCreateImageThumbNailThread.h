@@ -1,7 +1,7 @@
 #ifndef atCreateImageThumbNailThreadH
 #define atCreateImageThumbNailThreadH
 #include "core/atATObject.h"
-#include "mtkThread.h"
+#include "dslThread.h"
 #include <functional>
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
@@ -9,7 +9,7 @@
 
 typedef boost::function<void(int, int)> Callback;
 
-class AT_CORE CreateImageThumbNailThread : public mtk::Thread
+class AT_CORE CreateImageThumbNailThread : public dsl::Thread
 {
     public:
 								CreateImageThumbNailThread();

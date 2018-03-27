@@ -1,25 +1,25 @@
 #ifndef atHDMIStreamerProcessH
 #define atHDMIStreamerProcessH
-#include "mtkConstants.h"
+#include "dslConstants.h"
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
 #include <functional>
 #include <fstream>
-#include "mtkThread.h"
+#include "dslThread.h"
 #include "Poco/PipeStream.h"
 #include "core/atATObject.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 using Poco::Process;
 using Poco::ProcessHandle;
 using Poco::PipeInputStream;
 using Poco::PipeOutputStream;
 using Poco::Pipe;
-using mtk::Thread;
+using dsl::Thread;
 
 //!The HDMIStreamer process manages a BlackMagic HDMI streamer process, BMStreamer.
 //!The BMStreamer streams HDMI content to an anonomous pipe and, optionally to a file.
-class AT_CORE HDMIStreamerProcess : public mtk::Thread
+class AT_CORE HDMIStreamerProcess : public dsl::Thread
 {
 typedef boost::function<void(int, int)> Callback;
 	public:

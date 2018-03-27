@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include "atDS457.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
-using namespace mtk;
+using namespace dsl;
 
 DS457::DS457()
 :

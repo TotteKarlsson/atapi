@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include "atWhiskerUnit.h"
-#include "mtkProperties.h"
-#include "atArrayBotJoyStick.h"
-#include "mtkLogger.h"
+#include "dslProperties.h"
+#include "joystick/atArrayBotJoyStick.h"
+#include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 //WhiskerUnit::WhiskerUnit(IniFile& iniFile, const string& appDataFolder)
 //:
 //XYZUnit("WHISKER UNIT", iniFile, appDataFolder)//,

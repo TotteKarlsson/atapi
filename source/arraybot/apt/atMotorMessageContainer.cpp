@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atMotorMessageContainer.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-using namespace mtk;
+using namespace dsl;
 MotorMessageContainer::MotorMessageContainer()
 :
 mNrOfProcessedCommands(0)

@@ -3,13 +3,13 @@
 #include <string>
 #include <vector>
 #include "core/atCoreExporter.h"
-#include "mtkIniFile.h"
-#include "mtkIniFileProperties.h"
+#include "dslIniFile.h"
+#include "dslIniFileProperties.h"
 #include "WatchDogSensor.h"
 //---------------------------------------------------------------------------
-using mtk::IniFileProperties;
-using mtk::IniFile;
-using mtk::Property;
+using dsl::IniFileProperties;
+using dsl::IniFile;
+using dsl::Property;
 using std::string;
 using std::vector;
 

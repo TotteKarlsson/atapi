@@ -1,18 +1,20 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "THDMIStreamerFrame.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
-#include "ArrayCamUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
+//#include "ArrayCamUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"
-#pragma link "TIntegerLabeledEdit"
-#pragma link "TPropertyCheckBox"
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTPropertyCheckBox"
+#pragma link "dslTStdStringLabeledEdit"
+#pragma link "dslTIntegerLabeledEdit"
+#pragma link "dslTSTDStringLabeledEdit"
 #pragma resource "*.dfm"
 THDMIStreamerFrame *HDMIStreamerFrame;
-using namespace mtk;
+using namespace dsl;
 using namespace Poco;
 //---------------------------------------------------------------------------
 __fastcall THDMIStreamerFrame::THDMIStreamerFrame(TComponent* Owner)

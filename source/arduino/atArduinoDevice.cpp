@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atArduinoDevice.h"
-#include "mtkWin32Utils.h"
-#include "mtkLogger.h"
+#include "dslWin32Utils.h"
+#include "dslLogger.h"
 #include "Poco/Mutex.h"
-using namespace mtk;
+using namespace dsl;
 
 ArduinoDevice::ArduinoDevice(int pNr, int baudRate)
 :

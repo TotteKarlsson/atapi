@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include "atJoyStickButton.h"
-#include "mtkLogger.h"
+#include "dslLogger.h"
 #include "apt/atAPTMotor.h"
 //---------------------------------------------------------------------------
 
-using namespace mtk;
+using namespace dsl;
 JoyStickButton::JoyStickButton()
 :
 	mIsForward(true),

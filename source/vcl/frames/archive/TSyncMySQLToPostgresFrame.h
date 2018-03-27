@@ -8,11 +8,11 @@
 #include <Vcl.CheckLst.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "core/atSyncMySQLDataToPostgres.h"
-#include "mtkIniFile.h"
-#include "mtkIniFileProperties.h"
+#include "dslIniFile.h"
+#include "dslIniFileProperties.h"
 //---------------------------------------------------------------------------
-using mtk::IniFile;
-using mtk::IniFileProperties;
+using dsl::IniFile;
+using dsl::IniFileProperties;
 
 class TSyncMySQLToPostgresFrame : public TFrame
 {

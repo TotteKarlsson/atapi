@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "TRibbonsDataModule.h"
 
-#include "mtkLogger.h"
+#include "dslLogger.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -9,7 +9,7 @@
 #pragma resource "*.dfm"
 TRibbonsDataModule *RibbonsDataModule;
 
-using namespace mtk;
+using namespace dsl;
 
 //---------------------------------------------------------------------------
 __fastcall TRibbonsDataModule::TRibbonsDataModule(TComponent* Owner)

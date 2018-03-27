@@ -2,21 +2,21 @@
 #pragma hdrstop
 #include "TXYZProcessSequencerFrame.h"
 #include "atXYZUnit.h"
-#include "mtkLogger.h"
-#include "mtkVCLUtils.h"
+#include "dslLogger.h"
+#include "dslVCLUtils.h"
 #include "atAPTMotor.h"
 #include "atMove.h"
 #include "atArrayBot.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "TFloatLabeledEdit"
-#pragma link "TSTDStringLabeledEdit"
+#pragma link "dslTFloatLabeledEdit"
+#pragma link "dslTStdStringLabeledEdit"
 #pragma resource "*.dfm"
 TXYZProcessSequencerFrame *XYZProcessSequencerFrame;
 //---------------------------------------------------------------------------
 
 extern string gAppDataFolder;
-using namespace mtk;
+using namespace dsl;
 
 int TXYZProcessSequencerFrame::mFrameNr = 0;
 __fastcall TXYZProcessSequencerFrame::TXYZProcessSequencerFrame(XYZUnit* u, ArrayBot* ab, const string& appFolder, TComponent* Owner)
@@ -25,7 +25,7 @@ __fastcall TXYZProcessSequencerFrame::TXYZProcessSequencerFrame(XYZUnit* u, Arra
     mAB(ab),
     mProcessSequencer(appFolder)
 {
-    TFrame::Name = vclstr("Frame_" + replaceCharacter('-', '_', "MoveSequenceFrame") + mtk::toString(++mFrameNr));
+    TFrame::Name = vclstr("Frame_" + replaceCharacter('-', '_', "MoveSequenceFrame") + dsl::toString(++mFrameNr));
 
 	if(!mXYZUnit)
     {
@@ -100,10 +100,10 @@ void __fastcall TXYZProcessSequencerFrame::mAddMoveBtnClick(TObject *Sender)
     {
     	//Make move name unique
     	int i = 1;
-    	string lbl = "MOVE " + mtk::toString(mMovesLB->Count + i);
+    	string lbl = "MOVE " + dsl::toString(mMovesLB->Count + i);
         do
         {
-            lbl = "MOVE " + mtk::toString(mMovesLB->Count + i);
+            lbl = "MOVE " + dsl::toString(mMovesLB->Count + i);
             i++;
         }while(mMovesLB->Items->IndexOf(vclstr(lbl)) != -1);
 

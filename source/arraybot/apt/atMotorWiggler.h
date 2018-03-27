@@ -1,13 +1,13 @@
 #ifndef atMotorWigglerH
 #define atMotorWigglerH
 #include "core/atATObject.h"
-#include "mtkProperty.h"
-#include "mtkTimer.h"
+#include "dslProperty.h"
+#include "dslTimer.h"
 #include "arraybot/atABExporter.h"
 //---------------------------------------------------------------------------
 
-using mtk::Property;
-using mtk::Timer;
+using dsl::Property;
+using dsl::Timer;
 class APTMotor;
 
 typedef void (__closure *OnTimer)();

@@ -5,7 +5,7 @@
 #include "atDBUtils.h"
 #include <deque>
 #include "atDBConnection.h"
-#include "mtkStringList.h"
+#include "dslStringList.h"
 //---------------------------------------------------------------------------
 
 namespace Poco
@@ -16,7 +16,7 @@ namespace Poco
         class Session;
     }
 }
-using namespace mtk;
+using namespace dsl;
 
 //!The ATDB server session class encapsulate a database session
 //!with the ATDB MySQL database

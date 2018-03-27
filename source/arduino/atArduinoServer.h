@@ -3,18 +3,18 @@
 //---------------------------------------------------------------------------
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
-#include "mtkIPCServer.h"
-#include "mtkSocketWorker.h"
+#include "dslIPCServer.h"
+#include "dslSocketWorker.h"
 #include "atLightsArduino.h"
 #include "atSensorsArduino.h"
 
 #include <vector>
-#include "mtkTimer.h"
-using mtk::IPCServer;
-using mtk::IPCMessage;
+#include "dslTimer.h"
+using dsl::IPCServer;
+using dsl::IPCMessage;
 using std::vector;
 
-mtk::SocketWorker* AT_ARDUINO createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
+dsl::SocketWorker* AT_ARDUINO createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
 
 typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
