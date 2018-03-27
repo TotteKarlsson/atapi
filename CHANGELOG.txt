@@ -1,3 +1,18 @@
+Release 0.5.7 (March 27)
+=======================
+* Added .gitattributes to deal with bash shell scripts
+* Fixed static map init bug
+* Added postbuild script
+* Added prelink script and post build scripts in order to create a good library 'state'
+* Create borland lib from Visual Studio dll :
+  * >implib -a Thorlabs.MotionControl.Benchtop.StepperMotorB.lib Thorlabs.MotionControl.Benchtop.StepperMotor.dll_0
+  * -a creates a '_' prefixing exported functions, required for codegear linker
+
+* Fixing pragmas
+* Adding new build system
+* mtk -> dsl
+* Moving build files out of source tree
+
 Release 0.5.6 (March 23)
 =======================
 * Merge branch 'tokyo' of https://github.com/TotteKarlsson/atapi into tokyo
