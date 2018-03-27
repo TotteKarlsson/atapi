@@ -254,7 +254,7 @@ extern "C" {
 #define IS_INVALID_IMG_SIZE                                                21    
 #define IS_INVALID_ADDRESS                                                 22    
 #define IS_INVALID_VIDEO_MODE                                              23    
-#define IS_INVALID_AGC_MODE                                                24    
+#define IS_INVALID_AGC_MODE                                                24
 #define IS_INVALID_GAMMA_MODE                                              25    
 #define IS_INVALID_SYNC_LEVEL                                              26    
 #define IS_INVALID_CBARS_MODE                                              27    
@@ -303,7 +303,7 @@ extern "C" {
 #define IS_DD_BACKSURFACE_IN_SYSMEM                                        77    
 #define IS_DD_MDL_MALLOC_ERR                                               78    
 #define IS_DD_MDL_SIZE_ERR                                                 79    
-#define IS_DD_CLIP_NO_CHANGE                                               80    
+#define IS_DD_CLIP_NO_CHANGE                                               80
 #define IS_DD_PRIMMEM_NULL                                                 81    
 #define IS_DD_BACKMEM_NULL                                                 82    
 #define IS_DD_BACKOVLMEM_NULL                                              83    
@@ -548,7 +548,7 @@ extern "C" {
 #define IS_GET_GREEN_GAIN                                              0x8002    
 #define IS_GET_BLUE_GAIN                                               0x8003    
 #define IS_GET_DEFAULT_MASTER                                          0x8004    
-#define IS_GET_DEFAULT_RED                                             0x8005    
+#define IS_GET_DEFAULT_RED                                             0x8005
 #define IS_GET_DEFAULT_GREEN                                           0x8006    
 #define IS_GET_DEFAULT_BLUE                                            0x8007    
 #define IS_GET_GAINBOOST                                               0x8008    
@@ -646,7 +646,7 @@ extern "C" {
 #define IS_AOI_IMAGE_GET_POS_MAX                                       0x0009    
 #define IS_AOI_IMAGE_GET_SIZE_MAX                                      0x0010    
 #define IS_AOI_IMAGE_GET_POS_INC                                       0x0011    
-#define IS_AOI_IMAGE_GET_SIZE_INC                                      0x0012    
+#define IS_AOI_IMAGE_GET_SIZE_INC                                      0x0012
 #define IS_AOI_IMAGE_GET_POS_X_ABS                                     0x0013    
 #define IS_AOI_IMAGE_GET_POS_Y_ABS                                     0x0014    
 #define IS_AOI_IMAGE_GET_ORIGINAL_AOI                                  0x0015    
@@ -695,7 +695,7 @@ extern "C" {
 #define IS_SET_ROP_MIRROR_UPDOWN                                            8    
 #define IS_SET_ROP_MIRROR_UPDOWN_ODD                                       16    
 #define IS_SET_ROP_MIRROR_UPDOWN_EVEN                                      32    
-#define IS_SET_ROP_MIRROR_LEFTRIGHT                                        64    
+#define IS_SET_ROP_MIRROR_LEFTRIGHT                                        64
 
 
 // ----------------------------------------------------------------------------
@@ -744,7 +744,7 @@ extern "C" {
 
 #define IS_BINNING_2X_VERTICAL                                         0x0001    
 #define IS_BINNING_2X_HORIZONTAL                                       0x0002    
-#define IS_BINNING_4X_VERTICAL                                         0x0004    
+#define IS_BINNING_4X_VERTICAL                                         0x0004
 #define IS_BINNING_4X_HORIZONTAL                                       0x0008    
 #define IS_BINNING_3X_VERTICAL                                         0x0010    
 #define IS_BINNING_3X_HORIZONTAL                                       0x0020    
@@ -793,7 +793,7 @@ extern "C" {
 #define IS_SET_AUTO_SHUTTER_MAX                                        0x8004    
 #define IS_GET_AUTO_SHUTTER_MAX                                        0x8005    
 #define IS_SET_AUTO_SPEED                                              0x8006    
-#define IS_GET_AUTO_SPEED                                              0x8007    
+#define IS_GET_AUTO_SPEED                                              0x8007
 #define IS_SET_AUTO_WB_OFFSET                                          0x8008    
 #define IS_GET_AUTO_WB_OFFSET                                          0x8009    
 #define IS_SET_AUTO_WB_GAIN_RANGE                                      0x800A    
@@ -989,7 +989,7 @@ extern "C" {
 #define IS_HOTPIXEL_GET_SOFTWARE_USER_LIST_EXISTS                      0x8100    
 #define IS_HOTPIXEL_GET_SOFTWARE_USER_LIST_NUMBER                      0x8101    
 #define IS_HOTPIXEL_GET_SOFTWARE_USER_LIST                             0x8102    
-#define IS_HOTPIXEL_SET_SOFTWARE_USER_LIST                             0x8103    
+#define IS_HOTPIXEL_SET_SOFTWARE_USER_LIST                             0x8103
 #define IS_HOTPIXEL_SAVE_SOFTWARE_USER_LIST                            0x8104    
 #define IS_HOTPIXEL_LOAD_SOFTWARE_USER_LIST                            0x8105    
 
@@ -1038,7 +1038,7 @@ extern "C" {
 #define IS_GET_BAYER_CV_MODE                                           0x8000    
 
 #define IS_SET_BAYER_CV_NORMAL                                         0x0000    
-#define IS_SET_BAYER_CV_BETTER                                         0x0001    
+#define IS_SET_BAYER_CV_BETTER                                         0x0001
 #define IS_SET_BAYER_CV_BEST                                           0x0002    
 
 
@@ -1087,7 +1087,7 @@ extern "C" {
 // ----------------------------------------------------------------------------
 // EEPROM defines
 // ----------------------------------------------------------------------------
-#define IS_EEPROM_MIN_USER_ADDRESS                                          0    
+#define IS_EEPROM_MIN_USER_ADDRESS                                          0
 #define IS_EEPROM_MAX_USER_ADDRESS                                         63    
 #define IS_EEPROM_MAX_USER_SPACE                                           64    
 
@@ -1136,7 +1136,7 @@ extern "C" {
 #define DR_SET_VSYNC_OFF                                                   17    
 #define DR_SET_VSYNC_AUTO                                                  18    
 #define DR_SET_USER_SYNC                                                   19    
-#define DR_GET_USER_SYNC_POSITION_RANGE                                    20    
+#define DR_GET_USER_SYNC_POSITION_RANGE                                    20
 #define DR_LOAD_OVERLAY_FROM_FILE                                          21    
 #define DR_STEAL_NEXT_FRAME                                                22    
 #define DR_SET_STEAL_FORMAT                                                23    
@@ -1185,7 +1185,7 @@ extern "C" {
 #define IS_SET_EVENT_AUTOFOCUS_FINISHED                                    19    
 #define IS_SET_EVENT_FIRST_PACKET_RECEIVED                                 20    
 
-#define IS_SET_EVENT_REMOVE                                               128    
+#define IS_SET_EVENT_REMOVE                                               128
 #define IS_SET_EVENT_REMOVAL                                              129    
 #define IS_SET_EVENT_NEW_DEVICE                                           130    
 #define IS_SET_EVENT_STATUS_CHANGED                                       131    
@@ -1234,7 +1234,7 @@ extern "C" {
 #define IS_FIFO_OVR_CNT                                                     1    
 #define IS_SEQUENCE_CNT                                                     2    
 #define IS_LAST_FRAME_FIFO_OVR                                              3    
-#define IS_SEQUENCE_SIZE                                                    4    
+#define IS_SEQUENCE_SIZE                                                    4
 #define IS_VIDEO_PRESENT                                                    5    
 #define IS_STEAL_FINISHED                                                   6    
 #define IS_STORE_FILE_PATH                                                  7    
@@ -1332,7 +1332,7 @@ extern "C" {
 #define IS_OS_WINME                                                         6    
 #define IS_OS_WINNET                                                        7    
 #define IS_OS_WINSERVER2003                                                 8    
-#define IS_OS_WINVISTA                                                      9    
+#define IS_OS_WINVISTA                                                      9
 #define IS_OS_LINUX24                                                      10    
 #define IS_OS_LINUX26                                                      11    
 #define IS_OS_WIN7                                                         12    
@@ -1381,7 +1381,7 @@ extern "C" {
 #define IS_TEST_IMAGE_HORIZONTAL_GREYSCALE                         0x00000004    
 #define IS_TEST_IMAGE_VERTICAL_GREYSCALE                           0x00000008    
 #define IS_TEST_IMAGE_DIAGONAL_GREYSCALE                           0x00000010    
-#define IS_TEST_IMAGE_WEDGE_GRAY                                   0x00000020    
+#define IS_TEST_IMAGE_WEDGE_GRAY                                   0x00000020
 #define IS_TEST_IMAGE_WEDGE_COLOR                                  0x00000040    
 #define IS_TEST_IMAGE_ANIMATED_WEDGE_GRAY                          0x00000080    
 
@@ -1920,7 +1920,7 @@ typedef struct _UC480_CAMERA_LIST
 #define AC_SENSOR_FRAMERATE                                        0x00000400    
 #define AC_SENSOR_WB                                               0x00000800    
 #define AC_SENSOR_AUTO_REFERENCE                                   0x00001000    
-#define AC_SENSOR_AUTO_SPEED                                       0x00002000    
+#define AC_SENSOR_AUTO_SPEED                                       0x00002000
 #define AC_SENSOR_AUTO_HYSTERESIS                                  0x00004000    
 #define AC_SENSOR_AUTO_SKIPFRAMES                                  0x00008000    
 #define AC_SENSOR_AUTO_CONTRAST_CORRECTION                         0x00010000    
@@ -2998,7 +2998,7 @@ typedef enum E_DEVICE_FEATURE_CMD
 {
     IS_DEVICE_FEATURE_CMD_GET_SUPPORTED_FEATURES                 =          1 ,  
     IS_DEVICE_FEATURE_CMD_SET_LINESCAN_MODE                      =          2 ,  
-    IS_DEVICE_FEATURE_CMD_GET_LINESCAN_MODE                      =          3 ,  
+    IS_DEVICE_FEATURE_CMD_GET_LINESCAN_MODE                      =          3 ,
     IS_DEVICE_FEATURE_CMD_SET_LINESCAN_NUMBER                    =          4 ,  
     IS_DEVICE_FEATURE_CMD_GET_LINESCAN_NUMBER                    =          5 ,  
     IS_DEVICE_FEATURE_CMD_SET_SHUTTER_MODE                       =          6 ,  
@@ -3047,7 +3047,7 @@ typedef enum E_DEVICE_FEATURE_CMD
     IS_DEVICE_FEATURE_CMD_GET_JPEG_COMPRESSION_RANGE             =         49 ,  
     IS_DEVICE_FEATURE_CMD_GET_NOISE_REDUCTION_MODE               =         50 ,  
     IS_DEVICE_FEATURE_CMD_SET_NOISE_REDUCTION_MODE               =         51 ,  
-    IS_DEVICE_FEATURE_CMD_GET_NOISE_REDUCTION_MODE_DEFAULT       =         52 ,  
+    IS_DEVICE_FEATURE_CMD_GET_NOISE_REDUCTION_MODE_DEFAULT       =         52 ,
     IS_DEVICE_FEATURE_CMD_GET_TIMESTAMP_CONFIGURATION            =         53 ,  
     IS_DEVICE_FEATURE_CMD_SET_TIMESTAMP_CONFIGURATION            =         54 ,  
     IS_DEVICE_FEATURE_CMD_GET_VERTICAL_AOI_MERGE_HEIGHT_DEFAULT  =         55 ,  
@@ -3096,7 +3096,7 @@ typedef enum E_DEVICE_FEATURE_MODE_CAPS
     IS_DEVICE_FEATURE_CAP_FPN_CORRECTION                         = 0x00000200 ,  
     IS_DEVICE_FEATURE_CAP_SENSOR_SOURCE_GAIN                     = 0x00000400 ,  
     IS_DEVICE_FEATURE_CAP_BLACK_REFERENCE                        = 0x00000800 ,  
-    IS_DEVICE_FEATURE_CAP_SENSOR_BIT_DEPTH                       = 0x00001000 ,  
+    IS_DEVICE_FEATURE_CAP_SENSOR_BIT_DEPTH                       = 0x00001000 ,
     IS_DEVICE_FEATURE_CAP_TEMPERATURE                            = 0x00002000 ,  
     IS_DEVICE_FEATURE_CAP_JPEG_COMPRESSION                       = 0x00004000 ,  
     IS_DEVICE_FEATURE_CAP_NOISE_REDUCTION                        = 0x00008000 ,  
@@ -3145,7 +3145,7 @@ typedef enum E_VERTICAL_AOI_MERGE_MODES
     IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_SOFTWARE                =          2 ,  
     IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_FALLING_GPIO1           =          3 ,  
     IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_RISING_GPIO1            =          4 ,  
-    IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_FALLING_GPIO2           =          5 ,  
+    IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_FALLING_GPIO2           =          5 ,
     IS_VERTICAL_AOI_MERGE_MODE_TRIGGERED_RISING_GPIO2            =          6    
 
 } VERTICAL_AOI_MERGE_MODES;
@@ -3549,29 +3549,29 @@ typedef enum E_IS_CALLBACK_EVENT
 
 } IS_CALLBACK_EVENT;
 
-/*! \brief %Callback event context for data processing callbacks.
- *
- * For data processing callbacks a pointer to this data is provided to the %Callback function as the second argument.
- *
- * \sa IS_CALLBACK_FUNC
- *
- * \since uc480 SDK 4.20.
- */
-typedef struct S_IS_CALLBACK_EVCTX_DATA_PROCESSING
-{
-    /*! \brief Memory address of the source data. */
-    const void* const   pSrcBuf;
-
-    /*! \brief Size of the source data in units number of bytes. */
-    const UINT          cbSrcBuf;
-
-    /*! \brief Memory address of the destination buffer. */
-    void* const         pDestBuf;
-
-    /*! \brief Size of the destination buffer in units number of bytes. */
-    const UINT          cbDestBuf;
-
-} IS_CALLBACK_EVCTX_DATA_PROCESSING;
+///*! \brief %Callback event context for data processing callbacks.
+// *
+// * For data processing callbacks a pointer to this data is provided to the %Callback function as the second argument.
+// *
+// * \sa IS_CALLBACK_FUNC
+// *
+// * \since uc480 SDK 4.20.
+// */
+//typedef struct S_IS_CALLBACK_EVCTX_DATA_PROCESSING
+//{
+//    /*! \brief Memory address of the source data. */
+//    const void* const   pSrcBuf;
+//
+//    /*! \brief Size of the source data in units number of bytes. */
+//    const UINT          cbSrcBuf;
+//
+//    /*! \brief Memory address of the destination buffer. */
+//    void* const         pDestBuf;
+//
+//    /*! \brief Size of the destination buffer in units number of bytes. */
+//    const UINT          cbDestBuf;
+//
+//} IS_CALLBACK_EVCTX_DATA_PROCESSING;
 
 /*! \brief %Callback event context for image processing callbacks.
  *
@@ -3585,19 +3585,19 @@ typedef struct S_IS_CALLBACK_EVCTX_DATA_PROCESSING
  *
  * \since uc480 SDK 4.20.
  */
-typedef struct S_IS_CALLBACK_EVCTX_IMAGE_PROCESSING
-{
-    /*! brief Indication of the related memory buffers. */
-    IS_CALLBACK_EVCTX_DATA_PROCESSING   bufferInfo;
-
-    /*! \todo what else do we need here ?
-     * - Memory ID?
-     * - Source width?
-     * - Source pixelformat?
-     * - ...?
-     */
-
-} IS_CALLBACK_EVCTX_IMAGE_PROCESSING;
+//typedef struct S_IS_CALLBACK_EVCTX_IMAGE_PROCESSING
+//{
+//    /*! brief Indication of the related memory buffers. */
+//    IS_CALLBACK_EVCTX_DATA_PROCESSING   bufferInfo;
+//
+//    /*! \todo what else do we need here ?
+//     * - Memory ID?
+//     * - Source width?
+//     * - Source pixelformat?
+//     * - ...?
+//     */
+//
+//} IS_CALLBACK_EVCTX_IMAGE_PROCESSING;
 
 /*! \brief %Callback feedback for image processing callbacks.
  *
@@ -3651,7 +3651,7 @@ typedef HCAM HCAM_CALLBACK;
  *
  * \since uc480 SDK 4.20.
  */
-typedef struct S_IS_CALLBACK_INSTALLATION_DATA
+typedef struct //S_IS_CALLBACK_INSTALLATION_DATA
 {
     /*! \name User input */
     ///@{
