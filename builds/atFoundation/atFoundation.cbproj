@@ -106,10 +106,10 @@
         <Manifest_File>(None)</Manifest_File>
         <Defines>POCO_STATIC;AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;AT_EXPORT_UC7;$(Defines)</Defines>
         <BCC_PCHInject>atFoundationPCH.h</BCC_PCHInject>
-        <PreLinkEvent><![CDATA[C:\cygwin\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
+        <PreLinkEvent><![CDATA[$(SH_EXE) $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
         <BCC_PCHName>pch.csm</BCC_PCHName>
-        <PostBuildEvent><![CDATA[C:\cygwin\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
+        <PostBuildEvent><![CDATA[$(SH_EXE) $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
 $(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -620,14 +620,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>atFoundation.tds</RemoteName>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile LocalName="p:\build\tokyo\bin\atFoundation.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>atFoundation.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1018,9 +1018,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
         <PreBuildEvent/>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent>C:\cygwin\bin\sh $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
+        <PreLinkEvent>$(SH_EXE) $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>C:\cygwin\bin\sh $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
+        <PostBuildEvent>$(SH_EXE) $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

@@ -41,12 +41,7 @@ bool NavitarMotorController::connect()
 {
     //Check for connected devices
     int res = USBFindUSBinterfaces();
-
-    if(res != 1)
-    {
-        Log(lInfo) <<"FAILED to Find any Navitar Motor controller";
-        return false;
-    }
+    Log(lInfo) <<"Return value from Navitar API: USBFindUSBinterfaces "<<res;
 
 	Log(lDebug) <<"Connecting motor controller with ID: "<<1;
 	mMotorControllerHandle = USBConnectionConnect(1, DEF_MOTOR_CONTROLLER);

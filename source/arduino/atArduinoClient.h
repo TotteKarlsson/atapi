@@ -5,7 +5,7 @@
 #include "dslProperty.h"
 #include "dslMessageContainer.h"
 #include "atArduinoMessageProcessor.h"
-#include "IPC/dslSocketClient.h"
+#include "dslSocketClient.h"
 
 namespace dsl
 {
