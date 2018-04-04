@@ -4,7 +4,6 @@
 //#include "arraybot/atArrayBotServer.h"
 #include "core/atATObject.h"
 #include "atXYZUnit.h"
-#include "atWhiskerUnit.h"
 #include "joystick/atArrayBotJoyStick.h"
 #include "apt/atPairedMoves.h"
 #include "joystick/atJoyStickSettings.h"

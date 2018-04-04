@@ -1,22 +1,13 @@
 #pragma hdrstop
 #if defined DSL_STATIC
-	#pragma comment(lib, "dslCommon-static.lib")
-	#pragma comment(lib, "dslMath-static.lib")
-	#pragma comment(lib, "dslIPC-static.lib")
 #else
-	#pragma comment(lib, "dslCommon.lib")
-	#pragma comment(lib, "dslMath.lib")
-	#pragma comment(lib, "dslIPC.lib")
+	#pragma comment(lib, "dslFoundation.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")
-//#pragma comment(lib, "poco_data-static.lib")
-//#pragma comment(lib, "poco_mysql_connector-static.lib")
-//#pragma comment(lib, "poco_sqlite_connector-static.lib")
 #pragma comment(lib, "tinyxml2-static.lib")
 
 #pragma comment(lib, "atCore.lib")
-#pragma comment(lib, "atArduino.lib")
 
 //Thorlabs
 #pragma comment(lib, "Thorlabs.MotionControl.TDIEngineB.lib")

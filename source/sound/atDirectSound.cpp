@@ -1,7 +1,7 @@
 #pragma hdrstop
-//#include <mmsystem.h>
 #include "dslWin32Utils.h"
 #include "atDirectSound.h"
+#include <mmsystem.h>
 #include "dslLogger.h"
 
 using namespace dsl;

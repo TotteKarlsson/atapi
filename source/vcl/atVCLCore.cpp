@@ -64,16 +64,17 @@ namespace Tapplicationsoundsframe
 //}
 //
 
-#pragma comment(lib, "dslCommon.lib")
-#pragma comment(lib, "atCore.lib")
-#pragma comment(lib, "atDataBase.lib")
-#pragma comment(lib, "atResources.lib")
-#pragma comment(lib, "atBarcodeReader.lib")
+//#pragma comment(lib, "dslCommon.lib")
+//#pragma comment(lib, "atCore.lib")
+//#pragma comment(lib, "atDataBase.lib")
+//#pragma comment(lib, "atResources.lib")
+//#pragma comment(lib, "atBarcodeReader.lib")
 
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "tinyxml2-static.lib")
-#pragma comment(lib, "VCLCommon.bpi")
-#pragma comment(lib, "DuneComponents.bpi")
+
+//#pragma comment(lib, "VCLCommon.bpi")
+//#pragma comment(lib, "DuneComponents.bpi")
 
 #pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
 #pragma comment(lib, "DBXMySQLDriver.bpi")
