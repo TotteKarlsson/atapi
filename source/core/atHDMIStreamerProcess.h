@@ -8,20 +8,22 @@
 #include "dslThread.h"
 #include "Poco/PipeStream.h"
 #include "core/atATObject.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
-using namespace dsl;
+//using namespace dsl;
 using Poco::Process;
 using Poco::ProcessHandle;
 using Poco::PipeInputStream;
 using Poco::PipeOutputStream;
 using Poco::Pipe;
 using dsl::Thread;
+using dsl::gEmptyString;
 
 //!The HDMIStreamer process manages a BlackMagic HDMI streamer process, BMStreamer.
 //!The BMStreamer streams HDMI content to an anonomous pipe and, optionally to a file.
 class AT_CORE HDMIStreamerProcess : public dsl::Thread
 {
-typedef boost::function<void(int, int)> Callback;
+	typedef boost::function<void(int, int)> Callback;
 	public:
 						                HDMIStreamerProcess(const string& bmExecutable = gEmptyString, const string& pipeName = gEmptyString);
 						                ~HDMIStreamerProcess();
