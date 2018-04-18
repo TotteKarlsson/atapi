@@ -26,13 +26,8 @@ extern "C" int _libmain(unsigned long reason)
 }
 
 #if defined DSL_STATIC
-	#pragma comment(lib, "dslCommon-static.lib")
-	#pragma comment(lib, "dslMath-static.lib")
-	#pragma comment(lib, "dslIPC-static.lib")
 #else
-	#pragma comment(lib, "dslCommon.lib")
-	#pragma comment(lib, "dslMath.lib")
-	#pragma comment(lib, "dslIPC.lib")
+	#pragma comment(lib, "dslFoundation.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")

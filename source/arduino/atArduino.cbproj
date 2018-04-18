@@ -106,7 +106,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <Defines>POCO_STATIC;$(Defines)</Defines>
+        <Defines>POCO_STATIC;AT_EXPORT_ARDUINO;$(Defines)</Defines>
         <DynamicRTL>true</DynamicRTL>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
@@ -238,11 +238,8 @@
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\vlcComponent.bpl">File p:\build\debug\BPL\vlcComponent.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayBotPackage.bpl">File p:\build\debug\BPL\ArrayBotPackage.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayCamPackage.bpl">File p:\build\debug\BPL\ArrayCamPackage.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">

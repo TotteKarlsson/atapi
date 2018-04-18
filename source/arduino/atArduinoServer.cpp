@@ -12,23 +12,17 @@ using namespace dsl;
 ArduinoServer::ArduinoServer(int portNumber)
 :
 IPCServer(portNumber, "ARDUINO_SERVER", createArduinoIPCReceiver),
-mLightsArduino(-1),
-mSensorsArduino(-1)
+mLightsArduino(-1)
 {
 	mArduinos.push_back(&mLightsArduino);
-	mArduinos.push_back(&mSensorsArduino);
 
     //Assign receive callbacks
     mLightsArduino.assignSerialMessageReceivedCallBack(lightsArduinoMessageReceived);
-
-    //Assign receive callbacks
-    mSensorsArduino.assignSerialMessageReceivedCallBack(sensorsArduinoMessageReceived);
 }
 
 ArduinoServer::~ArduinoServer()
 {
     mLightsArduino.assignSerialMessageReceivedCallBack(NULL);
-    mSensorsArduino.assignSerialMessageReceivedCallBack(NULL);
 }
 
 void ArduinoServer::assignOnUpdateCallBack(OnMessageUpdateCB cb)
@@ -72,14 +66,6 @@ void ArduinoServer::broadcastStatus()
 //a message from the arduino thread over the serial port
 //Socket clients are updated using the notifyClients funtion
 void ArduinoServer::lightsArduinoMessageReceived(const string& msg)
-{
-	notifyClients(msg);
-}
-
-//This is called from the arduino devices class upon receiving
-//a message from the arduino thread over the serial port
-//Socket clients are updated using the notifyClients funtion
-void ArduinoServer::sensorsArduinoMessageReceived(const string& msg)
 {
 	notifyClients(msg);
 }

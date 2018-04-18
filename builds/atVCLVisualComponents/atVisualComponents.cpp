@@ -47,7 +47,7 @@ extern "C" int _libmain(unsigned long reason)
 #pragma comment(lib, "atComponents.bpi")
 
 #pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
-#pragma comment(lib, "DBXMySQLDriver.bpi")
+//#pragma comment(lib, "DBXMySQLDriver.bpi")
 
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "tinyxml2-static.lib")

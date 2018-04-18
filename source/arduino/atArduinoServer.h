@@ -1,15 +1,15 @@
 #ifndef atArduinoServerH
 #define atArduinoServerH
-//---------------------------------------------------------------------------
 #include "core/atCoreExporter.h"
 #include "core/atATObject.h"
 #include "dslIPCServer.h"
 #include "dslSocketWorker.h"
 #include "atLightsArduino.h"
 #include "atSensorsArduino.h"
-
 #include <vector>
 #include "dslTimer.h"
+//---------------------------------------------------------------------------
+
 using dsl::IPCServer;
 using dsl::IPCMessage;
 using std::vector;
@@ -24,9 +24,6 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //network functionality.
 //The Arduino server forwards any messages sent from the arduino board to any connected tcp/ip clients.
 
-//There are currently two Arduino boards, the 'Lights' board, and a 'Sensor' board containing sensors and
-//light controlling logic respectively.
-
 class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
 {
     public:
@@ -37,11 +34,9 @@ class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
                                             //!ProcessRequest implements the arduino server specific processing.
                                             //!Requests are sent to the server from a client.
     	bool 					            processRequest(IPCMessage& msg);
-
     	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
-    	SensorsArduino& 	   	            getSensorsArduino(){return mSensorsArduino;}
-        bool            		            shutDown();
 
+        bool            		            shutDown();
         void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
 		void								onUpdateClientsTimer();
         void								broadcastStatus();
@@ -50,18 +45,12 @@ class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
     							            //!Container for Arduino devices
 		vector<ArduinoDevice*> 	            mArduinos;
 
-        									//We should create a mutex for each of these
-                                            //devices...
+        									//We should create a mutex for device..
     	LightsArduino 			            mLightsArduino;
-
-    	SensorsArduino 			            mSensorsArduino;
 
         OnMessageUpdateCB					onMessageUpdateCB;
 
-
 		void					            lightsArduinoMessageReceived(const string& msg);
-		void					            sensorsArduinoMessageReceived(const string& msg);
-
         void								notifyClients(const string& msg);
 };
 

@@ -1,6 +1,6 @@
 object SensorsDataModule: TSensorsDataModule
   OldCreateOrder = False
-  Height = 384
+  Height = 348
   Width = 450
   object SensorDataDS: TSQLDataSet
     CommandText = 'SELECT * from sensordata order by date_time'
