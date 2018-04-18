@@ -1,0 +1,5 @@
+LIBRARY   atexplorer.dll
+
+EXPORTS
+   PyInit_atexplorer  = _PyInit_atexplorer;
+
