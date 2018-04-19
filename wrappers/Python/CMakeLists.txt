@@ -16,9 +16,9 @@ include_directories(
     ${PYTHON_INCLUDE_PATH}
     ${CMAKE_CURRENT_SOURCE_DIR}
 #    ${CMAKE_BINARY_DIR}/include
-    ${ATEXPLORER_ROOT}
-    ${ATEXPLORER_ROOT}/source
-    ${ATEXPLORER_ROOT}/source/core
+    ${ATAPI_ROOT}
+    ${ATAPI_ROOT}/source
+    ${ATAPI_ROOT}/source/core
 )
 
 link_directories(					

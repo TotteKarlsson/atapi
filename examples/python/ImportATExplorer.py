@@ -1,5 +1,6 @@
 import atexplorer
 
-a = atexplorer.ATObject()
+
+atexplorer.ATObject()
 
 print (a.getTypeName())

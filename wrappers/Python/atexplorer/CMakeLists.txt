@@ -1,10 +1,11 @@
 set_source_files_properties(atexplorer.i PROPERTIES CPLUSPLUS ON)
-set_source_files_properties(atexplorer.i PROPERTIES SWIG_FLAGS "-threads")
+SET_SOURCE_FILES_PROPERTIES(example.i PROPERTIES SWIG_FLAGS "-includeall")
 
 SWIG_ADD_LIBRARY(atexplorer LANGUAGE python SOURCES atexplorer.i)
 
 include_directories(
 .
+
 ${ATAPI_ROOT}
 ${ATAPI_ROOT}/source
 ${ATAPI_ROOT}/source/core
@@ -46,4 +47,4 @@ install(
     DESTINATION ${ATEXPLORER_PACKAGE_DIR}   
     COMPONENT python_module
 )
-
+SET_SOURCE_FILES_PROPERTIES(example.i PROPERTIES SWIG_FLAGS "-includeall")
