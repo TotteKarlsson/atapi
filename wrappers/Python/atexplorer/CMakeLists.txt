@@ -1,27 +1,33 @@
-FIND_PACKAGE(SWIG REQUIRED)
-INCLUDE(${SWIG_USE_FILE})
-FIND_PACKAGE(PythonLibs)
-INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-SET(CMAKE_SWIG_FLAGS "")
+find_package(SWIG REQUIRED)
+include(${SWIG_USE_FILE})
+find_package(PythonInterp)
+find_package(PythonLibs)
+message(${PYTHON_INCLUDE_DIRS})
+message(${PYTHON_LIBRARIES})
 
-SET_SOURCE_FILES_PROPERTIES(atexplorer.i PROPERTIES CPLUSPLUS ON)
-SET_SOURCE_FILES_PROPERTIES(atexplorer.i PROPERTIES SWIG_FLAGS "-threads")
-#SET_SOURCE_FILES_PROPERTIES(atexplorer.i PROPERTIES SWIG_FLAGS "-includeall")
-INCLUDE_DIRECTORIES(
+
+include_directories(${PYTHON_INCLUDE_PATH})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(
 .
 ${ATAPI_ROOT}
 ${ATAPI_ROOT}/source
 ${ATAPI_ROOT}/source/core
 )
+set (CMAKE_LINK_DEF_FILE_FLAG "/DEF:")
+link_directories(${LIBRARY_OUTPUT_PATH} C:/Python37)
 
-LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH} )
+set(CMAKE_SWIG_FLAGS "")
 
-SWIG_ADD_MODULE(atexplorer python atexplorer.i ${ATAPI_ROOT}/source/core/atATObject.cpp)
+set_source_files_properties(atexplorer.i PROPERTIES CPLUSPLUS ON)
+set_source_files_properties(atexplorer.i PROPERTIES SWIG_FLAGS "-threads")
+#SET_SOURCE_FILES_PROPERTIES(atexplorer.i PROPERTIES SWIG_FLAGS "-includeall")
+
+SWIG_ADD_LIBRARY(atexplorer MODULE LANGUAGE python SOURCES atexplorer.def atexplorer.i ${ATAPI_ROOT}/source/core/atATObject.cpp )
 SWIG_LINK_LIBRARIES (atexplorer 
-    ${PYTHON_LIBRARIES}
+    Python3_CG.lib
+    Python37_CG.lib
 )
-
 
 # INSTALL PYTHON BINDINGS
 # Get the python site packages directory by invoking python
