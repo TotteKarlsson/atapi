@@ -1,11 +1,13 @@
 #ifndef atATObjectH
 #define atATObjectH
-#include "core/atCoreExporter.h"
+//#include "core/atCoreExporter.h"
 #include <string>
 //---------------------------------------------------------------------------
 using std::string;
 
-class AT_CORE ATObject
+int MyTest(int r);
+
+class ATObject
 {
 	public:
     							ATObject();

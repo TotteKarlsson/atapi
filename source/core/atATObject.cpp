@@ -12,3 +12,9 @@ const string ATObject::getTypeName() const
 {
 	return "TYPENAME NOT IMPLEMENTED";
 }
+
+
+int MyTest(int r)
+{
+	return r;
+}

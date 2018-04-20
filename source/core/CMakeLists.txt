@@ -1,6 +1,6 @@
-set(target atCore)
+SET(target atCore)
 
-include_directories(
+INCLUDE_DIRECTORIES(
 .
 ${ATAPI_ROOT}
 ${ATAPI_ROOT}/source
@@ -10,54 +10,52 @@ ${DSL_INCLUDE}
 ${THIRD_PARTY_INSTALL_PREFIX}/include
 )
 
-set(src
+SET(src
 atATObject
 )
 
-#===== Static library
-if(${BUILD_STATIC_LIBS})
-    add_library(${target}-static STATIC
-    ${src}
-    )
-
-    set_property(TARGET ${target}-static  
-    PROPERTY COMPILE_DEFINITIONS 
-    DSL_STATIC
-    POCO_STATIC
-    )
-
-    target_link_libraries(${target}-static 
-    mtkCommon-static
-    mtkMath-static
-    )
-
-    if(${INSTALL_CXX_LIBS})
-        install(    
-        TARGETS ${target}-static
-        RUNTIME DESTINATION bin COMPONENT core
-        LIBRARY DESTINATION lib COMPONENT core
-        ARCHIVE DESTINATION lib COMPONENT core
-        )            
-    endif()
-endif()
+##===== Static library
+#if(${BUILD_STATIC_LIBS})
+#    ADD_LIBRARY(${target}-static STATIC
+#    ${src}
+#    )
+#
+#    SET_PROPERTY(TARGET ${target}-static  PROPERTY COMPILE_DEFINITIONS 
+#    DSL_STATIC
+#    POCO_STATIC
+#    )
+#
+#    TARGET_LINK_LIBRARIES(${target}-static 
+#    mtkCommon-static
+#    mtkMath-static
+#    )
+#
+#    if(${INSTALL_CXX_LIBS})
+#        INSTALL(    
+#        TARGETS ${target}-static
+#        RUNTIME DESTINATION bin COMPONENT core
+#        LIBRARY DESTINATION lib COMPONENT core
+#        ARCHIVE DESTINATION lib COMPONENT core
+#        )            
+#    endif()
+#endif()
 
 #===== Shared library
 if(${BUILD_SHARED_LIBS})
-    add_library(${target} SHARED
+    ADD_LIBRARY(${target} SHARED
     ${src}
     )
 
-    set_property(TARGET ${target}  
-    PROPERTY COMPILE_DEFINITIONS 
+    SET_PROPERTY(TARGET ${target}  PROPERTY COMPILE_DEFINITIONS 
     AT_EXPORT_CORE
     POCO_STATIC
     )
 
-    target_link_libraries(${target} 
+    TARGET_LINK_LIBRARIES(${target} 
     )
 
 
-    install(    
+    INSTALL(    
     TARGETS ${target} 
     RUNTIME DESTINATION bin COMPONENT core
     LIBRARY DESTINATION lib COMPONENT core
@@ -69,7 +67,7 @@ endif()
 #===== General Installs
 if(${INSTALL_CXX_LIBS})
 FILE (GLOB headers *.h)
-install (   FILES ${headers}			 	
+INSTALL (   FILES ${headers}			 	
             DESTINATION include/atexplorer 
             COMPONENT cxx_headers)
 

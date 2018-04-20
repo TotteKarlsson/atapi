@@ -1,16 +1,14 @@
 // atexplorer.i 
+%include "std_string.i"
+%include "windows.i"
 
 %module atexplorer
-
- %{
- #include "atATObject.h"
- %}
+%{
+//#define SWIG_FILE_WITH_INIT
+#include "atATObject.h"
+%}
  
-//Need to #define export macros. 
-
-#define AT_CORE
-
-
-//These are classes, and other entitites we want to expose to python
+//#define AT_CORE
+//Expose class ATObject to Python
 %include "atATObject.h"
 
