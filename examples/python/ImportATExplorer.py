@@ -1,10 +1,7 @@
 import atexplorer
 
-atexplorer.MyTest(3)
+print (atexplorer.MyTest(3))
 
-
-atexplorer.ATObject.__init__
-atexplorer.ATObject.getTypeName()
-
+a = atexplorer.ATObject()
 print (a.getTypeName())
 
