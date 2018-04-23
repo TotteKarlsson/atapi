@@ -4,7 +4,7 @@
 #include "dslSocketWorker.h"
 #include <vector>
 //#include "arraybot/atArrayBot.h"
-#include "arraybot/atArrayBotProtocol.h"
+#include "core/atArrayBotProtocol.h"
 #include "dslIPCMessage.h"
 #include "dslConstants.h"
 #include "arraybot/atArrayBot.h"

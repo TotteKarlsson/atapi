@@ -3,7 +3,7 @@
 #include "../atABExporter.h"
 #include "core/atProcess.h"
 #include "dslXMLUtils.h"
-#include "ArrayBot/atArrayBotProtocol.h"
+#include "core/atArrayBotProtocol.h"
 #include "atProcessSequenceProject.h"
 
 //---------------------------------------------------------------------------

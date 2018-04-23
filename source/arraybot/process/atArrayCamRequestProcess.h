@@ -3,7 +3,7 @@
 #include "../atABExporter.h"
 #include "core/atProcess.h"
 #include "dslXMLUtils.h"
-#include "arraycam/atArrayCamProtocol.h"
+#include "core/atArrayCamProtocol.h"
 #include "atProcessSequenceProject.h"
 
 //---------------------------------------------------------------------------

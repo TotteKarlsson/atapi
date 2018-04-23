@@ -4,11 +4,14 @@
 
 %module atexplorer
 %{
-//#define SWIG_FILE_WITH_INIT
 #include "atATObject.h"
+//#include "UC7/atUC7Component.h"
 %}
  
-//#define AT_CORE
+#define AT_CORE
+#define AT_UC7
+
 //Expose class ATObject to Python
 %include "atATObject.h"
+//%include "UC7/atUC7Component.h"
 

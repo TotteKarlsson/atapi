@@ -4,7 +4,7 @@
 #include "dslLogger.h"
 #include "dslSocketWorker.h"
 #include "dslStringUtils.h"
-#include "ArrayBot/atArrayBotProtocol.h"
+#include "core/atArrayBotProtocol.h"
 //---------------------------------------------------------------------------
 using namespace dsl;
 
