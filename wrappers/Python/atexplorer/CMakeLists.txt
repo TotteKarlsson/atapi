@@ -31,7 +31,7 @@ set(CMAKE_SWIG_FLAGS "")
 set_source_files_properties(atexplorer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(atexplorer.i PROPERTIES SWIG_FLAGS "-threads")
 #SET_SOURCE_FILES_PROPERTIES(atexplorer.i PROPERTIES SWIG_FLAGS "-includeall")
-
+SET( CMAKE_MODULE_LINKER_FLAGS  "${CMAKE_MODULE_LINKER_FLAGS} ${CMAKE_CURRENT_SOURCE_DIR}/atexplorer.def" )
 SWIG_ADD_LIBRARY(atexplorer MODULE LANGUAGE python SOURCES atexplorer.def atexplorer.i)
 SWIG_LINK_LIBRARIES (atexplorer 
     ${PYTHON_LIB_FOLDER}/Python3_CG.lib

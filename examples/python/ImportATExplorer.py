@@ -1,7 +1,10 @@
 import atexplorer
 
-print (atexplorer.MyTest(3))
+print (atexplorer.MyTest(33))
 
 a = atexplorer.ATObject()
-print (a.getTypeName())
+
+for i in range(1000000):
+    print (str(i) + str(": ") + a.getTypeName())
+
 
