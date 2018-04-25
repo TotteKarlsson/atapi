@@ -12,7 +12,7 @@ using std::string;
 //abr <==> arraybot request/response
 //abm <==> miscellaneous server message that clients may handle as they wish
 
-AT_CORE enum  ABMessageID
+enum  ABMessageID
 {
 
     abrSetJoyStickSpeed=0, 				//!The cmd needs one arguments: setting name, e.g. fast, medium  or slow
@@ -30,6 +30,7 @@ class AT_CORE ArrayBotProtocol
 
 	private:
 	    map<ABMessageID, string>::iterator	mIter;
+        static map<ABMessageID, string>     createProtocol();
 };
 
 #endif

@@ -2,12 +2,19 @@
 #include "atArrayBotProtocol.h"
 //---------------------------------------------------------------------------
 
-map<ABMessageID, string> ArrayBotProtocol::mIPCMessage;
+
+map<ABMessageID, string> ArrayBotProtocol::mIPCMessage = createProtocol();
 
 ArrayBotProtocol::ArrayBotProtocol()
+{}
+
+
+map<ABMessageID, string> ArrayBotProtocol::createProtocol()
 {
-    mIPCMessage[abrSetJoyStickSpeed] 			= "Set Joystick Speed";
-    mIPCMessage[abrUnknown]						= "Unknown";
+  	map<ABMessageID, string>   	m;
+    m[abrSetJoyStickSpeed] 	   	= "Set Joystick Speed";
+    m[abrUnknown]			    = "Unknown";
+    return m;
 }
 
 ABMessageID ArrayBotProtocol::idFromString(const string& r)

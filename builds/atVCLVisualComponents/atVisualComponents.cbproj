@@ -183,13 +183,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\vcl\forms\TYesNoForm.h</DependentOn>
             <BuildOrder>22</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\abFrames\TMotorFrame.cpp">
-            <Form>MotorFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\abFrames\TMotorFrame.h</DependentOn>
-            <BuildOrder>23</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
             <Form>ApplicationSoundsFrame</Form>
             <FormType>dfm</FormType>
@@ -224,6 +217,17 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\frames\TImagesFrame.h</DependentOn>
             <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\frames\TMotorFrame.cpp">
+            <DependentOn>..\..\source\vcl\frames\TMotorFrame.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\frames\TMotorPositionFrame.cpp">
+            <Form>MotorPositionFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>..\..\source\vcl\frames\TMotorPositionFrame.h</DependentOn>
+            <BuildOrder>26</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TMovieItemFrame.cpp">
             <Form>MovieItemFrame</Form>
@@ -274,12 +278,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\vcl\frames\TZebraScannerFrame.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
+        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TMotorPositionFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\abFrames\TMotorFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
@@ -287,6 +290,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TNavitarMotorFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
@@ -378,14 +382,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile LocalName="p:\build\debug\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>atVisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>atVisualComponents.tds</RemoteName>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -399,14 +403,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
+                <DeployFile LocalName="p:\build\debug\BPL\atVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>atVisualComponents.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>atVisualComponents.bpl</RemoteName>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

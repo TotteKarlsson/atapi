@@ -28,9 +28,11 @@ extern "C" int _libmain(unsigned long reason)
 //Linking
 #pragma hdrstop
 #if defined DSL_STATIC
-	#pragma comment(lib, "dslFoundation-static.lib")
+
 #else
-	#pragma comment(lib, "dslFoundation.lib")
+	#pragma comment(lib, "dslCommon.lib")
+	#pragma comment(lib, "dslIPC.lib")
+	#pragma comment(lib, "dslMath.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")
