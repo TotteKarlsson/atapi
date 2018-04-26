@@ -2,7 +2,7 @@
 #define atCameraServiceThreadH
 #include "dslThread.h"
 #include "core/atATObject.h"
-
+#include "atCameraExporter.h"
 class Cuc480;
 using dsl::Thread;
 
@@ -19,7 +19,7 @@ enum DoFunction {dfOpen, dfClose};
 //!The camera service thread performs camera specific functions that need to be
 //!performed in a thread, as suggested by the UC480 API document
 //---------------------------------------------------------------------------
-class AT_CORE CameraServiceThread : public Thread, public ATObject
+class AT_CAMERA CameraServiceThread : public Thread, public ATObject
 {
 	public:
 								CameraServiceThread(Cuc480& camera, int id, HWND handle);

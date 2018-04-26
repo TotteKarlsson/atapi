@@ -8,7 +8,7 @@
 
 using std::string;
 //!The NavitarMotorControl class is a Wrapper class for the Navitar USB motor controller API
-class AT_CORE NavitarMotorController : public ATObject
+class AT_NAVITAR NavitarMotorController : public ATObject
 {
    	friend NavitarMotor;
 	public:

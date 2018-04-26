@@ -8,7 +8,7 @@
 using dsl::ObjectType;
 using dsl::IniFile;
 
-class AT_CORE NavitarZoomPreset	: public Preset<int>
+class AT_NAVITAR NavitarZoomPreset	: public Preset<int>
 {
     public:
 		                                        NavitarZoomPreset(NavitarMotorController& mc, const string& name, const int& z = 0);

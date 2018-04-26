@@ -11,7 +11,7 @@ using dsl::ObjectType;
 using dsl::IniFile;
 using dsl::IniFileProperties;
 
-class AT_CORE NavitarPreset	: public IniFileProperties
+class AT_NAVITAR NavitarPreset	: public IniFileProperties
 {
     public:
 		                                        NavitarPreset(NavitarMotorController& mc, const string& name, const int& z = 0, const int& f = 0);

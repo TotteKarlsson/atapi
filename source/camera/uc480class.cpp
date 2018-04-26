@@ -1,6 +1,5 @@
 #pragma hdrstop
-//#include "stdafx.h"
-#include "uc480/uc480class.h"
+#include "uc480class.h"
 #include "dslLogger.h"
 
 using namespace dsl;

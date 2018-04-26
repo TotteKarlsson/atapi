@@ -14,7 +14,7 @@
 #include "uc480_deprecated.h"
 #include "camera/dynamic_uc480.h"
 
-#include "core/atCoreExporter.h"
+#include "atCameraExporter.h"
 
 enum _disp_mode
 {
@@ -22,7 +22,7 @@ enum _disp_mode
   e_disp_mode_direct3D
 };
 
-class AT_CORE Cuc480 : public Cuc480Dll
+class AT_CAMERA Cuc480 : public Cuc480Dll
 {
 	public:
                                             Cuc480();

@@ -1,7 +1,6 @@
 #ifndef atArrayBotH
 #define atArrayBotH
 #include "arraybot/atABExporter.h"
-//#include "arraybot/atArrayBotServer.h"
 #include "core/atATObject.h"
 #include "atXYZUnit.h"
 #include "joystick/atArrayBotJoyStick.h"

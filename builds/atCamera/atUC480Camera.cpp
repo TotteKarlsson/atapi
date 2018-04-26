@@ -25,33 +25,7 @@ extern "C" int _libmain(unsigned long reason)
 	return 1;
 }
 
-//Linking
-#pragma hdrstop
-#if defined DSL_STATIC
-
-#else
-	#pragma comment(lib, "dslCommon.lib")
-	#pragma comment(lib, "dslIPC.lib")
-	#pragma comment(lib, "dslMath.lib")
-#endif
-
+#pragma comment(lib, "dslCommon.lib")
+#pragma comment(lib, "atFoundation.lib")
 #pragma comment(lib, "poco_foundation-static.lib")
-#pragma comment(lib, "tinyxml2-static.lib")
-
-////Thorlabs
-//#pragma comment(lib, "Thorlabs.MotionControl.TDIEngineB.lib")
-
-//Motors
-//Thorlabs.MotionControl.Benchtop.StepperMotor
-//#pragma comment(lib, "Thorlabs.MotionControl.Benchtop.StepperMotorB.lib")
-//#pragma comment(lib, "Thorlabs.MotionControl.TCube.StepperMotorB.lib")
-//#pragma comment(lib, "Thorlabs.MotionControl.IntegratedStepperMotorsB.lib")
-//#pragma comment(lib, "Thorlabs.MotionControl.TCube.DCServoB.lib")
-//#pragma comment(lib, "Thorlabs.MotionControl.TCube.BrushlessMotorB.lib")
-
-//Barcodereader (DS457)
-//#pragma comment(lib, "atSSI.lib")
-
-//navitar
-//#pragma comment(lib, "navitarUSBAPI_Borland.lib")
 
