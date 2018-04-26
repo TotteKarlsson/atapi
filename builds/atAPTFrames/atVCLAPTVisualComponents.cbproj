@@ -3,7 +3,7 @@
         <ProjectGuid>{546B5E38-3521-41DB-8637-2A2D21F53BBC}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>atAPTFrames.cpp</MainSource>
+        <MainSource>atVCLAPTVisualComponents.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -44,18 +44,6 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
-        <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
@@ -73,7 +61,7 @@
         <Multithreaded>true</Multithreaded>
         <IncludePath>..\..\source\vcl\aptFrames\;P:\libs\atapi\builds\atAPTFrames\;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>..\..\source\vcl\aptFrames\;P:\libs\atapi\builds\atAPTFrames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <SanitizedProjectName>atAPTFrames</SanitizedProjectName>
+        <SanitizedProjectName>atVCLAPTVisualComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
         <PackageImports>bindcomp;bindcompdbx;bindcompfmx;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapxml;FireDACCommonODBC;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;rtl;tethering;xmlrtl;$(PackageImports)</PackageImports>
@@ -85,11 +73,9 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <BCC_PCHName_Clang>atAPTFrames.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>adortl;appanalytics;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
-        <BCC_PCHName_Clang>atAPTFrames.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -119,140 +105,146 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <ILINK_GenerateLibFile>false</ILINK_GenerateLibFile>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Defines>POCO_STATIC;$(Defines)</Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <BCC_PCHName_Clang>atAPTFrames.h</BCC_PCHName_Clang>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <BCC_PCHName_Clang>atAPTFrames.h</BCC_PCHName_Clang>
-    </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atAPTFrames.cpp">
+        <CppCompile Include="atVCLAPTVisualComponents.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <PCHCompile Include="atAPTFrames.h">
-            <BuildOrder>2</BuildOrder>
-            <PCH>true</PCH>
-        </PCHCompile>
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
         </PackageImport>
-        <CppCompile Include="..\..\source\vcl\aptFrames\TABProcessSequencerFrame.cpp">
-            <Form>ABProcessSequencerFrame</Form>
+        <CppCompile Include="..\..\source\vcl\aptFrames\TArrayBotRequestFrame.cpp">
+            <Form>ArrayBotRequestFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\aptFrames\TABProcessSequencerFrame.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
+            <DependentOn>..\..\source\vcl\aptFrames\TArrayBotRequestFrame.h</DependentOn>
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\aptFrames\TArrayCamRequestFrame.cpp">
+            <Form>ArrayCamRequestFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>..\..\source\vcl\aptFrames\TArrayCamRequestFrame.h</DependentOn>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\THomeMotorProcessFrame.cpp">
             <Form>HomeMotorProcessFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\THomeMotorProcessFrame.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TMotorFrame.cpp">
             <Form>MotorFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TMotorFrame.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.cpp">
             <Form>MotorMoveProcessFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TMotorPositionFrame.cpp">
             <Form>MotorPositionFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TMotorPositionFrame.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.cpp">
             <Form>MoveCoverSlipAtAngleProcessFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TParallelProcessesFrame.cpp">
             <Form>ParallelProcessesFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TParallelProcessesFrame.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
+            <BuildOrder>17</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TPositionalTriggerFrame.cpp">
             <Form>PositionalTriggerFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TPositionalTriggerFrame.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\vcl\aptFrames\TProcessSequenceControlForm.cpp">
+            <Form>ProcessSequenceControlForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\aptFrames\TProcessSequenceControlForm.h</DependentOn>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TSequenceInfoFrame.cpp">
             <Form>SequenceInfoFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TSequenceInfoFrame.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TSequencerButtonsFrame.cpp">
             <Form>SequencerButtonsFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TSequencerButtonsFrame.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TStopAndResumeFrame.cpp">
             <Form>StopAndResumeFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TStopAndResumeFrame.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TTimeDelayFrame.cpp">
             <Form>TimeDelayFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TTimeDelayFrame.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TXYZPositionsFrame.cpp">
             <Form>XYZPositionsFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TXYZPositionsFrame.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
+            <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\aptFrames\TXYZUnitFrame.cpp">
             <Form>XYZUnitFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\source\vcl\aptFrames\TXYZUnitFrame.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
+            <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <FormResources Include="..\..\source\vcl\aptFrames\TXYZUnitFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TABProcessSequencerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\THomeMotorProcessFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TMotorFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TMotorPositionFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TParallelProcessesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TPositionalTriggerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\aptFrames\TSequenceInfoFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TProcessSequenceControlForm.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TPositionalTriggerFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TParallelProcessesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\aptFrames\TSequencerButtonsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TStopAndResumeFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\aptFrames\TTimeDelayFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TXYZUnitFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\aptFrames\TXYZPositionsFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TTimeDelayFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TStopAndResumeFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TArrayCamRequestFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TArrayBotRequestFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\THomeMotorProcessFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TMotorPositionFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\aptFrames\TMotorFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -271,7 +263,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">atAPTFrames.cpp</Source>
+                    <Source Name="MainSource">atVCLAPTVisualComponents.cpp</Source>
                 </Source>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -280,8 +272,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\dslVCLVisualComponents.bpl">Dune Frames</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\ArrayCamPackage.bpl">ArrayCam VCL Core package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
@@ -337,9 +327,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atAPTFrames.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLAPTVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>atAPTFrames.bpl</RemoteName>
+                        <RemoteName>atVCLAPTVisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -348,14 +338,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLAPTVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
+                        <RemoteName>atVCLAPTVisualComponents.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atAPTFrames.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <RemoteName>atAPTFrames.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

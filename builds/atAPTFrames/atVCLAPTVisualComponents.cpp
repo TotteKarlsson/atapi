@@ -3,7 +3,8 @@
 #include "TMotorFrame.h"
 #include "TMotorPositionFrame.h"
 USEFORM("..\..\source\vcl\aptFrames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TABProcessSequencerFrame.cpp", ABProcessSequencerFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TArrayBotRequestFrame.cpp", ArrayBotRequestFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TArrayCamRequestFrame.cpp", ArrayCamRequestFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\THomeMotorProcessFrame.cpp", HomeMotorProcessFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
@@ -11,6 +12,7 @@ USEFORM("..\..\source\vcl\aptFrames\TMotorPositionFrame.cpp", MotorPositionFrame
 USEFORM("..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.cpp", MoveCoverSlipAtAngleProcessFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TParallelProcessesFrame.cpp", ParallelProcessesFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TProcessSequenceControlForm.cpp", ProcessSequenceControlForm);
 USEFORM("..\..\source\vcl\aptFrames\TSequenceInfoFrame.cpp", SequenceInfoFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TSequencerButtonsFrame.cpp", SequencerButtonsFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TStopAndResumeFrame.cpp", StopAndResumeFrame); /* TFrame: File Type */
@@ -61,5 +63,14 @@ namespace Tmotorpositionframe
 #pragma comment(lib, "dslVCLCommon.lib")
 #pragma comment(lib, "dslVCLComponents.bpi")
 
+#pragma comment(lib, "atFoundation.lib")
 #pragma comment(lib, "atArrayBotCore.lib")
 #pragma comment(lib, "atVCLComponents.lib")
+#pragma comment(lib, "poco_foundation-static")
+
+#pragma comment(lib, "atVCLCommon.lib")
+#pragma comment(lib, "poco_foundation-static.lib")
+#pragma comment(lib, "tinyxml2-static.lib")
+
+#pragma comment(lib, "atVCLVisualComponents.bpi")
+

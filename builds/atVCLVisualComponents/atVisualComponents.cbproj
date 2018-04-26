@@ -59,8 +59,8 @@
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>atVisualComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
@@ -118,10 +118,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="atVisualComponents.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <PCHCompile Include="atVVCLVisualComponents.h">
-            <BuildOrder>2</BuildOrder>
-            <PCH>true</PCH>
-        </PCHCompile>
         <PackageImport Include="dslVCLComponents.bpi">
             <BuildOrder>25</BuildOrder>
         </PackageImport>
@@ -131,58 +127,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PackageImport Include="vcl.bpi">
             <BuildOrder>24</BuildOrder>
         </PackageImport>
-        <CppCompile Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.cpp">
-            <Form>csPGDM</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>..\..\source\vcl\datamodules\TPGCoverSlipDataModule.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\datamodules\TPGDataModule.cpp">
-            <Form>pgDM</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>..\..\source\vcl\datamodules\TPGDataModule.h</DependentOn>
-            <BuildOrder>17</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.cpp">
-            <Form>PGImagesAndMoviesDM</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.h</DependentOn>
-            <BuildOrder>18</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\datamodules\TSensorsDataModule.cpp">
-            <Form>SensorsDataModule</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-            <DependentOn>..\..\source\vcl\datamodules\TSensorsDataModule.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.cpp">
-            <Form>SelectProcessTypeDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TSelectProcessTypeDialog.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TStringInputDialog.cpp">
-            <Form>StringInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TStringInputDialog.h</DependentOn>
-            <BuildOrder>20</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TTextInputDialog.cpp">
-            <Form>TextInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TTextInputDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TYesNoForm.cpp">
-            <Form>YesNoForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TYesNoForm.h</DependentOn>
-            <BuildOrder>22</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
             <Form>ApplicationSoundsFrame</Form>
             <FormType>dfm</FormType>
@@ -249,20 +193,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TYesNoForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

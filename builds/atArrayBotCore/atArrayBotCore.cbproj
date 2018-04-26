@@ -312,6 +312,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\atAPTFrames.bpl">File p:\build\debug\BPL\atAPTFrames.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
@@ -348,6 +349,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="p:\build\debug\bin\atArrayBotCore.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>atArrayBotCore.tds</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -375,12 +382,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="p:\build\debug\bin\atArrayBotCore.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>atArrayBotCore.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -777,7 +778,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
+        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

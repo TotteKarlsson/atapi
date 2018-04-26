@@ -11,6 +11,13 @@ USEFORM("..\..\source\vcl\frames\TPGConnectionFrame.cpp", PGConnectionFrame); /*
 USEFORM("..\..\source\vcl\frames\TMoviesFrame.cpp", MoviesFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\frames\TMovieItemFrame.cpp", MovieItemFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\frames\TImagesFrame.cpp", ImagesFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\forms\TSelectProcessTypeDialog.cpp", SelectProcessTypeDialog);
+USEFORM("..\..\source\vcl\forms\TShowFileContentForm.cpp", ShowFileContentForm);
+USEFORM("..\..\source\vcl\forms\TStringInputDialog.cpp", StringInputDialog);
+USEFORM("..\..\source\vcl\forms\TTextInputDialog.cpp", TextInputDialog);
+USEFORM("..\..\source\vcl\forms\TYesNoForm.cpp", YesNoForm);
+USEFORM("..\..\source\vcl\forms\TamFileEditor.cpp", amFileEditor);
+USEFORM("..\..\source\vcl\forms\TEditSequenceForm.cpp", EditSequenceForm);
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -32,14 +39,14 @@ extern "C" int _libmain(unsigned long reason)
 
 #pragma comment(lib, "atFoundation.lib")
 #pragma comment(lib, "atVCLCommon.lib")
-#pragma comment(lib, "atComponents.bpi")
+#pragma comment(lib, "atVCLComponents.bpi")
 
 #pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
 
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "tinyxml2-static.lib")
 
-#pragma comment(lib, "atVisualComponents.bpi")
+#pragma comment(lib, "atVCLDataModules.bpi")
 //Simple dataset
 #pragma comment(lib, "dbxcds.bpi")
 
