@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "atArrayCamRequestProcess.h"
-#include "atXYZUnit.h"
+//#include "atXYZUnit.h"
 #include "dslLogger.h"
 #include "dslXMLUtils.h"
 #include "arraycam/atArrayCamClient.h"

@@ -8,7 +8,7 @@
 using dsl::ObjectType;
 using dsl::IniFile;
 
-class AT_CORE NavitarFocusPreset	: public Preset<int>
+class AT_NAVITAR NavitarFocusPreset	: public Preset<int>
 {
     public:
 		                                        NavitarFocusPreset(NavitarMotorController& mc, const string& name, const int& z = 0);

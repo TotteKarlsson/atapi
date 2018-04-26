@@ -6,9 +6,7 @@
 map<ACMessageID, string> ArrayCamProtocol::mIPCMessage = createProtocol();
 
 ArrayCamProtocol::ArrayCamProtocol()
-{
-
-}
+{}
 
 map<ACMessageID, string> ArrayCamProtocol::createProtocol()
 {

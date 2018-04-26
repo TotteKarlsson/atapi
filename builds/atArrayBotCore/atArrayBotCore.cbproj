@@ -182,20 +182,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>..\..\source\arraybot\atArrayBot.h</DependentOn>
             <BuildOrder>52</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\arraybot\atArrayBotClient.cpp">
-            <BuildOrder>46</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\arraybot\atArrayBotCore.cpp">
-            <BuildOrder>55</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\..\source\arraybot\atArrayBotIPCReceiver.cpp">
             <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\arraybot\atArrayBotMessageProcessor.cpp">
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\arraybot\atArrayBotProtocol.cpp">
-            <BuildOrder>50</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\arraybot\atArrayBotServer.cpp">
             <BuildOrder>48</BuildOrder>
@@ -270,9 +258,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="..\..\source\arraybot\process\atTriggerFunction.cpp">
             <BuildOrder>15</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\arraycam\atArrayCamProtocol.cpp">
-            <BuildOrder>51</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -393,7 +378,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\bin\atArrayBotCore.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\debug\bin\atArrayBotCore.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>atArrayBotCore.tds</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -409,7 +394,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\bin\atArrayBotCore.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\debug\bin\atArrayBotCore.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>atArrayBotCore.dll</RemoteName>
                         <Overwrite>true</Overwrite>

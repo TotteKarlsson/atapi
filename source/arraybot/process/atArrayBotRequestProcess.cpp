@@ -1,9 +1,9 @@
 #pragma hdrstop
 #include "atArrayBotRequestProcess.h"
-#include "atXYZUnit.h"
+//#include "atXYZUnit.h"
 #include "dslLogger.h"
 #include "dslXMLUtils.h"
-#include "ArrayBot/atArrayBotClient.h"
+#include "core/atArrayBotClient.h"
 #include "atProcessSequence.h"
 
 using namespace dsl;

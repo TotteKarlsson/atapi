@@ -1,6 +1,7 @@
 #ifndef atNavitarMotorH
 #define atNavitarMotorH
 #include "core/atATObject.h"
+#include "atNavitarExporter.h"
 #include <string>
 //---------------------------------------------------------------------------
 
@@ -24,7 +25,7 @@ struct MotorRegisters
         int SETUP_LIMIT;
 };
 
-class AT_CORE NavitarMotor : public ATObject
+class AT_NAVITAR NavitarMotor : public ATObject
 {
 	public:
 								            NavitarMotor(NavitarMotorController& parent, int motorID);

@@ -11,7 +11,7 @@ using dsl::ObjectType;
 using dsl::IniFile;
 
 template <class T>
-class AT_CORE Preset : public Property<T>
+class Preset : public Property<T>
 {
     public:
         						                Preset(const string& name, const T& val);

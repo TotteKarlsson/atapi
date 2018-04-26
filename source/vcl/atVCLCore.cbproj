@@ -140,10 +140,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atReticle.cpp">
-            <DependentOn>atReticle.h</DependentOn>
-            <BuildOrder>24</BuildOrder>
-        </CppCompile>
         <CppCompile Include="atVCLCore.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -424,7 +420,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVCLCore.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLCoreBCC32D.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>atVCLCore.tds</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -440,7 +436,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\tokyo\BPL\atVCLCore.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLCoreBCC32D.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>atVCLCore.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

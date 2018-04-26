@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "atCameraServiceThread.h"
 #include "dslWin32Utils.h"
-#include "thirdparty/uc480/uc480class.h"
+#include "uc480class.h"
 #include "dslLogger.h"
 
 using namespace dsl;

@@ -5,7 +5,6 @@
 #include "navitar/atNavitarPreset.h"
 #pragma package(smart_init)
 #pragma link "dslTIntegerLabeledEdit"
-#pragma link "dslTIntegerLabeledEdit"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
