@@ -25,7 +25,6 @@ using dsl::gEmptyString;
 using std::deque;
 class UC7MessageReceiver;
 
-
 class AT_UC7 UC7 : public ATObject
 {
 	friend UC7MessageReceiver;

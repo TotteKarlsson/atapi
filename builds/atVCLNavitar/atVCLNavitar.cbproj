@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{AA48CE81-AC44-43B0-8C5E-937B25FC01EF}</ProjectGuid>
+        <ProjectGuid>{D0B1CF2C-38E6-4C04-8E5F-3ECA60BD681B}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>atVCLVisualComponents.cpp</MainSource>
+        <MainSource>atVCLNavitar.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -59,9 +59,9 @@
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <SanitizedProjectName>atVCLVisualComponents</SanitizedProjectName>
+        <IncludePath>..\..\source\vcl\navitarFrames\;..\atVCLNavitar\;..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\vcl\navitarFrames\;..\atVCLNavitar\;..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\frames\abFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <SanitizedProjectName>atVCLNavitar</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
         <PackageImports>bindcomp;bindcompdbx;bindcompfmx;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapxml;FireDACCommonODBC;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;rtl;tethering;xmlrtl;$(PackageImports)</PackageImports>
@@ -115,7 +115,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atVCLVisualComponents.cpp">
+        <CppCompile Include="atVCLNavitar.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
         <PackageImport Include="dslVCLComponents.bpi">
@@ -127,165 +127,22 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PackageImport Include="vcl.bpi">
             <BuildOrder>24</BuildOrder>
         </PackageImport>
-        <CppCompile Include="..\..\source\vcl\forms\TamFileEditor.cpp">
-            <Form>amFileEditor</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TamFileEditor.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TEditSequenceForm.cpp">
-            <Form>EditSequenceForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TEditSequenceForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\THandWheelPositionForm.cpp">
-            <Form>HandWheelPositionForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\THandWheelPositionForm.h</DependentOn>
-            <BuildOrder>20</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TSelectIntegerForm.cpp">
-            <Form>SelectIntegerForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TSelectIntegerForm.h</DependentOn>
-            <BuildOrder>24</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.cpp">
-            <Form>SelectProcessTypeDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TSelectProcessTypeDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TShowFileContentForm.cpp">
-            <Form>ShowFileContentForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TShowFileContentForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TStringInputDialog.cpp">
-            <Form>StringInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TStringInputDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TTextInputDialog.cpp">
-            <Form>TextInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TTextInputDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TYesNoForm.cpp">
-            <Form>YesNoForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TYesNoForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
-            <Form>ApplicationSoundsFrame</Form>
+        <CppCompile Include="..\..\source\vcl\navitarFrames\TNavitarMotorFrame.cpp">
+            <Form>NavitarMotorFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TApplicationSoundsFrame.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
+            <DependentOn>..\..\source\vcl\navitarFrames\TNavitarMotorFrame.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.cpp">
-            <Form>ArduinoServerCommandFrame</Form>
+        <CppCompile Include="..\..\source\vcl\navitarFrames\TNavitarPresetFrame.cpp">
+            <Form>NavitarPresetFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TArduinoServerCommandFrame.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TFFMPEGFrame.cpp">
-            <Form>FFMPEGFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TFFMPEGFrame.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.cpp">
-            <Form>FFMPEGOutputFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TFFMPEGOutputFrame.h</DependentOn>
-            <BuildOrder>22</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\THDMIStreamerFrame.cpp">
-            <Form>HDMIStreamerFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\THDMIStreamerFrame.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TImageItemFrame.cpp">
-            <Form>ImageItemFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TImageItemFrame.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TImagesFrame.cpp">
-            <Form>ImagesFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TImagesFrame.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TMovieItemFrame.cpp">
-            <Form>MovieItemFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TMovieItemFrame.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TMoviesFrame.cpp">
-            <Form>MoviesFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TMoviesFrame.h</DependentOn>
+            <DependentOn>..\..\source\vcl\navitarFrames\TNavitarPresetFrame.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TPGConnectionFrame.cpp">
-            <Form>PGConnectionFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TPGConnectionFrame.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TSoundsFrame.cpp">
-            <Form>SoundsFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TSoundsFrame.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TUC7StagePositionFrame.cpp">
-            <Form>UC7StagePositionFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TUC7StagePositionFrame.h</DependentOn>
-            <BuildOrder>23</BuildOrder>
-        </CppCompile>
-        <FormResources Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TFFMPEGFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TUC7StagePositionFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TamFileEditor.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TEditSequenceForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TYesNoForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\THandWheelPositionForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TShowFileContentForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectIntegerForm.dfm"/>
+        <FormResources Include="..\..\source\vcl\navitarFrames\TNavitarPresetFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\navitarFrames\TNavitarMotorFrame.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -304,7 +161,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">atVCLVisualComponents.cpp</Source>
+                    <Source Name="MainSource">atVCLNavitar.cpp</Source>
                 </Source>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -373,9 +230,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atVCLVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLNavitar.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
-                        <RemoteName>atVCLVisualComponents.tds</RemoteName>
+                        <RemoteName>atVCLNavitar.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -389,9 +246,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atVCLVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLNavitar.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>atVCLVisualComponents.bpl</RemoteName>
+                        <RemoteName>atVCLNavitar.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
