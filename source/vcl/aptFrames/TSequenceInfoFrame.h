@@ -87,6 +87,7 @@ class PACKAGE TSequenceInfoFrame : public TFrame
 
     public:
         			__fastcall 	                TSequenceInfoFrame(ProcessSequencer& ps, TComponent* Owner);
+        			__fastcall 	                ~TSequenceInfoFrame();
 		bool					                populate(ProcessSequence* seq, TScrollBox* processPanel = NULL);
 };
 

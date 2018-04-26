@@ -59,6 +59,17 @@ __fastcall TSequenceInfoFrame::TSequenceInfoFrame(ProcessSequencer& ps, TCompone
     setFramesVisibility(false);
 }
 
+__fastcall  TSequenceInfoFrame::~TSequenceInfoFrame()
+{
+    mFrames.clear();
+    delete mHomeMotorProcessFrame;
+    delete mMoveCoverSlipAtAngleProcessFrame;
+    delete mStopAndResumeFrame;
+    delete mMotorMoveProcessFrame;
+    delete mArrayCamRequestFrame;
+    delete mTimeDelayFrame;
+    delete mParallelProcessesFrame;
+}
 //---------------------------------------------------------------------------
 bool TSequenceInfoFrame::populate(ProcessSequence* seq, TScrollBox* processPanel)
 {

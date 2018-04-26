@@ -16,6 +16,7 @@ using std::deque;
 using std::string;
 using dsl::IniSection;
 using dsl::Property;
+using dsl::gEmptyString;
 class Process;
 class ArrayBot;
 
@@ -25,7 +26,7 @@ class ArrayBot;
 class AT_AB ProcessSequence : public ATObject
 {
     public:
-										    ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& sequenceName = "", const string& fileExt = "ab");
+										    ProcessSequence(ArrayBot& ab, ArrayCamClient& ac, const string& sequenceName = gEmptyString, const string& fileExt = "ab");
 				        		            ~ProcessSequence();
 					        		        ProcessSequence(const ProcessSequence& s);
 
