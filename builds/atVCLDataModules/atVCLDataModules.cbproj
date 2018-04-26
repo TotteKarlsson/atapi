@@ -156,10 +156,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\vcl\datamodules\TSensorsDataModule.h</DependentOn>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
-        <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
