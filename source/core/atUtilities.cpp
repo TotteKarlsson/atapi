@@ -48,6 +48,24 @@ string toString(ProcessType pt)
     }
 }
 
+
+int extractCoverSlipID(const string& bc)
+{
+	string temp(bc);
+    //Make sure first char is a 'C'
+    if(!bc.size() || bc[0] != 'C')
+    {
+    	Log(lError) << bc << " is not a valid barcode!";
+        return -1;
+    }
+
+	temp.erase(0,1);
+    int id = toInt(temp);
+    Log(lDebug3) << "Extracted id "<<id<<" from "<<bc;
+    return id;
+}
+
+
 //enum ProcessType {ptBaseType = 0, ptMaster, ptParallel, ptAbsoluteMove, ptTimeDelay, ptUnknown};
 
 ProcessType toProcessType(const string& str)

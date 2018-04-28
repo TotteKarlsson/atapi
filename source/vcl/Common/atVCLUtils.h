@@ -2,6 +2,7 @@
 #define atVCLUtilsH
 #include <System.Classes.hpp>
 #include <string>
+#include "atUtilities.h"
 //---------------------------------------------------------------------------
 using std::string;
 

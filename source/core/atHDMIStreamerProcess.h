@@ -10,8 +10,8 @@
 #include "core/atATObject.h"
 #include "dslConstants.h"
 //---------------------------------------------------------------------------
-//using namespace dsl;
-using Poco::Process;
+
+//using Poco::Process;
 using Poco::ProcessHandle;
 using Poco::PipeInputStream;
 using Poco::PipeOutputStream;
