@@ -32,6 +32,7 @@ enum ProcessType
 
 AT_CORE string 			toString(ProcessType tp);
 AT_CORE ProcessType 	toProcessType(const string& str);
+AT_CORE int 			extractCoverSlipID(const string& bc);
 
 //!Logic operators, used in triggers
 enum LogicOperator {loLargerThan = 0, loSmallerThan, loLargerThanOrEqual, loSmallerThanOrEqual, loEqualTo, loUndefined};

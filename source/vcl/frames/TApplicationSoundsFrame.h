@@ -31,7 +31,6 @@ class PACKAGE TApplicationSoundsFrame : public TFrame
 	TButton *PlayBtn;
 	TCheckBox *EnabledCB;
 	TGroupBox *SoundPropsGB;
-	TFloatLabeledEdit *FloatLabeledEdit1;
 	void __fastcall ApplicationSoundsLBClick(TObject *Sender);
 	void __fastcall SoundCBCloseUp(TObject *Sender);
 	void __fastcall PlayBtnClick(TObject *Sender);
