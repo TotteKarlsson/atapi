@@ -194,7 +194,14 @@ int DeviceManager::connectAllDevices()
 
 APTDevice* DeviceManager::connectDevice(int serial)
 {
-    Log(lDebug) <<"Connecting device with serial "<<serial;
+    if(serial != -1)
+    {
+    	Log(lInfo) <<"Connecting device with serial "<<serial;
+    }
+    else
+    {
+        return NULL;
+    }
 
     //First get device info so we know what to create
     TLI_DeviceInfo deviceInfo;
@@ -203,13 +210,12 @@ APTDevice* DeviceManager::connectDevice(int serial)
     int res = TLI_GetDeviceInfo(toString(serial).c_str(), &deviceInfo);
     if(res == 0)
     {
+        Log(lError) << "MotorType for device with serial: "<<serial<<" is: "<<deviceInfo.motorType;
 	    Log(lError) << "Failed getting device info for device with serial:"<<serial;
-		Log(lError) << "Device with serial "<<serial<<" was not connected";
-        Log(lError) << "MotorType is: "<<deviceInfo.motorType;
         return NULL;
     }
 
-    Log(lDebug3) <<"Device info: "<< ::toString(deviceInfo);
+    Log(lInfo) <<"Device info: "<< ::toString(deviceInfo);
 
     //Create and open the device
     APTDevice* device = NULL;
@@ -222,17 +228,17 @@ APTDevice* DeviceManager::connectDevice(int serial)
         break;
 
         case didTCubeStepperMotor:
-            Log(lDebug3) << "Creating a "<<toString(didTCubeStepperMotor)<<" device";
+            Log(lInfo) << "Creating a "<<toString(didTCubeStepperMotor)<<" device";
             device = new TCubeStepperMotor(serial);
         break;
 
         case didLongTravelStage:
-            Log(lDebug3) << "Creating a "<<toString(didLongTravelStage)<<" device";
+            Log(lInfo) << "Creating a "<<toString(didLongTravelStage)<<" device";
             device = new LongTravelStage(serial);
         break;
 
         case didBenchTopStepperMotor:
-            Log(lDebug3) << "Creating a "<<toString(didBenchTopStepperMotor)<<" device";
+            Log(lInfo) << "Creating a "<<toString(didBenchTopStepperMotor)<<" device";
             device = new BenchTopStepperMotor(serial);
         break;
 
@@ -331,15 +337,12 @@ string toString(DeviceTypeID value)
 {
 	switch(value)
     {
-    	case didTCubeDCServo:
-        	return "TCube DC Servo";
-
-		case didLongTravelStage:
-        	return "Long Travel Stage";
-
-		case didTCubeStepperMotor:
-        	return "TCube Stepper Motor";
+    	case didTCubeDCServo:             	return "TCube DC Servo";
+		case didLongTravelStage:          	return "Long Travel Stage";
+		case didTCubeStepperMotor:        	return "TCube Stepper Motor";
+		case didBenchTopStepperMotor:     	return "Benchtop Stepper Motor";
 		default:
+            Log(lWarning) <<"The devicetype ID\" "<<value<<"\" is not defined";
         	return "Device type is not defined";
     }
 }

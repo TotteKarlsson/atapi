@@ -2,22 +2,22 @@
 #pragma hdrstop
 #include "TMotorFrame.h"
 #include "TMotorPositionFrame.h"
-USEFORM("..\..\source\vcl\aptFrames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TArrayBotRequestFrame.cpp", ArrayBotRequestFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TArrayCamRequestFrame.cpp", ArrayCamRequestFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\THomeMotorProcessFrame.cpp", HomeMotorProcessFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TMotorPositionFrame.cpp", MotorPositionFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.cpp", MoveCoverSlipAtAngleProcessFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TParallelProcessesFrame.cpp", ParallelProcessesFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TProcessSequenceControlForm.cpp", ProcessSequenceControlForm);
 USEFORM("..\..\source\vcl\aptFrames\TSequenceInfoFrame.cpp", SequenceInfoFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TProcessSequenceControlForm.cpp", ProcessSequenceControlForm);
+USEFORM("..\..\source\vcl\aptFrames\TPositionalTriggerFrame.cpp", PositionalTriggerFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TParallelProcessesFrame.cpp", ParallelProcessesFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TSequencerButtonsFrame.cpp", SequencerButtonsFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TStopAndResumeFrame.cpp", StopAndResumeFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\aptFrames\TTimeDelayFrame.cpp", TimeDelayFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TXYZUnitFrame.cpp", XYZUnitFrame); /* TFrame: File Type */
 USEFORM("..\..\source\vcl\aptFrames\TXYZPositionsFrame.cpp", XYZPositionsFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TTimeDelayFrame.cpp", TimeDelayFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TStopAndResumeFrame.cpp", StopAndResumeFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TArrayCamRequestFrame.cpp", ArrayCamRequestFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TArrayBotRequestFrame.cpp", ArrayBotRequestFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\THomeMotorProcessFrame.cpp", HomeMotorProcessFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TMoveCoverSlipAtAngleProcessFrame.cpp", MoveCoverSlipAtAngleProcessFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TMotorPositionFrame.cpp", MotorPositionFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TMotorMoveProcessFrame.cpp", MotorMoveProcessFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\aptFrames\TMotorFrame.cpp", MotorFrame); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

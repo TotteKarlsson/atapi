@@ -19,12 +19,22 @@ bool DS457::connect(int port, int baudRate, HWND handle)
     mBaudRate 	= baudRate;
 	mHandle 	= handle;
 
-    int status = SSIConnect(mHandle, mBaudRate, mCOMPort);
+    Log(lInfo) << "Connecting barcode scanner using COM port "<<port <<" BaudRate = "<<baudRate<<" and Handle = " << handle;
+
+    int status(0);
+    try
+    {
+    	status = SSIConnect(mHandle, mBaudRate, mCOMPort);
+    }
+    catch(...)
+    {
+        Log(lError) << "SSIConnect failed..";
+    }
 
     Log(lInfo) << "DS457 Connect status: "<<status;
     if(status == 0)
     {
-//        PostMessage(WM_SENDGETVERSIONMSG, 0,0);
+		//        PostMessage(WM_SENDGETVERSIONMSG, 0,0);
         SetVideoBuffer(		    mCOMPort, 	mVideoData, MAX_VIDEO_LEN);
         SetDecodeBuffer(	    mCOMPort, 	mVideoData, MAX_VIDEO_LEN); // use is mutually exclusive so this is ok
         SetParameterBuffer(	    mCOMPort,   mVideoData, MAX_VIDEO_LEN); // as long as we reset it as soon as we

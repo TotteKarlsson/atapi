@@ -5,7 +5,7 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
-//#include "sound/atDirectSound.h"
+#include "sound/atDirectSound.h"
 //---------------------------------------------------------------------------
 
 class PACKAGE TArrayBotButton : public TBitBtn
@@ -17,7 +17,7 @@ class PACKAGE TArrayBotButton : public TBitBtn
     protected:
     	virtual void __fastcall 		WndProc(TMessage& msg);
         String                          FSoundID;
-//        DirectSound						mSound;
+        DirectSound						mSound;
 
     public:
         					__fastcall 	TArrayBotButton(TComponent* Owner);

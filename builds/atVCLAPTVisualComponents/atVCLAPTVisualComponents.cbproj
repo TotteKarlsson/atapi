@@ -59,8 +59,8 @@
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\source\vcl\aptFrames\;P:\libs\atapi\builds\atAPTFrames\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\vcl\aptFrames\;P:\libs\atapi\builds\atAPTFrames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\vcl\frames\;..\..\source\vcl\aptFrames\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\vcl\frames\;..\..\source\vcl\aptFrames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>atVCLAPTVisualComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">

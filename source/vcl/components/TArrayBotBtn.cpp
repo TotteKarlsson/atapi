@@ -12,10 +12,10 @@ using namespace dsl;
 //---------------------------------------------------------------------------
 __fastcall TArrayBotButton::TArrayBotButton(TComponent* Owner)
 	: TBitBtn(Owner),
-    FSoundID("BUTTON_CLICK_4")//,
-//    mSound("", NULL)
+    FSoundID("BUTTON_CLICK_4"),
+    mSound("", NULL)
 {
-//	initABCoreLib();
+	initABCoreLib();
 }
 
 void __fastcall	TArrayBotButton::CreateWnd()
@@ -26,10 +26,10 @@ void __fastcall	TArrayBotButton::CreateWnd()
     	Log(lError) << "The button does not have a handle";
     }
 
-//    if(!mSound.create(stdstr(FSoundID), this->Handle))
-//    {
-//    	Log(lError) << "Failed creating sound for button";
-//    }
+    if(!mSound.create(stdstr(FSoundID), this->Handle))
+    {
+    	Log(lError) << "Failed creating sound for button";
+    }
 }
 
 void __fastcall	TArrayBotButton::DestroyWnd()
@@ -47,11 +47,8 @@ void __fastcall TArrayBotButton::WndProc(TMessage& msg)
     {
     	case WM_POINTERDOWN:        	Log(lDebug) << "Touch Down";        break;
         case WM_POINTERUP:        		Log(lDebug) << "Touch Up";        	break;
-//        case WM_LBUTTONUP:            	mSound.play(0, false);				break;
-
-//        case WM_LBUTTONDOWN:
-//        //            mSound.Play(0, false);
-//        break;
+        case WM_LBUTTONUP:            	mSound.play(0, false);				break;
+//        case WM_LBUTTONDOWN:            mSound.Play(0, false);       		break;
     }
 
     TBitBtn::WndProc(msg);
