@@ -14,32 +14,6 @@ SET(src
 atATObject
 )
 
-##===== Static library
-#if(${BUILD_STATIC_LIBS})
-#    ADD_LIBRARY(${target}-static STATIC
-#    ${src}
-#    )
-#
-#    SET_PROPERTY(TARGET ${target}-static  PROPERTY COMPILE_DEFINITIONS 
-#    DSL_STATIC
-#    POCO_STATIC
-#    )
-#
-#    TARGET_LINK_LIBRARIES(${target}-static 
-#    mtkCommon-static
-#    mtkMath-static
-#    )
-#
-#    if(${INSTALL_CXX_LIBS})
-#        INSTALL(    
-#        TARGETS ${target}-static
-#        RUNTIME DESTINATION bin COMPONENT core
-#        LIBRARY DESTINATION lib COMPONENT core
-#        ARCHIVE DESTINATION lib COMPONENT core
-#        )            
-#    endif()
-#endif()
-
 #===== Shared library
 if(${BUILD_SHARED_LIBS})
     ADD_LIBRARY(${target} SHARED

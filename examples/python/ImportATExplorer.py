@@ -1,10 +1,14 @@
-import atexplorer
+import atp
 
-print (atexplorer.MyTest(33))
+print (atp.MyTest(33))
 
-a = atexplorer.ATObject()
+a = atp.ATObject()
 
-for i in range(1000000):
-    print (str(i) + str(": ") + a.getTypeName())
+b = a
+print (a.getTypeName())
+print (b.getTypeName())
+
+
+
 
 
