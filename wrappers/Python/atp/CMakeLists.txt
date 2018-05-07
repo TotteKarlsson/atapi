@@ -29,7 +29,7 @@ set(CMAKE_MODULE_LINKER_FLAGS ${CMAKE_CURRENT_SOURCE_DIR}/atp.def)
 
 
 if(BORLAND)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w-8105")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w-8105 -tR -tM")
 endif(BORLAND)
 
 set_source_files_properties(atp.i PROPERTIES CPLUSPLUS ON)
@@ -37,7 +37,7 @@ set_source_files_properties(atp.i PROPERTIES SWIG_FLAGS "-threads")
 
 SWIG_ADD_LIBRARY(atp
     MODULE LANGUAGE python 
-    SOURCES atp.i atp.def)
+    SOURCES atp.i)
     
 SWIG_LINK_LIBRARIES (atp
     atCore
