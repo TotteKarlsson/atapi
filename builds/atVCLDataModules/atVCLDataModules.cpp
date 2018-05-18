@@ -23,17 +23,11 @@ extern "C" int _libmain(unsigned long reason)
 //---------------------------------------------------------------------------
 #pragma comment(lib, "dslCommon.lib")
 #pragma comment(lib, "dslVCLCommon.lib")
-#pragma comment(lib, "dslVCLComponents.bpi")
 
 #pragma comment(lib, "atFoundation.lib")
-#pragma comment(lib, "atVCLCommon.lib")
-#pragma comment(lib, "atVCLComponents.bpi")
-
 #pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
 
-#pragma comment(lib, "poco_foundation-static.lib")
-#pragma comment(lib, "tinyxml2-static.lib")
 
 //Simple dataset
-#pragma comment(lib, "dbxcds.bpi")
+#pragma comment(lib, "dbxcds.bpi") //TSimpleDataset
 

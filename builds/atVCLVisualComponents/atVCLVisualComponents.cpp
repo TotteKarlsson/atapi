@@ -46,15 +46,10 @@ extern "C" int _libmain(unsigned long reason)
 #pragma comment(lib, "atFoundation.lib")
 #pragma comment(lib, "atVCLCommon.lib")
 #pragma comment(lib, "atVCLComponents.bpi")
-
-#pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
-
-#pragma comment(lib, "poco_foundation-static.lib")
-#pragma comment(lib, "tinyxml2-static.lib")
-
+#pragma comment(lib, "poco_foundation.lib")
 #pragma comment(lib, "atVCLDataModules.bpi")
 
-//Simple dataset
-#pragma comment(lib, "dbxcds.bpi")
+#pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
+#pragma comment(lib, "dbxcds.bpi") //Simple dataset
 #pragma comment(lib, "Tee.bpi")
 
