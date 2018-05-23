@@ -19,6 +19,16 @@ class PACKAGE ATWindowStructMessage
         LRESULT             Result;
 };
 
+
+//TImage utilities
+PACKAGE int 				getImageWidth(TImage* imageCtrl);
+PACKAGE int 				getImageHeight(TImage* imageCtrl);
+
+PACKAGE double				getImageAspectRatio(TImage* imageCtrl);
+PACKAGE double				getImageContainerAspectRatio(TImage* imageCtrl);
+PACKAGE int                 getImageWidthFromHeight(TImage* imageCtrl);
+PACKAGE int                 getImageHeightFromWidth(TImage* imageCtrl);
+
 //List boxes
 PACKAGE bool 	            updateListBoxItemCaption(TListBox* cb, int indx, const string& name);
 PACKAGE int                 selectAndClickListBoxItem(TListBox* lb, TObject* p);

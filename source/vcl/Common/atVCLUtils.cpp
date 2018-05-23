@@ -23,6 +23,194 @@ int getCurrentUserID(TComboBox* mUserCB)
 	return  -1;
 }
 
+int getImageWidth(TImage* imageCtrl)
+{
+    //First check if image is stretched or not
+    if(imageCtrl->Stretch == false)
+    {
+        return imageCtrl->Picture->Width; //The original width
+    }
+
+    //if it is stretched, check aspect ratios..
+    //Observe, this probably don't work.. need to check landscape or portrait
+    if(getImageAspectRatio(imageCtrl) == getImageContainerAspectRatio(imageCtrl))
+    {
+        return imageCtrl->Picture->Width;
+    }
+
+    //As the image is being stretched, there are several "cases"
+    if(imageCtrl->Width > imageCtrl->Height)
+    {
+        //Gotta check how the image is stretched, depends on original dimension
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            //Image Height == container height
+            return getImageWidthFromHeight(imageCtrl);
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            //Image width == container width
+            return imageCtrl->Width;
+        }
+    }
+    else if(imageCtrl->Width < imageCtrl->Height)
+    {
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            return imageCtrl->Width;
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            return getImageWidthFromHeight(imageCtrl);
+        }
+    }
+    else if (imageCtrl->Width == imageCtrl->Height)
+    {
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            return getImageWidthFromHeight(imageCtrl);
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            return imageCtrl->Width;
+        }
+    }
+    return -1;
+}
+
+int getImageHeight(TImage* imageCtrl)
+{
+    //First check if image is stretched or not
+    if(imageCtrl->Stretch == false)
+    {
+        return imageCtrl->Picture->Height; //The original height
+    }
+
+    //if it is stretched, check aspect ratios..
+    //Observe, this probably don't work.. need to check landscape or portrait
+    if(getImageAspectRatio(imageCtrl) == getImageContainerAspectRatio(imageCtrl))
+    {
+        return imageCtrl->Picture->Height;
+    }
+
+    //As the image is being stretched, there are several "cases"
+    if(imageCtrl->Width > imageCtrl->Height)
+    {
+        //Gotta check how the image is stretched, depends on original dimension
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            //Image Height == container height
+            return imageCtrl->Height;
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            //Image width == container width
+            return getImageHeightFromWidth(imageCtrl);
+        }
+    }
+    else if(imageCtrl->Width < imageCtrl->Height)
+    {
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            return getImageHeightFromWidth(imageCtrl);;
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            return imageCtrl->Height;
+        }
+    }
+    else if (imageCtrl->Width == imageCtrl->Height)
+    {
+        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
+        {
+            return imageCtrl->Height;
+
+        }
+        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
+        {
+            return getImageHeightFromWidth(imageCtrl);
+        }
+    }
+    return -1;
+}
+
+double getImageAspectRatio(TImage* imageCtrl)
+{
+    double w = imageCtrl->Picture->Width;
+	double h = imageCtrl->Picture->Height;
+
+    if(w == 0 || h == 0)
+    {
+        Log(lError) << "Can't calculate aspect ratio for image!";
+        return -1;
+    }
+
+    if( w > h)
+    {
+        return w / h;
+    }
+    else if (h > w)
+    {
+        return h/w;
+    }
+    else
+    {
+        return 1.0;
+    }
+}
+
+double getImageContainerAspectRatio(TImage* imageCtrl)
+{
+    double w = imageCtrl->Width;
+	double h = imageCtrl->Height;
+
+    if(w == 0 || h == 0)
+    {
+        Log(lError) << "Can't calculate aspect ratio for image container!";
+        return -1;
+    }
+
+    if( w > h)
+    {
+        return w / h;
+    }
+    else if (h > w)
+    {
+        return h/w;
+    }
+    else
+    {
+        return 1.0;
+    }
+}
+
+int getImageWidthFromHeight(TImage* imageCtrl)
+{
+    //This apply to as scaled, proprtional image, assuming its height is the same as
+    //its container
+    double originalWidth(imageCtrl->Picture->Width);
+    double originalHeight(imageCtrl->Picture->Height);
+
+    double currentHeight = imageCtrl->Height;
+    double currentWidth = currentHeight / ( originalHeight / originalWidth);
+
+    return currentWidth;
+}
+
+int getImageHeightFromWidth(TImage* imageCtrl)
+{
+    //This apply to as scaled, proprtional image, assuming its height is the same as
+    //its container
+    double originalWidth(imageCtrl->Picture->Width);
+    double originalHeight(imageCtrl->Picture->Height);
+
+    double currentWidth = imageCtrl->Width;
+    double currentHeight = currentWidth * ( originalHeight / originalWidth);
+
+    return currentHeight;
+}
+
+
 //void populateUsersCB(TComboBox* mUserCB, ATDBServerSession& ses)
 //{
 //    //Fetch data
