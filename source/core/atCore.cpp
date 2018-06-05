@@ -5,6 +5,14 @@
 #include "dslWin32Utils.h"
 using namespace dsl;
 
+const string MAJOR_VERSION = "0";
+const string MINOR_VERSION = "5";
+string getVersion()
+{
+    return MAJOR_VERSION + "." + MINOR_VERSION;
+}
+
+
 //Module entry point..
 extern "C" int _libmain(unsigned long reason)
 {
@@ -17,9 +25,12 @@ static unsigned int WM_INFO_MESSAGE_DIALOG 		= WM_APP + 101;
 
 void initABCoreLib()
 {
+#ifdef _WIN32
 	HMODULE	handle 				= LoadLibraryA("atResources");
     WM_MOTOR_WARNING_MESSAGE 	= RegisterWindowMessageA(MOTOR_WARNING_MESSAGE);
     WM_INFO_MESSAGE_DIALOG   	= RegisterWindowMessageA(INFO_MESSAGE_DIALOG);
+#endif
+
 }
 
 const unsigned int getABCoreMessageID(const string& msg)

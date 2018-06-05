@@ -6,13 +6,19 @@ ${ATAPI_ROOT}
 ${ATAPI_ROOT}/source
 ${CG_BOOST_ROOT}
 ${TR1_ROOT}
-${DSL_INCLUDE}
 ${THIRD_PARTY_INSTALL_PREFIX}/include
+${THIRD_PARTY_INSTALL_PREFIX}/include/dsl
 )
 
 SET(src
 atATObject
+atCore
 )
+
+link_directories(
+${THIRD_PARTY_INSTALL_PREFIX}/lib
+)
+
 
 #===== Shared library
 if(${BUILD_SHARED_LIBS})
@@ -22,10 +28,13 @@ if(${BUILD_SHARED_LIBS})
 
     SET_PROPERTY(TARGET ${target}  PROPERTY COMPILE_DEFINITIONS 
     AT_EXPORT_CORE
-    POCO_STATIC
     )
 
     TARGET_LINK_LIBRARIES(${target} 
+        ${THIRD_PARTY_INSTALL_PREFIX}/lib/dslCommon.lib
+        #Note: Just linking to "dslCommon" causes problem when generatign the python wrapper
+        #Specifying the full path of the library seem to fix such errors. This is some kind of bug
+        #in CMake
     )
 
 
@@ -35,7 +44,6 @@ if(${BUILD_SHARED_LIBS})
     LIBRARY DESTINATION lib COMPONENT core
     ARCHIVE DESTINATION lib COMPONENT core
     )            
-
 endif()
 
 #===== General Installs

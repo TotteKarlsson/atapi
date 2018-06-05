@@ -1,10 +1,7 @@
-import dsl
+import atfoundation as at
 
-pmd = dsl.PluginMetaData("test", "myCategory")
+print (at.getVersion())
 
-print(pmd.getAll())
-print (pmd.getPluginName())
-pmd.setAuthor("Monty")
 
-print (pmd.getAuthor())
+
 
