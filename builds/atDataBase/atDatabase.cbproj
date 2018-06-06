@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{9FE377E9-A8A9-4E3C-B349-3AB3A1ED7CD8}</ProjectGuid>
+        <ProjectGuid>{5BA85674-6D90-48FE-A207-91378715CC2D}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -41,13 +41,14 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_MinorVer>5</VerInfo_MinorVer>
+        <Defines>AT_EXPORT_DB;$(Defines)</Defines>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\ello\;..\arduino\;..\arraybot\;..\labelprinter\;..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;clients\;arraycam\;resources\;$(DSL_ROOT)\Common\Math;$(DSL_ROOT)\Common;$(AT_ROOT);UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\ello\;..\arduino\;..\arraybot\;..\labelprinter\;..\uc7\;..\camera\;..\resources\;..\sound\;..\navitar\;..\arraycam\;barcodereader\;navitar\;resources\;arraycam\;clients\;P:\ArrayBot\ui\lib\;P:\ArrayCam\source\;P:\atUC7\source\;UC7\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\database\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(DSL_ROOT)\Common;$(DSL_ROOT)\Common\Math;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\database\;arraybot\;process\;labelprinter\;database\;apt\;sound\;serial\;arduino\;joystick\;camera\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -56,7 +57,7 @@
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
-        <SanitizedProjectName>atCore</SanitizedProjectName>
+        <SanitizedProjectName>atDatabase</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <VerInfo_MajorVer>1</VerInfo_MajorVer>
@@ -89,99 +90,38 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <PreLinkEvent><![CDATA[copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib
-$(PreLinkEvent)]]></PreLinkEvent>
         <BCC_whid>false</BCC_whid>
-        <PreBuildEvent><![CDATA[if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480
-xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y
-copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib
-copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib
-copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib
+        <PreBuildEvent><![CDATA[REM copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib
+REM copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib
 $(PreBuildEvent)]]></PreBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dsl\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_wcsu>false</BCC_wcsu>
-        <BCC_PCHInject>atCorePCH.h</BCC_PCHInject>
+        <BCC_PCHInject>..\at_pch.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
         <LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-        <Defines>AT_EXPORT_CORE;$(Defines)</Defines>
+        <Defines>POCO_STATIC;AT_DB_SHARED;$(Defines)</Defines>
         <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BCC32)\lib;$(KINESIS_LIBS);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.1.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=ArrayBot++;ProductVersion=0.5.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
-        <VerInfo_MajorVer>1</VerInfo_MajorVer>
-        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Keys>CompanyName=;FileVersion=0.5.1.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=ArrayBot++;ProductVersion=0.5.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\..\source\core\atArrayBotProtocol.cpp">
-            <BuildOrder>17</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atArrayCamProtocol.cpp">
-            <BuildOrder>16</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atATObject.cpp">
-            <BuildOrder>68</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atCore.cpp">
-            <DependentOn>..\..\source\core\atCore.h</DependentOn>
+        <CppCompile Include="..\..\source\database\atDatabase.cpp">
+            <DependentOn>..\..\source\database\atDatabase.h</DependentOn>
             <BuildOrder>34</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\core\atCounter.cpp">
-            <DependentOn>..\..\source\core\atCounter.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
+        <CppCompile Include="..\..\source\database\atDBCredentials.cpp">
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\core\atCreateImageThumbNailThread.cpp">
-            <BuildOrder>26</BuildOrder>
+        <CppCompile Include="..\..\source\database\atQueryBuilder.cpp">
+            <BuildOrder>6</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\core\atCreateMovieThumbNailThread.cpp">
-            <BuildOrder>29</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atEnvironmentalSensorReader.cpp">
-            <BuildOrder>26</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atExceptions.cpp">
-            <DependentOn>..\..\source\core\atExceptions.h</DependentOn>
-            <BuildOrder>35</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atHDMIStreamerProcess.cpp">
-            <DependentOn>..\..\source\core\atHDMIStreamerProcess.h</DependentOn>
-            <BuildOrder>31</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atPreset.cpp">
-            <DependentOn>..\..\source\core\atPreset.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atProcess.cpp">
-            <BuildOrder>39</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atResourceManager.cpp">
-            <BuildOrder>18</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atUtilities.cpp">
-            <DependentOn>..\..\source\core\atUtilities.h</DependentOn>
-            <BuildOrder>27</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atVideoCompressorThread.cpp">
-            <DependentOn>..\..\source\core\atVideoCompressorThread.h</DependentOn>
-            <BuildOrder>30</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\auto_link.cpp">
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\WatchDogSensor.cpp">
-            <DependentOn>..\..\source\core\WatchDogSensor.h</DependentOn>
-            <BuildOrder>32</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\WatchDogServer.cpp">
-            <DependentOn>..\..\source\core\WatchDogServer.h</DependentOn>
-            <BuildOrder>33</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\labelprinter\atTSCLIB.cpp">
-            <DependentOn>..\..\source\labelprinter\atTSCLIB.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
+        <CppCompile Include="..\..\source\database\auto_link.cpp">
+            <BuildOrder>56</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -236,10 +176,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\dslVCLVisualComponents.bpl">Dune Visual Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\dslVCLComponents.bpl">Dune Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\atVCLComponents.bpl">File p:\build\debug\bpl\atVCLComponents.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\atVCLVisualComponents.bpl">File p:\build\debug\BPL\atVCLVisualComponents.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\tokyo\BPL\atVisualComponents.bpl">AT Frames and Forms</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -274,12 +213,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\bin\atCore.dll" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>atCore.dll</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -302,12 +235,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64250mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="p:\build\debug\bin\atCore.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>atCore.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -699,9 +626,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480&amp;&amp;xcopy $(AT_ROOT)\thirdparty\uc480\*.h $(DEBUG_BCC32)\include\uc480 /y&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreBuildEvent>
+        <PreBuildEvent>REM copy $(AT_ROOT)\Source\camera\lib\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;REM copy $(AT_ROOT)\Source\camera\lib\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent>copy $(AT_ROOT)\thirdparty\navitar\navusbAPI_B1.lib.redist  $(DEBUG_BCC32)\lib\navusbAPI_B1.lib</PreLinkEvent>
+        <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
         <PostBuildEvent/>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>

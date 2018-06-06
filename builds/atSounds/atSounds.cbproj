@@ -1,14 +1,13 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{AA48CE81-AC44-43B0-8C5E-937B25FC01EF}</ProjectGuid>
+        <ProjectGuid>{9F1BF92B-2F57-464C-92B2-C37015D06231}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>atVCLVisualComponents.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
-        <AppType>Package</AppType>
+        <AppType>Library</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -46,28 +45,27 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-        <DynamicRTL>true</DynamicRTL>
-        <UsePackages>true</UsePackages>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-        <ProjectType>CppPackage</ProjectType>
+        <ProjectType>CppDynamicLibrary</ProjectType>
+        <PackageImports>CloudService;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACIBDriver;FireDACSqliteDriver;inet;RESTBackendComponents;RESTComponents;soapmidas;soaprtl;soapserver;$(PackageImports)</PackageImports>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-        <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <SanitizedProjectName>atVCLVisualComponents</SanitizedProjectName>
+        <IncludePath>..\..\source\sound\;P:\libs\atapi\builds\atSounds\;$(IncludePath)</IncludePath>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+        <ILINK_LibraryPath>..\..\source\sound\;P:\libs\atapi\builds\atSounds\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <_TCHARMapping>char</_TCHARMapping>
+        <SanitizedProjectName>atSounds</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
         <PackageImports>bindcomp;bindcompdbx;bindcompfmx;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapxml;FireDACCommonODBC;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;rtl;tethering;xmlrtl;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <PackageImports>adortl;appanalytics;atComponents;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DbxDevartPostgreSQLDriver250;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dslVCLComponents;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;indy10sbridge250;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;sbridge250;svn;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <PackageImports>adortl;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DbxDevartPostgreSQLDriver250;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;sbridge250;svn;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -100,177 +98,33 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
+        <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <ILINK_Description>AT Frames and Forms</ILINK_Description>
-        <ILINK_LibraryPath>$(DSL_ROOT)\VCL\Components;$(AT_ROOT)\source\VCL\Frames;$(AT_ROOT)\source\VCL\Forms;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <BCC_PCHInject>atVVCLVisualComponentsPCH.h</BCC_PCHInject>
-        <Defines>POCO_STATIC;$(Defines)</Defines>
-        <ILINK_GenerateLibFile>false</ILINK_GenerateLibFile>
-        <PostBuildEvent><![CDATA[copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib
-$(PostBuildEvent)]]></PostBuildEvent>
+        <Manifest_File>(None)</Manifest_File>
+        <Defines>AT_EXPORT_SOUND;$(Defines)</Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="atVCLVisualComponents.cpp">
+        <PCHCompile Include="atSoundsPCH.h">
             <BuildOrder>0</BuildOrder>
-        </CppCompile>
-        <PackageImport Include="dslVCLComponents.bpi">
-            <BuildOrder>25</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="rtl.bpi">
-            <BuildOrder>1</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="vcl.bpi">
-            <BuildOrder>24</BuildOrder>
-        </PackageImport>
-        <CppCompile Include="..\..\source\vcl\forms\TamFileEditor.cpp">
-            <Form>amFileEditor</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TamFileEditor.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TEditSequenceForm.cpp">
-            <Form>EditSequenceForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TEditSequenceForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TSelectIntegerForm.cpp">
-            <Form>SelectIntegerForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TSelectIntegerForm.h</DependentOn>
-            <BuildOrder>24</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.cpp">
-            <Form>SelectProcessTypeDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TSelectProcessTypeDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TShowFileContentForm.cpp">
-            <Form>ShowFileContentForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TShowFileContentForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TStringInputDialog.cpp">
-            <Form>StringInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TStringInputDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TTextInputDialog.cpp">
-            <Form>TextInputDialog</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TTextInputDialog.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\forms\TYesNoForm.cpp">
-            <Form>YesNoForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\source\vcl\forms\TYesNoForm.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TApplicationSoundsFrame.cpp">
-            <Form>ApplicationSoundsFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TApplicationSoundsFrame.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.cpp">
-            <Form>ArduinoServerCommandFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TArduinoServerCommandFrame.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TFFMPEGFrame.cpp">
-            <Form>FFMPEGFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TFFMPEGFrame.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.cpp">
-            <Form>FFMPEGOutputFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TFFMPEGOutputFrame.h</DependentOn>
-            <BuildOrder>22</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\THDMIStreamerFrame.cpp">
-            <Form>HDMIStreamerFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\THDMIStreamerFrame.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TImageItemFrame.cpp">
-            <Form>ImageItemFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TImageItemFrame.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TImagesFrame.cpp">
-            <Form>ImagesFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TImagesFrame.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TMovieItemFrame.cpp">
-            <Form>MovieItemFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TMovieItemFrame.h</DependentOn>
+            <PCH>true</PCH>
+        </PCHCompile>
+        <CppCompile Include="..\..\source\sound\atApplicationSound.cpp">
+            <DependentOn>..\..\source\sound\atApplicationSound.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TMoviesFrame.cpp">
-            <Form>MoviesFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TMoviesFrame.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
+        <CppCompile Include="..\..\source\sound\atDirectSound.cpp">
+            <DependentOn>..\..\source\sound\atDirectSound.h</DependentOn>
+            <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TPGConnectionFrame.cpp">
-            <Form>PGConnectionFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TPGConnectionFrame.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
+        <CppCompile Include="..\..\source\sound\atSounds.cpp">
+            <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\vcl\frames\TSoundsFrame.cpp">
-            <Form>SoundsFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>..\..\source\vcl\frames\TSoundsFrame.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <FormResources Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TFFMPEGFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TYesNoForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TamFileEditor.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TEditSequenceForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TShowFileContentForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectIntegerForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -285,12 +139,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
-        <Borland.ProjectType>CppPackage</Borland.ProjectType>
+        <Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
-                <Source>
-                    <Source Name="MainSource">atVCLVisualComponents.cpp</Source>
-                </Source>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>
@@ -298,8 +149,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\dslVCLVisualComponents.bpl">Dune Visual Components</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\bpl\dslVCLComponents.bpl">Dune Components</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\bpl\atVCLComponents.bpl">File p:\build\debug\bpl\atVCLComponents.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\atVCLVisualComponents.bpl">File p:\build\debug\BPL\atVCLVisualComponents.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
@@ -353,14 +206,20 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\atSounds.dll" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>atSounds.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atVCLVisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName=".\Win32\Debug\atSounds.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
-                        <RemoteName>atVCLVisualComponents.tds</RemoteName>
+                        <RemoteName>atSounds.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -371,12 +230,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="p:\build\debug\BPL\atVCLVisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>atVCLVisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -754,12 +607,4 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
-    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent/>
-        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
-        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib</PostBuildEvent>
-        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-    </PropertyGroup>
 </Project>

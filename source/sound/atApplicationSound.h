@@ -14,12 +14,12 @@ using dsl::IniFile;
 class ApplicationSound;
 namespace dsl
 {
-	AT_CORE	string	toString(const ApplicationSound& sound);
+	AT_SOUND	string	toString(const ApplicationSound& sound);
 }
 
 //!An application sound object is a sound that is associated to a part of an application. Its properties are typically stored in
 //!an ini file.
-class AT_CORE ApplicationSound : public DirectSound
+class AT_SOUND ApplicationSound : public DirectSound
 {
 	public:
 							            ApplicationSound(const string& name = dsl::gEmptyString, long vol = 0, bool repeats = false, bool enabled = false, HWND handle = NULL);

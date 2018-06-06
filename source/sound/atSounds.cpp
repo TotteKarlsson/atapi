@@ -9,6 +9,15 @@
 //string 	                getSoundResourceName(ABSound a);
 //bool 			        PlayResource(const string& resName, long flags = 0);
 
+#pragma hdrstop
+#pragma argsused
+
+extern "C" int _libmain(unsigned long reason)
+{
+	return 1;
+}
+
+
 using namespace dsl;
 
 //string getSoundResourceName(ABSound a)
@@ -32,7 +41,7 @@ using namespace dsl;
 //    }
 //}
 
-AT_CORE StringList getSoundResources()
+AT_SOUND StringList getSoundResources()
 {
 	StringList list;
 	HINSTANCE handle = GetModuleHandle("atResources.dll");
@@ -94,3 +103,5 @@ AT_CORE StringList getSoundResources()
 //    return true;
 //}
 
+#pragma comment(lib, "dslCommon.lib")
+#pragma comment(lib, "atCore.lib")

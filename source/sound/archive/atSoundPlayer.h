@@ -8,7 +8,7 @@
 using dsl::Timer;
 //---------------------------------------------------------------------------
 
-//class AT_CORE SoundPlayer : public ATObject
+//class AT_SOUND SoundPlayer : public ATObject
 //{
 //    public:
 //						        SoundPlayer(const string& snd, int nrOfTimes = 1, int delay=500);

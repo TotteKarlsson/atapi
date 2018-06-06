@@ -1,6 +1,6 @@
 #ifndef atSoundsH
 #define atSoundsH
-#include "core/atCoreExporter.h"
+#include "atSoundExporter.h"
 #include "dslThread.h"
 #include <string>
 #include <deque>
@@ -31,12 +31,12 @@ using dsl::StringList;
 //};
 //
 //!Load our resource DLL and get a list of sound resources
-AT_CORE StringList		getSoundResources();
+AT_SOUND StringList		getSoundResources();
 
 //!Flags are
 //!SND_ASYNC SND_SYNC
 //!See: https://msdn.microsoft.com/en-us/library/windows/desktop/dd743680(v=vs.85).aspx
-//AT_CORE void 			playABSound(ABSound, long flags = SND_ASYNC);
+//AT_SOUND void 			playABSound(ABSound, long flags = SND_ASYNC);
 
 //class SoundPlayer;
 //
@@ -49,7 +49,7 @@ AT_CORE StringList		getSoundResources();
 //    	SoundPlayer&		mSoundPlayer;
 //};
 //
-//class AT_CORE SoundPlayer : public ATObject
+//class AT_SOUND SoundPlayer : public ATObject
 //{
 //	public:
 //								SoundPlayer();

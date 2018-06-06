@@ -1,11 +1,12 @@
 #ifndef atDirectSoundH
 #define atDirectSoundH
 #include "core/atATObject.h"
+#include "atSoundExporter.h"
 #include <windows.h>
 #include <mmreg.h>
 #include <dsound.h>
 
-class AT_CORE DirectSound //: public ATObject
+class AT_SOUND DirectSound //: public ATObject
 {
     public:
 							                        DirectSound(const string& resName, HWND hWnd = NULL);
