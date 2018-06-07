@@ -23,6 +23,9 @@ mRepeats(s.repeats()),
 mEnabled(s.enabled())
 {}
 
+ApplicationSound::~ApplicationSound()
+{}
+
 ApplicationSound& ApplicationSound::operator=(const ApplicationSound& rhs)
 {
 	if(this == &rhs)

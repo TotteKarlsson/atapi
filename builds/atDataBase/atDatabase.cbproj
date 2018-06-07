@@ -99,7 +99,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <BCC_PCHInject>..\at_pch.h</BCC_PCHInject>
         <VerInfo_Release>1</VerInfo_Release>
         <LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-        <Defines>POCO_STATIC;AT_DB_SHARED;$(Defines)</Defines>
         <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BCC32)\lib;$(KINESIS_LIBS);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
@@ -175,11 +174,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\tokyo\BPL\atVisualComponents.bpl">AT Frames and Forms</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>

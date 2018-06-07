@@ -26,6 +26,6 @@ extern "C" int _libmain(unsigned long reason)
 }
 
 #pragma comment(lib, "dslCommon.lib")
-#pragma comment(lib, "atFoundation.lib")
+#pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "navitarUSBAPI_Borland.lib")
-#pragma comment(lib, "poco_foundation-static.lib")
+#pragma comment(lib, "poco_foundation.lib")

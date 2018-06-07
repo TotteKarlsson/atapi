@@ -25,13 +25,10 @@ extern "C" int _libmain(unsigned long reason)
 	return 1;
 }
 
-#if defined DSL_STATIC
-#else
-	#pragma comment(lib, "dslFoundation.lib")
-#endif
-
-#pragma comment(lib, "poco_foundation-static.lib")
-#pragma comment(lib, "tinyxml2-static.lib")
+#pragma comment(lib, "dslCommon.lib")
+#pragma comment(lib, "dslIPC.lib")
+#pragma comment(lib, "poco_foundation.lib")
+#pragma comment(lib, "tinyxml2.lib")
 
 #pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "atSerialAPI.lib")

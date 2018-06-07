@@ -24,6 +24,7 @@ class AT_SOUND ApplicationSound : public DirectSound
 	public:
 							            ApplicationSound(const string& name = dsl::gEmptyString, long vol = 0, bool repeats = false, bool enabled = false, HWND handle = NULL);
 							            ApplicationSound(const ApplicationSound& s);
+							            ~ApplicationSound();
 		ApplicationSound&	            operator=(const ApplicationSound& rhs);
 
         void				            setVolume(int v);

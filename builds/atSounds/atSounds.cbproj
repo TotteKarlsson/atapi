@@ -104,6 +104,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
         <Defines>AT_EXPORT_SOUND;$(Defines)</Defines>
+        <DynamicRTL>true</DynamicRTL>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -148,12 +149,7 @@
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\dslVCLVisualComponents.bpl">Dune Visual Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\dslVCLComponents.bpl">Dune Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\atVCLComponents.bpl">File p:\build\debug\bpl\atVCLComponents.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\atVCLVisualComponents.bpl">File p:\build\debug\BPL\atVCLVisualComponents.bpl not found</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">
@@ -206,9 +202,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\atSounds.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName=".\Win32\Debug\atSounds.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
-                        <RemoteName>atSounds.dll</RemoteName>
+                        <RemoteName>atSounds.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -217,9 +213,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\atSounds.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName=".\Win32\Debug\atSounds.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>atSounds.tds</RemoteName>
+                        <RemoteName>atSounds.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

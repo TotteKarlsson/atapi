@@ -252,25 +252,25 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\vcl\frames\TSoundsFrame.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
-        <FormResources Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\THDMIStreamerFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TFFMPEGOutputFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TFFMPEGFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TArduinoServerCommandFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TApplicationSoundsFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TImageItemFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TSoundsFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
-        <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TPGConnectionFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\frames\TMoviesFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TMovieItemFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\frames\TImagesFrame.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TYesNoForm.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TamFileEditor.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TEditSequenceForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TShowFileContentForm.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TTextInputDialog.dfm"/>
-        <FormResources Include="..\..\source\vcl\forms\TSelectIntegerForm.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TStringInputDialog.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TShowFileContentForm.dfm"/>
         <FormResources Include="..\..\source\vcl\forms\TSelectProcessTypeDialog.dfm"/>
+        <FormResources Include="..\..\source\vcl\forms\TSelectIntegerForm.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

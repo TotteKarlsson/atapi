@@ -179,6 +179,13 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>..\..\source\core\WatchDogServer.h</DependentOn>
             <BuildOrder>33</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\ello\atElloUIClient.cpp">
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\ello\atElloUIMessageProcessor.cpp">
+            <DependentOn>..\..\source\ello\atElloUIMessageProcessor.h</DependentOn>
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\labelprinter\atTSCLIB.cpp">
             <DependentOn>..\..\source\labelprinter\atTSCLIB.h</DependentOn>
             <BuildOrder>15</BuildOrder>
@@ -235,12 +242,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
                     <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
                     <VersionInfoKeys Name="CFBundleExecutable"/>
                 </VersionInfoKeys>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\dslVCLVisualComponents.bpl">Dune Visual Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\dslVCLComponents.bpl">Dune Components</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\bpl\atVCLComponents.bpl">File p:\build\debug\bpl\atVCLComponents.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="p:\build\debug\BPL\atVCLVisualComponents.bpl">File p:\build\debug\BPL\atVCLVisualComponents.bpl not found</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>

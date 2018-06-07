@@ -1,13 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{568C563C-2CA5-41E0-AF15-CAA6A3B6B3D8}</ProjectGuid>
+        <ProjectGuid>{AA48CE81-AC44-43B0-8C5E-937B25FC01EF}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
+        <MainSource>atVCLUC7VisualComponents.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
-        <AppType>Library</AppType>
+        <AppType>Package</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -43,45 +44,38 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
-        <Cfg_2_OSX32>true</Cfg_2_OSX32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <_TCHARMapping>char</_TCHARMapping>
-        <Defines>AT_UC7_SHARED;$(Defines)</Defines>
-        <Manifest_File>None</Manifest_File>
-        <Multithreaded>true</Multithreaded>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <ILINK_LibraryPath>..\..\source\uc7\;..\;P:\libs\atapi\source\;P:\libs\atapi\source\uc7\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\..\source\uc7\;..\;P:\libs\atapi\source\;P:\libs\atapi\source\uc7\;$(IncludePath)</IncludePath>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <ProjectType>CppDynamicLibrary</ProjectType>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+        <DynamicRTL>true</DynamicRTL>
+        <UsePackages>true</UsePackages>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
-        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-        <SanitizedProjectName>atUC7API</SanitizedProjectName>
+        <ProjectType>CppPackage</ProjectType>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+        <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+        <_TCHARMapping>char</_TCHARMapping>
+        <Multithreaded>true</Multithreaded>
+        <IncludePath>..\..\source\vcl\uc7Forms\;..\..\source\vcl\uc7Frames\;..\atVCLUC7VisualComponents\;..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(AT_ROOT)\source\VCL\Components;..\..\source\vcl;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\vcl\uc7Forms\;..\..\source\vcl\uc7Frames\;..\atVCLUC7VisualComponents\;..\atVCLVisualComponents\;..\atFrames\;..\..\source\vcl\forms\;..\..\source\vcl\datamodules\;..\..\source\vcl\frames\;P:\libs\atapi\builds\atVCLVisualComponents\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <SanitizedProjectName>atVCLUC7VisualComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
-        <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
-        <PackageImports>bindcompfmx;DBXSqliteDriver;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;bindcomp;inetdb;DBXInterBaseDriver;DataSnapCommon;xmlrtl;DbxCommonDriver;IndyProtocols;dbxcds;DBXMySQLDriver;soaprtl;bindengine;bindcompdbx;CustomIPTransport;dsnap;IndyIPServer;IndyCore;fmxase;IndyIPCommon;inet;fmxobj;inetdbxpress;fmxdae;dbexpress;IndyIPClient;$(PackageImports)</PackageImports>
+        <PackageImports>bindcomp;bindcompdbx;bindcompfmx;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapxml;FireDACCommonODBC;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;rtl;tethering;xmlrtl;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <PackageImports>adortl;appanalytics;atComponents;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DbxDevartPostgreSQLDriver250;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dslVCLComponents;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;indy10sbridge250;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;sbridge250;svn;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <PackageImports>fs17;frx17;bindcompfmx;DBXSqliteDriver;vcldbx;RaizeComponentsTrialVcl;HsBarcode2DRun;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;sbridge170;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;indy10sbridge170;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;DbxDevartSQLiteDriver170;vclie;HsBarcode1DRun;RaizeComponentsTrialVclDb;vcltouch;bcbsmp;websnap;CustomIPTransport;vclribbon;DbxDevartPostgreSQLDriver170;dsnap;IndyIPServer;IndyCore;vcl;fmxase;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;frxDB17;inet;fsDB17;fmxobj;vclx;frxe17;inetdbxpress;webdsnap;fmxdae;bdertl;dbexpress;adortl;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <PackageImports>bindcompfmx;DBXSqliteDriver;RaizeComponentsTrialVcl;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;bindcomp;inetdb;DBXInterBaseDriver;DataSnapCommon;xmlrtl;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;vclie;vcltouch;websnap;CustomIPTransport;dsnap;IndyIPServer;IndyCore;vcl;fmxase;IndyIPCommon;dsnapcon;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;dbexpress;IndyIPClient;$(PackageImports)</PackageImports>
+        <PackageImports>adortl;appanalytics;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapcon;dsnapxml;FireDACADSDriver;FireDACCommonODBC;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inetdb;inetdbxpress;Intraweb;RaizeComponentsVcl;RaizeComponentsVclDb;rtl;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -106,47 +100,45 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DynamicRTL>true</DynamicRTL>
-        <FinalOutputDir>$(DEBUG_BCC32)\bin</FinalOutputDir>
-        <BPILibOutputDir>$(DEBUG_BCC32)\lib</BPILibOutputDir>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Defines>AT_EXPORT_UC7;$(Defines)</Defines>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <ILINK_Description>UC7 Frames and Forms</ILINK_Description>
+        <ILINK_LibraryPath>$(DSL_ROOT)\VCL\Components;$(AT_ROOT)\source\VCL\Frames;$(AT_ROOT)\source\VCL\Forms;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <BCC_PCHInject>atVVCLVisualComponentsPCH.h</BCC_PCHInject>
+        <Defines>POCO_STATIC;$(Defines)</Defines>
+        <ILINK_GenerateLibFile>false</ILINK_GenerateLibFile>
+        <PostBuildEvent><![CDATA[copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib
+$(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
-        <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
-    </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\..\source\uc7\atUC7API.cpp">
+        <CppCompile Include="atVCLUC7VisualComponents.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7Component.cpp">
-            <DependentOn>..\..\source\uc7\atUC7Component.h</DependentOn>
-            <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7Message.cpp">
-            <DependentOn>..\..\source\uc7\atUC7Message.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7MessageReceiver.cpp">
-            <DependentOn>..\..\source\uc7\atUC7MessageReceiver.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7MessageSender.cpp">
-            <DependentOn>..\..\source\uc7\atUC7MessageSender.h</DependentOn>
+        </PackageImport>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>24</BuildOrder>
+        </PackageImport>
+        <CppCompile Include="..\..\source\vcl\uc7Forms\THandWheelPositionForm.cpp">
+            <Form>HandWheelPositionForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\source\vcl\uc7Forms\THandWheelPositionForm.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7Miscellaneous.cpp">
-            <DependentOn>..\..\source\uc7\atUC7Miscellaneous.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
+        <CppCompile Include="..\..\source\vcl\uc7Frames\TUC7StagePositionFrame.cpp">
+            <Form>UC7StagePositionFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>..\..\source\vcl\uc7Frames\TUC7StagePositionFrame.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\uc7\atUC7StatusHistory.cpp">
-            <DependentOn>..\..\source\uc7\atUC7StatusHistory.h</DependentOn>
-            <BuildOrder>6</BuildOrder>
-        </CppCompile>
+        <FormResources Include="..\..\source\vcl\uc7Frames\TUC7StagePositionFrame.dfm"/>
+        <FormResources Include="..\..\source\vcl\uc7Forms\THandWheelPositionForm.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -161,44 +153,12 @@
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
-        <Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>
+        <Borland.ProjectType>CppPackage</Borland.ProjectType>
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
-                <VersionInfo>
-                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
-                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
-                    <VersionInfo Name="MajorVer">1</VersionInfo>
-                    <VersionInfo Name="MinorVer">0</VersionInfo>
-                    <VersionInfo Name="Release">0</VersionInfo>
-                    <VersionInfo Name="Build">0</VersionInfo>
-                    <VersionInfo Name="Debug">False</VersionInfo>
-                    <VersionInfo Name="PreRelease">False</VersionInfo>
-                    <VersionInfo Name="Special">False</VersionInfo>
-                    <VersionInfo Name="Private">False</VersionInfo>
-                    <VersionInfo Name="DLL">False</VersionInfo>
-                    <VersionInfo Name="Locale">1033</VersionInfo>
-                    <VersionInfo Name="CodePage">1252</VersionInfo>
-                </VersionInfo>
-                <VersionInfoKeys>
-                    <VersionInfoKeys Name="CompanyName"/>
-                    <VersionInfoKeys Name="FileDescription"/>
-                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
-                    <VersionInfoKeys Name="InternalName"/>
-                    <VersionInfoKeys Name="LegalCopyright"/>
-                    <VersionInfoKeys Name="LegalTrademarks"/>
-                    <VersionInfoKeys Name="OriginalFilename"/>
-                    <VersionInfoKeys Name="ProductName"/>
-                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
-                    <VersionInfoKeys Name="Comments"/>
-                    <VersionInfoKeys Name="CFBundleName"/>
-                    <VersionInfoKeys Name="CFBundleDisplayName"/>
-                    <VersionInfoKeys Name="CFBundleIdentifier"/>
-                    <VersionInfoKeys Name="CFBundleVersion"/>
-                    <VersionInfoKeys Name="CFBundlePackageType"/>
-                    <VersionInfoKeys Name="CFBundleSignature"/>
-                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
-                    <VersionInfoKeys Name="CFBundleExecutable"/>
-                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">atVCLUC7VisualComponents.cpp</Source>
+                </Source>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>
@@ -263,9 +223,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\bin\atUC7API.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLUC7VisualComponents.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
-                        <RemoteName>atUC7API.tds</RemoteName>
+                        <RemoteName>atVCLUC7VisualComponents.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -279,9 +239,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="p:\build\debug\bin\atUC7API.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="p:\build\debug\BPL\atVCLUC7VisualComponents.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>atUC7API.dll</RemoteName>
+                        <RemoteName>atVCLUC7VisualComponents.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -659,4 +619,12 @@
     <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
 </Project>

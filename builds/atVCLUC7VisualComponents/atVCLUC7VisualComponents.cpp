@@ -2,8 +2,8 @@
 
 #include <System.hpp>
 #pragma hdrstop
-USEFORM("..\..\source\vcl\navitarFrames\TNavitarPresetFrame.cpp", NavitarPresetFrame); /* TFrame: File Type */
-USEFORM("..\..\source\vcl\navitarFrames\TNavitarMotorFrame.cpp", NavitarMotorFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\uc7Frames\TUC7StagePositionFrame.cpp", UC7StagePositionFrame); /* TFrame: File Type */
+USEFORM("..\..\source\vcl\uc7Forms\THandWheelPositionForm.cpp", HandWheelPositionForm);
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -25,15 +25,11 @@ extern "C" int _libmain(unsigned long reason)
 #pragma comment(lib, "dslVCLVisualComponents.bpi")
 
 #pragma comment(lib, "atCore.lib")
-#pragma comment(lib, "atNavitar.lib")
-#pragma comment(lib, "atVCLCommon.lib")
-#pragma comment(lib, "atVCLComponents.bpi")
-
+#pragma comment(lib, "atUC7API.lib")
 
 #pragma comment(lib, "poco_foundation.lib")
-#pragma comment(lib, "tinyxml2.lib")
 
-//Simple dataset
-#pragma comment(lib, "dbxcds.bpi")
-
+#pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
+#pragma comment(lib, "dbxcds.bpi") //Simple dataset
+#pragma comment(lib, "Tee.bpi")
 
