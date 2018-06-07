@@ -105,7 +105,6 @@
         <ILINK_Description>AT Frames and Forms</ILINK_Description>
         <ILINK_LibraryPath>$(DSL_ROOT)\VCL\Components;$(AT_ROOT)\source\VCL\Frames;$(AT_ROOT)\source\VCL\Forms;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <BCC_PCHInject>atVVCLVisualComponentsPCH.h</BCC_PCHInject>
-        <Defines>POCO_STATIC;$(Defines)</Defines>
         <ILINK_GenerateLibFile>false</ILINK_GenerateLibFile>
         <PostBuildEvent><![CDATA[copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib
 $(PostBuildEvent)]]></PostBuildEvent>
@@ -297,10 +296,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">

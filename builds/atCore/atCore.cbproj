@@ -116,8 +116,25 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\..\source\arraycam\atArrayCamClient.cpp">
+            <DependentOn>..\..\source\arraycam\atArrayCamClient.h</DependentOn>
+            <BuildOrder>22</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\arraycam\atArrayCamMessageProcessor.cpp">
+            <DependentOn>..\..\source\arraycam\atArrayCamMessageProcessor.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\core\atArrayBotClient.cpp">
+            <DependentOn>..\..\source\core\atArrayBotClient.h</DependentOn>
+            <BuildOrder>23</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\core\atArrayBotMessageProcessor.cpp">
+            <DependentOn>..\..\source\core\atArrayBotMessageProcessor.h</DependentOn>
+            <BuildOrder>24</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\core\atArrayBotProtocol.cpp">
-            <BuildOrder>17</BuildOrder>
+            <DependentOn>..\..\source\core\atArrayBotProtocol.h</DependentOn>
+            <BuildOrder>24</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\core\atArrayCamProtocol.cpp">
             <BuildOrder>16</BuildOrder>

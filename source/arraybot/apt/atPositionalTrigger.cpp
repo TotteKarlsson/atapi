@@ -65,7 +65,7 @@ void PositionalTrigger::execute()
     }
 }
 
-XMLElement* PositionalTrigger::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
+XMLElement* PositionalTrigger::addToXMLDocumentAsChild(dsl::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
     XMLElement* pn	  			= doc.NewElement("trigger");

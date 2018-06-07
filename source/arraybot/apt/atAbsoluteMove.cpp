@@ -135,7 +135,7 @@ void AbsoluteMove::addTrigger(Trigger* t)
     }
 }
 
-XMLElement* AbsoluteMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
+XMLElement* AbsoluteMove::addToXMLDocumentAsChild(dsl::XMLDocument& doc, XMLNode* docRoot)
 {
 	XMLElement* dataval1 = doc.NewElement("motor_name");
     dataval1->SetText(mSubjectName.c_str());

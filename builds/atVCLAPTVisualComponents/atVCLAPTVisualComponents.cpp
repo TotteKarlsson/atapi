@@ -63,14 +63,15 @@ namespace Tmotorpositionframe
 #pragma comment(lib, "dslVCLCommon.lib")
 #pragma comment(lib, "dslVCLComponents.bpi")
 
-#pragma comment(lib, "atFoundation.lib")
+#pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "atArrayBotCore.lib")
+#pragma comment(lib, "atArduino.lib")
 #pragma comment(lib, "atVCLComponents.lib")
-#pragma comment(lib, "poco_foundation-static")
+#pragma comment(lib, "poco_foundation")
 
 #pragma comment(lib, "atVCLCommon.lib")
-#pragma comment(lib, "poco_foundation-static.lib")
-#pragma comment(lib, "tinyxml2-static.lib")
+#pragma comment(lib, "poco_foundation.lib")
+#pragma comment(lib, "tinyxml2.lib")
 
 #pragma comment(lib, "atVCLVisualComponents.bpi")
 

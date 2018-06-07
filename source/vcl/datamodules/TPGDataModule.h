@@ -291,8 +291,6 @@ __published:	// IDE-managed Components
 	void __fastcall SQLConnection1AfterDisconnect(TObject *Sender);
 	void __fastcall cdsbeforeDelete(TDataSet *DataSet);
 
-
-
 	private:
 
     protected:
