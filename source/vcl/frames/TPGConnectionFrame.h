@@ -12,8 +12,11 @@
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
 #include "TArrayBotBtn.h"
-#include "TPGDataModule.h"
 #include "dslTSTDStringLabeledEdit.h"
+#include <Data.DB.hpp>
+#include <Data.SqlExpr.hpp>
+#include "database/atDBCredentials.h"
+
 //---------------------------------------------------------------------------
 
 using dsl::IniFile;
@@ -27,20 +30,21 @@ class PACKAGE TPGConnectionFrame : public TFrame
         TSTDStringLabeledEdit *mDBUserE;
         TSTDStringLabeledEdit *mPasswordE;
         TSTDStringLabeledEdit *mDatabaseE;
-	TActionList *PGConnectionsActions;
+		TActionList *PGConnectionsActions;
 		TAction *ConnectA;
 		TArrayBotButton *ArrayBotButton1;
 		void __fastcall ConnectAExecute(TObject *Sender);
-	void __fastcall GBox1Click(TObject *Sender);
+		void __fastcall GBox1Click(TObject *Sender);
 
     private:
 		IniFile*				mIniFile;
+        TSQLConnection*         mDBConnection;
 		IniFileProperties       mProperties;
         void					updateUI();
 
     public:
                 __fastcall 		TPGConnectionFrame(TComponent* Owner);
-    	bool					init(IniFile* inifile, const string& iniFileSection);
+    	bool					init(IniFile* inifile, const string& iniFileSection, TSQLConnection* dbConnection);
         DBCredentials			getCredentials();
     	bool					writeParameters();
         void					afterConnect();

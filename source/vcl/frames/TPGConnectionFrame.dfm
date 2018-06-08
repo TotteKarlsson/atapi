@@ -9,6 +9,7 @@ object PGConnectionFrame: TPGConnectionFrame
     Top = 0
     Width = 286
     Height = 201
+    Align = alClient
     Caption = 'PostGres Connection'
     TabOrder = 0
     OnClick = GBox1Click

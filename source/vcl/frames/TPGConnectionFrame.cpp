@@ -3,6 +3,7 @@
 #include "TPGConnectionFrame.h"
 #include "dslVCLUtils.h"
 #include "dslLogger.h"
+#include "TDataModulesUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "dslTStdStringLabeledEdit"
@@ -16,12 +17,13 @@ using namespace dsl;
 //---------------------------------------------------------------------------
 __fastcall TPGConnectionFrame::TPGConnectionFrame(TComponent* Owner)
 	: TFrame(Owner),
-    mIniFile(NULL)
+    mIniFile(NULL),
+    mDBConnection(NULL)
 {
 	ConnectA->Caption = "Connect";
 }
 
-bool TPGConnectionFrame::init(IniFile* inifile, const string& iniFileSection)
+bool TPGConnectionFrame::init(IniFile* inifile, const string& iniFileSection, TSQLConnection* dbConnection)
 {
 	mIniFile = inifile;
 	if(!mIniFile)
@@ -29,6 +31,7 @@ bool TPGConnectionFrame::init(IniFile* inifile, const string& iniFileSection)
     	return false;
     }
     mProperties.setIniFile(mIniFile);
+    mDBConnection = dbConnection;
 
     mProperties.setSection(iniFileSection);
 	mProperties.add((BaseProperty*)  &mServerIPE->getProperty()->setup( 	    "SERVER_IP",        		      	"127.0.0.1"));
@@ -85,13 +88,13 @@ void TPGConnectionFrame::afterDisconnect()
 //---------------------------------------------------------------------------
 void __fastcall TPGConnectionFrame::ConnectAExecute(TObject *Sender)
 {
-	if(!pgDM)
+	if(!mDBConnection)
     {
     	Log(lWarning) << "Datamodule not allocated";
         return;
     }
 
-	if(pgDM->SQLConnection1 && pgDM->SQLConnection1->Connected)
+	if(mDBConnection && mDBConnection->Connected)
     {
     	//Remove runtime indices
 //    	TClientDataSet* cds = pgDM->specimenCDS;
@@ -118,12 +121,12 @@ void __fastcall TPGConnectionFrame::ConnectAExecute(TObject *Sender)
 //                }
 //            }
 //        }
-	    pgDM->SQLConnection1->Connected = false;
-	    pgDM->SQLConnection1->Close();
+	    mDBConnection->Connected = false;
+	    mDBConnection->Close();
     }
     else
     {
-	    pgDM->connect(mServerIPE->getValue(), mDatabaseE->getValue(), mDBUserE->getValue(), mPasswordE->getValue());
+	    connect(mServerIPE->getValue(), mDatabaseE->getValue(), mDBUserE->getValue(), mPasswordE->getValue(), mDBConnection);
     }
 }
 

@@ -119,8 +119,26 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="atVCLDataModules.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
+        <PackageImport Include="dbexpress.bpi">
+            <BuildOrder>10</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dbrtl.bpi">
+            <BuildOrder>8</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dbxcds.bpi">
+            <BuildOrder>12</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DbxCommonDriver.bpi">
+            <BuildOrder>11</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="DbxDevartPostgreSQLDriver250.bpi">
+            <BuildOrder>13</BuildOrder>
+        </PackageImport>
         <PackageImport Include="dslVCLComponents.bpi">
             <BuildOrder>25</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dsnap.bpi">
+            <BuildOrder>9</BuildOrder>
         </PackageImport>
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
@@ -128,6 +146,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PackageImport Include="vcl.bpi">
             <BuildOrder>24</BuildOrder>
         </PackageImport>
+        <CppCompile Include="..\..\source\vcl\datamodules\TDataModulesUtils.cpp">
+            <DependentOn>..\..\source\vcl\datamodules\TDataModulesUtils.h</DependentOn>
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.cpp">
             <Form>csPGDM</Form>
             <FormType>dfm</FormType>
@@ -140,7 +162,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>..\..\source\vcl\datamodules\TPGDataModule.h</DependentOn>
-            <BuildOrder>17</BuildOrder>
+            <BuildOrder>14</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.cpp">
             <Form>PGImagesAndMoviesDM</Form>
@@ -157,9 +179,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
         <FormResources Include="..\..\source\vcl\datamodules\TPGCoverSlipDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
-        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
         <FormResources Include="..\..\source\vcl\datamodules\TSensorsDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.dfm"/>
+        <FormResources Include="..\..\source\vcl\datamodules\TPGDataModule.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

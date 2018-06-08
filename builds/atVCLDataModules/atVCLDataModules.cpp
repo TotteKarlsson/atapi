@@ -2,10 +2,10 @@
 
 #include <System.hpp>
 #pragma hdrstop
+USEFORM("..\..\source\vcl\datamodules\TPGCoverSlipDataModule.cpp", csPGDM); /* TDataModule: File Type */
 USEFORM("..\..\source\vcl\datamodules\TSensorsDataModule.cpp", SensorsDataModule); /* TDataModule: File Type */
 USEFORM("..\..\source\vcl\datamodules\TPGImagesAndMoviesDataModule.cpp", PGImagesAndMoviesDM); /* TDataModule: File Type */
 USEFORM("..\..\source\vcl\datamodules\TPGDataModule.cpp", pgDM); /* TDataModule: File Type */
-USEFORM("..\..\source\vcl\datamodules\TPGCoverSlipDataModule.cpp", csPGDM); /* TDataModule: File Type */
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
