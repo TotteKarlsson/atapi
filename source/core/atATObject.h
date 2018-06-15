@@ -10,12 +10,11 @@ AT_CORE int MyTest(int r);
 class AT_CORE ATObject
 {
 	public:
-    							ATObject();
-		virtual					~ATObject();
+    							 ATObject(){}
+		virtual					~ATObject() = 0;
         virtual const string 	getTypeName() const;
 
 	protected:
-
 	private:
 };
 #endif

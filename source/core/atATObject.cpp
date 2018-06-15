@@ -2,9 +2,6 @@
 #include "core/atATObject.h"
 //---------------------------------------------------------------------------
 
-ATObject::ATObject()
-{}
-
 ATObject::~ATObject()
 {}
 
