@@ -23,4 +23,10 @@ class AT_CORE ATException : public std::exception, public ATObject
         string                              mMessage;
 };
 
+class AT_CORE FileSystemException : public ATException
+{
+    public:
+                                            FileSystemException(const string& desc) : ATException(desc){}
+                                            FileSystemException(const stringstream& msg) : ATException(msg){}
+};
 #endif

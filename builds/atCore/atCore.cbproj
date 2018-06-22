@@ -110,6 +110,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.1.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=ArrayBot++;ProductVersion=0.5.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_MajorVer>1</VerInfo_MajorVer>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
+        <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+        <BCC_MonitorThis>true</BCC_MonitorThis>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
