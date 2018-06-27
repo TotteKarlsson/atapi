@@ -8,95 +8,100 @@
 using namespace dsl;
 using Poco::Mutex;
 
-//----------------------------------------------------------------
-UC7MessageSender::UC7MessageSender(UC7& uc7)
-:
-dsl::Thread(""),
-mUC7(uc7),
-mProcessTimeDelay(50)
-{}
-
-//----------------------------------------------------------------
-UC7MessageSender::~UC7MessageSender()
+namespace at
 {
-	if(mIsRunning)
+
+    //----------------------------------------------------------------
+    UC7MessageSender::UC7MessageSender(UC7& uc7)
+    :
+    dsl::Thread(""),
+    mUC7(uc7),
+    mProcessTimeDelay(50)
+    {}
+
+    //----------------------------------------------------------------
+    UC7MessageSender::~UC7MessageSender()
     {
-		stop();
+    	if(mIsRunning)
+        {
+    		stop();
+        }
     }
-}
 
-//----------------------------------------------------------------
-void UC7MessageSender::run()
-{
-	mIsRunning = true;
-	Log(lDebug)<<"Entering UC7 message sender thread";
-	while(mIsTimeToDie == false)
-	{
-		{
-			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mSendBufferMutex);
-			if(mUC7.mOutgoingMessagesBuffer.size() == 0)
-			{
-				Log(lDebug3) << "Waiting for incoming UC7 messages.";
-				mUC7.mNewMessageToSendCondition.wait(mUC7.mSendBufferMutex);
-			}
+    //----------------------------------------------------------------
+    void UC7MessageSender::run()
+    {
+    	mIsRunning = true;
+    	Log(lDebug)<<"Entering UC7 message sender thread";
+    	while(mIsTimeToDie == false)
+    	{
+    		{
+    			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mSendBufferMutex);
+    			if(mUC7.mOutgoingMessagesBuffer.size() == 0)
+    			{
+    				Log(lDebug3) << "Waiting for incoming UC7 messages.";
+    				mUC7.mNewMessageToSendCondition.wait(mUC7.mSendBufferMutex);
+    			}
 
-            while(mUC7.mOutgoingMessagesBuffer.size() && mIsTimeToDie == false)
-            {
-            	try
+                while(mUC7.mOutgoingMessagesBuffer.size() && mIsTimeToDie == false)
                 {
-                    string msg = mUC7.mOutgoingMessagesBuffer.front();
-                    mUC7.mOutgoingMessagesBuffer.pop_front();
-
-                    //Send windows message and let UI handle the message
-                    if(!mUC7.mSerial.send(msg))
+                	try
                     {
-                        Log(lError) << "Sending a UC7 message failed..";
+                        string msg = mUC7.mOutgoingMessagesBuffer.front();
+                        mUC7.mOutgoingMessagesBuffer.pop_front();
+
+                        //Send windows message and let UI handle the message
+                        if(!mUC7.mSerial.send(msg))
+                        {
+                            Log(lError) << "Sending a UC7 message failed..";
+                        }
+
+                        //Use a delay in case the serial devices input buffer overflows
+                        sleep(mProcessTimeDelay);
+
                     }
-
-                    //Use a delay in case the serial devices input buffer overflows
-                    sleep(mProcessTimeDelay);
-
+                    catch(...)
+                    {
+                    	Log(lError) << "Exception thrown in message sender code..";
+                    }
                 }
-                catch(...)
-                {
-                	Log(lError) << "Exception thrown in message sender code..";
-                }
-            }
 
-		}//scoped lock
-	}
+    		}//scoped lock
+    	}
 
-    Log(lDebug) << "UC7 Message Sender thread finished";
-	mIsFinished = true;
-	mIsRunning = false;
+        Log(lDebug) << "UC7 Message Sender thread finished";
+    	mIsFinished = true;
+    	mIsRunning = false;
+    }
+
+    //----------------------------------------------------------------
+    bool UC7MessageSender::start(bool inThread)
+    {
+    	if(isRunning())
+    	{
+    		Log(lWarning) << "Tried to start a runnning thread";
+    		return true;
+    	}
+    	if(inThread)
+    	{
+    		return dsl::Thread::start();
+    	}
+    	else
+    	{
+    		run();
+    		return true;
+    	}
+    }
+
+    //----------------------------------------------------------------
+    void UC7MessageSender::stop()
+    {
+    	//Sets time to die to true
+    	dsl::Thread::stop();
+
+    	//If thread is waiting.. get it out of wait state
+    	mUC7.mNewMessageToSendCondition.signal();
+    }
+
+
 }
-
-//----------------------------------------------------------------
-bool UC7MessageSender::start(bool inThread)
-{
-	if(isRunning())
-	{
-		Log(lWarning) << "Tried to start a runnning thread";
-		return true;
-	}
-	if(inThread)
-	{
-		return dsl::Thread::start();
-	}
-	else
-	{
-		run();
-		return true;
-	}
-}
-
-//----------------------------------------------------------------
-void UC7MessageSender::stop()
-{
-	//Sets time to die to true
-	dsl::Thread::stop();
-
-	//If thread is waiting.. get it out of wait state
-	mUC7.mNewMessageToSendCondition.signal();
-}
-

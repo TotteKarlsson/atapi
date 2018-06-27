@@ -9,8 +9,16 @@
 #include "atTCubeStepperMotor.h"
 #include "atLongTravelStage.h"
 #include "atBenchTopStepperMotor.h"
-
 //---------------------------------------------------------------------------
+
+namespace at
+{
+AT_AB string 		toString(DeviceTypeID value);
+AT_AB string 		toString(const TLI_DeviceInfo& val);
+AT_AB StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
+AT_AB DeviceTypeID  getDeviceTypeID(const string& id);
+//AT_CORE DeviceTypeID getDeviceTypeID(const string& level);
+
 
 using namespace std;
 using namespace dsl;
@@ -71,7 +79,7 @@ ostream& operator << (ostream& st, DeviceManager& pm)
 
 int DeviceManager::getNumberOfConnectableDevices() const
 {
-	return ::getNumberOfConnectedDevices();
+	return at::getNumberOfConnectedDevices();
 }
 
 APTDevice* DeviceManager::getFirst() const
@@ -134,12 +142,12 @@ int DeviceManager::connectAllDevices()
     StringList serials(getSerialsForDeviceType(didLongTravelStage));
     if(serials.count())
     {
-	    Log(lDebug) <<"Connecting devices of type "<<toString(didLongTravelStage);
+	    Log(lDebug) <<"Connecting devices of type "<<at::toString(didLongTravelStage);
         for(uint i = 0; i < serials.count(); i++)
         {
             if(!connectDevice(toInt(serials[i])))
             {
-			    Log(lDebug) <<"Failed to connect devices of type "<<toString(didLongTravelStage)<<" with serial: "<<serials[i];
+			    Log(lDebug) <<"Failed to connect devices of type "<<at::toString(didLongTravelStage)<<" with serial: "<<serials[i];
             }
         }
     }
@@ -149,12 +157,12 @@ int DeviceManager::connectAllDevices()
     serials.appendList(StringList(getSerialsForDeviceType(didTCubeStepperMotor)));
     if(serials.count())
     {
-	    Log(lDebug) <<"Connecting devices of type "<<toString(didTCubeStepperMotor);
+	    Log(lDebug) <<"Connecting devices of type "<<at::toString(didTCubeStepperMotor);
         for(uint i = 0; i < serials.count(); i++)
         {
             if(!connectDevice(toInt(serials[i])))
             {
-			    Log(lDebug) <<"Failed to connect devices of type "<<toString(didTCubeStepperMotor)<<" with serial: "<<serials[i];
+			    Log(lDebug) <<"Failed to connect devices of type "<<at::toString(didTCubeStepperMotor)<<" with serial: "<<serials[i];
             }
         }
     }
@@ -164,12 +172,12 @@ int DeviceManager::connectAllDevices()
     serials.appendList(StringList(getSerialsForDeviceType(didTCubeDCServo)));
     if(serials.count())
     {
-        Log(lDebug) <<"Connecting devices of type "<<toString(didTCubeDCServo);
+        Log(lDebug) <<"Connecting devices of type "<<at::toString(didTCubeDCServo);
         for(uint i = 0; i < serials.count(); i++)
         {
             if(!connectDevice(toInt(serials[i])))
             {
-			    Log(lDebug) <<"Failed to connect devices of type "<<toString(didTCubeDCServo)<<" with serial: "<<serials[i];
+			    Log(lDebug) <<"Failed to connect devices of type "<<at::toString(didTCubeDCServo)<<" with serial: "<<serials[i];
             }
         }
     }
@@ -179,12 +187,12 @@ int DeviceManager::connectAllDevices()
     serials.appendList(getSerialsForDeviceType(didBenchTopStepperMotor));
     if(serials.count())
     {
-	    Log(lDebug) <<"Connecting devices of type "<<toString(didBenchTopStepperMotor);
+	    Log(lDebug) <<"Connecting devices of type "<<at::toString(didBenchTopStepperMotor);
         for(uint i = 0; i < serials.count(); i++)
         {
             if(!connectDevice(toInt(serials[i])))
             {
-			    Log(lDebug) <<"Failed to connect devices of type "<<toString(didBenchTopStepperMotor)<<" with serial: "<<serials[i];
+			    Log(lDebug) <<"Failed to connect devices of type "<<at::toString(didBenchTopStepperMotor)<<" with serial: "<<serials[i];
             }
         }
     }
@@ -215,7 +223,7 @@ APTDevice* DeviceManager::connectDevice(int serial)
         return NULL;
     }
 
-    Log(lInfo) <<"Device info: "<< ::toString(deviceInfo);
+    Log(lInfo) <<"Device info: "<< ::at::toString(deviceInfo);
 
     //Create and open the device
     APTDevice* device = NULL;
@@ -223,27 +231,27 @@ APTDevice* DeviceManager::connectDevice(int serial)
     switch(deviceInfo.typeID)
     {
         case didTCubeDCServo:
-            Log(lInfo) << "Creating a "<<toString(didTCubeDCServo)<<" device";
+            Log(lInfo) << "Creating a "<<at::toString(didTCubeDCServo)<<" device";
             device = new TCubeDCServo(serial);
         break;
 
         case didTCubeStepperMotor:
-            Log(lInfo) << "Creating a "<<toString(didTCubeStepperMotor)<<" device";
+            Log(lInfo) << "Creating a "<<at::toString(didTCubeStepperMotor)<<" device";
             device = new TCubeStepperMotor(serial);
         break;
 
         case didLongTravelStage:
-            Log(lInfo) << "Creating a "<<toString(didLongTravelStage)<<" device";
+            Log(lInfo) << "Creating a "<<at::toString(didLongTravelStage)<<" device";
             device = new LongTravelStage(serial);
         break;
 
         case didBenchTopStepperMotor:
-            Log(lInfo) << "Creating a "<<toString(didBenchTopStepperMotor)<<" device";
+            Log(lInfo) << "Creating a "<<at::toString(didBenchTopStepperMotor)<<" device";
             device = new BenchTopStepperMotor(serial);
         break;
 
         default:
-			Log(lError) << "Device of type: "<<toString(deviceInfo.typeID)<<" was not created";
+			Log(lError) << "Device of type: "<<dsl::toString(deviceInfo.typeID)<<" was not created";
     }
 
 	if(device)
@@ -269,7 +277,7 @@ StringList DeviceManager::getDeviceSerials() const
     StringList serials;
     for(mDevicesIter = mDevices.begin(); mDevicesIter != mDevices.end(); mDevicesIter++)
     {
-        serials.append(toString((*mDevicesIter).first));
+        serials.append(dsl::toString((*mDevicesIter).first));
     }
 
     return serials;
@@ -360,3 +368,4 @@ string toString(const TLI_DeviceInfo& val)
 }
 
 
+}

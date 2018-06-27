@@ -14,7 +14,7 @@ using dsl::IPCServer;
 using dsl::IPCMessage;
 using std::vector;
 
-dsl::SocketWorker* AT_ARDUINO createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
+
 
 typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 
@@ -24,34 +24,39 @@ typedef void (__closure *OnMessageUpdateCB)(const string& msg);
 //network functionality.
 //The Arduino server forwards any messages sent from the arduino board to any connected tcp/ip clients.
 
-class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
+namespace at
 {
-    public:
-                                            ArduinoServer(int portNumber = 50000);
-	                                        ~ArduinoServer();
+	dsl::SocketWorker* AT_ARDUINO createArduinoIPCReceiver(int portNr, int socketHandle, void* parent);
 
-                                            //!The process request is an overide from the IPCServer base class.
-                                            //!ProcessRequest implements the arduino server specific processing.
-                                            //!Requests are sent to the server from a client.
-    	bool 					            processRequest(IPCMessage& msg);
-    	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
+    class AT_ARDUINO ArduinoServer : public IPCServer, public ATObject
+    {
+        public:
+                                                ArduinoServer(int portNumber = 50000);
+    	                                        ~ArduinoServer();
 
-        bool            		            shutDown();
-        void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
-		void								onUpdateClientsTimer();
-        void								broadcastStatus();
+                                                //!The process request is an overide from the IPCServer base class.
+                                                //!ProcessRequest implements the arduino server specific processing.
+                                                //!Requests are sent to the server from a client.
+        	bool 					            processRequest(IPCMessage& msg);
+        	LightsArduino& 			            getLightsArduino(){return mLightsArduino;}
 
-    protected:
-    							            //!Container for Arduino devices
-		vector<ArduinoDevice*> 	            mArduinos;
+            bool            		            shutDown();
+            void								assignOnUpdateCallBack(OnMessageUpdateCB cb);
+    		void								onUpdateClientsTimer();
+            void								broadcastStatus();
 
-        									//We should create a mutex for device..
-    	LightsArduino 			            mLightsArduino;
+        protected:
+        							            //!Container for Arduino devices
+    		vector<ArduinoDevice*> 	            mArduinos;
 
-        OnMessageUpdateCB					onMessageUpdateCB;
+            									//We should create a mutex for device..
+        	LightsArduino 			            mLightsArduino;
 
-		void					            lightsArduinoMessageReceived(const string& msg);
-        void								notifyClients(const string& msg);
-};
+            OnMessageUpdateCB					onMessageUpdateCB;
+
+    		void					            lightsArduinoMessageReceived(const string& msg);
+            void								notifyClients(const string& msg);
+    };
+}
 
 #endif

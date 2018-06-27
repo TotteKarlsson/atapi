@@ -3,16 +3,21 @@
 #include <sstream>
 //---------------------------------------------------------------------------
 
-using namespace std;
-SensorsArduinoClient::SensorsArduinoClient()
-:
-	ArduinoClient()
-{}
-
-void SensorsArduinoClient::getBoardStatus()
+namespace at
 {
-	stringstream msg;
-    msg <<"GET_SENSORS_ARDUINO_STATUS";
-	request(msg.str());
-}
 
+    using namespace std;
+    SensorsArduinoClient::SensorsArduinoClient()
+    :
+    	ArduinoClient()
+    {}
+
+    void SensorsArduinoClient::getBoardStatus()
+    {
+    	stringstream msg;
+        msg <<"GET_SENSORS_ARDUINO_STATUS";
+    	request(msg.str());
+    }
+
+
+}

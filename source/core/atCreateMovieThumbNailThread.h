@@ -5,6 +5,7 @@
 #include <functional>
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
+#include <boost/function.hpp>
 //---------------------------------------------------------------------------
 
 

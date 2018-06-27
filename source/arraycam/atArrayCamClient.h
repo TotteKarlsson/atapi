@@ -20,58 +20,63 @@ using dsl::Property;
 using dsl::MessageContainer;
 using dsl::SocketReceiver;
 
-//!The client class connects to a server over a socket.
-//!Messages are received, over the socket, by a socket receiver and placed in a message container.
-//!Received messages are processed by the MessageProcessor.
-class AT_CORE ArrayCamClient : public SocketClient, public ATObject
+namespace at
 {
-	friend ArrayCamMessageProcessor;
-	public:
-                                            ArrayCamClient();
-    	virtual                             ~ArrayCamClient();
-        virtual bool                        shutDown();
 
-        virtual bool                        init(int pNumber = 50001, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
-        bool                                isConnected();
-        bool                                disConnect();
-        bool                                connect(int pNumber = -1, const string& host = dsl::gEmptyString);
+    //!The client class connects to a server over a socket.
+    //!Messages are received, over the socket, by a socket receiver and placed in a message container.
+    //!Received messages are processed by the MessageProcessor.
+    class AT_CORE ArrayCamClient : public SocketClient, public ATObject
+    {
+    	friend ArrayCamMessageProcessor;
+    	public:
+                                                ArrayCamClient();
+        	virtual                             ~ArrayCamClient();
+            virtual bool                        shutDown();
 
-		virtual void	 					getBoardStatus(){}
-		void								getServerStatus();
-        bool								startVideo();
-        bool								stopVideo();
+            virtual bool                        init(int pNumber = 50001, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
+            bool                                isConnected();
+            bool                                disConnect();
+            bool                                connect(int pNumber = -1, const string& host = dsl::gEmptyString);
 
-        bool								setWhiskerSyncOff();
-        bool								setWhiskerSyncOn();
+    		virtual void	 					getBoardStatus(){}
+    		void								getServerStatus();
+            bool								startVideo();
+            bool								stopVideo();
 
-        bool								setZoomAndFocus(int zoom, int focus);
-        bool								zoomIn(int val);
-        bool								zoomOut(int val);
+            bool								setWhiskerSyncOff();
+            bool								setWhiskerSyncOn();
 
-        bool								focusIn(int val);
-        bool								focusOut(int val);
+            bool								setZoomAndFocus(int zoom, int focus);
+            bool								zoomIn(int val);
+            bool								zoomOut(int val);
 
-        bool								setLEDIntensity(int intensity);
+            bool								focusIn(int val);
+            bool								focusOut(int val);
 
-        bool								triggerRibbonSeparator();
+            bool								setLEDIntensity(int intensity);
 
-        bool								takeSnapShot();
-        bool								enableBarcodeScanner();
-        bool								disableBarcodeScanner();
+            bool								triggerRibbonSeparator();
 
-        bool								startUC7();
-        bool								stopUC7();
+            bool								takeSnapShot();
+            bool								enableBarcodeScanner();
+            bool								disableBarcodeScanner();
 
-									        //!Post a custom request
-        bool 		                        postRequest(const string& msg);
-        bool 		                        postRequest(const string& msg, int p1);
-        bool 		                        postRequest(const string& msg, int p1, int p2);
+            bool								startUC7();
+            bool								stopUC7();
 
-        void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+    									        //!Post a custom request
+            bool 		                        postRequest(const string& msg);
+            bool 		                        postRequest(const string& msg, int p1);
+            bool 		                        postRequest(const string& msg, int p1, int p2);
 
-    protected:
-        ArrayCamMessageProcessor   			mMessageProcessor;
-        ArrayCamProtocol					mProtocol;
-};
+            void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
+        protected:
+            ArrayCamMessageProcessor   			mMessageProcessor;
+            ArrayCamProtocol					mProtocol;
+    };
+
+}
 
 #endif

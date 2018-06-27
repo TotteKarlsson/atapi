@@ -4,122 +4,125 @@
 //---------------------------------------------------------------------------
 using namespace dsl;
 
-PairedMoves::PairedMoves(const string& iniSection, IniFile& iniFile)
-:
-mIniSection(iniSection),
-mIniFile(iniFile)
+namespace at
 {
-    readINIParameters();
-}
-
-PairedMoves::~PairedMoves()
-{
-	writeINIParameters();
-}
-
-bool PairedMoves::readINIParameters()
-{
-	IniSection* sec =  mIniFile.getSection(mIniSection, true);
-
-    if(sec)
+    PairedMoves::PairedMoves(const string& iniSection, IniFile& iniFile)
+    :
+    mIniSection(iniSection),
+    mIniFile(iniFile)
     {
-    	IniKey* aKey = sec->getFirst();
-        while(aKey)
+        readINIParameters();
+    }
+
+    PairedMoves::~PairedMoves()
+    {
+    	writeINIParameters();
+    }
+
+    bool PairedMoves::readINIParameters()
+    {
+    	IniSection* sec =  mIniFile.getSection(mIniSection, true);
+
+        if(sec)
         {
-        	StringList vals(aKey->mValue,',');
-        	PairedMove pm(aKey->mKey, toDouble(vals[0]), toDouble(vals[1]), toDouble(vals[2]));
-	        add(pm);
-            aKey = sec->getNext();
+        	IniKey* aKey = sec->getFirst();
+            while(aKey)
+            {
+            	StringList vals(aKey->mValue,',');
+            	PairedMove pm(aKey->mKey, toDouble(vals[0]), toDouble(vals[1]), toDouble(vals[2]));
+    	        add(pm);
+                aKey = sec->getNext();
+            }
         }
+        return true;
     }
-    return true;
-}
 
-bool PairedMoves::writeINIParameters()
-{
-	//For each setting, create a iniKey and write to inifile
-	PairedMove* pm = getFirst();
-	IniSection* sec =  mIniFile.getSection(mIniSection, true);
-    while(pm && sec)
+    bool PairedMoves::writeINIParameters()
     {
-        IniKey* key = sec->getKey(pm->mLabel, true);
-        if(key)
+    	//For each setting, create a iniKey and write to inifile
+    	PairedMove* pm = getFirst();
+    	IniSection* sec =  mIniFile.getSection(mIniSection, true);
+        while(pm && sec)
         {
-            key->mValue = pm->asIniRecord();
+            IniKey* key = sec->getKey(pm->mLabel, true);
+            if(key)
+            {
+                key->mValue = pm->asIniRecord();
+            }
+    		pm = getNext();
         }
-		pm = getNext();
+        return true;
     }
-    return true;
-}
 
-PairedMove* PairedMoves::add(const PairedMove& pos)
-{
-	//Check label
-    mPairedMoves.push_front(pos);
-    return &(*(mPairedMoves.begin()));
-}
-
-bool PairedMoves::remove(const string& lbl)
-{
-	//Find item
-    return false;
-}
-
-PairedMove* PairedMoves::getPairedMove(const string& name)
-{
-	PairedMove* pm = getFirst();
-    while(pm)
+    PairedMove* PairedMoves::add(const PairedMove& pos)
     {
-        if(compareNoCase(pm->mLabel, name))
+    	//Check label
+        mPairedMoves.push_front(pos);
+        return &(*(mPairedMoves.begin()));
+    }
+
+    bool PairedMoves::remove(const string& lbl)
+    {
+    	//Find item
+        return false;
+    }
+
+    PairedMove* PairedMoves::getPairedMove(const string& name)
+    {
+    	PairedMove* pm = getFirst();
+        while(pm)
         {
-        	return pm;
+            if(compareNoCase(pm->mLabel, name))
+            {
+            	return pm;
+            }
+    		pm = getNext();
         }
-		pm = getNext();
+    	return NULL;
     }
-	return NULL;
-}
 
-PairedMove* PairedMoves::getFirst() const
-{
-    mPairedMovesIter = mPairedMoves.begin();
-    if(mPairedMovesIter != mPairedMoves.end())
+    PairedMove* PairedMoves::getFirst() const
     {
-        return &(*mPairedMovesIter);
-    }
-    return NULL;
-}
-
-PairedMove* PairedMoves::getCurrent() const
-{
-    if(mPairedMovesIter != mPairedMoves.end())
-    {
-        return &(*mPairedMovesIter);
-    }
-    return NULL;
-}
-
-PairedMove* PairedMoves::getNext() const
-{
-    if(mPairedMovesIter != mPairedMoves.end())
-    {
-        mPairedMovesIter++;
+        mPairedMovesIter = mPairedMoves.begin();
         if(mPairedMovesIter != mPairedMoves.end())
         {
             return &(*mPairedMovesIter);
         }
+        return NULL;
     }
-    return NULL;
-}
 
-PairedMove* PairedMoves::getPrevious() const
-{
-    if(mPairedMovesIter != mPairedMoves.end())
+    PairedMove* PairedMoves::getCurrent() const
     {
-        mPairedMovesIter--;
         if(mPairedMovesIter != mPairedMoves.end())
         {
             return &(*mPairedMovesIter);
         }
+        return NULL;
     }
-    return NULL;
+
+    PairedMove* PairedMoves::getNext() const
+    {
+        if(mPairedMovesIter != mPairedMoves.end())
+        {
+            mPairedMovesIter++;
+            if(mPairedMovesIter != mPairedMoves.end())
+            {
+                return &(*mPairedMovesIter);
+            }
+        }
+        return NULL;
+    }
+
+    PairedMove* PairedMoves::getPrevious() const
+    {
+        if(mPairedMovesIter != mPairedMoves.end())
+        {
+            mPairedMovesIter--;
+            if(mPairedMovesIter != mPairedMoves.end())
+            {
+                return &(*mPairedMovesIter);
+            }
+        }
+        return NULL;
+    }
 }

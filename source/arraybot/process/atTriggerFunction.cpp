@@ -6,64 +6,67 @@
 using namespace dsl;
 
 
-MoveAbsolute::MoveAbsolute(APTMotor* mtr, double pos, double v, double a)
-:
-mMotor(mtr),
-mPosition(pos),
-mVelocity(v),
-mAcceleration(a)
-{}
-
-bool MoveAbsolute::execute()
+namespace at
 {
-	if(mMotor)
+    MoveAbsolute::MoveAbsolute(APTMotor* mtr, double pos, double v, double a)
+    :
+    mMotor(mtr),
+    mPosition(pos),
+    mVelocity(v),
+    mAcceleration(a)
+    {}
+
+    bool MoveAbsolute::execute()
     {
-    	mMotor->moveAbsolute(mPosition, mVelocity, mAcceleration);
-        Log(lInfo) << "Move absolute trigger executed";
+    	if(mMotor)
+        {
+        	mMotor->moveAbsolute(mPosition, mVelocity, mAcceleration);
+            Log(lInfo) << "Move absolute trigger executed";
+        }
+        else
+        {
+            Log(lError) << "Move absolute trigger executed with NULL motor";
+        }
+
+    	return true;
     }
-    else
+
+    bool MoveAbsolute::isActive()
     {
-        Log(lError) << "Move absolute trigger executed with NULL motor";
+    	return mMotor ? mMotor->isActive() : false;
     }
 
-	return true;
+    dsl::XMLElement* MoveAbsolute::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot)
+    {
+        //Create XML for saving to file
+        XMLElement* e	  			= doc.NewElement("trigger_function");
+        XMLNode*    rootNode 		= doc.InsertFirstChild(e);
+        string 		test;
+
+        //Attributes
+        e->SetAttribute("type", getTypeName().c_str());
+
+        mMotorName = mMotor ? mMotor->getName() : mMotorName;
+        e->SetAttribute("motor_name", mMotorName.c_str());
+
+    	XMLElement* val = doc.NewElement("final_position");
+        test = dsl::toString(mPosition);
+        val->SetText(test.c_str());
+    	e->InsertEndChild(val);
+
+    	val = doc.NewElement("max_velocity");
+        test = dsl::toString(mVelocity);
+        val->SetText(test.c_str());
+    	e->InsertEndChild(val);
+
+    	val = doc.NewElement("acceleration");
+        test = dsl::toString(mAcceleration);
+        val->SetText(test.c_str());
+    	e->InsertEndChild(val);
+
+        e->InsertEndChild(rootNode);
+        docRoot->InsertEndChild(e);
+        return e;
+    }
+
 }
-
-bool MoveAbsolute::isActive()
-{
-	return mMotor ? mMotor->isActive() : false;
-}
-
-dsl::XMLElement* MoveAbsolute::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot)
-{
-    //Create XML for saving to file
-    XMLElement* e	  			= doc.NewElement("trigger_function");
-    XMLNode*    rootNode 		= doc.InsertFirstChild(e);
-    string 		test;
-
-    //Attributes
-    e->SetAttribute("type", getTypeName().c_str());
-
-    mMotorName = mMotor ? mMotor->getName() : mMotorName;
-    e->SetAttribute("motor_name", mMotorName.c_str());
-
-	XMLElement* val = doc.NewElement("final_position");
-    test = toString(mPosition);
-    val->SetText(test.c_str());
-	e->InsertEndChild(val);
-
-	val = doc.NewElement("max_velocity");
-    test = toString(mVelocity);
-    val->SetText(test.c_str());
-	e->InsertEndChild(val);
-
-	val = doc.NewElement("acceleration");
-    test = toString(mAcceleration);
-    val->SetText(test.c_str());
-	e->InsertEndChild(val);
-
-    e->InsertEndChild(rootNode);
-    docRoot->InsertEndChild(e);
-    return e;
-}
-

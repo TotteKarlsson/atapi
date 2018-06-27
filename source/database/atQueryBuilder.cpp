@@ -3,17 +3,22 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-string QueryBuilder::asString()
+namespace at
 {
-	return str();
-}
 
-const char* QueryBuilder::asCString()
-{
-	return str().c_str();
-}
+    string QueryBuilder::asString()
+    {
+    	return str();
+    }
 
-void QueryBuilder::clear()
-{
-	str("");
+    const char* QueryBuilder::asCString()
+    {
+    	return str().c_str();
+    }
+
+    void QueryBuilder::clear()
+    {
+    	str("");
+    }
+
 }

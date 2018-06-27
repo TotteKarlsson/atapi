@@ -103,5 +103,5 @@ AT_SOUND StringList getSoundResources()
 //    return true;
 //}
 
-#pragma comment(lib, "dslCommon.lib")
-#pragma comment(lib, "atCore.lib")
+//#pragma comment(lib, "dslCommon.lib")
+//#pragma comment(lib, "atCore.lib")

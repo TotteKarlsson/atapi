@@ -5,7 +5,7 @@
 #include "dslLogger.h"
 //---------------------------------------------------------------------------
 using namespace dsl;
-
+using namespace at;
 ContinousMove::ContinousMove(const string& lbl, double v, double acc)
 :
 at::Move(lbl, NULL, v, acc)
@@ -36,7 +36,7 @@ bool ContinousMove::start()
     return false;
 }
 
-XMLElement* ContinousMove::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
+XMLElement* ContinousMove::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
     XMLElement* processNode  	= doc.NewElement("process");

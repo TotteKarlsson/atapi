@@ -6,6 +6,9 @@
 //---------------------------------------------------------------------------
 using namespace dsl;
 
+namespace at
+{
+
 APTMotor::APTMotor(int serialNo)
 :
 	APTDevice(serialNo),
@@ -268,8 +271,8 @@ double getMotorPosition(APTMotor* m)
     }
     return -1;
 }
-namespace dsl
-{
+
+
 string toString(const JogMoveMode& mode)
 {
 	switch(mode)

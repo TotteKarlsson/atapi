@@ -6,64 +6,67 @@
 //---------------------------------------------------------------------------
 
 using std::string;
-class NavitarMotorController;
-
-struct MotorRegisters
+namespace at
 {
-        int USER_TARGET;
-        int USER_INCREMENT;
-        int USER_CURRENT;
-        int USER_LIMIT;
-        int USER_STATUS;
-        int SETUP_ACCEL;
-        int SETUP_INITVELOCITY;
-        int SETUP_MAXVELOCITY;
-        int SETUP_REVBACKLASH;
-        int SETUP_FWDBACKLASH;
-        int SETUP_SENSORTYPE;
-        int SETUP_CONFIG;
-        int SETUP_LIMIT;
-};
+    class NavitarMotorController;
 
-class AT_NAVITAR NavitarMotor : public ATObject
-{
-	public:
-								            NavitarMotor(NavitarMotorController& parent, int motorID);
+    struct MotorRegisters
+    {
+            int USER_TARGET;
+            int USER_INCREMENT;
+            int USER_CURRENT;
+            int USER_LIMIT;
+            int USER_STATUS;
+            int SETUP_ACCEL;
+            int SETUP_INITVELOCITY;
+            int SETUP_MAXVELOCITY;
+            int SETUP_REVBACKLASH;
+            int SETUP_FWDBACKLASH;
+            int SETUP_SENSORTYPE;
+            int SETUP_CONFIG;
+            int SETUP_LIMIT;
+    };
 
-        						            //!Drive motor to home
-		void					            home();
+    class AT_NAVITAR NavitarMotor : public ATObject
+    {
+    	public:
+    								            NavitarMotor(NavitarMotorController& parent, int motorID);
 
-        						            //!Drive motor to the limit
-		void					            limit();
+            						            //!Drive motor to home
+    		void					            home();
 
-        									//!Set the motors current position
-        int									setPosition(int pos);
+            						            //!Drive motor to the limit
+    		void					            limit();
 
-        									//!Add to current position
-        int									addToPosition(int pos);
+            									//!Set the motors current position
+            int									setPosition(int pos);
 
-        									//!Get the motors current position
-        int									getPosition();
+            									//!Add to current position
+            int									addToPosition(int pos);
 
-        									//!Get the motors current position
-        int									getMaxPosition();
+            									//!Get the motors current position
+            int									getPosition();
 
-        									//!Get the motors label
-        string								getLabel();
+            									//!Get the motors current position
+            int									getMaxPosition();
 
-    protected:
-		NavitarMotorController& 	        mMotorController;
+            									//!Get the motors label
+            string								getLabel();
 
-        									//!When calling registers, the motor ID indicates which motor to
-                                            //!communicate with
-        int						            mID;
+        protected:
+    		NavitarMotorController& 	        mMotorController;
 
-        									//!The label holds a "name" for the motor, Zoom or Focus
-        string								mLabel;
+            									//!When calling registers, the motor ID indicates which motor to
+                                                //!communicate with
+            int						            mID;
+
+            									//!The label holds a "name" for the motor, Zoom or Focus
+            string								mLabel;
 
 
-        //Registers
-        MotorRegisters						mRegisters;
-};
+            //Registers
+            MotorRegisters						mRegisters;
+    };
 
+}
 #endif

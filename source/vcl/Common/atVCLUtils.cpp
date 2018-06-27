@@ -1,12 +1,10 @@
-#include <vcl.h>
 #pragma hdrstop
 #include "atVCLUtils.h"
 #include "dslVCLUtils.h"
-#include "dslStringUtils.h"
-#include "dslLogger.h"
-//#include "Poco/Data/RecordSet.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init,weak)
+
+namespace at
+{
 
 using namespace dsl;
 using namespace Poco;
@@ -397,3 +395,4 @@ bool updateComboBoxItemCaption(TComboBox* cb, int indx, const string& name)
     return false;
 }
 
+}

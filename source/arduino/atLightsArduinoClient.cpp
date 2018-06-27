@@ -4,6 +4,9 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
+
+namespace at
+{
 LightsArduinoClient::LightsArduinoClient()
 :
 	ArduinoClient()
@@ -30,4 +33,4 @@ void LightsArduinoClient::toggleCoax()
 	request(msg.str());
 }
 
-
+}

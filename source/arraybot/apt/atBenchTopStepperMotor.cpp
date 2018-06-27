@@ -7,6 +7,7 @@
 #include "core/atExceptions.h"
 #include <bitset>
 using namespace std;
+using namespace at;
 
 short lChannel = 1;
 //---------------------------------------------------------------------------
@@ -28,7 +29,7 @@ bool BenchTopStepperMotor::connect()
 {
     // load the device settings
     // open the device
-    int res = SBC_Open(toString(mSerial).c_str());
+    int res = SBC_Open(dsl::toString(mSerial).c_str());
 
     mScalingFactors.position 	 = 409600.0;
     mScalingFactors.velocity 	 = 21987328.0;

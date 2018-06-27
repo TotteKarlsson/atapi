@@ -8,64 +8,67 @@
 
 using namespace dsl;
 
-SocketWorker* createArduinoIPCReceiver(int portNr, int socketHandle, void* server)
+namespace at
 {
-    SocketWorker* sWkr = new ArduinoServerIPCReceiver(portNr, socketHandle, (IPCServer*) server);
-    if(sWkr)
+    SocketWorker* createArduinoIPCReceiver(int portNr, int socketHandle, void* server)
     {
-        Log(lInfo)<<"Created an IPCReceiver. Socket Handle ID is : "<<socketHandle<<"\n";
-        sWkr->send("[Connection was created!]");
-    }
-    return sWkr;
-}
-
-ArduinoServerIPCReceiver::ArduinoServerIPCReceiver(int portNr, int socket_handle, IPCServer* server)
-:
-IPCReceiver(portNr, socket_handle, server)
-{}
-
-ArduinoServerIPCReceiver::~ArduinoServerIPCReceiver()
-{}
-
-void ArduinoServerIPCReceiver::Worker()
-{
-    IPCMessageBuilder aMessage('[',']');
-    while( !isTimeToDie() )
-    {
-        //Check for messages
-        int nBytes = receive();
-        if(nBytes != -1)
+        SocketWorker* sWkr = new ArduinoServerIPCReceiver(portNr, socketHandle, (IPCServer*) server);
+        if(sWkr)
         {
-            //When a message is ready, post message to list
-            while(mMessageBuffer.size())
+            Log(lInfo)<<"Created an IPCReceiver. Socket Handle ID is : "<<socketHandle<<"\n";
+            sWkr->send("[Connection was created!]");
+        }
+        return sWkr;
+    }
+
+    ArduinoServerIPCReceiver::ArduinoServerIPCReceiver(int portNr, int socket_handle, IPCServer* server)
+    :
+    IPCReceiver(portNr, socket_handle, server)
+    {}
+
+    ArduinoServerIPCReceiver::~ArduinoServerIPCReceiver()
+    {}
+
+    void ArduinoServerIPCReceiver::Worker()
+    {
+        IPCMessageBuilder aMessage('[',']');
+        while( !isTimeToDie() )
+        {
+            //Check for messages
+            int nBytes = receive();
+            if(nBytes != -1)
             {
-                char ch = mMessageBuffer.front();
-                mMessageBuffer.pop_front();
-
-                if(!aMessage.build(ch))
+                //When a message is ready, post message to list
+                while(mMessageBuffer.size())
                 {
-                    Log(lDebug)<<"Character was discarded in Arduino Server IPCReceiver: \'"<<ch<<"\'"<<endl;
-                }
+                    char ch = mMessageBuffer.front();
+                    mMessageBuffer.pop_front();
 
-                if(aMessage.isComplete() )
-                {
-                    int msgID          = getArduinoIPCMessageID(aMessage.getMessage());
-                    IPCMessage msg     = IPCMessage(msgID, aMessage.getMessage(), this->getSocketHandle());
-                    if(mServer)
+                    if(!aMessage.build(ch))
                     {
-                        mServer->postRequest(msg);
+                        Log(lDebug)<<"Character was discarded in Arduino Server IPCReceiver: \'"<<ch<<"\'"<<endl;
                     }
 
-                    aMessage.reset();
+                    if(aMessage.isComplete() )
+                    {
+                        int msgID          = getArduinoIPCMessageID(aMessage.getMessage());
+                        IPCMessage msg     = IPCMessage(msgID, aMessage.getMessage(), this->getSocketHandle());
+                        if(mServer)
+                        {
+                            mServer->postRequest(msg);
+                        }
+
+                        aMessage.reset();
+                    }
                 }
             }
+            else
+            {
+                stop();
+            }
         }
-        else
-        {
-            stop();
-        }
+        mSocketHandle = -1;
     }
-    mSocketHandle = -1;
 }
 
 

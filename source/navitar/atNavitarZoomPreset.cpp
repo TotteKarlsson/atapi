@@ -4,18 +4,20 @@
 //---------------------------------------------------------------------------
 using namespace dsl;
 
-
-NavitarZoomPreset::NavitarZoomPreset(NavitarMotorController& mc, const string& name, const int& z)
-:
-Preset<int>(name, z),
-mController(mc)
-{}
-
-NavitarZoomPreset::~NavitarZoomPreset()
-{}
-
-bool NavitarZoomPreset::set()
+namespace at
 {
-	Log(lInfo) << "Setting preset: " << mKey << " value = " << getValue();
-	return mController.getZoom().setPosition(getValue());
+    NavitarZoomPreset::NavitarZoomPreset(NavitarMotorController& mc, const string& name, const int& z)
+    :
+    Preset<int>(name, z),
+    mController(mc)
+    {}
+
+    NavitarZoomPreset::~NavitarZoomPreset()
+    {}
+
+    bool NavitarZoomPreset::set()
+    {
+    	Log(lInfo) << "Setting preset: " << mKey << " value = " << getValue();
+    	return mController.getZoom().setPosition(getValue());
+    }
 }

@@ -6,17 +6,20 @@
 //---------------------------------------------------------------------------
 class APTMotor;
 
-class AT_AB RelativeMove : public at::Move
+namespace at
 {
-    public:
-    								RelativeMove( const string& lbl, APTMotor* mtr = NULL, double pos = 0, double maxVel = 1, double acc = 1);
-									~RelativeMove(){}
-		const string 				getTypeName() const;
+    class AT_AB RelativeMove : public at::Move
+    {
+        public:
+        								RelativeMove( const string& lbl, APTMotor* mtr = NULL, double pos = 0, double maxVel = 1, double acc = 1);
+    									~RelativeMove(){}
+    		const string 				getTypeName() const;
 
 
-    protected:
+        protected:
 
-    private:
+        private:
 
-};
+    };
+}
 #endif

@@ -14,44 +14,47 @@ namespace tinyxml2
 	class XMLElement;
 }
 
-class ArrayCamClient;
-class ProcessSequence;
-class AbsoluteMove;
-class StopAndResumeProcess;
-class ArrayCamRequestProcess;
-class TimeDelay;
-class ParallelProcess;
-class ArduinoServerCommand;
-class MoveCoverSlipAtAngleProcess;
-class HomeMotor;
-
-//!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
-class AT_AB ProcessSequenceProject : public dsl::Project, public ATObject
+namespace at
 {
-	friend ArrayCamRequestProcess;
-    public:
-                                                ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName = "Sequence 1.abp");
-                                                ~ProcessSequenceProject();
+    class ArrayCamClient;
+    class ProcessSequence;
+    class AbsoluteMove;
+    class StopAndResumeProcess;
+    class ArrayCamRequestProcess;
+    class TimeDelay;
+    class ParallelProcess;
+    class ArduinoServerCommand;
+    class MoveCoverSlipAtAngleProcess;
+    class HomeMotor;
 
-        bool                                    save(const string& fName = dsl::gEmptyString);
-        bool                                    open();
-        string                                  getPresentXMLModelVersion();
+    //!A ProcessSequenceProject makes it possible to save and load a ProcessSequence to file, using a simple xml format.
+    class AT_AB ProcessSequenceProject : public dsl::Project, public ATObject
+    {
+    	friend ArrayCamRequestProcess;
+        public:
+                                                    ProcessSequenceProject(ProcessSequence& ps, ArrayCamClient& ac, const string& fName = "Sequence 1.abp");
+                                                    ~ProcessSequenceProject();
 
-    protected:
-        ProcessSequence&                        mProcessSequence;
-        ArrayCamClient&							mArrayCamClient;
-        bool                                    resetXML();
-        int                                     loadProcesses();
+            bool                                    save(const string& fName = dsl::gEmptyString);
+            bool                                    open();
+            string                                  getPresentXMLModelVersion();
 
-        Process*				                createProcess(tinyxml2::XMLElement* element);
-		ParallelProcess*						createParallelProcess(tinyxml2::XMLElement* element);
-		AbsoluteMove* 				  			createAbsoluteMove(tinyxml2::XMLElement* proc);
-		TimeDelay*								createTimeDelayProcess(tinyxml2::XMLElement* element);
-		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);
-		ArrayCamRequestProcess* 				createArrayCamRequestProcess(tinyxml2::XMLElement* element);
-		ArduinoServerCommand* 					createArduinoServerCommand(tinyxml2::XMLElement* proc);
-		MoveCoverSlipAtAngleProcess* 			createMoveCoverSlipAtAngleProcess(tinyxml2::XMLElement* proc);
-		HomeMotor* 								createHomeMotorProcess(tinyxml2::XMLElement* proc);
-};
+        protected:
+            ProcessSequence&                        mProcessSequence;
+            ArrayCamClient&							mArrayCamClient;
+            bool                                    resetXML();
+            int                                     loadProcesses();
+
+            Process*				                createProcess(tinyxml2::XMLElement* element);
+    		ParallelProcess*						createParallelProcess(tinyxml2::XMLElement* element);
+    		AbsoluteMove* 				  			createAbsoluteMove(tinyxml2::XMLElement* proc);
+    		TimeDelay*								createTimeDelayProcess(tinyxml2::XMLElement* element);
+    		StopAndResumeProcess*					createStopAndResumeProcess(tinyxml2::XMLElement* element);
+    		ArrayCamRequestProcess* 				createArrayCamRequestProcess(tinyxml2::XMLElement* element);
+    		ArduinoServerCommand* 					createArduinoServerCommand(tinyxml2::XMLElement* proc);
+    		MoveCoverSlipAtAngleProcess* 			createMoveCoverSlipAtAngleProcess(tinyxml2::XMLElement* proc);
+    		HomeMotor* 								createHomeMotorProcess(tinyxml2::XMLElement* proc);
+    };
+}
 
 #endif

@@ -21,11 +21,11 @@ extern "C" int _libmain(unsigned long reason)
 }
 
 //---------------------------------------------------------------------------
-#pragma comment(lib, "dslCommon.lib")
-#pragma comment(lib, "dslVCLCommon.lib")
+#pragma comment(lib, "dslFoundation.lib")
+//#pragma comment(lib, "dslVCLCommon.lib")
 
-#pragma comment(lib, "atCore.lib")
-#pragma comment(lib, "atDataBase.lib")
+#pragma comment(lib, "atFoundation.lib")
+//#pragma comment(lib, "atDataBase.lib")
 #pragma comment(lib, "DBXDevartPostgreSQLDriver250.bpi")
 
 

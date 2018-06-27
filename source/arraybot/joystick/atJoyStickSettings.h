@@ -9,27 +9,30 @@
 using std::list;
 using dsl::IniFile;
 
-typedef list<JoyStickSetting> JSSettings;
-
-class AT_AB JoyStickSettings : public ATObject
+namespace at
 {
-    public:
-                            			JoyStickSettings(const string& iniSection, IniFile& iniFile);
-                            			~JoyStickSettings();
-		JoyStickSetting*				add(const JoyStickSetting& s);
-        bool							remove(const string& lbl);
-		JoyStickSetting*				getSetting(const string& name);
-        JoyStickSetting*        		getFirst() const;
-        JoyStickSetting*                getNext() const;
-        JoyStickSetting*                getPrevious() const;
-        JoyStickSetting*                getCurrent() const;
-        bool							readINIParameters();
-        bool							writeINIParameters();
+    typedef list<JoyStickSetting> JSSettings;
 
-    protected:
-		string							mIniSection;
-        IniFile&						mIniFile;
-		mutable JSSettings   			mSettings;
-    	mutable JSSettings::iterator 	mSettingsIter;
-};
+    class AT_AB JoyStickSettings : public ATObject
+    {
+        public:
+                                			JoyStickSettings(const string& iniSection, IniFile& iniFile);
+                                			~JoyStickSettings();
+    		JoyStickSetting*				add(const JoyStickSetting& s);
+            bool							remove(const string& lbl);
+    		JoyStickSetting*				getSetting(const string& name);
+            JoyStickSetting*        		getFirst() const;
+            JoyStickSetting*                getNext() const;
+            JoyStickSetting*                getPrevious() const;
+            JoyStickSetting*                getCurrent() const;
+            bool							readINIParameters();
+            bool							writeINIParameters();
+
+        protected:
+    		string							mIniSection;
+            IniFile&						mIniFile;
+    		mutable JSSettings   			mSettings;
+        	mutable JSSettings::iterator 	mSettingsIter;
+    };
+}
 #endif

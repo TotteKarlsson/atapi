@@ -20,35 +20,39 @@ using dsl::Property;
 using dsl::MessageContainer;
 using dsl::SocketReceiver;
 
-//!The client class connects to a server over a socket.
-//!Messages are received, over the socket, by a socket receiver and placed in a message container.
-//!Received messages are processed by the MessageProcessor.
-class AT_CORE ArrayBotClient : public SocketClient, public ATObject
+namespace at
 {
-	friend ArrayBotMessageProcessor;
-	public:
-                                            ArrayBotClient();
-    	virtual                             ~ArrayBotClient();
-        virtual bool                        shutDown();
 
-        virtual bool                        init(int pNumber = 50001, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
-        bool                                isConnected();
-        bool                                disConnect();
-        bool                                connect(int pNumber = -1, const string& host = dsl::gEmptyString);
+    //!The client class connects to a server over a socket.
+    //!Messages are received, over the socket, by a socket receiver and placed in a message container.
+    //!Received messages are processed by the MessageProcessor.
+    class AT_CORE ArrayBotClient : public SocketClient, public ATObject
+    {
+    	friend ArrayBotMessageProcessor;
+    	public:
+                                                ArrayBotClient();
+        	virtual                             ~ArrayBotClient();
+            virtual bool                        shutDown();
 
-		virtual void	 					getBoardStatus(){}
-		void								getServerStatus();
+            virtual bool                        init(int pNumber = 50001, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
+            bool                                isConnected();
+            bool                                disConnect();
+            bool                                connect(int pNumber = -1, const string& host = dsl::gEmptyString);
 
-									        //!Post a custom request
-        bool 		                        postRequest(const string& msg);
-        bool 		                        postRequest(const string& msg, int p1);
-        bool 		                        postRequest(const string& msg, int p1, int p2);
+    		virtual void	 					getBoardStatus(){}
+    		void								getServerStatus();
 
-        void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+    									        //!Post a custom request
+            bool 		                        postRequest(const string& msg);
+            bool 		                        postRequest(const string& msg, int p1);
+            bool 		                        postRequest(const string& msg, int p1, int p2);
 
-    protected:
-        ArrayBotMessageProcessor   			mMessageProcessor;
-        ArrayBotProtocol					mProtocol;
-};
+            void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
+        protected:
+            ArrayBotMessageProcessor   			mMessageProcessor;
+            ArrayBotProtocol					mProtocol;
+    };
+}
 
 #endif

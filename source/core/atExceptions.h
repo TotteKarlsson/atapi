@@ -9,31 +9,36 @@
 using std::string;
 using std::stringstream;
 
-class AT_CORE ATException : public std::exception, public ATObject
+namespace at
 {
-    public:
-                                            ATException(const string& desc);
-                                            ATException(const stringstream& msg);
-        virtual                             ~ATException() throw();
-        virtual const char*                 what() const throw();
-        string                              Message() const;
+    class AT_CORE ATException : public std::exception, public ATObject
+    {
+        public:
+                                                ATException(const string& desc);
+                                                ATException(const stringstream& msg);
+            virtual                             ~ATException() throw();
+            virtual const char*                 what() const throw();
+            string                              Message() const;
 
-    protected:
-                                            //ATException message
-        string                              mMessage;
-};
+        protected:
+                                                //ATException message
+            string                              mMessage;
+    };
 
-class AT_CORE FileSystemException : public ATException
-{
-    public:
-                                            FileSystemException(const string& desc) : ATException(desc){}
-                                            FileSystemException(const stringstream& msg) : ATException(msg){}
-};
+    class AT_CORE FileSystemException : public ATException
+    {
+        public:
+                                                FileSystemException(const string& desc) : ATException(desc){}
+                                                FileSystemException(const stringstream& msg) : ATException(msg){}
+    };
 
-class AT_CORE ATDataException : public ATException
-{
-    public:
-                                            ATDataException(const string& desc) : ATException(desc){}
-                                            ATDataException(const stringstream& msg) : ATException(msg){}
-};
+    class AT_CORE ATDataException : public ATException
+    {
+        public:
+                                                ATDataException(const string& desc) : ATException(desc){}
+                                                ATDataException(const stringstream& msg) : ATException(msg){}
+    };
+
+
+}
 #endif

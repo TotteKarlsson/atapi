@@ -6,90 +6,95 @@
 
 using namespace dsl;
 
-ElloUIClient::ElloUIClient()
-:
-mMessageProcessor(*this)
-{}
-
-ElloUIClient::~ElloUIClient()
+namespace at
 {
-    Log(lDebug3)<<"ElloUI client is shutting down..";
-}
 
-bool ElloUIClient::init(int serverPort, const string& hostname, bool connectOnInit)
-{
-    Log(lDebug3)<<"Setting up an ElloUI client";
-	this->assignParent(this);
+    ElloUIClient::ElloUIClient()
+    :
+    mMessageProcessor(*this)
+    {}
 
-    if(connectOnInit)
+    ElloUIClient::~ElloUIClient()
     {
-        if(!SocketClient::connect(serverPort, hostname))
-        {
-        	return false;
-        }
-
-       	if(!mReceiver.isRunning())
-        {
-            mReceiver.start(true);
-        }
-     	return true;
-    }
-    return false;
-}
-
-bool ElloUIClient::connect(int serverPort, const string& host)
-{
-	//This should be done in a thread..
-    bool res = init(serverPort, host, true);
-
-    //Do only run the message processor if we are connected
-    if(res == true && !mMessageProcessor.isRunning())
-    {
-        mMessageProcessor.start(true);
+        Log(lDebug3)<<"ElloUI client is shutting down..";
     }
 
-    return res;
-}
+    bool ElloUIClient::init(int serverPort, const string& hostname, bool connectOnInit)
+    {
+        Log(lDebug3)<<"Setting up an ElloUI client";
+    	this->assignParent(this);
 
-void ElloUIClient::run()
-{
-	request("RUN");
-}
+        if(connectOnInit)
+        {
+            if(!SocketClient::connect(serverPort, hostname))
+            {
+            	return false;
+            }
 
-void ElloUIClient::assignOnMessageReceivedCallBack(OnMessageReceivedCB cb)
-{
-	mMessageProcessor.assignOnMessageReceivedCallBack(cb);
-}
+           	if(!mReceiver.isRunning())
+            {
+                mReceiver.start(true);
+            }
+         	return true;
+        }
+        return false;
+    }
 
-bool ElloUIClient::isConnected()
-{
-	return SocketClient::isConnected();
-}
+    bool ElloUIClient::connect(int serverPort, const string& host)
+    {
+    	//This should be done in a thread..
+        bool res = init(serverPort, host, true);
 
-bool ElloUIClient::shutDown()
-{
-    Log(lDebug3)<<"Stop receiving";
-	mReceiver.stop();
+        //Do only run the message processor if we are connected
+        if(res == true && !mMessageProcessor.isRunning())
+        {
+            mMessageProcessor.start(true);
+        }
 
-    Log(lDebug3)<<"Stop processing messages";
-	mMessageProcessor.stop();
+        return res;
+    }
 
-    Log(lDebug3)<<"Closing socket in ElloUIClient";
-	SocketClient::close();
+    void ElloUIClient::run()
+    {
+    	request("RUN");
+    }
 
-    Log(lDebug3)<<"ElloUIClient was shut down";
-    return true;
-}
+    void ElloUIClient::assignOnMessageReceivedCallBack(OnMessageReceivedCB cb)
+    {
+    	mMessageProcessor.assignOnMessageReceivedCallBack(cb);
+    }
 
-bool ElloUIClient::disConnect()
-{
-	mMessageProcessor.stop();
-	return SocketClient::close();
-}
+    bool ElloUIClient::isConnected()
+    {
+    	return SocketClient::isConnected();
+    }
 
-void ElloUIClient::postMessage(const string& msg)
-{
-    string socketMessage = msg;
-    SocketClient::send(msg);
+    bool ElloUIClient::shutDown()
+    {
+        Log(lDebug3)<<"Stop receiving";
+    	mReceiver.stop();
+
+        Log(lDebug3)<<"Stop processing messages";
+    	mMessageProcessor.stop();
+
+        Log(lDebug3)<<"Closing socket in ElloUIClient";
+    	SocketClient::close();
+
+        Log(lDebug3)<<"ElloUIClient was shut down";
+        return true;
+    }
+
+    bool ElloUIClient::disConnect()
+    {
+    	mMessageProcessor.stop();
+    	return SocketClient::close();
+    }
+
+    void ElloUIClient::postMessage(const string& msg)
+    {
+        string socketMessage = msg;
+        SocketClient::send(msg);
+    }
+
 }
 

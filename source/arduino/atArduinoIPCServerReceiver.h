@@ -6,15 +6,18 @@
 #include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 
-class AT_ARDUINO ArduinoServerIPCReceiver : public dsl::IPCReceiver, public ATObject
+namespace at
 {
-    public:
-						        		ArduinoServerIPCReceiver(int portNr = -1, int socket_handle = -1, dsl::IPCServer* server = NULL);
-						        		~ArduinoServerIPCReceiver();
-		virtual void                    Worker();
+    class AT_ARDUINO ArduinoServerIPCReceiver : public dsl::IPCReceiver, public ATObject
+    {
+        public:
+    						        		ArduinoServerIPCReceiver(int portNr = -1, int socket_handle = -1, dsl::IPCServer* server = NULL);
+    						        		~ArduinoServerIPCReceiver();
+    		virtual void                    Worker();
 
-    protected:
+        protected:
 
-};
+    };
+}
 
 #endif

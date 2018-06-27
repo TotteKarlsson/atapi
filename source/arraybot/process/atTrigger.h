@@ -1,6 +1,6 @@
 #ifndef atTriggerH
 #define atTriggerH
-#include "../atABExporter.h"
+#include "atABExporter.h"
 #include "atATObject.h"
 #include <string>
 #include "dslTimer.h"
@@ -12,82 +12,87 @@
 using std::string;
 using std::vector;
 
-typedef double (__closure *triggerTestFunctionFPtr)();
-class TriggerFunction;
-
-class AT_AB Trigger : public ATObject
+namespace at
 {
-    public:
-                                            Trigger(ATObject* s, LogicOperator lt = loLargerThan);
-		virtual                             ~Trigger(){}
 
-        void								assignSubject(ATObject* s){mSubject = s;}
-        ATObject*							getSubject(){return mSubject;}
+    typedef double (__closure *triggerTestFunctionFPtr)();
+    class TriggerFunction;
 
-		string					            getSubjectName();
+    class AT_AB Trigger : public ATObject
+    {
+        public:
+                                                Trigger(ATObject* s, LogicOperator lt = loLargerThan);
+    		virtual                             ~Trigger(){}
 
-         bool								setTestOperator(LogicOperator lo){mTriggerConditionOperator = lo; return true;}
-        LogicOperator						getTestOperator(){return mTriggerConditionOperator;}
+            void								assignSubject(ATObject* s){mSubject = s;}
+            ATObject*							getSubject(){return mSubject;}
 
-        						            //!Enable 'loads' the trigger.
-        virtual bool			            enable();
+    		string					            getSubjectName();
 
-        						            //!Disable disables the trigger.
-        virtual bool			            disable();
+             bool								setTestOperator(LogicOperator lo){mTriggerConditionOperator = lo; return true;}
+            LogicOperator						getTestOperator(){return mTriggerConditionOperator;}
 
-        									//!The test function is using the TriggerCondition
-                                            //operator in order to check if the trigger should trigger
-        virtual void			            setTestFunction(triggerTestFunctionFPtr f);
+            						            //!Enable 'loads' the trigger.
+            virtual bool			            enable();
 
-        									//!Assign function that will be executed when
-                                            //!the trigger triggers
-		virtual void						assignTriggerFunction(TriggerFunction* f);
+            						            //!Disable disables the trigger.
+            virtual bool			            disable();
 
-        									//!Check if the trigger been triggered
-		bool                                isTriggered(){return mIsTriggered;}
+            									//!The test function is using the TriggerCondition
+                                                //operator in order to check if the trigger should trigger
+            virtual void			            setTestFunction(triggerTestFunctionFPtr f);
 
-        						            //!Any subclass need to implement
-                                            //an execute method
-		virtual void	 		            execute() = 0;
-        virtual void	 		            reset();
+            									//!Assign function that will be executed when
+                                                //!the trigger triggers
+    		virtual void						assignTriggerFunction(TriggerFunction* f);
 
-        TriggerFunction* 					getTriggerFunction(){return mTriggerFunction;}
+            									//!Check if the trigger been triggered
+    		bool                                isTriggered(){return mIsTriggered;}
 
-        									//!Ability to read/write trigger objects occurs using xml
-		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
+            						            //!Any subclass need to implement
+                                                //an execute method
+    		virtual void	 		            execute() = 0;
+            virtual void	 		            reset();
 
-    protected:
-        									//!The subject name is the name of the device being monitored
-        string					            mSubjectName;
+            TriggerFunction* 					getTriggerFunction(){return mTriggerFunction;}
 
-        									//!The subject being 'observed' is typically APTDevices, motors etc
-        ATObject*							mSubject;
+            									//!Ability to read/write trigger objects occurs using xml
+    		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
 
-    										//!The mIsTriggered is set to true in case the trigger been fired
-        bool					            mIsTriggered;
+        protected:
+            									//!The subject name is the name of the device being monitored
+            string					            mSubjectName;
 
-    										//!The Trigger timer checks for a satisified trigger condition.
-                                            //!Todo: Add timeout logic..
-        dsl::Timer				            mTriggerTimer;
+            									//!The subject being 'observed' is typically APTDevices, motors etc
+            ATObject*							mSubject;
 
-        						            //!The test function is a function called
-                                            //!in the triggers timer function and used to test for the trigger condition
-        triggerTestFunctionFPtr	            mTestFunction;
+        										//!The mIsTriggered is set to true in case the trigger been fired
+            bool					            mIsTriggered;
 
-        virtual bool  			            test(double){return false;}
-        virtual bool  			            test(int)   {return false;}
+        										//!The Trigger timer checks for a satisified trigger condition.
+                                                //!Todo: Add timeout logic..
+            dsl::Timer				            mTriggerTimer;
 
-        									//!The triggerTest function is called by the timer
-                                            //!and is the point at where the trigger condition is checked                                            /
-        virtual void  			            triggerTest() = 0;
+            						            //!The test function is a function called
+                                                //!in the triggers timer function and used to test for the trigger condition
+            triggerTestFunctionFPtr	            mTestFunction;
 
-        									//!The triggering is tested using an Logic operator
-        LogicOperator            			mTriggerConditionOperator;
+            virtual bool  			            test(double){return false;}
+            virtual bool  			            test(int)   {return false;}
 
-        									//!The Fire function is executed when the trigger is
-                                            //triggered
-		TriggerFunction*				 	mTriggerFunction;
-};
+            									//!The triggerTest function is called by the timer
+                                                //!and is the point at where the trigger condition is checked                                            /
+            virtual void  			            triggerTest() = 0;
 
+            									//!The triggering is tested using an Logic operator
+            LogicOperator            			mTriggerConditionOperator;
+
+            									//!The Fire function is executed when the trigger is
+                                                //triggered
+    		TriggerFunction*				 	mTriggerFunction;
+    };
+
+
+}
 #endif
 

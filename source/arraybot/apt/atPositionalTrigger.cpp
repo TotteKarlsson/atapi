@@ -5,98 +5,103 @@
 #include "atTriggerFunction.h"
 using namespace dsl;
 
-//---------------------------------------------------------------------------
-PositionalTrigger::PositionalTrigger(APTMotor* m, double position, LogicOperator lt)
-:
-Trigger(m),
-mPosition(position),
-mMotor(m)
+namespace at
 {
-	if(m)
+
+    //---------------------------------------------------------------------------
+    PositionalTrigger::PositionalTrigger(APTMotor* m, double position, LogicOperator lt)
+    :
+    Trigger(m),
+    mPosition(position),
+    mMotor(m)
     {
-    	assignSubject(m);
-        setTestFunction(m->getPosition);
-    }
-
-	mTriggerTimer.assignTimerFunction(triggerTest);
-}
-
-void PositionalTrigger::triggerTest()
-{
-	if(!mTestFunction)
-	{
-    	return;
-    }
-
-    double testVal = mTestFunction();
-    if(test(testVal))
-    {
-	    mTriggerTimer.stop();
-        execute();
-       	string name("");
-        if(mMotor)
-	    {
-        	name = mMotor->getName();
+    	if(m)
+        {
+        	assignSubject(m);
+            setTestFunction(m->getPosition);
         }
-        Log(lInfo) << "Positional trigger: \""<<name<<" was executed at trigger value: "<<testVal;
-    }
-}
 
-bool PositionalTrigger::test(double val)
-{
-	switch(mTriggerConditionOperator)
+    	mTriggerTimer.assignTimerFunction(triggerTest);
+    }
+
+    void PositionalTrigger::triggerTest()
     {
-    	case loLargerThan: 			return val > mPosition;
-    	case loLargerThanOrEqual: 	return val >= mPosition;
-    	case loSmallerThan: 		return val < mPosition;
-    	case loSmallerThanOrEqual:	return val < mPosition;
+    	if(!mTestFunction)
+    	{
+        	return;
+        }
 
-        default: Log(lError) << "Trigger condition not defined"; return false;
+        double testVal = mTestFunction();
+        if(test(testVal))
+        {
+    	    mTriggerTimer.stop();
+            execute();
+           	string name("");
+            if(mMotor)
+    	    {
+            	name = mMotor->getName();
+            }
+            Log(lInfo) << "Positional trigger: \""<<name<<" was executed at trigger value: "<<testVal;
+        }
     }
-}
 
-void PositionalTrigger::execute()
-{
-    mIsTriggered = true;
-    //Execute any functions in the fireFunction container
-    if(mTriggerFunction)
+    bool PositionalTrigger::test(double val)
     {
-        mTriggerFunction->execute();
+    	switch(mTriggerConditionOperator)
+        {
+        	case loLargerThan: 			return val > mPosition;
+        	case loLargerThanOrEqual: 	return val >= mPosition;
+        	case loSmallerThan: 		return val < mPosition;
+        	case loSmallerThanOrEqual:	return val < mPosition;
+
+            default: Log(lError) << "Trigger condition not defined"; return false;
+        }
     }
-}
 
-XMLElement* PositionalTrigger::addToXMLDocumentAsChild(dsl::XMLDocument& doc, XMLNode* docRoot)
-{
-    //Create XML for saving to file
-    XMLElement* pn	  			= doc.NewElement("trigger");
-    XMLNode*    rootNode 		= doc.InsertFirstChild(pn);
-    string 		test;
-
-    //Attributes
-    pn->SetAttribute("type", getTypeName().c_str());
-    pn->SetAttribute("subject", mSubjectName.c_str());
-
-	XMLElement* val = doc.NewElement("position");
-    test = toString(mPosition);
-    val->SetText(test.c_str());
-	pn->InsertEndChild(val);
-
-	val = doc.NewElement("operator");
-    test = toString(mTriggerConditionOperator);
-    val->SetText(test.c_str());
-	pn->InsertEndChild(val);
-
-
-    //Add trigger function(s)
-    if(mTriggerFunction)
+    void PositionalTrigger::execute()
     {
-		mTriggerFunction->addToXMLDocumentAsChild(doc, pn);
+        mIsTriggered = true;
+        //Execute any functions in the fireFunction container
+        if(mTriggerFunction)
+        {
+            mTriggerFunction->execute();
+        }
     }
 
-    pn->InsertEndChild(rootNode);
-    docRoot->InsertEndChild(pn);
+    XMLElement* PositionalTrigger::addToXMLDocumentAsChild(dsl::XMLDocument& doc, XMLNode* docRoot)
+    {
+        //Create XML for saving to file
+        XMLElement* pn	  			= doc.NewElement("trigger");
+        XMLNode*    rootNode 		= doc.InsertFirstChild(pn);
+        string 		test;
 
-    return pn;
+        //Attributes
+        pn->SetAttribute("type", getTypeName().c_str());
+        pn->SetAttribute("subject", mSubjectName.c_str());
+
+    	XMLElement* val = doc.NewElement("position");
+        test = dsl::toString(mPosition);
+        val->SetText(test.c_str());
+    	pn->InsertEndChild(val);
+
+    	val = doc.NewElement("operator");
+        test = dsl::toString(mTriggerConditionOperator);
+        val->SetText(test.c_str());
+    	pn->InsertEndChild(val);
+
+
+        //Add trigger function(s)
+        if(mTriggerFunction)
+        {
+    		mTriggerFunction->addToXMLDocumentAsChild(doc, pn);
+        }
+
+        pn->InsertEndChild(rootNode);
+        docRoot->InsertEndChild(pn);
+
+        return pn;
+    }
+
+
+
 }
-
-

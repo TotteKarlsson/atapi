@@ -5,6 +5,7 @@
 #include "dslThread.h"
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
+#include <boost/function.hpp>
 //---------------------------------------------------------------------------
 
 typedef boost::function<void(int, int)> Callback;

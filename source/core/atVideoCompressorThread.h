@@ -5,6 +5,7 @@
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
 #include "atCoreExporter.h"
+#include <boost/function.hpp>
 //---------------------------------------------------------------------------
 
 class AT_CORE VideoCompressorThread : public dsl::Thread

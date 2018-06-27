@@ -7,8 +7,10 @@
 //#include "atTriggerFunction.h"
 #include "atArduinoClient.h"
 
+namespace at
+{
+
 using namespace dsl;
-//using namespace at;
 
 //---------------------------------------------------------------------------
 ArduinoServerCommand::ArduinoServerCommand(const string& lbl)
@@ -95,7 +97,7 @@ bool ArduinoServerCommand::start()
     return false;
 }
 
-XMLElement* ArduinoServerCommand::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
+XMLElement* ArduinoServerCommand::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
     //Create XML for saving to file
     XMLElement* pn	  	 = doc.NewElement("process");
@@ -118,7 +120,7 @@ XMLElement* ArduinoServerCommand::addToXMLDocumentAsChild(XMLDocument& doc, XMLN
 	pn->InsertEndChild(dataval1);
 
 	dataval1 = doc.NewElement("post_dwell_time");
-    dataval1->SetText(toString(getPostDwellTime()).c_str());
+    dataval1->SetText(dsl::toString(getPostDwellTime()).c_str());
 	pn->InsertEndChild(dataval1);
 
     pn->InsertEndChild(rootNode);
@@ -131,6 +133,5 @@ bool ArduinoServerCommand::isDone()
     return mIsProcessed;
 }
 
-
-
+}
 

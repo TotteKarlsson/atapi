@@ -4,15 +4,20 @@
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 
-class AT_ARDUINO SensorsArduinoClient : public ArduinoClient
+namespace at
 {
-    public:
-			   			        			SensorsArduinoClient();
-		virtual			        			~SensorsArduinoClient(){}
-		virtual void	 					getBoardStatus();
 
-    protected:
+    class AT_ARDUINO SensorsArduinoClient : public ArduinoClient
+    {
+        public:
+    			   			        			SensorsArduinoClient();
+    		virtual			        			~SensorsArduinoClient(){}
+    		virtual void	 					getBoardStatus();
 
-};
+        protected:
+
+    };
+}
 
 #endif
+

@@ -2,20 +2,23 @@
 #include "atJoyStickButtonStateEventDispatcher.h"
 //---------------------------------------------------------------------------
 
-JoyStickButtonStateEventDispatcher::JoyStickButtonStateEventDispatcher(JoyStickButton& btn)
-:
-//mButtonState(bsUp),
-mClickEventOnly(true),
-mButton(btn)
-{}
-
-void JoyStickButtonStateEventDispatcher::setButtonState(JoyStickButtonState s)
+namespace at
 {
-//	mButtonState = s;
-   	mButton.setState(s);
-}
+    JoyStickButtonStateEventDispatcher::JoyStickButtonStateEventDispatcher(JoyStickButton& btn)
+    :
+    //mButtonState(bsUp),
+    mClickEventOnly(true),
+    mButton(btn)
+    {}
 
-JoyStickButtonState JoyStickButtonStateEventDispatcher::getButtonState()
-{
-	return mButton.getState();
+    void JoyStickButtonStateEventDispatcher::setButtonState(JoyStickButtonState s)
+    {
+    //	mButtonState = s;
+       	mButton.setState(s);
+    }
+
+    JoyStickButtonState JoyStickButtonStateEventDispatcher::getButtonState()
+    {
+    	return mButton.getState();
+    }
 }

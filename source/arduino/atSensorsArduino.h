@@ -4,16 +4,16 @@
 #include "atArduinoDevice.h"
 //---------------------------------------------------------------------------
 
-class AT_ARDUINO SensorsArduino : public ArduinoDevice
+namespace at
 {
-    public:
-                                			SensorsArduino(int portNr, int baudRate = 9600);
-			                                ~SensorsArduino(){}
-        bool								getStatus();
+    class AT_ARDUINO SensorsArduino : public ArduinoDevice
+    {
+        public:
+                                    			SensorsArduino(int portNr, int baudRate = 9600);
+    			                                ~SensorsArduino(){}
+            bool								getStatus();
 
-
-    protected:
-
-
-};
+        protected:
+    };
+}
 #endif

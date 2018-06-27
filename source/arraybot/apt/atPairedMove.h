@@ -6,28 +6,31 @@
 //---------------------------------------------------------------------------
 using std::string;
 
-class APTMotor;
-class AT_AB PairedMove : public ATObject
+namespace at
 {
-    public:
-                                        PairedMove(const string& name, double d = 0, double v = 0, double a = 0);
-                                        ~PairedMove();
-		void							assignMotor1(APTMotor* motor);
-		void							assignMotor2(APTMotor* motor);
-		string            				mLabel;
-        double            		        mDistance;
-        double            		        mVelocity;
-        double            		        mAcceleration;
+    class APTMotor;
+    class AT_AB PairedMove : public ATObject
+    {
+        public:
+                                            PairedMove(const string& name, double d = 0, double v = 0, double a = 0);
+                                            ~PairedMove();
+    		void							assignMotor1(APTMotor* motor);
+    		void							assignMotor2(APTMotor* motor);
+    		string            				mLabel;
+            double            		        mDistance;
+            double            		        mVelocity;
+            double            		        mAcceleration;
 
-        bool							execute();
-        bool							check();
-        string							getCheckMessage();
-        string			            	asIniRecord();
+            bool							execute();
+            bool							check();
+            string							getCheckMessage();
+            string			            	asIniRecord();
 
-    protected:
-		APTMotor*						mMotor1;
-		APTMotor*						mMotor2;
-        string							mCheckMessage;
-};
+        protected:
+    		APTMotor*						mMotor1;
+    		APTMotor*						mMotor2;
+            string							mCheckMessage;
+    };
+}
 
 #endif

@@ -3,12 +3,13 @@
 #include "dslConstants.h"
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
-#include <functional>
+//#include <functional>
 #include <fstream>
 #include "dslThread.h"
 #include "Poco/PipeStream.h"
 #include "atATObject.h"
 #include "dslConstants.h"
+#include <boost/function.hpp>
 //---------------------------------------------------------------------------
 
 //using Poco::Process;

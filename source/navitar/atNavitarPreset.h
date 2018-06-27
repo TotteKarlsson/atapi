@@ -11,29 +11,32 @@ using dsl::ObjectType;
 using dsl::IniFile;
 using dsl::IniFileProperties;
 
-class AT_NAVITAR NavitarPreset	: public IniFileProperties
+namespace at
 {
-    public:
-		                                        NavitarPreset(NavitarMotorController& mc, const string& name, const int& z = 0, const int& f = 0);
-        				                        ~NavitarPreset();
-		string									getName();
-		bool									setName(const string& n);
-		bool									setup(const string& iniSection, IniFile& iniFile);
+    class AT_NAVITAR NavitarPreset	: public IniFileProperties
+    {
+        public:
+    		                                        NavitarPreset(NavitarMotorController& mc, const string& name, const int& z = 0, const int& f = 0);
+            				                        ~NavitarPreset();
+    		string									getName();
+    		bool									setName(const string& n);
+    		bool									setup(const string& iniSection, IniFile& iniFile);
 
-		bool	 								set();
-        bool									setZoom(const int& z);
-        bool									setFocus(const int& f);
-        bool									setValue(const int& z, const int& f);
+    		bool	 								set();
+            bool									setZoom(const int& z);
+            bool									setFocus(const int& f);
+            bool									setValue(const int& z, const int& f);
 
-        int										getFocusPreset();
-        int										getZoomPreset();
+            int										getFocusPreset();
+            int										getZoomPreset();
 
 
-    protected:
-    	string									mName;
-		NavitarMotorController&					mController;
-        NavitarZoomPreset						mZoom;
-        NavitarFocusPreset						mFocus;
+        protected:
+        	string									mName;
+    		NavitarMotorController&					mController;
+            NavitarZoomPreset						mZoom;
+            NavitarFocusPreset						mFocus;
 
-};
+    };
+}
 #endif

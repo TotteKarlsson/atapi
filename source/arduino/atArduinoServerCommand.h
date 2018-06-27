@@ -5,7 +5,10 @@
 #include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 
+namespace at
+{
 class ArduinoClient;
+
 
 //!Arraybot can execute a Arduino command, like Activate Vacuum using an
 //!Arduino server command.
@@ -17,7 +20,7 @@ class AT_ARDUINO ArduinoServerCommand : public Process
 		const string 						getTypeName() const;
 		virtual void		   		        init(ArrayBot& ab);
 		virtual bool 			  	        write(){return false;}
-		virtual dsl::XMLElement*            addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
+		virtual XMLElement*            		addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot);
 
         virtual bool	                    isBeingProcessed();
         bool 						        isProcessed();
@@ -37,4 +40,5 @@ class AT_ARDUINO ArduinoServerCommand : public Process
         ArduinoClient*                      mArduinoClient;
 };
 
+}
 #endif

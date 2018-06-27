@@ -15,14 +15,16 @@ namespace dsl
 }
 
 using dsl::MessageContainer;
-class ArduinoClient;
+
 typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
+namespace at
+{
+class ArduinoClient;
 //!The Arduino Message processor processes messages sent from a
 //!Arduino Server.
 class AT_ARDUINO ArduinoMessageProcessor : public Thread, public ATObject
 {
-
     public:
                                         ArduinoMessageProcessor(ArduinoClient& client);
                                         ~ArduinoMessageProcessor();
@@ -46,4 +48,5 @@ class AT_ARDUINO ArduinoMessageProcessor : public Thread, public ATObject
 		ArduinoClient&					mClient;
 };
 
+}
 #endif

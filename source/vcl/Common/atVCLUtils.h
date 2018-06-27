@@ -1,46 +1,53 @@
 #ifndef atVCLUtilsH
 #define atVCLUtilsH
-#include <System.Classes.hpp>
+#include "atVCLCommonExporter.h"
 #include <string>
-#include "atUtilities.h"
 //---------------------------------------------------------------------------
+namespace at
+{
+
 using std::string;
 
+class TImage;
+class TListBox;
+class TComboBox;
+class TObject;
 
-class PACKAGE ATWindowStructMessage
-{
-	public:
-        Cardinal            Msg;
-                            //
-        int                 wparam;
-
-                            //This is our data
-        void*				lparam;
-        LRESULT             Result;
-};
+//class AT_VCLCOMMON ATWindowStructMessage
+//{
+//	public:
+//        Cardinal            Msg;
+//                            //
+//        int                 wparam;
+//
+//                            //This is our data
+//        void*				lparam;
+//        LRESULT             Result;
+//};
 
 
 //TImage utilities
-PACKAGE int 				getImageWidth(TImage* imageCtrl);
-PACKAGE int 				getImageHeight(TImage* imageCtrl);
+AT_VCLCOMMON int 				getImageWidth(TImage* imageCtrl);
+AT_VCLCOMMON int 				getImageHeight(TImage* imageCtrl);
 
-PACKAGE double				getImageAspectRatio(TImage* imageCtrl);
-PACKAGE double				getImageContainerAspectRatio(TImage* imageCtrl);
-PACKAGE int                 getImageWidthFromHeight(TImage* imageCtrl);
-PACKAGE int                 getImageHeightFromWidth(TImage* imageCtrl);
+AT_VCLCOMMON double				getImageAspectRatio(TImage* imageCtrl);
+AT_VCLCOMMON double				getImageContainerAspectRatio(TImage* imageCtrl);
+AT_VCLCOMMON int                getImageWidthFromHeight(TImage* imageCtrl);
+AT_VCLCOMMON int                getImageHeightFromWidth(TImage* imageCtrl);
 
 //List boxes
-PACKAGE bool 	            updateListBoxItemCaption(TListBox* cb, int indx, const string& name);
-PACKAGE int                 selectAndClickListBoxItem(TListBox* lb, TObject* p);
-PACKAGE int                 selectAndClickListBoxItem(TListBox* lb, int itemIndex);
-PACKAGE int                 selectAndClickListBoxItem(TListBox* lb, const string& name);
+AT_VCLCOMMON bool 	            updateListBoxItemCaption(TListBox* cb, int indx, const string& name);
+AT_VCLCOMMON int                selectAndClickListBoxItem(TListBox* lb, TObject* p);
+AT_VCLCOMMON int                selectAndClickListBoxItem(TListBox* lb, int itemIndex);
+AT_VCLCOMMON int                selectAndClickListBoxItem(TListBox* lb, const string& name);
 
 //Combo boxes
-PACKAGE bool 	            updateComboBoxItemCaption(TComboBox* cb, int indx, const string& name);
-PACKAGE string 	            getSelectedItem(TComboBox* lb);
-PACKAGE int 	            selectItem(TComboBox* lb, const string& name, bool addItem = false);
-PACKAGE int 	            selectAndClickComboBoxItem(TComboBox* lb, const string& name);
+AT_VCLCOMMON bool 	            updateComboBoxItemCaption(TComboBox* cb, int indx, const string& name);
+AT_VCLCOMMON string             getSelectedItem(TComboBox* lb);
+AT_VCLCOMMON int 	            selectItem(TComboBox* lb, const string& name, bool addItem = false);
+AT_VCLCOMMON int 	            selectAndClickComboBoxItem(TComboBox* lb, const string& name);
 
-PACKAGE int 	            getCurrentUserID(TComboBox* mUserCB);
+AT_VCLCOMMON int 	            getCurrentUserID(TComboBox* mUserCB);
 
+}
 #endif

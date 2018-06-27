@@ -11,9 +11,8 @@
 using dsl::Timer;
 namespace at
 {
-	class Move;
-}
 
+class Move;
 class ArrayBot;
 class ArrayCamClient;
 //!The Process Sequencer executes and maintain a process sequence.
@@ -88,4 +87,5 @@ class AT_AB ProcessSequencer : public ATObject
 		void			                    onTimerFunc();
 };
 
+}
 #endif

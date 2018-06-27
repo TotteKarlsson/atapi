@@ -9,77 +9,80 @@
 #include "process/atProcessSequencer.h"
 //---------------------------------------------------------------------------
 
-class ArduinoClient;
-//class ArrayBotServer;
-class AT_AB ArrayBot : public ATObject
+namespace at
 {
-    public:
-									                    ArrayBot(IniFile& ini, const string& appFolder);
-									                    ~ArrayBot();
+    class ArduinoClient;
+    //class ArrayBotServer;
+    class AT_AB ArrayBot : public ATObject
+    {
+        public:
+    									                    ArrayBot(IniFile& ini, const string& appFolder);
+    									                    ~ArrayBot();
 
-		void 						                    initialize();
-        bool						                    applyJoyStickSetting(const string& settingName);
-        bool						                    readINIParameters();
-        bool						                    writeINIParameters();
+    		void 						                    initialize();
+            bool						                    applyJoyStickSetting(const string& settingName);
+            bool						                    readINIParameters();
+            bool						                    writeINIParameters();
 
-		bool											enableCoverSlipUnit();
-		bool											disableCoverSlipUnit();
-		bool											enableWhiskerUnit();
-		bool											disableWhiskerUnit();
+    		bool											enableCoverSlipUnit();
+    		bool											disableCoverSlipUnit();
+    		bool											enableWhiskerUnit();
+    		bool											disableWhiskerUnit();
 
-        XYZUnit&					                    getCoverSlipUnit();
-        XYZUnit&					                    getWhiskerUnit();
-        bool						                    shutDown();
+            XYZUnit&					                    getCoverSlipUnit();
+            XYZUnit&					                    getWhiskerUnit();
+            bool						                    shutDown();
 
-        ArrayBotJoyStick&			                    getJoyStick();
-        JoyStickSettings&			                    getJoyStickSettings();
+            ArrayBotJoyStick&			                    getJoyStick();
+            JoyStickSettings&			                    getJoyStickSettings();
 
-		bool						                    enableJoyStick();
-		void						                    disableJoyStick();
+    		bool						                    enableJoyStick();
+    		void						                    disableJoyStick();
 
-        												//!Allow buttons to work, while the axes don't
-        void											enableJoyStickAxes();
-        void											disableJoyStickAxes();
+            												//!Allow buttons to work, while the axes don't
+            void											enableJoyStickAxes();
+            void											disableJoyStickAxes();
 
-        void						                    stopAll();
-        void											homeAll();
+            void						                    stopAll();
+            void											homeAll();
 
-        bool						                    isActive();
-        bool						                    isShuttingDown();
+            bool						                    isActive();
+            bool						                    isShuttingDown();
 
-		APTMotor*					                    getCoverSlipAngleController();
-		APTMotor*					                    getCameraAngleController();
+    		APTMotor*					                    getCoverSlipAngleController();
+    		APTMotor*					                    getCameraAngleController();
 
-    	PairedMoves&	 			                    getLiftMoves(){return mLifts;}
-        vector<APTMotor*>			                    getAllMotors();
-        APTMotor*										getMotorWithName(const string& name);
-        APTMotor*										getMotorWithSerial(const string& serial);
+        	PairedMoves&	 			                    getLiftMoves(){return mLifts;}
+            vector<APTMotor*>			                    getAllMotors();
+            APTMotor*										getMotorWithName(const string& name);
+            APTMotor*										getMotorWithSerial(const string& serial);
 
-    private:
-        bool						                    mIsShuttingDown;
-        string						                    mAppDataFolder;
-        IniFile&					                    mIniFile;
-        IniFileProperties  			    				mProperties;
-        Property<int>									mJoyStickID;
-		Property<double>								mRightJoyStickXLeftDeadZone;
-        Property<double>                                mRightJoyStickXRightDeadZone;
-        Property<double>                                mRightJoyStickYLeftDeadZone;
-        Property<double>                                mRightJoyStickYRightDeadZone;
-        Property<double>                                mLeftJoyStickXLeftDeadZone;
-        Property<double>                                mLeftJoyStickXRightDeadZone;
-        Property<double>                                mLeftJoyStickYLeftDeadZone;
-        Property<double>                                mLeftJoyStickYRightDeadZone;
+        private:
+            bool						                    mIsShuttingDown;
+            string						                    mAppDataFolder;
+            IniFile&					                    mIniFile;
+            IniFileProperties  			    				mProperties;
+            Property<int>									mJoyStickID;
+    		Property<double>								mRightJoyStickXLeftDeadZone;
+            Property<double>                                mRightJoyStickXRightDeadZone;
+            Property<double>                                mRightJoyStickYLeftDeadZone;
+            Property<double>                                mRightJoyStickYRightDeadZone;
+            Property<double>                                mLeftJoyStickXLeftDeadZone;
+            Property<double>                                mLeftJoyStickXRightDeadZone;
+            Property<double>                                mLeftJoyStickYLeftDeadZone;
+            Property<double>                                mLeftJoyStickYRightDeadZone;
 
-        ArrayBotJoyStick			                    mJoyStick;
-        JoyStickSettings			                    mJSSettings;
+            ArrayBotJoyStick			                    mJoyStick;
+            JoyStickSettings			                    mJSSettings;
 
-        XYZUnit						                    mCoverSlip;
-        XYZUnit											mWhisker;
+            XYZUnit						                    mCoverSlip;
+            XYZUnit											mWhisker;
 
-        							                    //!List of Lifts
-        PairedMoves					                    mLifts;
-//        ArrayBotServer									mServer;
+            							                    //!List of Lifts
+            PairedMoves					                    mLifts;
+    //        ArrayBotServer									mServer;
 
-};
+    };
+}
 
 #endif

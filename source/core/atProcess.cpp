@@ -6,6 +6,8 @@
 using Poco::Timespan;
 using namespace dsl;
 
+namespace at
+{
 Process::Process(const string& lbl, ATObject* ao)
 :
 mSubject(ao),
@@ -27,7 +29,7 @@ ProcessType Process::getProcessType()
 
 string Process::getProcessTypeAsString()
 {
-	return toString(mProcessType);
+	return dsl::toString(mProcessType);
 }
 
 bool Process::start()
@@ -84,7 +86,7 @@ XMLElement* Process::addToXMLDocument(tinyxml2::XMLDocument& doc, XMLNode* docRo
 }
 
 //Re implemented in derived processes
-XMLElement* Process::addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot)
+XMLElement* Process::addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot)
 {
 	return NULL;
 }
@@ -109,4 +111,6 @@ Poco::Timespan Process::getElapsedTimeSinceStart()
      	Poco::Timestamp now;
         Poco::Timespan timeElapsed(now - mStartTime);
         return timeElapsed;
+}
+
 }

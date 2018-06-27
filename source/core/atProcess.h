@@ -11,11 +11,17 @@
 using std::string;
 using Poco::Timestamp;
 using Poco::Timestamp::TimeDiff;
+using tinyxml2::XMLElement;
+using tinyxml2::XMLDocument;
+using tinyxml2::XMLNode;
 
 namespace dsl
 {
 	class IniSection;
 }
+
+namespace at
+{
 
 class Trigger;
 class ArrayBot;
@@ -66,8 +72,8 @@ class AT_CORE Process : public ATObject
         virtual	bool 			 	            isStarted() 		{return mIsStarted;}
 
 
-        virtual dsl::XMLElement*           		addToXMLDocument(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
-		virtual dsl::XMLElement*                addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
+        virtual  XMLElement*          			addToXMLDocument(XMLDocument& doc, XMLNode* docRoot);
+		virtual  XMLElement*                	addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot);
         Poco::Timespan							getElapsedTimeSinceStart();
 
     protected:
@@ -104,4 +110,5 @@ class AT_CORE Process : public ATObject
         Poco::Timespan 				            mTimeOut;
 };
 
+}
 #endif

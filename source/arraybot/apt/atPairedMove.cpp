@@ -8,109 +8,112 @@
 //---------------------------------------------------------------------------
 using namespace dsl;
 
-PairedMove::PairedMove(const string& name, double d, double v, double a)
-:
-mLabel(name),
-mDistance(d),
-mVelocity(v),
-mAcceleration(a)
+namespace at
 {
-}
-
-PairedMove::~PairedMove()
-{}
-
-string PairedMove::asIniRecord()
-{
-	stringstream s;
-    s << mDistance << "," << mVelocity << ","<< mAcceleration;
-	return s.str();
-}
-
-void PairedMove::assignMotor1(APTMotor* motor)
-{
-	mMotor1 = motor;
-}
-
-void PairedMove::assignMotor2(APTMotor* motor)
-{
-	mMotor2 = motor;
-}
-
-bool PairedMove::check()
-{
-	if(!mMotor1 || !mMotor2)
+    PairedMove::PairedMove(const string& name, double d, double v, double a)
+    :
+    mLabel(name),
+    mDistance(d),
+    mVelocity(v),
+    mAcceleration(a)
     {
-        mCheckMessage = "Motors are not assigned for the Paired move";
-        return false;
     }
 
-    if(mVelocity == 0 || mAcceleration == 0 || mDistance == 0)
-    {
-        mCheckMessage = "Velocity, acceleration and vertical distance need all to be non zero";
-    	Log(lError) << mCheckMessage;
-        return false;
-    }
+    PairedMove::~PairedMove()
+    {}
 
-//    //Find out which motor can move least
-//    double dist1 =  mMotor1->getMinPosition()  - mMotor1->getPosition();
-//    double dist2  = mMotor2->getMinPosition()  - mMotor2->getPosition();
-//
-    //Choose the shortest "longest" distance that we can move
-//    mDistance = dist1 < dist2 ? dist1 : dist2;
-//    mDistance = 30;//mDistance - 2.0;
-
-    //get current positions and carry out some moveTo's
-	double newZ1Pos = mMotor1->getPosition() - mDistance;
-	double newZ2Pos = mMotor2->getPosition() - mDistance;
-
-    if(newZ1Pos < mMotor1->getMinPosition())
+    string PairedMove::asIniRecord()
     {
     	stringstream s;
-        s << "New position ("<<newZ1Pos<<") too small for motor with label: \""<<mMotor1->getName()<<"\"\rMax position is "<<mMotor1->getMinPosition()<<" mm";
-    	Log(lError) << s.str();
-        mCheckMessage = s.str();
-        return false;
+        s << mDistance << "," << mVelocity << ","<< mAcceleration;
+    	return s.str();
     }
 
-    if(newZ2Pos < mMotor2->getMinPosition())
+    void PairedMove::assignMotor1(APTMotor* motor)
     {
-    	stringstream s;
-        s << "New position ("<<newZ2Pos<<") too small for motor with label: \""<<mMotor2->getName()<<"\"\rMax position is "<<mMotor2->getMinPosition()<<" mm";
-    	Log(lError) << s.str();
-        mCheckMessage = s.str();
-        return false;
+    	mMotor1 = motor;
     }
-    return true;
-}
 
-bool PairedMove::execute()
-{
-	if(!check())
+    void PairedMove::assignMotor2(APTMotor* motor)
     {
-    	return false;
+    	mMotor2 = motor;
     }
 
-    //get current positions and carry out some moveTo's
-	double newZ1Pos = mMotor1->getPosition() - mDistance;
-	double newZ2Pos = mMotor2->getPosition() - mDistance;
+    bool PairedMove::check()
+    {
+    	if(!mMotor1 || !mMotor2)
+        {
+            mCheckMessage = "Motors are not assigned for the Paired move";
+            return false;
+        }
 
-	//Update motors with current parameters and start the move
-    mMotor1->setVelocityParameters(mVelocity, mAcceleration);
-    mMotor2->setVelocityParameters(mVelocity, mAcceleration);
+        if(mVelocity == 0 || mAcceleration == 0 || mDistance == 0)
+        {
+            mCheckMessage = "Velocity, acceleration and vertical distance need all to be non zero";
+        	Log(lError) << mCheckMessage;
+            return false;
+        }
 
-    Log(lInfo) << "Moving Motor 1 to: "	<<newZ1Pos;
-    Log(lInfo) << "Moving Motor 2 to: "	<<newZ2Pos;
+    //    //Find out which motor can move least
+    //    double dist1 =  mMotor1->getMinPosition()  - mMotor1->getPosition();
+    //    double dist2  = mMotor2->getMinPosition()  - mMotor2->getPosition();
+    //
+        //Choose the shortest "longest" distance that we can move
+    //    mDistance = dist1 < dist2 ? dist1 : dist2;
+    //    mDistance = 30;//mDistance - 2.0;
 
-	//Initiate the move
-    mMotor1->moveToPosition(newZ1Pos);
-    mMotor2->moveToPosition(newZ2Pos);
-	return true;
+        //get current positions and carry out some moveTo's
+    	double newZ1Pos = mMotor1->getPosition() - mDistance;
+    	double newZ2Pos = mMotor2->getPosition() - mDistance;
+
+        if(newZ1Pos < mMotor1->getMinPosition())
+        {
+        	stringstream s;
+            s << "New position ("<<newZ1Pos<<") too small for motor with label: \""<<mMotor1->getName()<<"\"\rMax position is "<<mMotor1->getMinPosition()<<" mm";
+        	Log(lError) << s.str();
+            mCheckMessage = s.str();
+            return false;
+        }
+
+        if(newZ2Pos < mMotor2->getMinPosition())
+        {
+        	stringstream s;
+            s << "New position ("<<newZ2Pos<<") too small for motor with label: \""<<mMotor2->getName()<<"\"\rMax position is "<<mMotor2->getMinPosition()<<" mm";
+        	Log(lError) << s.str();
+            mCheckMessage = s.str();
+            return false;
+        }
+        return true;
+    }
+
+    bool PairedMove::execute()
+    {
+    	if(!check())
+        {
+        	return false;
+        }
+
+        //get current positions and carry out some moveTo's
+    	double newZ1Pos = mMotor1->getPosition() - mDistance;
+    	double newZ2Pos = mMotor2->getPosition() - mDistance;
+
+    	//Update motors with current parameters and start the move
+        mMotor1->setVelocityParameters(mVelocity, mAcceleration);
+        mMotor2->setVelocityParameters(mVelocity, mAcceleration);
+
+        Log(lInfo) << "Moving Motor 1 to: "	<<newZ1Pos;
+        Log(lInfo) << "Moving Motor 2 to: "	<<newZ2Pos;
+
+    	//Initiate the move
+        mMotor1->moveToPosition(newZ1Pos);
+        mMotor2->moveToPosition(newZ2Pos);
+    	return true;
+    }
+
+
+    string PairedMove::getCheckMessage()
+    {
+    	return mCheckMessage;
+    }
+
 }
-
-
-string PairedMove::getCheckMessage()
-{
-	return mCheckMessage;
-}
-

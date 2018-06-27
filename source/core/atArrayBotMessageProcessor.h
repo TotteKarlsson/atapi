@@ -14,39 +14,42 @@ namespace dsl
 }
 
 using dsl::MessageContainer;
-class ArrayBotClient;
 typedef void (__closure *OnMessageReceivedCB)(const string& msg);
-
-//!The ArrayBot Message processor processes messages sent from a
-//!ArrayBot Server.
-class AT_CORE ArrayBotMessageProcessor : public Thread, public ATObject
+namespace at
 {
 
-    public:
-                                        ArrayBotMessageProcessor(ArrayBotClient& client);
-                                        ~ArrayBotMessageProcessor();
+    class ArrayBotClient;
+    //!The ArrayBot Message processor processes messages sent from a
+    //!ArrayBot Server.
+    class AT_CORE ArrayBotMessageProcessor : public Thread, public ATObject
+    {
 
-                                        // overridden from Thread
-        void                            worker();
-        void                            run();
+        public:
+                                            ArrayBotMessageProcessor(ArrayBotClient& client);
+                                            ~ArrayBotMessageProcessor();
 
-        bool                            start(bool inThread);
-        void                            stop();
-        virtual void                    processMessage(const string& msg);
-        void                            suspendProcessing() {mAllowProcessing = false;}
-        void                            resumeProcessing()  {mAllowProcessing = true;}
+                                            // overridden from Thread
+            void                            worker();
+            void                            run();
 
-        								//Might be nicer to setup a proper subject/observer mechanism
-		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+            bool                            start(bool inThread);
+            void                            stop();
+            virtual void                    processMessage(const string& msg);
+            void                            suspendProcessing() {mAllowProcessing = false;}
+            void                            resumeProcessing()  {mAllowProcessing = true;}
+
+            								//Might be nicer to setup a proper subject/observer mechanism
+    		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
 
 
-	private:
-        string                          mServerName;
-        bool                            mAllowProcessing;
-        MessageContainer&            	mMessageContainer;
-        vector<OnMessageReceivedCB>		onMessageReceivedCallbacks;
+    	private:
+            string                          mServerName;
+            bool                            mAllowProcessing;
+            MessageContainer&            	mMessageContainer;
+            vector<OnMessageReceivedCB>		onMessageReceivedCallbacks;
 
-		ArrayBotClient&					mClient;
-};
+    		ArrayBotClient&					mClient;
+    };
+}
 
 #endif

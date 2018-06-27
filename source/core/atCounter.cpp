@@ -2,99 +2,101 @@
 #include "atCounter.h"
 //---------------------------------------------------------------------------
 
-
-Counter::Counter()
-:
-mCount(0),
-mCountTo(10),
-mOnCountCallBack(NULL),
-mOnCountedToCallBack(NULL),
-mEnabled(false)
-{}
-
-void Counter::increase(int count)
+namespace at
 {
-	if(!mEnabled)
-    {
-    	return;
-    }
+    Counter::Counter()
+    :
+    mCount(0),
+    mCountTo(10),
+    mOnCountCallBack(NULL),
+    mOnCountedToCallBack(NULL),
+    mEnabled(false)
+    {}
 
-	mCount += count;
-
-    //Check....
-    if(mCount >= mCountTo)
+    void Counter::increase(int count)
     {
-        if(mOnCountedToCallBack)
+    	if(!mEnabled)
         {
-            mOnCountedToCallBack();
+        	return;
+        }
+
+    	mCount += count;
+
+        //Check....
+        if(mCount >= mCountTo)
+        {
+            if(mOnCountedToCallBack)
+            {
+                mOnCountedToCallBack();
+            }
+        }
+
+        if(mOnCountCallBack)
+        {
+            mOnCountCallBack();
         }
     }
 
-    if(mOnCountCallBack)
+    void Counter::decrease()
     {
-        mOnCountCallBack();
-    }
-}
-
-void Counter::decrease()
-{
-	if(!mEnabled)
-    {
-    	return;
-    }
-
-	mCount--;
-    if(mCount <= mCountTo)
-    {
-    	if(mOnCountCallBack)
+    	if(!mEnabled)
         {
-        	mOnCountCallBack();
+        	return;
+        }
+
+    	mCount--;
+        if(mCount <= mCountTo)
+        {
+        	if(mOnCountCallBack)
+            {
+            	mOnCountCallBack();
+            }
         }
     }
-}
 
-void Counter::reset(int count)
-{
-	mLastCount = mCount;
-	mCount = count;
-}
+    void Counter::reset(int count)
+    {
+    	mLastCount = mCount;
+    	mCount = count;
+    }
 
-int	Counter::getLastCount()
-{
-	return mLastCount;
-}
+    int	Counter::getLastCount()
+    {
+    	return mLastCount;
+    }
 
-int	Counter::getCount()
-{
-	return mCount;
-}
+    int	Counter::getCount()
+    {
+    	return mCount;
+    }
 
-int& Counter::getCountReference()
-{
-	return mCount;
-}
+    int& Counter::getCountReference()
+    {
+    	return mCount;
+    }
 
-int& Counter::getCountToReference()
-{
-	return mCountTo;
-}
+    int& Counter::getCountToReference()
+    {
+    	return mCountTo;
+    }
 
-void Counter::assignOnCountCallBack(CounterCallBack cb)
-{
-	mOnCountCallBack = cb;
-}
+    void Counter::assignOnCountCallBack(CounterCallBack cb)
+    {
+    	mOnCountCallBack = cb;
+    }
 
-void Counter::assignOnCountedToCallBack(CounterCallBack cb)
-{
-	mOnCountedToCallBack = cb;
-}
+    void Counter::assignOnCountedToCallBack(CounterCallBack cb)
+    {
+    	mOnCountedToCallBack = cb;
+    }
 
-void Counter::enable()
-{
-	mEnabled = true;
-}
+    void Counter::enable()
+    {
+    	mEnabled = true;
+    }
 
-void Counter::disable()
-{
-	mEnabled = false;
+    void Counter::disable()
+    {
+    	mEnabled = false;
+    }
 }

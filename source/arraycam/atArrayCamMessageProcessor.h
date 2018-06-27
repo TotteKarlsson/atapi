@@ -14,39 +14,44 @@ namespace dsl
 }
 
 using dsl::MessageContainer;
-class ArrayCamClient;
-typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
-//!The ArrayCam Message processor processes messages sent from a
-//!ArrayCam Server.
-class AT_CORE ArrayCamMessageProcessor : public Thread, public ATObject
+
+namespace at
 {
+    typedef void (__closure *OnMessageReceivedCB)(const string& msg);
+    class ArrayCamClient;
 
-    public:
-                                        ArrayCamMessageProcessor(ArrayCamClient& client);
-                                        ~ArrayCamMessageProcessor();
+    //!The ArrayCam Message processor processes messages sent from a
+    //!ArrayCam Server.
+    class AT_CORE ArrayCamMessageProcessor : public Thread, public ATObject
+    {
 
-                                        // overridden from Thread
-        void                            worker();
-        void                            run();
+        public:
+                                            ArrayCamMessageProcessor(ArrayCamClient& client);
+                                            ~ArrayCamMessageProcessor();
 
-        bool                            start(bool inThread);
-        void                            stop();
-        virtual void                    processMessage(const string& msg);
-        void                            suspendProcessing() {mAllowProcessing = false;}
-        void                            resumeProcessing()  {mAllowProcessing = true;}
+                                            // overridden from Thread
+            void                            worker();
+            void                            run();
 
-        								//Might be nicer to setup a proper subject/observer mechanism
-		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+            bool                            start(bool inThread);
+            void                            stop();
+            virtual void                    processMessage(const string& msg);
+            void                            suspendProcessing() {mAllowProcessing = false;}
+            void                            resumeProcessing()  {mAllowProcessing = true;}
+
+            								//Might be nicer to setup a proper subject/observer mechanism
+    		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
 
 
-	private:
-        string                          mServerName;
-        bool                            mAllowProcessing;
-        MessageContainer&            	mMessageContainer;
-        vector<OnMessageReceivedCB>		onMessageReceivedCallbacks;
+    	private:
+            string                          mServerName;
+            bool                            mAllowProcessing;
+            MessageContainer&            	mMessageContainer;
+            vector<OnMessageReceivedCB>		onMessageReceivedCallbacks;
 
-		ArrayCamClient&					mClient;
-};
+    		ArrayCamClient&					mClient;
+    };
 
+}
 #endif

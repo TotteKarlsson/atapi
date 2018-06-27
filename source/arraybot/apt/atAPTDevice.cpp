@@ -4,14 +4,16 @@
 //---------------------------------------------------------------------------
 
 
+namespace at
+{
 APTDevice::APTDevice(int serial)
-	:
-	mSerial(toString(serial)),
-	mIsConnected(false),
-	mDeviceTypeID(didUnknown),
+    :
+    mSerial(dsl::toString(serial)),
+    mIsConnected(false),
+    mDeviceTypeID(didUnknown),
     mName("<none>")
 {
-    mProperties.setSection(toString(serial));
+    mProperties.setSection(dsl::toString(serial));
     mProperties.add((BaseProperty*) &mName.setup("NAME", 			"<none>", true));
 }
 
@@ -20,27 +22,27 @@ APTDevice::~APTDevice()
 
 void APTDevice::setName(const string& name)
 {
-	mName = name;
+    mName = name;
 }
 
 string APTDevice::getName() const
 {
-	return mName.getValue();
+    return mName.getValue();
 }
 
 string APTDevice::getSerial() const
 {
-	return mSerial.getValue();
+    return mSerial.getValue();
 }
 
 bool APTDevice::isConnected() const
 {
-	return mIsConnected;
+    return mIsConnected;
 }
 
 bool APTDevice::loadProperties(IniFile& iniFile)
 {
-	Log(lDebug) << "Loading properties for APT device with serial: "<<mSerial;
+    Log(lDebug) << "Loading properties for APT device with serial: "<<mSerial;
     mProperties.setIniFile(&iniFile);
     mProperties.read();
 
@@ -51,9 +53,10 @@ bool APTDevice::loadProperties(IniFile& iniFile)
 
 bool APTDevice::writeProperties(IniFile& iniFile)
 {
-	Log(lDebug) << "Writing properties for APT device with serial: "<<mSerial;
+    Log(lDebug) << "Writing properties for APT device with serial: "<<mSerial;
     mProperties.setIniFile(&iniFile);
     mProperties.write();
     return true;
 }
 
+}

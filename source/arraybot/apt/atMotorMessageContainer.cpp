@@ -5,76 +5,79 @@
 #pragma package(smart_init)
 
 using namespace dsl;
-MotorMessageContainer::MotorMessageContainer()
-:
-mNrOfProcessedCommands(0)
-{}
-
-MotorMessageContainer::~MotorMessageContainer()
-{}
-
-void MotorMessageContainer::post(const MotorCommand& msg)
+namespace at
 {
-    //The list of motorCMDs are accessed by child threads
+
+    MotorMessageContainer::MotorMessageContainer()
+    :
+    mNrOfProcessedCommands(0)
+    {}
+
+    MotorMessageContainer::~MotorMessageContainer()
+    {}
+
+    void MotorMessageContainer::post(const MotorCommand& msg)
     {
-        Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
-        if(msg.getCore() == mcStopProfiled || msg.getCore() == mcStopHard)
+        //The list of motorCMDs are accessed by child threads
         {
-			mCommands.clear();
-        }
-        mCommands.push_back(msg);
-        mNewCommandCondition.signal();
-        Log(lDebug) << "Command posted to message list: "<<msg.asString();
-    }
-}
-
-void  MotorMessageContainer::wakeUpWatchers()
-{
-	Log(lDebug) << "Wake up processors waiting for motorCMDs";
-	mNewCommandCondition.signal();
-}
-
-MotorCommand MotorMessageContainer::pop()
-{
-    MotorCommand cmd(mcNone);
-
-    //Scoped lock
-    {
-        Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
-        if(mCommands.size())
-        {
-            cmd = mCommands.front();
-            mCommands.pop_front();
+            Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
+            if(msg.getCore() == mcStopProfiled || msg.getCore() == mcStopHard)
+            {
+    			mCommands.clear();
+            }
+            mCommands.push_back(msg);
+            mNewCommandCondition.signal();
+            Log(lDebug) << "Command posted to message list: "<<msg.asString();
         }
     }
 
-    return cmd;
-}
-
-MotorCommand MotorMessageContainer::peek()
-{
-    MotorCommand cmd(mcNone);
-
-    //Scoped lock
+    void  MotorMessageContainer::wakeUpWatchers()
     {
-        Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
-        if(mCommands.size())
-        {
-            cmd = mCommands.front();
-        }
+    	Log(lDebug) << "Wake up processors waiting for motorCMDs";
+    	mNewCommandCondition.signal();
     }
 
-    return cmd;
-}
+    MotorCommand MotorMessageContainer::pop()
+    {
+        MotorCommand cmd(mcNone);
 
-bool MotorMessageContainer::hasMessage()
-{
-    return count() > 0  ? true : false;
-}
+        //Scoped lock
+        {
+            Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
+            if(mCommands.size())
+            {
+                cmd = mCommands.front();
+                mCommands.pop_front();
+            }
+        }
 
-int MotorMessageContainer::count()
-{
-    int sz = mCommands.size();
-    return sz;
-}
+        return cmd;
+    }
 
+    MotorCommand MotorMessageContainer::peek()
+    {
+        MotorCommand cmd(mcNone);
+
+        //Scoped lock
+        {
+            Poco::ScopedLock<Poco::Mutex> lock(mListMutex);
+            if(mCommands.size())
+            {
+                cmd = mCommands.front();
+            }
+        }
+
+        return cmd;
+    }
+
+    bool MotorMessageContainer::hasMessage()
+    {
+        return count() > 0  ? true : false;
+    }
+
+    int MotorMessageContainer::count()
+    {
+        int sz = mCommands.size();
+        return sz;
+    }
+}

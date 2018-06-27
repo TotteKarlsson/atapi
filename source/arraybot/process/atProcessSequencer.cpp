@@ -7,6 +7,8 @@
 //---------------------------------------------------------------------------
 using namespace dsl;
 
+namespace at
+{
 ProcessSequencer::ProcessSequencer(ArrayBot& ab, ArrayCamClient& acc,  const string& fileFolder)
 :
 mAB(ab),
@@ -381,5 +383,7 @@ bool ProcessSequencer::isRunning()
 bool ProcessSequencer::isPaused()
 {
 	return mSequenceTimer.isPaused();
+}
+
 }
 

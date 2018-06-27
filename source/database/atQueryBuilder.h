@@ -5,13 +5,19 @@
 #include "atATObject.h"
 //---------------------------------------------------------------------------
 
-class AT_DB QueryBuilder : public std::stringstream, public ATObject
+namespace at
 {
-	public:
-		std::string				asString();
-        const char* 			asCString();
-        void					clear();
 
-    protected:
-};
+    class AT_DB QueryBuilder : public std::stringstream, public ATObject
+    {
+    	public:
+    		std::string				asString();
+            const char* 			asCString();
+            void					clear();
+
+        protected:
+    };
+
+}
+
 #endif

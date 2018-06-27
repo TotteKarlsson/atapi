@@ -10,6 +10,8 @@
 //----------------------------------------------------------------
 using namespace dsl;
 
+namespace at
+{
 ArduinoMessageProcessor::ArduinoMessageProcessor(ArduinoClient& client)
 :
 Thread("MessageProcessor"),
@@ -85,3 +87,4 @@ void ArduinoMessageProcessor::processMessage(const string& msg)
     }
 }
 
+}

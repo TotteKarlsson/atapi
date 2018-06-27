@@ -4,27 +4,29 @@
 #include <map>
 #include "arraybot/atABExporter.h"
 #include "atATObject.h"
-#include "dslConstants.h"
+
 #include "dslStringList.h"
 #include "atAPTDevice.h"
+#include "dslConstants.h"
 //---------------------------------------------------------------------------
-using std::string;
-using std::map;
-using std::ostream;
+
 using dsl::gEmptyString;
 using dsl::StringList;
+namespace at
+{
+
+using std::string;
+using std::map;
+//using std::ostream;
+
+
 
 //Thorlabs device
-class APTDevice;
-struct TLI_DeviceInfo;
+//class APTDevice;
+//struct TLI_DeviceInfo;
 
 AT_AB bool 			buildDeviceList();
-AT_AB string 		toString(DeviceTypeID value);
-AT_AB string 		toString(const TLI_DeviceInfo& val);
 AT_AB int 			getNumberOfConnectedDevices();
-AT_AB StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
-AT_AB DeviceTypeID getDeviceTypeID(const string& id);
-//AT_CORE DeviceTypeID getDeviceTypeID(const string& level);
 
 
 
@@ -60,4 +62,5 @@ class AT_AB DeviceManager : public ATObject
         mutable map<int, APTDevice*>::iterator    	mDevicesIter;
 };
 
+}
 #endif

@@ -19,30 +19,35 @@ using dsl::Property;
 using dsl::MessageContainer;
 using dsl::SocketReceiver;
 
-//!The ElloUI (socket) client class connects to a ElloUI server over a socket.
-//!Messages are received, over the socket, by a socket receiver and placed in a message container.
-//!Received messages are processed by the ElloUIMessageProcessor.
-class AT_CORE ElloUIClient : public SocketClient, public ATObject
+namespace at
 {
-	friend ElloUIMessageProcessor;
-	public:
-                                            ElloUIClient();
-    	virtual                             ~ElloUIClient();
-        virtual bool                        shutDown();
 
-        virtual bool                        init(int pNumber = 50002, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
-        bool                                isConnected();
-        bool                                disConnect();
-        bool                                connect(int pNumber = 50002, const string& host = dsl::gEmptyString);
+    //!The ElloUI (socket) client class connects to a ElloUI server over a socket.
+    //!Messages are received, over the socket, by a socket receiver and placed in a message container.
+    //!Received messages are processed by the ElloUIMessageProcessor.
+    class AT_CORE ElloUIClient : public SocketClient, public ATObject
+    {
+    	friend ElloUIMessageProcessor;
+    	public:
+                                                ElloUIClient();
+        	virtual                             ~ElloUIClient();
+            virtual bool                        shutDown();
 
-		void								run();
+            virtual bool                        init(int pNumber = 50002, const string& hostname = dsl::gEmptyString, bool connectOnInit = true);
+            bool                                isConnected();
+            bool                                disConnect();
+            bool                                connect(int pNumber = 50002, const string& host = dsl::gEmptyString);
 
-									        //!Post a custom message to the message list
-        virtual void                        postMessage(const string& msg);
-        void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+    		void								run();
 
-    protected:
-        ElloUIMessageProcessor   			mMessageProcessor;
-};
+    									        //!Post a custom message to the message list
+            virtual void                        postMessage(const string& msg);
+            void		 						assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
+        protected:
+            ElloUIMessageProcessor   			mMessageProcessor;
+    };
+
+}
 
 #endif

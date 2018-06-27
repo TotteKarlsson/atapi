@@ -5,85 +5,88 @@
 //---------------------------------------------------------------------------
 
 using namespace dsl;
-JoyStickButton::JoyStickButton()
-:
-	mIsForward(true),
-    mIsEnabled(false),
-    mButtonState(bsUp)
-{}
-
-JoyStickButton::~JoyStickButton()
-{}
-
-void JoyStickButton::setState(JoyStickButtonState s)
+namespace at
 {
-	mButtonState = s;
-}
+    JoyStickButton::JoyStickButton()
+    :
+    	mIsForward(true),
+        mIsEnabled(false),
+        mButtonState(bsUp)
+    {}
 
-JoyStickButtonState JoyStickButton::getState()
-{
-	return mButtonState;
-}
+    JoyStickButton::~JoyStickButton()
+    {}
 
-void JoyStickButton::assignMotor(APTMotor* motor)
-{
-	mMotor = motor;
-}
-
-void JoyStickButton::enable()
-{
-	mIsEnabled = true;
-}
-
-void JoyStickButton::disable()
-{
-	mIsEnabled = false;
-}
-
-bool JoyStickButton::isDown()
-{
-	return (mButtonState == bsDown) ? true : false;
-}
-
-void JoyStickButton::setForward()
-{
-	mIsForward = true;
-}
-
-void JoyStickButton::setReverse()
-{
-	mIsForward = false;
-}
-
-void JoyStickButton::down()
-{
-	mButtonState = bsDown;
-    Log(lDebug3) << "JSButton Down.";
-	if(!mMotor || !mIsEnabled)
+    void JoyStickButton::setState(JoyStickButtonState s)
     {
-        Log(lInfo) << "Motor object is null or JS button is disabled.";
-    	return;
+    	mButtonState = s;
     }
 
-	if(mIsForward)
+    JoyStickButtonState JoyStickButton::getState()
     {
-    	mMotor->jogForward();
-    }
-    else
-    {
-    	mMotor->jogReverse();
-    }
-}
-
-void JoyStickButton::up()
-{
-	mButtonState = bsUp;
-    Log(lDebug3) << "JSButton Up.";
-    if(!mMotor || !mIsEnabled)
-    {
-        Log(lInfo) << "Motor object is null or JS button is disabled.";
-    	return;
+    	return mButtonState;
     }
 
-	mMotor->stopProfiled();
+    void JoyStickButton::assignMotor(APTMotor* motor)
+    {
+    	mMotor = motor;
+    }
+
+    void JoyStickButton::enable()
+    {
+    	mIsEnabled = true;
+    }
+
+    void JoyStickButton::disable()
+    {
+    	mIsEnabled = false;
+    }
+
+    bool JoyStickButton::isDown()
+    {
+    	return (mButtonState == bsDown) ? true : false;
+    }
+
+    void JoyStickButton::setForward()
+    {
+    	mIsForward = true;
+    }
+
+    void JoyStickButton::setReverse()
+    {
+    	mIsForward = false;
+    }
+
+    void JoyStickButton::down()
+    {
+    	mButtonState = bsDown;
+        Log(lDebug3) << "JSButton Down.";
+    	if(!mMotor || !mIsEnabled)
+        {
+            Log(lInfo) << "Motor object is null or JS button is disabled.";
+        	return;
+        }
+
+    	if(mIsForward)
+        {
+        	mMotor->jogForward();
+        }
+        else
+        {
+        	mMotor->jogReverse();
+        }
+    }
+
+    void JoyStickButton::up()
+    {
+    	mButtonState = bsUp;
+        Log(lDebug3) << "JSButton Up.";
+        if(!mMotor || !mIsEnabled)
+        {
+            Log(lInfo) << "Motor object is null or JS button is disabled.";
+        	return;
+        }
+
+    	mMotor->stopProfiled();
+    }
 }

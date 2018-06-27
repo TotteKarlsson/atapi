@@ -26,63 +26,66 @@ using dsl::StringList;
 typedef void (__closure *InitCallBack)();
 typedef void (__closure *SerialMessageReceivedCallBack)(const string& msg);
 
-class AT_ARDUINO ArduinoDevice : public ATObject
+namespace at
 {
-	friend ArduinoSerialMessageSender;
-    public:
-        							ArduinoDevice(int portNr, int baudRate = 9600);
-    	virtual		    			~ArduinoDevice();
+    class AT_ARDUINO ArduinoDevice : public ATObject
+    {
+    	friend ArduinoSerialMessageSender;
+        public:
+            							ArduinoDevice(int portNr, int baudRate = 9600);
+        	virtual		    			~ArduinoDevice();
 
-		void						setName(const string& name){mName = name;}
-        string						getName(){return mName;}
+    		void						setName(const string& name){mName = name;}
+            string						getName(){return mName;}
 
-        void		 				assignInitFunction(InitCallBack cb);
-        void		 				assignSerialMessageReceivedCallBack(SerialMessageReceivedCallBack cb);
+            void		 				assignInitFunction(InitCallBack cb);
+            void		 				assignSerialMessageReceivedCallBack(SerialMessageReceivedCallBack cb);
 
-		bool						connect(int portNr, int baudRate = 9600);
-        bool 						isConnected();
-        bool						disConnect();
+    		bool						connect(int portNr, int baudRate = 9600);
+            bool 						isConnected();
+            bool						disConnect();
 
-        bool						hasMessage();
-		string						getMessage();
+            bool						hasMessage();
+    		string						getMessage();
 
-									//!Read state of an Arduino digital pin (not implemented)
-		virtual bool	 			readDigitalPin(int pin);
+    									//!Read state of an Arduino digital pin (not implemented)
+    		virtual bool	 			readDigitalPin(int pin);
 
-									//!Set (write) the state of an Arduino digital output pin (not implemented)
-		virtual bool	   			writeDigitalPin(int pin);
+    									//!Set (write) the state of an Arduino digital output pin (not implemented)
+    		virtual bool	   			writeDigitalPin(int pin);
 
-									//!Send custom message to the Arduino
-        bool						send(const string& msg);
+    									//!Send custom message to the Arduino
+            bool						send(const string& msg);
 
-        							//!send an integer
-        bool						send(int nr);
+            							//!send an integer
+            bool						send(int nr);
 
-        							//!The init callback is designed to give an ArduinoDevice client a
-                                    //!way to update its state on initialization
-		InitCallBack				initCallBack;
+            							//!The init callback is designed to give an ArduinoDevice client a
+                                        //!way to update its state on initialization
+    		InitCallBack				initCallBack;
 
-    protected:
-    								//!The arduino device name. Used in the INI file
-        string						mName;
+        protected:
+        								//!The arduino device name. Used in the INI file
+            string						mName;
 
-    								//!Serial communication can be quite complex. It is wrapped by the Serial class
-                                    //and confined further with low level functions in the SerialPort class
-        Serial						mSerial;
+        								//!Serial communication can be quite complex. It is wrapped by the Serial class
+                                        //and confined further with low level functions in the SerialPort class
+            Serial						mSerial;
 
 
-        deque<string> 				mIncomingMessagesBuffer;
-        Poco::Mutex		  			mReceiveBufferMutex;
-        Poco::Condition	  			mNewReceivedMessageCondition;
+            deque<string> 				mIncomingMessagesBuffer;
+            Poco::Mutex		  			mReceiveBufferMutex;
+            Poco::Condition	  			mNewReceivedMessageCondition;
 
-        ArduinoSerialMessageSender 	mMessageSender;
-		deque<string>  	  			mOutgoingMessagesBuffer;
-        Poco::Mutex		  			mSendBufferMutex;
-        Poco::Condition	  			mNewMessageToSendCondition;
+            ArduinoSerialMessageSender 	mMessageSender;
+    		deque<string>  	  			mOutgoingMessagesBuffer;
+            Poco::Mutex		  			mSendBufferMutex;
+            Poco::Condition	  			mNewMessageToSendCondition;
 
-        							//A stream makes it easy to compose messages
-        std::stringstream		  	mSS;
+            							//A stream makes it easy to compose messages
+            std::stringstream		  	mSS;
 
-};
+    };
+}
 
 #endif

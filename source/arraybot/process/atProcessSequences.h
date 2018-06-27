@@ -10,47 +10,50 @@
 using std::deque;
 using namespace dsl;
 
-class ProcessSequencer;
-
-class AT_AB ProcessSequences : public ATObject
+namespace at
 {
-	public:
-								                    ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayCamClient& ac, ArrayBot& ab);
-								                    ~ProcessSequences();
-		bool										setFileFolder(const string& fileFolder);
-        string										getFileFolder();
-        int											loadAll(const string& fileFolder = gEmptyString);
+    class ProcessSequencer;
 
-		bool					                    add(ProcessSequence* s);
-        bool					                    remove(const string& lbl);
+    class AT_AB ProcessSequences : public ATObject
+    {
+    	public:
+    								                    ProcessSequences(const string& fileFolder, const string& fileExtension, ArrayCamClient& ac, ArrayBot& ab);
+    								                    ~ProcessSequences();
+    		bool										setFileFolder(const string& fileFolder);
+            string										getFileFolder();
+            int											loadAll(const string& fileFolder = gEmptyString);
 
-	   	ProcessSequence*							select(ProcessSequence* s);
-	   	ProcessSequence*							select(const string& sName);
+    		bool					                    add(ProcessSequence* s);
+            bool					                    remove(const string& lbl);
 
-        ProcessSequence*                            getFirst() const;
-        ProcessSequence*                            getNext() const;
-        ProcessSequence*                            getPrevious() const;
-        ProcessSequence*                            getCurrent() const;
-		string										getCurrentSequenceName();
-        void										sortOnOrder();
-        void										sortOnCategory();
+    	   	ProcessSequence*							select(ProcessSequence* s);
+    	   	ProcessSequence*							select(const string& sName);
 
-        											//!Loads a process sequence from file.
-                                                    //Files have the same name as the
-                                                    //sequence itself
-        bool										load(const string& fName);
+            ProcessSequence*                            getFirst() const;
+            ProcessSequence*                            getNext() const;
+            ProcessSequence*                            getPrevious() const;
+            ProcessSequence*                            getCurrent() const;
+    		string										getCurrentSequenceName();
+            void										sortOnOrder();
+            void										sortOnCategory();
 
-        int											count(){return mProcessSequences.size();}
-        bool										clear();
-		bool										saveCurrent();
+            											//!Loads a process sequence from file.
+                                                        //Files have the same name as the
+                                                        //sequence itself
+            bool										load(const string& fName);
 
-	protected:
-    												//!ArrayBot provide "unit"s that are used by the processes
-    	ArrayBot&									mAB;
-    	ArrayCamClient&	  							mAC;
-    	mutable deque<ProcessSequence*> 			mProcessSequences;
-    	mutable deque<ProcessSequence*>::iterator 	mProcessSequencesIter;
-        string										mFileFolder;
-        string										mFileExtension;
-};
+            int											count(){return mProcessSequences.size();}
+            bool										clear();
+    		bool										saveCurrent();
+
+    	protected:
+        												//!ArrayBot provide "unit"s that are used by the processes
+        	ArrayBot&									mAB;
+        	ArrayCamClient&	  							mAC;
+        	mutable deque<ProcessSequence*> 			mProcessSequences;
+        	mutable deque<ProcessSequence*>::iterator 	mProcessSequencesIter;
+            string										mFileFolder;
+            string										mFileExtension;
+    };
+}
 #endif

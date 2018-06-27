@@ -8,16 +8,19 @@
 using dsl::ObjectType;
 using dsl::IniFile;
 
-class AT_NAVITAR NavitarFocusPreset	: public Preset<int>
+namespace at
 {
-    public:
-		                                        NavitarFocusPreset(NavitarMotorController& mc, const string& name, const int& z = 0);
-        				                        ~NavitarFocusPreset();
+    class AT_NAVITAR NavitarFocusPreset	: public Preset<int>
+    {
+        public:
+    		                                        NavitarFocusPreset(NavitarMotorController& mc, const string& name, const int& z = 0);
+            				                        ~NavitarFocusPreset();
 
-		bool	 								set();
+    		bool	 								set();
 
 
-    protected:
-		NavitarMotorController&					mController;
-};
+        protected:
+    		NavitarMotorController&					mController;
+    };
+}
 #endif

@@ -2,16 +2,14 @@
 #include "atATObject.h"
 //---------------------------------------------------------------------------
 
-ATObject::~ATObject()
-{}
-
-const string ATObject::getTypeName() const
+namespace at
 {
-	return "TYPENAME NOT IMPLEMENTED";
-}
+    ATObject::~ATObject()
+    {}
 
+    const string ATObject::getTypeName() const
+    {
+    	return "TYPENAME NOT IMPLEMENTED";
+    }
 
-int MyTest(int r)
-{
-	return r;
 }

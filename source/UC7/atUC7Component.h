@@ -23,157 +23,163 @@
 
 using dsl::gEmptyString;
 using std::deque;
-class UC7MessageReceiver;
-
-class AT_UC7 UC7 : public ATObject
+using dsl::uint;
+namespace at
 {
-	friend UC7MessageReceiver;
-	friend UC7MessageSender;
 
-	public:
-    	enum CutterStopMode				                    {smDirect = 0, smBeforeCutting, smAfterCutting, smBeforeRetracting};
-										                    UC7(HWND__ *h);
-										                    ~UC7();
+    class UC7MessageReceiver;
 
-		bool							                    connect(int comPort);
-        bool							                    disConnect();
-        bool							                    isConnected();
-        bool							                    getVersion();
+    class AT_UC7 UC7 : public ATObject
+    {
+    	friend UC7MessageReceiver;
+    	friend UC7MessageSender;
 
-        Counter&						                    getSectionCounter(){return mSectionCounter;}
-        Counter&						                    getRibbonOrderCounter(){return mRibbonOrderCounter;}
-        bool							                    sendRawMessage(const string& msg);
+    	public:
+        	enum CutterStopMode				                    {smDirect = 0, smBeforeCutting, smAfterCutting, smBeforeRetracting};
+    										                    UC7(HWND__ *h);
+    										                    ~UC7();
 
-        bool							                    startCutter();
-        bool							                    stopCutter(CutterStopMode sm = smDirect);
+    		bool							                    connect(int comPort);
+            bool							                    disConnect();
+            bool							                    isConnected();
+            bool							                    getVersion();
 
-        bool							                    moveKnifeStageNSAbsolute(uint pos, bool isRequest = true);
+            Counter&						                    getSectionCounter(){return mSectionCounter;}
+            Counter&						                    getRibbonOrderCounter(){return mRibbonOrderCounter;}
+            bool							                    sendRawMessage(const string& msg);
 
-        bool							                    jogKnifeStageSouth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
-        bool							                    jogKnifeStageNorth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
-        bool							                    stopKnifeStageNSMotion();
+            bool							                    startCutter();
+            bool							                    stopCutter(CutterStopMode sm = smDirect);
 
-        								                    //!Prevent user from bumping in knife into specimen
-		bool 							                    setNorthLimitPosition(uint limit);
+            bool							                    moveKnifeStageNSAbsolute(uint pos, bool isRequest = true);
 
-        								                    //!Set Feedrate in nm
-        bool							                    setFeedRate(uint feedRate, bool isRequest = true);
-		bool							                    setNorthSouthStageAbsolutePosition(uint pos, bool isRequest = true);
+            bool							                    jogKnifeStageSouth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
+            bool							                    jogKnifeStageNorth(uint nm, bool useAbsolutePos = false, bool isRequest = true);
+            bool							                    stopKnifeStageNSMotion();
 
-        bool                                                setCuttingSpeed(uint speed, bool isRequest = true);
-        bool                                                setReturnSpeed(uint speed, bool isRequest = true);
+            								                    //!Prevent user from bumping in knife into specimen
+    		bool 							                    setNorthLimitPosition(uint limit);
 
-										                    //status requests
-                                                            //!Get all statuses
-        bool							                    getStatus();
+            								                    //!Set Feedrate in nm
+            bool							                    setFeedRate(uint feedRate, bool isRequest = true);
+    		bool							                    setNorthSouthStageAbsolutePosition(uint pos, bool isRequest = true);
 
-        								                    //!Get status of cutter motor, on/off
-        bool							                    getCutterMotorStatus();
+            bool                                                setCuttingSpeed(uint speed, bool isRequest = true);
+            bool                                                setReturnSpeed(uint speed, bool isRequest = true);
 
-        								                    //!Get current feedrate in nm
-		int								                    getCurrentFeedRate(bool isRequest = true);
+    										                    //status requests
+                                                                //!Get all statuses
+            bool							                    getStatus();
 
-        								                    //Get absolute position of stage
-        bool							                    getKnifeStagePosition();
+            								                    //!Get status of cutter motor, on/off
+            bool							                    getCutterMotorStatus();
 
-        bool							                    hasMessage();
-        UC7Message						                    getLastSentMessage();
+            								                    //!Get current feedrate in nm
+    		int								                    getCurrentFeedRate(bool isRequest = true);
 
-        void							                    disableCounter();
-        void							                    enableCounter();
+            								                    //Get absolute position of stage
+            bool							                    getKnifeStagePosition();
 
-        bool							                    prepareForNewRibbon();
-        void							                    prepareForNewRibbon(bool what);
+            bool							                    hasMessage();
+            UC7Message						                    getLastSentMessage();
 
-        bool							                    prepareToCutRibbon();
-        void							                    prepareToCutRibbon(bool what);
+            void							                    disableCounter();
+            void							                    enableCounter();
 
-        bool							                    setFeedRatePreset(uint rate);
-        bool							                    setKnifeStageJogStepPreset(uint preset);
-        bool							                    setKnifeStageResumeDelta(uint delta);
+            bool							                    prepareForNewRibbon();
+            void							                    prepareForNewRibbon(bool what);
 
-        bool							                    setStrokeState(UC7StrokeState state);
-        UC7StrokeState					                    getStrokeState(){return mStrokeState;}
+            bool							                    prepareToCutRibbon();
+            void							                    prepareToCutRibbon(bool what);
 
-        bool							                    setStageMoveDelay(int ms);
+            bool							                    setFeedRatePreset(uint rate);
+            bool							                    setKnifeStageJogStepPreset(uint preset);
+            bool							                    setKnifeStageResumeDelta(uint delta);
 
-        bool							                    isActive(){return mIsActive;}
-		void							                    isActive(bool isIt){mIsActive = isIt;}
+            bool							                    setStrokeState(UC7StrokeState state);
+            UC7StrokeState					                    getStrokeState(){return mStrokeState;}
 
-    									                    //References
-		bool&        					                    getRibbonCreatorActiveReference(){return mIsActive;}
-		int&        					                    getNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
+            bool							                    setStageMoveDelay(int ms);
 
-        bool							                    isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
-        bool							                    isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
-        int								                    getLastNumberOfSections(){return mSectionCounter.getLastCount();}
-        int								                    getCurrentSectionCount(){return mSectionCounter.getCount();}
+            bool							                    isActive(){return mIsActive;}
+    		void							                    isActive(bool isIt){mIsActive = isIt;}
 
-        UC7StatusHistory&				                    getStatusHistoryRef(){return mUC7StatusHistory;}
+        									                    //References
+    		bool&        					                    getRibbonCreatorActiveReference(){return mIsActive;}
+    		int&        					                    getNumberOfZeroStrokesReference(){return mSetNumberOfZeroStrokes;}
 
-    protected:
-        string							                    mINIFileSection;
-        int								                    mLastNrOfSections;
+            bool							                    isSerialMessageSenderRunnning(){return mUC7MessageSender.isRunning();}
+            bool							                    isSerialMessageReceiverRunnning(){return mUC7MessageReceiver.isRunning();}
+            int								                    getLastNumberOfSections(){return mSectionCounter.getLastCount();}
+            int								                    getCurrentSectionCount(){return mSectionCounter.getCount();}
 
-        								                    //!When active, zero stroke and knife stage movement will
-                                                            //!take place when the counter reaches ribbonLength
-        bool							                    mIsActive;
+            UC7StatusHistory&				                    getStatusHistoryRef(){return mUC7StatusHistory;}
 
-		CutterStopMode					                    mStopMode;
+        protected:
+            string							                    mINIFileSection;
+            int								                    mLastNrOfSections;
 
-										                    //Serial Components
-        int								                    mCOMPort;
-    	Serial							                    mSerial;
-        bool							                    sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
+            								                    //!When active, zero stroke and knife stage movement will
+                                                                //!take place when the counter reaches ribbonLength
+            bool							                    mIsActive;
 
-        								                    //!Receive UC7 messages
-        UC7MessageReceiver		  		                    mUC7MessageReceiver;
-        deque<UC7Message> 				                    mIncomingMessagesBuffer;
-        Poco::Mutex						                    mReceiveBufferMutex;
-        Poco::Condition					                    mNewReceivedMessageCondition;
+    		CutterStopMode					                    mStopMode;
 
-        								                    //!Send UC7 messages
-        UC7MessageSender				                    mUC7MessageSender;
-		deque<string>  					                    mOutgoingMessagesBuffer;
-        Poco::Mutex						                    mSendBufferMutex;
-        Poco::Condition					                    mNewMessageToSendCondition;
+    										                    //Serial Components
+            int								                    mCOMPort;
+        	Serial							                    mSerial;
+            bool							                    sendUC7Message(const UC7MessageEnum& uc, const string& data1 = gEmptyString, const string& data2 = gEmptyString);
 
-        								                    //!This is the previous sent message
-        UC7Message 						                    mUC7Message;
+            								                    //!Receive UC7 messages
+            UC7MessageReceiver		  		                    mUC7MessageReceiver;
+            deque<UC7Message> 				                    mIncomingMessagesBuffer;
+            Poco::Mutex						                    mReceiveBufferMutex;
+            Poco::Condition					                    mNewReceivedMessageCondition;
 
-        								                    //Hardware states
-                                                            //!Feedrate in nm
-        UC7StrokeState	  				                    mStrokeState;
-		uint	 						                    mFeedRate;
-		uint	 						                    mPresetFeedRate;
-		uint  							                    mKnifeStageJogPreset;
-        uint							                    mKnifeStageResumeDelta;
-        int  							                    mSetNumberOfZeroStrokes;
-        uint	 						                    mNumberOfZeroStrokes;
-        uint   							                    mNorthSouthStagePosition;
-        uint							                    mNorthLimitPosition;
-        uint							                    mCuttingSpeed;
-        uint							                    mReturnSpeed;
+            								                    //!Send UC7 messages
+            UC7MessageSender				                    mUC7MessageSender;
+    		deque<string>  					                    mOutgoingMessagesBuffer;
+            Poco::Mutex						                    mSendBufferMutex;
+            Poco::Condition					                    mNewMessageToSendCondition;
 
-        								                    //!When this boolean is true, UC7 commands may be sent to the leica
-                                                            //!when HW status is changing
-        bool							                    mPrepareForNewRibbon;
+            								                    //!This is the previous sent message
+            UC7Message 						                    mUC7Message;
 
-                                                            //!This boolean controls the Cut ribbon process
-        bool							                    mPrepareToCutRibbon;
+            								                    //Hardware states
+                                                                //!Feedrate in nm
+            UC7StrokeState	  				                    mStrokeState;
+    		uint	 						                    mFeedRate;
+    		uint	 						                    mPresetFeedRate;
+    		uint  							                    mKnifeStageJogPreset;
+            uint							                    mKnifeStageResumeDelta;
+            int  							                    mSetNumberOfZeroStrokes;
+            uint	 						                    mNumberOfZeroStrokes;
+            uint   							                    mNorthSouthStagePosition;
+            uint							                    mNorthLimitPosition;
+            uint							                    mCuttingSpeed;
+            uint							                    mReturnSpeed;
 
-        Counter							                    mSectionCounter;
-        Counter							                    mRibbonOrderCounter;
+            								                    //!When this boolean is true, UC7 commands may be sent to the leica
+                                                                //!when HW status is changing
+            bool							                    mPrepareForNewRibbon;
 
-		dsl::Timer	   			                            mCustomTimer;
+                                                                //!This boolean controls the Cut ribbon process
+            bool							                    mPrepareToCutRibbon;
 
-        								                    //!Keep history of the UC7 status
-        UC7StatusHistory 				                    mUC7StatusHistory;
+            Counter							                    mSectionCounter;
+            Counter							                    mRibbonOrderCounter;
 
-        								                    //!Events
-        void							                    onSerialMessage(const string& msg);
-        void 							                    onPrepareToCutRibbon();
-		void 							                    onPrepareForNewRibbon();
-};
+    		dsl::Timer	   			                            mCustomTimer;
+
+            								                    //!Keep history of the UC7 status
+            UC7StatusHistory 				                    mUC7StatusHistory;
+
+            								                    //!Events
+            void							                    onSerialMessage(const string& msg);
+            void 							                    onPrepareToCutRibbon();
+    		void 							                    onPrepareForNewRibbon();
+    };
+
+}
 
 #endif

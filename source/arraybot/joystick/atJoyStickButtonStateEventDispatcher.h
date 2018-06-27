@@ -10,33 +10,36 @@ using std::pair;
 //---------------------------------------------------------------------------
 typedef void (__closure *JoyStickEvent)();
 typedef pair<JoyStickEvent, JoyStickEvent> ButtonEvents;
-class JoyStickButton;
-
-//Helper class
-class AT_AB JoyStickButtonStateEventDispatcher  : public ATObject
+namespace at
 {
-	public:
-				    			JoyStickButtonStateEventDispatcher(JoyStickButton& btn);
+    class JoyStickButton;
 
-                                //!The buttons state is checked against
-                                //!status value retrieved in a polling loop. If
-                                //!the value changed, the state is updated
-                                //!and the associated Event is fired
-		void					setButtonState(JoyStickButtonState s);
-        JoyStickButtonState		getButtonState();
+    //Helper class
+    class AT_AB JoyStickButtonStateEventDispatcher  : public ATObject
+    {
+    	public:
+    				    			JoyStickButtonStateEventDispatcher(JoyStickButton& btn);
 
-//		JoyStickButtonState 	mButtonState;
-    	ButtonEvents 			mEvents;
+                                    //!The buttons state is checked against
+                                    //!status value retrieved in a polling loop. If
+                                    //!the value changed, the state is updated
+                                    //!and the associated Event is fired
+    		void					setButtonState(JoyStickButtonState s);
+            JoyStickButtonState		getButtonState();
 
-        						//!Stting clickEventOnly means that the state
-                                //is only checked for a state change, i.e. going from
-                                //pressed to 'unpressed'.
-                                //If Click eventOnly is false, state is checked continously
-                                //in the event loop
-        bool					mClickEventOnly;
+    //		JoyStickButtonState 	mButtonState;
+        	ButtonEvents 			mEvents;
 
-        JoyStickButton&			mButton;
-};
+            						//!Stting clickEventOnly means that the state
+                                    //is only checked for a state change, i.e. going from
+                                    //pressed to 'unpressed'.
+                                    //If Click eventOnly is false, state is checked continously
+                                    //in the event loop
+            bool					mClickEventOnly;
 
+            JoyStickButton&			mButton;
+    };
+
+}
 
 #endif

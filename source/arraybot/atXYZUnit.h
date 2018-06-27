@@ -10,75 +10,79 @@
 //#include "atPositions.h"
 //---------------------------------------------------------------------------
 
-class APTMotor;
-class ArrayBotJoyStick;
-class MoveSequencer;
 using dsl::IniFileProperties;
 using dsl::Property;
 using dsl::IniFile;
+using at::DeviceManager;
 
-class AT_AB XYZUnit : public ATObject
+namespace at
 {
-	public:
-    					                XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder);
-    					                ~XYZUnit();
+    class APTMotor;
+    class ArrayBotJoyStick;
+    class MoveSequencer;
+    class AT_AB XYZUnit : public ATObject
+    {
+    	public:
+        					                XYZUnit(const string& name, IniFile& iniFile, const string& appDataFolder);
+        					                ~XYZUnit();
 
-		bool					        isActive();
+    		bool					        isActive();
 
-		bool					        enableJSAxes();
-		bool					        disableJSAxes();
+    		bool					        enableJSAxes();
+    		bool					        disableJSAxes();
 
-		bool					        enableZButtons();
-		bool					        disableZButtons();
+    		bool					        enableZButtons();
+    		bool					        disableZButtons();
 
-        void					        attachJoyStick(ArrayBotJoyStick* js);
-        void					        detachJoyStick();
+            void					        attachJoyStick(ArrayBotJoyStick* js);
+            void					        detachJoyStick();
 
-		void					        home();
-		void					        stow();
+    		void					        home();
+    		void					        stow();
 
-		void				            shutDown();
-		string					        getName() const;
-  //      Positions&				        positions(){return mPositions;}
+    		void				            shutDown();
+    		string					        getName() const;
+      //      Positions&				        positions(){return mPositions;}
 
-		virtual bool	  	            initialize();
-        virtual bool	  		        stopAll();
-        virtual vector<APTMotor*>	    getAllMotors();
+    		virtual bool	  	            initialize();
+            virtual bool	  		        stopAll();
+            virtual vector<APTMotor*>	    getAllMotors();
 
-		APTMotor*			            getXMotor() const;
-		APTMotor*			            getYMotor() const;
-		APTMotor*			            getZMotor() const;
-        APTMotor*				        getAngleMotor() const;
-        APTMotor*				        getMotorWithName(const string& name);
-        APTMotor*				        getMotorWithSerial(const string& ser);
+    		APTMotor*			            getXMotor() const;
+    		APTMotor*			            getYMotor() const;
+    		APTMotor*			            getZMotor() const;
+            APTMotor*				        getAngleMotor() const;
+            APTMotor*				        getMotorWithName(const string& name);
+            APTMotor*				        getMotorWithSerial(const string& ser);
 
-        Property<int>		            mXMotorSerialNr;
-        Property<int>		            mYMotorSerialNr;
-		Property<int>		            mZMotorSerialNr;
-	    Property<int>		            mAngleMotorSerialNr;
+            Property<int>		            mXMotorSerialNr;
+            Property<int>		            mYMotorSerialNr;
+    		Property<int>		            mZMotorSerialNr;
+    	    Property<int>		            mAngleMotorSerialNr;
 
-        						        //TODO: move the devicemanager to ArrayBot and
-                                        //use a reference for each class that needs to use it
-    	DeviceManager	                mDeviceManager;
+            						        //TODO: move the devicemanager to ArrayBot and
+                                            //use a reference for each class that needs to use it
+        	DeviceManager	                mDeviceManager;
 
 
-	protected:
-		string					        mName;
+    	protected:
+    		string					        mName;
 
-        						        //!App datafolder is where sequence files are saved
-        string					        mAppDataFolder;
-        IniFile&				        mIniFile;
-        IniFileProperties	            mProperties;
+            						        //!App datafolder is where sequence files are saved
+            string					        mAppDataFolder;
+            IniFile&				        mIniFile;
+            IniFileProperties	            mProperties;
 
-        						        //!XYZ stages
-        APTMotor*			            mXMotor;
-        APTMotor*			            mYMotor;
-        APTMotor*			            mZMotor;
+            						        //!XYZ stages
+            APTMotor*			            mXMotor;
+            APTMotor*			            mYMotor;
+            APTMotor*			            mZMotor;
 
-        						        //!Angle controller
-        APTMotor*			            mAngleMotor;
+            						        //!Angle controller
+            APTMotor*			            mAngleMotor;
 
-        ArrayBotJoyStick*               mJoyStick;
-//        Positions				        mPositions;
-};
+            ArrayBotJoyStick*               mJoyStick;
+    //        Positions				        mPositions;
+    };
+}
 #endif

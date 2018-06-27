@@ -5,13 +5,16 @@
 using namespace dsl;
 
 
-SensorsArduino::SensorsArduino(int portNr, int baudRate)
-:
-ArduinoDevice(portNr, baudRate)
-{}
-
-bool SensorsArduino::getStatus()
+namespace at
 {
-	Log(lInfo) << "Requesting sensor arduino status";
-	return send("i");
+    SensorsArduino::SensorsArduino(int portNr, int baudRate)
+    :
+    ArduinoDevice(portNr, baudRate)
+    {}
+
+    bool SensorsArduino::getStatus()
+    {
+    	Log(lInfo) << "Requesting sensor arduino status";
+    	return send("i");
+    }
 }

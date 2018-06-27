@@ -6,6 +6,9 @@
 
 using namespace dsl;
 
+namespace at
+{
+
 ArduinoClient::ArduinoClient()
 :
 mMessageProcessor(*this)
@@ -93,3 +96,4 @@ void ArduinoClient::postMessage(const string& msg)
     SocketClient::send(msg);
 }
 
+}

@@ -18,54 +18,57 @@
 //TODO: These triggerfunctions may be replaced later
 //on by using pure process objects instead, like the MoveAbsoluteProcess
 
-class APTMotor;
-class AT_AB TriggerFunction : public ATObject
+namespace at
 {
-    public:
-                                            TriggerFunction(){}
-                                            ~TriggerFunction(){}
-        const string   	                    getTypeName() const {return "triggerFunction";}
-        virtual bool				        execute() = 0;
-        virtual bool		   				isActive() = 0;
+    class APTMotor;
+    class AT_AB TriggerFunction : public ATObject
+    {
+        public:
+                                                TriggerFunction(){}
+                                                ~TriggerFunction(){}
+            const string   	                    getTypeName() const {return "triggerFunction";}
+            virtual bool				        execute() = 0;
+            virtual bool		   				isActive() = 0;
 
-        									//!Ability to read/write trigger objects occurs using xml
-		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
-};
+            									//!Ability to read/write trigger objects occurs using xml
+    		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot) = 0;
+    };
 
-//!Move absolute is a subclass of TriggerFunction.
-class AT_AB MoveAbsolute : public  TriggerFunction
-{
-	public:
-								            MoveAbsolute(APTMotor* mtr, double pos = 0, double v = 1.0, double a = 1.0);
+    //!Move absolute is a subclass of TriggerFunction.
+    class AT_AB MoveAbsolute : public  TriggerFunction
+    {
+    	public:
+    								            MoveAbsolute(APTMotor* mtr, double pos = 0, double v = 1.0, double a = 1.0);
 
-        virtual bool	                    execute();
-        const string   	                    getTypeName() const {return "absoluteMove";}
+            virtual bool	                    execute();
+            const string   	                    getTypeName() const {return "absoluteMove";}
 
-        bool								isActive();
-        void								setMotor(APTMotor* mtr){mMotor = mtr;}
-        APTMotor*							getMotor(){return mMotor;}
+            bool								isActive();
+            void								setMotor(APTMotor* mtr){mMotor = mtr;}
+            APTMotor*							getMotor(){return mMotor;}
 
-        void								setMotorName(const string& name){mMotorName = name;}
-        string 								getMotorName(){return mMotorName;}
+            void								setMotorName(const string& name){mMotorName = name;}
+            string 								getMotorName(){return mMotorName;}
 
-        double								getVelocity(){return mVelocity;}
-        void								setVelocity(double v){mVelocity = v;}
+            double								getVelocity(){return mVelocity;}
+            void								setVelocity(double v){mVelocity = v;}
 
-        double								getAcceleration(){return mAcceleration;}
-        void								setAcceleration(double a){mAcceleration = a;}
+            double								getAcceleration(){return mAcceleration;}
+            void								setAcceleration(double a){mAcceleration = a;}
 
-        double								getPosition(){return mPosition;}
-        void								setPosition(double a){mPosition = a;}
+            double								getPosition(){return mPosition;}
+            void								setPosition(double a){mPosition = a;}
 
-		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
+    		virtual dsl::XMLElement* 			addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
 
-	protected:
-        APTMotor*		                    mMotor;
-        string			                    mMotorName;
-    	double			                    mVelocity;
-        double			                    mAcceleration;
-        double 			                    mPosition;
-};
+    	protected:
+            APTMotor*		                    mMotor;
+            string			                    mMotorName;
+        	double			                    mVelocity;
+            double			                    mAcceleration;
+            double 			                    mPosition;
+    };
+}
 
 
 #endif

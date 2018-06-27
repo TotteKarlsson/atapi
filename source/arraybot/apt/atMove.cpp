@@ -4,10 +4,10 @@
 #include "atArrayBot.h"
 #include "atAPTMotor.h"
 #include "atTriggerFunction.h"
+
 namespace at
 {
 
-//using namespace std::tr1;
 using namespace dsl;
 
 //---------------------------------------------------------------------------

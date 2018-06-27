@@ -12,37 +12,42 @@ namespace dsl
 {
 	class MessageContainer;
 }
-
 using dsl::MessageContainer;
-class ElloUIClient;
-typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
-//!The Message processor processes messages sent from a
-//!Server.
-class AT_CORE ElloUIMessageProcessor : public Thread, public ATObject
+namespace at
 {
 
-    public:
-                                        ElloUIMessageProcessor(ElloUIClient& client);
-                                        ~ElloUIMessageProcessor();
+    typedef void (__closure *OnMessageReceivedCB)(const string& msg);
 
-                                        // overridden from Thread
-        void                            worker();
-        void                            run();
+    class ElloUIClient;
+    //!The Message processor processes messages sent from a
+    //!Server.
+    class AT_CORE ElloUIMessageProcessor : public Thread, public ATObject
+    {
 
-        bool                            start(bool inThread);
-        void                            stop();
-        virtual void                    processMessage(const string& msg);
-        void                            suspendProcessing() {mAllowProcessing = false;}
-        void                            resumeProcessing()  {mAllowProcessing = true;}
-		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+        public:
+                                            ElloUIMessageProcessor(ElloUIClient& client);
+                                            ~ElloUIMessageProcessor();
 
-	private:
-        string                          mServerName;
-        bool                            mAllowProcessing;
-        MessageContainer&            	mMessageContainer;
-        OnMessageReceivedCB		  		onMessageReceivedCB;
-		ElloUIClient&					mClient;
-};
+                                            // overridden from Thread
+            void                            worker();
+            void                            run();
+
+            bool                            start(bool inThread);
+            void                            stop();
+            virtual void                    processMessage(const string& msg);
+            void                            suspendProcessing() {mAllowProcessing = false;}
+            void                            resumeProcessing()  {mAllowProcessing = true;}
+    		void							assignOnMessageReceivedCallBack(OnMessageReceivedCB cb);
+
+    	private:
+            string                          mServerName;
+            bool                            mAllowProcessing;
+            MessageContainer&            	mMessageContainer;
+            OnMessageReceivedCB		  		onMessageReceivedCB;
+    		ElloUIClient&					mClient;
+    };
+
+}
 
 #endif

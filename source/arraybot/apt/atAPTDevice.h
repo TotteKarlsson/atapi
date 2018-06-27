@@ -1,6 +1,6 @@
 #ifndef atAPTDeviceH
 #define atAPTDeviceH
-#include "arraybot/atABExporter.h"
+#include "atABExporter.h"
 #include "atATObject.h"
 #include "dslProperties.h"
 #include "atUtilities.h"
@@ -8,6 +8,12 @@
 #include "dslIniFile.h"
 
 using namespace dsl;
+
+
+//---------------------------------------------------------------------------
+namespace at
+{
+
 struct HardwareInformation;
 
 ///Enum holding Thorlab Device Type IDS
@@ -21,13 +27,12 @@ enum DeviceTypeID
 };
 
 
-//---------------------------------------------------------------------------
 class AT_AB APTDevice : public ATObject
 {
-	public:
-    							                //Every APTDevice need to be created with a serial number
-    					                        APTDevice(int serial);
-		virtual                                 ~APTDevice();
+    public:
+                                                //Every APTDevice need to be created with a serial number
+                                                APTDevice(int serial);
+        virtual                                 ~APTDevice();
         bool					                isConnected() const;
         virtual bool			                connect() = 0;
         virtual bool			                disconnect() = 0;
@@ -47,15 +52,15 @@ class AT_AB APTDevice : public ATObject
         bool									writeProperties(IniFile& iniFile);
 
     protected:
-		IniFileProperties	  					mProperties;
+        IniFileProperties	  					mProperties;
         virtual bool							applyProperties() = 0;
-    	Property<string>                        mSerial;
-    	Property<string>						mName;
+        Property<string>                        mSerial;
+        Property<string>						mName;
 
-								                //DeviceTypeID enum
-		DeviceTypeID		 	                mDeviceTypeID;
+                                                //DeviceTypeID enum
+        DeviceTypeID		 	                mDeviceTypeID;
 
-        						                //True if connection with hardware device is
+                                                //True if connection with hardware device is
                                                 //established
         bool					                mIsConnected;
 
@@ -109,6 +114,8 @@ class AT_AB APTDevice : public ATObject
 //{
 //    return "DeviceTypeID";
 //}
+
+}
 
 
 #endif

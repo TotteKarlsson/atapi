@@ -4,6 +4,10 @@
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 
+namespace at
+{
+
+
 class AT_ARDUINO LightsArduinoClient : public ArduinoClient
 {
     public:
@@ -18,4 +22,5 @@ class AT_ARDUINO LightsArduinoClient : public ArduinoClient
 
 };
 
+}
 #endif

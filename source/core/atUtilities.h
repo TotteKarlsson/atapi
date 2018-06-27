@@ -8,6 +8,10 @@
 #include "dslTypeInfo.h"
 #include "dslIniFile.h"
 //---------------------------------------------------------------------------
+
+namespace at
+{
+
 using std::string;
 using std::vector;
 using dsl::StringList;
@@ -43,7 +47,7 @@ AT_CORE LogicOperator 	toLogicOperator(const string& p);
 						//!Thorlab errors
 AT_CORE string 			tlError(int errCode);
 
-
+}
 
 
 #endif
