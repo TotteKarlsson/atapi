@@ -1,7 +1,7 @@
 #ifndef atTriggerFunctionH
 #define atTriggerFunctionH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include <functional>
 #include "dslXMLUtils.h"
 //---------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 #include "arraybot/atABExporter.h"
 #include <string>
 #include "dslThread.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslConstants.h"
 #include "dslStringList.h"
 #include "atMotorMessageProcessor.h"

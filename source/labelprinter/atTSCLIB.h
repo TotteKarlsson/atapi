@@ -2,8 +2,8 @@
 #define atTSCLIBH
 #include <string>
 #include <windows.h>
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
+#include "atCoreExporter.h"
+#include "atATObject.h"
 #include "dslStringList.h"
 
 

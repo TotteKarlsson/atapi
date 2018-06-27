@@ -1,7 +1,7 @@
 #ifndef atMoveCoverSlipAtAngleProcessH
 #define atMoveCoverSlipAtAngleProcessH
-#include "../core/atProcess.h"
-#include "arraybot/atABExporter.h"
+#include "atProcess.h"
+#include "atABExporter.h"
 #include "dslXMLUtils.h"
 //---------------------------------------------------------------------------
 

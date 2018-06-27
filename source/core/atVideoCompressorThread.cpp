@@ -1,14 +1,15 @@
 #pragma hdrstop
 #include "atVideoCompressorThread.h"
-#include "dslLogger.h"
+#include <fstream>
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
 #include "Poco/StreamCopier.h"
-#include <fstream>
-#include "dslFileUtils.h"
-#include "dslMathUtils.h"
 #include "Poco/Path.h"
 #include "Poco/File.h"
+#include "dslLogger.h"
+#include "dslFileUtils.h"
+#include "dslMathUtils.h"
+
 using Poco::Path;
 
 using namespace Poco;

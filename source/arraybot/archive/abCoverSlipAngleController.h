@@ -1,7 +1,7 @@
 #ifndef atCoverSlipAngleControllerH
 #define atCoverSlipAngleControllerH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslIniFile.h"
 #include "dslProperties.h"
 #include "dslINIFileProperties.h"

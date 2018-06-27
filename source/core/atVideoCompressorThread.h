@@ -1,10 +1,10 @@
 #ifndef atVideoCompressorThreadH
 #define atVideoCompressorThreadH
-#include "dslThread.h"
 #include <functional>
+#include "dslThread.h"
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 //---------------------------------------------------------------------------
 
 class AT_CORE VideoCompressorThread : public dsl::Thread

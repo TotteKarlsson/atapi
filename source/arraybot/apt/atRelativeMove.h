@@ -1,7 +1,7 @@
 #ifndef atRelativeMoveH
 #define atRelativeMoveH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atMove.h"
 //---------------------------------------------------------------------------
 class APTMotor;

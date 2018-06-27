@@ -1,6 +1,6 @@
 #ifndef atDirectSoundH
 #define atDirectSoundH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atSoundExporter.h"
 #include <windows.h>
 #include <mmreg.h>

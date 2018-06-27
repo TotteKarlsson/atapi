@@ -1,7 +1,7 @@
 #ifndef atExceptionsH
 #define atExceptionsH
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
+#include "atCoreExporter.h"
+#include "atATObject.h"
 #include <exception>
 #include <string>
 #include <sstream>
@@ -28,5 +28,12 @@ class AT_CORE FileSystemException : public ATException
     public:
                                             FileSystemException(const string& desc) : ATException(desc){}
                                             FileSystemException(const stringstream& msg) : ATException(msg){}
+};
+
+class AT_CORE ATDataException : public ATException
+{
+    public:
+                                            ATDataException(const string& desc) : ATException(desc){}
+                                            ATDataException(const stringstream& msg) : ATException(msg){}
 };
 #endif

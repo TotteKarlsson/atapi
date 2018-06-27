@@ -1,8 +1,8 @@
 #ifndef atCreateImageThumbNailThreadH
 #define atCreateImageThumbNailThreadH
-#include "core/atATObject.h"
-#include "dslThread.h"
 #include <functional>
+#include "atATObject.h"
+#include "dslThread.h"
 #include "Poco/Process.h"
 #include "Poco/Timespan.h"
 //---------------------------------------------------------------------------

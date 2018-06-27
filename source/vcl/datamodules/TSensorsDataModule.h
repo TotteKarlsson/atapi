@@ -7,7 +7,7 @@
 #include <Datasnap.DBClient.hpp>
 #include <Datasnap.Provider.hpp>
 #include <string>
-#include "core/WatchDogSensor.h"
+#include "WatchDogSensor.h"
 //---------------------------------------------------------------------------
 
 using std::string;

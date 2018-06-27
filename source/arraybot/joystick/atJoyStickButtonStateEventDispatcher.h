@@ -1,6 +1,6 @@
 #ifndef atJoyStickButtonStateEventDispatcherH
 #define atJoyStickButtonStateEventDispatcherH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atEnums.h"
 #include <utility>
 #include "atJoyStickButton.h"

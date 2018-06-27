@@ -1,9 +1,9 @@
 #ifndef atArrayBotRequestH
 #define atArrayBotRequestH
 #include "../atABExporter.h"
-#include "core/atProcess.h"
+#include "atProcess.h"
 #include "dslXMLUtils.h"
-#include "core/atArrayBotProtocol.h"
+#include "atArrayBotProtocol.h"
 #include "atProcessSequenceProject.h"
 
 //---------------------------------------------------------------------------

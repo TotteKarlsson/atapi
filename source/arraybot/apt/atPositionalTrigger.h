@@ -2,7 +2,7 @@
 #define atPositionalTriggerH
 //---------------------------------------------------------------------------
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "arraybot/process/atTrigger.h"
 //---------------------------------------------------------------------------
 

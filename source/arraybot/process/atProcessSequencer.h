@@ -2,7 +2,7 @@
 #define atProcessSequencerH
 #include <list>
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atProcessSequence.h"
 #include "dslTimer.h"
 #include "atProcessSequenceProject.h"

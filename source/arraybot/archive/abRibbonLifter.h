@@ -1,7 +1,7 @@
 #ifndef atRibbonLifterH
 #define atRibbonLifterH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslProperty.h"
 #include "dslIniFile.h"
 #include "atArrayBot.h"

@@ -1,6 +1,6 @@
 #ifndef WatchDogSensorH
 #define WatchDogSensorH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include "dslConstants.h"
 //---------------------------------------------------------------------------
 using namespace dsl;

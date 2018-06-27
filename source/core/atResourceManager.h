@@ -1,7 +1,7 @@
 #ifndef atResourceManagerH
 #define atResourceManagerH
 #include <string>
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include "dslStringList.h"
 //---------------------------------------------------------------------------
 

@@ -19,7 +19,7 @@
 #ifndef atSerialPortH
 #define atSerialPortH
 #include "atSerialExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 
 //////////////////////////////////////////////////////////////////////
 // The SERIAL_DEFAULT_OVERLAPPED defines if the default open mode uses

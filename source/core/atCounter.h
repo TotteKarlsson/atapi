@@ -1,6 +1,6 @@
 #ifndef atCounterH
 #define atCounterH
-#include "core/atATObject.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 typedef void (__closure *CounterCallBack)();
 

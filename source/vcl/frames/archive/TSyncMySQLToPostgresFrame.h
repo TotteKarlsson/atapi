@@ -7,7 +7,7 @@
 #include "TSTDStringLabeledEdit.h"
 #include <Vcl.CheckLst.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "core/atSyncMySQLDataToPostgres.h"
+#include "atSyncMySQLDataToPostgres.h"
 #include "dslIniFile.h"
 #include "dslIniFileProperties.h"
 //---------------------------------------------------------------------------

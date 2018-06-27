@@ -93,6 +93,12 @@
         <Debugger_HostApplication>P:\build\debug\bin\ArrayBot.exe</Debugger_HostApplication>
         <PostBuildEvent><![CDATA[copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib
 copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.Benchtop.StepperMotor.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.Benchtop.StepperMotor.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.DeviceManager.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.DeviceManager.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TDIEngine.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TDIEngine.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.DCServo.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.DCServo.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.StepperMotor.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.StepperMotor.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.IntegratedStepperMotors.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.IntegratedStepperMotors.dll
 $(PostBuildEvent)]]></PostBuildEvent>
         <BCC_whid>false</BCC_whid>
         <PreBuildEvent><![CDATA[if not exist $(DEBUG_BCC32)\include\uc480 mkdir $(DEBUG_BCC32)\include\uc480
@@ -774,7 +780,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PostBuildEvent>
+        <PostBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.Benchtop.StepperMotor.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.Benchtop.StepperMotor.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.DeviceManager.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.DeviceManager.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TDIEngine.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TDIEngine.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.DCServo.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.DCServo.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.StepperMotor.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.StepperMotor.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.IntegratedStepperMotors.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.IntegratedStepperMotors.dll</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

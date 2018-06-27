@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "core/atATObject.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 ATObject::~ATObject()

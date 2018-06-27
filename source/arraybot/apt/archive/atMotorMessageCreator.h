@@ -2,7 +2,7 @@
 #define atMotorMessageCreatorH
 #include "arraybot/atABExporter.h"
 #include <string>
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslThread.h"
 #include "dslConstants.h"
 //---------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 #include "dslTSTDStringLabeledEdit.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "core/atHDMIStreamerProcess.h"
+#include "atHDMIStreamerProcess.h"
 #include "dslTIntegerLabeledEdit.h"
 #include "dslTSTDStringLabeledEdit.h"
 //---------------------------------------------------------------------------

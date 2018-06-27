@@ -1,6 +1,6 @@
 #ifndef atArduinoUtilsH
 #define atArduinoUtilsH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include <string>
 #include "atArduinoExporter.h"
 //---------------------------------------------------------------------------

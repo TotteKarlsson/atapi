@@ -1,6 +1,6 @@
 #ifndef atUtilitiesH
 #define atUtilitiesH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include <vector>
 #include <string>
 #include "dslStringList.h"

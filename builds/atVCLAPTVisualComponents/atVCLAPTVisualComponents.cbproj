@@ -59,7 +59,7 @@
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\source\vcl\frames\;..\..\source\vcl\aptFrames\;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\vcl\frames\;..\..\source\vcl\aptFrames\;..\..\source\arraybot;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>..\..\source\vcl\frames\;..\..\source\vcl\aptFrames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>atVCLAPTVisualComponents</SanitizedProjectName>
     </PropertyGroup>

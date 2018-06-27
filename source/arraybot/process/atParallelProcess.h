@@ -1,7 +1,7 @@
 #ifndef atParallelProcessH
 #define atParallelProcessH
-#include "../atABExporter.h"
-#include "../core/atProcess.h"
+#include "atABExporter.h"
+#include "atProcess.h"
 #include <vector>
 #include "dslXMLUtils.h"
 //---------------------------------------------------------------------------

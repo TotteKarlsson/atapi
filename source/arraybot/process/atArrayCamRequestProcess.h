@@ -1,9 +1,9 @@
 #ifndef atArrayCamRequestH
 #define atArrayCamRequestH
 #include "../atABExporter.h"
-#include "core/atProcess.h"
+#include "atProcess.h"
 #include "dslXMLUtils.h"
-#include "core/atArrayCamProtocol.h"
+#include "atArrayCamProtocol.h"
 #include "atProcessSequenceProject.h"
 
 //---------------------------------------------------------------------------

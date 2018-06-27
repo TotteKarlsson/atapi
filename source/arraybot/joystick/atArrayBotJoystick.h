@@ -1,7 +1,7 @@
 #ifndef atArrayBotJoystickH
 #define atArrayBotJoystickH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atJoyStickAxis.h"
 #include "atJoyStickButton.h"
 #include "atJoyStickMessageDispatcher.h"

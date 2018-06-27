@@ -2,7 +2,7 @@
 #define atArduinoIPCServerReceiverH
 #include "dslIPCReceiver.h"
 #include "dslIPCServer.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 

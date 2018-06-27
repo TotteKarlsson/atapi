@@ -1,7 +1,7 @@
 #ifndef atJoyStickSettingsH
 #define atJoyStickSettingsH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atJoyStickSetting.h"
 #include <list>
 #include "dslINIFile.h"

@@ -1,11 +1,13 @@
 #ifndef atATObjectH
 #define atATObjectH
-#include "core/atCoreExporter.h"
 #include <string>
+#include "atCoreExporter.h"
 //---------------------------------------------------------------------------
-using std::string;
 
+using std::string;
 AT_CORE int MyTest(int r);
+
+typedef unsigned int uint;
 
 class AT_CORE ATObject
 {
@@ -17,4 +19,5 @@ class AT_CORE ATObject
 	protected:
 	private:
 };
+
 #endif

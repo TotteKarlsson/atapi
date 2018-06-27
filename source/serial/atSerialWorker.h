@@ -3,7 +3,7 @@
 #include "dslIPCMessageBuilder.h"
 #include "dslThread.h"
 #include "atSerialPort.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 //---------------------------------------------------------------------------
 
 class Serial;

@@ -1,12 +1,12 @@
 #ifndef atTriggerH
 #define atTriggerH
 #include "../atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include <string>
 #include "dslTimer.h"
 #include <vector>
 #include "dslXMLUtils.h"
-#include "core/atUtilities.h"
+#include "atUtilities.h"
 //---------------------------------------------------------------------------
 
 using std::string;

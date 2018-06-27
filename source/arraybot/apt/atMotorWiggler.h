@@ -1,6 +1,6 @@
 #ifndef atMotorWigglerH
 #define atMotorWigglerH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslProperty.h"
 #include "dslTimer.h"
 #include "arraybot/atABExporter.h"

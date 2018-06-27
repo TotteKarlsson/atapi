@@ -1,7 +1,7 @@
 #ifndef atSerialH
 #define atSerialH
 #include "atSerialExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslStringList.h"
 #include "Poco/Mutex.h"
 #include "Poco/Condition.h"

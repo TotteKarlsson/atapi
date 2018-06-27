@@ -1,7 +1,7 @@
 #ifndef atArrayCamClientH
 #define atArrayCamClientH
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
+#include "atCoreExporter.h"
+#include "atATObject.h"
 #include "dslProperty.h"
 #include "dslMessageContainer.h"
 #include "atArrayCamMessageProcessor.h"

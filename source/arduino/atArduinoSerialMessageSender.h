@@ -1,9 +1,9 @@
 #ifndef atArduinoSerialMessageSenderH
 #define atArduinoSerialMessageSenderH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include <string>
 #include "dslThread.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atArduinoExporter.h"
 //---------------------------------------------------------------------------
 class ArduinoDevice;

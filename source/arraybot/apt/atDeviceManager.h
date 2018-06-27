@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslConstants.h"
 #include "dslStringList.h"
 #include "atAPTDevice.h"

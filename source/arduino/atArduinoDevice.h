@@ -1,6 +1,6 @@
 #ifndef atArduinoDeviceH
 #define atArduinoDeviceH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include <sstream>
 #include <iostream>
 #include "Poco/Mutex.h"

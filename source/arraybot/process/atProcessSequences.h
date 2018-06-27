@@ -1,7 +1,7 @@
 #ifndef atProcessSequencesH
 #define atProcessSequencesH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include <deque>
 #include "atProcessSequence.h"
 #include "dslConstants.h"

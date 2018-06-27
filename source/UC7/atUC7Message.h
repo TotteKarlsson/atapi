@@ -1,6 +1,6 @@
 #ifndef atUC7MessageH
 #define atUC7MessageH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atUC7Exporter.h"
 #include "dslConstants.h"
 //---------------------------------------------------------------------------

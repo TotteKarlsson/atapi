@@ -1,6 +1,6 @@
 #ifndef atStopAndResumeProcessH
 #define atStopAndResumeProcessH
-#include "core/atProcess.h"
+#include "atProcess.h"
 #include <vector>
 #include "dslXMLUtils.h"
 #include "arraybot/atABExporter.h"

@@ -1,7 +1,7 @@
 #ifndef atMotorCommandH
 #define atMotorCommandH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include <string>
 #include <ostream>
 

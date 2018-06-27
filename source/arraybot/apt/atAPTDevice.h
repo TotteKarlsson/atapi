@@ -1,9 +1,9 @@
 #ifndef atAPTDeviceH
 #define atAPTDeviceH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslProperties.h"
-#include "core/atUtilities.h"
+#include "atUtilities.h"
 #include "dslINIFileProperties.h"
 #include "dslIniFile.h"
 

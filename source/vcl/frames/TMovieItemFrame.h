@@ -11,7 +11,7 @@
 #include "Poco/Path.h"
 #include "Poco/File.h"
 #include <Vcl.Imaging.pngimage.hpp>
-#include "core/atCreateMovieThumbNailThread.h"
+#include "atCreateMovieThumbNailThread.h"
 //---------------------------------------------------------------------------
 using Poco::Path;
 using Poco::File;

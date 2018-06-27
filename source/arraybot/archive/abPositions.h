@@ -1,7 +1,7 @@
 #ifndef atPositionsH
 #define atPositionsH
 #include "arraybot/atABExporter.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include <deque>
 #include "atPosition.h"
 //---------------------------------------------------------------------------

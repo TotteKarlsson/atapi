@@ -2,8 +2,8 @@
 #define atElloUIMessageProcessorH
 #include <string>
 #include "dslThread.h"
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
+#include "atCoreExporter.h"
+#include "atATObject.h"
 //----------------------------------------------------------------
 
 using dsl::Thread;

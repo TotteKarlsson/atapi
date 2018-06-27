@@ -1,6 +1,6 @@
 #ifndef atPairedMovesH
 #define atPairedMovesH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atPairedMove.h"
 #include <list>
 #include "dslINIFile.h"

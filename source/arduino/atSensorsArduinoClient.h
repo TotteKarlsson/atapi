@@ -1,6 +1,6 @@
 #ifndef atSensorsArduinoClientH
 #define atSensorsArduinoClientH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include "atArduinoClient.h"
 //---------------------------------------------------------------------------
 

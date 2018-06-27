@@ -1,7 +1,7 @@
 #ifndef atHomeMotorH
 #define atHomeMotorH
 #include "arraybot/atABExporter.h"
-#include "core/atProcess.h"
+#include "atProcess.h"
 #include "atPositionalTrigger.h"
 #include "atMove.h"
 //---------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #ifndef atCameraServiceThreadH
 #define atCameraServiceThreadH
 #include "dslThread.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atCameraExporter.h"
 class Cuc480;
 using dsl::Thread;

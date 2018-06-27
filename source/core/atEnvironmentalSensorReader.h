@@ -1,9 +1,10 @@
 #ifndef atEnvironmentalSensorReaderH
 #define atEnvironmentalSensorReaderH
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
-#include <utility>
+//#include <utility>
 #include <vector>
+#include "atCoreExporter.h"
+#include "atATObject.h"
+
 //---------------------------------------------------------------------------
 
 using std::vector;

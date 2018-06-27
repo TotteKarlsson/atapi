@@ -5,7 +5,7 @@
 #include <string>
 #include <deque>
 #include <mmsystem.h>
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslStringList.h"
 //---------------------------------------------------------------------------
 

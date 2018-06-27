@@ -1,6 +1,6 @@
 #ifndef atJoyStickPOVStateEventDispatcherH
 #define atJoyStickPOVStateEventDispatcherH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atEnums.h"
 #include <utility>
 #include "arraybot/atABExporter.h"

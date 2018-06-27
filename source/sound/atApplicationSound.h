@@ -1,7 +1,7 @@
 #ifndef atApplicationSoundH
 #define atApplicationSoundH
 #include "dslProperty.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atDirectSound.h"
 #include "dslConstants.h"
 #include "dslStringList.h"

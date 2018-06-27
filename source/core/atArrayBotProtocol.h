@@ -1,6 +1,6 @@
 #ifndef atArrayBotProtocolH
 #define atArrayBotProtocolH
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include <map>
 #include <string>
 //---------------------------------------------------------------------------

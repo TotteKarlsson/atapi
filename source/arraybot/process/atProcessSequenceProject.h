@@ -3,8 +3,8 @@
 #include "arraybot/atABExporter.h"
 #include "dslProject.h"
 #include "dslConstants.h"
-#include "core/atProcess.h"
-#include "core/atATObject.h"
+#include "atProcess.h"
+#include "atATObject.h"
 
 //---------------------------------------------------------------------------
 AT_AB extern const string gProcessSequenceProjectFileVersion;

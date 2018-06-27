@@ -2,7 +2,7 @@
 #define WatchDogServerH
 #include <string>
 #include <vector>
-#include "core/atCoreExporter.h"
+#include "atCoreExporter.h"
 #include "dslIniFile.h"
 #include "dslIniFileProperties.h"
 #include "WatchDogSensor.h"

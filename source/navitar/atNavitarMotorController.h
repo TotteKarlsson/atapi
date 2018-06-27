@@ -2,7 +2,7 @@
 #define atNavitarMotorControllerH
 #include "thirdparty/navitar/navusbAPI.h"
 #include <string>
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atNavitarMotor.h"
 //---------------------------------------------------------------------------
 

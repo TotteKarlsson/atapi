@@ -1,6 +1,6 @@
 #ifndef atCreateMovieThumbNailThreadH
 #define atCreateMovieThumbNailThreadH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslThread.h"
 #include <functional>
 #include "Poco/Process.h"

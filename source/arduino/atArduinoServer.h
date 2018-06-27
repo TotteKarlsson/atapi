@@ -1,7 +1,7 @@
 #ifndef atArduinoServerH
 #define atArduinoServerH
-#include "core/atCoreExporter.h"
-#include "core/atATObject.h"
+#include "atCoreExporter.h"
+#include "atATObject.h"
 #include "dslIPCServer.h"
 #include "dslSocketWorker.h"
 #include "atLightsArduino.h"

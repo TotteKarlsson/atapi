@@ -7,7 +7,7 @@
 #include <fstream>
 #include "dslThread.h"
 #include "Poco/PipeStream.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "dslConstants.h"
 //---------------------------------------------------------------------------
 

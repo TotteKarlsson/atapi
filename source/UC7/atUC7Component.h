@@ -1,12 +1,12 @@
 #ifndef atUC7ComponentH
 #define atUC7ComponentH
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "serial/atSerial.h"
 #include "atUC7Message.h"
 #include <deque>
 #include "Poco/Mutex.h"
 #include "atUC7Exporter.h"
-#include "core/atCounter.h"
+#include "atCounter.h"
 #include "atUC7MessageSender.h"
 #include "atUC7MessageReceiver.h"
 #include "dslTimer.h"

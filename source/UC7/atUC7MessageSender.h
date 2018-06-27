@@ -2,7 +2,7 @@
 #define atUC7MessageSenderH
 #include <string>
 #include "dslThread.h"
-#include "core/atATObject.h"
+#include "atATObject.h"
 #include "atUC7Exporter.h"
 //---------------------------------------------------------------------------
 

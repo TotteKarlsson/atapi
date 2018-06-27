@@ -1,14 +1,14 @@
 #pragma hdrstop
 #include "atCreateMovieThumbNailThread.h"
-#include "dslLogger.h"
+#include <fstream>
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
 #include "Poco/StreamCopier.h"
-#include <fstream>
-#include "dslFileUtils.h"
-#include "dslMathUtils.h"
 #include "Poco/Path.h"
 #include "Poco/File.h"
+#include "dslLogger.h"
+#include "dslFileUtils.h"
+
 //---------------------------------------------------------------------------
 using namespace Poco;
 using namespace dsl;
@@ -138,4 +138,5 @@ int CreateMovieThumbNailThread::parseFFMPEGOutput(const string& s)
     //Check and parse string
    	return (s.size()) ? 0 : 1;
 }
+
 
