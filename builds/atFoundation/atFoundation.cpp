@@ -31,6 +31,9 @@ extern "C" int _libmain(unsigned long reason)
 
 #pragma comment(lib, "navitarUSBAPI_Borland.lib")
 
+                        //Barcodereader
+#pragma comment(lib, "atSSI.lib")
+
 //Thorlabs
 #pragma comment(lib, "Thorlabs.MotionControl.TDIEngineB.lib")
 

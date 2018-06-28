@@ -365,6 +365,9 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <DependentOn>..\..\source\arraycam\atArrayCamMessageProcessor.h</DependentOn>
             <BuildOrder>86</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\barcodereader\atDS457.cpp">
+            <BuildOrder>107</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\camera\atCameraServiceThread.cpp">
             <BuildOrder>103</BuildOrder>
         </CppCompile>
