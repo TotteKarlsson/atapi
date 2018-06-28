@@ -14,8 +14,15 @@
 #include "dslTIntegerLabeledEdit.h"
 #include "dslTFloatLabeledEdit.h"
 
-class Process;
-class TimeDelay;
+namespace at
+{
+    class Process;
+    class TimeDelay;
+}
+using at::ArrayBot;
+using at::TimeDelay;
+using at::Process;
+
 //---------------------------------------------------------------------------
 class PACKAGE TTimeDelayFrame : public TFrame
 {

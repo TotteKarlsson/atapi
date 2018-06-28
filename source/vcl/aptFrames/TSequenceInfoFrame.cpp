@@ -33,6 +33,7 @@ TSequenceInfoFrame *SequenceInfoFrame;
 bool updateCurrentProcessState(Process* p, ArrayBot& ab);
 
 using namespace dsl;
+using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TSequenceInfoFrame::TSequenceInfoFrame(ProcessSequencer& ps, TComponent* Owner)
     : TFrame(Owner),

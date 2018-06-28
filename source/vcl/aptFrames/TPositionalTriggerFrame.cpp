@@ -14,6 +14,7 @@
 
 TPositionalTriggerFrame *PositionalTriggerFrame;
 
+using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TPositionalTriggerFrame::TPositionalTriggerFrame(TComponent* Owner)
 	: TFrame(Owner)

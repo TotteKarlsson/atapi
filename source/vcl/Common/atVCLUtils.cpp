@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include "atVCLUtils.h"
 #include "dslVCLUtils.h"
+#include "dslLogger.h"
 //---------------------------------------------------------------------------
 
 namespace at

@@ -24,6 +24,7 @@
 TMoveCoverSlipAtAngleProcessFrame *MoveCoverSlipAtAngleProcessFrame;
 
 using namespace dsl;
+using namespace at;
 static int frameNr = 1;
 
 //---------------------------------------------------------------------------

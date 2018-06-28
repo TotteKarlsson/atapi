@@ -11,9 +11,17 @@
 #include "dslTFloatLabeledEdit.h"
 #include "dslTSTDStringLabeledEdit.h"
 
-class Process;
-class StopAndResumeProcess;
-class ArrayBot;
+namespace at
+{
+    class Process;
+    class StopAndResumeProcess;
+    class ArrayBot;
+}
+
+using at::Process;
+using at::StopAndResumeProcess;
+using at::ArrayBot;
+
 //---------------------------------------------------------------------------
 class PACKAGE TStopAndResumeFrame : public TFrame
 {

@@ -8,9 +8,15 @@
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 
-class PositionalTrigger;
-class Trigger;
-class ArrayBot;
+namespace at
+{
+    class PositionalTrigger;
+    class Trigger;
+    class ArrayBot;
+}
+using at::PositionalTrigger;
+using at::Trigger;
+using at::ArrayBot;
 
 class PACKAGE TPositionalTriggerFrame : public TFrame
 {

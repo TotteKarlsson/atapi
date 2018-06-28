@@ -8,7 +8,12 @@
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 
-class XYZUnit;
+namespace at
+{
+	class XYZUnit;
+}
+using at::XYZUnit;
+
 class PACKAGE TXYZPositionsFrame : public TFrame
 {
     __published:	// IDE-managed Components

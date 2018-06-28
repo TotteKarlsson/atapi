@@ -21,7 +21,7 @@
 
 #include "atCameraExporter.h"
 #include "atATObject.h"
-class AT_CAMERA Cuc480Dll : public ATObject
+class AT_CAMERA Cuc480Dll : public at::ATObject
 {
     public:
       										Cuc480Dll();

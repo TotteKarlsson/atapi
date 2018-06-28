@@ -4,7 +4,6 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "dslTFloatLabeledEdit.h"
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include "dslTFloatLabeledEdit.h"
@@ -12,12 +11,19 @@
 #include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 
-class AbsoluteMove;
-class TPositionalTriggerFrame;
-class ProcessSequencer;
+namespace at
+{
+	class AbsoluteMove;
+    class ProcessSequencer;
+    class ArrayBot;
+    class XYZUnit;
+}
 
-class ArrayBot;
-class XYZUnit;
+using at::AbsoluteMove;
+using at::ProcessSequencer;
+using at::ArrayBot;
+using at::XYZUnit;
+class TPositionalTriggerFrame;
 
 //!This should perhaps be reanamed to TAbsoluteMoveFrame
 class PACKAGE TMotorMoveProcessFrame : public TFrame

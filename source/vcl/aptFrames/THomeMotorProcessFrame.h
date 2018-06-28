@@ -12,9 +12,15 @@
 #include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 
-class HomeMotor;
-class ProcessSequencer;
-class ArrayBot;
+namespace at
+{
+    class HomeMotor;
+    class ProcessSequencer;
+    class ArrayBot;
+}
+using at::HomeMotor;
+using at::ProcessSequencer;
+using at::ArrayBot;
 
 class PACKAGE THomeMotorProcessFrame : public TFrame
 {

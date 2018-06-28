@@ -12,8 +12,15 @@
 #include "dslTSTDStringLabeledEdit.h"
 #include "dslTIntegerLabeledEdit.h"
 //---------------------------------------------------------------------------
-class Process;
-class ArrayBotRequestProcess;
+
+namespace at
+{
+	class Process;
+	class ArrayBotRequestProcess;
+}
+using at::ProcessSequencer;
+using at::Process;
+using at::ArrayBotRequestProcess;
 
 //---------------------------------------------------------------------------
 class PACKAGE TArrayBotRequestFrame : public TFrame

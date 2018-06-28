@@ -32,7 +32,7 @@
 #define IMAGE_TYPE_UNKNOWN		         3
 
 
-class AT_BCR DS457 : public ATObject
+class AT_BCR DS457 : public at::ATObject
 {
 	public:
 								            DS457();

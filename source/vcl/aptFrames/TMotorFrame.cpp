@@ -17,6 +17,7 @@ TMotorFrame *MotorFrame;
 
 using namespace dsl;
 using namespace std;
+using namespace at;
 int TMotorFrame::mFrameNr = 0;
 //---------------------------------------------------------------------------
 __fastcall TMotorFrame::TMotorFrame(const string& name, TComponent* Owner)

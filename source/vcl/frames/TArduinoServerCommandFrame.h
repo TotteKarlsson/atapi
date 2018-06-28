@@ -12,8 +12,13 @@
 #include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 
+namespace at
+{
 class ArduinoServerCommand;
 class ArrayBot;
+}
+using at::ArrayBot;
+using at::ArduinoServerCommand;
 
 
 class PACKAGE TArduinoServerCommandFrame : public TFrame

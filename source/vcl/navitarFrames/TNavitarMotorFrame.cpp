@@ -15,7 +15,7 @@
 TNavitarMotorFrame *NavitarMotorFrame;
 
 using namespace dsl;
-
+using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TNavitarMotorFrame::TNavitarMotorFrame(TComponent* Owner)
 	: TFrame(Owner),

@@ -19,6 +19,7 @@
 #pragma resource "*.dfm"
 THomeMotorProcessFrame *HomeMotorProcessFrame;
 
+using namespace at;
 static int frameNr = 1;
 //---------------------------------------------------------------------------
 __fastcall THomeMotorProcessFrame::THomeMotorProcessFrame(ProcessSequencer& ps, TComponent* Owner)

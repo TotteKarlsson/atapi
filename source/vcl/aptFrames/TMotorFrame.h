@@ -12,7 +12,7 @@
 #include "dslTPropertyCheckBox.h"
 //---------------------------------------------------------------------------
 
-class APTMotor;
+namespace at{class APTMotor;} using at::APTMotor;
 
 class PACKAGE TMotorFrame : public TFrame
 {

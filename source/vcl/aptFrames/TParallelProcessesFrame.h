@@ -13,14 +13,23 @@
 #include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 
-class Process;
-class ParallelProcess;
-class XYZUnit;
 class TArduinoServerCommandFrame;
 class TArrayCamRequestFrame;
 class TMotorMoveProcessFrame;
 class THomeMotorProcessFrame;
 class TMoveCoverSlipAtAngleProcessFrame;
+
+namespace at
+{
+    class Process;
+    class ParallelProcess;
+    class XYZUnit;
+}
+
+using at::Process;
+using at::ParallelProcess;
+using at::XYZUnit;
+using at::ProcessSequencer;
 
 class PACKAGE TParallelProcessesFrame : public TFrame
 {

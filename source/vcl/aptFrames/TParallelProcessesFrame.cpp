@@ -32,7 +32,7 @@
 #pragma resource "*.dfm"
 
 using namespace dsl;
-
+using namespace at;
 TParallelProcessesFrame *ParallelProcessesFrame;
 //---------------------------------------------------------------------------
 __fastcall TParallelProcessesFrame::TParallelProcessesFrame(ProcessSequencer& ps, TComponent* Owner)

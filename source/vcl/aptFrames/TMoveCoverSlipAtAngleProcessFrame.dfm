@@ -175,7 +175,7 @@ object MoveCoverSlipAtAngleProcessFrame: TMoveCoverSlipAtAngleProcessFrame
           EditLabel.Height = 23
           EditLabel.Caption = 'Delta Z (mm)'
           TabOrder = 0
-          Text = '1.00'
+          Text = '1.0000'
           OnKeyDown = EditKeyDown
           Value = 1.000000000000000000
         end
@@ -188,7 +188,7 @@ object MoveCoverSlipAtAngleProcessFrame: TMoveCoverSlipAtAngleProcessFrame
           EditLabel.Height = 23
           EditLabel.Caption = 'Y Move (mm)'
           TabOrder = 1
-          Text = '1.00'
+          Text = '1.0000'
           OnKeyDown = EditKeyDown
           Value = 1.000000000000000000
         end
@@ -201,7 +201,7 @@ object MoveCoverSlipAtAngleProcessFrame: TMoveCoverSlipAtAngleProcessFrame
           EditLabel.Height = 23
           EditLabel.Caption = 'Z Move (mm)'
           TabOrder = 2
-          Text = '1.00'
+          Text = '1.0000'
           OnKeyDown = EditKeyDown
           Value = 1.000000000000000000
         end
@@ -224,7 +224,7 @@ object MoveCoverSlipAtAngleProcessFrame: TMoveCoverSlipAtAngleProcessFrame
         EditLabel.Height = 23
         EditLabel.Caption = 'Y Move Scaling'
         TabOrder = 8
-        Text = '1.00'
+        Text = '1.0000'
         OnKeyDown = EditKeyDown
         Value = 1.000000000000000000
       end

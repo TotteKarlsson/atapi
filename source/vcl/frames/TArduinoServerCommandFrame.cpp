@@ -13,6 +13,7 @@
 #pragma resource "*.dfm"
 TArduinoServerCommandFrame *ArduinoServerCommandFrame;
 
+using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TArduinoServerCommandFrame::TArduinoServerCommandFrame(ArrayBot& ab, TComponent* Owner)
 	:

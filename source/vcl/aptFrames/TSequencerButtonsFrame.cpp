@@ -13,6 +13,7 @@
 #pragma resource "*.dfm"
 
 using namespace dsl;
+using namespace at;
 using std::stringstream;
 TSequencerButtonsFrame *SequencerButtonsFrame;
 

@@ -10,6 +10,7 @@ using namespace dsl;
 #pragma resource "*.dfm"
 TMotorPositionFrame *MotorPositionFrame;
 
+using namespace at;
 int	TMotorPositionFrame::mFrameNr = 0;
 //---------------------------------------------------------------------------
 __fastcall TMotorPositionFrame::TMotorPositionFrame(TComponent* Owner, const APTMotor* mtr)

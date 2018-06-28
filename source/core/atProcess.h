@@ -12,7 +12,7 @@ using std::string;
 using Poco::Timestamp;
 using Poco::Timestamp::TimeDiff;
 using tinyxml2::XMLElement;
-using tinyxml2::XMLDocument;
+//using tinyxml2::XMLDocument;
 using tinyxml2::XMLNode;
 
 namespace dsl
@@ -72,8 +72,8 @@ class AT_CORE Process : public ATObject
         virtual	bool 			 	            isStarted() 		{return mIsStarted;}
 
 
-        virtual  XMLElement*          			addToXMLDocument(XMLDocument& doc, XMLNode* docRoot);
-		virtual  XMLElement*                	addToXMLDocumentAsChild(XMLDocument& doc, XMLNode* docRoot);
+        virtual  XMLElement*          			addToXMLDocument(tinyxml2::XMLDocument& doc, XMLNode* docRoot);
+		virtual  XMLElement*                	addToXMLDocumentAsChild(tinyxml2::XMLDocument& doc, XMLNode* docRoot);
         Poco::Timespan							getElapsedTimeSinceStart();
 
     protected:

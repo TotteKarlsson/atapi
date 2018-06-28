@@ -10,8 +10,11 @@
 #include "dslTIntLabel.h"
 //---------------------------------------------------------------------------
 
-
+namespace at
+{
 class NavitarMotor;
+}
+using at::NavitarMotor;
 
 class PACKAGE TNavitarMotorFrame : public TFrame
 {

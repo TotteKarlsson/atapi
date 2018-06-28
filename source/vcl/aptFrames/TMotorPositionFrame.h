@@ -8,7 +8,8 @@
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 
-class APTMotor;
+namespace at{class APTMotor;} using at::APTMotor;
+
 class PACKAGE TMotorPositionFrame : public TFrame
 {
     __published:	// IDE-managed Components

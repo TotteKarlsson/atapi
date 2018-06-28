@@ -10,7 +10,11 @@
 #include <string>
 //---------------------------------------------------------------------------
 
-class ProcessSequencer;
+namespace at
+{
+    class ProcessSequencer;
+}
+using at::ProcessSequencer;
 using std::string;
 class PACKAGE TProcessSequenceControlForm : public TForm
 {

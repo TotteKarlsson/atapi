@@ -14,11 +14,22 @@
 #include "dslTPropertyCheckBox.h"
 //---------------------------------------------------------------------------
 
-class MoveCoverSlipAtAngleProcess;
+
 class TPositionalTriggerFrame;
-class ProcessSequencer;
-class ArrayBot;
-class XYZUnit;
+
+namespace at
+{
+    class MoveCoverSlipAtAngleProcess;
+    class ProcessSequencer;
+    class ArrayBot;
+    class XYZUnit;
+}
+using at::MoveCoverSlipAtAngleProcess;
+
+using at::ProcessSequencer;
+using at::ArrayBot;
+using at::XYZUnit;
+
 
 //!This should perhaps be reanamed to TAbsoluteMoveFrame
 class PACKAGE TMoveCoverSlipAtAngleProcessFrame : public TFrame

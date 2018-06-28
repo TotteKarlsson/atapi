@@ -10,7 +10,8 @@
 #include "TArrayBotBtn.h"
 //---------------------------------------------------------------------------
 
-
+using at::ProcessSequencer;
+using at::ArrayBot;
 class PACKAGE TSequencerButtonsFrame : public TFrame
 {
     __published:

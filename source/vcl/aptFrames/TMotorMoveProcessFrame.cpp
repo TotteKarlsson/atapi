@@ -18,6 +18,7 @@
 #pragma link "TArrayBotBtn"
 #pragma resource "*.dfm"
 TMotorMoveProcessFrame *MotorMoveProcessFrame;
+using namespace at;
 
 static int frameNr = 1;
 //---------------------------------------------------------------------------

@@ -7,6 +7,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
+using namespace std;
 using namespace dsl;
 TSensorsDataModule *sensorsDM;
 

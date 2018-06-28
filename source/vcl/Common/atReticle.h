@@ -3,10 +3,12 @@
 #include <VCL.Graphics.hpp>
 #include <utility>
 #include "atATObject.h"
+#include "atVCLCommonExporter.h"
 //---------------------------------------------------------------------------
 
 using std::pair;
-class PACKAGE TReticle : public ATObject
+
+class AT_VCLCOMMON TReticle : public at::ATObject
 {
 	public:
     	enum ReticleType	        {rtCrossHair, rtCircle, rtBoth};

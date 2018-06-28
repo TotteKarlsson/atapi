@@ -10,8 +10,13 @@
 //---------------------------------------------------------------------------
 
 using std::vector;
-class XYZUnit;
 class TMotorFrame;
+namespace at
+{
+	class XYZUnit;
+}
+using at::XYZUnit;
+
 
 class PACKAGE TXYZUnitFrame : public TFrame
 {

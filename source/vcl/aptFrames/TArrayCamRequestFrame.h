@@ -13,8 +13,16 @@
 #include "dslTIntegerLabeledEdit.h"
 #include "dslTSTDStringLabeledEdit.h"
 
-class Process;
-class ArrayCamRequestProcess;
+namespace at
+{
+    class Process;
+    class ArrayCamRequestProcess;
+}
+
+using at::Process;
+using at::ArrayCamRequestProcess;
+using at::ProcessSequencer;
+
 //---------------------------------------------------------------------------
 class PACKAGE TArrayCamRequestFrame : public TFrame
 {

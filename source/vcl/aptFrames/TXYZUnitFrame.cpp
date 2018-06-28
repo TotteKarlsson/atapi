@@ -14,6 +14,7 @@
 TXYZUnitFrame *XYZUnitFrame;
 
 using namespace dsl;
+using namespace at;
 int TXYZUnitFrame::mFrameNr = 0;
 //---------------------------------------------------------------------------
 __fastcall TXYZUnitFrame::TXYZUnitFrame(TComponent* Owner)

@@ -104,11 +104,20 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
-        <Defines>AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;AT_EXPORT_UC7;AT_EXPORT_SOUND;AT_EXPORT_NAVITAR;$(Defines)</Defines>
+        <Defines>AT_EXPORT_CORE;AT_EXPORT_ARDUINO;AT_EXPORT_SERIAL;AT_EXPORT_AB;AT_EXPORT_BARCODEREADER;AT_EXPORT_DB;AT_EXPORT_UC7;AT_EXPORT_SOUND;AT_EXPORT_NAVITAR;AT_EXPORT_VCLCOMMON;AT_EXPORT_CAMERA;$(Defines)</Defines>
         <PreLinkEvent><![CDATA[$(SH_EXE) $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)
 $(PreLinkEvent)]]></PreLinkEvent>
         <PostBuildEvent><![CDATA[$(SH_EXE) $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.Benchtop.StepperMotor.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.Benchtop.StepperMotor.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.DeviceManager.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.DeviceManager.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TDIEngine.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TDIEngine.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.DCServo.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.DCServo.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.StepperMotor.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.StepperMotor.dll
+copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.IntegratedStepperMotors.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.IntegratedStepperMotors.dll
 $(PostBuildEvent)]]></PostBuildEvent>
+        <PreBuildEvent><![CDATA[copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib
+copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib
+$(PreBuildEvent)]]></PreBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -356,6 +365,15 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\arraycam\atArrayCamMessageProcessor.h</DependentOn>
             <BuildOrder>86</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\camera\atCameraServiceThread.cpp">
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\camera\Dynamic_uc480.cpp">
+            <BuildOrder>106</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\camera\uc480class.cpp">
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\core\atArrayBotClient.cpp">
             <DependentOn>..\..\source\core\atArrayBotClient.h</DependentOn>
             <BuildOrder>61</BuildOrder>
@@ -509,6 +527,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DependentOn>..\..\source\UC7\atUC7StatusHistory.h</DependentOn>
             <BuildOrder>100</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\source\vcl\common\atReticle.cpp">
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\source\vcl\Common\atVCLUtils.cpp">
             <BuildOrder>56</BuildOrder>
         </CppCompile>
@@ -535,7 +556,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="p:\build\debug\BPL\atVCLAPTVisualComponents.bpl">atVCLAPTVisualComponents</Excluded_Packages>
+                </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c250mt.dll" Class="DependencyModule">
@@ -990,11 +1013,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent/>
+        <PreBuildEvent>copy $(AT_ROOT)\thirdparty\uc480\uc480_B.lib.template  $(DEBUG_BCC32)\lib\uc480_B.lib&amp;&amp;copy $(AT_ROOT)\thirdparty\uc480\uc480_TOOLS_B.lib.template  $(DEBUG_BCC32)\lib\uc480_TOOLS_B.lib</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent>$(SH_EXE) $(AT_ROOT)\source\prelink_bcc32.sh $(BDSCOMMONDIR) $(AT_ROOT)</PreLinkEvent>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>$(SH_EXE) $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)</PostBuildEvent>
+        <PostBuildEvent>$(SH_EXE) $(AT_ROOT)\source\postbuild_bcc32.sh  $(BDSCOMMONDIR) $(AT_ROOT)&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.Benchtop.StepperMotor.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.Benchtop.StepperMotor.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.DeviceManager.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.DeviceManager.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TDIEngine.dll_0  $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TDIEngine.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.DCServo.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.DCServo.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.TCube.StepperMotor.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.TCube.StepperMotor.dll&amp;&amp;copy $(AT_ROOT)\thirdparty\Thorlabs\Thorlabs.MotionControl.IntegratedStepperMotors.dll_0 $(DEBUG_BCC32)\bin\Thorlabs.MotionControl.IntegratedStepperMotors.dll</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

@@ -11,6 +11,7 @@
 TProcessSequenceControlForm *ProcessSequenceControlForm;
 
 using namespace dsl;
+using namespace at;
 string updateProgressString(const string& s);
 //---------------------------------------------------------------------------
 __fastcall TProcessSequenceControlForm::TProcessSequenceControlForm(ProcessSequencer& s, TComponent* Owner)

@@ -8,6 +8,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 
+using namespace at;
 TNavitarPresetFrame *NavitarPresetFrame;
 static int frameNr = 0;
 //---------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 #ifndef atVCLUtilsH
 #define atVCLUtilsH
+#include <VCL.ExtCtrls.hpp>
 #include "atVCLCommonExporter.h"
 #include <string>
 //---------------------------------------------------------------------------
@@ -8,22 +9,17 @@ namespace at
 
 using std::string;
 
-class TImage;
-class TListBox;
-class TComboBox;
-class TObject;
+class AT_VCLCOMMON ATWindowStructMessage
+{
+	public:
+        Cardinal            Msg;
+                            //
+        int                 wparam;
 
-//class AT_VCLCOMMON ATWindowStructMessage
-//{
-//	public:
-//        Cardinal            Msg;
-//                            //
-//        int                 wparam;
-//
-//                            //This is our data
-//        void*				lparam;
-//        LRESULT             Result;
-//};
+                            //This is our data
+        void*				lparam;
+        LRESULT             Result;
+};
 
 
 //TImage utilities

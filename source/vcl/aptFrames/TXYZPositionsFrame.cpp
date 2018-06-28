@@ -4,13 +4,13 @@
 #include "arraybot/atXYZUnit.h"
 #include "dslVCLUtils.h"
 #include "arraybot/apt/atAPTMotor.h"
-
-using namespace dsl;
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TXYZPositionsFrame *XYZPositionsFrame;
 
+TXYZPositionsFrame *XYZPositionsFrame;
+using namespace dsl;
+using namespace at;
 int	TXYZPositionsFrame::mFrameNr = 0;
 //---------------------------------------------------------------------------
 __fastcall TXYZPositionsFrame::TXYZPositionsFrame(TComponent* Owner, const XYZUnit& u)

@@ -15,7 +15,7 @@
 TApplicationSoundsFrame *ApplicationSoundsFrame;
 
 using namespace dsl;
-
+using namespace at;
 
 //---------------------------------------------------------------------------
 __fastcall TApplicationSoundsFrame::TApplicationSoundsFrame(TComponent* Owner)

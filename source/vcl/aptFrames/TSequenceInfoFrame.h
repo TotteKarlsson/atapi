@@ -13,7 +13,6 @@
 #include <Vcl.Menus.hpp>
 //---------------------------------------------------------------------------
 
-class ProcessSequence;
 class TParallelProcessesFrame;
 class TTimeDelayFrame;
 class TArrayCamRequestFrame;
@@ -22,9 +21,20 @@ class TStopAndResumeFrame;
 class TMoveCoverSlipAtAngleProcessFrame;
 class THomeMotorProcessFrame;
 
-class Process;
-class ArrayBot;
-class ProcessSequencer;
+namespace at
+{
+    class ProcessSequence;
+    class Process;
+    class ArrayBot;
+    class ProcessSequencer;
+}
+
+using at::ProcessSequence;
+using at::ProcessSequencer;
+using at::Process;
+using at::ArrayBot;
+
+
 using std::vector;
 
 class PACKAGE TSequenceInfoFrame : public TFrame
