@@ -1,5 +1,5 @@
-#ifndef atUtilitiesH
-#define atUtilitiesH
+#ifndef atUtilsH
+#define atUtilsH
 #include "atCoreExporter.h"
 #include <vector>
 #include <string>

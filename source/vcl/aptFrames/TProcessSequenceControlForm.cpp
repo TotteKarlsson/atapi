@@ -1,9 +1,9 @@
-#include <vcl.h>
 #pragma hdrstop
 #include "TProcessSequenceControlForm.h"
 #include "arraybot/process/atProcessSequencer.h"
 #include "dslVCLUtils.h"
 #include "dslLogger.h"
+#include <algorithm>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TArrayBotBtn"

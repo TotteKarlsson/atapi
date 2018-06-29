@@ -11,7 +11,10 @@ using namespace dsl;
 Cuc480::Cuc480() : Cuc480Dll()
 {
     m_hu = NULL;
-    Connect(DRIVER_DLL_NAME);
+    if(Connect(DRIVER_DLL_NAME) == IS_NO_SUCCESS)
+    {
+        Log(lError) << "Failed loading DLL: " << DRIVER_DLL_NAME;
+    }
     mImageMemory    = NULL;
     mMemoryId       = 0;
     mDispModeSel    = e_disp_mode_bitmap;

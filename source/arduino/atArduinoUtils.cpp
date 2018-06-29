@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include "atArduinoUtils.h"
 #include "dslUtils.h"
+#include "dslStringUtils.h"
 #include "dslIPCMessageEnums.h"
 
 using namespace dsl;

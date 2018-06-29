@@ -4,7 +4,7 @@
 #include "atDeviceManager.h"
 #include "dslLogger.h"
 #include "dslUtils.h"
-#include "core/atUtilities.h"
+#include "core/atUtils.h"
 #include "atTCubeDCServo.h"
 #include "atTCubeStepperMotor.h"
 #include "atLongTravelStage.h"

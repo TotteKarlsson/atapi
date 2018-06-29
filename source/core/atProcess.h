@@ -5,7 +5,7 @@
 #include "Poco/TimeStamp.h"
 #include "Poco/Timespan.h"
 #include "dslXMLUtils.h"
-#include "atUtilities.h"
+#include "atUtils.h"
 //---------------------------------------------------------------------------
 
 using std::string;

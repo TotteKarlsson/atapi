@@ -3,7 +3,7 @@
 #include "atABExporter.h"
 #include "atATObject.h"
 #include "dslProperties.h"
-#include "atUtilities.h"
+#include "atUtils.h"
 #include "dslINIFileProperties.h"
 #include "dslIniFile.h"
 

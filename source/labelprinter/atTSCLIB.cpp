@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include "atTSCLIB.h"
 #include "dslUtils.h"
+#include "dslFileUtils.h"
 #include "dslLogger.h"
 //---------------------------------------------------------------------------
 using namespace dsl;

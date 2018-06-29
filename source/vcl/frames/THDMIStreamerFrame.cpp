@@ -3,6 +3,7 @@
 #include "THDMIStreamerFrame.h"
 #include "dslLogger.h"
 #include "dslVCLUtils.h"
+#include "dslFileUtils.h"
 //#include "ArrayCamUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
