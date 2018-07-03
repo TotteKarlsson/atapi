@@ -46,8 +46,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <Multithreaded>true</Multithreaded>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>P:\atExplorer\C++\Source\;..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\resources\;$(DSL_ROOT)\Common;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>P:\atExplorer\C++\Source\;..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\resources\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\resources\;$(DSL_ROOT)\Common;$(AT_ROOT);$(AT_ROOT)\thirdparty;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\source\arraybot\;..\..\source\core\;..\..\source\arraycam\;..\..\source\ello\;..\..\source\camera\;..\..\source\navitar\;..\..\source\labelprinter\;..\resources\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
@@ -179,10 +179,6 @@ $(PreBuildEvent)]]></PreBuildEvent>
         </CppCompile>
         <CppCompile Include="..\..\source\core\atResourceManager.cpp">
             <BuildOrder>18</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\source\core\atUtilities.cpp">
-            <DependentOn>..\..\source\core\atUtilities.h</DependentOn>
-            <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\source\core\atVideoCompressorThread.cpp">
             <DependentOn>..\..\source\core\atVideoCompressorThread.h</DependentOn>

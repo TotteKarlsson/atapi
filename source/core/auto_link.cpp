@@ -1,11 +1,9 @@
 #pragma hdrstop
 
-#pragma comment(lib, "dslCommon.lib")
-#pragma comment(lib, "dslIPC.lib")
-#pragma comment(lib, "dslMath.lib")
+#pragma comment(lib, "dslFoundation")
 
-#pragma comment(lib, "poco_foundation.lib")
-#pragma comment(lib, "tinyxml2.lib")
+#pragma comment(lib, "poco_foundation")
+#pragma comment(lib, "tinyxml2")
 
 
 

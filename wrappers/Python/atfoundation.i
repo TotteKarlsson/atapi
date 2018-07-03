@@ -1,4 +1,4 @@
-%module(docstring="Array Tomography Library for Python (atfoundation), (c) 2016-2018 Allen Institute for BrainScience",threads="1", directors="1" ) atfoundation
+%module(docstring="Array Tomography Library for Python (atfoundation), (c) 2016-2018 Allen Institute for BrainScience",threads="1", directors="0" ) atfoundation
 
 // ************************************************************
 // Module Includes

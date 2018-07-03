@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(atfoundation)
 find_package(SWIG REQUIRED)
 include(UseSWIG)
+
 find_package(PythonInterp)
 find_package(PythonLibs)
 get_filename_component(PYTHON_LIB_FOLDER ${PYTHON_LIBRARIES} DIRECTORY CACHE)
@@ -12,21 +13,21 @@ message("CMake Install folder: "    ${CMAKE_INSTALL_PREFIX})
 
 set(PyModule "atfoundation")
 include_directories(
-.
-    ${PYTHON_INCLUDE_PATH}
+    .
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${ATAPI_ROOT}
     ${ATAPI_ROOT}/source
     ${ATAPI_ROOT}/source/core
     ${THIRD_PARTY_INSTALL_PREFIX}/include
     ${THIRD_PARTY_INSTALL_PREFIX}/include/dsl
-${CMAKE_INSTALL_PREFIX}/lib
+    ${CMAKE_INSTALL_PREFIX}/lib
+    ${PYTHON_INCLUDE_PATH}
 )
 
 link_directories(
+${THIRD_PARTY_INSTALL_PREFIX}/lib
 ${CMAKE_BINARY_DIR}/lib
 ${PYTHON_LIB_FOLDER}
-${THIRD_PARTY_INSTALL_PREFIX}/lib
 )
 
 # set(CMAKE_SWIG_FLAGS "-DPOCO_STATIC")
@@ -36,11 +37,12 @@ set_source_files_properties(${PyModule}.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(${PyModule}.i PROPERTIES SWIG_FLAGS "-threads")
 
 SWIG_ADD_LIBRARY(${PyModule}
-    MODULE LANGUAGE python 
+    TYPE MODULE 
+    LANGUAGE python 
     SOURCES ${PyModule}.i
     )
     
-SWIG_LINK_LIBRARIES (${PyModule}
+TARGET_LINK_LIBRARIES (${PyModule}
     atCore
     ${CMAKE_INSTALL_PREFIX}/lib/dslPlugins.lib
     ${CMAKE_INSTALL_PREFIX}/lib/dslPythonPlugins.lib
@@ -54,7 +56,7 @@ execute_process(COMMAND python -c "import site; print(site.getsitepackages()[0])
 message("PYTHON_SITE_PACKAGES = ${PYTHON_SITE_PACKAGES}")
 
 install(
-    TARGETS _${PyModule}
+    TARGETS ${PyModule}
     DESTINATION ${PYTHON_SITE_PACKAGES})
 
 install(

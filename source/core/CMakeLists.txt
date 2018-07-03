@@ -13,6 +13,7 @@ ${THIRD_PARTY_INSTALL_PREFIX}/include/dsl
 SET(src
 atATObject
 atCore
+atExceptions
 )
 
 link_directories(
@@ -31,10 +32,7 @@ if(${BUILD_SHARED_LIBS})
     )
 
     TARGET_LINK_LIBRARIES(${target} 
-        ${THIRD_PARTY_INSTALL_PREFIX}/lib/dslCommon.lib
-        #Note: Just linking to "dslCommon" causes problem when generatign the python wrapper
-        #Specifying the full path of the library seem to fix such errors. This is some kind of bug
-        #in CMake
+        ${THIRD_PARTY_INSTALL_PREFIX}/lib/dslFoundation.lib
     )
 
 
