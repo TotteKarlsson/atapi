@@ -36,7 +36,7 @@ namespace at
                                                     ~ProcessSequenceProject();
 
             bool                                    save(const string& fName = dsl::gEmptyString);
-            bool                                    open();
+            bool                                    open(const string& fName = dsl::gEmptyString);
             string                                  getPresentXMLModelVersion();
 
         protected:

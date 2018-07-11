@@ -28,6 +28,7 @@ extern "C" int _libmain(unsigned long reason)
 //Linking
 #pragma hdrstop
 #pragma comment(lib, "dslFoundation.lib")
+#pragma comment(lib, "dslVCLCommon.lib")
 
 #pragma comment(lib, "navitarUSBAPI_Borland.lib")
 

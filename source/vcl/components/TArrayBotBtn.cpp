@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 
 using namespace dsl;
-
+using namespace at;
 //---------------------------------------------------------------------------
 __fastcall TArrayBotButton::TArrayBotButton(TComponent* Owner)
 	: TBitBtn(Owner),

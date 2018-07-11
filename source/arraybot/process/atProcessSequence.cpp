@@ -266,7 +266,7 @@ namespace at
 
     bool ProcessSequence::read(const string& fName)
     {
-    	if(mProject.loadFromFile(fName))
+    	if(mProject.loadXMLFromFile(fName))
         {
         	bool res = mProject.open();
         	return res;

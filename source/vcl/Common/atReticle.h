@@ -16,7 +16,10 @@ class AT_VCLCOMMON TReticle : public at::ATObject
 		void				        draw(int clientW, int clientH);
 
         void				        setCircleRadius(int r);
+        int				        	getCircleRadius(){return mCircleRadius;}
         void				        setReticleCenter(int x, int y);
+        pair<int, int>              getReticleCenter(){return mReticleCenter;}
+
         void						visible(bool vis);
         bool						isVisible();
 
