@@ -3,7 +3,6 @@
 #include "dslConstants.h"
 #include "Poco/Process.h"
 #include "Poco/PipeStream.h"
-//#include <functional>
 #include <fstream>
 #include "dslThread.h"
 #include "Poco/PipeStream.h"
