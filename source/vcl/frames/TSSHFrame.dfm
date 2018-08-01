@@ -1,9 +1,8 @@
 object SSHFrame: TSSHFrame
   Left = 0
   Top = 0
-  Width = 521
-  Height = 70
-  AutoSize = True
+  Width = 950
+  Height = 616
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0
@@ -73,20 +72,20 @@ object SSHFrame: TSSHFrame
   end
   object ScFileStorage: TScFileStorage
     Password = 'lacket47'
-    Left = 48
-    Top = 224
+    Left = 24
+    Top = 64
   end
   object ScSSHShell1: TScSSHShell
     Client = ScSSHClient
     NonBlocking = True
     OnAsyncError = ScSSHShell1AsyncError
-    Left = 176
-    Top = 240
+    Left = 280
+    Top = 64
   end
   object ScSSHChannel: TScSSHChannel
     Client = ScSSHClient
-    Left = 120
-    Top = 256
+    Left = 192
+    Top = 72
   end
   object ScSSHClient: TScSSHClient
     HostName = 'atbigdawg'
@@ -97,7 +96,7 @@ object SSHFrame: TSSHFrame
     BeforeConnect = ScSSHClientBeforeConnect
     AfterDisconnect = ScSSHClientAfterDisconnect
     OnServerKeyValidate = ScSSHClientServerKeyValidate
-    Left = 80
-    Top = 280
+    Left = 96
+    Top = 72
   end
 end

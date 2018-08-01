@@ -23,8 +23,11 @@ class AT_VCLCOMMON ATWindowStructMessage
 
 
 //TImage utilities
-AT_VCLCOMMON int 				getImageWidth(TImage* imageCtrl);
-AT_VCLCOMMON int 				getImageHeight(TImage* imageCtrl);
+//AT_VCLCOMMON int 				getImageWidth(TImage* imageCtrl);
+//AT_VCLCOMMON int 				getImageHeight(TImage* imageCtrl);
+
+AT_VCLCOMMON double 			getCurrentImageWidth(TImage* img);
+AT_VCLCOMMON double 			getCurrentImageHeight(TImage* img);
 
 AT_VCLCOMMON double				getImageAspectRatio(TImage* imageCtrl);
 AT_VCLCOMMON double				getImageContainerAspectRatio(TImage* imageCtrl);

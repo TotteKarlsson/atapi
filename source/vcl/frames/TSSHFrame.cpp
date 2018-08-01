@@ -24,11 +24,32 @@ __fastcall TSSHFrame::TSSHFrame(TComponent* Owner)
 }
 
 //---------------------------------------------------------------------------
+void __fastcall TSSHFrame::ScSSHClientBeforeConnect(TObject *Sender)
+{
+   	FRandomized = true;
+    ScSSHClient->HostName = edSSHHost->Text;
+    ScSSHClient->Port = StrToInt(seSSHPort->Text);
+    ScSSHClient->User = edSSHUserName->Text;
+
+    ScSSHClient->Authentication = atPassword;
+    ScSSHClient->Password = edSSHPassword->Text;
+    ScSSHClient->KeyStorage = ScFileStorage;
+}
+
+//---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ScSSHClientAfterConnect(TObject *Sender)
 {
 	Log(lInfo) << "Connected..";
     ConnectBtn->Caption = "Disconnect";
     ScSSHShell1->Connect();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TSSHFrame::ScSSHClientAfterDisconnect(TObject *Sender)
+{
+	Log(lInfo) << "Disconnected..";
+    ConnectBtn->Caption = "Connect";
+    ScSSHShell1->Disconnect();
 }
 
 //---------------------------------------------------------------------------
@@ -65,26 +86,6 @@ void __fastcall TSSHFrame::ScSSHClientServerKeyValidate(TObject *Sender, TScKey 
 	}
 }
 
-//---------------------------------------------------------------------------
-void __fastcall TSSHFrame::ScSSHClientAfterDisconnect(TObject *Sender)
-{
-	Log(lInfo) << "Disconnected..";
-    ConnectBtn->Caption = "Connect";
-    ScSSHShell1->Disconnect();
-}
-
-//---------------------------------------------------------------------------
-void __fastcall TSSHFrame::ScSSHClientBeforeConnect(TObject *Sender)
-{
-   	FRandomized = true;
-    ScSSHClient->HostName = edSSHHost->Text;
-    ScSSHClient->Port = StrToInt(seSSHPort->Text);
-    ScSSHClient->User = edSSHUserName->Text;
-
-    ScSSHClient->Authentication = atPassword;
-    ScSSHClient->Password = edSSHPassword->Text;
-    ScSSHClient->KeyStorage = ScFileStorage;
-}
 
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ConnectBtnClick(TObject *Sender)

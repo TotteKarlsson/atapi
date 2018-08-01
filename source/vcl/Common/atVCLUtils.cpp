@@ -22,115 +22,48 @@ int getCurrentUserID(TComboBox* mUserCB)
 	return  -1;
 }
 
-int getImageWidth(TImage* imageCtrl)
+//---------------------------------------------------------------------------
+double getCurrentImageWidth(TImage* img)
 {
-    //First check if image is stretched or not
-    if(imageCtrl->Stretch == false)
-    {
-        return imageCtrl->Picture->Width; //The original width
-    }
+    //This function assumes stretch is proportional
+    double origW = img->Picture->Width;
+    double origH = img->Picture->Height;
+    double imageR = origW / origH;
 
-    //if it is stretched, check aspect ratios..
-    //Observe, this probably don't work.. need to check landscape or portrait
-    if(getImageAspectRatio(imageCtrl) == getImageContainerAspectRatio(imageCtrl))
-    {
-        return imageCtrl->Picture->Width;
-    }
+    double containerW = img->Width;
+    double containerH = img->Height;
+    double containerR = containerW / containerH;
 
-    //As the image is being stretched, there are several "cases"
-    if(imageCtrl->Width > imageCtrl->Height)
+    if(containerR > imageR)
     {
-        //Gotta check how the image is stretched, depends on original dimension
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            //Image Height == container height
-            return getImageWidthFromHeight(imageCtrl);
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            //Image width == container width
-            return imageCtrl->Width;
-        }
+    	return containerH * imageR;
     }
-    else if(imageCtrl->Width < imageCtrl->Height)
+    else
     {
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            return imageCtrl->Width;
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            return getImageWidthFromHeight(imageCtrl);
-        }
+    	return containerW;
     }
-    else if (imageCtrl->Width == imageCtrl->Height)
-    {
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            return getImageWidthFromHeight(imageCtrl);
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            return imageCtrl->Width;
-        }
-    }
-    return -1;
 }
 
-int getImageHeight(TImage* imageCtrl)
+//---------------------------------------------------------------------------
+double getCurrentImageHeight(TImage* img)
 {
-    //First check if image is stretched or not
-    if(imageCtrl->Stretch == false)
-    {
-        return imageCtrl->Picture->Height; //The original height
-    }
+    //This function assumes stretch is proportional
+    double origW = img->Picture->Width;
+    double origH = img->Picture->Height;
+    double imageR = origW / origH;
 
-    //if it is stretched, check aspect ratios..
-    //Observe, this probably don't work.. need to check landscape or portrait
-    if(getImageAspectRatio(imageCtrl) == getImageContainerAspectRatio(imageCtrl))
-    {
-        return imageCtrl->Picture->Height;
-    }
+    double containerW = img->Width;
+    double containerH = img->Height;
+    double containerR = containerW / containerH;
 
-    //As the image is being stretched, there are several "cases"
-    if(imageCtrl->Width > imageCtrl->Height)
+    if(containerR > imageR)
     {
-        //Gotta check how the image is stretched, depends on original dimension
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            //Image Height == container height
-            return imageCtrl->Height;
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            //Image width == container width
-            return getImageHeightFromWidth(imageCtrl);
-        }
+        return containerH;
     }
-    else if(imageCtrl->Width < imageCtrl->Height)
+    else
     {
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            return getImageHeightFromWidth(imageCtrl);;
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            return imageCtrl->Height;
-        }
+    	return containerW /imageR;
     }
-    else if (imageCtrl->Width == imageCtrl->Height)
-    {
-        if(imageCtrl->Picture->Width < imageCtrl->Picture->Height)
-        {
-            return imageCtrl->Height;
-
-        }
-        else if(imageCtrl->Picture->Width > imageCtrl->Picture->Height)
-        {
-            return getImageHeightFromWidth(imageCtrl);
-        }
-    }
-    return -1;
 }
 
 double getImageAspectRatio(TImage* imageCtrl)
