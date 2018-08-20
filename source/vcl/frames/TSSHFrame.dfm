@@ -2,7 +2,7 @@ object SSHFrame: TSSHFrame
   Left = 0
   Top = 0
   Width = 950
-  Height = 616
+  Height = 258
   TabOrder = 0
   object GroupBox1: TGroupBox
     Left = 0

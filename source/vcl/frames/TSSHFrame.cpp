@@ -1,4 +1,3 @@
-#include <vcl.h>
 #pragma hdrstop
 #include "TSSHFrame.h"
 #include "dslLogger.h"
@@ -85,7 +84,6 @@ void __fastcall TSSHFrame::ScSSHClientServerKeyValidate(TObject *Sender, TScKey 
         }
 	}
 }
-
 
 //---------------------------------------------------------------------------
 void __fastcall TSSHFrame::ConnectBtnClick(TObject *Sender)
