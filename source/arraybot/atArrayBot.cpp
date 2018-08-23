@@ -14,7 +14,7 @@ namespace at
     mAppDataFolder(appFolder),
     mIniFile(ini),
     mJoyStickID(-1),
-    mJoyStick(mJoyStickID.getReference()),
+    mJoyStick(mJoyStickID.getValueReference()),
 
     mRightJoyStickXLeftDeadZone(0),
     mRightJoyStickXRightDeadZone(0),

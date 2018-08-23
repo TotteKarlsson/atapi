@@ -3,6 +3,9 @@
         <ProjectGuid>{68E8A670-B919-436B-ACC8-64717B6486C6}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="..\thirdparty\ssidll\atSSI.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="atFoundation\atFoundation.cbproj">
             <Dependencies/>
         </Projects>
@@ -20,6 +23,15 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="atSSI">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj"/>
+    </Target>
+    <Target Name="atSSI:Clean">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atSSI:Make">
+        <MSBuild Projects="..\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="atFoundation">
         <MSBuild Projects="atFoundation\atFoundation.cbproj"/>
     </Target>
@@ -48,13 +60,13 @@
         <MSBuild Projects="atVCLComponents\atVCLComponents.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="atFoundation;atVCLCommon;atVCLComponents"/>
+        <CallTarget Targets="atSSI;atFoundation;atVCLCommon;atVCLComponents"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atFoundation:Clean;atVCLCommon:Clean;atVCLComponents:Clean"/>
+        <CallTarget Targets="atSSI:Clean;atFoundation:Clean;atVCLCommon:Clean;atVCLComponents:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atFoundation:Make;atVCLCommon:Make;atVCLComponents:Make"/>
+        <CallTarget Targets="atSSI:Make;atFoundation:Make;atVCLCommon:Make;atVCLComponents:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
