@@ -1,22 +1,19 @@
 #ifndef atATObjectH
 #define atATObjectH
-#include <string>
 #include "atCoreExporter.h"
+#include <string>
 //---------------------------------------------------------------------------
-
-using std::string;
 
 namespace at
 {
+
+using std::string;
 class AT_CORE ATObject
 {
 	public:
     							 ATObject(){}
 		virtual					~ATObject() = 0;
         virtual const string 	getTypeName() const;
-
-	protected:
-	private:
 };
 }
 #endif

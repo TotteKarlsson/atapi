@@ -1,3 +1,4 @@
+#include <vcl.h>
 #pragma hdrstop
 #include "TSSHFrame.h"
 #include "dslLogger.h"
