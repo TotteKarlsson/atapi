@@ -5,6 +5,10 @@
 #include <windows.h>
 #include <mmreg.h>
 #include <dsound.h>
+#include <string>
+//---------------------------------------------------------------------------
+
+using std::string;
 
 class AT_SOUND DirectSound //: public ATObject
 {

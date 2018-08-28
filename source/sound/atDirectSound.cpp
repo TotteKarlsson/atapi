@@ -3,6 +3,7 @@
 #include "atDirectSound.h"
 #include <mmsystem.h>
 #include "dslLogger.h"
+//---------------------------------------------------------------------------
 
 using namespace dsl;
 
