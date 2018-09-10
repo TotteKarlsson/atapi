@@ -41,6 +41,16 @@ mArrayCamClient(ac)
 ProcessSequenceProject::~ProcessSequenceProject()
 {}
 
+dsl::XMLElement* ProcessSequenceProject::addToXMLDocument(dsl::XMLDocument& doc, dsl::XMLNode* docRoot)
+{
+    return nullptr;
+}
+
+dsl::XMLElement* ProcessSequenceProject::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* node)
+{
+    return nullptr;
+}
+
 string ProcessSequenceProject::getPresentXMLModelVersion()
 {
     return gProcessSequenceProjectFileVersion;
