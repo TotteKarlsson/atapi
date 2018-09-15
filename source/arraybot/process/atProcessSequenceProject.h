@@ -36,7 +36,7 @@ class AT_AB ProcessSequenceProject : public dsl::Project, public ATObject
                                                 ~ProcessSequenceProject();
 
         virtual dsl::XMLElement*           		addToXMLDocument(dsl::XMLDocument& doc, dsl::XMLNode* docRoot);
-		virtual dsl::XMLElement*                addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* node);
+		virtual dsl::XMLElement*                addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLElement* node);
 
         bool                                    save(const string& fName = dsl::gEmptyString);
         bool                                    open(const string& fName = dsl::gEmptyString);

@@ -46,7 +46,7 @@ dsl::XMLElement* ProcessSequenceProject::addToXMLDocument(dsl::XMLDocument& doc,
     return nullptr;
 }
 
-dsl::XMLElement* ProcessSequenceProject::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLNode* node)
+dsl::XMLElement* ProcessSequenceProject::addToXMLDocumentAsChild(dsl::XMLDocument& doc, dsl::XMLElement* node)
 {
     return nullptr;
 }
