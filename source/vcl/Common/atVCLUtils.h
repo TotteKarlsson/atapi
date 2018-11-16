@@ -47,6 +47,5 @@ AT_VCLCOMMON int 	            selectItem(TComboBox* lb, const string& name, bool
 AT_VCLCOMMON int 	            selectAndClickComboBoxItem(TComboBox* lb, const string& name);
 
 AT_VCLCOMMON int 	            getCurrentUserID(TComboBox* mUserCB);
-
 }
 #endif
