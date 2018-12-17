@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{AA48CE81-AC44-43B0-8C5E-937B25FC01EF}</ProjectGuid>
+        <ProjectGuid>{D87D22D0-71EE-457A-8D60-1926CAF92FF5}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <MainSource>atVCLUC7VisualComponents.cpp</MainSource>
@@ -624,7 +624,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib</PostBuildEvent>
+        <PostBuildEvent>copy $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).bpi $(DEBUG_BCC32)\DCP\$(OUTPUTNAME).lib</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

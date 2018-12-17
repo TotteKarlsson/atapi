@@ -27,7 +27,10 @@ using std::map;
 
 AT_AB bool 			buildDeviceList();
 AT_AB int 			getNumberOfConnectedDevices();
-
+AT_AB StringList 	getSerialsForDeviceType(DeviceTypeID deviceID);
+AT_AB string 		toString(DeviceTypeID value);
+AT_AB DeviceTypeID  getDeviceTypeID(const string& id);
+//AT_CORE DeviceTypeID getDeviceTypeID(const string& level);
 
 
 class AT_AB DeviceManager : public ATObject
